@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#071620">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Hurricane Console — Atlantic Tropical Weather</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<style>
+  :root{
+    --bg:#071620; --panel:#0c2233; --line:#173347; --ink:#dce8ef;
+    --dim:#7ea3b8; --amber:#ffa23a; --amber-dim:#c47a26; --cyan:#4fc3d6;
+    --strong:#ff6b5a; --inferred:#9a86c9; --mono:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);
+    font:14px/1.45 var(--mono);-webkit-text-size-adjust:100%}
+  #app{display:flex;flex-direction:column;height:100%}
+
+  header{display:flex;align-items:center;gap:.65rem;padding:.55rem .8rem;
+    padding-top:calc(.55rem + env(safe-area-inset-top));
+    background:linear-gradient(180deg,#0a1e2c,#071620);border-bottom:1px solid var(--line)}
+  header .glyph{width:22px;height:22px;flex:0 0 auto}
+  header h1{font-size:.95rem;font-weight:600;letter-spacing:.02em;margin:0}
+  header h1 small{color:var(--dim);font-weight:400;letter-spacing:.06em;font-size:.7rem;display:block}
+  .badge{margin-left:auto;font-size:.66rem;letter-spacing:.12em;font-weight:700;
+    padding:.2rem .5rem;border-radius:3px;border:1px solid currentColor}
+  .badge.LIVE{color:#5fd08a} .badge.CACHED{color:var(--cyan)}
+  .badge.SAMPLE{color:var(--amber)} .badge.PASTED{color:var(--inferred)}
+  .badge.ERROR{color:var(--strong)}
+
+  #map{flex:1;background:#04101a;outline:none}
+  .leaflet-container{background:#04101a;font:inherit}
+
+  .toolbar{display:flex;gap:.4rem;flex-wrap:wrap;align-items:center;
+    padding:.5rem .8rem;padding-bottom:calc(.5rem + env(safe-area-inset-bottom));
+    background:var(--panel);border-top:1px solid var(--line)}
+  button{font:inherit;color:var(--ink);background:#123246;border:1px solid var(--line);
+    border-radius:4px;padding:.4rem .7rem;cursor:pointer}
+  button:hover{border-color:var(--amber-dim)}
+  button:focus-visible{outline:2px solid var(--amber);outline-offset:1px}
+  button.primary{background:var(--amber);color:#231400;border-color:var(--amber);font-weight:600}
+  .meta{margin-left:auto;color:var(--dim);font-size:.72rem;text-align:right;line-height:1.3}
+
+  /* legend + popups */
+  .legend{position:absolute;right:.6rem;top:.6rem;z-index:500;background:rgba(9,26,38,.9);
+    border:1px solid var(--line);border-radius:6px;padding:.5rem .6rem;font-size:.7rem;
+    line-height:1.7;backdrop-filter:blur(3px)}
+  .legend b{display:block;color:var(--dim);font-weight:600;letter-spacing:.08em;
+    font-size:.62rem;margin-bottom:.2rem}
+  .swatch{display:inline-block;width:12px;height:0;border-top-width:3px;
+    border-top-style:solid;vertical-align:middle;margin-right:.4rem}
+  .leaflet-popup-content-wrapper{background:#0c2233;color:var(--ink);border:1px solid var(--line);
+    border-radius:6px;font:inherit}
+  .leaflet-popup-tip{background:#0c2233}
+  .pop-tag{font-size:.62rem;letter-spacing:.1em;font-weight:700;color:var(--amber)}
+  .pop-tag.inf{color:var(--inferred)}
+  .pop-src{color:var(--dim);font-size:.72rem;margin-top:.3rem;max-width:240px}
+
+  dialog{background:var(--panel);color:var(--ink);border:1px solid var(--line);
+    border-radius:8px;max-width:min(560px,92vw);padding:1rem}
+  dialog::backdrop{background:rgba(2,10,16,.7)}
+  textarea{width:100%;height:38vh;background:#04101a;color:var(--ink);border:1px solid var(--line);
+    border-radius:4px;font:12px/1.4 var(--mono);padding:.5rem;resize:vertical}
+  dialog h2{margin:.1rem 0 .5rem;font-size:.9rem}
+  dialog .row{display:flex;gap:.5rem;justify-content:flex-end;margin-top:.6rem}
+  a.link{color:var(--cyan)}
+</style>
+</head>
+<body>
+<div id="app">
+  <header>
+    <svg class="glyph" viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="12" cy="12" r="2.4" fill="none" stroke="#ffa23a" stroke-width="1.4"/>
+      <path d="M12 9.6 C7 8 5.5 12 7.2 15" fill="none" stroke="#ffa23a" stroke-width="1.6" stroke-linecap="round"/>
+      <path d="M12 14.4 C17 16 18.5 12 16.8 9" fill="none" stroke="#ffa23a" stroke-width="1.6" stroke-linecap="round"/>
+    </svg>
+    <h1>Hurricane Console<small>NHC TWDAT · ATLANTIC</small></h1>
+    <span id="badge" class="badge SAMPLE">SAMPLE</span>
+  </header>
+
+  <div style="position:relative;flex:1;display:flex">
+    <div id="map"></div>
+    <div class="legend" id="legend">
+      <b>LAYERS</b>
+      <div><span class="swatch" style="border-top-color:#ffa23a"></span>Wave axis</div>
+      <div><span class="swatch" style="border-top-color:#4fc3d6"></span>Trough</div>
+      <div><span class="swatch" style="border-top-color:#ff6b5a;border-top-style:dotted"></span>Convection</div>
+      <div><span class="swatch" style="border-top-color:#9a86c9;border-top-style:dashed"></span>Inferred / +24h</div>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <button id="refresh" class="primary">Refresh</button>
+    <button id="paste">Paste product</button>
+    <button id="which">TWD / TWO</button>
+    <div class="meta" id="meta">—</div>
+  </div>
+</div>
+
+<dialog id="pasteDlg">
+  <h2>Paste an NHC product</h2>
+  <p style="color:var(--dim);font-size:.75rem;margin:.2rem 0 .5rem">
+    Any TWDAT (discussion) or archived issuance from the
+    <a class="link" href="https://www.nhc.noaa.gov/text/" target="_blank" rel="noopener">NHC text archive</a>.
+  </p>
+  <textarea id="pasteText" placeholder="TWDAT&#10;Tropical Weather Discussion&#10;..."></textarea>
+  <div class="row">
+    <button id="pasteCancel">Cancel</button>
+    <button id="pasteMap" class="primary">Map it</button>
+  </div>
+</dialog>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="coastlines.js"></script>
+<script src="parser.js"></script>
+<script src="sample.js"></script>
+<script src="app.js"></script>
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(()=>{}));
+  }
+</script>
+</body>
+</html>
