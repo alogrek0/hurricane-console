@@ -18,14 +18,14 @@
     center: [17, -55], zoom: 4, minZoom: 3, maxZoom: 7,
     zoomControl: true, attributionControl: false, worldCopyJump: false
   });
-  map.setMaxBounds([[-8, -110], [47, 4]]);
+  map.setMaxBounds([[-8, -110], [45, 4]]);
 
   // graticule every 5deg
   var graticule = L.layerGroup().addTo(map);
   for (var la = -5; la <= 45; la += 5) graticule.addLayer(
     L.polyline([[la, -110], [la, 4]], { color: '#0f2f42', weight: 1, interactive: false }));
   for (var lo = -100; lo <= 0; lo += 5) graticule.addLayer(
-    L.polyline([[-8, lo], [47, lo]], { color: '#0f2f42', weight: 1, interactive: false }));
+    L.polyline([[-8, lo], [45, lo]], { color: '#0f2f42', weight: 1, interactive: false }));
 
   // graticule labels: chart-frame style — longitude along the bottom edge,
   // latitude along the left, repositioned as the view moves. Density follows
@@ -45,7 +45,7 @@
     // just inside its left edge, clamped to the viewport when the frame
     // extends past it
     var yRow = Math.min(size.y - 12, map.latLngToContainerPoint([-10, 0]).y + 9);
-    // (frame bottom stays at 10S; the north edge is 48N — see mask above)
+    // (frame bottom stays at 10S; the north edge is 45N — see mask above)
     var xCol = Math.max(4, map.latLngToContainerPoint([0, -110]).x + 6);
     for (var lo = -100; lo <= 0; lo += 5) {
       if (lo % step || lo < b.getWest() || lo > b.getEast()) continue;
@@ -82,7 +82,7 @@
     'https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png',
     // bounds = the coastline clip box: tiles render only inside the basin
     // frame (maxBounds clamps panning, not painting) and never world-wrap.
-    { subdomains: 'abcd', maxZoom: 7, noWrap: true, bounds: [[-10, -110], [48, 5]] }
+    { subdomains: 'abcd', maxZoom: 7, noWrap: true, bounds: [[-10, -110], [45, 5]] }
   );
   var tilesLoaded = false, tileErrors = 0;
   function tilesUp() {
@@ -109,7 +109,7 @@
   // (ocean-colored, evenodd fill) keeps everything outside the frame dark.
   L.polygon([
     [[-85, -250], [85, -250], [85, 250], [-85, 250]],
-    [[-10, -110], [48, -110], [48, 5], [-10, 5]]
+    [[-10, -110], [45, -110], [45, 5], [-10, 5]]
   ], { stroke: false, fillColor: '#04101a', fillOpacity: 1, interactive: false }).addTo(map);
 
   var featureLayer = L.layerGroup().addTo(map);
