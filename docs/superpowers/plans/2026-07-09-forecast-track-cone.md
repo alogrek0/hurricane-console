@@ -573,8 +573,9 @@ appears in TWO mode.)
 
 In `loadTWD()`: set `twdState = 'live'/'cached'` in the success path, `'sample'` in
 the catch's sample path, `'error'` on ERROR; then call `loadTCM();` as the final
-statement of BOTH the `.then` and `.catch` handlers. Also call `loadTCM()` once at
-boot after the initial `loadTWD()`.
+statement of BOTH the `.then` and `.catch` handlers. Do NOT also call `loadTCM()`
+at boot — the boot `loadTWD()` already triggers it on every resolution path, and a
+standalone boot call would race it with a duplicate fetch round (review finding).
 
 - [ ] **Step 4: app.js — mode + paste routing**
 
@@ -598,7 +599,13 @@ In the `pasteMap` handler, TCM detection comes FIRST (precedence per spec):
       } else if (/tropical weather outlook/i.test(txt.slice(0, 300))) {
         // existing TWO branch — keep body unchanged
       } else {
-        // existing TWD branch — keep body unchanged
+        // existing TWD branch, plus clearing the forecast layer: a pasted
+        // discussion must not keep a previously-fetched storm's track/cone
+        // on screen under a PASTED badge (review finding)
+        setMode('TWD');
+        tcmLayer.clearLayers();
+        tcmNote = '';
+        render(window.BasinParser.parse(txt));
       }
       setBadge('PASTED');
 ```
