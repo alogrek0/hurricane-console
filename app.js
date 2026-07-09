@@ -470,6 +470,8 @@
         renderTWO(window.BasinParser.parseTWO(txt));
       } else {
         setMode('TWD');
+        tcmLayer.clearLayers();
+        tcmNote = '';
         render(window.BasinParser.parse(txt));
       }
       setBadge('PASTED');
@@ -487,5 +489,4 @@
     setBadge('ERROR');
   }
   loadTWD();
-  loadTCM();
 })();
