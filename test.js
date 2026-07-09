@@ -248,5 +248,26 @@ ok('cone: width grows with forecast hour', (() => {
 })());
 ok('cone: null for a single point', P.coneFromTrack([conePts[0]]) === null);
 
+// polygon must be simple (no self-intersections) — regression for the
+// 0/360-straddling heading bug on recurving tracks (Lee's due-north leg)
+function segsCross(a, b, c, d) {
+  function o(p, q, r) {
+    const v = (q.lon - p.lon) * (r.lat - p.lat) - (q.lat - p.lat) * (r.lon - p.lon);
+    return v > 1e-12 ? 1 : v < -1e-12 ? -1 : 0;
+  }
+  return o(a, b, c) !== o(a, b, d) && o(c, d, a) !== o(c, d, b);
+}
+ok('cone: ring is a simple polygon (no self-intersection)', (() => {
+  for (let i = 0; i < ring.length; i++) {
+    const a = ring[i], b = ring[(i + 1) % ring.length];
+    for (let j = i + 2; j < ring.length; j++) {
+      if (i === 0 && j === ring.length - 1) continue; // shared endpoint
+      const c = ring[j], d = ring[(j + 1) % ring.length];
+      if (segsCross(a, b, c, d)) return false;
+    }
+  }
+  return true;
+})());
+
 console.log('\n' + pass + ' passed, ' + fail + ' failed');
 process.exit(fail ? 1 : 0);

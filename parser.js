@@ -551,20 +551,27 @@
     return (Math.atan2(dLon, dLat) * 180 / Math.PI + 360) % 360;
   }
 
+  // circular mean: averaging 357deg and 8deg must give ~2.5deg, not 182.5deg
+  function meanHeading(a, b) {
+    const ar = a * Math.PI / 180, br = b * Math.PI / 180;
+    return (Math.atan2(Math.sin(ar) + Math.sin(br), Math.cos(ar) + Math.cos(br)) * 180 / Math.PI + 360) % 360;
+  }
+
   // Track points (with .hours) -> cone polygon ring. The standard construction:
   // perpendicular left/right offsets at each point's radius, semicircular caps.
   function coneFromTrack(points) {
     if (!points || points.length < 2) return null;
     const left = [], right = [];
+    const hdgs = [];
     for (let i = 0; i < points.length; i++) {
       const p = points[i];
       const hdg = i === 0 ? headingDeg(points[0], points[1])
         : i === points.length - 1 ? headingDeg(points[i - 1], points[i])
-        : (headingDeg(points[i - 1], p) + headingDeg(p, points[i + 1])) / 2;
+        : meanHeading(headingDeg(points[i - 1], p), headingDeg(p, points[i + 1]));
       const r = coneRadiusNm(p.hours || 0);
+      hdgs.push(hdg);
       left.push(offsetNm(p, hdg - 90, r));
       right.push(offsetNm(p, hdg + 90, r));
-      p._hdg = hdg; // reused by the caps below
     }
     function arc(center, fromDeg, toDeg, r) {
       const out = [];
@@ -572,11 +579,11 @@
       return out;
     }
     const last = points[points.length - 1], first = points[0];
+    const lastHdg = hdgs[hdgs.length - 1], firstHdg = hdgs[0];
     const ring = left
-      .concat(arc(last, last._hdg - 90, last._hdg + 90, coneRadiusNm(last.hours || 0)))
+      .concat(arc(last, lastHdg - 90, lastHdg + 90, coneRadiusNm(last.hours || 0)))
       .concat(right.slice().reverse())
-      .concat(arc(first, first._hdg + 90, first._hdg + 270, coneRadiusNm(first.hours || 0)));
-    points.forEach((p) => { delete p._hdg; });
+      .concat(arc(first, firstHdg + 90, firstHdg + 270, coneRadiusNm(first.hours || 0)));
     return ring;
   }
 
