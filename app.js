@@ -26,11 +26,12 @@
   var PAN_BOUNDS = [[-8, -110], [45, 4]];
   map.setMaxBounds(PAN_BOUNDS);
 
-  // Fill-viewport floor: never allow a zoom where the basin is smaller than
-  // the viewport (no floating frame with dark letterbox bands around it).
+  // Zoom-out floor: the whole basin fits the viewport (chart-fit). Below the
+  // window's aspect this letterboxes with dark margins, but the frame edges
+  // stay labeled so they read as chart borders — and nothing is ever hidden.
   function fitMinZoom() {
-    // snap the floor UP to the zoomSnap grid so the basin still covers the view
-    var fit = Math.max(3, Math.ceil(map.getBoundsZoom(PAN_BOUNDS, true) * 4) / 4);
+    // snap DOWN to the zoomSnap grid so the full basin is guaranteed visible
+    var fit = Math.max(3, Math.floor(map.getBoundsZoom(PAN_BOUNDS, false) * 4) / 4);
     map.setMinZoom(fit);
     if (map.getZoom() < fit) map.setZoom(fit);
   }
