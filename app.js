@@ -39,7 +39,9 @@
   attrib.addAttribution('&copy; OpenStreetMap contributors &copy; CARTO');
   var tiles = L.tileLayer(
     'https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png',
-    { subdomains: 'abcd', maxZoom: 7 }
+    // bounds = the coastline clip box: tiles render only inside the basin
+    // frame (maxBounds clamps panning, not painting) and never world-wrap.
+    { subdomains: 'abcd', maxZoom: 7, noWrap: true, bounds: [[-10, -110], [43, 5]] }
   );
   var tilesLoaded = false, tileErrors = 0;
   function tilesUp() {
@@ -60,6 +62,14 @@
   window.addEventListener('offline', function () { coastGeo.setStyle({ opacity: 1 }); });
   window.addEventListener('online', function () { tilesLoaded = false; tileErrors = 0; tilesUp(); });
   tilesUp();
+
+  // Frame mask: tiles load in whole-tile blocks, so edge tiles paint well past
+  // the basin at coarse zooms. A world-sized polygon with a basin-shaped hole
+  // (ocean-colored, evenodd fill) keeps everything outside the frame dark.
+  L.polygon([
+    [[-85, -250], [85, -250], [85, 250], [-85, 250]],
+    [[-10, -110], [43, -110], [43, 5], [-10, 5]]
+  ], { stroke: false, fillColor: '#04101a', fillOpacity: 1, interactive: false }).addTo(map);
 
   var featureLayer = L.layerGroup().addTo(map);
   var twoLayer = L.layerGroup().addTo(map); // TWO formation areas (mode-exclusive)
