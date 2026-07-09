@@ -11,6 +11,7 @@
   var BASIN = { minLat: 0, maxLat: 34, minLon: -100, maxLon: -6 };
   var TWD_URL = 'https://api.weather.gov/products/types/TWDAT';
   var TWO_URL = 'https://api.weather.gov/products/types/TWOAT';
+  var TCM_URL = 'https://api.weather.gov/products/types/TCM';
   var mode = 'TWD'; // or 'TWO' (outlook formation areas, gazetteer-inferred)
 
   // --- map setup -------------------------------------------------------------
@@ -135,6 +136,7 @@
 
   var featureLayer = L.layerGroup().addTo(map);
   var twoLayer = L.layerGroup().addTo(map); // TWO formation areas (mode-exclusive)
+  var tcmLayer = L.layerGroup().addTo(map); // forecast track + cone
 
   // --- rendering -------------------------------------------------------------
   function ll(p) { return [p.lat, p.lon]; }
@@ -148,6 +150,12 @@
     return String(s).replace(/[&<>"]/g, function (c) {
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
     });
+  }
+
+  var metaBase = '—';
+  function updateMeta() {
+    document.getElementById('meta').innerHTML =
+      metaBase + (tcmNote ? ' · ' + tcmNote : '');
   }
 
   function render(parsed) {
@@ -231,10 +239,10 @@
     var nCyc = (parsed.cyclones || []).length;
     var n = nCyc + parsed.waves.length + parsed.troughs.length + parsed.convection.length +
       parsed.fixes.length + parsed.inferred.length;
-    document.getElementById('meta').innerHTML =
-      n + ' features · ' + parsed.waves.length + ' waves' +
+    metaBase = n + ' features · ' + parsed.waves.length + ' waves' +
       (nCyc ? ' · ' + nCyc + ' cyclone' + (nCyc === 1 ? '' : 's') : '') + '<br>' +
       (parsed.issued ? escapeHtml(parsed.issued) : 'issuance n/a');
+    updateMeta();
   }
 
   // TWO formation areas: prose locations, so every circle is inferred by
@@ -256,10 +264,10 @@
       }).bindPopup(popup(label, d.source, true)).addTo(twoLayer);
     });
     var n = parsed.disturbances.length;
-    document.getElementById('meta').innerHTML =
-      n + ' outlook area' + (n === 1 ? '' : 's') +
+    metaBase = n + ' outlook area' + (n === 1 ? '' : 's') +
       (unmapped ? ' · ' + unmapped + ' not mappable — see product text' : '') + '<br>' +
       (parsed.issued ? escapeHtml(parsed.issued) : 'issuance n/a');
+    updateMeta();
   }
 
   // --- data source -----------------------------------------------------------
@@ -298,18 +306,24 @@
       try {
         render(window.BasinParser.parse(res.text));
         setBadge(res.cached ? 'CACHED' : 'LIVE');
+        twdState = res.cached ? 'cached' : 'live';
       } catch (e) {
         setBadge('ERROR');
+        twdState = 'error';
       }
+      loadTCM();
     }).catch(function () {
       // no network + nothing cached -> embedded sample
-      if (!window.TWD_SAMPLE) { setBadge('ERROR'); return; }
+      if (!window.TWD_SAMPLE) { setBadge('ERROR'); twdState = 'error'; loadTCM(); return; }
       try {
         render(window.BasinParser.parse(window.TWD_SAMPLE));
         setBadge('SAMPLE');
+        twdState = 'sample';
       } catch (e) {
         setBadge('ERROR');
+        twdState = 'error';
       }
+      loadTCM();
     });
   }
 
@@ -334,6 +348,85 @@
     });
   }
 
+  // like fetchLatest but returns the newest n product texts
+  function fetchRecent(listUrl, n) {
+    return fetch(listUrl, { headers: { Accept: 'application/ld+json' } }).then(function (r) {
+      if (!r.ok) throw new Error('list ' + r.status);
+      return r.json().then(function (j) {
+        var items = (j['@graph'] || j.features || []).slice(0, n);
+        if (!items.length) return [];
+        return Promise.all(items.map(function (it) {
+          return fetch(it['@id'] || it.id)
+            .then(function (pr) { return pr.json(); })
+            .then(function (p) { return p.productText || ''; })
+            .catch(function () { return ''; });
+        }));
+      });
+    });
+  }
+
+  var twdState = 'sample'; // 'live' | 'cached' | 'sample' | 'error' — set by loadTWD
+  var tcmNote = '';
+
+  function loadTCM() {
+    fetchRecent(TCM_URL, 8).then(function (texts) {
+      var byStorm = {};
+      texts.forEach(function (t) {
+        var p = window.BasinParser.parseTCM(t);
+        if (!p || !p.stormId || p.stormId.slice(0, 2) !== 'AL') return;
+        if (!byStorm[p.stormId] || byStorm[p.stormId].advisory < p.advisory) byStorm[p.stormId] = p;
+      });
+      var storms = Object.keys(byStorm).map(function (k) { return byStorm[k]; });
+      renderTCM(storms);
+      tcmNote = storms.length ? storms.length + ' forecast track' + (storms.length === 1 ? '' : 's') : '';
+      updateMeta();
+    }).catch(function () {
+      // SAMPLE state demos the feature; a live TWD with dead TCM is reported honestly
+      if (twdState === 'sample' && window.TCM_SAMPLE) {
+        var p = window.BasinParser.parseTCM(window.TCM_SAMPLE);
+        renderTCM(p ? [p] : []);
+        tcmNote = p ? '1 forecast track (sample)' : '';
+      } else {
+        renderTCM([]);
+        tcmNote = 'forecast track n/a';
+      }
+      updateMeta();
+    });
+  }
+
+  function intensityColor(kt) {
+    return kt >= 64 ? '#ff6b5a' : kt >= 34 ? '#ffa23a' : '#dce8ef';
+  }
+
+  function renderTCM(storms) {
+    tcmLayer.clearLayers();
+    (storms || []).forEach(function (s) {
+      var pts = [{ hours: 0, lat: s.center.lat, lon: s.center.lon }].concat(s.track);
+      var ring = window.BasinParser.coneFromTrack(pts);
+      if (ring) {
+        L.polygon(ring.map(ll), {
+          color: '#7ea3b8', weight: 1.5, dashArray: '4 4',
+          fillColor: '#dce8ef', fillOpacity: 0.07, interactive: true
+        }).bindPopup(popup('CONE ' + s.name.toUpperCase(),
+          'Computed from NHC seasonal cone radii - the official cone lives at hurricanes.gov. Advisory #' + s.advisory + ' issued ' + s.issued + '.',
+          true)).addTo(tcmLayer);
+      }
+      L.polyline(pts.map(ll), { color: '#dce8ef', weight: 2 })
+        .bindPopup(popup('TRACK ' + s.name.toUpperCase(),
+          'NHC forecast/advisory #' + s.advisory + ' - positions at 12-120 h.', false))
+        .addTo(tcmLayer);
+      s.track.forEach(function (p) {
+        L.circleMarker(ll(p), {
+          radius: 5, color: intensityColor(p.windKt || 0),
+          fillColor: intensityColor(p.windKt || 0), fillOpacity: 0.85, weight: 1.5
+        }).bindPopup(popup('+' + p.hours + 'h · ' + p.validZ,
+          (p.windKt != null ? p.windKt + ' kt' : 'wind n/a') +
+          (p.state ? ' · ' + p.state : ''), false))
+          .addTo(tcmLayer);
+      });
+    });
+  }
+
   // --- UI wiring -------------------------------------------------------------
   document.getElementById('refresh').addEventListener('click', function () {
     mode === 'TWD' ? loadTWD() : loadTWO();
@@ -345,7 +438,7 @@
     whichBtn.textContent = mode === 'TWD' ? 'TWD / TWO' : 'TWO / TWD';
     // One badge, one product: never show both products at once.
     if (mode === 'TWD') twoLayer.clearLayers();
-    else featureLayer.clearLayers();
+    else { featureLayer.clearLayers(); tcmLayer.clearLayers(); tcmNote = ''; }
   }
   whichBtn.addEventListener('click', function () {
     setMode(mode === 'TWD' ? 'TWO' : 'TWD');
@@ -363,9 +456,16 @@
     var txt = document.getElementById('pasteText').value;
     dlg.close();
     if (!txt.trim()) return;
-    // Route by product: a pasted outlook gets the TWO treatment.
+    // Route by product: TCM check first, then TWO, then TWD.
     try {
-      if (/tropical weather outlook/i.test(txt.slice(0, 300))) {
+      if (/FORECAST\/ADVISORY/i.test(txt.slice(0, 400))) {
+        setMode('TWD');
+        var ptcm = window.BasinParser.parseTCM(txt);
+        if (!ptcm) throw new Error('unparseable TCM');
+        renderTCM([ptcm]);
+        tcmNote = '1 forecast track (pasted)';
+        updateMeta();
+      } else if (/tropical weather outlook/i.test(txt.slice(0, 300))) {
         setMode('TWO');
         renderTWO(window.BasinParser.parseTWO(txt));
       } else {
@@ -387,4 +487,5 @@
     setBadge('ERROR');
   }
   loadTWD();
+  loadTCM();
 })();
