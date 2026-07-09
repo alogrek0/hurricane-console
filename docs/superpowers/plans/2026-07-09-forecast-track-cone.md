@@ -281,6 +281,27 @@ ok('cone: width grows with forecast hour', (() => {
   return widthNear(conePts[conePts.length - 1]) > widthNear(conePts[1]);
 })());
 ok('cone: null for a single point', P.coneFromTrack([conePts[0]]) === null);
+
+// polygon must be simple (no self-intersections) — regression for the
+// 0/360-straddling heading bug on recurving tracks (Lee's due-north leg)
+function segsCross(a, b, c, d) {
+  function o(p, q, r) {
+    const v = (q.lon - p.lon) * (r.lat - p.lat) - (q.lat - p.lat) * (r.lon - p.lon);
+    return v > 1e-12 ? 1 : v < -1e-12 ? -1 : 0;
+  }
+  return o(a, b, c) !== o(a, b, d) && o(c, d, a) !== o(c, d, b);
+}
+ok('cone: ring is a simple polygon (no self-intersection)', (() => {
+  for (let i = 0; i < ring.length; i++) {
+    const a = ring[i], b = ring[(i + 1) % ring.length];
+    for (let j = i + 2; j < ring.length; j++) {
+      if (i === 0 && j === ring.length - 1) continue; // shared endpoint
+      const c = ring[j], d = ring[(j + 1) % ring.length];
+      if (segsCross(a, b, c, d)) return false;
+    }
+  }
+  return true;
+})());
 ```
 
 - [ ] **Step 2: Run tests, verify the new ones fail**
@@ -324,20 +345,28 @@ Expected: crash/FAIL at `P.coneFromTrack is not a function`.
     return (Math.atan2(dLon, dLat) * 180 / Math.PI + 360) % 360;
   }
 
+  // circular mean: averaging 357deg and 8deg must give ~2.5deg, not 182.5deg
+  // (a naive arithmetic mean flips the cone sides where a track crosses north
+  // and produces a self-intersecting ring — found in review on the Lee fixture)
+  function meanHeading(a, b) {
+    const ar = a * Math.PI / 180, br = b * Math.PI / 180;
+    return (Math.atan2(Math.sin(ar) + Math.sin(br), Math.cos(ar) + Math.cos(br)) * 180 / Math.PI + 360) % 360;
+  }
+
   // Track points (with .hours) -> cone polygon ring. The standard construction:
   // perpendicular left/right offsets at each point's radius, semicircular caps.
   function coneFromTrack(points) {
     if (!points || points.length < 2) return null;
-    const left = [], right = [];
+    const left = [], right = [], hdgs = [];
     for (let i = 0; i < points.length; i++) {
       const p = points[i];
       const hdg = i === 0 ? headingDeg(points[0], points[1])
         : i === points.length - 1 ? headingDeg(points[i - 1], points[i])
-        : (headingDeg(points[i - 1], p) + headingDeg(p, points[i + 1])) / 2;
+        : meanHeading(headingDeg(points[i - 1], p), headingDeg(p, points[i + 1]));
       const r = coneRadiusNm(p.hours || 0);
+      hdgs.push(hdg);
       left.push(offsetNm(p, hdg - 90, r));
       right.push(offsetNm(p, hdg + 90, r));
-      p._hdg = hdg; // reused by the caps below
     }
     function arc(center, fromDeg, toDeg, r) {
       const out = [];
@@ -346,10 +375,9 @@ Expected: crash/FAIL at `P.coneFromTrack is not a function`.
     }
     const last = points[points.length - 1], first = points[0];
     const ring = left
-      .concat(arc(last, last._hdg - 90, last._hdg + 90, coneRadiusNm(last.hours || 0)))
+      .concat(arc(last, hdgs[hdgs.length - 1] - 90, hdgs[hdgs.length - 1] + 90, coneRadiusNm(last.hours || 0)))
       .concat(right.slice().reverse())
-      .concat(arc(first, first._hdg + 90, first._hdg + 270, coneRadiusNm(first.hours || 0)));
-    points.forEach((p) => { delete p._hdg; });
+      .concat(arc(first, hdgs[0] + 90, hdgs[0] + 270, coneRadiusNm(first.hours || 0)));
     return ring;
   }
 ```
@@ -363,7 +391,7 @@ Extend exports:
 - [ ] **Step 4: Run tests, verify all pass**
 
 Run: `node test.js`
-Expected: `53 passed, 0 failed`, exit 0.
+Expected: `54 passed, 0 failed`, exit 0.
 
 - [ ] **Step 5: Commit**
 
@@ -585,7 +613,7 @@ In the `pasteMap` handler, TCM detection comes FIRST (precedence per spec):
 - [ ] **Step 6: Syntax check + tests**
 
 Run: `node --check app.js && node --check sample.js && node test.js`
-Expected: `53 passed, 0 failed`.
+Expected: `54 passed, 0 failed`.
 
 - [ ] **Step 7: Browser verification** (serve on a FRESH port — python's dev server
 has no cache headers and the SW caches aggressively; a previously-used port serves
@@ -644,7 +672,7 @@ README.md — "What it does" gains:
 
 - [ ] **Step 3: Full test + verify**
 
-Run: `node test.js` → `53 passed, 0 failed`.
+Run: `node test.js` → `54 passed, 0 failed`.
 Re-run the Task 3 browser pass once more on a fresh port.
 
 - [ ] **Step 4: Commit + deploy**
