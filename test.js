@@ -148,7 +148,7 @@ ok('coastlines: >=150 clipped lines', geom && geom.coordinates.length >= 150);
 // clip keeps one continuity vertex past each frame edge, so allow 1 deg margin
 ok('coastlines: all coords inside clip box (+1 deg margin)',
   geom && geom.coordinates.every(line =>
-    line.every(([x, y]) => x >= -111 && x <= 6 && y >= -11 && y <= 44)));
+    line.every(([x, y]) => x >= -111 && x <= 6 && y >= -11 && y <= 49)));
 ok('coastlines: western hemisphere is negative',
   geom && geom.coordinates.some(line => line.some(([x]) => x < -60)));
 

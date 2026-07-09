@@ -5,7 +5,7 @@
  *
  * Downloads the public-domain Natural Earth 1:50m coastline
  * (github.com/nvkelso/natural-earth-vector), clips it to the Atlantic basin
- * box (lon -110..5, lat -10..43 — covers the map's maxBounds with margin),
+ * box (lon -110..5, lat -10..48 — covers the map's maxBounds with margin),
  * rounds coordinates to 2 decimals, and rewrites coastlines.js as a single
  * MultiLineString feature. Dev-time only; zero dependencies; never runs in
  * the browser.
@@ -17,7 +17,7 @@ const https = require('https');
 
 const URL =
   'https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_50m_coastline.geojson';
-const BOX = { w: -110, e: 5, s: -10, n: 43 };
+const BOX = { w: -110, e: 5, s: -10, n: 48 };
 const OUT = path.join(__dirname, '..', 'coastlines.js');
 
 const inBox = (p) => p[0] >= BOX.w && p[0] <= BOX.e && p[1] >= BOX.s && p[1] <= BOX.n;
