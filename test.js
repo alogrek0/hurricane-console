@@ -152,5 +152,71 @@ ok('coastlines: all coords inside clip box (+1 deg margin)',
 ok('coastlines: western hemisphere is negative',
   geom && geom.coordinates.some(line => line.some(([x]) => x < -60)));
 
+// --- TCM forecast/advisory -----------------------------------------------------
+
+const TCM_FIX = `ZCZC MIATCMAT3 ALL
+TTAA00 KNHC DDHHMM
+
+HURRICANE LEE FORECAST/ADVISORY NUMBER  23
+NWS NATIONAL HURRICANE CENTER MIAMI FL       AL132023
+0300 UTC MON SEP 11 2023
+
+HURRICANE CENTER LOCATED NEAR 22.6N  62.2W AT 11/0300Z
+POSITION ACCURATE WITHIN  15 NM
+
+PRESENT MOVEMENT TOWARD THE NORTHWEST OR 305 DEGREES AT   7 KT
+
+ESTIMATED MINIMUM CENTRAL PRESSURE  950 MB
+MAX SUSTAINED WINDS 105 KT WITH GUSTS TO 130 KT.
+64 KT....... 65NE  40SE  40SW  55NW.
+50 KT.......110NE  80SE  60SW  90NW.
+34 KT.......150NE 140SE 100SW 140NW.
+
+REPEAT...CENTER LOCATED NEAR 22.6N  62.2W AT 11/0300Z
+
+FORECAST VALID 11/1200Z 23.1N  63.1W
+MAX WIND 115 KT...GUSTS 140 KT.
+64 KT... 65NE  50SE  45SW  60NW.
+
+FORECAST VALID 12/0000Z 23.6N  64.4W
+MAX WIND 120 KT...GUSTS 145 KT.
+
+FORECAST VALID 13/0000Z 24.6N  66.4W
+MAX WIND 110 KT...GUSTS 135 KT.
+
+FORECAST VALID 14/0000Z 26.5N  67.7W
+MAX WIND  95 KT...GUSTS 115 KT.
+
+OUTLOOK VALID 15/0000Z 30.2N  67.9W
+MAX WIND  85 KT...GUSTS 105 KT.
+
+OUTLOOK VALID 16/0000Z 35.5N  67.0W...POST-TROP/EXTRATROP
+MAX WIND  70 KT...GUSTS  85 KT.
+
+NEXT ADVISORY AT 11/0900Z
+
+$$`;
+
+const tcm = P.parseTCM(TCM_FIX);
+ok('TCM: header parsed', tcm && tcm.name === 'Lee' && tcm.classification === 'Hurricane' &&
+  tcm.stormId === 'AL132023' && tcm.advisory === 23);
+ok('TCM: center + intensity', tcm && tcm.center.lat === 22.6 && tcm.center.lon === -62.2 &&
+  tcm.windKt === 105 && tcm.gustKt === 130 && tcm.pressureMb === 950);
+ok('TCM: motion from degrees form', tcm && tcm.motion && tcm.motion.bearing === 305 && tcm.motion.slowKt === 7);
+ok('TCM: six track points', tcm && tcm.track.length === 6);
+ok('TCM: hour offsets from valid times', tcm &&
+  tcm.track.map(p => p.hours).join(',') === '9,21,45,69,93,117');
+ok('TCM: track coordinate values', tcm && tcm.track[0].lat === 23.1 && tcm.track[0].lon === -63.1 &&
+  tcm.track[5].lat === 35.5 && tcm.track[5].lon === -67.0);
+ok('TCM: track winds', tcm && tcm.track[0].windKt === 115 && tcm.track[4].windKt === 85);
+ok('TCM: post-tropical end state tagged', tcm && tcm.track[5].state === 'post-tropical');
+ok('TCM: month rollover hours', (() => {
+  const t = P.parseTCM(TCM_FIX.replace('AT 11/0300Z', 'AT 30/2100Z')
+    .replace('NEAR 22.6N  62.2W AT 30/2100Z', 'NEAR 22.6N  62.2W AT 30/2100Z')
+    .replace('FORECAST VALID 11/1200Z', 'FORECAST VALID 01/0600Z'));
+  return t && t.track[0].hours === 33; // 30/2100Z -> 01/0600Z across a 31-day month
+})());
+ok('TCM: garbage returns null', P.parseTCM('not a product') === null && P.parseTCM('') === null);
+
 console.log('\n' + pass + ' passed, ' + fail + ' failed');
 process.exit(fail ? 1 : 0);

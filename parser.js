@@ -448,6 +448,75 @@
     return out;
   }
 
+  // --- TCM (Tropical Cyclone Forecast/Advisory) --------------------------------
+  // The most rigid NHC text product: FORECAST/OUTLOOK VALID lines carry the
+  // official track. Times are DD/HHMMZ with no month, so hour offsets resolve
+  // month rollover by picking the month length that lands the delta in 0..6 days.
+
+  function tcmHours(d0, h0, d1, h1) {
+    var days = d1 - d0;
+    if (days < 0) {
+      var lens = [31, 30, 29, 28];
+      for (var i = 0; i < lens.length; i++) {
+        var cand = d1 - d0 + lens[i];
+        if (cand >= 0 && cand <= 6) { days = cand; break; }
+      }
+      if (days < 0) return null;
+    }
+    return days * 24 + (h1 - h0);
+  }
+
+  function parseTCM(raw) {
+    const text = dehyphenate(String(raw || ''));
+    const head = text.match(
+      /\b(HURRICANE|TROPICAL STORM|TROPICAL DEPRESSION|SUBTROPICAL STORM|SUBTROPICAL DEPRESSION|POST-TROPICAL CYCLONE|REMNANTS OF)\s+([A-Z][A-Za-z-]+)\s+(?:SPECIAL\s+)?FORECAST\/ADVISORY\s+NUMBER\s+(\d+)/i
+    );
+    const ctr = text.match(
+      /CENTER LOCATED NEAR\s+(\d{1,2}(?:\.\d)?)\s*([NS])\s+(\d{1,3}(?:\.\d)?)\s*([EW])\s+AT\s+(\d{2})\/(\d{2})(\d{2})Z/i
+    );
+    if (!head || !ctr) return null;
+    const idm = text.match(/\b(AL|EP|CP)(\d{6})\b/);
+    const d0 = parseInt(ctr[5], 10), h0 = parseInt(ctr[6], 10);
+    const wm = text.match(/MAX SUSTAINED WINDS\s+(\d{1,3})\s*KT(?:\s+WITH\s+GUSTS\s+TO\s+(\d{1,3})\s*KT)?/i);
+    const pm = text.match(/MINIMUM CENTRAL PRESSURE\s+(\d{3,4})\s*MB/i);
+
+    const track = [];
+    for (const chunk of text.split(/\n\s*\n/)) {
+      const v = chunk.match(
+        /^\s*(FORECAST|OUTLOOK)\s+VALID\s+(\d{2})\/(\d{2})(\d{2})Z\s+(\d{1,2}(?:\.\d)?)\s*([NS])\s+(\d{1,3}(?:\.\d)?)\s*([EW])/i
+      );
+      if (!v) continue; // dissipated blocks carry no position; skip from geometry
+      const mw = chunk.match(/MAX WIND\s+(\d{1,3})\s*KT/i);
+      const hours = tcmHours(d0, h0, parseInt(v[2], 10), parseInt(v[3], 10));
+      if (hours == null) continue;
+      const entry = {
+        kind: v[1].toUpperCase(),
+        hours: hours,
+        validZ: v[2] + '/' + v[3] + v[4] + 'Z',
+        lat: lat(v[5], v[6].toUpperCase()),
+        lon: lon(v[7], v[8].toUpperCase()),
+        windKt: mw ? parseInt(mw[1], 10) : null,
+      };
+      if (/POST-TROP/i.test(chunk)) entry.state = 'post-tropical';
+      if (/DISSIPAT/i.test(chunk)) entry.state = 'dissipated';
+      track.push(entry);
+    }
+
+    return {
+      stormId: idm ? (idm[1] + idm[2]) : null,
+      name: titleCase(head[2]),
+      classification: titleCase(head[1]),
+      advisory: parseInt(head[3], 10),
+      center: { lat: lat(ctr[1], ctr[2].toUpperCase()), lon: lon(ctr[3], ctr[4].toUpperCase()) },
+      issued: ctr[5] + '/' + ctr[6] + ctr[7] + 'Z',
+      windKt: wm ? parseInt(wm[1], 10) : null,
+      gustKt: wm && wm[2] ? parseInt(wm[2], 10) : null,
+      pressureMb: pm ? parseInt(pm[1], 10) : null,
+      motion: parseMotion(text),
+      track: track,
+    };
+  }
+
   // --- orchestration ---------------------------------------------------------
 
   // Dead-reckon +24h from a point with stated motion; shared by waves and
@@ -504,6 +573,6 @@
     return result;
   }
 
-  root.BasinParser = { parse, parseTWO, pairsIn, sections, dehyphenate, parseMotion, project };
+  root.BasinParser = { parse, parseTWO, parseTCM, pairsIn, sections, dehyphenate, parseMotion, project };
   if (typeof module !== 'undefined' && module.exports) module.exports = root.BasinParser;
 })(typeof window !== 'undefined' ? window : globalThis);
