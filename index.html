@@ -60,6 +60,10 @@
   .pop-tag{font-size:.62rem;letter-spacing:.1em;font-weight:700;color:var(--amber)}
   .pop-tag.inf{color:var(--inferred)}
   .pop-src{color:var(--dim);font-size:.72rem;margin-top:.3rem;max-width:240px}
+  .cyc-label{background:rgba(9,26,38,.9);color:var(--ink);border:1px solid var(--line);
+    border-radius:4px;font:600 .68rem/1.2 var(--mono);letter-spacing:.06em;
+    padding:.15rem .35rem;box-shadow:none}
+  .cyc-label::before{display:none}
 
   dialog{background:var(--panel);color:var(--ink);border:1px solid var(--line);
     border-radius:8px;max-width:min(560px,92vw);padding:1rem}
@@ -87,10 +91,12 @@
     <div id="map"></div>
     <div class="legend" id="legend">
       <b>LAYERS</b>
+      <div><span class="swatch" style="border-top-color:#ff6b5a;border-top-width:6px"></span>Cyclone</div>
       <div><span class="swatch" style="border-top-color:#ffa23a"></span>Wave axis</div>
       <div><span class="swatch" style="border-top-color:#4fc3d6"></span>Trough</div>
       <div><span class="swatch" style="border-top-color:#ff6b5a;border-top-style:dotted"></span>Convection</div>
       <div><span class="swatch" style="border-top-color:#9a86c9;border-top-style:dashed"></span>Inferred / +24h</div>
+      <div><span class="swatch" style="border-top-color:#ffd23a;border-top-style:dashed"></span>TWO area · 7-day %</div>
     </div>
   </div>
 
