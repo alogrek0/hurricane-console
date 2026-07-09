@@ -68,6 +68,12 @@
     font:.6rem/1.4 var(--mono);padding:.1rem .4rem}
   .leaflet-control-attribution a{color:var(--dim)}
 
+  /* graticule frame labels: quiet chart numerals, halo for legibility on tiles */
+  .grat-labels{position:absolute;inset:0;z-index:450;pointer-events:none}
+  .grat-labels span{position:absolute;font:500 .58rem/1 var(--mono);color:var(--dim);
+    opacity:.8;letter-spacing:.06em;font-variant-numeric:tabular-nums;
+    text-shadow:0 0 4px #04101a,0 0 2px #04101a}
+
   /* update-available banner: shown when a new SW installs behind a live page */
   #updateBar{position:fixed;left:50%;transform:translateX(-50%);z-index:900;
     bottom:calc(3.4rem + env(safe-area-inset-bottom));display:flex;gap:.6rem;

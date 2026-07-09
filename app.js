@@ -27,6 +27,46 @@
   for (var lo = -100; lo <= 0; lo += 5) graticule.addLayer(
     L.polyline([[-8, lo], [42, lo]], { color: '#0f2f42', weight: 1, interactive: false }));
 
+  // graticule labels: chart-frame style — longitude along the bottom edge,
+  // latitude along the left, repositioned as the view moves. Density follows
+  // zoom so the frame never crowds.
+  var gratLabels = document.createElement('div');
+  gratLabels.className = 'grat-labels';
+  map.getContainer().appendChild(gratLabels);
+  function fmtDeg(v, pos, neg) {
+    return Math.abs(v) + '°' + (v < 0 ? neg : v > 0 ? pos : '');
+  }
+  function drawGratLabels() {
+    var size = map.getSize();
+    var b = map.getBounds();
+    var step = map.getZoom() <= 3 ? 10 : 5;
+    var html = '';
+    // pin rows to the chart margin: just under the frame's bottom edge and
+    // just inside its left edge, clamped to the viewport when the frame
+    // extends past it
+    var yRow = Math.min(size.y - 12, map.latLngToContainerPoint([-10, 0]).y + 9);
+    var xCol = Math.max(4, map.latLngToContainerPoint([0, -110]).x + 6);
+    for (var lo = -100; lo <= 0; lo += 5) {
+      if (lo % step || lo < b.getWest() || lo > b.getEast()) continue;
+      var x = map.latLngToContainerPoint([0, lo]).x;
+      if (x < 16 || x > size.x - 16) continue;
+      // keep clear of the attribution chip in the bottom-right corner
+      if (yRow > size.y - 30 && x > size.x - 175) continue;
+      html += '<span style="left:' + Math.round(x) + 'px;top:' + Math.round(yRow) +
+        'px;transform:translate(-50%,-50%)">' + fmtDeg(lo, 'E', 'W') + '</span>';
+    }
+    for (var la = -5; la <= 35; la += 5) {
+      if (la % step || la < b.getSouth() || la > b.getNorth()) continue;
+      var y = map.latLngToContainerPoint([la, 0]).y;
+      if (y < 12 || y > size.y - 18 || Math.abs(y - yRow) < 12) continue;
+      html += '<span style="left:' + Math.round(xCol) + 'px;top:' + Math.round(y) +
+        'px;transform:translateY(-50%)">' + fmtDeg(la, 'N', 'S') + '</span>';
+    }
+    gratLabels.innerHTML = html;
+  }
+  map.on('move zoom viewreset resize', drawGratLabels);
+  drawGratLabels();
+
   // Embedded NE 50m coastlines: the guaranteed basemap. Always on the map so
   // the chart works with zero network; dimmed (not removed) when tiles load.
   var coastGeo = L.geoJSON(window.BASIN_COASTLINES, {
