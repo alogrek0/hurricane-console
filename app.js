@@ -27,10 +27,39 @@
   for (var lo = -100; lo <= 0; lo += 5) graticule.addLayer(
     L.polyline([[-8, lo], [42, lo]], { color: '#0f2f42', weight: 1, interactive: false }));
 
-  // coastlines
-  L.geoJSON(window.BASIN_COASTLINES, {
+  // Embedded NE 50m coastlines: the guaranteed basemap. Always on the map so
+  // the chart works with zero network; dimmed (not removed) when tiles load.
+  var coastGeo = L.geoJSON(window.BASIN_COASTLINES, {
     style: { color: '#2c5870', weight: 1, fill: false, interactive: false }
   }).addTo(map);
+
+  // CARTO dark tiles: progressive enhancement when online. The badge never
+  // describes the basemap — only the data product.
+  var attrib = L.control.attribution({ prefix: false });
+  attrib.addAttribution('&copy; OpenStreetMap contributors &copy; CARTO');
+  var tiles = L.tileLayer(
+    'https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png',
+    { subdomains: 'abcd', maxZoom: 7 }
+  );
+  var tilesLoaded = false, tileErrors = 0;
+  function tilesUp() {
+    if (!map.hasLayer(tiles)) { tiles.addTo(map); attrib.addTo(map); }
+  }
+  function tilesDown() {
+    if (map.hasLayer(tiles)) { map.removeLayer(tiles); attrib.remove(); }
+    coastGeo.setStyle({ opacity: 1 });
+  }
+  tiles.on('load', function () {
+    tilesLoaded = true;
+    coastGeo.setStyle({ opacity: 0.35 }); // tiles carry the land; vectors stay as chart lines
+  });
+  tiles.on('tileerror', function () {
+    // never loaded and repeatedly failing (offline boot, sandbox) -> vectors only
+    if (!tilesLoaded && ++tileErrors >= 4) tilesDown();
+  });
+  window.addEventListener('offline', function () { coastGeo.setStyle({ opacity: 1 }); });
+  window.addEventListener('online', function () { tilesLoaded = false; tileErrors = 0; tilesUp(); });
+  tilesUp();
 
   var featureLayer = L.layerGroup().addTo(map);
   var twoLayer = L.layerGroup().addTo(map); // TWO formation areas (mode-exclusive)

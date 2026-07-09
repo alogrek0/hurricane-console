@@ -62,6 +62,9 @@ node test.js
 - The parser is heuristic. NHC forecasters write for humans; unusual phrasings
   will be missed or misplaced. The confidence flag and source-sentence popups
   exist so errors are visible, not hidden.
-- Coastlines are hand-simplified vectors (~0.5°), schematic by design.
+- Coastlines are Natural Earth 1:50m vectors (public domain), embedded so the
+  map works fully offline. When online, a CARTO dark basemap
+  (&copy; OpenStreetMap contributors &copy; CARTO) renders underneath; if tiles
+  can't load, the vector chart carries the map alone.
 - **Not for life-safety decisions.** Official NHC products at hurricanes.gov are
   always authoritative.

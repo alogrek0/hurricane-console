@@ -138,5 +138,19 @@ ok('D1 resolves to Lesser Antilles anchor', d1 && d1.lat === 15.5 && d1.lon === 
 ok('D2 "between A and B" midpoint resolves',
   d2 && d2.lat === (13.0 + 15.0) / 2 && d2.lon === (-61.2 + -75.0) / 2);
 
+// --- coastlines.js integrity (generated file; guards a bad regeneration) ------
+
+const COAST = require('./coastlines.js');
+const geom = COAST.features && COAST.features[0] && COAST.features[0].geometry;
+ok('coastlines: FeatureCollection with MultiLineString',
+  COAST.type === 'FeatureCollection' && geom && geom.type === 'MultiLineString');
+ok('coastlines: >=150 clipped lines', geom && geom.coordinates.length >= 150);
+// clip keeps one continuity vertex past each frame edge, so allow 1 deg margin
+ok('coastlines: all coords inside clip box (+1 deg margin)',
+  geom && geom.coordinates.every(line =>
+    line.every(([x, y]) => x >= -111 && x <= 6 && y >= -11 && y <= 44)));
+ok('coastlines: western hemisphere is negative',
+  geom && geom.coordinates.some(line => line.some(([x]) => x < -60)));
+
 console.log('\n' + pass + ' passed, ' + fail + ' failed');
 process.exit(fail ? 1 : 0);

@@ -33,7 +33,8 @@ Everything is client side. Files:
 | `index.html`     | app shell, styles, script order |
 | `app.js`         | fetch → parse → render on Leaflet; badge + paste/refresh UI |
 | `parser.js`      | TWDAT text-to-geo engine — runs in browser AND node |
-| `coastlines.js`  | embedded simplified vector coastlines (no tile server) |
+| `coastlines.js`  | embedded Natural Earth 50m coastlines — GENERATED, do not hand-edit (regenerate: `node tools/build-coastlines.js`) |
+| `tools/build-coastlines.js` | dev-only generator: downloads/clips NE 50m → coastlines.js |
 | `sample.js`      | embedded Jul 7 2026 TWDAT/TWOAT fallback (SAMPLE state) |
 | `sw.js`          | service worker: cache-first shell, network-first data |
 | `manifest.json`  | PWA manifest |
@@ -70,7 +71,11 @@ same reason.
 - Plain ES5-ish browser JS, no framework, no bundler. Keep it dependency-free
   except Leaflet from the CDN (already in the SHELL cache list).
 - Coordinates are `{lat, lon}` with **west and south negative** throughout.
-- Coastlines are schematic (~0.5°) by design — matching the product's resolution.
+- **Basemap is hybrid**: embedded Natural Earth 50m vectors are the guaranteed
+  offline basemap and always render; CARTO dark tiles are a progressive
+  enhancement when online (vectors dim to 0.35 over them). Tiles are never
+  cached by the SW (ToS + bloat) and never required — the offline story must
+  keep working. Attribution control appears only while tiles are on the map.
 
 ## Deploy (GitHub Pages)
 Push to `main`, then repo **Settings → Pages → Deploy from a branch → `main` /
