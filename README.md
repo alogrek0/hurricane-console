@@ -17,6 +17,9 @@ plots them on an Atlantic basin map. No backend, no build step, no API keys.
   band between the slow and fast solutions when the text gives a speed range.
 - **Paste product** button maps any TWDAT text you paste, including archived
   issuances from the [NHC text archive](https://www.nhc.noaa.gov/text/).
+- Plots the official NHC forecast track (TCM advisories) with a cone of
+  uncertainty computed from NHC's published seasonal cone radii — labeled as
+  computed; the official cone lives at hurricanes.gov.
 
 ## Run locally
 

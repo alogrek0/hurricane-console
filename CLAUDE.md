@@ -50,6 +50,10 @@ Everything is client side. Files:
 3. **Dead-reckoning** — projects +24h wave positions from stated motion. A speed
    range (`15 to 20 kt`) yields an **uncertainty band** between the slow and fast
    solutions, not a single point.
+4. **TCM pass** — `parseTCM` reads the official forecast/advisory (track points,
+   intensity); `coneFromTrack` computes the cone from NHC's published seasonal
+   radii (update `CONE_RADII_NM` each season from nhc.noaa.gov/aboutcone.shtml).
+   The cone is always labeled as computed — never presented as the official cone.
 
 `dehyphenate()` rejoins teletype line-wraps (`upper-\nlevel` → `upper-level`) so
 keyword matches survive — this was a real bug; keep the hyphen.
