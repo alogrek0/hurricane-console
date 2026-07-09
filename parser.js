@@ -517,6 +517,69 @@
     };
   }
 
+  // --- cone geometry ---------------------------------------------------------
+  // NHC published cone circle radii (nm) by forecast hour, Atlantic basin.
+  // Source: https://www.nhc.noaa.gov/aboutcone.shtml (current season; update
+  // annually). Hour 0 uses a small fixed radius so the cone starts at the center.
+  const CONE_RADII_NM = [
+    [0, 10], [12, 25], [24, 39], [36, 49], [48, 62], [60, 77], [72, 95], [96, 134], [120, 200],
+  ];
+
+  function coneRadiusNm(hours) {
+    const t = CONE_RADII_NM;
+    if (hours <= t[0][0]) return t[0][1];
+    for (let i = 1; i < t.length; i++) {
+      if (hours <= t[i][0]) {
+        const [h0, r0] = t[i - 1], [h1, r1] = t[i];
+        return r0 + (r1 - r0) * (hours - h0) / (h1 - h0);
+      }
+    }
+    return t[t.length - 1][1];
+  }
+
+  // Move nm from pt along bearingDeg (planar, lat-scaled lon — same approx as project()).
+  function offsetNm(pt, bearingDeg, nm) {
+    const dLat = (nm * Math.cos((bearingDeg * Math.PI) / 180)) / 60;
+    const dLon = (nm * Math.sin((bearingDeg * Math.PI) / 180)) /
+      (60 * Math.cos((pt.lat * Math.PI) / 180));
+    return { lat: pt.lat + dLat, lon: pt.lon + dLon };
+  }
+
+  function headingDeg(a, b) {
+    const dLat = b.lat - a.lat;
+    const dLon = (b.lon - a.lon) * Math.cos(((a.lat + b.lat) / 2) * Math.PI / 180);
+    return (Math.atan2(dLon, dLat) * 180 / Math.PI + 360) % 360;
+  }
+
+  // Track points (with .hours) -> cone polygon ring. The standard construction:
+  // perpendicular left/right offsets at each point's radius, semicircular caps.
+  function coneFromTrack(points) {
+    if (!points || points.length < 2) return null;
+    const left = [], right = [];
+    for (let i = 0; i < points.length; i++) {
+      const p = points[i];
+      const hdg = i === 0 ? headingDeg(points[0], points[1])
+        : i === points.length - 1 ? headingDeg(points[i - 1], points[i])
+        : (headingDeg(points[i - 1], p) + headingDeg(p, points[i + 1])) / 2;
+      const r = coneRadiusNm(p.hours || 0);
+      left.push(offsetNm(p, hdg - 90, r));
+      right.push(offsetNm(p, hdg + 90, r));
+      p._hdg = hdg; // reused by the caps below
+    }
+    function arc(center, fromDeg, toDeg, r) {
+      const out = [];
+      for (let k = 1; k < 8; k++) out.push(offsetNm(center, fromDeg + (toDeg - fromDeg) * k / 8, r));
+      return out;
+    }
+    const last = points[points.length - 1], first = points[0];
+    const ring = left
+      .concat(arc(last, last._hdg - 90, last._hdg + 90, coneRadiusNm(last.hours || 0)))
+      .concat(right.slice().reverse())
+      .concat(arc(first, first._hdg + 90, first._hdg + 270, coneRadiusNm(first.hours || 0)));
+    points.forEach((p) => { delete p._hdg; });
+    return ring;
+  }
+
   // --- orchestration ---------------------------------------------------------
 
   // Dead-reckon +24h from a point with stated motion; shared by waves and
@@ -573,6 +636,6 @@
     return result;
   }
 
-  root.BasinParser = { parse, parseTWO, parseTCM, pairsIn, sections, dehyphenate, parseMotion, project };
+  root.BasinParser = { parse, parseTWO, parseTCM, coneFromTrack, pairsIn, sections, dehyphenate, parseMotion, project };
   if (typeof module !== 'undefined' && module.exports) module.exports = root.BasinParser;
 })(typeof window !== 'undefined' ? window : globalThis);

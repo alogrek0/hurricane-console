@@ -218,5 +218,35 @@ ok('TCM: month rollover hours', (() => {
 })());
 ok('TCM: garbage returns null', P.parseTCM('not a product') === null && P.parseTCM('') === null);
 
+// --- cone geometry -------------------------------------------------------------
+
+// ray-cast point-in-polygon for test purposes
+function inRing(pt, ring) {
+  let inside = false;
+  for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+    const a = ring[i], b = ring[j];
+    if ((a.lon > pt.lon) !== (b.lon > pt.lon) &&
+        pt.lat < (b.lat - a.lat) * (pt.lon - a.lon) / (b.lon - a.lon) + a.lat) inside = !inside;
+  }
+  return inside;
+}
+
+const conePts = [{ hours: 0, lat: tcm.center.lat, lon: tcm.center.lon }].concat(tcm.track);
+const ring = P.coneFromTrack(conePts);
+ok('cone: returns a ring', Array.isArray(ring) && ring.length > 20);
+ok('cone: every track point inside', conePts.every(p => inRing(p, ring)));
+ok('cone: width grows with forecast hour', (() => {
+  // ring width near the first forecast point vs near the last one
+  function widthNear(p) {
+    let min = Infinity, max = -Infinity;
+    ring.forEach(r => {
+      if (Math.abs(r.lat - p.lat) < 1.5) { min = Math.min(min, r.lon); max = Math.max(max, r.lon); }
+    });
+    return max - min;
+  }
+  return widthNear(conePts[conePts.length - 1]) > widthNear(conePts[1]);
+})());
+ok('cone: null for a single point', P.coneFromTrack([conePts[0]]) === null);
+
 console.log('\n' + pass + ' passed, ' + fail + ' failed');
 process.exit(fail ? 1 : 0);
