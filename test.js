@@ -212,11 +212,14 @@ ok('TCM: track winds', tcm && tcm.track[0].windKt === 115 && tcm.track[4].windKt
 ok('TCM: post-tropical end state tagged', tcm && tcm.track[5].state === 'post-tropical');
 ok('TCM: month rollover hours', (() => {
   const t = P.parseTCM(TCM_FIX.replace('AT 11/0300Z', 'AT 30/2100Z')
-    .replace('NEAR 22.6N  62.2W AT 30/2100Z', 'NEAR 22.6N  62.2W AT 30/2100Z')
     .replace('FORECAST VALID 11/1200Z', 'FORECAST VALID 01/0600Z'));
   return t && t.track[0].hours === 33; // 30/2100Z -> 01/0600Z across a 31-day month
 })());
 ok('TCM: garbage returns null', P.parseTCM('not a product') === null && P.parseTCM('') === null);
+ok('TCM: dissipated end state tagged', (() => {
+  const t = P.parseTCM(TCM_FIX.replace('...POST-TROP/EXTRATROP', '...DISSIPATED'));
+  return t && t.track[5].state === 'dissipated';
+})());
 
 // --- cone geometry -------------------------------------------------------------
 

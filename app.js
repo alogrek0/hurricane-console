@@ -359,7 +359,7 @@
           return fetch(it['@id'] || it.id)
             .then(function (pr) { return pr.json(); })
             .then(function (p) { return p.productText || ''; })
-            .catch(function () { return ''; });
+            .catch(function (e) { console.warn('TCM product fetch failed', e); return ''; });
         }));
       });
     });
@@ -370,6 +370,7 @@
 
   function loadTCM() {
     fetchRecent(TCM_URL, 8).then(function (texts) {
+      if (mode !== 'TWD') return;
       var byStorm = {};
       texts.forEach(function (t) {
         var p = window.BasinParser.parseTCM(t);
@@ -381,6 +382,7 @@
       tcmNote = storms.length ? storms.length + ' forecast track' + (storms.length === 1 ? '' : 's') : '';
       updateMeta();
     }).catch(function () {
+      if (mode !== 'TWD') return;
       // SAMPLE state demos the feature; a live TWD with dead TCM is reported honestly
       if (twdState === 'sample' && window.TCM_SAMPLE) {
         var p = window.BasinParser.parseTCM(window.TCM_SAMPLE);
@@ -411,10 +413,13 @@
           'Computed from NHC seasonal cone radii - the official cone lives at hurricanes.gov. Advisory #' + s.advisory + ' issued ' + s.issued + '.',
           true)).addTo(tcmLayer);
       }
-      L.polyline(pts.map(ll), { color: '#dce8ef', weight: 2 })
-        .bindPopup(popup('TRACK ' + s.name.toUpperCase(),
-          'NHC forecast/advisory #' + s.advisory + ' - positions at 12-120 h.', false))
-        .addTo(tcmLayer);
+      if (s.track.length) {
+        L.polyline(pts.map(ll), { color: '#dce8ef', weight: 2 })
+          .bindPopup(popup('TRACK ' + s.name.toUpperCase(),
+            'NHC forecast/advisory #' + s.advisory + ' - positions at ' +
+            s.track[0].hours + '-' + s.track[s.track.length - 1].hours + ' h.', false))
+          .addTo(tcmLayer);
+      }
       s.track.forEach(function (p) {
         L.circleMarker(ll(p), {
           radius: 5, color: intensityColor(p.windKt || 0),

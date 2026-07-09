@@ -35,7 +35,7 @@ Everything is client side. Files:
 | `parser.js`      | TWDAT text-to-geo engine — runs in browser AND node |
 | `coastlines.js`  | embedded Natural Earth 50m coastlines — GENERATED, do not hand-edit (regenerate: `node tools/build-coastlines.js`) |
 | `tools/build-coastlines.js` | dev-only generator: downloads/clips NE 50m → coastlines.js |
-| `sample.js`      | embedded Jul 7 2026 TWDAT/TWOAT fallback (SAMPLE state) |
+| `sample.js`      | embedded Jul 7 2026 TWDAT/TWOAT/TCM fallback (SAMPLE state) |
 | `sw.js`          | service worker: cache-first shell, network-first data |
 | `manifest.json`  | PWA manifest |
 | `test.js`        | node parser test harness |

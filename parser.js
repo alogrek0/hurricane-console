@@ -463,7 +463,8 @@
       }
       if (days < 0) return null;
     }
-    return days * 24 + (h1 - h0);
+    var hrs = days * 24 + (h1 - h0);
+    return hrs < 0 ? null : hrs;
   }
 
   function parseTCM(raw) {
@@ -518,7 +519,7 @@
   }
 
   // --- cone geometry ---------------------------------------------------------
-  // NHC published cone circle radii (nm) by forecast hour, Atlantic basin.
+  // NHC published cone circle radii (nm) by forecast hour, Atlantic basin, 2026 season.
   // Source: https://www.nhc.noaa.gov/aboutcone.shtml (current season; update
   // annually). Hour 0 uses a small fixed radius so the cone starts at the center.
   const CONE_RADII_NM = [
