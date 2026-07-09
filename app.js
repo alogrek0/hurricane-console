@@ -16,9 +16,21 @@
   // --- map setup -------------------------------------------------------------
   var map = L.map('map', {
     center: [17, -55], zoom: 4, minZoom: 3, maxZoom: 7,
-    zoomControl: true, attributionControl: false, worldCopyJump: false
+    zoomControl: true, attributionControl: false, worldCopyJump: false,
+    maxBoundsViscosity: 1.0 // hard edge: a drag can never overshoot the frame
   });
-  map.setMaxBounds([[-8, -110], [45, 4]]);
+  var PAN_BOUNDS = [[-8, -110], [45, 4]];
+  map.setMaxBounds(PAN_BOUNDS);
+
+  // Fill-viewport floor: never allow a zoom where the basin is smaller than
+  // the viewport (no floating frame with dark letterbox bands around it).
+  function fitMinZoom() {
+    var fit = Math.max(3, Math.ceil(map.getBoundsZoom(PAN_BOUNDS, true)));
+    map.setMinZoom(fit);
+    if (map.getZoom() < fit) map.setZoom(fit);
+  }
+  fitMinZoom();
+  window.addEventListener('resize', fitMinZoom);
 
   // graticule every 5deg
   var graticule = L.layerGroup().addTo(map);
@@ -57,8 +69,11 @@
         'px;transform:translate(-50%,-50%)">' + fmtDeg(lo, 'E', 'W') + '</span>';
     }
     for (var la = -5; la <= 45; la += 5) {
-      if (la % step || la < b.getSouth() || la > b.getNorth()) continue;
+      if (la % step || la < b.getSouth() || la > b.getNorth() + 0.01) continue;
       var y = map.latLngToContainerPoint([la, 0]).y;
+      // clamp the frame-top label into view instead of suppressing it —
+      // 45N must stay labeled even when it sits at the viewport's top edge
+      if (y >= -2 && y < 12) y = 12;
       if (y < 12 || y > size.y - 18 || Math.abs(y - yRow) < 12) continue;
       html += '<span style="left:' + Math.round(xCol) + 'px;top:' + Math.round(y) +
         'px;transform:translateY(-50%)">' + fmtDeg(la, 'N', 'S') + '</span>';
