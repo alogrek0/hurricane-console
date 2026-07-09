@@ -8,7 +8,7 @@
  *
  * Bump VERSION whenever you ship changed shell files so clients pick them up.
  */
-const VERSION = 'v9';
+const VERSION = 'v10';
 const SHELL_CACHE = 'shell-' + VERSION;
 const DATA_CACHE = 'data-' + VERSION;
 

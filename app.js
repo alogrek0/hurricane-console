@@ -17,7 +17,11 @@
   var map = L.map('map', {
     center: [17, -55], zoom: 4, minZoom: 3, maxZoom: 7,
     zoomControl: true, attributionControl: false, worldCopyJump: false,
-    maxBoundsViscosity: 1.0 // hard edge: a drag can never overshoot the frame
+    maxBoundsViscosity: 1.0, // hard edge: a drag can never overshoot the frame
+    // Fractional zoom: the fill-viewport floor leaves only ~2 integer levels
+    // of range, which made wheel zoom feel like an on/off switch. Quarter
+    // steps + a gentler wheel rate give a usable, smooth range.
+    zoomSnap: 0.25, zoomDelta: 0.5, wheelPxPerZoomLevel: 200
   });
   var PAN_BOUNDS = [[-8, -110], [45, 4]];
   map.setMaxBounds(PAN_BOUNDS);
@@ -25,7 +29,8 @@
   // Fill-viewport floor: never allow a zoom where the basin is smaller than
   // the viewport (no floating frame with dark letterbox bands around it).
   function fitMinZoom() {
-    var fit = Math.max(3, Math.ceil(map.getBoundsZoom(PAN_BOUNDS, true)));
+    // snap the floor UP to the zoomSnap grid so the basin still covers the view
+    var fit = Math.max(3, Math.ceil(map.getBoundsZoom(PAN_BOUNDS, true) * 4) / 4);
     map.setMinZoom(fit);
     if (map.getZoom() < fit) map.setZoom(fit);
   }
