@@ -68,6 +68,14 @@
     font:.6rem/1.4 var(--mono);padding:.1rem .4rem}
   .leaflet-control-attribution a{color:var(--dim)}
 
+  /* update-available banner: shown when a new SW installs behind a live page */
+  #updateBar{position:fixed;left:50%;transform:translateX(-50%);z-index:900;
+    bottom:calc(3.4rem + env(safe-area-inset-bottom));display:flex;gap:.6rem;
+    align-items:center;background:var(--panel);border:1px solid var(--amber-dim);
+    border-radius:6px;padding:.45rem .7rem;font-size:.78rem;
+    box-shadow:0 4px 18px rgba(0,0,0,.45)}
+  #updateBar[hidden]{display:none}
+
   dialog{background:var(--panel);color:var(--ink);border:1px solid var(--line);
     border-radius:8px;max-width:min(560px,92vw);padding:1rem}
   dialog::backdrop{background:rgba(2,10,16,.7)}
@@ -111,6 +119,11 @@
   </div>
 </div>
 
+<div id="updateBar" hidden>
+  New version available
+  <button id="updateReload" class="primary">Refresh</button>
+</div>
+
 <dialog id="pasteDlg">
   <h2>Paste an NHC product</h2>
   <p style="color:var(--dim);font-size:.75rem;margin:.2rem 0 .5rem">
@@ -131,8 +144,32 @@
 <script src="app.js"></script>
 <script>
   if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(()=>{}));
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('sw.js').then(function (reg) {
+        // A new SW reaching "installed" while an old one controls this page
+        // means fresh shell files are cached — offer a one-tap refresh instead
+        // of silently running stale code until the next visit.
+        function watch(sw) {
+          if (!sw) return;
+          sw.addEventListener('statechange', function () {
+            if (sw.state === 'installed' && navigator.serviceWorker.controller) {
+              document.getElementById('updateBar').hidden = false;
+            }
+          });
+        }
+        if (reg.waiting && navigator.serviceWorker.controller) {
+          document.getElementById('updateBar').hidden = false;
+        }
+        watch(reg.installing);
+        reg.addEventListener('updatefound', function () { watch(reg.installing); });
+        // long-lived tabs (storm watching) should still learn about deploys
+        setInterval(function () { reg.update().catch(function () {}); }, 60 * 60 * 1000);
+      }).catch(function () {});
+    });
   }
+  document.getElementById('updateReload').addEventListener('click', function () {
+    location.reload();
+  });
 </script>
 </body>
 </html>

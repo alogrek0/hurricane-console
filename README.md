@@ -56,6 +56,9 @@ node test.js
   product is served from cache and the badge flips to **CACHED**.
 - iOS install: Share → **Add to Home Screen** (Safari never prompts).
 - Bump `VERSION` in `sw.js` when you ship shell changes so clients update.
+- When a new version is deployed, running clients show a **"New version
+  available — Refresh"** banner instead of silently serving stale files until
+  the next visit.
 
 ## Honest limitations
 
