@@ -15,10 +15,42 @@
   var mode = 'TWD'; // or 'TWO' (outlook formation areas, gazetteer-inferred)
 
   // --- map setup -------------------------------------------------------------
+  // Opt-in Lambert Conformal Conic display CRS (?crs=lcc). Conformal + conic
+  // over the ~10-45N storm band keeps recurve headings true; Web Mercator
+  // (Leaflet's default EPSG:3857) stays the default when the flag is absent.
+  // See docs/PROJECTION_DECISION.md. proj4/proj4leaflet load from the CDN in
+  // index.html and sit idle unless this CRS is actually constructed.
+  // Projection selection precedence: an explicit ?crs= URL param wins (shareable
+  // override), else the saved preference in localStorage, else Mercator. The
+  // toolbar toggle (#proj) writes the preference and reloads — Leaflet fixes the
+  // CRS at map construction, so switching projection means a reload, not a live swap.
+  var crsParam = new URLSearchParams(location.search).get('crs');
+  var projPref = crsParam;
+  if (!projPref) { try { projPref = localStorage.getItem('projection'); } catch (e) {} }
+  var useLCC = projPref === 'lcc' && !!(window.L && L.Proj);
+  var lccCRS = useLCC && (function () {
+    var def = '+proj=lcc +lat_1=20 +lat_2=40 +lat_0=30 +lon_0=-60 ' +
+      '+datum=WGS84 +units=m +no_defs';
+    // Projected extent of PAN_BOUNDS in LCC metres, boundary-sampled (the cone
+    // fans the extremes onto the edges, not the lat/lon corners).
+    var minX = -6491559, maxX = 8137941, minY = -4452905, maxY = 3066985;
+    var res = [];
+    // metres/pixel per zoom, reusing Leaflet's Mercator ladder so fit-to-basin
+    // lands within a quarter zoom of today. Every index 0..8 must be filled:
+    // proj4leaflet indexes the array directly and a hole yields NaN scales.
+    for (var z = 0; z <= 8; z++) res.push(156543.03392804097 / Math.pow(2, z));
+    return new L.Proj.CRS('EPSG:LCC-ATL', def, {
+      origin: [-6600000, 3150000], // top-left [minX, maxY], padded outward
+      resolutions: res,
+      bounds: L.bounds([minX, minY], [maxX, maxY]) // required for sane maxBounds
+    });
+  })();
+
   var map = L.map('map', {
     center: [17, -55], zoom: 4, minZoom: 3, maxZoom: 7,
     zoomControl: true, attributionControl: false, worldCopyJump: false,
     maxBoundsViscosity: 1.0, // hard edge: a drag can never overshoot the frame
+    crs: lccCRS || L.CRS.EPSG3857, // Mercator default unless ?crs=lcc
     // Fractional zoom: the fill-viewport floor leaves only ~2 integer levels
     // of range, which made wheel zoom feel like an on/off switch. Quarter
     // steps + a gentler wheel rate give a usable, smooth range.
@@ -60,7 +92,7 @@
   // graticule every 5deg
   var graticule = L.layerGroup().addTo(map);
   for (var la = -5; la <= 45; la += 5) graticule.addLayer(
-    L.polyline([[la, -110], [la, 4]], { color: '#0f2f42', weight: 1, interactive: false }));
+    L.polyline(densify([[la, -110], [la, 4]], 2), { color: '#0f2f42', weight: 1, interactive: false }));
   for (var lo = -100; lo <= 0; lo += 5) graticule.addLayer(
     L.polyline([[-8, lo], [45, lo]], { color: '#0f2f42', weight: 1, interactive: false }));
 
@@ -115,6 +147,26 @@
   // --- rendering -------------------------------------------------------------
   function ll(p) { return [p.lat, p.lon]; }
 
+  // Leaflet draws a polyline as straight *screen* chords between projected
+  // vertices. Under LCC a constant-latitude line is an arc, so a 2-point
+  // parallel renders as a wrong chord. densify() samples intermediate lat/lon
+  // points along each segment so the CRS can bend them. It no-ops under
+  // Mercator (parallels are already straight there), keeping the default path
+  // byte-identical. Input/output are [lat, lon] arrays.
+  function densify(latlngs, stepDeg) {
+    if (!useLCC || latlngs.length < 2) return latlngs;
+    var out = [];
+    for (var i = 0; i < latlngs.length - 1; i++) {
+      var a = latlngs[i], b = latlngs[i + 1];
+      out.push(a);
+      var dLat = b[0] - a[0], dLon = b[1] - a[1];
+      var n = Math.max(1, Math.ceil(Math.max(Math.abs(dLat), Math.abs(dLon)) / stepDeg));
+      for (var k = 1; k < n; k++) out.push([a[0] + dLat * k / n, a[1] + dLon * k / n]);
+    }
+    out.push(latlngs[latlngs.length - 1]);
+    return out;
+  }
+
   function popup(tag, src, inferred) {
     return '<span class="pop-tag' + (inferred ? ' inf' : '') + '">' +
       tag + (inferred ? ' ◇ INFERRED' : '') + '</span>' +
@@ -137,20 +189,28 @@
     featureLayer.clearLayers();
 
     parsed.troughs.forEach(function (t) {
-      L.polyline(t.line.map(ll), { color: '#4fc3d6', weight: 2, dashArray: '1 0' })
+      L.polyline(densify(t.line.map(ll), 2), { color: '#4fc3d6', weight: 2, dashArray: '1 0' })
         .bindPopup(popup('TROUGH', t.source, false)).addTo(featureLayer);
     });
 
     parsed.convection.forEach(function (c) {
-      L.rectangle([[c.bbox.s, c.bbox.w], [c.bbox.n, c.bbox.e]], {
+      var style = {
         color: c.strong ? '#ff6b5a' : '#ffb98a', weight: 1, dashArray: '3 3',
         fillColor: c.strong ? '#ff6b5a' : '#ff9d6a', fillOpacity: 0.10
-      }).bindPopup(popup(c.strong ? 'CONVECTION · STRONG' : 'CONVECTION', c.source, false))
+      };
+      // Under LCC the box's top/bottom edges are parallels (arcs), so draw a
+      // densified polygon; a plain rectangle would chord them. Mercator keeps
+      // the rectangle (its parallels are straight) — default path unchanged.
+      var shape = useLCC
+        ? L.polygon(densify([[c.bbox.s, c.bbox.w], [c.bbox.n, c.bbox.w],
+          [c.bbox.n, c.bbox.e], [c.bbox.s, c.bbox.e], [c.bbox.s, c.bbox.w]], 2), style)
+        : L.rectangle([[c.bbox.s, c.bbox.w], [c.bbox.n, c.bbox.e]], style);
+      shape.bindPopup(popup(c.strong ? 'CONVECTION · STRONG' : 'CONVECTION', c.source, false))
         .addTo(featureLayer);
     });
 
     parsed.waves.forEach(function (w) {
-      L.polyline(w.axis.map(ll), { color: '#ffa23a', weight: 3 })
+      L.polyline(densify(w.axis.map(ll), 2), { color: '#ffa23a', weight: 3 })
         .bindPopup(popup('WAVE ' + w.id, w.source, false)).addTo(featureLayer);
       // small motion arrowhead label at the axis head
       L.circleMarker(ll(w.axis[0]), { radius: 3, color: '#ffa23a', fillOpacity: 1 })
@@ -184,16 +244,16 @@
     parsed.projections.forEach(function (p) {
       var pts = p.band ? [ll(p.slow), ll(p.fast)] : [ll(p.slow)];
       if (p.band) {
-        L.polyline([ll(p.from), ll(p.slow)], { color: '#9a86c9', weight: 2, dashArray: '5 4' })
+        L.polyline(densify([ll(p.from), ll(p.slow)], 2), { color: '#9a86c9', weight: 2, dashArray: '5 4' })
           .addTo(featureLayer);
-        L.polyline([ll(p.from), ll(p.fast)], { color: '#9a86c9', weight: 2, dashArray: '5 4' })
+        L.polyline(densify([ll(p.from), ll(p.fast)], 2), { color: '#9a86c9', weight: 2, dashArray: '5 4' })
           .addTo(featureLayer);
         L.circleMarker(ll(p.slow), { radius: 3, color: '#9a86c9', fillOpacity: .6 })
           .bindPopup(popup('+24h ' + (p.id || p.waveId) + ' (slow)', p.source, true)).addTo(featureLayer);
         L.circleMarker(ll(p.fast), { radius: 3, color: '#9a86c9', fillOpacity: .6 })
           .bindPopup(popup('+24h ' + (p.id || p.waveId) + ' (fast)', p.source, true)).addTo(featureLayer);
       } else {
-        L.polyline([ll(p.from), ll(p.slow)], { color: '#9a86c9', weight: 2, dashArray: '5 4' })
+        L.polyline(densify([ll(p.from), ll(p.slow)], 2), { color: '#9a86c9', weight: 2, dashArray: '5 4' })
           .addTo(featureLayer);
         L.circleMarker(ll(p.slow), { radius: 3, color: '#9a86c9', fillOpacity: .6 })
           .bindPopup(popup('+24h ' + (p.id || p.waveId), p.source, true)).addTo(featureLayer);
@@ -390,7 +450,7 @@
       var pts = [{ hours: 0, lat: s.center.lat, lon: s.center.lon }].concat(s.track);
       var ring = window.BasinParser.coneFromTrack(pts);
       if (ring) {
-        L.polygon(ring.map(ll), {
+        L.polygon(densify(ring.map(ll), 2), {
           color: '#7ea3b8', weight: 1.5, dashArray: '4 4',
           fillColor: '#dce8ef', fillOpacity: 0.07, interactive: true
         }).bindPopup(popup('CONE ' + s.name.toUpperCase(),
@@ -398,7 +458,7 @@
           true)).addTo(tcmLayer);
       }
       if (s.track.length) {
-        L.polyline(pts.map(ll), { color: '#dce8ef', weight: 2 })
+        L.polyline(densify(pts.map(ll), 2), { color: '#dce8ef', weight: 2 })
           .bindPopup(popup('TRACK ' + s.name.toUpperCase(),
             'NHC forecast/advisory #' + s.advisory + ' - positions at ' +
             s.track[0].hours + '-' + s.track[s.track.length - 1].hours + ' h.', false))
@@ -433,6 +493,18 @@
     setMode(mode === 'TWD' ? 'TWO' : 'TWD');
     mode === 'TWD' ? loadTWD() : loadTWO();
   });
+
+  // Projection toggle. Persist the choice and reload to a clean path (Leaflet
+  // can't swap CRS on a live map). Projection is a view control, not a data
+  // source, so it deliberately does not touch the LIVE/CACHED/SAMPLE badge.
+  var projBtn = document.getElementById('proj');
+  if (projBtn) {
+    projBtn.textContent = useLCC ? 'Map: LCC' : 'Map: Mercator';
+    projBtn.addEventListener('click', function () {
+      try { localStorage.setItem('projection', useLCC ? 'mercator' : 'lcc'); } catch (e) {}
+      location.assign(location.pathname); // drop any stale ?crs= override; pref drives it
+    });
+  }
 
   var dlg = document.getElementById('pasteDlg');
   document.getElementById('paste').addEventListener('click', function () {
