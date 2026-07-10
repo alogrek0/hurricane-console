@@ -68,9 +68,9 @@ node test.js
 - The parser is heuristic. NHC forecasters write for humans; unusual phrasings
   will be missed or misplaced. The confidence flag and source-sentence popups
   exist so errors are visible, not hidden.
-- Coastlines are Natural Earth 1:50m vectors (public domain), embedded so the
-  map works fully offline. When online, a CARTO dark basemap
-  (&copy; OpenStreetMap contributors &copy; CARTO) renders underneath; if tiles
-  can't load, the vector chart carries the map alone.
+- The basemap is fully embedded Natural Earth 1:50m vector data (public domain):
+  land, coastlines, country borders, and US state lines — identical online and
+  offline, no tile server. Internal borders of other countries are deliberately
+  omitted to keep the chart quiet.
 - **Not for life-safety decisions.** Official NHC products at hurricanes.gov are
   always authoritative.

@@ -8,7 +8,7 @@
  *
  * Bump VERSION whenever you ship changed shell files so clients pick them up.
  */
-const VERSION = 'v12';
+const VERSION = 'v13';
 const SHELL_CACHE = 'shell-' + VERSION;
 const DATA_CACHE = 'data-' + VERSION;
 
@@ -48,10 +48,6 @@ function stampCached(resp) {
 self.addEventListener('fetch', function (e) {
   if (e.request.method !== 'GET') return;
   const url = new URL(e.request.url);
-
-  // TILES: never intercept or cache (CARTO ToS + unbounded growth). Tiles are
-  // online-only by design; the embedded coastlines are the offline basemap.
-  if (url.hostname.endsWith('cartocdn.com')) return;
 
   // DATA: network-first, fall back to cache (stamped)
   if (url.hostname === 'api.weather.gov') {

@@ -33,8 +33,8 @@ Everything is client side. Files:
 | `index.html`     | app shell, styles, script order |
 | `app.js`         | fetch → parse → render on Leaflet; badge + paste/refresh UI |
 | `parser.js`      | TWDAT text-to-geo engine — runs in browser AND node |
-| `coastlines.js`  | embedded Natural Earth 50m coastlines — GENERATED, do not hand-edit (regenerate: `node tools/build-coastlines.js`) |
-| `tools/build-coastlines.js` | dev-only generator: downloads/clips NE 50m → coastlines.js |
+| `basemap.js`     | embedded Natural Earth 50m basemap: land, coast, country borders, US-only state lines — GENERATED, do not hand-edit (regenerate: `node tools/build-basemap.js`) |
+| `tools/build-basemap.js` | dev-only generator: downloads/clips NE 50m → basemap.js |
 | `sample.js`      | embedded Jul 7 2026 TWDAT/TWOAT/TCM fallback (SAMPLE state) |
 | `sw.js`          | service worker: cache-first shell, network-first data |
 | `manifest.json`  | PWA manifest |
@@ -75,11 +75,13 @@ same reason.
 - Plain ES5-ish browser JS, no framework, no bundler. Keep it dependency-free
   except Leaflet from the CDN (already in the SHELL cache list).
 - Coordinates are `{lat, lon}` with **west and south negative** throughout.
-- **Basemap is hybrid**: embedded Natural Earth 50m vectors are the guaranteed
-  offline basemap and always render; CARTO dark tiles are a progressive
-  enhancement when online (vectors dim to 0.35 over them). Tiles are never
-  cached by the SW (ToS + bloat) and never required — the offline story must
-  keep working. Attribution control appears only while tiles are on the map.
+- **Basemap is all-vector and embedded**: Natural Earth 50m land/coast/borders in
+  `basemap.js` render identically online and offline — no tile server, no
+  attribution requirements, no network dependency. Border policy is deliberate:
+  country borders everywhere, admin-1 state lines only for the USA (filtered at
+  generation time by `ADM0_A3`). This also keeps the basemap portable to a future
+  non-Mercator display CRS (see docs/projection_decision.md), which raster tiles
+  would not survive.
 
 ## Deploy (GitHub Pages)
 Push to `main`, then repo **Settings → Pages → Deploy from a branch → `main` /
