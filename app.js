@@ -9,8 +9,8 @@
   'use strict';
 
   var BASIN = { minLat: 0, maxLat: 34, minLon: -100, maxLon: -6 };
-  var TWD_URL = 'https://api.weather.gov/products/types/TWDAT';
-  var TWO_URL = 'https://api.weather.gov/products/types/TWOAT';
+  var TWD_URL = 'https://api.weather.gov/products/types/TWD';
+  var TWO_URL = 'https://api.weather.gov/products/types/TWO';
   var TCM_URL = 'https://api.weather.gov/products/types/TCM';
   var mode = 'TWD'; // or 'TWO' (outlook formation areas, gazetteer-inferred)
 
@@ -252,29 +252,38 @@
     b.textContent = state;
   }
 
-  // api.weather.gov: list products -> newest @id -> product text
-  function fetchLatest(listUrl) {
-    return fetch(listUrl, { headers: { Accept: 'application/ld+json' } })
-      .then(function (r) {
-        var cached = r.headers.get('X-From-Cache') === '1';
-        if (!r.ok) throw new Error('list ' + r.status);
-        return r.json().then(function (j) {
-          var items = j['@graph'] || j.features || [];
-          if (!items.length) throw new Error('no products');
-          var id = items[0]['@id'] || items[0].id;
-          return fetch(id).then(function (pr) {
+  // api.weather.gov's product types are 3-letter AWIPS categories (TWD, TWO)
+  // that mix basins and offices — the newest TWD may be the East Pacific
+  // issuance or Guam's. Scan the recent list for the newest product carrying
+  // the wanted AWIPS id (TWDAT / TWOAT, on the product's third line).
+  function fetchLatestMatching(listUrl, awipsId, n) {
+    return fetch(listUrl, { headers: { Accept: 'application/ld+json' } }).then(function (r) {
+      var cached = r.headers.get('X-From-Cache') === '1';
+      if (!r.ok) throw new Error('list ' + r.status);
+      return r.json().then(function (j) {
+        var items = (j['@graph'] || j.features || []).slice(0, n);
+        if (!items.length) throw new Error('no products');
+        var idx = 0;
+        function tryNext() {
+          if (idx >= items.length) throw new Error('no ' + awipsId + ' in newest ' + n);
+          var it = items[idx++];
+          return fetch(it['@id'] || it.id).then(function (pr) {
             var c2 = cached || pr.headers.get('X-From-Cache') === '1';
             return pr.json().then(function (p) {
-              return { text: p.productText || '', cached: c2 };
+              var text = p.productText || '';
+              if (text.indexOf(awipsId) !== -1) return { text: text, cached: c2 };
+              return tryNext();
             });
           });
-        });
+        }
+        return tryNext();
       });
+    });
   }
 
   function loadTWD() {
     setBadge('LIVE'); // optimistic; corrected on resolution
-    fetchLatest(TWD_URL).then(function (res) {
+    fetchLatestMatching(TWD_URL, 'TWDAT', 8).then(function (res) {
       if (!res.text) throw new Error('empty');
       // Fetch succeeded: a parse/render failure here is a real error, and
       // falling back to SAMPLE would lie about the data source.
@@ -304,7 +313,7 @@
 
   function loadTWO() {
     setBadge('LIVE'); // optimistic; corrected on resolution
-    fetchLatest(TWO_URL).then(function (res) {
+    fetchLatestMatching(TWO_URL, 'TWOAT', 8).then(function (res) {
       if (!res.text) throw new Error('empty');
       try {
         renderTWO(window.BasinParser.parseTWO(res.text));

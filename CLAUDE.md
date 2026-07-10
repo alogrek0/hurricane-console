@@ -62,7 +62,9 @@ keyword matches survive — this was a real bug; keep the hyphen.
 
 ### Data + caching
 - `api.weather.gov` sends `Access-Control-Allow-Origin: *`, so the browser fetches
-  TWDAT/TWOAT directly — no proxy.
+  products directly — no proxy. Product types are the 3-letter AWIPS categories
+  (`TWD`, `TWO`, `TCM`), which mix basins/offices: the app scans the newest few
+  and selects by AWIPS id in the text (`TWDAT`, `TWOAT`) or storm ID (`AL...`).
 - `sw.js` is network-first for `api.weather.gov` and stamps cache-served responses
   with `X-From-Cache: 1` so the badge reads **CACHED** honestly.
 - Versioning is CalVer (`YYYY.MM.DD`, `.N` suffix for same-day re-deploys), single
