@@ -138,19 +138,32 @@ ok('D1 resolves to Lesser Antilles anchor', d1 && d1.lat === 15.5 && d1.lon === 
 ok('D2 "between A and B" midpoint resolves',
   d2 && d2.lat === (13.0 + 15.0) / 2 && d2.lon === (-61.2 + -75.0) / 2);
 
-// --- coastlines.js integrity (generated file; guards a bad regeneration) ------
+// --- basemap.js integrity (generated file; guards a bad regeneration) ---------
 
-const COAST = require('./coastlines.js');
-const geom = COAST.features && COAST.features[0] && COAST.features[0].geometry;
-ok('coastlines: FeatureCollection with MultiLineString',
-  COAST.type === 'FeatureCollection' && geom && geom.type === 'MultiLineString');
-ok('coastlines: >=150 clipped lines', geom && geom.coordinates.length >= 150);
+const BM = require('./basemap.js');
+const layers = {};
+(BM.features || []).forEach(f => { layers[f.properties.layer] = f.geometry; });
+ok('basemap: FeatureCollection with 4 layer features',
+  BM.type === 'FeatureCollection' && BM.features.length === 4 &&
+  layers.land && layers.usStates && layers.countries && layers.coast);
+ok('basemap: geometry types per layer',
+  layers.land.type === 'MultiPolygon' && layers.coast.type === 'MultiLineString' &&
+  layers.countries.type === 'MultiLineString' && layers.usStates.type === 'MultiLineString');
+ok('basemap: layer volumes sane', layers.land.coordinates.length >= 120 &&
+  layers.coast.coordinates.length >= 150 && layers.countries.coordinates.length >= 50 &&
+  layers.usStates.coordinates.length >= 80);
 // clip keeps one continuity vertex past each frame edge, so allow 1 deg margin
-ok('coastlines: all coords inside clip box (+1 deg margin)',
-  geom && geom.coordinates.every(line =>
-    line.every(([x, y]) => x >= -111 && x <= 6 && y >= -11 && y <= 46)));
-ok('coastlines: western hemisphere is negative',
-  geom && geom.coordinates.some(line => line.some(([x]) => x < -60)));
+const inClip = ([x, y]) => x >= -111 && x <= 6 && y >= -11 && y <= 46;
+ok('basemap: all line coords inside clip box (+1 deg margin)',
+  ['coast', 'countries', 'usStates'].every(k =>
+    layers[k].coordinates.every(line => line.every(inClip))));
+ok('basemap: land rings clipped hard to the box (no margin)',
+  layers.land.coordinates.every(poly => poly[0].every(([x, y]) =>
+    x >= -110 && x <= 5 && y >= -10 && y <= 45)));
+// border policy: US state lines live in US latitudes; no admin-1 south of 24N
+// (Mexican/Brazilian internals would violate this)
+ok('basemap: admin-1 confined to the US (border policy)',
+  layers.usStates.coordinates.every(line => line.every(([, y]) => y >= 24)));
 
 // --- TCM forecast/advisory -----------------------------------------------------
 
