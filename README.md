@@ -58,7 +58,10 @@ node test.js
 - **Data** (`api.weather.gov`): network-first; if the network is down the last
   product is served from cache and the badge flips to **CACHED**.
 - iOS install: Share → **Add to Home Screen** (Safari never prompts).
-- Bump `VERSION` in `sw.js` when you ship shell changes so clients update.
+- Versions are CalVer (`YYYY.MM.DD[.N]`) in `version.js` — shown in the app's
+  meta corner so you can always tell which build a device is running. Bump it
+  when you ship shell changes so clients update (a pre-push git hook guards
+  this: `git config core.hooksPath tools/hooks` once per clone).
 - When a new version is deployed, running clients show a **"New version
   available — Refresh"** banner instead of silently serving stale files until
   the next visit.

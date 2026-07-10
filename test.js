@@ -285,5 +285,10 @@ ok('cone: ring is a simple polygon (no self-intersection)', (() => {
   return true;
 })());
 
+// --- app version (single source, CalVer) ---------------------------------------
+
+const VER = require('./version.js');
+ok('version: CalVer format YYYY.MM.DD[.N]', /^\d{4}\.\d{2}\.\d{2}(\.\d+)?$/.test(VER));
+
 console.log('\n' + pass + ' passed, ' + fail + ' failed');
 process.exit(fail ? 1 : 0);

@@ -6,15 +6,18 @@
  * Cache-served data responses are stamped X-From-Cache:1 so the UI badge can flip
  * to CACHED honestly instead of guessing.
  *
- * Bump VERSION whenever you ship changed shell files so clients pick them up.
+ * The version lives in version.js (CalVer, single source shared with the page).
+ * Browsers byte-check imported scripts during SW update checks, so bumping
+ * version.js alone is enough to roll clients forward.
  */
-const VERSION = 'v13';
+importScripts('./version.js');
+const VERSION = self.APP_VERSION;
 const SHELL_CACHE = 'shell-' + VERSION;
 const DATA_CACHE = 'data-' + VERSION;
 
 const SHELL = [
   './', './index.html', './app.js', './parser.js', './basemap.js',
-  './sample.js', './manifest.json', './icon-192.png', './icon-512.png',
+  './sample.js', './version.js', './manifest.json', './icon-192.png', './icon-512.png',
   'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css',
   'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js'
 ];

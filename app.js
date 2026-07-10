@@ -129,7 +129,8 @@
   var metaBase = '—';
   function updateMeta() {
     document.getElementById('meta').innerHTML =
-      metaBase + (tcmNote ? ' · ' + tcmNote : '');
+      metaBase + (tcmNote ? ' · ' + tcmNote : '') +
+      '<br><span class="ver">' + (window.APP_VERSION || '') + '</span>';
   }
 
   function render(parsed) {

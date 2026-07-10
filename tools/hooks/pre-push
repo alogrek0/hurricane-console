@@ -1,0 +1,29 @@
+#!/bin/sh
+# pre-push guard: block pushes that change shell files without bumping the
+# app version (version.js, CalVer). Clients only pick up new shell files when
+# the version changes, so forgetting the bump ships an update nobody receives.
+#
+# One-time setup per clone:  git config core.hooksPath tools/hooks
+# Deliberate bypass:         git push --no-verify
+
+ZERO=0000000000000000000000000000000000000000
+
+while read local_ref local_sha remote_ref remote_sha; do
+  # branch deletion: nothing to check
+  [ "$local_sha" = "$ZERO" ] && continue
+  # new branch on the remote: no base to diff against, skip
+  [ "$remote_sha" = "$ZERO" ] && continue
+
+  changed=$(git diff --name-only "$remote_sha".."$local_sha")
+  shell_changed=$(printf '%s\n' "$changed" | grep -E '^(index\.html|app\.js|parser\.js|basemap\.js|sample\.js|sw\.js|manifest\.json)$')
+  ver_changed=$(printf '%s\n' "$changed" | grep -E '^version\.js$')
+
+  if [ -n "$shell_changed" ] && [ -z "$ver_changed" ]; then
+    echo "pre-push: shell files changed without a version bump:" >&2
+    printf '%s\n' "$shell_changed" | sed 's/^/  /' >&2
+    echo "Bump APP_VERSION in version.js (CalVer YYYY.MM.DD[.N]) or push with --no-verify." >&2
+    exit 1
+  fi
+done
+
+exit 0

@@ -36,7 +36,9 @@ Everything is client side. Files:
 | `basemap.js`     | embedded Natural Earth 50m basemap: land, coast, country borders, US-only state lines — GENERATED, do not hand-edit (regenerate: `node tools/build-basemap.js`) |
 | `tools/build-basemap.js` | dev-only generator: downloads/clips NE 50m → basemap.js |
 | `sample.js`      | embedded Jul 7 2026 TWDAT/TWOAT/TCM fallback (SAMPLE state) |
+| `version.js`     | app version, single source (CalVer) — shared by page, SW, and tests |
 | `sw.js`          | service worker: cache-first shell, network-first data |
+| `tools/hooks/`   | committed git hooks (pre-push version guard); enable once per clone: `git config core.hooksPath tools/hooks` |
 | `manifest.json`  | PWA manifest |
 | `test.js`        | node parser test harness |
 
@@ -63,7 +65,11 @@ keyword matches survive — this was a real bug; keep the hyphen.
   TWDAT/TWOAT directly — no proxy.
 - `sw.js` is network-first for `api.weather.gov` and stamps cache-served responses
   with `X-From-Cache: 1` so the badge reads **CACHED** honestly.
-- Bump `VERSION` in `sw.js` whenever shell files change so clients update.
+- Versioning is CalVer (`YYYY.MM.DD`, `.N` suffix for same-day re-deploys), single
+  source in `version.js` — the page shows it in the meta corner, the SW derives its
+  cache names from it, and tests check the format. Bump it whenever any shell file
+  ships; the committed pre-push hook (`tools/hooks/pre-push`, enable with
+  `git config core.hooksPath tools/hooks`) blocks pushes that forget.
 
 ### The badge is a contract
 The header badge must always reflect the true data source: **LIVE / CACHED /
