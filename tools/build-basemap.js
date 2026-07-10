@@ -97,6 +97,7 @@ Promise.all(Object.values(SRC).map((f) => fetchJson(BASE + f))).then(([coastJ, l
   for (const f of landJ.features) {
     const polys = f.geometry.type === 'Polygon' ? [f.geometry.coordinates] : f.geometry.coordinates;
     for (const poly of polys) {
+      // outer rings only: NE 50m land has no lake holes inside this clip box
       const c = clipRing(poly[0]);
       if (c && c.length >= 3) land.push([c]); // each ring -> its own single-ring polygon
     }

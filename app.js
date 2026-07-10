@@ -1,9 +1,9 @@
 /*
  * app.js — Hurricane Console
  * Fetches the newest Atlantic TWDAT/TWOAT from api.weather.gov, parses it in the
- * browser, and renders the features on a tile-less Leaflet map drawn from
- * embedded vector coastlines. The header badge always tells the truth about the
- * data source: LIVE / CACHED / SAMPLE / PASTED / ERROR.
+ * browser, and renders the features on a Leaflet map drawn from an embedded
+ * all-vector Natural Earth basemap (land, coast, borders). The header badge always
+ * tells the truth about the data source: LIVE / CACHED / SAMPLE / PASTED / ERROR.
  */
 (function () {
   'use strict';
@@ -82,14 +82,12 @@
     // just inside its left edge, clamped to the viewport when the frame
     // extends past it
     var yRow = Math.min(size.y - 12, map.latLngToContainerPoint([-10, 0]).y + 9);
-    // (frame bottom stays at 10S; the north edge is 45N — see mask above)
+    // (frame bottom stays at 10S; the north edge is 45N)
     var xCol = Math.max(4, map.latLngToContainerPoint([0, -110]).x + 6);
     for (var lo = -100; lo <= 0; lo += 5) {
       if (lo % step || lo < b.getWest() || lo > b.getEast()) continue;
       var x = map.latLngToContainerPoint([0, lo]).x;
       if (x < 16 || x > size.x - 16) continue;
-      // keep clear of the attribution chip in the bottom-right corner
-      if (yRow > size.y - 30 && x > size.x - 175) continue;
       html += '<span style="left:' + Math.round(x) + 'px;top:' + Math.round(yRow) +
         'px;transform:translate(-50%,-50%)">' + fmtDeg(lo, 'E', 'W') + '</span>';
     }
