@@ -20,27 +20,54 @@
   // (Leaflet's default EPSG:3857) stays the default when the flag is absent.
   // See docs/PROJECTION_DECISION.md. proj4/proj4leaflet load from the CDN in
   // index.html and sit idle unless this CRS is actually constructed.
-  // Projection selection precedence: an explicit ?crs= URL param wins (shareable
-  // override), else the saved preference in localStorage, else Mercator. The
-  // toolbar toggle (#proj) writes the preference and reloads — Leaflet fixes the
-  // CRS at map construction, so switching projection means a reload, not a live swap.
+  // Map projection choices, in cycle order. Mercator is the default; the two LCC
+  // options differ only in standard parallels (cone angle = how much the map fans).
+  // Single source for the CRS selection, the toolbar button labels, and cycling.
+  var MAP_MODES = [
+    { key: 'mercator', label: 'Mercator' },
+    { key: 'lcc-curved', label: 'LCC · curved', sp: [15, 33] },
+    { key: 'lcc-flat', label: 'LCC · flatter', sp: [10, 30] }
+  ];
+  function mapModeByKey(k) {
+    for (var i = 0; i < MAP_MODES.length; i++) if (MAP_MODES[i].key === k) return MAP_MODES[i];
+    if (k === 'lcc') return MAP_MODES[1]; // back-compat: bare ?crs=lcc -> first LCC option
+    return null;
+  }
+  // Selection precedence: an explicit ?crs= URL param wins (shareable override),
+  // else the saved preference in localStorage, else Mercator. The toolbar button
+  // (#proj) writes the preference and reloads — Leaflet fixes the CRS at map
+  // construction, so switching projection means a reload, not a live swap.
   var crsParam = new URLSearchParams(location.search).get('crs');
-  var projPref = crsParam;
-  if (!projPref) { try { projPref = localStorage.getItem('projection'); } catch (e) {} }
-  var useLCC = projPref === 'lcc' && !!(window.L && L.Proj);
+  var savedPref = null; try { savedPref = localStorage.getItem('projection'); } catch (e) {}
+  var mapMode = mapModeByKey(crsParam) || mapModeByKey(savedPref) || MAP_MODES[0];
+  var useLCC = !!mapMode.sp && !!(window.L && L.Proj);
   var lccCRS = useLCC && (function () {
-    var def = '+proj=lcc +lat_1=20 +lat_2=40 +lat_0=30 +lon_0=-60 ' +
-      '+datum=WGS84 +units=m +no_defs';
-    // Projected extent of PAN_BOUNDS in LCC metres, boundary-sampled (the cone
-    // fans the extremes onto the edges, not the lat/lon corners).
-    var minX = -6491559, maxX = 8137941, minY = -4452905, maxY = 3066985;
+    // Standard parallels set the cone angle — how much the map "fans". Lower,
+    // closer parallels flatten it. The selected mode carries its pair (see
+    // MAP_MODES); an optional ?sp=lat1,lat2 override tunes curvature by eye.
+    var sp = mapMode.sp.slice();
+    var spParam = new URLSearchParams(location.search).get('sp');
+    if (spParam && /^-?\d+(?:\.\d+)?,-?\d+(?:\.\d+)?$/.test(spParam)) sp = spParam.split(',').map(Number);
+    var def = '+proj=lcc +lat_1=' + sp[0] + ' +lat_2=' + sp[1] +
+      ' +lat_0=30 +lon_0=-60 +datum=WGS84 +units=m +no_defs';
+    // Projected extent of PAN_BOUNDS, computed by sampling its boundary and
+    // forward-projecting with proj4 (the cone fans the extremes onto the edges,
+    // not the lat/lon corners). Derived, not hardcoded, so any parallels work.
+    var fwd = proj4(def).forward, minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+    function sample(lat, lon) {
+      var p = fwd([lon, lat]);
+      if (p[0] < minX) minX = p[0]; if (p[0] > maxX) maxX = p[0];
+      if (p[1] < minY) minY = p[1]; if (p[1] > maxY) maxY = p[1];
+    }
+    for (var lon = -110; lon <= 4; lon += 2) { sample(-8, lon); sample(45, lon); }
+    for (var lat = -8; lat <= 45; lat += 2) { sample(lat, -110); sample(lat, 4); }
     var res = [];
     // metres/pixel per zoom, reusing Leaflet's Mercator ladder so fit-to-basin
     // lands within a quarter zoom of today. Every index 0..8 must be filled:
     // proj4leaflet indexes the array directly and a hole yields NaN scales.
     for (var z = 0; z <= 8; z++) res.push(156543.03392804097 / Math.pow(2, z));
     return new L.Proj.CRS('EPSG:LCC-ATL', def, {
-      origin: [-6600000, 3150000], // top-left [minX, maxY], padded outward
+      origin: [minX, maxY], // top-left of the projected extent
       resolutions: res,
       bounds: L.bounds([minX, minY], [maxX, maxY]) // required for sane maxBounds
     });
@@ -499,9 +526,10 @@
   // source, so it deliberately does not touch the LIVE/CACHED/SAMPLE badge.
   var projBtn = document.getElementById('proj');
   if (projBtn) {
-    projBtn.textContent = useLCC ? 'Map: LCC' : 'Map: Mercator';
+    projBtn.textContent = 'Map: ' + mapMode.label;
     projBtn.addEventListener('click', function () {
-      try { localStorage.setItem('projection', useLCC ? 'mercator' : 'lcc'); } catch (e) {}
+      var next = MAP_MODES[(MAP_MODES.indexOf(mapMode) + 1) % MAP_MODES.length];
+      try { localStorage.setItem('projection', next.key); } catch (e) {}
       location.assign(location.pathname); // drop any stale ?crs= override; pref drives it
     });
   }
