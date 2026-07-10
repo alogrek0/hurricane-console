@@ -80,7 +80,7 @@ same reason.
   attribution requirements, no network dependency. Border policy is deliberate:
   country borders everywhere, admin-1 state lines only for the USA (filtered at
   generation time by `ADM0_A3`). This also keeps the basemap portable to a future
-  non-Mercator display CRS (see docs/projection_decision.md), which raster tiles
+  non-Mercator display CRS (see docs/PROJECTION_DECISION.md), which raster tiles
   would not survive.
 
 ## Deploy (GitHub Pages)
