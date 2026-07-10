@@ -39,6 +39,24 @@
   fitMinZoom();
   window.addEventListener('resize', fitMinZoom);
 
+  // All-vector basemap, generated from Natural Earth (see tools/build-basemap.js).
+  // Land fill sits under the graticule; line work (coast, borders) above it.
+  // Border policy: country borders everywhere, state lines only for the USA.
+  var BASEMAP_STYLES = {
+    land: { stroke: false, fillColor: '#10202b', fillOpacity: 1 },
+    usStates: { color: '#1b3a4a', weight: 1, dashArray: '3 3', fill: false },
+    countries: { color: '#24485c', weight: 1.2, fill: false },
+    coast: { color: '#2c5870', weight: 1, fill: false },
+  };
+  function basemapLayer(names) {
+    return L.geoJSON(window.BASIN_BASEMAP, {
+      filter: function (f) { return names.indexOf(f.properties.layer) !== -1; },
+      style: function (f) { return BASEMAP_STYLES[f.properties.layer]; },
+      interactive: false,
+    });
+  }
+  var landLayer = basemapLayer(['land']).addTo(map);
+
   // graticule every 5deg
   var graticule = L.layerGroup().addTo(map);
   for (var la = -5; la <= 45; la += 5) graticule.addLayer(
@@ -90,49 +108,7 @@
   map.on('move zoom viewreset resize', drawGratLabels);
   drawGratLabels();
 
-  // Embedded NE 50m coastlines: the guaranteed basemap. Always on the map so
-  // the chart works with zero network; dimmed (not removed) when tiles load.
-  var coastGeo = L.geoJSON(window.BASIN_COASTLINES, {
-    style: { color: '#2c5870', weight: 1, fill: false, interactive: false }
-  }).addTo(map);
-
-  // CARTO dark tiles: progressive enhancement when online. The badge never
-  // describes the basemap — only the data product.
-  var attrib = L.control.attribution({ prefix: false });
-  attrib.addAttribution('&copy; OpenStreetMap contributors &copy; CARTO');
-  var tiles = L.tileLayer(
-    'https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png',
-    // bounds = the coastline clip box: tiles render only inside the basin
-    // frame (maxBounds clamps panning, not painting) and never world-wrap.
-    { subdomains: 'abcd', maxZoom: 7, noWrap: true, bounds: [[-10, -110], [45, 5]] }
-  );
-  var tilesLoaded = false, tileErrors = 0;
-  function tilesUp() {
-    if (!map.hasLayer(tiles)) { tiles.addTo(map); attrib.addTo(map); }
-  }
-  function tilesDown() {
-    if (map.hasLayer(tiles)) { map.removeLayer(tiles); attrib.remove(); }
-    coastGeo.setStyle({ opacity: 1 });
-  }
-  tiles.on('load', function () {
-    tilesLoaded = true;
-    coastGeo.setStyle({ opacity: 0.35 }); // tiles carry the land; vectors stay as chart lines
-  });
-  tiles.on('tileerror', function () {
-    // never loaded and repeatedly failing (offline boot, sandbox) -> vectors only
-    if (!tilesLoaded && ++tileErrors >= 4) tilesDown();
-  });
-  window.addEventListener('offline', function () { coastGeo.setStyle({ opacity: 1 }); });
-  window.addEventListener('online', function () { tilesLoaded = false; tileErrors = 0; tilesUp(); });
-  tilesUp();
-
-  // Frame mask: tiles load in whole-tile blocks, so edge tiles paint well past
-  // the basin at coarse zooms. A world-sized polygon with a basin-shaped hole
-  // (ocean-colored, evenodd fill) keeps everything outside the frame dark.
-  L.polygon([
-    [[-85, -250], [85, -250], [85, 250], [-85, 250]],
-    [[-10, -110], [45, -110], [45, 5], [-10, 5]]
-  ], { stroke: false, fillColor: '#04101a', fillOpacity: 1, interactive: false }).addTo(map);
+  var lineLayer = basemapLayer(['usStates', 'countries', 'coast']).addTo(map);
 
   var featureLayer = L.layerGroup().addTo(map);
   var twoLayer = L.layerGroup().addTo(map); // TWO formation areas (mode-exclusive)
