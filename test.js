@@ -59,6 +59,42 @@ ok('plain form regression', m && m.bearing === 270 && m.slowKt === 10 && m.fastK
 // axis-order fix: projection origin is always the northern end of the axis
 ok('wave projection starts at north end (17N)', r.projections[0].from.lat === 17);
 
+// --- real-archive wave phrasings (parser-audit regressions) ------------------
+// The synthetic sample used only "axis along 22W from 05N to 17N". Real TWDATs
+// vary widely and the original extractor dropped whole waves. Each line below is
+// a phrasing pulled from live NHC products (Jul 2026 audit); all must parse.
+const TWD_WAVEV = `TWDAT
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+0015 UTC Sun Jul 5 2026
+
+...TROPICAL WAVES...
+
+An Atlantic tropical wave is near 39W, south of 17N, moving W at 15 kt.
+Scattered moderate convection is seen from 05.5N to 11.5N between 33W and 39W.
+
+A Caribbean tropical wave is near 72W, south of 20N, moving W at 15 to 20 kt.
+
+An eastern Atlantic tropical wave is along 33W S of 17N, moving W at 10 kt.
+
+A central Atlantic tropical wave is along 61W-62W, south of 18N, moving W at 10 kt.
+
+A far eastern Atlantic tropical wave has its axis along 22W from 12-19N, moving W at 15 kt.
+
+$$`;
+const wv = P.parse(TWD_WAVEV).waves;
+ok('real phrasings: all five waves parsed', wv.length === 5);
+ok('"near 39W" anchors the axis (not just "along")', wv[0] && wv[0].axis[0].lon === -39);
+ok('convection "from A to B between C and D" not mistaken for the axis',
+  wv[0] && wv[0].axis[0].lat === 17 && wv[0].axis[1].lat === 5); // "south of 17N", not 11.5N
+ok('"S of" abbreviation resolves the southern extent',
+  wv[2] && wv[2].axis[0].lon === -33 && wv[2].axis[0].lat === 17);
+ok('longitude span "61W-62W" averages to the axis meridian',
+  wv[3] && wv[3].axis[0].lon === -61.5 && wv[3].axis[0].lat === 18);
+ok('hyphenated latitude range "from 12-19N" spans the axis',
+  wv[4] && wv[4].axis[0].lat === 19 && wv[4].axis[1].lat === 12 && wv[4].axis[0].lon === -22);
+ok('all recovered wave axes carry westward motion', wv.every(w => w.motion && w.motion.bearing === 270));
+
 // --- SPECIAL FEATURES cyclones -----------------------------------------------
 
 const TWD_SF = `TWDAT

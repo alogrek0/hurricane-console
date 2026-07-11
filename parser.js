@@ -221,12 +221,22 @@
       const flat = chunk.replace(/\n/g, ' ').replace(/\s+/g, ' ').trim();
       const axis = [];
 
-      // "along 46W south of 17N" / "axis along 22W from 05N to 17N"
-      let m = flat.match(/along\s+(\d{1,3}(?:\.\d)?)\s*([EW])/i);
+      // Axis longitude. Real TWDATs vary the phrasing widely — "axis along 22W",
+      // "is along 33W", "is near 39W", "has its axis near 46W" — and sometimes give
+      // a span "along 61W-62W". Anchor on the first along/near longitude in the
+      // chunk (the axis is stated before any convection), averaging a span.
+      let m = flat.match(
+        /\b(?:along|near)\s+(\d{1,3}(?:\.\d)?)\s*([EW])(?:\s*(?:-|to)\s*(\d{1,3}(?:\.\d)?)\s*([EW]))?/i
+      );
       if (m) {
-        const lo = lon(m[1], m[2]);
-        const south = flat.match(/south of\s+(\d{1,2}(?:\.\d)?)\s*([NS])/i);
-        const range = flat.match(/from\s+(\d{1,2}(?:\.\d)?)\s*([NS])\s+to\s+(\d{1,2}(?:\.\d)?)\s*([NS])/i);
+        const lo = m[3] ? (lon(m[1], m[2]) + lon(m[3], m[4])) / 2 : lon(m[1], m[2]);
+        // Southern extent: "south of 17N" and the abbreviated "S of 17N".
+        const south = flat.match(/\b(?:south|s)\s+of\s+(\d{1,2}(?:\.\d)?)\s*([NS])/i);
+        // Latitude span: "from 05N to 17N", or the hyphenated "from 12-19N". The
+        // negative lookahead skips a "from A to B between C and D" phrase — that's
+        // a convection box (longitude-bounded by "between"), not the wave axis.
+        const range = flat.match(/from\s+(\d{1,2}(?:\.\d)?)\s*([NS])\s+to\s+(\d{1,2}(?:\.\d)?)\s*([NS])(?!\s*,?\s*between)/i);
+        const hrange = flat.match(/from\s+(\d{1,2}(?:\.\d)?)\s*-\s*(\d{1,2}(?:\.\d)?)\s*([NS])(?!\s*,?\s*between)/i);
         if (range) {
           // North end first, matching the "south of" branch, so axis[0] is a
           // consistent projection origin regardless of phrasing.
@@ -234,6 +244,10 @@
           const p2 = { lat: lat(range[3], range[4]), lon: lo };
           axis.push(p1.lat >= p2.lat ? p1 : p2);
           axis.push(p1.lat >= p2.lat ? p2 : p1);
+        } else if (hrange) {
+          const a = lat(hrange[1], hrange[3]), b = lat(hrange[2], hrange[3]);
+          axis.push({ lat: Math.max(a, b), lon: lo });
+          axis.push({ lat: Math.min(a, b), lon: lo });
         } else if (south) {
           const top = lat(south[1], south[2]);
           axis.push({ lat: top, lon: lo });
