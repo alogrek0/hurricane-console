@@ -3,7 +3,17 @@
  * products from nhc.noaa.gov (as opposed to tools/parser-audit.js, which sweeps
  * whatever is on the live api.weather.gov feed right now).
  *
- * Usage:  node tools/archive-audit.js
+ * Usage:  node tools/archive-audit.js                  # audit only (triage)
+ *         node tools/archive-audit.js --save-fixtures  # audit + write fixtures/
+ *
+ * --save-fixtures persists the corpus into the repo: each product's teletype
+ * text (LF-normalized) goes to fixtures/<tag>.txt and a pinned snapshot of the
+ * current parser output (shape: tools/corpus-summary.js) goes to
+ * fixtures/expected.json, which `node test.js` then asserts against offline.
+ * This same command IS the snapshot-update workflow after a deliberate parser
+ * change: re-run it, review `git diff fixtures/`, commit alongside the change.
+ * It refuses to write if ANY product fails its ground-truth expectations below
+ * — never pin snapshots the manifest itself says are wrong.
  *
  * Why it exists: the TCM (parseTCM) and SPECIAL-FEATURES cyclone
  * (extractCyclones) paths only get exercised when a storm is active, so a live
@@ -31,6 +41,10 @@ const path = require('path');
 
 const OUT = process.env.AUDIT_OUT || path.join(os.tmpdir(), 'hurricane-console-archive-audit');
 fs.mkdirSync(OUT, { recursive: true });
+
+const SAVE = process.argv.includes('--save-fixtures');
+const FIXDIR = path.join(__dirname, '..', 'fixtures');
+const SUM = require('./corpus-summary.js');
 
 const UA = { headers: { 'User-Agent': 'hurricane-console-archive-audit (opt08400@gmail.com)' } };
 const BASE = 'https://www.nhc.noaa.gov/archive/';
@@ -155,6 +169,9 @@ function auditTWDAT(txt, expect) {
 // --- runner ----------------------------------------------------------------------
 (async () => {
   const report = { TCM: [], TWDAT: [] };
+  // --save-fixtures accumulator; `_txt` holds the LF-normalized fixture body
+  // and is stripped before expected.json is written.
+  const fixtures = { tcm: {}, twdat: {} };
 
   for (const item of TCMS) {
     const tag = item.path.split('/').pop().replace(/\.shtml$/, '');
@@ -163,6 +180,10 @@ function auditTWDAT(txt, expect) {
       const raw = stripPre(await fetchCached(BASE + item.path, tag + '.html'));
       fs.writeFileSync(path.join(OUT, tag + '.txt'), raw);
       row = { id: tag, covers: item.covers, ...auditTCM(raw, item.expect) };
+      if (SAVE) {
+        const txt = raw.replace(/\r\n?/g, '\n');
+        fixtures.tcm[tag + '.txt'] = { source: BASE + item.path, covers: item.covers, snap: SUM.summarizeTCM(P.parseTCM(txt)), _txt: txt };
+      }
     } catch (e) {
       row = { id: tag, covers: item.covers, flags: ['fetch-error:' + e.message], stats: {} };
     }
@@ -176,6 +197,10 @@ function auditTWDAT(txt, expect) {
       if (!fname) throw new Error('no TWDAT matching prefix ' + item.prefix + ' in ' + item.year);
       const raw = await fetchCached(BASE + 'text/TWDAT/' + item.year + '/' + fname, fname);
       row = { id: fname, covers: item.covers, ...auditTWDAT(raw, item.expect) };
+      if (SAVE) {
+        const txt = raw.replace(/\r\n?/g, '\n');
+        fixtures.twdat[fname] = { source: BASE + 'text/TWDAT/' + item.year + '/' + fname, covers: item.covers, snap: SUM.summarizeTWDAT(P.parse(txt)), _txt: txt };
+      }
     } catch (e) {
       row = { id: 'TWDAT.' + item.prefix + '*', covers: item.covers, flags: ['fetch-error:' + e.message], stats: {} };
     }
@@ -196,4 +221,32 @@ function auditTWDAT(txt, expect) {
   fs.writeFileSync(path.join(OUT, 'report.json'), JSON.stringify(report, null, 1));
   console.log('\nFlags are a triage aid, not a pass/fail gate.');
   console.log('corpus + report saved to', OUT);
+
+  if (SAVE) {
+    const flagged = [...report.TCM, ...report.TWDAT].filter((r) => r.flags.length);
+    if (flagged.length) {
+      console.error('\n--save-fixtures: REFUSING to write fixtures — ' + flagged.length +
+        ' product(s) failed the manifest expectations above. Fix the parser (or the manifest) first.');
+      process.exit(1);
+    }
+    fs.mkdirSync(FIXDIR, { recursive: true });
+    const expected = {
+      _readme: 'Pinned parser snapshots for the committed archive corpus (checked by node test.js). ' +
+        'Regenerate deliberately with: node tools/archive-audit.js --save-fixtures (network, dev-only), ' +
+        'then review the git diff — a changed snap is a parser behavior change. Never hand-edit.',
+      tcm: {}, twdat: {},
+    };
+    let n = 0;
+    for (const type of ['tcm', 'twdat']) {
+      for (const name of Object.keys(fixtures[type]).sort()) {
+        const e = fixtures[type][name];
+        fs.writeFileSync(path.join(FIXDIR, name), e._txt);
+        expected[type][name] = { source: e.source, covers: e.covers, snap: e.snap };
+        n++;
+      }
+    }
+    fs.writeFileSync(path.join(FIXDIR, 'expected.json'), JSON.stringify(expected, null, 2) + '\n');
+    console.log('\n--save-fixtures: wrote ' + n + ' fixtures + expected.json to ' + FIXDIR);
+    console.log('Review `git diff fixtures/` before committing.');
+  }
 })();

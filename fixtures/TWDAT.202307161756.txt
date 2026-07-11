@@ -1,0 +1,162 @@
+
+000
+AXNT20 KNHC 161756
+TWDAT
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+1805 UTC Sun Jul 16 2023
+
+Tropical Weather Discussion for North America, Central America
+Gulf of Mexico, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 1200 UTC surface analysis and satellite imagery through 
+1740 UTC.
+
+...SPECIAL FEATURES...
+
+The center of Subtropical Depression Don, at 16/1500 UTC, is
+near 39.0N 48.1W. Don is moving toward the ENE, or 070 degrees, 
+07 knots. The estimated minimum central pressure is 1009 mb.
+The maximum sustained wind speeds are 30 knots with gusts to
+40 knots. The sea heights are 12 feet or higher within 150 nm of 
+the center in the NE quadrant; within 150 nm of the center in the
+SE quadrant; within 0 nm of the center in the SW quadrant; and 
+within 150 nm of the center in the NW quadrant. The maximum sea 
+heights are reaching 15 feet. Precipitation: widely scattered 
+moderate to isolated strong is within 300 nm of the center in the 
+E semicircle.
+
+Please, read the latest HIGH SEAS FORECAST, that is issued
+by the Ocean Prediction Center, at the web-site 
+https://www.opc.noaa.gov/text/MIAHSFAT1.shtml, and the
+latest Subtropical Storm Don Forecast/Advisory and the
+Public Advisory, at www.hurricanes.gov for more details. 
+
+...TROPICAL WAVES...
+
+An Atlantic Ocean tropical wave is along 29W, from 17N southward,
+moving westward from 10 knots to 15 knots. Precipitation: 
+isolated moderate to locally strong is within 360 nm to the east
+of the tropical wave from 07N to 12N.
+
+An Atlantic Ocean tropical wave is along 56W/57W, from 20N 
+southward, moving westward from 15 knots to 20 knots. 
+Precipitation: isolated moderate to locally strong is within
+360 nm to the north and northwest of the tropical wave, and 
+within 360 nm on either side of the tropical wave.
+
+A Caribbean Sea tropical wave is along 72W/73W, from 19N
+in Haiti southward, moving westward from 15 knots to 20 knots. 
+Precipitation: widely scattered moderate to isolated strong is
+within 300 nm to the east of the tropical wave from 16N to 21N.
+Isolated moderate is within 300 nm to the west of the tropical
+wave from 12N to 15N. The sea heights are ranging from 6 feet
+to 9 feet from Puerto Rico westward from the Greater Antilles
+southward. A maximum value of 12 feet is off the coast of Colombia
+between 76W/77W. Strong winds are from 17N southward from 66W
+westward.
+
+A tropical wave is along 92W, moving through the Isthmus of
+Tehuantepec, from 19N southward, moving westward from 10 knots
+to 15 knots. Precipitation: isolated moderate is in the SW corner
+of the Gulf of Mexico from 20N southward.
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough passes through the coastal border areas of
+Mauritania and Senegal, to 13N25W. The ITCZ is along 12N31W 
+10N41W 07N53W. Precipitation: widely scattered moderate to
+isolated strong is from 07N to 14N between 30W and 40W.
+Isolated moderate to locally strong is from 14N southward from
+30W eastward. 
+
+GULF OF MEXICO...
+
+Broad surface anticyclonic wind flow spans the area.
+The GFS model shows that a 700 mb inverted trough is extending
+from the SW corner of the Gulf of Mexico to the north central
+sections of the area. Precipitation: widely scattered moderate
+to isolated strong is from 23N to 28N between 84W and 92W.
+
+The GFS model shows that a trough is at 500 mb and at 700 mb,
+in parts of the western Atlantic Ocean and on top of Florida.
+Precipitation: widely scattered to scattered moderate, and
+isolated strong, are in Florida from 27N northward between
+80W and the Florida Panhandle.
+
+The sea heights range from 3 feet to 4 feet to the west of the
+line that runs from the middle Texas Gulf coast to the NW coast 
+of the Yucatan Peninsula. The sea heights range from 1 foot to
+2 feet elsewhere. Moderate or slower anticyclonic wind speeds 
+span the area.
+
+A ridge will persist from southwest Florida to the central Texas 
+coast through mid week. A trough will develop over the Yucatan 
+Peninsula each evening and move offshore. This pattern will 
+maintain moderate to fresh winds pulsing north and west of the 
+Yucatan peninsula during the late afternoon and evening hours. 
+Elsewhere, gentle to moderate winds and slight seas will prevail.
+
+CARIBBEAN SEA...
+
+A tropical wave is moving through the central sections of the
+Caribbean Sea. Please, read the TROPICAL WAVES section, for 
+details about the precipitation, the wind speeds, and the sea 
+heights.
+
+The sea heights range from 3 feet to 5 feet in the remainder of
+the area that is from 80W westward. The sea heights range from
+4 feet to 6 feet in the remainder of the Caribbean Sea.
+Strong winds are from 17N southward from 66W westward. Fresh
+winds are in the rest of the area that is from 18N southward from
+63W westward. Moderate or slower wind speeds are in the remainder
+of Caribbean Sea.
+
+The monsoon trough is along 09N/10N from 74W in Colombia beyond
+Costa Rica. Precipitation: scattered strong is from 08N to 13N
+between 77W and 86W, from parts of Panama to Costa Rica and
+Nicaragua, and in parts of the SW corner of the Caribbean Sea.
+
+The pressure gradient between high pressure over the Atlantic and
+the Colombian low will maintain fresh to strong winds across the 
+central Caribbean through the period. Winds may reach near gale 
+force along the coast of Colombia tonight. 
+
+ATLANTIC OCEAN...
+
+Please, read the SPECIAL FEATURES section, for information 
+about Subtropical Depression Don in the north central Atlantic 
+Ocean near 39.0N 48.1W, at 16/1500 UTC.
+
+A surface ridge extends from a 1018 mb 32N66W high pressure
+center, to the NW Bahamas, to the northern coast of Mexico.
+The GFS model shows that a trough is at 500 mb and at 700 mb,
+in parts of the western Atlantic Ocean and on top of Florida. 
+Precipitation: widely scattered moderate to isolated strong
+is from 20N northward from 60W westward. 
+
+Broad surface anticyclonic wind flow covers the Atlantic Ocean 
+from 20N northward from 55W eastward. The sea heights range from
+6 feet to 10 feet from the Cabo Verde Islands northward from 40W 
+eastward.
+
+The sea heights range from 4 feet to 6 feet, elsewhere, from 60W
+eastward. The sea heights range from 3 feet to 5 feet in the 
+remainder of the Atlantic Ocean. Fresh to strong NE winds are from
+17N northward from 35W eastward. Moderate to fresh winds are from
+14N northward between 35W and 45W, and from 09N to 27N between 
+45W and 60W. Moderate to fresh southerly winds are from 25N 
+northward from 73W westward, to the southeast of an inland U.S.A. 
+cold front. Gentle or slower winds are in the remainder of the 
+Atlantic Ocean.
+
+A ridge of high pressure will prevail across the forecast waters,
+supporting pulses of fresh to strong NE to E winds and rough seas
+off Hispaniola. 
+
+$$
+mt/al

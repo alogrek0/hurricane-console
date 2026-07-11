@@ -525,6 +525,40 @@ ok('issued: unknown zone returns null (no guessing)',
 ok('issued: garbage/empty return null',
   P.parseIssued('not a timestamp') === null && P.parseIssued('') === null);
 
+// --- committed archive corpus (fixtures/ + fixtures/expected.json) --------------
+// Real archived NHC products with pinned parser snapshots. A failing snapshot
+// means parser behavior changed on real-world text: if the change is deliberate,
+// regenerate with `node tools/archive-audit.js --save-fixtures` (network,
+// dev-only) and review the diff; never hand-edit expected.json.
+
+const SUM = require('./tools/corpus-summary.js');
+const FIXDIR = __dirname + '/fixtures';
+const EXP = JSON.parse(fs.readFileSync(FIXDIR + '/expected.json', 'utf8'));
+
+for (const [type, summarize, parseFn] of [
+  ['tcm', SUM.summarizeTCM, (t) => P.parseTCM(t)],
+  ['twdat', SUM.summarizeTWDAT, (t) => P.parse(t)],
+]) {
+  for (const [file, want] of Object.entries(EXP[type])) {
+    const txt = fs.readFileSync(FIXDIR + '/' + file, 'utf8');
+    // CRLF would silently change parse results; .gitattributes pins these to LF,
+    // and this assertion turns a misconfigured checkout into one loud failure.
+    ok('corpus ' + file + ': LF only (see .gitattributes)', !/\r/.test(txt));
+    const got = summarize(parseFn(txt));
+    const same = JSON.stringify(got) === JSON.stringify(want.snap);
+    ok('corpus ' + file + ': snapshot (' + want.covers + ')', same);
+    if (!same) {
+      console.log('       want ' + JSON.stringify(want.snap));
+      console.log('       got  ' + JSON.stringify(got));
+    }
+  }
+}
+
+ok('corpus: every fixtures/*.txt has expectations',
+  fs.readdirSync(FIXDIR)
+    .filter((f) => f.endsWith('.txt'))
+    .every((f) => EXP.tcm[f] || EXP.twdat[f]));
+
 // --- app version (single source, CalVer) ---------------------------------------
 
 const VER = require('./version.js');
