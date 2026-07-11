@@ -285,6 +285,25 @@ ok('cone: ring is a simple polygon (no self-intersection)', (() => {
   return true;
 })());
 
+// --- issuance time parsing -----------------------------------------------------
+
+const iss1 = P.parseIssued('805 AM EDT Mon Jul 7 2026');
+ok('issued: EDT 12-hour to UTC (8:05 EDT = 12:05Z)',
+  iss1 && iss1.getTime() === Date.UTC(2026, 6, 7, 12, 5));
+const iss2 = P.parseIssued('0300 UTC MON SEP 11 2023');
+ok('issued: UTC 24-hour passthrough',
+  iss2 && iss2.getTime() === Date.UTC(2023, 8, 11, 3, 0));
+ok('issued: 12:30 AM EST is 05:30Z (midnight-hour wrap)',
+  (() => { const d = P.parseIssued('1230 AM EST Tue Dec 1 2026');
+    return d && d.getTime() === Date.UTC(2026, 11, 1, 5, 30); })());
+ok('issued: 12:15 PM AST is 16:15Z (noon-hour + Atlantic offset)',
+  (() => { const d = P.parseIssued('1215 PM AST Wed Aug 5 2026');
+    return d && d.getTime() === Date.UTC(2026, 7, 5, 16, 15); })());
+ok('issued: unknown zone returns null (no guessing)',
+  P.parseIssued('805 AM XYZ Mon Jul 7 2026') === null);
+ok('issued: garbage/empty return null',
+  P.parseIssued('not a timestamp') === null && P.parseIssued('') === null);
+
 // --- app version (single source, CalVer) ---------------------------------------
 
 const VER = require('./version.js');

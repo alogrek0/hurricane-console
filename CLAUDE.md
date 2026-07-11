@@ -77,7 +77,10 @@ keyword matches survive — this was a real bug; keep the hyphen.
 The header badge must always reflect the true data source: **LIVE / CACHED /
 SAMPLE / PASTED / ERROR**. Never show LIVE for stale or sample data. Honesty about
 provenance is the whole point — inferred features are visually distinct for the
-same reason.
+same reason. **LOADING** is the one transient exception — shown (pulsing) only
+while a fetch is in flight, before the source is known; it asserts no provenance
+and must resolve to one of the five real states. Never claim a source
+optimistically before the fetch resolves.
 
 ## Conventions
 - Plain ES5-ish browser JS, no framework, no bundler. Keep it dependency-free

@@ -32,6 +32,8 @@
   .badge.LIVE{color:#5fd08a} .badge.CACHED{color:var(--cyan)}
   .badge.SAMPLE{color:var(--amber)} .badge.PASTED{color:var(--inferred)}
   .badge.ERROR{color:var(--strong)}
+  .badge.LOADING{color:var(--dim);animation:badgePulse 1s ease-in-out infinite}
+  @keyframes badgePulse{50%{opacity:.35}}
 
   #map{flex:1;background:#04101a;outline:none}
   .leaflet-container{background:#04101a;font:inherit}
@@ -46,6 +48,7 @@
   button.primary{background:var(--amber);color:#231400;border-color:var(--amber);font-weight:600}
   .meta{margin-left:auto;color:var(--dim);font-size:.72rem;text-align:right;line-height:1.3}
   .meta .ver{font-size:.6rem;opacity:.55;letter-spacing:.08em}
+  .meta .local{font-size:.66rem;opacity:.7}
 
   /* legend + popups */
   .legend{position:absolute;right:.6rem;top:.6rem;z-index:500;background:rgba(9,26,38,.9);

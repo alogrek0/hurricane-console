@@ -588,6 +588,46 @@
     return ring;
   }
 
+  // --- issuance time ---------------------------------------------------------
+  // Turn an NHC product issuance line into a UTC Date. Two shapes occur:
+  //   "805 AM EDT Mon Jul 7 2026"   (TWDAT/TWOAT: 12-hour clock + AM/PM)
+  //   "0300 UTC MON SEP 11 2023"    (TCM: 24-hour, zero-padded)
+  // The 3-4 digit clump is HMM/HHMM; the zone abbreviation carries the offset.
+  // Returns null (never a guess) when the line doesn't match or names a zone we
+  // don't know, so the caller can fall back to showing the raw header text.
+  const TZ_UTC_OFFSET_MIN = {
+    UTC: 0, GMT: 0, Z: 0,
+    AST: 240, ADT: 180,   // Atlantic
+    EST: 300, EDT: 240,   // Eastern
+    CST: 360, CDT: 300,   // Central
+    MST: 420, MDT: 360,   // Mountain
+    PST: 480, PDT: 420,   // Pacific
+    HST: 600,
+  };
+  const MONTHS = { jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5,
+                   jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11 };
+
+  function parseIssued(str) {
+    const m = String(str || '').match(
+      /(\d{3,4})\s*(AM|PM)?\s*([A-Z]{1,4})\s+[A-Za-z]{3,}\s+([A-Za-z]{3})[A-Za-z]*\s+(\d{1,2})\s+(\d{4})/i
+    );
+    if (!m) return null;
+    const offMin = TZ_UTC_OFFSET_MIN[m[3].toUpperCase()];
+    const mon = MONTHS[m[4].toLowerCase()];
+    if (offMin == null || mon == null) return null; // unknown zone/month -> no guess
+
+    const clump = m[1];
+    let hh = parseInt(clump.slice(0, clump.length - 2), 10);
+    const mm = parseInt(clump.slice(-2), 10);
+    const ap = m[2] && m[2].toUpperCase();
+    if (ap === 'PM' && hh < 12) hh += 12;
+    if (ap === 'AM' && hh === 12) hh = 0;
+
+    const day = parseInt(m[5], 10), year = parseInt(m[6], 10);
+    // stated wall-clock time is local to the zone; add its offset to reach UTC
+    return new Date(Date.UTC(year, mon, day, hh, mm) + offMin * 60000);
+  }
+
   // --- orchestration ---------------------------------------------------------
 
   // Dead-reckon +24h from a point with stated motion; shared by waves and
@@ -644,6 +684,6 @@
     return result;
   }
 
-  root.BasinParser = { parse, parseTWO, parseTCM, coneFromTrack, pairsIn, sections, dehyphenate, parseMotion, project };
+  root.BasinParser = { parse, parseTWO, parseTCM, parseIssued, coneFromTrack, pairsIn, sections, dehyphenate, parseMotion, project };
   if (typeof module !== 'undefined' && module.exports) module.exports = root.BasinParser;
 })(typeof window !== 'undefined' ? window : globalThis);

@@ -46,6 +46,7 @@ node test.js
 
 | Badge  | Meaning |
 |--------|---------|
+| LOADING | a fetch is in flight; resolves to one of the states below |
 | LIVE   | fresh product from api.weather.gov |
 | CACHED | network unreachable; showing last stored product |
 | SAMPLE | API unavailable and nothing cached; embedded fallback |

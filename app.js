@@ -126,12 +126,66 @@
     });
   }
 
-  var metaBase = '—';
-  function updateMeta() {
-    document.getElementById('meta').innerHTML =
-      metaBase + (tcmNote ? ' · ' + tcmNote : '') +
-      '<br><span class="ver">' + (window.APP_VERSION || '') + '</span>';
+  var featureLine = '—'; // "N features · X waves ..." — set by render/renderTWO
+  var issuedStr = null;  // raw product issuance line, or null
+  var badgeState = 'SAMPLE'; // last badge; gates the "next update" hint
+
+  // "just now" / "12m ago" / "3h ago" / "2d ago" from a Date.
+  function relAge(date) {
+    var min = Math.round((Date.now() - date.getTime()) / 60000);
+    if (min < -1) return 'issued ahead of clock';
+    if (min < 1) return 'just now';
+    if (min < 60) return min + 'm ago';
+    var hr = Math.round(min / 60);
+    if (hr < 48) return hr + 'h ago';
+    return Math.round(hr / 24) + 'd ago';
   }
+
+  // Next routine NHC issuance. TWD and TWO both land on the 00/06/12/18Z
+  // synoptic cycle (a few minutes past, hence the "~"). Returns the slot label
+  // and a short time-until string; recomputed each minute by the meta interval.
+  function nextSynoptic() {
+    var now = Date.now(), d = new Date(now);
+    var nextH = (Math.floor(d.getUTCHours() / 6) + 1) * 6; // 6, 12, 18, or 24
+    var slot = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()) + nextH * 3600000;
+    var min = Math.round((slot - now) / 60000);
+    return {
+      z: (nextH % 24 < 10 ? '0' : '') + (nextH % 24) + '00Z',
+      until: min < 60 ? 'in ' + min + 'm'
+        : 'in ' + Math.floor(min / 60) + 'h' + (min % 60 ? (min % 60) + 'm' : ''),
+    };
+  }
+
+  function updateMeta() {
+    var issuedLine, dimParts = [];
+    if (!issuedStr) {
+      issuedLine = 'issuance n/a';
+    } else {
+      var d = window.BasinParser.parseIssued(issuedStr);
+      issuedLine = escapeHtml(issuedStr);
+      if (d && !isNaN(d.getTime())) {
+        issuedLine += ' · ' + relAge(d);
+        // the viewer's own zone, so "local" is honest wherever they are
+        dimParts.push('local ' + d.toLocaleString([], {
+          hour: 'numeric', minute: '2-digit', timeZoneName: 'short'
+        }));
+      }
+    }
+    if (tcmNote) issuedLine += ' · ' + tcmNote;
+    // The next-issuance hint only makes sense while tracking the live cycle —
+    // never over a fixed SAMPLE or a pasted archived product.
+    if (badgeState === 'LIVE' || badgeState === 'CACHED') {
+      var nx = nextSynoptic();
+      dimParts.push('next ~' + nx.z + ' ' + nx.until);
+    }
+    var html = featureLine + '<br>' + issuedLine;
+    if (dimParts.length) html += '<br><span class="local">' + escapeHtml(dimParts.join(' · ')) + '</span>';
+    html += '<br><span class="ver">' + (window.APP_VERSION || '') + '</span>';
+    document.getElementById('meta').innerHTML = html;
+  }
+
+  // Relative age drifts as a storm-watching tab sits open; refresh each minute.
+  setInterval(updateMeta, 60000);
 
   function render(parsed) {
     featureLayer.clearLayers();
@@ -214,9 +268,9 @@
     var nCyc = (parsed.cyclones || []).length;
     var n = nCyc + parsed.waves.length + parsed.troughs.length + parsed.convection.length +
       parsed.fixes.length + parsed.inferred.length;
-    metaBase = n + ' features · ' + parsed.waves.length + ' waves' +
-      (nCyc ? ' · ' + nCyc + ' cyclone' + (nCyc === 1 ? '' : 's') : '') + '<br>' +
-      (parsed.issued ? escapeHtml(parsed.issued) : 'issuance n/a');
+    featureLine = n + ' features · ' + parsed.waves.length + ' waves' +
+      (nCyc ? ' · ' + nCyc + ' cyclone' + (nCyc === 1 ? '' : 's') : '');
+    issuedStr = parsed.issued || null;
     updateMeta();
   }
 
@@ -239,17 +293,19 @@
       }).bindPopup(popup(label, d.source, true)).addTo(twoLayer);
     });
     var n = parsed.disturbances.length;
-    metaBase = n + ' outlook area' + (n === 1 ? '' : 's') +
-      (unmapped ? ' · ' + unmapped + ' not mappable — see product text' : '') + '<br>' +
-      (parsed.issued ? escapeHtml(parsed.issued) : 'issuance n/a');
+    featureLine = n + ' outlook area' + (n === 1 ? '' : 's') +
+      (unmapped ? ' · ' + unmapped + ' not mappable — see product text' : '');
+    issuedStr = parsed.issued || null;
     updateMeta();
   }
 
   // --- data source -----------------------------------------------------------
   function setBadge(state) {
+    badgeState = state;
     var b = document.getElementById('badge');
     b.className = 'badge ' + state;
     b.textContent = state;
+    updateMeta(); // reflect the resolved provenance (e.g. show/hide next-update)
   }
 
   // api.weather.gov's product types are 3-letter AWIPS categories (TWD, TWO)
@@ -282,7 +338,7 @@
   }
 
   function loadTWD() {
-    setBadge('LIVE'); // optimistic; corrected on resolution
+    setBadge('LOADING'); // in-flight; resolves to the real source below
     fetchLatestMatching(TWD_URL, 'TWDAT', 8).then(function (res) {
       if (!res.text) throw new Error('empty');
       // Fetch succeeded: a parse/render failure here is a real error, and
@@ -312,7 +368,7 @@
   }
 
   function loadTWO() {
-    setBadge('LIVE'); // optimistic; corrected on resolution
+    setBadge('LOADING'); // in-flight; resolves to the real source below
     fetchLatestMatching(TWO_URL, 'TWOAT', 8).then(function (res) {
       if (!res.text) throw new Error('empty');
       try {
