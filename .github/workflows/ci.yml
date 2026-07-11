@@ -1,0 +1,26 @@
+# CI: parser test suite on every push to main and every PR, plus the
+# version guard (shared with tools/hooks/pre-push via
+# tools/check-version-guard.sh) on PRs — covering clones that never ran
+# `git config core.hooksPath tools/hooks`.
+name: ci
+on:
+  push:
+    branches: [main] # deploy branch; PRs cover feature branches
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # version guard needs history for merge-base; repo is tiny
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: node test.js
+      - name: version guard (shell files require a version.js bump)
+        if: github.event_name == 'pull_request'
+        run: |
+          BASE=$(git merge-base "origin/$GITHUB_BASE_REF" HEAD)
+          echo "merge-base: $BASE"
+          sh tools/check-version-guard.sh "$BASE" HEAD
