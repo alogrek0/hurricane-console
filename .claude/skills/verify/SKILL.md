@@ -42,8 +42,11 @@ Real archived product text lives in the archive-audit cache
   serves the OLD app.js/parser.js and you verify stale code. Unregistering +
   reloading is unreliable (the boot re-registers and re-caches through the HTTP
   cache). Reliable bypass: serve on a **fresh port** (new origin, no SW) with
-  caching disabled: `npx -y http-server -p 8001 -s -c-1`. Confirm with
-  `navigator.serviceWorker.controller` (must be null) before trusting results.
+  caching disabled: `npx -y http-server -p 8001 -s -c-1`. Note the SW claims
+  clients on first load even on a fresh origin, so `controller` being non-null
+  is NOT proof of staleness — on a fresh port the cache was just built from the
+  live server, which is the point. To confirm freshness, fetch the changed file
+  and check it contains your new code.
 - Stopping the background `npx http-server` task can orphan the actual node
   child on Windows (port stays bound). Kill by port instead:
   `Get-NetTCPConnection -LocalPort 8001 -State Listen` → `Stop-Process`.

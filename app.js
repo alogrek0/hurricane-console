@@ -175,7 +175,8 @@
   // tail, or '' if it has no recognizable date. Anchored on the 4-digit year.
   function statedDate(header) {
     var m = header.match(/\b([A-Za-z]{3})[a-z]*\s+(\d{1,2})\s+\d{4}\b/);
-    return m ? m[1] + ' ' + m[2] : '';
+    // normalize the month token: TWD headers say "Jul", TCM headers say "SEP"
+    return m ? m[1][0].toUpperCase() + m[1].slice(1).toLowerCase() + ' ' + m[2] : '';
   }
 
   // parseIssued is regex-based and updateMeta runs on every 60s tick and each
