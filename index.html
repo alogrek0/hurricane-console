@@ -48,7 +48,9 @@
   button.primary{background:var(--amber);color:#231400;border-color:var(--amber);font-weight:600}
   .meta{margin-left:auto;color:var(--dim);font-size:.72rem;text-align:right;line-height:1.3}
   .meta .ver{font-size:.6rem;opacity:.55;letter-spacing:.08em}
-  .meta .local{font-size:.66rem;opacity:.7}
+  /* readout last line: next-update hint pinned left, version pinned right */
+  .meta .rd-last{display:flex;gap:.6rem;align-items:baseline;justify-content:flex-end}
+  .meta .next{margin-right:auto;font-size:.66rem;opacity:.8}
 
   /* legend + popups */
   .legend{position:absolute;right:.6rem;top:.6rem;z-index:500;background:rgba(9,26,38,.9);
