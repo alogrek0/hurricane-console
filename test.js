@@ -139,6 +139,84 @@ ok('cyclone center not double-counted as fix',
   !sf.fixes.some(f => f.lat === 25.5 && f.lon === -74.2));
 ok('quiet TWDAT has zero cyclones', r.cyclones.length === 0);
 
+// Real TWDATs don't always carry a SPECIAL FEATURES section: on 29 Aug 2023
+// the discussion described Franklin and Idalia in the untitled preamble
+// instead. Distilled from TWDAT.202308291005 (nhc.noaa.gov archive).
+const TWD_PRE = `AXNT20 KNHC 291005
+TWDAT
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+1205 UTC Tue Aug 29 2023
+
+Tropical Weather Discussion for North America, Central America
+Gulf of Mexico, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N.
+
+Major Hurricane Franklin is centered near 30.2N 70.8W at 29/0900
+UTC or 330 nm WSW of Bermuda, moving NNE at 8 kt. Estimated
+minimum central pressure is 935 mb. Maximum sustained wind speed
+is 120 kt with gusts to 145 kt.
+
+Recently upgraded Hurricane Idalia is centered near 23.1N 85.0W
+at 29/0900 UTC or 70 nm N of the western tip of Cuba, moving N
+at 12 kt. Estimated minimum central pressure is 981 mb. Maximum
+sustained wind speed is 65 kt with gusts to 80 kt.
+
+...TROPICAL WAVES...
+
+A tropical wave has its axis along 22W from 05N to 17N, moving
+west at 10 to 15 kt.
+
+$$`;
+
+const pre = P.parse(TWD_PRE);
+ok('preamble cyclones extracted when no SPECIAL FEATURES section',
+  pre.cyclones.length === 2 && pre.cyclones[0].name === 'Franklin' &&
+  pre.cyclones[1].name === 'Idalia' && pre.cyclones[0].srcSection === 'PREAMBLE');
+ok('preamble cyclone centers and "wind speed is" phrasing',
+  pre.cyclones[0].lat === 30.2 && pre.cyclones[0].lon === -70.8 && pre.cyclones[0].windKt === 120 &&
+  pre.cyclones[1].lat === 23.1 && pre.cyclones[1].lon === -85 && pre.cyclones[1].windKt === 65);
+ok('preamble cyclone centers not double-counted as fixes',
+  !pre.fixes.some(f => (f.lat === 30.2 && f.lon === -70.8) || (f.lat === 23.1 && f.lon === -85)));
+ok('preamble cyclones get +24h projections',
+  pre.projections.some(p => p.id === 'Franklin') && pre.projections.some(p => p.id === 'Idalia'));
+
+// Subtropical Depression Don (TWDAT 16 Jul 2023, distilled): "maximum
+// sustained wind speeds are 30 knots" — plural "speeds", spelled-out "knots" —
+// and no "centered near", so the center comes from the coordinate-pair
+// fallback. The PTC chunk is synthetic, covering the RE_CYCLONE addition.
+const TWD_DON = `TWDAT
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+205 PM EDT Sun Jul 16 2023
+
+Tropical Weather Discussion for the Atlantic Ocean.
+
+...SPECIAL FEATURES...
+
+The center of Subtropical Depression Don, at 16/1500 UTC, is
+near 39.0N 48.1W. Don is moving toward the ENE, or 070 degrees,
+07 knots. The estimated minimum central pressure is 1009 mb.
+The maximum sustained wind speeds are 30 knots with gusts to
+40 knots.
+
+Potential Tropical Cyclone Eight is centered near 32.0N 78.0W
+moving northwest at 6 kt. Maximum sustained winds are 40 kt.
+
+$$`;
+
+const don = P.parse(TWD_DON);
+ok('Don: subtropical depression, center from pair fallback',
+  don.cyclones[0] && don.cyclones[0].classification === 'Subtropical Depression' &&
+  don.cyclones[0].lat === 39 && don.cyclones[0].lon === -48.1);
+ok('Don: "wind speeds are NN knots" phrasing parsed',
+  don.cyclones[0].windKt === 30 && don.cyclones[0].pressureMb === 1009);
+ok('Potential Tropical Cyclone recognized in special features',
+  don.cyclones[1] && don.cyclones[1].classification === 'Potential Tropical Cyclone' &&
+  don.cyclones[1].name === 'Eight' && don.cyclones[1].windKt === 40);
+
 // --- TWO (Tropical Weather Outlook) --------------------------------------------
 
 const TWO_FIX = `Tropical Weather Outlook
@@ -321,6 +399,51 @@ ok('TCM: dissipated end state tagged', (() => {
   const t = P.parseTCM(TCM_FIX.replace('...POST-TROP/EXTRATROP', '...DISSIPATED'));
   return t && t.track[5].state === 'dissipated';
 })());
+
+// Real PTC advisory (Potential Tropical Cyclone Eight, Sep 2024): PTC header
+// classification, a prior-position "CENTER WAS LOCATED" line that must not win
+// the center match, INLAND / TROPICAL CYCLONE track suffixes, and a
+// position-less DISSIPATED outlook. Distilled from
+// nhc.noaa.gov/archive/2024/al08/al082024.fstadv.001.shtml.
+const PTC_FIX = `ZCZC MIATCMAT3 ALL
+TTAA00 KNHC DDHHMM
+
+POTENTIAL TROPICAL CYCLONE EIGHT FORECAST/ADVISORY NUMBER   1
+NWS NATIONAL HURRICANE CENTER MIAMI FL       AL082024
+2100 UTC SUN SEP 15 2024
+
+POTENTIAL TROP CYCLONE CENTER LOCATED NEAR 32.0N  78.0W AT 15/2100Z
+POSITION ACCURATE WITHIN  30 NM
+
+PRESENT MOVEMENT TOWARD THE NORTHWEST OR 320 DEGREES AT   6 KT
+
+ESTIMATED MINIMUM CENTRAL PRESSURE 1006 MB
+MAX SUSTAINED WINDS  40 KT WITH GUSTS TO  50 KT.
+
+REPEAT...CENTER LOCATED NEAR 32.0N  78.0W AT 15/2100Z
+AT 15/1800Z CENTER WAS LOCATED NEAR 31.8N  77.8W
+
+FORECAST VALID 16/0600Z 32.4N  78.7W...TROPICAL CYCLONE
+MAX WIND  40 KT...GUSTS  50 KT.
+
+FORECAST VALID 16/1800Z 33.1N  79.4W...INLAND
+MAX WIND  45 KT...GUSTS  55 KT.
+
+FORECAST VALID 17/0600Z 34.1N  80.0W...POST-TROPICAL
+MAX WIND  25 KT...GUSTS  35 KT.
+
+OUTLOOK VALID 19/1800Z...DISSIPATED
+
+$$`;
+
+const ptc = P.parseTCM(PTC_FIX);
+ok('PTC: header parsed', ptc && ptc.classification === 'Potential Tropical Cyclone' &&
+  ptc.name === 'Eight' && ptc.stormId === 'AL082024' && ptc.advisory === 1);
+ok('PTC: initial center wins over prior-position line',
+  ptc && ptc.center.lat === 32 && ptc.center.lon === -78 && ptc.issued === '15/2100Z');
+ok('PTC: positioned points only (dissipated outlook excluded)',
+  ptc && ptc.track.length === 3 && ptc.track.map(p => p.hours).join(',') === '9,21,33');
+ok('PTC: post-tropical track suffix tagged', ptc && ptc.track[2].state === 'post-tropical');
 
 // --- cone geometry -------------------------------------------------------------
 

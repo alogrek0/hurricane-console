@@ -63,9 +63,14 @@ function auditTWD(txt) {
   const r = P.parse(txt);
   const flags = [];
   if (/tropical wave/i.test(txt) && r.waves.length === 0) flags.push('waves-in-text/none-parsed');
-  if (/\.\.\.SPECIAL FEATURES\.\.\./i.test(txt) &&
-      /\b(hurricane|tropical storm|tropical depression|subtropical)\b/i.test(txt) &&
-      (r.cyclones || []).length === 0) flags.push('special-features/no-cyclone');
+  // Scope the storm-keyword check to the SPECIAL FEATURES sections themselves:
+  // every product mentions "Hurricane" in the NHC office header, and quiet-day
+  // sections holding only a Gale Warning correctly yield zero cyclones. Require
+  // a classification followed by a name-like word (not "Center"/"Warning").
+  const sfStorm = P.sections(txt)
+    .filter((s) => /SPECIAL FEATURE/i.test(s.name))
+    .some((s) => /\b(hurricane|tropical storm|tropical depression|subtropical (?:storm|depression)|potential tropical cyclone)\s+(?!center\b|warning\b)[a-z-]+/i.test(s.text));
+  if (sfStorm && (r.cyclones || []).length === 0) flags.push('special-features/no-cyclone');
   if (r.sections.length <= 1) flags.push('sections-not-split');
   const bad = coordsOf(r).filter((p) => !SANE(p) && isFinite(p.lat) && isFinite(p.lon));
   if (bad.length) flags.push('coords-out-of-basin:' + bad.slice(0, 3).map((p) => p.k + '(' + p.lat + ',' + p.lon + ')').join(','));

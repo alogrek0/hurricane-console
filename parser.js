@@ -288,7 +288,7 @@
   // SPECIAL FEATURES: active tropical cyclones. Case-insensitive because
   // archived TWDATs are ALL CAPS; the captured name is title-cased.
   const RE_CYCLONE =
-    /\b(Hurricane|Tropical Storm|Tropical Depression|Subtropical Storm|Subtropical Depression|Post-Tropical Cyclone|Remnants of)\s+([A-Z][A-Za-z]+(?:-[A-Za-z]+)?)/i;
+    /\b(Hurricane|Tropical Storm|Tropical Depression|Subtropical Storm|Subtropical Depression|Potential Tropical Cyclone|Post-Tropical Cyclone|Remnants of)\s+([A-Z][A-Za-z]+(?:-[A-Za-z]+)?)/i;
 
   function titleCase(s) {
     return s.replace(/\w\S*/g, (w) => w[0].toUpperCase() + w.slice(1).toLowerCase());
@@ -310,7 +310,9 @@
       else pos = pairsIn(flat)[0] || null;
       if (!pos) return;
 
-      const wm = flat.match(/max(?:imum)? sustained winds?(?:\s+speed)?(?:\s+(?:is|are|of))?\s*(?:near\s+)?(\d{1,3})\s*kt/i);
+      // "winds are 90 kt" / "wind speed is 120 kt" / "wind speeds are 30 knots"
+      // all occur in real TWDATs (the last is Subtropical Depression Don, Jul 2023)
+      const wm = flat.match(/max(?:imum)? sustained winds?(?:\s+speeds?)?(?:\s+(?:is|are|of))?\s*(?:near\s+)?(\d{1,3})\s*k(?:t|nots?)\b/i);
       const pm = flat.match(/(?:minimum central\s+)?pressure(?:\s+is)?(?:\s+estimated(?:\s+to be)?)?\D{0,15}(\d{3,4})\s*mb/i)
         || flat.match(/(\d{3,4})\s*mb/);
 
@@ -505,7 +507,7 @@
   function parseTCM(raw) {
     const text = dehyphenate(String(raw || ''));
     const head = text.match(
-      /\b(HURRICANE|TROPICAL STORM|TROPICAL DEPRESSION|SUBTROPICAL STORM|SUBTROPICAL DEPRESSION|POST-TROPICAL CYCLONE|REMNANTS OF)\s+([A-Z][A-Za-z-]+)\s+(?:SPECIAL\s+)?FORECAST\/ADVISORY\s+NUMBER\s+(\d+)/i
+      /\b(HURRICANE|TROPICAL STORM|TROPICAL DEPRESSION|SUBTROPICAL STORM|SUBTROPICAL DEPRESSION|POTENTIAL TROPICAL CYCLONE|POST-TROPICAL CYCLONE|REMNANTS OF)\s+([A-Z][A-Za-z-]+)\s+(?:SPECIAL\s+)?FORECAST\/ADVISORY\s+NUMBER\s+(\d+)/i
     );
     const ctr = text.match(
       /CENTER LOCATED NEAR\s+(\d{1,2}(?:\.\d)?)\s*([NS])\s+(\d{1,3}(?:\.\d)?)\s*([EW])\s+AT\s+(\d{2})\/(\d{2})(\d{2})Z/i
@@ -696,15 +698,23 @@
       const isITCZ = /ITCZ|MONSOON|TROUGH/i.test(s.name);
       // SPECIAL FEATURES paragraphs become typed cyclones; suppress the generic
       // fix/gazetteer passes there so a named center doesn't double-register.
+      // Some real TWDATs carry no SPECIAL FEATURES section at all and describe
+      // active cyclones in the preamble instead (e.g. Franklin + Idalia,
+      // TWDAT 29 Aug 2023), so the cyclone pass covers the preamble too.
       const isSpecial = /SPECIAL FEATURE/i.test(s.name);
-      if (isSpecial) result.cyclones.push(...extractCyclones(s.text, s.name));
+      const isPreamble = s.name === 'PREAMBLE';
+      let cycs = [];
+      if (isSpecial || isPreamble) {
+        cycs = extractCyclones(s.text, s.name);
+        result.cyclones.push(...cycs);
+      }
       if (isWave) result.waves.push(...extractWaves(s.text, s.name));
       result.convection.push(...extractConvection(s.text));
       if (isITCZ || /TROUGH/i.test(s.text)) result.troughs.push(...extractTroughs(s.text, s.name));
-      if (!isSpecial) result.fixes.push(...extractFixes(s.text));
+      if (!isSpecial && !cycs.length) result.fixes.push(...extractFixes(s.text));
       // The preamble is product boilerplate ("...to the African coast...");
       // running the gazetteer over it only manufactures phantom positions.
-      if (s.name !== 'PREAMBLE' && !isSpecial) result.inferred.push(...extractInferred(s.text));
+      if (!isPreamble && !isSpecial) result.inferred.push(...extractInferred(s.text));
     }
 
     // Pass 3: dead-reckon +24h for every wave and cyclone that stated motion.
