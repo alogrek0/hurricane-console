@@ -174,6 +174,58 @@ ok('D1 resolves to Lesser Antilles anchor', d1 && d1.lat === 15.5 && d1.lon === 
 ok('D2 "between A and B" midpoint resolves',
   d2 && d2.lat === (13.0 + 15.0) / 2 && d2.lon === (-61.2 + -75.0) / 2);
 
+// --- gazetteer over-firing guards (extractInferred hardening) ------------------
+// extractInferred used to fire on ANY place mention, producing two failure modes:
+// TYPE 1 — a sentence with singleton coords ("along 61W-62W, south of 18N")
+// slipped the pair-guard and got force-fit to a coarse centroid; TYPE 2 — pure
+// narrative naming a region got a spurious dot. Two new guards fix both while
+// keeping the canonical prose-only case working.
+
+// TYPE 1: singleton coords in a non-WAVE section must yield NO inferred dot.
+const TWD_T1 = `TWDAT
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+0015 UTC Sun Jul 5 2026
+
+...DISCUSSION...
+
+A tropical wave has entered the Caribbean, along 61W-62W, south of 18N, moving westward.
+
+$$`;
+const t1 = P.parse(TWD_T1);
+ok('TYPE 1: singleton-coord sentence produces no inferred dot', t1.inferred.length === 0);
+
+// TYPE 2: pure narrative naming a region must yield NO inferred dot.
+const TWD_T2 = `TWDAT
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+0015 UTC Sun Jul 5 2026
+
+...DISCUSSION...
+
+Trades over the Gulf of Honduras will pulse to strong each evening.
+
+$$`;
+const t2 = P.parse(TWD_T2);
+ok('TYPE 2: pure-narrative region mention produces no inferred dot', t2.inferred.length === 0);
+
+// Canonical prose-only feature: still exactly one inferred dot at the midpoint
+// of the two "between A and B" anchors (Hispaniola 19.0,-71.0 & SE Bahamas 22.0,-73.5).
+const TWD_CANON = `TWDAT
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+0015 UTC Sun Jul 5 2026
+
+...DISCUSSION...
+
+A disturbed area between Hispaniola and the southeastern Bahamas bears watching over the next several days.
+
+$$`;
+const tc = P.parse(TWD_CANON);
+ok('canonical prose-only feature still infers exactly one dot', tc.inferred.length === 1);
+ok('canonical inferred dot lands at the between-anchor midpoint',
+  tc.inferred[0] && tc.inferred[0].lat === (19.0 + 22.0) / 2 && tc.inferred[0].lon === (-71.0 + -73.5) / 2);
+
 // --- basemap.js integrity (generated file; guards a bad regeneration) ---------
 
 const BM = require('./basemap.js');

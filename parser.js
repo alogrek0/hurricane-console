@@ -32,6 +32,19 @@
   // A paired coordinate token like 14N76W or 08N27W (lat first, lon second).
   const RE_PAIR = /(\d{1,2}(?:\.\d)?)\s*([NS])\s*(\d{1,3}(?:\.\d)?)\s*([EW])/g;
 
+  // A single explicit coordinate token like "61W", "18N", "5.5S" — used to
+  // detect sentences the gazetteer must NOT touch. Unlike RE_PAIR this fires on
+  // a lone lat OR lon, so "along 61W-62W, south of 18N" is recognised as coord-
+  // positioned even though its lat and lon never appear adjacently as a pair.
+  const RE_COORD_TOKEN = /\b\d{1,3}(?:\.\d)?\s*[NSEW]\b/;
+
+  // Feature nouns that mean a sentence is actually introducing/locating a
+  // system, not just mentioning a place in passing. Bare "area"/"disturbed"
+  // (NOT the two-word "area of") so CLAUDE.md's canonical case "a disturbed
+  // area between Hispaniola and the southeastern Bahamas bears watching" still
+  // infers, while pure narrative ("trades over the Gulf of Honduras") does not.
+  const RE_FEATURE_NOUN = /\b(?:wave|low|disturbance|disturbed|trough|area|system|gyre)\b/i;
+
   function pairsIn(text) {
     const out = [];
     let m;
@@ -388,6 +401,14 @@
     secText.split(/(?<=[.])\s+/).forEach((sent) => {
       if (RE_PAIR.test(sent)) { RE_PAIR.lastIndex = 0; return; }
       RE_PAIR.lastIndex = 0;
+      // (a) A sentence positioned by an explicit coordinate token (even a lone
+      // "61W" or "18N" with no paired mate) is not the gazetteer's job. Emitting
+      // no dot is more honest than force-fitting it to a coarse place centroid.
+      if (RE_COORD_TOKEN.test(sent)) return;
+      // (b) Only infer when the sentence actually introduces/locates a feature.
+      // Otherwise a place merely named in narrative ("trades over the Gulf of
+      // Honduras will pulse") gets a spurious dot.
+      if (!RE_FEATURE_NOUN.test(sent)) return;
       const g = gazResolve(sent);
       if (g) {
         feats.push({
