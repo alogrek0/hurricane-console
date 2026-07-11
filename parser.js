@@ -547,6 +547,9 @@
       advisory: parseInt(head[3], 10),
       center: { lat: lat(ctr[1], ctr[2].toUpperCase()), lon: lon(ctr[3], ctr[4].toUpperCase()) },
       issued: ctr[5] + '/' + ctr[6] + ctr[7] + 'Z',
+      // Full issuance header ("2100 UTC SUN SEP 15 2024") — unlike the DD/HHMMZ
+      // stamp above, this is a line parseIssued can turn into a Date.
+      issuedHeader: (text.match(/\b\d{3,4}\s+UTC\s+[A-Za-z]{3}\s+[A-Za-z]{3}\s+\d{1,2}\s+\d{4}\b/) || [null])[0],
       windKt: wm ? parseInt(wm[1], 10) : null,
       gustKt: wm && wm[2] ? parseInt(wm[2], 10) : null,
       pressureMb: pm ? parseInt(pm[1], 10) : null,

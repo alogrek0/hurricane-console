@@ -395,6 +395,15 @@ ok('TCM: month rollover hours', (() => {
   return t && t.track[0].hours === 33; // 30/2100Z -> 01/0600Z across a 31-day month
 })());
 ok('TCM: garbage returns null', P.parseTCM('not a product') === null && P.parseTCM('') === null);
+ok('TCM: issuance header line extracted', tcm.issuedHeader === '0300 UTC MON SEP 11 2023');
+ok('TCM: issuance header round-trips through parseIssued', (() => {
+  const d = P.parseIssued(tcm.issuedHeader);
+  return d && d.getTime() === Date.UTC(2023, 8, 11, 3, 0);
+})());
+ok('TCM: missing issuance header yields null, not a bad guess', (() => {
+  const t = P.parseTCM(TCM_FIX.replace('0300 UTC MON SEP 11 2023', ''));
+  return t && t.issuedHeader === null;
+})());
 ok('TCM: dissipated end state tagged', (() => {
   const t = P.parseTCM(TCM_FIX.replace('...POST-TROP/EXTRATROP', '...DISSIPATED'));
   return t && t.track[5].state === 'dissipated';
@@ -444,6 +453,7 @@ ok('PTC: initial center wins over prior-position line',
 ok('PTC: positioned points only (dissipated outlook excluded)',
   ptc && ptc.track.length === 3 && ptc.track.map(p => p.hours).join(',') === '9,21,33');
 ok('PTC: post-tropical track suffix tagged', ptc && ptc.track[2].state === 'post-tropical');
+ok('PTC: issuance header line extracted', ptc && ptc.issuedHeader === '2100 UTC SUN SEP 15 2024');
 
 // --- cone geometry -------------------------------------------------------------
 

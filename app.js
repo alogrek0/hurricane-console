@@ -569,7 +569,7 @@
         featureLayer.clearLayers();
         renderTCM([ptcm]);
         featureLine = ptcm.classification + ' ' + ptcm.name + ' · adv ' + ptcm.advisory;
-        issuedStr = null; // TCM stamps DD/HHMMZ, not a header parseIssued can read
+        issuedStr = ptcm.issuedHeader || null; // "2100 UTC SUN SEP 15 2024"
         tcmNote = '1 track (pasted)';
         updateMeta();
       } else if (/tropical weather outlook/i.test(txt.slice(0, 300))) {
