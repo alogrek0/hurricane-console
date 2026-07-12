@@ -102,6 +102,31 @@
   dialog h2{margin:.1rem 0 .5rem;font-size:.9rem}
   dialog .row{display:flex;gap:.5rem;justify-content:flex-end;margin-top:.6rem}
   a.link{color:var(--cyan)}
+
+  /* --- phone layout (no breakpoint existed before this; desktop untouched) --- */
+  .legend .caret{display:none}
+  @media (max-width:520px){
+    /* legend collapses to a chip; app.js adds/removes .collapsed */
+    .legend{cursor:pointer}
+    .legend b{margin-bottom:.2rem}
+    .legend .caret{display:inline}
+    .legend .caret::before{content:' ▾'}
+    .legend.collapsed .caret::before{content:' ▸'}
+    .legend.collapsed [data-cat]{display:none}
+    .legend.collapsed{padding:.35rem .55rem}
+    .legend.collapsed b{margin-bottom:0}
+    .legend.collapsed .hint,.legend .hint{display:none}
+    /* readout becomes its own full-width row under the buttons */
+    .toolbar .meta{flex:1 1 100%;margin-left:0;font-size:.78rem}
+    .meta .ver{font-size:.68rem}
+    .meta .next{font-size:.72rem}
+  }
+  /* touch targets (phones AND tablets) */
+  @media (pointer:coarse){
+    button{min-height:44px}
+    .legend [data-cat]{min-height:34px;display:flex;align-items:center}
+    .leaflet-control-zoom a{width:36px !important;height:36px !important;line-height:36px !important}
+  }
 </style>
 </head>
 <body>
@@ -119,7 +144,7 @@
   <div style="position:relative;flex:1;display:flex">
     <div id="map"></div>
     <div class="legend" id="legend">
-      <b>LAYERS · CLICK TO TOGGLE</b>
+      <b id="legendHead">LAYERS<span class="hint"> · CLICK TO TOGGLE</span><span class="caret"></span></b>
       <div data-cat="cyclone"><span class="swatch" style="border-top-color:#ff6b5a;border-top-width:6px"></span>Cyclone</div>
       <div data-cat="wave"><span class="swatch" style="border-top-color:#ffa23a"></span>Wave axis</div>
       <div data-cat="trough"><span class="swatch" style="border-top-color:#4fc3d6"></span>Trough</div>
