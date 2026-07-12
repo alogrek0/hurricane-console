@@ -37,11 +37,18 @@
     if (map.getZoom() < fit) map.setZoom(fit);
   }
   fitMinZoom();
-  // Open at chart-fit. The init view (17N 55W @ zoom 4) approximates chart-fit
-  // only on wide desktop windows; on a narrow phone, zoom 4 spans ~34° of
-  // longitude and the page opened on an arbitrary mid-ocean slice. The whole
-  // basin is the right opening view at every aspect — pinch in from there.
-  map.setView(L.latLngBounds(PAN_BOUNDS).getCenter(), map.getMinZoom(), { animate: false });
+  // Opening view. Landscape/desktop: chart-fit (the old fixed 17N 55W @ zoom 4
+  // approximated it only on wide windows; on other aspects it opened on an
+  // arbitrary mid-ocean slice). Portrait: chart-fit letterboxes badly — the
+  // basin is wide, phones are tall — so fill the frame instead, centered on
+  // the eastern-Caribbean wave alley; the rest of the basin pans.
+  if (map.getSize().x < map.getSize().y) {
+    // snap UP to the zoomSnap grid so the basin truly fills (no dark bands)
+    var fill = Math.ceil(map.getBoundsZoom(PAN_BOUNDS, true) * 4) / 4;
+    map.setView([16, -63], fill, { animate: false });
+  } else {
+    map.setView(L.latLngBounds(PAN_BOUNDS).getCenter(), map.getMinZoom(), { animate: false });
+  }
   window.addEventListener('resize', fitMinZoom);
 
   // All-vector basemap, generated from Natural Earth (see tools/build-basemap.js).
