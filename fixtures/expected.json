@@ -16,6 +16,9 @@
         "windKt": 45,
         "gustKt": 55,
         "pressureMb": 1002,
+        "windRadiiKt": [
+          34
+        ],
         "trackPoints": 8,
         "postTropTrack": false
       }
@@ -35,6 +38,9 @@
         "windKt": 40,
         "gustKt": 50,
         "pressureMb": 1006,
+        "windRadiiKt": [
+          34
+        ],
         "trackPoints": 6,
         "postTropTrack": true
       }
@@ -54,6 +60,7 @@
         "windKt": 25,
         "gustKt": 35,
         "pressureMb": 1006,
+        "windRadiiKt": [],
         "trackPoints": 8,
         "postTropTrack": false
       }
@@ -73,6 +80,9 @@
         "windKt": 40,
         "gustKt": 50,
         "pressureMb": 1005,
+        "windRadiiKt": [
+          34
+        ],
         "trackPoints": 8,
         "postTropTrack": false
       }
@@ -92,6 +102,11 @@
         "windKt": 105,
         "gustKt": 130,
         "pressureMb": 950,
+        "windRadiiKt": [
+          34,
+          50,
+          64
+        ],
         "trackPoints": 8,
         "postTropTrack": false
       }
@@ -111,6 +126,11 @@
         "windKt": 70,
         "gustKt": 85,
         "pressureMb": 965,
+        "windRadiiKt": [
+          34,
+          50,
+          64
+        ],
         "trackPoints": 4,
         "postTropTrack": true
       }
@@ -130,6 +150,11 @@
         "windKt": 110,
         "gustKt": 135,
         "pressureMb": 945,
+        "windRadiiKt": [
+          34,
+          50,
+          64
+        ],
         "trackPoints": 8,
         "postTropTrack": true
       }

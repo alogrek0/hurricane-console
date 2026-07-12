@@ -20,6 +20,9 @@ plots them on an Atlantic basin map. No backend, no build step, no API keys.
 - Plots the official NHC forecast track (TCM advisories) with a cone of
   uncertainty computed from NHC's published seasonal cone radii — labeled as
   computed; the official cone lives at hurricanes.gov.
+- Draws the storm's current **wind field** from the advisory's per-quadrant
+  34/50/64-kt wind radii as nested translucent bands — quadrant steps kept
+  sharp because that's the shape the data actually describes.
 
 ## Run locally
 
