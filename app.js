@@ -496,6 +496,11 @@
   function intensityColor(kt) {
     return kt >= 64 ? '#ff6b5a' : kt >= 34 ? '#ffa23a' : '#dce8ef';
   }
+  // wind-field bands get their own 50-kt tier; intensityColor stays as-is so
+  // 50-63 kt track dots keep their established color
+  function windBandColor(kt) {
+    return kt >= 64 ? '#ff6b5a' : kt >= 50 ? '#ff8749' : '#ffa23a';
+  }
 
   function renderTCM(storms) {
     tcmLayer.clearLayers();
@@ -510,6 +515,23 @@
           'Computed from NHC seasonal cone radii - the official cone lives at hurricanes.gov. Advisory #' + s.advisory + ' issued ' + s.issued + '.',
           true)).addTo(tcmLayer);
       }
+      // current wind field: nested quadrant bands, 34 kt first so the smaller,
+      // stronger bands paint on top. Radii are official advisory data (unlike
+      // the computed cone) and the popup shows the exact numbers.
+      var wf = window.BasinParser.windFieldFromTCM(s);
+      (wf || []).forEach(function (band) {
+        var q = s.windRadiiNm[band.kt];
+        L.polygon(band.ring.map(ll), {
+          color: windBandColor(band.kt), weight: 1, opacity: 0.7,
+          fillColor: windBandColor(band.kt),
+          fillOpacity: band.kt >= 64 ? 0.22 : band.kt >= 50 ? 0.15 : 0.10,
+          interactive: true
+        }).bindPopup(popup(band.kt + ' KT WIND FIELD · ' + s.name.toUpperCase(),
+          'Official advisory wind radii, nm (largest anywhere in quadrant): NE ' +
+          q.ne + ' / SE ' + q.se + ' / SW ' + q.sw + ' / NW ' + q.nw +
+          '. Advisory #' + s.advisory + '.', false))
+          .addTo(tcmLayer);
+      });
       if (s.track.length) {
         L.polyline(pts.map(ll), { color: '#dce8ef', weight: 2 })
           .bindPopup(popup('TRACK ' + s.name.toUpperCase(),

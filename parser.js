@@ -614,6 +614,24 @@
     const wm = text.match(/MAX SUSTAINED WINDS\s+(\d{1,3})\s*KT(?:\s+WITH\s+GUSTS\s+TO\s+(\d{1,3})\s*KT)?/i);
     const pm = text.match(/MINIMUM CENTRAL PRESSURE\s+(\d{3,4})\s*MB/i);
 
+    // Current-position wind radii: "64 KT....... 65NE  40SE  40SW  55NW." lines
+    // between the intensity block and the first FORECAST VALID. These are
+    // official advisory data (nm, largest radius anywhere in the quadrant) —
+    // unlike the computed cone. Forecast-point radii exist too but are not
+    // captured (v1 draws the current wind field only).
+    const fcstAt = text.search(/FORECAST VALID/i);
+    const preFcst = fcstAt === -1 ? text : text.slice(0, fcstAt);
+    let windRadiiNm = null;
+    const rre = /(\d{2})\s*KT\.+\s*(\d{1,3})NE\s+(\d{1,3})SE\s+(\d{1,3})SW\s+(\d{1,3})NW/gi;
+    let rm;
+    while ((rm = rre.exec(preFcst)) !== null) {
+      const q = { ne: +rm[2], se: +rm[3], sw: +rm[4], nw: +rm[5] };
+      if (q.ne || q.se || q.sw || q.nw) {
+        windRadiiNm = windRadiiNm || {};
+        windRadiiNm[parseInt(rm[1], 10)] = q;
+      }
+    }
+
     const track = [];
     for (const chunk of text.split(/\n\s*\n/)) {
       const v = chunk.match(
@@ -649,6 +667,7 @@
       windKt: wm ? parseInt(wm[1], 10) : null,
       gustKt: wm && wm[2] ? parseInt(wm[2], 10) : null,
       pressureMb: pm ? parseInt(pm[1], 10) : null,
+      windRadiiNm: windRadiiNm,
       motion: parseMotion(text),
       track: track,
     };
@@ -683,6 +702,33 @@
     const dLon = (nm * Math.sin((bearingDeg * Math.PI) / 180)) /
       (60 * Math.cos((pt.lat * Math.PI) / 180));
     return { lat: pt.lat + dLat, lon: pt.lon + dLon };
+  }
+
+  // Quadrant wind radii -> polygon ring: four quarter-circle arcs (NE/SE/SW/NW,
+  // bearings 0-90/90-180/180-270/270-360) each at its own radius, joined by
+  // radial steps at the compass axes. Deliberately NOT smoothed — the advisory
+  // states per-quadrant extents and interpolating between them invents data.
+  function quadRing(center, q) {
+    const ring = [];
+    const radii = [q.ne, q.se, q.sw, q.nw];
+    for (let quad = 0; quad < 4; quad++) {
+      const r = radii[quad];
+      // both endpoints of each arc are emitted, so the boundary bearing appears
+      // twice (once per adjacent quadrant) and renders as a crisp radial step
+      for (let d = 0; d <= 90; d += 6) ring.push(offsetNm(center, quad * 90 + d, r));
+    }
+    return ring;
+  }
+
+  // TCM -> nested wind-field polygons for the CURRENT position, ascending kt
+  // (34 outermost) so callers can paint bottom-up. Null when the advisory
+  // carries no radii (e.g. remnants). Data is official, unlike the cone.
+  function windFieldFromTCM(t) {
+    if (!t || !t.center || !t.windRadiiNm) return null;
+    const out = Object.keys(t.windRadiiNm)
+      .map(Number).sort((a, b) => a - b)
+      .map((kt) => ({ kt: kt, ring: quadRing(t.center, t.windRadiiNm[kt]) }));
+    return out.length ? out : null;
   }
 
   function headingDeg(a, b) {
@@ -835,6 +881,6 @@
     return result;
   }
 
-  root.BasinParser = { parse, parseTWO, parseTCM, parseIssued, coneFromTrack, CONE_SEASON, pairsIn, sections, dehyphenate, parseMotion, project };
+  root.BasinParser = { parse, parseTWO, parseTCM, parseIssued, coneFromTrack, windFieldFromTCM, CONE_SEASON, pairsIn, sections, dehyphenate, parseMotion, project };
   if (typeof module !== 'undefined' && module.exports) module.exports = root.BasinParser;
 })(typeof window !== 'undefined' ? window : globalThis);

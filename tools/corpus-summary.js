@@ -23,6 +23,9 @@ function summarizeTCM(t) {
     windKt: t.windKt,
     gustKt: t.gustKt,
     pressureMb: t.pressureMb,
+    windRadiiKt: t.windRadiiNm
+      ? Object.keys(t.windRadiiNm).map(Number).sort(function (a, b) { return a - b; })
+      : [],
     trackPoints: t.track.length,
     postTropTrack: t.track.some(function (p) { return p.state === 'post-tropical'; }),
   };

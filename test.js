@@ -508,6 +508,31 @@ ok('TCM: dissipated end state tagged', (() => {
   return t && t.track[5].state === 'dissipated';
 })());
 
+// --- TCM wind radii + wind-field geometry ---------------------------------------
+
+ok('TCM: current wind radii parsed per quadrant at 34/50/64 kt',
+  tcm.windRadiiNm && tcm.windRadiiNm[34].ne === 150 &&
+  tcm.windRadiiNm[50].sw === 60 && tcm.windRadiiNm[64].nw === 55);
+ok('TCM: radii come from the current position, not the +12h block (40SE, not 50SE)',
+  tcm.windRadiiNm[64].se === 40);
+ok('TCM: no radii lines yields windRadiiNm null', (() => {
+  const t = P.parseTCM(TCM_FIX.replace(/^\d{2} KT\.+.*$/gm, ''));
+  return t && t.windRadiiNm === null;
+})());
+
+const wf = P.windFieldFromTCM(tcm);
+ok('wind field: three nested bands, ascending kt (34 painted first)',
+  wf && wf.length === 3 && wf[0].kt === 34 && wf[1].kt === 50 && wf[2].kt === 64);
+ok('wind field: due-north edge sits exactly 150 nm (2.5 deg) from center',
+  Math.abs(wf[0].ring[0].lat - (22.6 + 150 / 60)) < 1e-9 &&
+  Math.abs(wf[0].ring[0].lon - -62.2) < 1e-9);
+ok('wind field: crisp quadrant step at bearing 090 (NE 150 nm vs SE 140 nm), not smoothed',
+  (() => { const a = wf[0].ring[15], b = wf[0].ring[16];
+    return Math.abs(a.lat - b.lat) < 1e-6 && a.lon > b.lon; })());
+ok('wind field: null for advisories without radii and for null input',
+  P.windFieldFromTCM(P.parseTCM(TCM_FIX.replace(/^\d{2} KT\.+.*$/gm, ''))) === null &&
+  P.windFieldFromTCM(null) === null);
+
 // Real PTC advisory (Potential Tropical Cyclone Eight, Sep 2024): PTC header
 // classification, a prior-position "CENTER WAS LOCATED" line that must not win
 // the center match, INLAND / TROPICAL CYCLONE track suffixes, and a
