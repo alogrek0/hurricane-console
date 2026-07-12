@@ -403,6 +403,29 @@ ok('dedup: canonical between-anchors disturbance still infers',
 ok('dedup: distant same-kind wave survives (central Caribbean vs 62W axis)',
   dd.inferred.some((d) => d.lon === -75 && /central sections/.test(d.source)));
 
+// --- popup context (paragraph + section carried on every prose feature) --------
+// Load-bearing invariant: context is built with the SAME normalization as that
+// feature's source, so the popup can locate the source span via indexOf.
+
+const ctxAll = [].concat(r.waves, r.convection, r.troughs, r.fixes, r.inferred, r.projections);
+ok('context: every prose feature carries context and srcSection',
+  ctxAll.length > 0 && ctxAll.every((f) => f.context && f.srcSection));
+ok('context: source is always locatable inside context (indexOf invariant)',
+  ctxAll.every((f) => f.context.indexOf(f.source) !== -1));
+ok('context: projections inherit the parent wave paragraph',
+  r.projections[0].context === r.waves[0].context &&
+  r.projections[0].srcSection === r.waves[0].srcSection);
+ok('context: convection context is the surrounding sentence, not just the coord phrase',
+  r.convection[0].context.length > r.convection[0].source.length);
+
+// The cap: a giant paragraph is trimmed word-safely with the source span kept.
+ok('context: >600-char paragraphs are capped without losing the source span', (() => {
+  const pad = 'The wave remains poorly organized while conditions stay hostile. '.repeat(15);
+  const big = P.parse('TWDAT\n\n...TROPICAL WAVES...\n\nA tropical wave is along 40W, from 15N southward, moving W at 10 kt. ' + pad + '\n\n$$');
+  const w = big.waves[0];
+  return w && w.context.length <= 602 && w.context.indexOf(w.source) !== -1;
+})());
+
 // --- basemap.js integrity (generated file; guards a bad regeneration) ---------
 
 const BM = require('./basemap.js');

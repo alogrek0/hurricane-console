@@ -156,11 +156,26 @@
   // --- rendering -------------------------------------------------------------
   function ll(p) { return [p.lat, p.lon]; }
 
-  function popup(tag, src, inferred) {
-    return '<span class="pop-tag' + (inferred ? ' inf' : '') + '">' +
+  // Callout HTML. With `ctx` (the source's paragraph, built by the parser in
+  // the same normalization as `src`), the popup shows the whole paragraph with
+  // the key sentence emphasized; `section` adds a product-section chip. Locate
+  // src inside ctx BEFORE escaping, then escape the three segments separately.
+  function popup(tag, src, inferred, ctx, section, sub) {
+    var head = '<span class="pop-tag' + (inferred ? ' inf' : '') + '">' +
       tag + (inferred ? ' ◇ INFERRED' : '') + '</span>' +
-      '<div class="pop-src">' + escapeHtml(src || '') + '</div>';
+      (section ? '<span class="pop-sec">' + escapeHtml(section) + '</span>' : '') +
+      (sub ? '<div class="pop-sub">' + escapeHtml(sub) + '</div>' : '');
+    if (ctx && src) {
+      var at = ctx.indexOf(src);
+      if (at !== -1) {
+        return head + '<div class="pop-ctx">' + escapeHtml(ctx.slice(0, at)) +
+          '<mark class="pop-key">' + escapeHtml(src) + '</mark>' +
+          escapeHtml(ctx.slice(at + src.length)) + '</div>';
+      }
+    }
+    return head + '<div class="pop-src">' + escapeHtml(ctx || src || '') + '</div>';
   }
+  var POPUP_OPTS = { maxWidth: 340, maxHeight: 280 };
   function escapeHtml(s) {
     return String(s).replace(/[&<>"]/g, function (c) {
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
@@ -290,20 +305,23 @@
 
     parsed.troughs.forEach(function (t) {
       L.polyline(t.line.map(ll), { color: '#4fc3d6', weight: 2, dashArray: '1 0' })
-        .bindPopup(popup('TROUGH', t.source, false)).addTo(cat.trough);
+        .bindPopup(popup('TROUGH', t.source, false, t.context, t.srcSection), POPUP_OPTS)
+        .addTo(cat.trough);
     });
 
     parsed.convection.forEach(function (c) {
       L.rectangle([[c.bbox.s, c.bbox.w], [c.bbox.n, c.bbox.e]], {
         color: c.strong ? '#ff6b5a' : '#ffb98a', weight: 1, dashArray: '3 3',
         fillColor: c.strong ? '#ff6b5a' : '#ff9d6a', fillOpacity: 0.10
-      }).bindPopup(popup(c.strong ? 'CONVECTION · STRONG' : 'CONVECTION', c.source, false))
+      }).bindPopup(popup(c.strong ? 'CONVECTION · STRONG' : 'CONVECTION', c.source, false,
+        c.context, c.srcSection), POPUP_OPTS)
         .addTo(cat.convection);
     });
 
     parsed.waves.forEach(function (w) {
       L.polyline(w.axis.map(ll), { color: '#ffa23a', weight: 3 })
-        .bindPopup(popup('WAVE ' + w.id, w.source, false)).addTo(cat.wave);
+        .bindPopup(popup('WAVE ' + w.id, w.source, false, w.context, w.srcSection), POPUP_OPTS)
+        .addTo(cat.wave);
       // small motion arrowhead label at the axis head
       L.circleMarker(ll(w.axis[0]), { radius: 3, color: '#ffa23a', fillOpacity: 1 })
         .addTo(cat.wave);
@@ -329,7 +347,7 @@
       L.circleMarker(ll(c), style)
         .bindTooltip(c.name, { permanent: true, direction: 'top', className: 'cyc-label' })
         .bindPopup(popup(c.classification.toUpperCase() + ' ' + c.name.toUpperCase(),
-          stats + ' — ' + c.source, false))
+          c.source, false, c.context, c.srcSection, stats), POPUP_OPTS)
         .addTo(cat.cyclone);
     });
 
@@ -341,26 +359,28 @@
         L.polyline([ll(p.from), ll(p.fast)], { color: '#9a86c9', weight: 2, dashArray: '5 4' })
           .addTo(cat.projection);
         L.circleMarker(ll(p.slow), { radius: 3, color: '#9a86c9', fillOpacity: .6 })
-          .bindPopup(popup('+24h ' + (p.id || p.waveId) + ' (slow)', p.source, true)).addTo(cat.projection);
+          .bindPopup(popup('+24h ' + (p.id || p.waveId) + ' (slow)', p.source, true, p.context, p.srcSection), POPUP_OPTS).addTo(cat.projection);
         L.circleMarker(ll(p.fast), { radius: 3, color: '#9a86c9', fillOpacity: .6 })
-          .bindPopup(popup('+24h ' + (p.id || p.waveId) + ' (fast)', p.source, true)).addTo(cat.projection);
+          .bindPopup(popup('+24h ' + (p.id || p.waveId) + ' (fast)', p.source, true, p.context, p.srcSection), POPUP_OPTS).addTo(cat.projection);
       } else {
         L.polyline([ll(p.from), ll(p.slow)], { color: '#9a86c9', weight: 2, dashArray: '5 4' })
           .addTo(cat.projection);
         L.circleMarker(ll(p.slow), { radius: 3, color: '#9a86c9', fillOpacity: .6 })
-          .bindPopup(popup('+24h ' + (p.id || p.waveId), p.source, true)).addTo(cat.projection);
+          .bindPopup(popup('+24h ' + (p.id || p.waveId), p.source, true, p.context, p.srcSection), POPUP_OPTS).addTo(cat.projection);
       }
     });
 
     parsed.fixes.forEach(function (f) {
       L.circleMarker(ll(f), { radius: 4, color: '#dce8ef', weight: 1.5, fillOpacity: 0 })
-        .bindPopup(popup('FIX', f.source, false)).addTo(cat.fix);
+        .bindPopup(popup('FIX', f.source, false, f.context, f.srcSection), POPUP_OPTS)
+        .addTo(cat.fix);
     });
 
     parsed.inferred.forEach(function (f) {
       L.circleMarker(ll(f), {
         radius: 5, color: '#9a86c9', weight: 1.5, dashArray: '3 3', fillOpacity: 0
-      }).bindPopup(popup('POSITION', f.source, true)).addTo(cat.inferred);
+      }).bindPopup(popup('POSITION', f.source, true, f.context, f.srcSection), POPUP_OPTS)
+        .addTo(cat.inferred);
     });
 
     var nCyc = (parsed.cyclones || []).length;
@@ -388,7 +408,7 @@
       L.circle(ll(d), {
         radius: 300000, color: color, weight: 2, dashArray: '6 5',
         fillColor: color, fillOpacity: 0.08
-      }).bindPopup(popup(label, d.source, true)).addTo(cat.two);
+      }).bindPopup(popup(label, d.source, true, d.context), POPUP_OPTS).addTo(cat.two);
     });
     var n = parsed.disturbances.length;
     featureLine = plural(n, 'outlook area') +

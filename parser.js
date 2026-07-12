@@ -262,6 +262,34 @@
 
   // --- feature extractors (pass 1) -------------------------------------------
 
+  // --- popup context ---------------------------------------------------------
+  // Each feature carries `context`: the paragraph its `source` came from, built
+  // in the SAME normalization as that extractor's source so the popup can
+  // locate the source span inside it by plain indexOf. Capped so popups stay
+  // popup-sized; the cap window always keeps the [at, at+len) span visible.
+  const CONTEXT_MAX = 600;
+  function capContext(text, at, len) {
+    if (text.length <= CONTEXT_MAX) return text;
+    let start = Math.max(0, Math.min(at - ((CONTEXT_MAX - len) >> 1), text.length - CONTEXT_MAX));
+    let end = start + CONTEXT_MAX;
+    // never cut mid-word, never cut into the span itself
+    if (start > 0) { const sp = text.indexOf(' ', start); if (sp !== -1 && sp < at) start = sp + 1; }
+    if (end < text.length) { const sp = text.lastIndexOf(' ', end); if (sp > at + len) end = sp; }
+    return (start > 0 ? '…' : '') + text.slice(start, end) + (end < text.length ? '…' : '');
+  }
+
+  // Sentence(s) around a regex match in a newline-flattened section — for the
+  // extractors whose source is a verbatim match (convection/trough/fix).
+  function sentenceAround(flat, at, len) {
+    const s0 = flat.lastIndexOf('.', at - 1) + 1;
+    let s1 = flat.indexOf('.', at + len);
+    s1 = s1 === -1 ? flat.length : s1 + 1;
+    let ctx = flat.slice(s0, s1);
+    const lead = ctx.match(/^\s*/)[0].length;
+    ctx = ctx.slice(lead).replace(/\s+$/, '');
+    return capContext(ctx, at - s0 - lead, len);
+  }
+
   function extractWaves(secText, srcName) {
     const feats = [];
     // Sentences within the section; TWDAT separates waves by blank lines or ".".
@@ -326,6 +354,7 @@
         motion,
         inferred: false,
         source: flat.slice(0, 220),
+        context: capContext(flat, 0, Math.min(flat.length, 220)),
         srcSection: srcName,
       });
     });
@@ -376,13 +405,14 @@
         motion: parseMotion(flat),
         inferred: false,
         source: flat.slice(0, 240),
+        context: capContext(flat, 0, Math.min(flat.length, 240)),
         srcSection: srcName,
       });
     });
     return feats;
   }
 
-  function extractConvection(secText) {
+  function extractConvection(secText, srcName) {
     const feats = [];
     const flat = secText.replace(/\n/g, ' ');
     // "from 07N to 11N between 40W and 50W"
@@ -401,6 +431,8 @@
         strong,
         inferred: false,
         source: m[0],
+        context: sentenceAround(flat, m.index, m[0].length),
+        srcSection: srcName,
       });
     }
     return feats;
@@ -420,6 +452,7 @@
           line: pts,
           inferred: false,
           source: ('from ' + m[1]).slice(0, 160).trim(),
+          context: sentenceAround(flat, m.index, m[0].length),
           srcSection: srcName,
         });
       }
@@ -427,7 +460,7 @@
     return feats;
   }
 
-  function extractFixes(secText) {
+  function extractFixes(secText, srcName) {
     const feats = [];
     const flat = secText.replace(/\n/g, ' ');
     // "near 14N76W", "centered near 27N85W", buoy/ship "at 20N60W"
@@ -440,13 +473,15 @@
         lon: lon(m[3], m[4]),
         inferred: false,
         source: m[0],
+        context: sentenceAround(flat, m.index, m[0].length),
+        srcSection: srcName,
       });
     }
     return feats;
   }
 
   // gazetteer pass over any sentence that names a place but has no coords
-  function extractInferred(secText) {
+  function extractInferred(secText, srcName) {
     const feats = [];
     secText.split(/(?<=[.])\s+/).forEach((sent) => {
       if (RE_PAIR.test(sent)) { RE_PAIR.lastIndex = 0; return; }
@@ -475,6 +510,10 @@
           lat: g.lat, lon: g.lon,
           inferred: true,
           source: sent.trim().slice(0, 200),
+          // same basis as source (trimmed, internal newlines kept) so the
+          // source stays a literal prefix; HTML collapses the newlines anyway
+          context: capContext(sent.trim(), 0, Math.min(sent.trim().length, 200)),
+          srcSection: srcName,
         });
       }
     });
@@ -574,6 +613,7 @@
           chance48: twoChance(flat, '48 hours'),
           chance7: twoChance(flat, '7 days'),
           source: flat.slice(0, 300),
+          context: capContext(flat, 0, Math.min(flat.length, 300)),
         });
       }
       prev = chunk;
@@ -817,7 +857,7 @@
 
   // Dead-reckon +24h from a point with stated motion; shared by waves and
   // cyclones. `waveId` is kept as an alias of `id` for older consumers.
-  function addProjection(result, id, from, motion, source) {
+  function addProjection(result, id, from, motion, parent) {
     if (!motion || motion.bearing == null || !from) return;
     const slow = project(from, motion.bearing, motion.slowKt);
     const fast = project(from, motion.bearing, motion.fastKt);
@@ -828,7 +868,9 @@
       slow, fast,
       band: motion.slowKt !== motion.fastKt,
       inferred: true,
-      source,
+      source: parent.source,
+      context: parent.context,
+      srcSection: parent.srcSection,
     });
   }
 
@@ -857,12 +899,12 @@
         result.cyclones.push(...cycs);
       }
       if (isWave) result.waves.push(...extractWaves(s.text, s.name));
-      result.convection.push(...extractConvection(s.text));
+      result.convection.push(...extractConvection(s.text, s.name));
       if (isITCZ || /TROUGH/i.test(s.text)) result.troughs.push(...extractTroughs(s.text, s.name));
-      if (!isSpecial && !cycs.length) result.fixes.push(...extractFixes(s.text));
+      if (!isSpecial && !cycs.length) result.fixes.push(...extractFixes(s.text, s.name));
       // The preamble is product boilerplate ("...to the African coast...");
       // running the gazetteer over it only manufactures phantom positions.
-      if (!isPreamble && !isSpecial) result.inferred.push(...extractInferred(s.text));
+      if (!isPreamble && !isSpecial) result.inferred.push(...extractInferred(s.text, s.name));
     }
 
     // Gazetteer dots must represent features with no coordinate representation;
@@ -872,10 +914,10 @@
     // Pass 3: dead-reckon +24h for every wave and cyclone that stated motion.
     for (const w of result.waves) {
       if (!w.axis.length) continue;
-      addProjection(result, w.id, w.axis[0], w.motion, w.source);
+      addProjection(result, w.id, w.axis[0], w.motion, w);
     }
     for (const c of result.cyclones) {
-      addProjection(result, c.name || c.id, { lat: c.lat, lon: c.lon }, c.motion, c.source);
+      addProjection(result, c.name || c.id, { lat: c.lat, lon: c.lon }, c.motion, c);
     }
 
     return result;
