@@ -483,7 +483,30 @@
     });
   }
 
-  function loadTWD() {
+  // Refresh feedback: NOAA confirmed there's nothing newer than what's shown.
+  // Keyed on the fetched text itself (per product mode); pasted products don't
+  // participate — the comparison is strictly fetch-vs-previous-fetch. Only a
+  // LIVE (non-cached) answer earns the toast: a cache hit proves nothing.
+  var lastFetched = { TWD: null, TWO: null };
+  var toastTimer = null;
+  function toast(msg) {
+    var el = document.getElementById('toast');
+    el.textContent = msg;
+    el.hidden = false;
+    el.style.opacity = '1';
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () {
+      el.style.opacity = '0';
+      toastTimer = setTimeout(function () { el.hidden = true; }, 350);
+    }, 4200);
+  }
+  function noNewProductToast() {
+    var d = window.BasinParser.parseIssued(issuedStr || '');
+    var z = d ? ('0' + d.getUTCHours()).slice(-2) + ('0' + d.getUTCMinutes()).slice(-2) + 'Z' : '';
+    toast('No new product — still the latest' + (z ? ' (' + z + ' issuance)' : '') + '.');
+  }
+
+  function loadTWD(fromUser) {
     setBadge('LOADING'); // in-flight; resolves to the real source below
     fetchLatestMatching(TWD_URL, 'TWDAT', 8).then(function (res) {
       if (!res.text) throw new Error('empty');
@@ -493,6 +516,8 @@
         render(window.BasinParser.parse(res.text));
         setBadge(res.cached ? 'CACHED' : 'LIVE');
         twdState = res.cached ? 'cached' : 'live';
+        if (fromUser && !res.cached && res.text === lastFetched.TWD) noNewProductToast();
+        if (!res.cached) lastFetched.TWD = res.text;
       } catch (e) {
         setBadge('ERROR');
         twdState = 'error';
@@ -513,13 +538,15 @@
     });
   }
 
-  function loadTWO() {
+  function loadTWO(fromUser) {
     setBadge('LOADING'); // in-flight; resolves to the real source below
     fetchLatestMatching(TWO_URL, 'TWOAT', 8).then(function (res) {
       if (!res.text) throw new Error('empty');
       try {
         renderTWO(window.BasinParser.parseTWO(res.text));
         setBadge(res.cached ? 'CACHED' : 'LIVE');
+        if (fromUser && !res.cached && res.text === lastFetched.TWO) noNewProductToast();
+        if (!res.cached) lastFetched.TWO = res.text;
       } catch (e) {
         setBadge('ERROR');
       }
@@ -642,7 +669,8 @@
 
   // --- UI wiring -------------------------------------------------------------
   document.getElementById('refresh').addEventListener('click', function () {
-    mode === 'TWD' ? loadTWD() : loadTWO();
+    // fromUser: an explicit refresh earns "no new product" feedback
+    mode === 'TWD' ? loadTWD(true) : loadTWO(true);
   });
 
   var whichBtn = document.getElementById('which');
