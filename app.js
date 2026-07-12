@@ -37,6 +37,11 @@
     if (map.getZoom() < fit) map.setZoom(fit);
   }
   fitMinZoom();
+  // Open at chart-fit. The init view (17N 55W @ zoom 4) approximates chart-fit
+  // only on wide desktop windows; on a narrow phone, zoom 4 spans ~34° of
+  // longitude and the page opened on an arbitrary mid-ocean slice. The whole
+  // basin is the right opening view at every aspect — pinch in from there.
+  map.setView(L.latLngBounds(PAN_BOUNDS).getCenter(), map.getMinZoom(), { animate: false });
   window.addEventListener('resize', fitMinZoom);
 
   // All-vector basemap, generated from Natural Earth (see tools/build-basemap.js).
