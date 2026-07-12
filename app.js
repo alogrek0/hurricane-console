@@ -153,6 +153,20 @@
   }
   initLegendToggles();
 
+  // On phones the legend starts as a chip; tapping the header expands it and
+  // tapping the map collapses it again so it never lingers over the chart.
+  // Desktop keeps the always-open legend (header click still works, harmless).
+  var PHONE = matchMedia('(max-width:520px)');
+  var legendEl = document.getElementById('legend');
+  if (PHONE.matches) legendEl.classList.add('collapsed');
+  document.getElementById('legendHead').addEventListener('click', function (e) {
+    e.stopPropagation(); // a chip tap must not fall through as a row toggle
+    legendEl.classList.toggle('collapsed');
+  });
+  map.on('click', function () {
+    if (PHONE.matches) legendEl.classList.add('collapsed');
+  });
+
   // --- rendering -------------------------------------------------------------
   function ll(p) { return [p.lat, p.lon]; }
 
@@ -175,7 +189,9 @@
     }
     return head + '<div class="pop-src">' + escapeHtml(ctx || src || '') + '</div>';
   }
-  var POPUP_OPTS = { maxWidth: 340, maxHeight: 280 };
+  // popups keep ~20px per side on narrow viewports instead of going edge-to-edge
+  // (maxWidth constrains the CONTENT; Leaflet's wrapper adds ~50px of chrome)
+  var POPUP_OPTS = { maxWidth: Math.min(340, window.innerWidth - 90), maxHeight: 280 };
   function escapeHtml(s) {
     return String(s).replace(/[&<>"]/g, function (c) {
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
