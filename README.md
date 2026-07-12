@@ -46,6 +46,21 @@ archived NHC products (`fixtures/`). GitHub Actions runs the same command on
 every push to `main` and every pull request, and PRs also enforce the
 version-bump guard.
 
+## Invest alerts (optional)
+
+A GitHub Actions cron (`alerts.yml`) checks the latest Atlantic Tropical
+Weather Outlook twice an hour and pushes a phone notification via
+[ntfy.sh](https://ntfy.sh) when:
+
+- a new **invest** is designated (AL90–AL99 tag appears),
+- a **new disturbance area** shows up in the outlook, or
+- an area's **7-day formation chance crosses 40% or 60%**.
+
+Setup: install the ntfy app, subscribe to a private topic name, and store that
+name as the `NTFY_TOPIC` repo secret. Without the secret the workflow dry-runs
+harmlessly. Send yourself a test ping from the Actions tab: run the `alerts`
+workflow manually with `test = true`. The app itself remains fully static.
+
 ## Deploy to GitHub Pages
 
 1. Push these files to the root of `main`.
