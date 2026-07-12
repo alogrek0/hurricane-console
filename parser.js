@@ -607,6 +607,8 @@
         out.disturbances.push({
           kind: 'disturbance',
           id: 'D' + (out.disturbances.length + 1),
+          // invest tag from the title line ("1. Central Tropical Atlantic (AL92):")
+          invest: title ? (((title[1].match(/\((AL\d{2})\)/i) || [])[1] || '').toUpperCase() || null) : null,
           lat: pos ? pos.lat : null,   // null = honest "not mappable", never invented
           lon: pos ? pos.lon : null,
           inferred: true,              // ALWAYS — prose location

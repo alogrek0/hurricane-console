@@ -55,6 +55,8 @@ Everything is client side. Files:
 | `tools/archive-audit.js` | dev-only, network: audits parser vs curated archived NHC products; `--save-fixtures` regenerates `fixtures/` |
 | `fixtures/`      | committed archive corpus: 10 real NHC products (LF-pinned via `.gitattributes`) + pinned snapshots in `expected.json` — regenerate only via `--save-fixtures`, never hand-edit |
 | `.github/workflows/ci.yml` | CI: `node test.js` on push-to-main + PRs; version guard on PRs |
+| `.github/workflows/alerts.yml` | invest alerts: twice-hourly cron polls the TWOAT, diffs vs cached state, pushes to ntfy.sh (`NTFY_TOPIC` repo secret; unset = dry-run) |
+| `tools/alert-invests.js` | the alerter: fetch/diff/push; pure logic (stateFromTWO/diffAlerts/formatAlert) unit-tested offline in test.js |
 | `manifest.json`  | PWA manifest |
 | `test.js`        | node parser test harness (includes the corpus snapshot checks) |
 
@@ -135,6 +137,8 @@ precision the parser doesn't have.
 ## Roadmap parked from prior sessions
 - Charleston / Lowcountry angle: overlay NOAA tide-gauge data
   (`tidesandcurrents.noaa.gov`, also CORS-open) for local surge/flood context.
-- Optional push alerts via a GitHub Actions cron + ntfy.sh (would add the only
-  non-static piece). Not started; keep v1 static.
+- ~~Push alerts via GitHub Actions cron + ntfy.sh~~ DONE (`alerts.yml` +
+  `tools/alert-invests.js`): new invest / new outlook area / 7-day chance
+  crossing 40%/60%. The app itself is still fully static — the alerter is a
+  repo sidecar that never runs in the browser.
 - East Pacific support: paste a TWDEP to see how the parser handles another basin.

@@ -297,6 +297,60 @@ ok('D1 always inferred', d1 && d1.inferred === true);
 ok('D1 resolves to Lesser Antilles anchor', d1 && d1.lat === 15.5 && d1.lon === -61.3);
 ok('D2 "between A and B" midpoint resolves',
   d2 && d2.lat === (13.0 + 15.0) / 2 && d2.lon === (-61.2 + -75.0) / 2);
+ok('untitled disturbances carry no invest tag', d1.invest === null && d2.invest === null);
+
+// Titled current-format TWO with an invest tag in the title line.
+const TWO_INVEST = `Tropical Weather Outlook
+NWS National Hurricane Center Miami FL
+800 AM EDT Tue Jul 8 2026
+
+For the North Atlantic...Caribbean Sea and the Gulf of America:
+
+1. Central Tropical Atlantic (AL92):
+A tropical wave in the central tropical Atlantic is becoming better
+organized.
+
+* Formation chance through 48 hours...medium...50 percent.
+* Formation chance through 7 days...high...70 percent.
+
+$$`;
+const twoInv = P.parseTWO(TWO_INVEST);
+ok('invest tag captured from the title line',
+  twoInv.disturbances.length === 1 && twoInv.disturbances[0].invest === 'AL92');
+
+// --- invest alerter (tools/alert-invests.js, pure logic only — offline) --------
+
+const ALERTS = require('./tools/alert-invests.js');
+const stPlain = ALERTS.stateFromTWO(two, 'prod-1');
+const stInvest = ALERTS.stateFromTWO(twoInv, 'prod-2');
+ok('alerts: state keys are stable (gazetteer grid for untagged, tag for invests)',
+  stPlain.disturbances[0].key === 'G15,-60' && stInvest.disturbances[0].key === 'AL92');
+ok('alerts: cold start primes silently', ALERTS.diffAlerts(null, stInvest).length === 0);
+ok('alerts: same product id never re-alerts',
+  ALERTS.diffAlerts(stInvest, { ...stInvest }).length === 0);
+ok('alerts: new invest designation fires', (() => {
+  const a = ALERTS.diffAlerts(stPlain, stInvest);
+  return a.length >= 1 && a[0].type === 'new-invest' && a[0].d.invest === 'AL92';
+})());
+ok('alerts: brand-new untagged area fires new-area', (() => {
+  const a = ALERTS.diffAlerts(stInvest, { productId: 'prod-3', disturbances: stPlain.disturbances });
+  return a.length === 2 && a.every((x) => x.type === 'new-area');
+})());
+ok('alerts: 7-day chance crossing 40 and 60 upward fires, in-band moves do not', (() => {
+  const at = (pct, pid) => ({ productId: pid, disturbances: [{ key: 'AL92', invest: 'AL92', pct7: pct, where: 'X' }] });
+  const fired = (a, b) => ALERTS.diffAlerts(a, b).length;
+  return fired(at(35, 'a'), at(45, 'b')) === 1 &&   // crosses 40
+    fired(at(55, 'a'), at(65, 'b')) === 1 &&        // crosses 60
+    fired(at(45, 'a'), at(55, 'b')) === 0 &&        // between thresholds
+    fired(at(65, 'a'), at(70, 'b')) === 0 &&        // above both already
+    fired(at(65, 'a'), at(35, 'b')) === 0;          // downward never fires
+})());
+ok('alerts: formatAlert produces a titled message for each type', (() => {
+  const inv = ALERTS.formatAlert({ type: 'new-invest', d: { invest: 'AL92', pct7: 70, where: 'Central Tropical Atlantic ' } });
+  const area = ALERTS.formatAlert({ type: 'new-area', d: { pct7: 20, where: null } });
+  const thr = ALERTS.formatAlert({ type: 'threshold', d: { invest: 'AL92', pct7: 60, where: 'X' }, t: 60, from: 50 });
+  return /Invest AL92/.test(inv.title) && /Atlantic/.test(area.body) && /Crossed 60%/.test(thr.body);
+})());
 
 // --- gazetteer over-firing guards (extractInferred hardening) ------------------
 // extractInferred used to fire on ANY place mention, producing two failure modes:
