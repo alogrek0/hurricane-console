@@ -350,6 +350,59 @@ ok('canonical prose-only feature still infers exactly one dot', tc.inferred.leng
 ok('canonical inferred dot lands at the between-anchor midpoint',
   tc.inferred[0] && tc.inferred[0].lat === (19.0 + 22.0) / 2 && tc.inferred[0].lon === (-71.0 + -73.5) / 2);
 
+// --- inferred-dot dedup (audit follow-up: 106 residual dots on 34 TWDATs) ------
+// Each sentence below isolates one suppression rule; the two keeps prove the
+// rules don't over-suppress genuine prose-only features.
+const TWD_DEDUP = `TWDAT
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+1005 UTC Tue Aug 29 2023
+
+...TROPICAL WAVES...
+
+A tropical wave is along 62W, from 18N southward, moving W at 15 kt.
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough axis extends from 09N16W to 08N30W to 08N44W.
+
+...CARIBBEAN SEA...
+
+Squalls and thunderstorms are ahead of the tropical wave in the eastern Caribbean.
+A tropical wave is near the Leeward Islands.
+The pressure gradient between the Atlantic ridge and the Colombian low is supporting strong winds over the central Caribbean.
+A strong tropical wave will reach the Lesser Antilles by Wednesday.
+A tropical wave has moved into the eastern Pacific.
+Refer to the Tropical Waves section above for details on a tropical wave over the central Caribbean.
+The GFS model shows a trough over the central Caribbean.
+No significant convection is noted near the trough axis over the eastern Caribbean.
+A disturbed area between Hispaniola and the southeastern Bahamas bears watching.
+A tropical wave is moving through the central sections of the Caribbean Sea.
+
+$$`;
+const dd = P.parse(TWD_DEDUP);
+ok('dedup: coordinate wave and trough parsed (preconditions)',
+  dd.waves.length === 1 && dd.troughs.length === 1);
+ok('dedup: only the two genuine prose-only features survive', dd.inferred.length === 2);
+ok('dedup: "the tropical wave" re-mention suppressed (wave drawn from its own section)',
+  !dd.inferred.some((d) => /ahead of the tropical wave/.test(d.source)));
+ok('dedup: same-kind dot on the parsed axis suppressed (Leeward Islands vs 62W wave)',
+  !dd.inferred.some((d) => /Leeward/.test(d.source)));
+ok('dedup: climo nouns ("Colombian low") cannot satisfy the feature gate',
+  !dd.inferred.some((d) => /pressure gradient/.test(d.source)));
+ok('dedup: future position ("will reach the Lesser Antilles") yields no dot',
+  !dd.inferred.some((d) => /will reach/.test(d.source)));
+ok('dedup: a wave that left for the Pacific is off the chart',
+  !dd.inferred.some((d) => /eastern Pacific/.test(d.source)));
+ok('dedup: cross-references and model fields are not analyzed positions',
+  !dd.inferred.some((d) => /Refer to|GFS/.test(d.source)));
+ok('dedup: "near the trough axis" re-mention suppressed',
+  !dd.inferred.some((d) => /trough axis over/.test(d.source)));
+ok('dedup: canonical between-anchors disturbance still infers',
+  dd.inferred.some((d) => d.lat === 20.5 && d.lon === -72.25));
+ok('dedup: distant same-kind wave survives (central Caribbean vs 62W axis)',
+  dd.inferred.some((d) => d.lon === -75 && /central sections/.test(d.source)));
+
 // --- basemap.js integrity (generated file; guards a bad regeneration) ---------
 
 const BM = require('./basemap.js');

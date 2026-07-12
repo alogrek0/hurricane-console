@@ -148,7 +148,7 @@
         "convection": 4,
         "troughs": 0,
         "fixes": 1,
-        "inferred": 6,
+        "inferred": 1,
         "projections": 5
       }
     },
@@ -165,7 +165,7 @@
         "convection": 3,
         "troughs": 0,
         "fixes": 4,
-        "inferred": 3,
+        "inferred": 1,
         "projections": 4
       }
     },
@@ -182,7 +182,7 @@
         "convection": 3,
         "troughs": 1,
         "fixes": 2,
-        "inferred": 1,
+        "inferred": 0,
         "projections": 2
       }
     }
