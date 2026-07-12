@@ -95,6 +95,52 @@ ok('hyphenated latitude range "from 12-19N" spans the axis',
   wv[4] && wv[4].axis[0].lat === 19 && wv[4].axis[1].lat === 12 && wv[4].axis[0].lon === -22);
 ok('all recovered wave axes carry westward motion', wv.every(w => w.motion && w.motion.bearing === 270));
 
+// 2023-era archive phrasings (found via the committed corpus: waves in
+// TWDAT.202308291005 parsed to zero). Open-ended "from 18N southward" works
+// like "south of 18N"; a slash span "17W/18W" averages like "61W-62W".
+const TWD_WAVEV2 = `TWDAT
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+1005 UTC Tue Aug 29 2023
+
+...TROPICAL WAVES...
+
+A tropical wave is in the Atlantic Ocean along 43W, from 18N
+southward, moving W at around 20 kt. No significant convection is
+evident with this tropical wave.
+
+A tropical wave is in the Atlantic Ocean approaching the Leeward
+Islands along 60W, from 17N southward to along the border of
+Guyana and Venezuela, moving W around 20 kt. Scattered moderate
+isolated strong convection is evident from 10N to 15N between 52W
+and 60W.
+
+A tropical wave is near 17W/18W, south of 20N, moving W at 10 kt.
+
+An Atlantic Ocean tropical wave is along 29W, from 17N southward,
+moving westward from 10 knots to 15 knots. Precipitation:
+isolated moderate to locally strong is within 360 nm to the east
+of the tropical wave from 07N to 12N.
+
+A Caribbean Sea tropical wave is along 73W, from 19N
+in Haiti southward, moving westward from 15 knots to 20 knots.
+Precipitation: widely scattered moderate is within 300 nm to the
+east of the tropical wave from 16N to 21N.
+
+$$`;
+const wv2 = P.parse(TWD_WAVEV2).waves;
+ok('archive phrasings: all five waves parsed', wv2.length === 5);
+ok('"from 18N southward" resolves like "south of 18N"',
+  wv2[0] && wv2[0].axis[0].lat === 18 && wv2[0].axis[0].lon === -43 && wv2[0].axis[1].lat < 18);
+ok('"southward to along the border..." prose does not break the axis',
+  wv2[1] && wv2[1].axis[0].lat === 17 && wv2[1].axis[0].lon === -60);
+ok('slash longitude span "17W/18W" averages to the axis meridian',
+  wv2[2] && wv2[2].axis[0].lon === -17.5 && wv2[2].axis[0].lat === 20);
+ok('earliest extent wins: "Precipitation: ... from 07N to 12N" cannot hijack the axis',
+  wv2[3] && wv2[3].axis[0].lat === 17 && wv2[3].axis[0].lon === -29);
+ok('place interjection: "from 19N in Haiti southward" resolves the extent',
+  wv2[4] && wv2[4].axis[0].lat === 19 && wv2[4].axis[0].lon === -73);
+
 // --- SPECIAL FEATURES cyclones -----------------------------------------------
 
 const TWD_SF = `TWDAT
@@ -505,6 +551,18 @@ ok('cone: ring is a simple polygon (no self-intersection)', (() => {
   }
   return true;
 })());
+
+// Hyphenated classifications follow NHC style ("Post-Tropical", capital T);
+// exercised against the committed archive fixture.
+ok('TCM: hyphenated classification title-cased NHC-style',
+  P.parseTCM(fs.readFileSync(__dirname + '/fixtures/al132023.fstadv.044.txt', 'utf8'))
+    .classification === 'Post-Tropical Cyclone');
+
+// Seasonal-constant guard: CONE_RADII_NM must be refreshed each season from
+// nhc.noaa.gov/aboutcone.shtml. This DELIBERATELY starts failing every January
+// until the radii (and CONE_SEASON beside them) are updated.
+ok('cone: CONE_SEASON (' + P.CONE_SEASON + ') is not behind the calendar year',
+  P.CONE_SEASON >= new Date().getUTCFullYear());
 
 // --- issuance time parsing -----------------------------------------------------
 

@@ -239,29 +239,40 @@
       // a span "along 61W-62W". Anchor on the first along/near longitude in the
       // chunk (the axis is stated before any convection), averaging a span.
       let m = flat.match(
-        /\b(?:along|near)\s+(\d{1,3}(?:\.\d)?)\s*([EW])(?:\s*(?:-|to)\s*(\d{1,3}(?:\.\d)?)\s*([EW]))?/i
+        /\b(?:along|near)\s+(\d{1,3}(?:\.\d)?)\s*([EW])(?:\s*(?:-|to|\/)\s*(\d{1,3}(?:\.\d)?)\s*([EW]))?/i
       );
       if (m) {
         const lo = m[3] ? (lon(m[1], m[2]) + lon(m[3], m[4])) / 2 : lon(m[1], m[2]);
-        // Southern extent: "south of 17N" and the abbreviated "S of 17N".
-        const south = flat.match(/\b(?:south|s)\s+of\s+(\d{1,2}(?:\.\d)?)\s*([NS])/i);
+        // Southern extent: "south of 17N", the abbreviated "S of 17N", and the
+        // open-ended "from 18N southward" (2023-era archive phrasing), which may
+        // carry a short place interjection: "from 19N in Haiti southward".
+        const south = flat.match(/\b(?:south|s)\s+of\s+(\d{1,2}(?:\.\d)?)\s*([NS])/i) ||
+          flat.match(/\bfrom\s+(\d{1,2}(?:\.\d)?)\s*([NS])(?:\s+(?:in|near|over)\s+[A-Za-z .-]{1,25}?)?\s+southward/i);
         // Latitude span: "from 05N to 17N", or the hyphenated "from 12-19N". The
         // negative lookahead skips a "from A to B between C and D" phrase — that's
         // a convection box (longitude-bounded by "between"), not the wave axis.
         const range = flat.match(/from\s+(\d{1,2}(?:\.\d)?)\s*([NS])\s+to\s+(\d{1,2}(?:\.\d)?)\s*([NS])(?!\s*,?\s*between)/i);
         const hrange = flat.match(/from\s+(\d{1,2}(?:\.\d)?)\s*-\s*(\d{1,2}(?:\.\d)?)\s*([NS])(?!\s*,?\s*between)/i);
-        if (range) {
+        // The axis extent is stated immediately after the along/near anchor;
+        // convection latitudes come later in the chunk ("Precipitation: ...
+        // from 07N to 12N"), so when several forms match, the earliest
+        // occurrence wins — not a fixed precedence.
+        const kind = [[range, 'range'], [hrange, 'hrange'], [south, 'south']]
+          .filter((c) => c[0])
+          .sort((a, b) => a[0].index - b[0].index)
+          .map((c) => c[1])[0];
+        if (kind === 'range') {
           // North end first, matching the "south of" branch, so axis[0] is a
           // consistent projection origin regardless of phrasing.
           const p1 = { lat: lat(range[1], range[2]), lon: lo };
           const p2 = { lat: lat(range[3], range[4]), lon: lo };
           axis.push(p1.lat >= p2.lat ? p1 : p2);
           axis.push(p1.lat >= p2.lat ? p2 : p1);
-        } else if (hrange) {
+        } else if (kind === 'hrange') {
           const a = lat(hrange[1], hrange[3]), b = lat(hrange[2], hrange[3]);
           axis.push({ lat: Math.max(a, b), lon: lo });
           axis.push({ lat: Math.min(a, b), lon: lo });
-        } else if (south) {
+        } else if (kind === 'south') {
           const top = lat(south[1], south[2]);
           axis.push({ lat: top, lon: lo });
           axis.push({ lat: Math.max(2, top - 12), lon: lo }); // extend toward ITCZ
@@ -291,7 +302,8 @@
     /\b(Hurricane|Tropical Storm|Tropical Depression|Subtropical Storm|Subtropical Depression|Potential Tropical Cyclone|Post-Tropical Cyclone|Remnants of)\s+([A-Z][A-Za-z]+(?:-[A-Za-z]+)?)/i;
 
   function titleCase(s) {
-    return s.replace(/\w\S*/g, (w) => w[0].toUpperCase() + w.slice(1).toLowerCase());
+    // \b\w capitalizes after hyphens too — NHC style is "Post-Tropical Cyclone".
+    return s.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase());
   }
 
   function extractCyclones(secText, srcName) {
@@ -559,9 +571,12 @@
   }
 
   // --- cone geometry ---------------------------------------------------------
-  // NHC published cone circle radii (nm) by forecast hour, Atlantic basin, 2026 season.
+  // NHC published cone circle radii (nm) by forecast hour, Atlantic basin.
   // Source: https://www.nhc.noaa.gov/aboutcone.shtml (current season; update
-  // annually). Hour 0 uses a small fixed radius so the cone starts at the center.
+  // annually). CONE_SEASON is the season the radii were taken from — bump BOTH
+  // together; a test fails when the season falls behind the calendar year.
+  // Hour 0 uses a small fixed radius so the cone starts at the center.
+  const CONE_SEASON = 2026;
   const CONE_RADII_NM = [
     [0, 10], [12, 25], [24, 39], [36, 49], [48, 62], [60, 77], [72, 95], [96, 134], [120, 200],
   ];
@@ -732,6 +747,6 @@
     return result;
   }
 
-  root.BasinParser = { parse, parseTWO, parseTCM, parseIssued, coneFromTrack, pairsIn, sections, dehyphenate, parseMotion, project };
+  root.BasinParser = { parse, parseTWO, parseTCM, parseIssued, coneFromTrack, CONE_SEASON, pairsIn, sections, dehyphenate, parseMotion, project };
   if (typeof module !== 'undefined' && module.exports) module.exports = root.BasinParser;
 })(typeof window !== 'undefined' ? window : globalThis);
