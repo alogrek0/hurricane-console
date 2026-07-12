@@ -100,7 +100,7 @@
       "source": "https://www.nhc.noaa.gov/archive/2023/al13/al132023.fstadv.044.shtml",
       "covers": "post-tropical header (not just a track suffix)",
       "snap": {
-        "classification": "Post-tropical Cyclone",
+        "classification": "Post-Tropical Cyclone",
         "name": "Lee",
         "stormId": "AL132023",
         "advisory": 44,
@@ -144,12 +144,12 @@
         "cyclones": [
           "Subtropical Depression Don"
         ],
-        "waves": 2,
+        "waves": 4,
         "convection": 4,
         "troughs": 0,
         "fixes": 1,
         "inferred": 6,
-        "projections": 3
+        "projections": 5
       }
     },
     "TWDAT.202308291005.txt": {
@@ -161,12 +161,12 @@
           "Hurricane Franklin",
           "Hurricane Idalia"
         ],
-        "waves": 0,
+        "waves": 2,
         "convection": 3,
         "troughs": 0,
         "fixes": 4,
         "inferred": 3,
-        "projections": 2
+        "projections": 4
       }
     },
     "TWDAT.202309151056.txt": {
