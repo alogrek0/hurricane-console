@@ -45,6 +45,42 @@
   // infers, while pure narrative ("trades over the Gulf of Honduras") does not.
   const RE_FEATURE_NOUN = /\b(?:wave|low|disturbance|disturbed|trough|area|system|gyre)\b/i;
 
+  // Future modality: everything after these words describes where a feature is
+  // GOING, not where it is. A gazetteer dot at a future position labeled as
+  // current is actively wrong, so gazResolve only sees the pre-modal prefix.
+  const RE_FUTURE = /\b(?:will|should|is expected|are expected|forecast)\b/i;
+
+  // Climatological/boilerplate phrases whose nouns ("low", "area") are NOT
+  // transient tropical features: the semi-permanent pressure centers, the
+  // product's own forecast-area edge ("north of the area"), and warning areas.
+  // Stripped before the feature-noun gate so "the pressure gradient between the
+  // Atlantic ridge and the Colombian low is supporting strong winds" no longer
+  // earns a dot from the "low" inside a climo name.
+  const RE_CLIMO = new RegExp(
+    [
+      '(?:colombian|panama)\\s+low',
+      '(?:bermuda-azores|bermuda|azores)\\s+high',
+      '(?:subtropical|atlantic)\\s+ridge',
+      '\\w+\\s+warning\\s+area',
+      '(?:north|south|east|west)\\s+of\\s+the\\s+(?:forecast\\s+)?area',
+      'this\\s+area',
+    ].join('|'), 'gi'
+  );
+
+  // A feature that has crossed into the Pacific has left the chart; a dot at
+  // its old Atlantic-side anchor would map a feature that is no longer there.
+  const RE_LEFT_BASIN = /\bmoved\s+(?:in)?to\s+the\s+(?:eastern\s+)?pacific\b/i;
+
+  // Cross-references ("Refer to the Tropical Waves section above...") point at
+  // a feature described elsewhere; model attributions ("The GFS model shows a
+  // 700 mb inverted trough...") describe model fields, not analyzed features.
+  const RE_XREF_OR_MODEL = /\brefer to\b|\b(?:gfs|ecmwf|nam|model)\b/i;
+
+  // Definite reference ("the wave", "this trough", "the tropical wave") to a
+  // feature kind the product has already positioned with real coordinates.
+  const RE_ANA_WAVE = /\b(?:the|this|that)\s+(?:[a-z-]+\s+)?wave\b/i;
+  const RE_ANA_TROUGH = /\b(?:the|this|that)\s+(?:[a-z-]+\s+)?trough\b/i;
+
   function pairsIn(text) {
     const out = [];
     let m;
@@ -419,11 +455,20 @@
       // "61W" or "18N" with no paired mate) is not the gazetteer's job. Emitting
       // no dot is more honest than force-fitting it to a coarse place centroid.
       if (RE_COORD_TOKEN.test(sent)) return;
+      // (c) A feature that departed for the Pacific is off the chart; a
+      // cross-reference or model-field sentence is not an analyzed position.
+      if (RE_LEFT_BASIN.test(sent) || RE_XREF_OR_MODEL.test(sent)) return;
+      // (d) Positions after a future modal are forecasts, not fixes: resolve
+      // only the pre-modal prefix. "For the forecast, ..." dies here too
+      // (prefix "For the " carries no feature noun).
+      const present = sent.split(RE_FUTURE)[0];
+      // (e) Climo names must not satisfy the noun gate ("Colombian low").
+      const gated = present.replace(RE_CLIMO, ' ');
       // (b) Only infer when the sentence actually introduces/locates a feature.
       // Otherwise a place merely named in narrative ("trades over the Gulf of
       // Honduras will pulse") gets a spurious dot.
-      if (!RE_FEATURE_NOUN.test(sent)) return;
-      const g = gazResolve(sent);
+      if (!RE_FEATURE_NOUN.test(gated)) return;
+      const g = gazResolve(present);
       if (g) {
         feats.push({
           kind: 'inferred',
@@ -434,6 +479,45 @@
       }
     });
     return feats;
+  }
+
+  // Planar point-to-segment distance in degrees (lon scaled by cos lat) —
+  // deliberately coarse, matching the gazetteer's own precision.
+  function ptSegDeg(p, a, b) {
+    const k = Math.cos((p.lat * Math.PI) / 180);
+    const ax = a.lon * k, ay = a.lat, bx = b.lon * k, by = b.lat;
+    const px = p.lon * k, py = p.lat;
+    const dx = bx - ax, dy = by - ay;
+    const L2 = dx * dx + dy * dy;
+    const t = L2 ? Math.max(0, Math.min(1, ((px - ax) * dx + (py - ay) * dy) / L2)) : 0;
+    return Math.hypot(px - (ax + t * dx), py - (ay + t * dy));
+  }
+
+  // Drop inferred dots that duplicate a feature the product already positions
+  // with real coordinates: a definite re-mention ("the tropical wave entering
+  // the Caribbean" — the wave is drawn from its own section) or a same-kind dot
+  // within DEDUP_DEG of the parsed geometry ("A tropical wave is just west of
+  // the Cabo Verde Islands" sitting on a parsed axis). Kind-matched on purpose:
+  // an unrelated disturbance that merely borders a convection box must survive.
+  const DEDUP_DEG = 2;
+  function dedupeInferred(result) {
+    result.inferred = result.inferred.filter((dot) => {
+      const s = dot.source;
+      if (RE_ANA_WAVE.test(s) && result.waves.length) return false;
+      if (RE_ANA_TROUGH.test(s) && result.troughs.length) return false;
+      let d = Infinity;
+      if (/\bwave\b/i.test(s)) for (const w of result.waves)
+        for (let i = 0; i < w.axis.length; i++)
+          d = Math.min(d, ptSegDeg(dot, w.axis[i], w.axis[Math.min(i + 1, w.axis.length - 1)]));
+      if (/\btrough\b/i.test(s)) for (const t of result.troughs)
+        for (let i = 0; i + 1 < t.line.length; i++)
+          d = Math.min(d, ptSegDeg(dot, t.line[i], t.line[i + 1]));
+      if (/\b(?:low|disturbance|disturbed|system|gyre|area)\b/i.test(s)) {
+        for (const c of result.cyclones) d = Math.min(d, ptSegDeg(dot, c, c));
+        for (const f of result.fixes) d = Math.min(d, ptSegDeg(dot, f, f));
+      }
+      return d >= DEDUP_DEG;
+    });
   }
 
   // --- TWO (Tropical Weather Outlook) -----------------------------------------
@@ -734,6 +818,10 @@
       // running the gazetteer over it only manufactures phantom positions.
       if (!isPreamble && !isSpecial) result.inferred.push(...extractInferred(s.text));
     }
+
+    // Gazetteer dots must represent features with no coordinate representation;
+    // drop the ones that duplicate parsed geometry.
+    dedupeInferred(result);
 
     // Pass 3: dead-reckon +24h for every wave and cyclone that stated motion.
     for (const w of result.waves) {

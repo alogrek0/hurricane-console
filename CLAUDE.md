@@ -64,7 +64,12 @@ Everything is client side. Files:
    (`from 08N27W to 08N44W to 09N57W`), point fixes (`near 14N76W`). Confidence high.
 2. **Gazetteer** — prose-only positions (`between Hispaniola and the southeastern
    Bahamas`). **Always** returned with `inferred:true` and rendered dashed with a
-   `◇ INFERRED` tag. A gazetteer guess must never masquerade as a fix.
+   `◇ INFERRED` tag. A gazetteer guess must never masquerade as a fix. Heavily
+   guarded against noise: no dot for future positions ("will reach the Lesser
+   Antilles"), climatological features (Colombian low, Atlantic ridge),
+   cross-references / model fields, features departed for the Pacific, or
+   re-mentions of a wave/trough the product already positions with coordinates
+   (definite article or within 2° of the same-kind parsed geometry).
 3. **Dead-reckoning** — projects +24h wave positions from stated motion. A speed
    range (`15 to 20 kt`) yields an **uncertainty band** between the slow and fast
    solutions, not a single point.
