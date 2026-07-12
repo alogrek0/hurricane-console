@@ -1,0 +1,190 @@
+{
+  "_readme": "Pinned parser snapshots for the committed archive corpus (checked by node test.js). Regenerate deliberately with: node tools/archive-audit.js --save-fixtures (network, dev-only), then review the git diff — a changed snap is a parser behavior change. Never hand-edit.",
+  "tcm": {
+    "al052023.fstadv.001.txt": {
+      "source": "https://www.nhc.noaa.gov/archive/2023/al05/al052023.fstadv.001.shtml",
+      "covers": "subtropical",
+      "snap": {
+        "classification": "Subtropical Storm",
+        "name": "Don",
+        "stormId": "AL052023",
+        "advisory": 1,
+        "center": {
+          "lat": 32.9,
+          "lon": -46.8
+        },
+        "windKt": 45,
+        "gustKt": 55,
+        "pressureMb": 1002,
+        "trackPoints": 8,
+        "postTropTrack": false
+      }
+    },
+    "al082024.fstadv.001.txt": {
+      "source": "https://www.nhc.noaa.gov/archive/2024/al08/al082024.fstadv.001.shtml",
+      "covers": "PTC + INLAND/TROPICAL CYCLONE/DISSIPATED forecast-line suffixes",
+      "snap": {
+        "classification": "Potential Tropical Cyclone",
+        "name": "Eight",
+        "stormId": "AL082024",
+        "advisory": 1,
+        "center": {
+          "lat": 32,
+          "lon": -78
+        },
+        "windKt": 40,
+        "gustKt": 50,
+        "pressureMb": 1006,
+        "trackPoints": 6,
+        "postTropTrack": true
+      }
+    },
+    "al102023.fstadv.001.txt": {
+      "source": "https://www.nhc.noaa.gov/archive/2023/al10/al102023.fstadv.001.shtml",
+      "covers": "TD with spelled-number name (Idalia genesis)",
+      "snap": {
+        "classification": "Tropical Depression",
+        "name": "Ten",
+        "stormId": "AL102023",
+        "advisory": 1,
+        "center": {
+          "lat": 21.1,
+          "lon": -86.1
+        },
+        "windKt": 25,
+        "gustKt": 35,
+        "pressureMb": 1006,
+        "trackPoints": 8,
+        "postTropTrack": false
+      }
+    },
+    "al132023.fstadv.002.txt": {
+      "source": "https://www.nhc.noaa.gov/archive/2023/al13/al132023.fstadv.002.shtml",
+      "covers": "tropical storm",
+      "snap": {
+        "classification": "Tropical Storm",
+        "name": "Lee",
+        "stormId": "AL132023",
+        "advisory": 2,
+        "center": {
+          "lat": 13.2,
+          "lon": -41.8
+        },
+        "windKt": 40,
+        "gustKt": 50,
+        "pressureMb": 1005,
+        "trackPoints": 8,
+        "postTropTrack": false
+      }
+    },
+    "al132023.fstadv.023.txt": {
+      "source": "https://www.nhc.noaa.gov/archive/2023/al13/al132023.fstadv.023.shtml",
+      "covers": "hurricane; sibling of the inline TCM_FIX in test.js",
+      "snap": {
+        "classification": "Hurricane",
+        "name": "Lee",
+        "stormId": "AL132023",
+        "advisory": 23,
+        "center": {
+          "lat": 22.6,
+          "lon": -62.2
+        },
+        "windKt": 105,
+        "gustKt": 130,
+        "pressureMb": 950,
+        "trackPoints": 8,
+        "postTropTrack": false
+      }
+    },
+    "al132023.fstadv.044.txt": {
+      "source": "https://www.nhc.noaa.gov/archive/2023/al13/al132023.fstadv.044.shtml",
+      "covers": "post-tropical header (not just a track suffix)",
+      "snap": {
+        "classification": "Post-tropical Cyclone",
+        "name": "Lee",
+        "stormId": "AL132023",
+        "advisory": 44,
+        "center": {
+          "lat": 41.8,
+          "lon": -66
+        },
+        "windKt": 70,
+        "gustKt": 85,
+        "pressureMb": 965,
+        "trackPoints": 4,
+        "postTropTrack": true
+      }
+    },
+    "al142024.fstadv.009.txt": {
+      "source": "https://www.nhc.noaa.gov/archive/2024/al14/al142024.fstadv.009.shtml",
+      "covers": "SPECIAL FORECAST/ADVISORY",
+      "snap": {
+        "classification": "Hurricane",
+        "name": "Milton",
+        "stormId": "AL142024",
+        "advisory": 9,
+        "center": {
+          "lat": 21.8,
+          "lon": -92.2
+        },
+        "windKt": 110,
+        "gustKt": 135,
+        "pressureMb": 945,
+        "trackPoints": 8,
+        "postTropTrack": true
+      }
+    }
+  },
+  "twdat": {
+    "TWDAT.202307161756.txt": {
+      "source": "https://www.nhc.noaa.gov/archive/text/TWDAT/2023/TWDAT.202307161756.txt",
+      "covers": "single (subtropical) cyclone",
+      "snap": {
+        "sections": 7,
+        "cyclones": [
+          "Subtropical Depression Don"
+        ],
+        "waves": 2,
+        "convection": 4,
+        "troughs": 0,
+        "fixes": 1,
+        "inferred": 6,
+        "projections": 3
+      }
+    },
+    "TWDAT.202308291005.txt": {
+      "source": "https://www.nhc.noaa.gov/archive/text/TWDAT/2023/TWDAT.202308291005.txt",
+      "covers": "two hurricanes, warning-laden prose",
+      "snap": {
+        "sections": 6,
+        "cyclones": [
+          "Hurricane Franklin",
+          "Hurricane Idalia"
+        ],
+        "waves": 0,
+        "convection": 3,
+        "troughs": 0,
+        "fixes": 4,
+        "inferred": 3,
+        "projections": 2
+      }
+    },
+    "TWDAT.202309151056.txt": {
+      "source": "https://www.nhc.noaa.gov/archive/text/TWDAT/2023/TWDAT.202309151056.txt",
+      "covers": "two simultaneous cyclones, ALL-CAPS archive text",
+      "snap": {
+        "sections": 6,
+        "cyclones": [
+          "Hurricane Lee",
+          "Tropical Storm Margot"
+        ],
+        "waves": 0,
+        "convection": 3,
+        "troughs": 1,
+        "fixes": 2,
+        "inferred": 1,
+        "projections": 2
+      }
+    }
+  }
+}

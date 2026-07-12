@@ -126,12 +126,123 @@
     });
   }
 
-  var metaBase = '—';
-  function updateMeta() {
-    document.getElementById('meta').innerHTML =
-      metaBase + (tcmNote ? ' · ' + tcmNote : '') +
-      '<br><span class="ver">' + (window.APP_VERSION || '') + '</span>';
+  var featureLine = '—'; // "N features · X waves ..." — set by render/renderTWO
+  var issuedStr = null;  // raw product issuance line, or null
+  var badgeState = 'SAMPLE'; // last badge; gates the "next update" hint
+
+  // "1 wave" / "3 waves" — count with a naively pluralized noun.
+  function plural(n, w) { return n + ' ' + w + (n === 1 ? '' : 's'); }
+
+  // Bare relative-age phrase: 'just now' / '12m ago' / '3h ago' / '2d ago'.
+  // Returns '' when the product reads more than a couple minutes AHEAD of the
+  // client clock — a relative age would be bogus (clock skew or a stale device
+  // clock), so the caller shows just the stated time instead of inventing "3h ago".
+  function relAge(date) {
+    var min = Math.round((Date.now() - date.getTime()) / 60000);
+    if (min < -2) return '';
+    if (min < 1) return 'just now';
+    if (min < 60) return min + 'm ago';
+    var hr = Math.round(min / 60);
+    if (hr < 48) return hr + 'h ago';
+    return Math.round(hr / 24) + 'd ago';
   }
+
+  // Next routine NHC issuance, always relative to NOW. TWD/TWO land on the
+  // 00/06/12/18Z synoptic cycle (a few minutes past, hence the "~"). Keyed off
+  // the wall clock, not the displayed product's time, so a stale CACHED product
+  // still names the real upcoming cycle rather than a long-past one.
+  function nextSynoptic() {
+    var now = new Date();
+    var nextH = (Math.floor(now.getUTCHours() / 6) + 1) * 6; // 6, 12, 18, or 24
+    var slot = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()) + nextH * 3600000;
+    var min = Math.round((slot - now.getTime()) / 60000);
+    return {
+      z: (nextH % 24 < 10 ? '0' : '') + (nextH % 24) + '00Z',
+      until: min < 60 ? 'in ' + min + 'm'
+        : 'in ' + Math.floor(min / 60) + 'h' + (min % 60 ? (min % 60) + 'm' : ''),
+    };
+  }
+
+  // Time+zone prefix of a header ("805 AM EDT Mon Jul 7 2026" -> "805 AM EDT").
+  // The calendar date is normally carried by the relative age, so the readout
+  // shows just the time — but updateMeta re-appends the date (statedDate) when
+  // the product is not from today, since touch devices can't reach the hover title.
+  function statedTime(header) {
+    var m = header.match(/^\s*(\d{3,4}\s*(?:AM|PM)?\s*[A-Z]{1,4})\b/i);
+    return m ? m[1].replace(/\s+/g, ' ').trim() : header;
+  }
+  // Short "Jul 7" date (month + day, no weekday) from a header's "Mon Jul 7 2026"
+  // tail, or '' if it has no recognizable date. Anchored on the 4-digit year.
+  function statedDate(header) {
+    var m = header.match(/\b([A-Za-z]{3})[a-z]*\s+(\d{1,2})\s+\d{4}\b/);
+    // normalize the month token: TWD headers say "Jul", TCM headers say "SEP"
+    return m ? m[1][0].toUpperCase() + m[1].slice(1).toLowerCase() + ' ' + m[2] : '';
+  }
+
+  // parseIssued is regex-based and updateMeta runs on every 60s tick and each
+  // setBadge, yet issuedStr changes only on load — so memoize on the string value.
+  // Keying on issuedStr auto-invalidates when it changes; no separate state to sync.
+  var issuedCache = { str: undefined, date: null };
+  function issuedDate() {
+    if (issuedCache.str !== issuedStr) {
+      issuedCache.str = issuedStr;
+      var d = issuedStr ? window.BasinParser.parseIssued(issuedStr) : null;
+      issuedCache.date = d && !isNaN(d.getTime()) ? d : null;
+    }
+    return issuedCache.date;
+  }
+
+  // The readout (bottom-right). Three lines:
+  //   1  features · waves · cyclones · forecast tracks
+  //   2  issued <age> · <stated time[ · date]> · local <viewer time>[ · ahead of clock]
+  //   3  next ~HHMMZ in ...            (live cycle only)      <version, right>
+  function updateMeta() {
+    // Line 1: features, with the forecast-track count folded in from tcmNote.
+    var line1 = featureLine + (tcmNote ? ' · ' + tcmNote : '');
+
+    var d = issuedDate();
+
+    // Line 2: freshness, the product's stated time, and the viewer's local time.
+    var line2, titleAttr = '';
+    if (!issuedStr) {
+      line2 = 'issuance n/a';
+    } else if (d) {
+      titleAttr = ' title="' + escapeHtml(issuedStr) + '"'; // full header on hover
+      var now = new Date();
+      var age = relAge(d); // '' only when the product reads ahead of the clock
+      var stated = statedTime(issuedStr);
+      // Add the calendar date when the product isn't from today — otherwise a
+      // touch user (no hover title) can't tell which day an older product is from.
+      var sameDay = d.getUTCFullYear() === now.getUTCFullYear() &&
+        d.getUTCMonth() === now.getUTCMonth() && d.getUTCDate() === now.getUTCDate();
+      var sd = sameDay ? '' : statedDate(issuedStr);
+      line2 = 'issued ' + (age ? age + ' · ' : '') + escapeHtml(stated) +
+        (sd ? ' · ' + escapeHtml(sd) : '') +
+        ' · local ' + escapeHtml(d.toLocaleString([], {
+          hour: 'numeric', minute: '2-digit', timeZoneName: 'short'
+        })) +
+        (age ? '' : ' · ahead of clock'); // skew signal, since age was suppressed
+    } else {
+      titleAttr = ' title="' + escapeHtml(issuedStr) + '"';
+      line2 = 'issued ' + escapeHtml(issuedStr); // unparseable: raw header, no age
+    }
+
+    // Line 3: next-issuance hint (only while tracking the live cycle — never over
+    // a fixed SAMPLE or a pasted archived product) at left, version at right.
+    var nextHtml = '';
+    if (badgeState === 'LIVE' || badgeState === 'CACHED') {
+      var nx = nextSynoptic();
+      nextHtml = '<span class="next">next ~' + nx.z + ' ' + nx.until + '</span>';
+    }
+    var line3 = '<div class="rd-last">' + nextHtml +
+      '<span class="ver">' + escapeHtml(window.APP_VERSION || '') + '</span></div>';
+
+    document.getElementById('meta').innerHTML =
+      line1 + '<br><span' + titleAttr + '>' + line2 + '</span>' + line3;
+  }
+
+  // Relative age drifts as a storm-watching tab sits open; refresh each minute.
+  setInterval(updateMeta, 60000);
 
   function render(parsed) {
     featureLayer.clearLayers();
@@ -214,9 +325,9 @@
     var nCyc = (parsed.cyclones || []).length;
     var n = nCyc + parsed.waves.length + parsed.troughs.length + parsed.convection.length +
       parsed.fixes.length + parsed.inferred.length;
-    metaBase = n + ' features · ' + parsed.waves.length + ' waves' +
-      (nCyc ? ' · ' + nCyc + ' cyclone' + (nCyc === 1 ? '' : 's') : '') + '<br>' +
-      (parsed.issued ? escapeHtml(parsed.issued) : 'issuance n/a');
+    featureLine = plural(n, 'feature') + ' · ' + plural(parsed.waves.length, 'wave') +
+      (nCyc ? ' · ' + plural(nCyc, 'cyclone') : '');
+    issuedStr = parsed.issued || null;
     updateMeta();
   }
 
@@ -239,17 +350,19 @@
       }).bindPopup(popup(label, d.source, true)).addTo(twoLayer);
     });
     var n = parsed.disturbances.length;
-    metaBase = n + ' outlook area' + (n === 1 ? '' : 's') +
-      (unmapped ? ' · ' + unmapped + ' not mappable — see product text' : '') + '<br>' +
-      (parsed.issued ? escapeHtml(parsed.issued) : 'issuance n/a');
+    featureLine = plural(n, 'outlook area') +
+      (unmapped ? ' · ' + unmapped + ' not mappable — see product text' : '');
+    issuedStr = parsed.issued || null;
     updateMeta();
   }
 
   // --- data source -----------------------------------------------------------
   function setBadge(state) {
+    badgeState = state;
     var b = document.getElementById('badge');
     b.className = 'badge ' + state;
     b.textContent = state;
+    updateMeta(); // reflect the resolved provenance (e.g. show/hide next-update)
   }
 
   // api.weather.gov's product types are 3-letter AWIPS categories (TWD, TWO)
@@ -282,7 +395,7 @@
   }
 
   function loadTWD() {
-    setBadge('LIVE'); // optimistic; corrected on resolution
+    setBadge('LOADING'); // in-flight; resolves to the real source below
     fetchLatestMatching(TWD_URL, 'TWDAT', 8).then(function (res) {
       if (!res.text) throw new Error('empty');
       // Fetch succeeded: a parse/render failure here is a real error, and
@@ -312,7 +425,7 @@
   }
 
   function loadTWO() {
-    setBadge('LIVE'); // optimistic; corrected on resolution
+    setBadge('LOADING'); // in-flight; resolves to the real source below
     fetchLatestMatching(TWO_URL, 'TWOAT', 8).then(function (res) {
       if (!res.text) throw new Error('empty');
       try {
@@ -363,7 +476,7 @@
       });
       var storms = Object.keys(byStorm).map(function (k) { return byStorm[k]; });
       renderTCM(storms);
-      tcmNote = storms.length ? storms.length + ' forecast track' + (storms.length === 1 ? '' : 's') : '';
+      tcmNote = storms.length ? plural(storms.length, 'track') : '';
       updateMeta();
     }).catch(function () {
       if (mode !== 'TWD') return;
@@ -371,10 +484,10 @@
       if (twdState === 'sample' && window.TCM_SAMPLE) {
         var p = window.BasinParser.parseTCM(window.TCM_SAMPLE);
         renderTCM(p ? [p] : []);
-        tcmNote = p ? '1 forecast track (sample)' : '';
+        tcmNote = p ? '1 track (sample)' : '';
       } else {
         renderTCM([]);
-        tcmNote = 'forecast track n/a';
+        tcmNote = 'track n/a';
       }
       updateMeta();
     });
@@ -451,8 +564,14 @@
         setMode('TWD');
         var ptcm = window.BasinParser.parseTCM(txt);
         if (!ptcm) throw new Error('unparseable TCM');
+        // Replace whatever was on screen: a pasted TCM stands alone, so drop the
+        // previous product's features and its readout provenance rather than
+        // leaving a stale issuance/counts under the PASTED badge.
+        featureLayer.clearLayers();
         renderTCM([ptcm]);
-        tcmNote = '1 forecast track (pasted)';
+        featureLine = ptcm.classification + ' ' + ptcm.name + ' · adv ' + ptcm.advisory;
+        issuedStr = ptcm.issuedHeader || null; // "2100 UTC SUN SEP 15 2024"
+        tcmNote = '1 track (pasted)';
         updateMeta();
       } else if (/tropical weather outlook/i.test(txt.slice(0, 300))) {
         setMode('TWO');

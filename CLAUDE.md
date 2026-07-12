@@ -18,11 +18,22 @@ is blocked, so it shows SAMPLE mode — the live path activates on a real origin
 ## How to test
 
 ```bash
-node test.js      # parser smoke test, exits non-zero on failure
+node test.js      # parser smoke test + archive-corpus snapshots, exits non-zero on failure
 ```
 
 Keep `node test.js` green. The parser is the component that has to earn its keep,
-so any parser change gets a matching assertion in `test.js`.
+so any parser change gets a matching assertion in `test.js`. CI (GitHub Actions)
+runs the same command on every push to `main` and every PR.
+
+The suite includes **snapshot checks against `fixtures/`** — real archived NHC
+products with pinned parser output (`fixtures/expected.json`). A failing snapshot
+means parser behavior changed on real-world text. If the change is deliberate:
+run `node tools/archive-audit.js --save-fixtures` (network, dev-only; refuses to
+write if any product fails its ground-truth expectations), review
+`git diff fixtures/`, and commit the regenerated snapshots alongside the parser
+change. Never hand-edit `expected.json`. Snapshots pin *current* behavior, warts
+included — e.g. known phrasing gaps stay pinned until the parser is fixed, at
+which point regeneration records the improvement.
 
 ## Architecture
 
@@ -38,9 +49,14 @@ Everything is client side. Files:
 | `sample.js`      | embedded Jul 7 2026 TWDAT/TWOAT/TCM fallback (SAMPLE state) |
 | `version.js`     | app version, single source (CalVer) — shared by page, SW, and tests |
 | `sw.js`          | service worker: cache-first shell, network-first data |
-| `tools/hooks/`   | committed git hooks (pre-push version guard); enable once per clone: `git config core.hooksPath tools/hooks` |
+| `tools/hooks/`   | committed git hooks; pre-push delegates to the shared version guard; enable once per clone: `git config core.hooksPath tools/hooks` |
+| `tools/check-version-guard.sh` | the version-bump check itself (`BASE HEAD` args) — single source, called by the pre-push hook AND CI |
+| `tools/corpus-summary.js` | snapshot shape for the archive corpus — shared by test.js (checker) and archive-audit.js (writer) |
+| `tools/archive-audit.js` | dev-only, network: audits parser vs curated archived NHC products; `--save-fixtures` regenerates `fixtures/` |
+| `fixtures/`      | committed archive corpus: 10 real NHC products (LF-pinned via `.gitattributes`) + pinned snapshots in `expected.json` — regenerate only via `--save-fixtures`, never hand-edit |
+| `.github/workflows/ci.yml` | CI: `node test.js` on push-to-main + PRs; version guard on PRs |
 | `manifest.json`  | PWA manifest |
-| `test.js`        | node parser test harness |
+| `test.js`        | node parser test harness (includes the corpus snapshot checks) |
 
 ### The parser (three passes, in `parser.js`)
 1. **Regex** — explicit coordinates: wave axes (`along 46W south of 17N`),
@@ -70,14 +86,20 @@ keyword matches survive — this was a real bug; keep the hyphen.
 - Versioning is CalVer (`YYYY.MM.DD`, `.N` suffix for same-day re-deploys), single
   source in `version.js` — the page shows it in the meta corner, the SW derives its
   cache names from it, and tests check the format. Bump it whenever any shell file
-  ships; the committed pre-push hook (`tools/hooks/pre-push`, enable with
-  `git config core.hooksPath tools/hooks`) blocks pushes that forget.
+  ships. The check lives in `tools/check-version-guard.sh` (the watched-file list
+  is defined ONLY there) and runs twice: the committed pre-push hook
+  (`tools/hooks/pre-push`, enable with `git config core.hooksPath tools/hooks`)
+  and the CI workflow on PRs. Changes to `test.js`, `fixtures/`, `tools/`, docs,
+  or `.github/` do **not** need a bump — only the shell files do.
 
 ### The badge is a contract
 The header badge must always reflect the true data source: **LIVE / CACHED /
 SAMPLE / PASTED / ERROR**. Never show LIVE for stale or sample data. Honesty about
 provenance is the whole point — inferred features are visually distinct for the
-same reason.
+same reason. **LOADING** is the one transient exception — shown (pulsing) only
+while a fetch is in flight, before the source is known; it asserts no provenance
+and must resolve to one of the five real states. Never claim a source
+optimistically before the fetch resolves.
 
 ## Conventions
 - Plain ES5-ish browser JS, no framework, no bundler. Keep it dependency-free

@@ -59,6 +59,42 @@ ok('plain form regression', m && m.bearing === 270 && m.slowKt === 10 && m.fastK
 // axis-order fix: projection origin is always the northern end of the axis
 ok('wave projection starts at north end (17N)', r.projections[0].from.lat === 17);
 
+// --- real-archive wave phrasings (parser-audit regressions) ------------------
+// The synthetic sample used only "axis along 22W from 05N to 17N". Real TWDATs
+// vary widely and the original extractor dropped whole waves. Each line below is
+// a phrasing pulled from live NHC products (Jul 2026 audit); all must parse.
+const TWD_WAVEV = `TWDAT
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+0015 UTC Sun Jul 5 2026
+
+...TROPICAL WAVES...
+
+An Atlantic tropical wave is near 39W, south of 17N, moving W at 15 kt.
+Scattered moderate convection is seen from 05.5N to 11.5N between 33W and 39W.
+
+A Caribbean tropical wave is near 72W, south of 20N, moving W at 15 to 20 kt.
+
+An eastern Atlantic tropical wave is along 33W S of 17N, moving W at 10 kt.
+
+A central Atlantic tropical wave is along 61W-62W, south of 18N, moving W at 10 kt.
+
+A far eastern Atlantic tropical wave has its axis along 22W from 12-19N, moving W at 15 kt.
+
+$$`;
+const wv = P.parse(TWD_WAVEV).waves;
+ok('real phrasings: all five waves parsed', wv.length === 5);
+ok('"near 39W" anchors the axis (not just "along")', wv[0] && wv[0].axis[0].lon === -39);
+ok('convection "from A to B between C and D" not mistaken for the axis',
+  wv[0] && wv[0].axis[0].lat === 17 && wv[0].axis[1].lat === 5); // "south of 17N", not 11.5N
+ok('"S of" abbreviation resolves the southern extent',
+  wv[2] && wv[2].axis[0].lon === -33 && wv[2].axis[0].lat === 17);
+ok('longitude span "61W-62W" averages to the axis meridian',
+  wv[3] && wv[3].axis[0].lon === -61.5 && wv[3].axis[0].lat === 18);
+ok('hyphenated latitude range "from 12-19N" spans the axis',
+  wv[4] && wv[4].axis[0].lat === 19 && wv[4].axis[1].lat === 12 && wv[4].axis[0].lon === -22);
+ok('all recovered wave axes carry westward motion', wv.every(w => w.motion && w.motion.bearing === 270));
+
 // --- SPECIAL FEATURES cyclones -----------------------------------------------
 
 const TWD_SF = `TWDAT
@@ -103,6 +139,84 @@ ok('cyclone center not double-counted as fix',
   !sf.fixes.some(f => f.lat === 25.5 && f.lon === -74.2));
 ok('quiet TWDAT has zero cyclones', r.cyclones.length === 0);
 
+// Real TWDATs don't always carry a SPECIAL FEATURES section: on 29 Aug 2023
+// the discussion described Franklin and Idalia in the untitled preamble
+// instead. Distilled from TWDAT.202308291005 (nhc.noaa.gov archive).
+const TWD_PRE = `AXNT20 KNHC 291005
+TWDAT
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+1205 UTC Tue Aug 29 2023
+
+Tropical Weather Discussion for North America, Central America
+Gulf of Mexico, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N.
+
+Major Hurricane Franklin is centered near 30.2N 70.8W at 29/0900
+UTC or 330 nm WSW of Bermuda, moving NNE at 8 kt. Estimated
+minimum central pressure is 935 mb. Maximum sustained wind speed
+is 120 kt with gusts to 145 kt.
+
+Recently upgraded Hurricane Idalia is centered near 23.1N 85.0W
+at 29/0900 UTC or 70 nm N of the western tip of Cuba, moving N
+at 12 kt. Estimated minimum central pressure is 981 mb. Maximum
+sustained wind speed is 65 kt with gusts to 80 kt.
+
+...TROPICAL WAVES...
+
+A tropical wave has its axis along 22W from 05N to 17N, moving
+west at 10 to 15 kt.
+
+$$`;
+
+const pre = P.parse(TWD_PRE);
+ok('preamble cyclones extracted when no SPECIAL FEATURES section',
+  pre.cyclones.length === 2 && pre.cyclones[0].name === 'Franklin' &&
+  pre.cyclones[1].name === 'Idalia' && pre.cyclones[0].srcSection === 'PREAMBLE');
+ok('preamble cyclone centers and "wind speed is" phrasing',
+  pre.cyclones[0].lat === 30.2 && pre.cyclones[0].lon === -70.8 && pre.cyclones[0].windKt === 120 &&
+  pre.cyclones[1].lat === 23.1 && pre.cyclones[1].lon === -85 && pre.cyclones[1].windKt === 65);
+ok('preamble cyclone centers not double-counted as fixes',
+  !pre.fixes.some(f => (f.lat === 30.2 && f.lon === -70.8) || (f.lat === 23.1 && f.lon === -85)));
+ok('preamble cyclones get +24h projections',
+  pre.projections.some(p => p.id === 'Franklin') && pre.projections.some(p => p.id === 'Idalia'));
+
+// Subtropical Depression Don (TWDAT 16 Jul 2023, distilled): "maximum
+// sustained wind speeds are 30 knots" — plural "speeds", spelled-out "knots" —
+// and no "centered near", so the center comes from the coordinate-pair
+// fallback. The PTC chunk is synthetic, covering the RE_CYCLONE addition.
+const TWD_DON = `TWDAT
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+205 PM EDT Sun Jul 16 2023
+
+Tropical Weather Discussion for the Atlantic Ocean.
+
+...SPECIAL FEATURES...
+
+The center of Subtropical Depression Don, at 16/1500 UTC, is
+near 39.0N 48.1W. Don is moving toward the ENE, or 070 degrees,
+07 knots. The estimated minimum central pressure is 1009 mb.
+The maximum sustained wind speeds are 30 knots with gusts to
+40 knots.
+
+Potential Tropical Cyclone Eight is centered near 32.0N 78.0W
+moving northwest at 6 kt. Maximum sustained winds are 40 kt.
+
+$$`;
+
+const don = P.parse(TWD_DON);
+ok('Don: subtropical depression, center from pair fallback',
+  don.cyclones[0] && don.cyclones[0].classification === 'Subtropical Depression' &&
+  don.cyclones[0].lat === 39 && don.cyclones[0].lon === -48.1);
+ok('Don: "wind speeds are NN knots" phrasing parsed',
+  don.cyclones[0].windKt === 30 && don.cyclones[0].pressureMb === 1009);
+ok('Potential Tropical Cyclone recognized in special features',
+  don.cyclones[1] && don.cyclones[1].classification === 'Potential Tropical Cyclone' &&
+  don.cyclones[1].name === 'Eight' && don.cyclones[1].windKt === 40);
+
 // --- TWO (Tropical Weather Outlook) --------------------------------------------
 
 const TWO_FIX = `Tropical Weather Outlook
@@ -137,6 +251,58 @@ ok('D1 always inferred', d1 && d1.inferred === true);
 ok('D1 resolves to Lesser Antilles anchor', d1 && d1.lat === 15.5 && d1.lon === -61.3);
 ok('D2 "between A and B" midpoint resolves',
   d2 && d2.lat === (13.0 + 15.0) / 2 && d2.lon === (-61.2 + -75.0) / 2);
+
+// --- gazetteer over-firing guards (extractInferred hardening) ------------------
+// extractInferred used to fire on ANY place mention, producing two failure modes:
+// TYPE 1 — a sentence with singleton coords ("along 61W-62W, south of 18N")
+// slipped the pair-guard and got force-fit to a coarse centroid; TYPE 2 — pure
+// narrative naming a region got a spurious dot. Two new guards fix both while
+// keeping the canonical prose-only case working.
+
+// TYPE 1: singleton coords in a non-WAVE section must yield NO inferred dot.
+const TWD_T1 = `TWDAT
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+0015 UTC Sun Jul 5 2026
+
+...DISCUSSION...
+
+A tropical wave has entered the Caribbean, along 61W-62W, south of 18N, moving westward.
+
+$$`;
+const t1 = P.parse(TWD_T1);
+ok('TYPE 1: singleton-coord sentence produces no inferred dot', t1.inferred.length === 0);
+
+// TYPE 2: pure narrative naming a region must yield NO inferred dot.
+const TWD_T2 = `TWDAT
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+0015 UTC Sun Jul 5 2026
+
+...DISCUSSION...
+
+Trades over the Gulf of Honduras will pulse to strong each evening.
+
+$$`;
+const t2 = P.parse(TWD_T2);
+ok('TYPE 2: pure-narrative region mention produces no inferred dot', t2.inferred.length === 0);
+
+// Canonical prose-only feature: still exactly one inferred dot at the midpoint
+// of the two "between A and B" anchors (Hispaniola 19.0,-71.0 & SE Bahamas 22.0,-73.5).
+const TWD_CANON = `TWDAT
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+0015 UTC Sun Jul 5 2026
+
+...DISCUSSION...
+
+A disturbed area between Hispaniola and the southeastern Bahamas bears watching over the next several days.
+
+$$`;
+const tc = P.parse(TWD_CANON);
+ok('canonical prose-only feature still infers exactly one dot', tc.inferred.length === 1);
+ok('canonical inferred dot lands at the between-anchor midpoint',
+  tc.inferred[0] && tc.inferred[0].lat === (19.0 + 22.0) / 2 && tc.inferred[0].lon === (-71.0 + -73.5) / 2);
 
 // --- basemap.js integrity (generated file; guards a bad regeneration) ---------
 
@@ -229,10 +395,65 @@ ok('TCM: month rollover hours', (() => {
   return t && t.track[0].hours === 33; // 30/2100Z -> 01/0600Z across a 31-day month
 })());
 ok('TCM: garbage returns null', P.parseTCM('not a product') === null && P.parseTCM('') === null);
+ok('TCM: issuance header line extracted', tcm.issuedHeader === '0300 UTC MON SEP 11 2023');
+ok('TCM: issuance header round-trips through parseIssued', (() => {
+  const d = P.parseIssued(tcm.issuedHeader);
+  return d && d.getTime() === Date.UTC(2023, 8, 11, 3, 0);
+})());
+ok('TCM: missing issuance header yields null, not a bad guess', (() => {
+  const t = P.parseTCM(TCM_FIX.replace('0300 UTC MON SEP 11 2023', ''));
+  return t && t.issuedHeader === null;
+})());
 ok('TCM: dissipated end state tagged', (() => {
   const t = P.parseTCM(TCM_FIX.replace('...POST-TROP/EXTRATROP', '...DISSIPATED'));
   return t && t.track[5].state === 'dissipated';
 })());
+
+// Real PTC advisory (Potential Tropical Cyclone Eight, Sep 2024): PTC header
+// classification, a prior-position "CENTER WAS LOCATED" line that must not win
+// the center match, INLAND / TROPICAL CYCLONE track suffixes, and a
+// position-less DISSIPATED outlook. Distilled from
+// nhc.noaa.gov/archive/2024/al08/al082024.fstadv.001.shtml.
+const PTC_FIX = `ZCZC MIATCMAT3 ALL
+TTAA00 KNHC DDHHMM
+
+POTENTIAL TROPICAL CYCLONE EIGHT FORECAST/ADVISORY NUMBER   1
+NWS NATIONAL HURRICANE CENTER MIAMI FL       AL082024
+2100 UTC SUN SEP 15 2024
+
+POTENTIAL TROP CYCLONE CENTER LOCATED NEAR 32.0N  78.0W AT 15/2100Z
+POSITION ACCURATE WITHIN  30 NM
+
+PRESENT MOVEMENT TOWARD THE NORTHWEST OR 320 DEGREES AT   6 KT
+
+ESTIMATED MINIMUM CENTRAL PRESSURE 1006 MB
+MAX SUSTAINED WINDS  40 KT WITH GUSTS TO  50 KT.
+
+REPEAT...CENTER LOCATED NEAR 32.0N  78.0W AT 15/2100Z
+AT 15/1800Z CENTER WAS LOCATED NEAR 31.8N  77.8W
+
+FORECAST VALID 16/0600Z 32.4N  78.7W...TROPICAL CYCLONE
+MAX WIND  40 KT...GUSTS  50 KT.
+
+FORECAST VALID 16/1800Z 33.1N  79.4W...INLAND
+MAX WIND  45 KT...GUSTS  55 KT.
+
+FORECAST VALID 17/0600Z 34.1N  80.0W...POST-TROPICAL
+MAX WIND  25 KT...GUSTS  35 KT.
+
+OUTLOOK VALID 19/1800Z...DISSIPATED
+
+$$`;
+
+const ptc = P.parseTCM(PTC_FIX);
+ok('PTC: header parsed', ptc && ptc.classification === 'Potential Tropical Cyclone' &&
+  ptc.name === 'Eight' && ptc.stormId === 'AL082024' && ptc.advisory === 1);
+ok('PTC: initial center wins over prior-position line',
+  ptc && ptc.center.lat === 32 && ptc.center.lon === -78 && ptc.issued === '15/2100Z');
+ok('PTC: positioned points only (dissipated outlook excluded)',
+  ptc && ptc.track.length === 3 && ptc.track.map(p => p.hours).join(',') === '9,21,33');
+ok('PTC: post-tropical track suffix tagged', ptc && ptc.track[2].state === 'post-tropical');
+ok('PTC: issuance header line extracted', ptc && ptc.issuedHeader === '2100 UTC SUN SEP 15 2024');
 
 // --- cone geometry -------------------------------------------------------------
 
@@ -284,6 +505,59 @@ ok('cone: ring is a simple polygon (no self-intersection)', (() => {
   }
   return true;
 })());
+
+// --- issuance time parsing -----------------------------------------------------
+
+const iss1 = P.parseIssued('805 AM EDT Mon Jul 7 2026');
+ok('issued: EDT 12-hour to UTC (8:05 EDT = 12:05Z)',
+  iss1 && iss1.getTime() === Date.UTC(2026, 6, 7, 12, 5));
+const iss2 = P.parseIssued('0300 UTC MON SEP 11 2023');
+ok('issued: UTC 24-hour passthrough',
+  iss2 && iss2.getTime() === Date.UTC(2023, 8, 11, 3, 0));
+ok('issued: 12:30 AM EST is 05:30Z (midnight-hour wrap)',
+  (() => { const d = P.parseIssued('1230 AM EST Tue Dec 1 2026');
+    return d && d.getTime() === Date.UTC(2026, 11, 1, 5, 30); })());
+ok('issued: 12:15 PM AST is 16:15Z (noon-hour + Atlantic offset)',
+  (() => { const d = P.parseIssued('1215 PM AST Wed Aug 5 2026');
+    return d && d.getTime() === Date.UTC(2026, 7, 5, 16, 15); })());
+ok('issued: unknown zone returns null (no guessing)',
+  P.parseIssued('805 AM XYZ Mon Jul 7 2026') === null);
+ok('issued: garbage/empty return null',
+  P.parseIssued('not a timestamp') === null && P.parseIssued('') === null);
+
+// --- committed archive corpus (fixtures/ + fixtures/expected.json) --------------
+// Real archived NHC products with pinned parser snapshots. A failing snapshot
+// means parser behavior changed on real-world text: if the change is deliberate,
+// regenerate with `node tools/archive-audit.js --save-fixtures` (network,
+// dev-only) and review the diff; never hand-edit expected.json.
+
+const SUM = require('./tools/corpus-summary.js');
+const FIXDIR = __dirname + '/fixtures';
+const EXP = JSON.parse(fs.readFileSync(FIXDIR + '/expected.json', 'utf8'));
+
+for (const [type, summarize, parseFn] of [
+  ['tcm', SUM.summarizeTCM, (t) => P.parseTCM(t)],
+  ['twdat', SUM.summarizeTWDAT, (t) => P.parse(t)],
+]) {
+  for (const [file, want] of Object.entries(EXP[type])) {
+    const txt = fs.readFileSync(FIXDIR + '/' + file, 'utf8');
+    // CRLF would silently change parse results; .gitattributes pins these to LF,
+    // and this assertion turns a misconfigured checkout into one loud failure.
+    ok('corpus ' + file + ': LF only (see .gitattributes)', !/\r/.test(txt));
+    const got = summarize(parseFn(txt));
+    const same = JSON.stringify(got) === JSON.stringify(want.snap);
+    ok('corpus ' + file + ': snapshot (' + want.covers + ')', same);
+    if (!same) {
+      console.log('       want ' + JSON.stringify(want.snap));
+      console.log('       got  ' + JSON.stringify(got));
+    }
+  }
+}
+
+ok('corpus: every fixtures/*.txt has expectations',
+  fs.readdirSync(FIXDIR)
+    .filter((f) => f.endsWith('.txt'))
+    .every((f) => EXP.tcm[f] || EXP.twdat[f]));
 
 // --- app version (single source, CalVer) ---------------------------------------
 

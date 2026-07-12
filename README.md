@@ -35,6 +35,11 @@ python3 -m http.server 8000   # open http://localhost:8000
 node test.js
 ```
 
+Runs the parser suite plus snapshot checks against a committed corpus of real
+archived NHC products (`fixtures/`). GitHub Actions runs the same command on
+every push to `main` and every pull request, and PRs also enforce the
+version-bump guard.
+
 ## Deploy to GitHub Pages
 
 1. Push these files to the root of `main`.
@@ -46,6 +51,7 @@ node test.js
 
 | Badge  | Meaning |
 |--------|---------|
+| LOADING | a fetch is in flight; resolves to one of the states below |
 | LIVE   | fresh product from api.weather.gov |
 | CACHED | network unreachable; showing last stored product |
 | SAMPLE | API unavailable and nothing cached; embedded fallback |

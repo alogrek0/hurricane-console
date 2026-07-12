@@ -32,6 +32,19 @@
   // A paired coordinate token like 14N76W or 08N27W (lat first, lon second).
   const RE_PAIR = /(\d{1,2}(?:\.\d)?)\s*([NS])\s*(\d{1,3}(?:\.\d)?)\s*([EW])/g;
 
+  // A single explicit coordinate token like "61W", "18N", "5.5S" — used to
+  // detect sentences the gazetteer must NOT touch. Unlike RE_PAIR this fires on
+  // a lone lat OR lon, so "along 61W-62W, south of 18N" is recognised as coord-
+  // positioned even though its lat and lon never appear adjacently as a pair.
+  const RE_COORD_TOKEN = /\b\d{1,3}(?:\.\d)?\s*[NSEW]\b/;
+
+  // Feature nouns that mean a sentence is actually introducing/locating a
+  // system, not just mentioning a place in passing. Bare "area"/"disturbed"
+  // (NOT the two-word "area of") so CLAUDE.md's canonical case "a disturbed
+  // area between Hispaniola and the southeastern Bahamas bears watching" still
+  // infers, while pure narrative ("trades over the Gulf of Honduras") does not.
+  const RE_FEATURE_NOUN = /\b(?:wave|low|disturbance|disturbed|trough|area|system|gyre)\b/i;
+
   function pairsIn(text) {
     const out = [];
     let m;
@@ -221,12 +234,22 @@
       const flat = chunk.replace(/\n/g, ' ').replace(/\s+/g, ' ').trim();
       const axis = [];
 
-      // "along 46W south of 17N" / "axis along 22W from 05N to 17N"
-      let m = flat.match(/along\s+(\d{1,3}(?:\.\d)?)\s*([EW])/i);
+      // Axis longitude. Real TWDATs vary the phrasing widely — "axis along 22W",
+      // "is along 33W", "is near 39W", "has its axis near 46W" — and sometimes give
+      // a span "along 61W-62W". Anchor on the first along/near longitude in the
+      // chunk (the axis is stated before any convection), averaging a span.
+      let m = flat.match(
+        /\b(?:along|near)\s+(\d{1,3}(?:\.\d)?)\s*([EW])(?:\s*(?:-|to)\s*(\d{1,3}(?:\.\d)?)\s*([EW]))?/i
+      );
       if (m) {
-        const lo = lon(m[1], m[2]);
-        const south = flat.match(/south of\s+(\d{1,2}(?:\.\d)?)\s*([NS])/i);
-        const range = flat.match(/from\s+(\d{1,2}(?:\.\d)?)\s*([NS])\s+to\s+(\d{1,2}(?:\.\d)?)\s*([NS])/i);
+        const lo = m[3] ? (lon(m[1], m[2]) + lon(m[3], m[4])) / 2 : lon(m[1], m[2]);
+        // Southern extent: "south of 17N" and the abbreviated "S of 17N".
+        const south = flat.match(/\b(?:south|s)\s+of\s+(\d{1,2}(?:\.\d)?)\s*([NS])/i);
+        // Latitude span: "from 05N to 17N", or the hyphenated "from 12-19N". The
+        // negative lookahead skips a "from A to B between C and D" phrase — that's
+        // a convection box (longitude-bounded by "between"), not the wave axis.
+        const range = flat.match(/from\s+(\d{1,2}(?:\.\d)?)\s*([NS])\s+to\s+(\d{1,2}(?:\.\d)?)\s*([NS])(?!\s*,?\s*between)/i);
+        const hrange = flat.match(/from\s+(\d{1,2}(?:\.\d)?)\s*-\s*(\d{1,2}(?:\.\d)?)\s*([NS])(?!\s*,?\s*between)/i);
         if (range) {
           // North end first, matching the "south of" branch, so axis[0] is a
           // consistent projection origin regardless of phrasing.
@@ -234,6 +257,10 @@
           const p2 = { lat: lat(range[3], range[4]), lon: lo };
           axis.push(p1.lat >= p2.lat ? p1 : p2);
           axis.push(p1.lat >= p2.lat ? p2 : p1);
+        } else if (hrange) {
+          const a = lat(hrange[1], hrange[3]), b = lat(hrange[2], hrange[3]);
+          axis.push({ lat: Math.max(a, b), lon: lo });
+          axis.push({ lat: Math.min(a, b), lon: lo });
         } else if (south) {
           const top = lat(south[1], south[2]);
           axis.push({ lat: top, lon: lo });
@@ -261,7 +288,7 @@
   // SPECIAL FEATURES: active tropical cyclones. Case-insensitive because
   // archived TWDATs are ALL CAPS; the captured name is title-cased.
   const RE_CYCLONE =
-    /\b(Hurricane|Tropical Storm|Tropical Depression|Subtropical Storm|Subtropical Depression|Post-Tropical Cyclone|Remnants of)\s+([A-Z][A-Za-z]+(?:-[A-Za-z]+)?)/i;
+    /\b(Hurricane|Tropical Storm|Tropical Depression|Subtropical Storm|Subtropical Depression|Potential Tropical Cyclone|Post-Tropical Cyclone|Remnants of)\s+([A-Z][A-Za-z]+(?:-[A-Za-z]+)?)/i;
 
   function titleCase(s) {
     return s.replace(/\w\S*/g, (w) => w[0].toUpperCase() + w.slice(1).toLowerCase());
@@ -283,7 +310,9 @@
       else pos = pairsIn(flat)[0] || null;
       if (!pos) return;
 
-      const wm = flat.match(/max(?:imum)? sustained winds?(?:\s+speed)?(?:\s+(?:is|are|of))?\s*(?:near\s+)?(\d{1,3})\s*kt/i);
+      // "winds are 90 kt" / "wind speed is 120 kt" / "wind speeds are 30 knots"
+      // all occur in real TWDATs (the last is Subtropical Depression Don, Jul 2023)
+      const wm = flat.match(/max(?:imum)? sustained winds?(?:\s+speeds?)?(?:\s+(?:is|are|of))?\s*(?:near\s+)?(\d{1,3})\s*k(?:t|nots?)\b/i);
       const pm = flat.match(/(?:minimum central\s+)?pressure(?:\s+is)?(?:\s+estimated(?:\s+to be)?)?\D{0,15}(\d{3,4})\s*mb/i)
         || flat.match(/(\d{3,4})\s*mb/);
 
@@ -374,6 +403,14 @@
     secText.split(/(?<=[.])\s+/).forEach((sent) => {
       if (RE_PAIR.test(sent)) { RE_PAIR.lastIndex = 0; return; }
       RE_PAIR.lastIndex = 0;
+      // (a) A sentence positioned by an explicit coordinate token (even a lone
+      // "61W" or "18N" with no paired mate) is not the gazetteer's job. Emitting
+      // no dot is more honest than force-fitting it to a coarse place centroid.
+      if (RE_COORD_TOKEN.test(sent)) return;
+      // (b) Only infer when the sentence actually introduces/locates a feature.
+      // Otherwise a place merely named in narrative ("trades over the Gulf of
+      // Honduras will pulse") gets a spurious dot.
+      if (!RE_FEATURE_NOUN.test(sent)) return;
       const g = gazResolve(sent);
       if (g) {
         feats.push({
@@ -470,7 +507,7 @@
   function parseTCM(raw) {
     const text = dehyphenate(String(raw || ''));
     const head = text.match(
-      /\b(HURRICANE|TROPICAL STORM|TROPICAL DEPRESSION|SUBTROPICAL STORM|SUBTROPICAL DEPRESSION|POST-TROPICAL CYCLONE|REMNANTS OF)\s+([A-Z][A-Za-z-]+)\s+(?:SPECIAL\s+)?FORECAST\/ADVISORY\s+NUMBER\s+(\d+)/i
+      /\b(HURRICANE|TROPICAL STORM|TROPICAL DEPRESSION|SUBTROPICAL STORM|SUBTROPICAL DEPRESSION|POTENTIAL TROPICAL CYCLONE|POST-TROPICAL CYCLONE|REMNANTS OF)\s+([A-Z][A-Za-z-]+)\s+(?:SPECIAL\s+)?FORECAST\/ADVISORY\s+NUMBER\s+(\d+)/i
     );
     const ctr = text.match(
       /CENTER LOCATED NEAR\s+(\d{1,2}(?:\.\d)?)\s*([NS])\s+(\d{1,3}(?:\.\d)?)\s*([EW])\s+AT\s+(\d{2})\/(\d{2})(\d{2})Z/i
@@ -510,6 +547,9 @@
       advisory: parseInt(head[3], 10),
       center: { lat: lat(ctr[1], ctr[2].toUpperCase()), lon: lon(ctr[3], ctr[4].toUpperCase()) },
       issued: ctr[5] + '/' + ctr[6] + ctr[7] + 'Z',
+      // Full issuance header ("2100 UTC SUN SEP 15 2024") — unlike the DD/HHMMZ
+      // stamp above, this is a line parseIssued can turn into a Date.
+      issuedHeader: (text.match(/\b\d{3,4}\s+UTC\s+[A-Za-z]{3}\s+[A-Za-z]{3}\s+\d{1,2}\s+\d{4}\b/) || [null])[0],
       windKt: wm ? parseInt(wm[1], 10) : null,
       gustKt: wm && wm[2] ? parseInt(wm[2], 10) : null,
       pressureMb: pm ? parseInt(pm[1], 10) : null,
@@ -588,6 +628,46 @@
     return ring;
   }
 
+  // --- issuance time ---------------------------------------------------------
+  // Turn an NHC product issuance line into a UTC Date. Two shapes occur:
+  //   "805 AM EDT Mon Jul 7 2026"   (TWDAT/TWOAT: 12-hour clock + AM/PM)
+  //   "0300 UTC MON SEP 11 2023"    (TCM: 24-hour, zero-padded)
+  // The 3-4 digit clump is HMM/HHMM; the zone abbreviation carries the offset.
+  // Returns null (never a guess) when the line doesn't match or names a zone we
+  // don't know, so the caller can fall back to showing the raw header text.
+  const TZ_UTC_OFFSET_MIN = {
+    UTC: 0, GMT: 0, Z: 0,
+    AST: 240, ADT: 180,   // Atlantic
+    EST: 300, EDT: 240,   // Eastern
+    CST: 360, CDT: 300,   // Central
+    MST: 420, MDT: 360,   // Mountain
+    PST: 480, PDT: 420,   // Pacific
+    HST: 600,
+  };
+  const MONTHS = { jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5,
+                   jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11 };
+
+  function parseIssued(str) {
+    const m = String(str || '').match(
+      /(\d{3,4})\s*(AM|PM)?\s*([A-Z]{1,4})\s+[A-Za-z]{3,}\s+([A-Za-z]{3})[A-Za-z]*\s+(\d{1,2})\s+(\d{4})/i
+    );
+    if (!m) return null;
+    const offMin = TZ_UTC_OFFSET_MIN[m[3].toUpperCase()];
+    const mon = MONTHS[m[4].toLowerCase()];
+    if (offMin == null || mon == null) return null; // unknown zone/month -> no guess
+
+    const clump = m[1];
+    let hh = parseInt(clump.slice(0, clump.length - 2), 10);
+    const mm = parseInt(clump.slice(-2), 10);
+    const ap = m[2] && m[2].toUpperCase();
+    if (ap === 'PM' && hh < 12) hh += 12;
+    if (ap === 'AM' && hh === 12) hh = 0;
+
+    const day = parseInt(m[5], 10), year = parseInt(m[6], 10);
+    // stated wall-clock time is local to the zone; add its offset to reach UTC
+    return new Date(Date.UTC(year, mon, day, hh, mm) + offMin * 60000);
+  }
+
   // --- orchestration ---------------------------------------------------------
 
   // Dead-reckon +24h from a point with stated motion; shared by waves and
@@ -621,15 +701,23 @@
       const isITCZ = /ITCZ|MONSOON|TROUGH/i.test(s.name);
       // SPECIAL FEATURES paragraphs become typed cyclones; suppress the generic
       // fix/gazetteer passes there so a named center doesn't double-register.
+      // Some real TWDATs carry no SPECIAL FEATURES section at all and describe
+      // active cyclones in the preamble instead (e.g. Franklin + Idalia,
+      // TWDAT 29 Aug 2023), so the cyclone pass covers the preamble too.
       const isSpecial = /SPECIAL FEATURE/i.test(s.name);
-      if (isSpecial) result.cyclones.push(...extractCyclones(s.text, s.name));
+      const isPreamble = s.name === 'PREAMBLE';
+      let cycs = [];
+      if (isSpecial || isPreamble) {
+        cycs = extractCyclones(s.text, s.name);
+        result.cyclones.push(...cycs);
+      }
       if (isWave) result.waves.push(...extractWaves(s.text, s.name));
       result.convection.push(...extractConvection(s.text));
       if (isITCZ || /TROUGH/i.test(s.text)) result.troughs.push(...extractTroughs(s.text, s.name));
-      if (!isSpecial) result.fixes.push(...extractFixes(s.text));
+      if (!isSpecial && !cycs.length) result.fixes.push(...extractFixes(s.text));
       // The preamble is product boilerplate ("...to the African coast...");
       // running the gazetteer over it only manufactures phantom positions.
-      if (s.name !== 'PREAMBLE' && !isSpecial) result.inferred.push(...extractInferred(s.text));
+      if (!isPreamble && !isSpecial) result.inferred.push(...extractInferred(s.text));
     }
 
     // Pass 3: dead-reckon +24h for every wave and cyclone that stated motion.
@@ -644,6 +732,6 @@
     return result;
   }
 
-  root.BasinParser = { parse, parseTWO, parseTCM, coneFromTrack, pairsIn, sections, dehyphenate, parseMotion, project };
+  root.BasinParser = { parse, parseTWO, parseTCM, parseIssued, coneFromTrack, pairsIn, sections, dehyphenate, parseMotion, project };
   if (typeof module !== 'undefined' && module.exports) module.exports = root.BasinParser;
 })(typeof window !== 'undefined' ? window : globalThis);

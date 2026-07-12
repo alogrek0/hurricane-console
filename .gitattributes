@@ -1,0 +1,9 @@
+# Corpus fixtures must be byte-identical on Windows checkouts (autocrlf) and
+# Linux CI — parser.js never strips \r, so CRLF would change parse results.
+# test.js asserts LF-only per fixture as a backstop.
+fixtures/*.txt         text eol=lf
+fixtures/expected.json text eol=lf
+
+# sh chokes on CRLF; keep shell scripts LF on Windows checkouts too.
+*.sh                   text eol=lf
+tools/hooks/pre-push   text eol=lf
