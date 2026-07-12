@@ -108,9 +108,50 @@
 
   var lineLayer = basemapLayer(['usStates', 'countries', 'coast']).addTo(map);
 
-  var featureLayer = L.layerGroup().addTo(map);
-  var twoLayer = L.layerGroup().addTo(map); // TWO formation areas (mode-exclusive)
-  var tcmLayer = L.layerGroup().addTo(map); // forecast track + cone
+  // One layer group per feature category so the legend can toggle each class
+  // independently. 'fix' has no legend row (small explicit markers, always on).
+  var cat = {};
+  var TWD_CATS = ['trough', 'convection', 'wave', 'cyclone', 'projection', 'fix', 'inferred'];
+  var TCM_CATS = ['track', 'cone', 'wind'];
+  TWD_CATS.concat(TCM_CATS).concat(['two']).forEach(function (k) {
+    cat[k] = L.layerGroup().addTo(map);
+  });
+  function clearCats(keys) { keys.forEach(function (k) { cat[k].clearLayers(); }); }
+
+  // Legend rows carry data-cat="key [key2]"; clicking hides/shows those groups.
+  // Hidden groups still receive features on re-render (they're just not on the
+  // map), so a toggle is never desynced from the data. Choice persists locally.
+  var LAYERS_OFF_KEY = 'hc-layers-off';
+  var offCats = [];
+  try { offCats = JSON.parse(localStorage.getItem(LAYERS_OFF_KEY) || '[]'); } catch (e) { }
+  function setCatVisible(keys, on) {
+    keys.forEach(function (k) {
+      if (!cat[k]) return;
+      if (on) map.addLayer(cat[k]); else map.removeLayer(cat[k]);
+    });
+  }
+  function initLegendToggles() {
+    var rows = Array.prototype.slice.call(document.querySelectorAll('#legend [data-cat]'));
+    rows.forEach(function (row) {
+      var keys = row.getAttribute('data-cat').split(' ');
+      if (keys.every(function (k) { return offCats.indexOf(k) !== -1; })) {
+        row.classList.add('off');
+        setCatVisible(keys, false);
+      }
+      row.addEventListener('click', function () {
+        var turningOff = !row.classList.contains('off');
+        row.classList.toggle('off', turningOff);
+        setCatVisible(keys, !turningOff);
+        keys.forEach(function (k) {
+          var i = offCats.indexOf(k);
+          if (turningOff && i === -1) offCats.push(k);
+          if (!turningOff && i !== -1) offCats.splice(i, 1);
+        });
+        try { localStorage.setItem(LAYERS_OFF_KEY, JSON.stringify(offCats)); } catch (e) { }
+      });
+    });
+  }
+  initLegendToggles();
 
   // --- rendering -------------------------------------------------------------
   function ll(p) { return [p.lat, p.lon]; }
@@ -245,11 +286,11 @@
   setInterval(updateMeta, 60000);
 
   function render(parsed) {
-    featureLayer.clearLayers();
+    clearCats(TWD_CATS);
 
     parsed.troughs.forEach(function (t) {
       L.polyline(t.line.map(ll), { color: '#4fc3d6', weight: 2, dashArray: '1 0' })
-        .bindPopup(popup('TROUGH', t.source, false)).addTo(featureLayer);
+        .bindPopup(popup('TROUGH', t.source, false)).addTo(cat.trough);
     });
 
     parsed.convection.forEach(function (c) {
@@ -257,15 +298,15 @@
         color: c.strong ? '#ff6b5a' : '#ffb98a', weight: 1, dashArray: '3 3',
         fillColor: c.strong ? '#ff6b5a' : '#ff9d6a', fillOpacity: 0.10
       }).bindPopup(popup(c.strong ? 'CONVECTION · STRONG' : 'CONVECTION', c.source, false))
-        .addTo(featureLayer);
+        .addTo(cat.convection);
     });
 
     parsed.waves.forEach(function (w) {
       L.polyline(w.axis.map(ll), { color: '#ffa23a', weight: 3 })
-        .bindPopup(popup('WAVE ' + w.id, w.source, false)).addTo(featureLayer);
+        .bindPopup(popup('WAVE ' + w.id, w.source, false)).addTo(cat.wave);
       // small motion arrowhead label at the axis head
       L.circleMarker(ll(w.axis[0]), { radius: 3, color: '#ffa23a', fillOpacity: 1 })
-        .addTo(featureLayer);
+        .addTo(cat.wave);
     });
 
     // Active cyclones from SPECIAL FEATURES. A stated center IS a fix — solid
@@ -289,37 +330,37 @@
         .bindTooltip(c.name, { permanent: true, direction: 'top', className: 'cyc-label' })
         .bindPopup(popup(c.classification.toUpperCase() + ' ' + c.name.toUpperCase(),
           stats + ' — ' + c.source, false))
-        .addTo(featureLayer);
+        .addTo(cat.cyclone);
     });
 
     parsed.projections.forEach(function (p) {
       var pts = p.band ? [ll(p.slow), ll(p.fast)] : [ll(p.slow)];
       if (p.band) {
         L.polyline([ll(p.from), ll(p.slow)], { color: '#9a86c9', weight: 2, dashArray: '5 4' })
-          .addTo(featureLayer);
+          .addTo(cat.projection);
         L.polyline([ll(p.from), ll(p.fast)], { color: '#9a86c9', weight: 2, dashArray: '5 4' })
-          .addTo(featureLayer);
+          .addTo(cat.projection);
         L.circleMarker(ll(p.slow), { radius: 3, color: '#9a86c9', fillOpacity: .6 })
-          .bindPopup(popup('+24h ' + (p.id || p.waveId) + ' (slow)', p.source, true)).addTo(featureLayer);
+          .bindPopup(popup('+24h ' + (p.id || p.waveId) + ' (slow)', p.source, true)).addTo(cat.projection);
         L.circleMarker(ll(p.fast), { radius: 3, color: '#9a86c9', fillOpacity: .6 })
-          .bindPopup(popup('+24h ' + (p.id || p.waveId) + ' (fast)', p.source, true)).addTo(featureLayer);
+          .bindPopup(popup('+24h ' + (p.id || p.waveId) + ' (fast)', p.source, true)).addTo(cat.projection);
       } else {
         L.polyline([ll(p.from), ll(p.slow)], { color: '#9a86c9', weight: 2, dashArray: '5 4' })
-          .addTo(featureLayer);
+          .addTo(cat.projection);
         L.circleMarker(ll(p.slow), { radius: 3, color: '#9a86c9', fillOpacity: .6 })
-          .bindPopup(popup('+24h ' + (p.id || p.waveId), p.source, true)).addTo(featureLayer);
+          .bindPopup(popup('+24h ' + (p.id || p.waveId), p.source, true)).addTo(cat.projection);
       }
     });
 
     parsed.fixes.forEach(function (f) {
       L.circleMarker(ll(f), { radius: 4, color: '#dce8ef', weight: 1.5, fillOpacity: 0 })
-        .bindPopup(popup('FIX', f.source, false)).addTo(featureLayer);
+        .bindPopup(popup('FIX', f.source, false)).addTo(cat.fix);
     });
 
     parsed.inferred.forEach(function (f) {
       L.circleMarker(ll(f), {
         radius: 5, color: '#9a86c9', weight: 1.5, dashArray: '3 3', fillOpacity: 0
-      }).bindPopup(popup('POSITION', f.source, true)).addTo(featureLayer);
+      }).bindPopup(popup('POSITION', f.source, true)).addTo(cat.inferred);
     });
 
     var nCyc = (parsed.cyclones || []).length;
@@ -334,8 +375,8 @@
   // TWO formation areas: prose locations, so every circle is inferred by
   // definition. Colored by the 7-day chance using NHC's yellow/orange/red.
   function renderTWO(parsed) {
-    featureLayer.clearLayers();
-    twoLayer.clearLayers();
+    clearCats(TWD_CATS);
+    cat.two.clearLayers();
     var unmapped = 0;
     parsed.disturbances.forEach(function (d) {
       if (d.lat == null) { unmapped++; return; } // honest: never invent a spot
@@ -347,7 +388,7 @@
       L.circle(ll(d), {
         radius: 300000, color: color, weight: 2, dashArray: '6 5',
         fillColor: color, fillOpacity: 0.08
-      }).bindPopup(popup(label, d.source, true)).addTo(twoLayer);
+      }).bindPopup(popup(label, d.source, true)).addTo(cat.two);
     });
     var n = parsed.disturbances.length;
     featureLine = plural(n, 'outlook area') +
@@ -503,7 +544,7 @@
   }
 
   function renderTCM(storms) {
-    tcmLayer.clearLayers();
+    clearCats(TCM_CATS);
     (storms || []).forEach(function (s) {
       var pts = [{ hours: 0, lat: s.center.lat, lon: s.center.lon }].concat(s.track);
       var ring = window.BasinParser.coneFromTrack(pts);
@@ -513,7 +554,7 @@
           fillColor: '#dce8ef', fillOpacity: 0.07, interactive: true
         }).bindPopup(popup('CONE ' + s.name.toUpperCase(),
           'Computed from NHC seasonal cone radii - the official cone lives at hurricanes.gov. Advisory #' + s.advisory + ' issued ' + s.issued + '.',
-          true)).addTo(tcmLayer);
+          true)).addTo(cat.cone);
       }
       // current wind field: nested quadrant bands, 34 kt first so the smaller,
       // stronger bands paint on top. Radii are official advisory data (unlike
@@ -530,14 +571,14 @@
           'Official advisory wind radii, nm (largest anywhere in quadrant): NE ' +
           q.ne + ' / SE ' + q.se + ' / SW ' + q.sw + ' / NW ' + q.nw +
           '. Advisory #' + s.advisory + '.', false))
-          .addTo(tcmLayer);
+          .addTo(cat.wind);
       });
       if (s.track.length) {
         L.polyline(pts.map(ll), { color: '#dce8ef', weight: 2 })
           .bindPopup(popup('TRACK ' + s.name.toUpperCase(),
             'NHC forecast/advisory #' + s.advisory + ' - positions at ' +
             s.track[0].hours + '-' + s.track[s.track.length - 1].hours + ' h.', false))
-          .addTo(tcmLayer);
+          .addTo(cat.track);
       }
       s.track.forEach(function (p) {
         L.circleMarker(ll(p), {
@@ -546,7 +587,7 @@
         }).bindPopup(popup('+' + p.hours + 'h · ' + p.validZ,
           (p.windKt != null ? p.windKt + ' kt' : 'wind n/a') +
           (p.state ? ' · ' + p.state : ''), false))
-          .addTo(tcmLayer);
+          .addTo(cat.track);
       });
     });
   }
@@ -561,8 +602,8 @@
     mode = m;
     whichBtn.textContent = mode === 'TWD' ? 'TWD / TWO' : 'TWO / TWD';
     // One badge, one product: never show both products at once.
-    if (mode === 'TWD') twoLayer.clearLayers();
-    else { featureLayer.clearLayers(); tcmLayer.clearLayers(); tcmNote = ''; }
+    if (mode === 'TWD') cat.two.clearLayers();
+    else { clearCats(TWD_CATS.concat(TCM_CATS)); tcmNote = ''; }
   }
   whichBtn.addEventListener('click', function () {
     setMode(mode === 'TWD' ? 'TWO' : 'TWD');
@@ -589,7 +630,7 @@
         // Replace whatever was on screen: a pasted TCM stands alone, so drop the
         // previous product's features and its readout provenance rather than
         // leaving a stale issuance/counts under the PASTED badge.
-        featureLayer.clearLayers();
+        clearCats(TWD_CATS);
         renderTCM([ptcm]);
         featureLine = ptcm.classification + ' ' + ptcm.name + ' · adv ' + ptcm.advisory;
         issuedStr = ptcm.issuedHeader || null; // "2100 UTC SUN SEP 15 2024"
@@ -600,7 +641,7 @@
         renderTWO(window.BasinParser.parseTWO(txt));
       } else {
         setMode('TWD');
-        tcmLayer.clearLayers();
+        clearCats(TCM_CATS);
         tcmNote = '';
         render(window.BasinParser.parse(txt));
       }

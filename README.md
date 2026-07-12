@@ -23,6 +23,9 @@ plots them on an Atlantic basin map. No backend, no build step, no API keys.
 - Draws the storm's current **wind field** from the advisory's per-quadrant
   34/50/64-kt wind radii as nested translucent bands — quadrant steps kept
   sharp because that's the shape the data actually describes.
+- Every legend row is a **layer toggle** — click to hide/show that feature
+  class (waves, convection, inferred positions, cone, wind field, ...);
+  choices persist locally.
 
 ## Run locally
 
