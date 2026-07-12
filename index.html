@@ -94,6 +94,14 @@
     box-shadow:0 4px 18px rgba(0,0,0,.45)}
   #updateBar[hidden]{display:none}
 
+  /* transient refresh feedback ("no new product") — same shelf as updateBar */
+  #toast{position:fixed;left:50%;transform:translateX(-50%);z-index:900;
+    bottom:calc(3.4rem + env(safe-area-inset-bottom));background:var(--panel);
+    border:1px solid var(--line);border-radius:6px;padding:.45rem .7rem;
+    font-size:.78rem;color:var(--dim);box-shadow:0 4px 18px rgba(0,0,0,.45);
+    transition:opacity .3s;pointer-events:none}
+  #toast[hidden]{display:none}
+
   dialog{background:var(--panel);color:var(--ink);border:1px solid var(--line);
     border-radius:8px;max-width:min(560px,92vw);padding:1rem}
   dialog::backdrop{background:rgba(2,10,16,.7)}
@@ -169,6 +177,7 @@
   New version available
   <button id="updateReload" class="primary">Refresh</button>
 </div>
+<div id="toast" hidden></div>
 
 <dialog id="pasteDlg">
   <h2>Paste an NHC product</h2>
