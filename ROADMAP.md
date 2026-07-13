@@ -2,8 +2,13 @@
 
 The session agenda for steady work toward an eventual App Store release.
 
-**How this file is used:** one session ≈ one green PR (batch-merge workflow —
-PRs queue up CI-green, merges happen when a release feels right). The weekly
+**How this file is used:** one session ≈ one green PR, merged as soon as CI
+passes (merge-when-green — deploys are cheap, rollback is a revert, and
+clients pick up updates on the next reload). Queued/stacked PRs are avoided:
+every shell PR bumps the same `version.js` line, so parallel PRs always
+conflict. The one reason to hold a merge is an **active storm** — don't ship
+mid-event while the map is in anger-use; say "hold" and the PR waits green.
+`/ship` runs the whole commit → push → PR → CI → merge flow. The weekly
 Sunday check-in routine reads this file top-down and proposes the **topmost
 unchecked item**; entries in the friction log jump the queue. Check items off
 (`[x]`) in the same PR that completes them.

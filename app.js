@@ -20,11 +20,12 @@
     zoomControl: true, attributionControl: false, worldCopyJump: false,
     maxBoundsViscosity: 1.0, // hard edge: a drag can never overshoot the frame
     // Fractional zoom: the fill-viewport floor leaves only ~2 integer levels
-    // of range, which made wheel zoom feel like an on/off switch. Quarter
-    // steps + a gentler wheel rate give a usable, smooth range.
-    zoomSnap: 0.25, zoomDelta: 0.5, wheelPxPerZoomLevel: 200
+    // of range, which made wheel zoom feel like an on/off switch. Eighth-step
+    // wheel/pinch snap, quarter-step +/- buttons, and a wheel rate of a
+    // quarter-step per notch give a usable, smooth range.
+    zoomSnap: 0.125, zoomDelta: 0.25, wheelPxPerZoomLevel: 400
   });
-  var PAN_BOUNDS = [[-8, -110], [45, 4]];
+  var PAN_BOUNDS = [[-5, -110], [45, 4]]; // 5S hard southern edge — nothing south of it is pannable
   map.setMaxBounds(PAN_BOUNDS);
 
   // Zoom-out floor: the whole basin fits the viewport (chart-fit). Below the
@@ -32,7 +33,7 @@
   // stay labeled so they read as chart borders — and nothing is ever hidden.
   function fitMinZoom() {
     // snap DOWN to the zoomSnap grid so the full basin is guaranteed visible
-    var fit = Math.max(3, Math.floor(map.getBoundsZoom(PAN_BOUNDS, false) * 4) / 4);
+    var fit = Math.max(3, Math.floor(map.getBoundsZoom(PAN_BOUNDS, false) * 8) / 8);
     map.setMinZoom(fit);
     if (map.getZoom() < fit) map.setZoom(fit);
   }
@@ -44,7 +45,7 @@
   // the eastern-Caribbean wave alley; the rest of the basin pans.
   if (map.getSize().x < map.getSize().y) {
     // snap UP to the zoomSnap grid so the basin truly fills (no dark bands)
-    var fill = Math.ceil(map.getBoundsZoom(PAN_BOUNDS, true) * 4) / 4;
+    var fill = Math.ceil(map.getBoundsZoom(PAN_BOUNDS, true) * 8) / 8;
     map.setView([16, -63], fill, { animate: false });
   } else {
     map.setView(L.latLngBounds(PAN_BOUNDS).getCenter(), map.getMinZoom(), { animate: false });
@@ -84,7 +85,7 @@
   for (var la = -5; la <= 45; la += 5) graticule.addLayer(
     L.polyline([[la, -110], [la, 4]], { color: '#0f2f42', weight: 1, interactive: false }));
   for (var lo = -100; lo <= 0; lo += 5) graticule.addLayer(
-    L.polyline([[-8, lo], [45, lo]], { color: '#0f2f42', weight: 1, interactive: false }));
+    L.polyline([[-5, lo], [45, lo]], { color: '#0f2f42', weight: 1, interactive: false }));
 
   // graticule labels: chart-frame style — longitude along the bottom edge,
   // latitude along the left, repositioned as the view moves. Density follows
@@ -105,8 +106,9 @@
     // extends past it
     // 18px keep-out matches the latitude column's bottom margin — enough for
     // the full glyph box + halo even one frame before a size invalidation
-    var yRow = Math.min(size.y - 18, map.latLngToContainerPoint([-10, 0]).y + 9);
-    // (frame bottom stays at 10S; the north edge is 45N)
+    var yRow = Math.min(size.y - 18, map.latLngToContainerPoint([-7, 0]).y + 9);
+    // (the row anchors 2° below the frame's 5S bottom edge, floating in the
+    // letterbox margin when the whole frame is on screen; north edge is 45N)
     var xCol = Math.max(4, map.latLngToContainerPoint([0, -110]).x + 6);
     for (var lo = -100; lo <= 0; lo += 5) {
       if (lo % step || lo < b.getWest() || lo > b.getEast()) continue;
