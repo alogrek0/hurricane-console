@@ -114,6 +114,8 @@
   /* --- phone layout (no breakpoint existed before this; desktop untouched) --- */
   .legend .caret{display:none}
   @media (max-width:520px){
+    /* shorter button labels so all four fit one toolbar row (saves a row of map) */
+    .wide{display:none}
     /* legend collapses to a chip; app.js adds/removes .collapsed */
     .legend{cursor:pointer}
     .legend b{margin-bottom:.2rem}
@@ -167,7 +169,7 @@
 
   <div class="toolbar">
     <button id="refresh" class="primary">Refresh</button>
-    <button id="paste">Paste product</button>
+    <button id="paste">Paste<span class="wide"> product</span></button>
     <button id="which">TWD / TWO</button>
     <button id="about" title="What this is — and what it is not">About</button>
     <div class="meta" id="meta">—</div>

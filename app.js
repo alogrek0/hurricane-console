@@ -342,12 +342,24 @@
   // Relative age drifts as a storm-watching tab sits open; refresh each minute.
   setInterval(updateMeta, 60000);
 
+  // A 2-3px polyline is a hopeless touch target. Pair every tappable line
+  // with an invisible 16px twin and bind the popup to the pair — a near-miss
+  // tap still opens it. The twin lives in the same category group, so the
+  // legend toggle hides both.
+  function tapline(latlngs, style, html) {
+    var g = L.featureGroup([
+      L.polyline(latlngs, style),
+      L.polyline(latlngs, { weight: 16, opacity: 0 })
+    ]);
+    return html ? g.bindPopup(html, POPUP_OPTS) : g;
+  }
+
   function render(parsed) {
     clearCats(TWD_CATS);
 
     parsed.troughs.forEach(function (t) {
-      L.polyline(t.line.map(ll), { color: '#4fc3d6', weight: 2, dashArray: '1 0' })
-        .bindPopup(popup('TROUGH', t.source, false, t.context, t.srcSection), POPUP_OPTS)
+      tapline(t.line.map(ll), { color: '#4fc3d6', weight: 2, dashArray: '1 0' },
+        popup('TROUGH', t.source, false, t.context, t.srcSection))
         .addTo(cat.trough);
     });
 
@@ -361,8 +373,8 @@
     });
 
     parsed.waves.forEach(function (w) {
-      L.polyline(w.axis.map(ll), { color: '#ffa23a', weight: 3 })
-        .bindPopup(popup('WAVE ' + w.id, w.source, false, w.context, w.srcSection), POPUP_OPTS)
+      tapline(w.axis.map(ll), { color: '#ffa23a', weight: 3 },
+        popup('WAVE ' + w.id, w.source, false, w.context, w.srcSection))
         .addTo(cat.wave);
       // small motion arrowhead label at the axis head
       L.circleMarker(ll(w.axis[0]), { radius: 3, color: '#ffa23a', fillOpacity: 1 })
@@ -396,16 +408,19 @@
     parsed.projections.forEach(function (p) {
       var pts = p.band ? [ll(p.slow), ll(p.fast)] : [ll(p.slow)];
       if (p.band) {
-        L.polyline([ll(p.from), ll(p.slow)], { color: '#9a86c9', weight: 2, dashArray: '5 4' })
+        tapline([ll(p.from), ll(p.slow)], { color: '#9a86c9', weight: 2, dashArray: '5 4' },
+          popup('+24h ' + (p.id || p.waveId) + ' (slow)', p.source, true, p.context, p.srcSection))
           .addTo(cat.projection);
-        L.polyline([ll(p.from), ll(p.fast)], { color: '#9a86c9', weight: 2, dashArray: '5 4' })
+        tapline([ll(p.from), ll(p.fast)], { color: '#9a86c9', weight: 2, dashArray: '5 4' },
+          popup('+24h ' + (p.id || p.waveId) + ' (fast)', p.source, true, p.context, p.srcSection))
           .addTo(cat.projection);
         L.circleMarker(ll(p.slow), { radius: 3, color: '#9a86c9', fillOpacity: .6 })
           .bindPopup(popup('+24h ' + (p.id || p.waveId) + ' (slow)', p.source, true, p.context, p.srcSection), POPUP_OPTS).addTo(cat.projection);
         L.circleMarker(ll(p.fast), { radius: 3, color: '#9a86c9', fillOpacity: .6 })
           .bindPopup(popup('+24h ' + (p.id || p.waveId) + ' (fast)', p.source, true, p.context, p.srcSection), POPUP_OPTS).addTo(cat.projection);
       } else {
-        L.polyline([ll(p.from), ll(p.slow)], { color: '#9a86c9', weight: 2, dashArray: '5 4' })
+        tapline([ll(p.from), ll(p.slow)], { color: '#9a86c9', weight: 2, dashArray: '5 4' },
+          popup('+24h ' + (p.id || p.waveId), p.source, true, p.context, p.srcSection))
           .addTo(cat.projection);
         L.circleMarker(ll(p.slow), { radius: 3, color: '#9a86c9', fillOpacity: .6 })
           .bindPopup(popup('+24h ' + (p.id || p.waveId), p.source, true, p.context, p.srcSection), POPUP_OPTS).addTo(cat.projection);
@@ -663,8 +678,8 @@
           .addTo(cat.wind);
       });
       if (s.track.length) {
-        L.polyline(pts.map(ll), { color: '#dce8ef', weight: 2 })
-          .bindPopup(popup('TRACK ' + s.name.toUpperCase(),
+        tapline(pts.map(ll), { color: '#dce8ef', weight: 2 },
+          popup('TRACK ' + s.name.toUpperCase(),
             'NHC forecast/advisory #' + s.advisory + ' - positions at ' +
             s.track[0].hours + '-' + s.track[s.track.length - 1].hours + ' h.', false))
           .addTo(cat.track);
