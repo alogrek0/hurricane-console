@@ -13,7 +13,13 @@ unchecked item**; entries in the friction log jump the queue. Check items off
 Real-usage annoyances from actual storm-watching. Anything here outranks the
 planned tracks — lived friction beats speculation.
 
-- (empty — add items as they come up)
+- [x] **Update banner lags deploys by up to 10 min** (2026-07-13) — after
+  merging the graticule-label fix, a plain reload didn't surface the new
+  version; a shift-refresh was needed. Cause: `register('sw.js')` defaults to
+  `updateViaCache:'imports'`, so update checks refetched `sw.js` (unchanged)
+  but took `version.js` — the actual update signal — from the HTTP cache
+  (GitHub Pages `max-age=600`). Fixed same day: register with
+  `updateViaCache:'none'`.
 
 ## Track A — Features
 

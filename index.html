@@ -201,7 +201,10 @@
 <script>
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', function () {
-      navigator.serviceWorker.register('sw.js').then(function (reg) {
+      // updateViaCache 'none': update checks must refetch version.js too —
+      // most deploys bump only the version import, not sw.js itself, and
+      // GitHub Pages' max-age=600 otherwise hides the change for 10 minutes
+      navigator.serviceWorker.register('sw.js', { updateViaCache: 'none' }).then(function (reg) {
         // A new SW reaching "installed" while an old one controls this page
         // means fresh shell files are cached — offer a one-tap refresh instead
         // of silently running stale code until the next visit.
