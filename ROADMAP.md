@@ -28,7 +28,7 @@ planned tracks — lived friction beats speculation.
 
 ## Track A — Features
 
-- [ ] **Product-history scrubber** — fetch the last ~8 TWDAT/TWO issuances and
+- [x] **Product-history scrubber** — fetch the last ~8 TWDAT/TWO issuances and
   step through time; watch waves march and formation odds evolve. Pairs
   naturally with an invest alert ("what changed since yesterday?").
 - [ ] **Tide-gauge overlay (Charleston/Lowcountry)** — NOAA CO-OPS
