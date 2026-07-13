@@ -50,6 +50,16 @@
     map.setView(L.latLngBounds(PAN_BOUNDS).getCenter(), map.getMinZoom(), { animate: false });
   }
   window.addEventListener('resize', fitMinZoom);
+  // The map container also resizes WITHOUT a window resize — the toolbar grows
+  // when the readout fills in after a fetch — and Leaflet only watches the
+  // window, so its cached size goes stale and bottom-pinned graticule labels
+  // drift under the clipped edge. Watch the container itself.
+  if (window.ResizeObserver) {
+    new ResizeObserver(function () {
+      map.invalidateSize({ animate: false });
+      fitMinZoom();
+    }).observe(map.getContainer());
+  }
 
   // All-vector basemap, generated from Natural Earth (see tools/build-basemap.js).
   // Land fill sits under the graticule; line work (coast, borders) above it.
@@ -93,7 +103,9 @@
     // pin rows to the chart margin: just under the frame's bottom edge and
     // just inside its left edge, clamped to the viewport when the frame
     // extends past it
-    var yRow = Math.min(size.y - 12, map.latLngToContainerPoint([-10, 0]).y + 9);
+    // 18px keep-out matches the latitude column's bottom margin — enough for
+    // the full glyph box + halo even one frame before a size invalidation
+    var yRow = Math.min(size.y - 18, map.latLngToContainerPoint([-10, 0]).y + 9);
     // (frame bottom stays at 10S; the north edge is 45N)
     var xCol = Math.max(4, map.latLngToContainerPoint([0, -110]).x + 6);
     for (var lo = -100; lo <= 0; lo += 5) {
