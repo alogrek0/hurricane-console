@@ -32,8 +32,9 @@ Merging to `main` IS the deploy (GitHub Pages serves `main`), so a completed
 5. **PR**: `gh pr create` with a `## Summary` and `## Verification` body,
    ending with the "Generated with Claude Code" line.
 6. **Wait for CI**: `gh pr checks <n> --watch --fail-fast` (the suite takes
-   ~1 min). If a check fails: report the failure output, leave the PR open,
-   and STOP — do not merge.
+   ~1 min). Right after PR creation it can error with "no checks reported" —
+   the job hasn't registered yet; wait ~15s and retry. If a check fails:
+   report the failure output, leave the PR open, and STOP — do not merge.
 7. **Merge** (skip when the user said "hold"): `gh pr merge <n> --merge`
    (merge commit, matching the repo's history), then
    `git checkout main && git pull`, and delete the local + remote branch.
