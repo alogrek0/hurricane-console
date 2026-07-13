@@ -700,6 +700,10 @@
     mode === 'TWD' ? loadTWD() : loadTWO();
   });
 
+  var aboutDlg = document.getElementById('aboutDlg');
+  document.getElementById('about').addEventListener('click', function () { aboutDlg.showModal(); });
+  document.getElementById('aboutClose').addEventListener('click', function () { aboutDlg.close(); });
+
   var dlg = document.getElementById('pasteDlg');
   document.getElementById('paste').addEventListener('click', function () {
     document.getElementById('pasteText').value = '';

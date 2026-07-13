@@ -145,7 +145,7 @@
       <path d="M12 9.6 C7 8 5.5 12 7.2 15" fill="none" stroke="#ffa23a" stroke-width="1.6" stroke-linecap="round"/>
       <path d="M12 14.4 C17 16 18.5 12 16.8 9" fill="none" stroke="#ffa23a" stroke-width="1.6" stroke-linecap="round"/>
     </svg>
-    <h1>Hurricane Console<small>NHC TWDAT · ATLANTIC</small></h1>
+    <h1>Hurricane Console<small>NHC TWDAT · ATLANTIC · UNOFFICIAL</small></h1>
     <span id="badge" class="badge SAMPLE">SAMPLE</span>
   </header>
 
@@ -169,6 +169,7 @@
     <button id="refresh" class="primary">Refresh</button>
     <button id="paste">Paste product</button>
     <button id="which">TWD / TWO</button>
+    <button id="about" title="What this is — and what it is not">About</button>
     <div class="meta" id="meta">—</div>
   </div>
 </div>
@@ -178,6 +179,27 @@
   <button id="updateReload" class="primary">Refresh</button>
 </div>
 <div id="toast" hidden></div>
+
+<dialog id="aboutDlg">
+  <h2>About Hurricane Console</h2>
+  <p style="color:var(--dim);font-size:.78rem;line-height:1.55;margin:.4rem 0 .5rem">
+    Parses the National Hurricane Center's <em>Tropical Weather Discussion</em> —
+    the forecasters' own written reasoning — into map features, entirely in your
+    browser. Solid shapes come from explicit coordinates in the text; dashed
+    <span style="color:var(--inferred)">◇ INFERRED</span> shapes are best-guess
+    positions read from prose, and are drawn differently on purpose.
+  </p>
+  <p style="font-size:.78rem;line-height:1.55;margin:0 0 .6rem">
+    <strong>Unofficial — not for life-safety decisions.</strong> This is a
+    visualization aid built on a heuristic parser; it can misread or miss
+    features. Always follow the official products at
+    <a class="link" href="https://www.hurricanes.gov" target="_blank" rel="noopener">hurricanes.gov</a>
+    and the guidance of your local emergency management.
+  </p>
+  <div class="row">
+    <button id="aboutClose" class="primary">Close</button>
+  </div>
+</dialog>
 
 <dialog id="pasteDlg">
   <h2>Paste an NHC product</h2>
