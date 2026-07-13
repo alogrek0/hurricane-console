@@ -3,7 +3,8 @@
  * Fetches the newest Atlantic TWDAT/TWOAT from api.weather.gov, parses it in the
  * browser, and renders the features on a Leaflet map drawn from an embedded
  * all-vector Natural Earth basemap (land, coast, borders). The header badge always
- * tells the truth about the data source: LIVE / CACHED / SAMPLE / PASTED / ERROR.
+ * tells the truth about the data source: LIVE / CACHED / SAMPLE / PASTED / ERROR /
+ * HISTORY (deliberately viewing a past issuance via the scrubber).
  */
 (function () {
   'use strict';
@@ -481,6 +482,7 @@
     b.className = 'badge ' + state;
     b.textContent = state;
     updateMeta(); // reflect the resolved provenance (e.g. show/hide next-update)
+    updateScrub(); // scrubber visibility follows the badge (hidden unless LIVE/CACHED/HISTORY)
   }
 
   // api.weather.gov's product types are 3-letter AWIPS categories (TWD, TWO)
@@ -536,6 +538,7 @@
   }
 
   function loadTWD(fromUser) {
+    resetHistory();
     setBadge('LOADING'); // in-flight; resolves to the real source below
     fetchLatestMatching(TWD_URL, 'TWDAT', 8).then(function (res) {
       if (!res.text) throw new Error('empty');
@@ -568,6 +571,7 @@
   }
 
   function loadTWO(fromUser) {
+    resetHistory();
     setBadge('LOADING'); // in-flight; resolves to the real source below
     fetchLatestMatching(TWO_URL, 'TWOAT', 8).then(function (res) {
       if (!res.text) throw new Error('empty');
@@ -604,6 +608,46 @@
             .catch(function (e) { console.warn('TCM product fetch failed', e); return ''; });
         }));
       });
+    });
+  }
+
+  // --- product history (scrubber) --------------------------------------------
+  // Lazy: nothing extra is fetched until the first ◀ tap. The TWD/TWO lists mix
+  // basins and offices (TWDAT + TWDEP + ...), so scan the newest HIST_SCAN items
+  // in parallel (same shape as fetchRecent) and keep the newest HIST_KEEP that
+  // carry the wanted AWIPS id. Reusing the bare list URL means the SW's data
+  // cache from the initial load can serve the scan offline.
+  var HIST_SCAN = 30;
+  var HIST_KEEP = 8;
+  var hist = { texts: null, idx: 0, srcBadge: null, loading: false, gen: 0 };
+
+  // Every fresh load or mode switch invalidates the scan (gen guards in-flight
+  // fetches against resolving into the new context).
+  function resetHistory() {
+    hist.gen++;
+    hist.texts = null;
+    hist.idx = 0;
+    hist.srcBadge = null;
+    hist.loading = false;
+    updateScrub();
+  }
+
+  function fetchHistory(listUrl, awipsId) {
+    return fetch(listUrl, { headers: { Accept: 'application/ld+json' } }).then(function (r) {
+      if (!r.ok) throw new Error('list ' + r.status);
+      return r.json().then(function (j) {
+        var items = (j['@graph'] || j.features || []).slice(0, HIST_SCAN);
+        return Promise.all(items.map(function (it) {
+          return fetch(it['@id'] || it.id)
+            .then(function (pr) { return pr.json(); })
+            .then(function (p) { return p.productText || ''; })
+            .catch(function () { return ''; });
+        }));
+      });
+    }).then(function (texts) {
+      return texts.filter(function (t) {
+        return t.indexOf(awipsId) !== -1;
+      }).slice(0, HIST_KEEP);
     });
   }
 
@@ -704,6 +748,7 @@
 
   var whichBtn = document.getElementById('which');
   function setMode(m) {
+    resetHistory(); // covers the paste path too — every paste branch calls setMode first
     mode = m;
     whichBtn.textContent = mode === 'TWD' ? 'TWD / TWO' : 'TWO / TWD';
     // One badge, one product: never show both products at once.
@@ -713,6 +758,81 @@
   whichBtn.addEventListener('click', function () {
     setMode(mode === 'TWD' ? 'TWO' : 'TWD');
     mode === 'TWD' ? loadTWD() : loadTWO();
+  });
+
+  // --- history scrubber: ◀ steps back through past issuances, ▶ forward ------
+  var scrubEl = document.getElementById('scrub');
+  var scrubBack = document.getElementById('scrubBack');
+  var scrubFwd = document.getElementById('scrubFwd');
+  var scrubLbl = document.getElementById('scrubLabel');
+
+  function updateScrub() {
+    // Only the fetched-product states can scrub; SAMPLE/PASTED/ERROR/LOADING
+    // have no history list behind them.
+    var show = badgeState === 'LIVE' || badgeState === 'CACHED' || badgeState === 'HISTORY';
+    scrubEl.hidden = !show;
+    if (!show) return;
+    var maxIdx = hist.texts ? hist.texts.length - 1 : null;
+    scrubBack.disabled = hist.loading || (maxIdx !== null && hist.idx >= maxIdx);
+    scrubFwd.disabled = hist.loading || hist.idx === 0;
+    scrubLbl.textContent = hist.loading ? 'loading…'
+      : hist.idx === 0 ? 'latest'
+        : statedTime(issuedStr || '') + ' −' + hist.idx + '/' + maxIdx;
+  }
+
+  function scrubTo(i) {
+    var t = hist.texts[i];
+    var parsed;
+    try {
+      parsed = mode === 'TWD' ? window.BasinParser.parse(t)
+        : window.BasinParser.parseTWO(t);
+    } catch (e) {
+      toast('Could not parse that issuance.');
+      return;
+    }
+    // Leaving the present: the TCM overlay belongs to the CURRENT advisory —
+    // drawing it over a past discussion would lie. Clear before rendering so
+    // the render's updateMeta() already omits the track note. (Clearing, not
+    // hiding: the legend toggle re-shows hidden layers on any click.)
+    if (mode === 'TWD' && hist.idx === 0 && i > 0) { clearCats(TCM_CATS); tcmNote = ''; }
+    var returning0 = i === 0 && hist.idx !== 0;
+    if (mode === 'TWD') render(parsed); else renderTWO(parsed);
+    hist.idx = i;
+    // -0 restores the true source badge captured when the scan started
+    setBadge(i > 0 ? 'HISTORY' : hist.srcBadge);
+    if (returning0 && mode === 'TWD') loadTCM();
+  }
+
+  scrubBack.addEventListener('click', function () {
+    if (hist.texts) {
+      if (hist.idx < hist.texts.length - 1) scrubTo(hist.idx + 1);
+      return;
+    }
+    // First tap: scan the recent list once, then step. Note texts[0] is the
+    // scan's newest — if NOAA issued between load and this tap, -0 will show
+    // that newer text under the badge captured here; network-first transport
+    // keeps the badge truthful, and Refresh self-heals the window.
+    hist.srcBadge = badgeState; // LIVE or CACHED — control is hidden otherwise
+    hist.loading = true;
+    var gen = hist.gen;
+    updateScrub();
+    fetchHistory(mode === 'TWD' ? TWD_URL : TWO_URL, mode === 'TWD' ? 'TWDAT' : 'TWOAT')
+      .then(function (texts) {
+        if (gen !== hist.gen) return; // a refresh/mode switch invalidated this scan
+        hist.loading = false;
+        if (texts.length < 2) { toast('No older issuances found.'); updateScrub(); return; }
+        hist.texts = texts;
+        scrubTo(1);
+      })
+      .catch(function () {
+        if (gen !== hist.gen) return;
+        hist.loading = false;
+        toast('Could not fetch history.');
+        updateScrub();
+      });
+  });
+  scrubFwd.addEventListener('click', function () {
+    if (hist.texts && hist.idx > 0) scrubTo(hist.idx - 1);
   });
 
   var aboutDlg = document.getElementById('aboutDlg');

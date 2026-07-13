@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#071620">
+<meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>Hurricane Console — Atlantic Tropical Weather</title>
@@ -32,6 +33,7 @@
   .badge.LIVE{color:#5fd08a} .badge.CACHED{color:var(--cyan)}
   .badge.SAMPLE{color:var(--amber)} .badge.PASTED{color:var(--inferred)}
   .badge.ERROR{color:var(--strong)}
+  .badge.HISTORY{color:var(--dim)} /* muted slate: archival, deliberately not the feed */
   .badge.LOADING{color:var(--dim);animation:badgePulse 1s ease-in-out infinite}
   @keyframes badgePulse{50%{opacity:.35}}
 
@@ -63,6 +65,20 @@
   .legend [data-cat]{cursor:pointer;user-select:none}
   .legend [data-cat]:hover{color:#fff}
   .legend [data-cat].off{opacity:.35;text-decoration:line-through}
+  /* history scrubber: chip under the zoom control (zoom bottoms out ~75px,
+     ~92px on coarse pointers — 96px clears both). Lat labels may pass under
+     it, same accepted behavior as the zoom control. */
+  .scrub{position:absolute;left:.6rem;top:96px;z-index:500;display:flex;
+    align-items:center;gap:.1rem;background:rgba(9,26,38,.9);
+    border:1px solid var(--line);border-radius:6px;padding:.1rem .2rem;
+    font-size:.7rem;backdrop-filter:blur(3px)}
+  .scrub[hidden]{display:none} /* display:flex defeats [hidden], same as #updateBar */
+  .scrub button{background:transparent;border:none;padding:.25rem .55rem;
+    font-size:.75rem;line-height:1;min-height:0}
+  .scrub button:disabled{opacity:.3;cursor:default}
+  .scrub span{color:var(--dim);letter-spacing:.04em;white-space:nowrap;
+    font-variant-numeric:tabular-nums;min-width:3.2em;text-align:center}
+
   .leaflet-popup-content-wrapper{background:#0c2233;color:var(--ink);border:1px solid var(--line);
     border-radius:6px;font:inherit}
   .leaflet-popup-tip{background:#0c2233}
@@ -134,6 +150,9 @@
   /* touch targets (phones AND tablets) */
   @media (pointer:coarse){
     button{min-height:44px}
+    /* .scrub button overrides the global min-height at higher specificity,
+       so restate both dimensions here for real touch targets */
+    .scrub button{min-width:44px;min-height:44px}
     .legend [data-cat]{min-height:34px;display:flex;align-items:center}
     .leaflet-control-zoom a{width:36px !important;height:36px !important;line-height:36px !important}
   }
@@ -164,6 +183,11 @@
       <div data-cat="track"><span class="swatch" style="border-top-color:#dce8ef"></span>Forecast track</div>
       <div data-cat="cone"><span class="swatch" style="border-top-color:#7ea3b8;border-top-style:dashed"></span>Cone · computed</div>
       <div data-cat="wind"><span class="swatch" style="border-top-color:#ff8749;border-top-width:5px;opacity:.65"></span>Wind field 34/50/64 kt</div>
+    </div>
+    <div class="scrub" id="scrub" hidden>
+      <button id="scrubBack" aria-label="Older issuance">◀</button>
+      <span id="scrubLabel">latest</span>
+      <button id="scrubFwd" aria-label="Newer issuance" disabled>▶</button>
     </div>
   </div>
 
