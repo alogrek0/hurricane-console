@@ -58,6 +58,7 @@ Everything is client side. Files:
 | `.github/workflows/alerts.yml` | invest alerts: twice-hourly cron polls the TWOAT, diffs vs cached state, pushes to ntfy.sh (`NTFY_TOPIC` repo secret; unset = dry-run) |
 | `tools/alert-invests.js` | the alerter: fetch/diff/push; pure logic (stateFromTWO/diffAlerts/formatAlert) unit-tested offline in test.js |
 | `manifest.json`  | PWA manifest |
+| `ROADMAP.md`     | session agenda (features + App Store tracks, friction log, maintenance calendar) — the weekly check-in routine reads it; topmost unchecked item is the default proposal |
 | `test.js`        | node parser test harness (includes the corpus snapshot checks) |
 
 ### The parser (three passes, in `parser.js`)
