@@ -46,6 +46,7 @@ Everything is client side. Files:
 | `parser.js`      | TWDAT text-to-geo engine — runs in browser AND node |
 | `basemap.js`     | embedded Natural Earth 50m basemap: land, coast, country borders, US-only state lines — GENERATED, do not hand-edit (regenerate: `node tools/build-basemap.js`) |
 | `tools/build-basemap.js` | dev-only generator: downloads/clips NE 50m → basemap.js |
+| `tools/make-icons.html` | dev-only icon generator: canvas-draws the header glyph at every icon size (any/maskable/apple + favicon.svg is hand-authored from the same art) — regeneration procedure in the file header |
 | `sample.js`      | embedded Jul 7 2026 TWDAT/TWOAT/TCM fallback (SAMPLE state) |
 | `version.js`     | app version, single source (CalVer) — shared by page, SW, and tests |
 | `sw.js`          | service worker: cache-first shell, network-first data |
@@ -97,7 +98,9 @@ keyword matches survive — this was a real bug; keep the hyphen.
   with `X-From-Cache: 1` so the badge reads **CACHED** honestly.
 - Versioning is CalVer (`YYYY.MM.DD`, `.N` suffix for same-day re-deploys), single
   source in `version.js` — the page shows it in the meta corner, the SW derives its
-  cache names from it, and tests check the format. Bump it whenever any shell file
+  **shell** cache name from it (the data cache is deliberately version-independent —
+  `data-v1`, FIFO-trimmed to ~200 entries — so cached NOAA products survive
+  updates), and tests check the format. Bump it whenever any shell file
   ships. The check lives in `tools/check-version-guard.sh` (the watched-file list
   is defined ONLY there) and runs twice: the committed pre-push hook
   (`tools/hooks/pre-push`, enable with `git config core.hooksPath tools/hooks`)

@@ -13,11 +13,15 @@
 importScripts('./version.js');
 const VERSION = self.APP_VERSION;
 const SHELL_CACHE = 'shell-' + VERSION;
-const DATA_CACHE = 'data-' + VERSION;
+// Data cache is deliberately NOT versioned: NOAA products are immutable and
+// served network-first, so cached issuances stay valid across app updates —
+// a version bump must not cost the user their offline products.
+const DATA_CACHE = 'data-v1';
 
 const SHELL = [
   './', './index.html', './app.js', './parser.js', './basemap.js',
   './sample.js', './version.js', './manifest.json', './icon-192.png', './icon-512.png',
+  './favicon.svg', './icon-maskable-512.png', './apple-touch-icon-180.png',
   'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css',
   'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js'
 ];
@@ -48,6 +52,18 @@ function stampCached(resp) {
   });
 }
 
+// FIFO trim: the Cache API has no LRU; keys() is insertion-ordered and put()
+// re-appends refreshed entries, so dropping from the front evicts the
+// oldest-written products. Keeps the persistent data cache bounded.
+const DATA_MAX_ENTRIES = 200;
+function trimData(c) {
+  return c.keys().then(function (keys) {
+    if (keys.length <= DATA_MAX_ENTRIES) return;
+    return Promise.all(keys.slice(0, keys.length - DATA_MAX_ENTRIES)
+      .map(function (k) { return c.delete(k); }));
+  });
+}
+
 self.addEventListener('fetch', function (e) {
   if (e.request.method !== 'GET') return;
   const url = new URL(e.request.url);
@@ -58,7 +74,10 @@ self.addEventListener('fetch', function (e) {
       fetch(e.request).then(function (resp) {
         if (resp.ok) {
           const copy = resp.clone();
-          caches.open(DATA_CACHE).then(function (c) { c.put(e.request, copy); });
+          // waitUntil: don't let the SW be killed mid-write
+          e.waitUntil(caches.open(DATA_CACHE).then(function (c) {
+            return c.put(e.request, copy).then(function () { return trimData(c); });
+          }).catch(function () { }));
         }
         return resp;
       }).catch(function () {

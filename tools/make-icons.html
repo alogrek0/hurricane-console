@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<!--
+  tools/make-icons.html — dev-only icon generator. Never shipped, never in the
+  SW SHELL list. Draws the header glyph (the exact SVG art from index.html) on
+  <canvas> at every icon size the app needs, so the whole set stays coherent
+  and re-generable from one source.
+
+  Regeneration procedure (one-time, whenever the art changes):
+    1. npx -y http-server -p 8000 -s          (repo root, background)
+    2. Open http://localhost:8000/tools/make-icons.html (Playwright or a
+       browser) and eyeball the four tiles.
+    3. Export each canvas: in the console / browser_evaluate —
+         ['any192','any512','maskable512','apple180'].map(id =>
+           document.getElementById(id).toDataURL('image/png'))
+    4. Strip the data:image/png;base64, prefix and write the files with node:
+         fs.writeFileSync('icon-192.png', Buffer.from(b64, 'base64'))
+       -> icon-192.png, icon-512.png, icon-maskable-512.png,
+          apple-touch-icon-180.png (repo root).
+    5. Validate: PNG magic + IHDR dimensions (bytes 16-24), then view them.
+
+  Variant rules:
+    any*        rounded-rect tile (rx 4.5/24), transparent corners
+    maskable512 full-bleed background, art scaled to 80% (mask safe zone)
+    apple180    full-bleed opaque background (iOS applies its own mask)
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Hurricane Console — icon generator (dev only)</title>
+<style>
+  body{background:#223;display:flex;gap:24px;flex-wrap:wrap;padding:24px;font:14px monospace;color:#cde}
+  figure{margin:0;text-align:center}
+  canvas{background:repeating-conic-gradient(#334 0 25%,#445 0 50%) 0 0/16px 16px}
+</style>
+</head>
+<body>
+<figure><canvas id="any192" width="192" height="192"></canvas><figcaption>icon-192.png (any)</figcaption></figure>
+<figure><canvas id="any512" width="512" height="512"></canvas><figcaption>icon-512.png (any)</figcaption></figure>
+<figure><canvas id="maskable512" width="512" height="512"></canvas><figcaption>icon-maskable-512.png</figcaption></figure>
+<figure><canvas id="apple180" width="180" height="180"></canvas><figcaption>apple-touch-icon-180.png</figcaption></figure>
+<script>
+  'use strict';
+  var BG = '#071620', AMBER = '#ffa23a';
+  // The exact header glyph art (index.html): 24-unit box, circle + two arcs.
+  function drawGlyph(ctx) {
+    ctx.strokeStyle = AMBER;
+    ctx.lineCap = 'round';
+    ctx.lineWidth = 1.4;
+    ctx.beginPath();
+    ctx.arc(12, 12, 2.4, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.lineWidth = 1.6;
+    ctx.stroke(new Path2D('M12 9.6 C7 8 5.5 12 7.2 15'));
+    ctx.stroke(new Path2D('M12 14.4 C17 16 18.5 12 16.8 9'));
+  }
+  function roundRect(ctx, s, r) {
+    ctx.beginPath();
+    ctx.moveTo(r, 0);
+    ctx.arcTo(s, 0, s, s, r);
+    ctx.arcTo(s, s, 0, s, r);
+    ctx.arcTo(0, s, 0, 0, r);
+    ctx.arcTo(0, 0, s, 0, r);
+    ctx.closePath();
+  }
+  function make(id, opts) {
+    var c = document.getElementById(id);
+    var s = c.width;
+    var ctx = c.getContext('2d');
+    if (opts.bleed) {
+      ctx.fillStyle = BG;
+      ctx.fillRect(0, 0, s, s);
+    } else {
+      roundRect(ctx, s, s * 4.5 / 24);
+      ctx.fillStyle = BG;
+      ctx.fill();
+    }
+    var artScale = opts.art || 1; // fraction of the canvas the 24-unit box spans
+    var span = s * artScale;
+    ctx.save();
+    ctx.translate((s - span) / 2, (s - span) / 2);
+    ctx.scale(span / 24, span / 24);
+    drawGlyph(ctx);
+    ctx.restore();
+  }
+  make('any192', {});
+  make('any512', {});
+  make('maskable512', { bleed: true, art: 0.8 });
+  make('apple180', { bleed: true });
+</script>
+</body>
+</html>

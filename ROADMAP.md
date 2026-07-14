@@ -45,9 +45,15 @@ planned tracks — lived friction beats speculation.
 A bare PWA can't be submitted; the path is a Capacitor (WKWebView) shell
 around the exact same files. Ordered milestones:
 
-- [ ] **PWA polish** — full icon set (maskable sizes), launch screen,
-  accessibility pass (VoiceOver labels on controls, contrast check), offline
-  behavior audit. All of this improves the PWA today and is required later.
+- [x] **PWA polish** — full icon set regenerated from one canvas source
+  (`tools/make-icons.html`: any 192/512 + dedicated maskable 512 + apple-touch
+  180 + hand-authored favicon.svg), accessibility pass (keyboard/ARIA legend
+  toggles, live-region badge/toast/scrubber, dialog labels, contrast fixes to
+  4.5:1+), offline audit fix (data cache now version-independent `data-v1`,
+  FIFO-trimmed, so cached products survive updates). Launch-screen images
+  deliberately SKIPPED (permanent): manifest `background_color` provides the
+  launch backdrop; static iOS startup images become a Capacitor-shell concern
+  if that ever happens.
 - [ ] **Apple Developer account + build machine** — $99/yr; needs Xcode on a
   Mac (owned, borrowed, or a CI Mac runner). Decision, not code.
 - [ ] **Capacitor shell spike** — wrap the app unchanged, run it in the iOS

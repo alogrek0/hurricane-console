@@ -51,7 +51,8 @@ Real archived product text lives in the archive-audit cache
   child on Windows (port stays bound). Kill by port instead:
   `Get-NetTCPConnection -LocalPort 8001 -State Listen` → `Stop-Process`.
 
-- favicon.ico 404 in the console is pre-existing noise.
+- The console should be clean: a favicon 404 or any deprecation warning is a
+  regression, not noise.
 - Playwright screenshots land in `.playwright-mcp/` inside the repo — delete
   the directory before committing.
 - On localhost the live api.weather.gov fetch works (CORS is open), so the
