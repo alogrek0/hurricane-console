@@ -40,6 +40,10 @@ function summarizeTWDAT(r) {
     waves: r.waves.length,
     convection: r.convection.length,
     troughs: r.troughs.length,
+    // pins the ITCZ / monsoon / surface-trough classification against real text
+    troughKinds: ['itcz', 'monsoon', 'trough'].map(function (k) {
+      return k + ':' + r.troughs.filter(function (t) { return t.subtype === k; }).length;
+    }).join(' '),
     fixes: r.fixes.length,
     inferred: r.inferred.length,
     projections: r.projections.length,

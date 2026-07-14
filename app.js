@@ -222,8 +222,16 @@
 
   // One layer group per feature category so the legend can toggle each class
   // independently. 'fix' has no legend row (small explicit markers, always on).
+  // Convergence features, coloured apart. Keep them in the same cyan/teal family
+  // — they are one class of feature — and let the legend + popup carry the name.
+  var TROUGH_STYLES = {
+    itcz:    { color: '#4fc3d6', tag: 'ITCZ', cat: 'itcz' },
+    monsoon: { color: '#46c98d', tag: 'MONSOON TROUGH', cat: 'monsoon' },
+    trough:  { color: '#2e8fa5', tag: 'TROUGH', cat: 'trough' }
+  };
+
   var cat = {};
-  var TWD_CATS = ['trough', 'convection', 'wave', 'cyclone', 'projection', 'fix', 'inferred'];
+  var TWD_CATS = ['itcz', 'monsoon', 'trough', 'convection', 'wave', 'cyclone', 'projection', 'fix', 'inferred'];
   var TCM_CATS = ['track', 'cone', 'wind'];
   TWD_CATS.concat(TCM_CATS).concat(['two']).forEach(function (k) {
     cat[k] = L.layerGroup().addTo(map);
@@ -575,10 +583,15 @@
   function render(parsed) {
     clearCats(TWD_CATS);
 
+    // The ITCZ, the monsoon trough and an ordinary surface trough are different
+    // features and the parser now tells them apart (parser.js troughKind). NHC's
+    // own chart labels the first two in text and dashes the third; we colour-code
+    // instead — a house convention, not NHC's, so the popup always names it.
     parsed.troughs.forEach(function (t) {
-      tapline(t.line.map(ll), { color: '#4fc3d6', weight: 2, dashArray: '1 0' },
-        popup('TROUGH', t.source, false, t.context, t.srcSection))
-        .addTo(cat.trough);
+      var st = TROUGH_STYLES[t.subtype] || TROUGH_STYLES.trough;
+      tapline(t.line.map(ll), { color: st.color, weight: 2 },
+        popup(st.tag, t.source, false, t.context, t.srcSection))
+        .addTo(cat[st.cat]);
     });
 
     parsed.convection.forEach(function (c) {

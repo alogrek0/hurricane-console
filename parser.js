@@ -574,6 +574,30 @@
     return feats;
   }
 
+  // The ITCZ, the monsoon trough and an ordinary surface trough are three
+  // different features, and the product SAYS which is which in the sentence
+  // that positions it ("Segments of the ITCZ are from 07.5N90W to ...", "The
+  // monsoon trough extends from 11N74.5W to ..."). Take the nearest cue BEFORE
+  // the coordinates, so a sentence naming both still tags each segment right;
+  // fall back to a trailing cue ("... marks the ITCZ") before giving up.
+  function troughKind(flat, at) {
+    // Sentence bounds on '. ' (period + SPACE), never a bare '.': the
+    // coordinates themselves carry decimal points ("07.5N90W"), and splitting
+    // on those severs the ITCZ cue from the segments it introduces.
+    const before = flat.slice(0, at);
+    const s0 = before.lastIndexOf('. ');
+    const head = (s0 === -1 ? before : before.slice(s0 + 2)).toLowerCase();
+    const iI = Math.max(head.lastIndexOf('itcz'), head.lastIndexOf('intertropical convergence'));
+    const iM = head.lastIndexOf('monsoon trough');
+    if (iI !== -1 || iM !== -1) return iI > iM ? 'itcz' : 'monsoon';
+    const rest = flat.slice(at);
+    const e = rest.indexOf('. ');
+    const tail = (e === -1 ? rest : rest.slice(0, e)).toLowerCase();
+    if (/\bitcz\b|intertropical convergence/.test(tail)) return 'itcz';
+    if (/monsoon trough/.test(tail)) return 'monsoon';
+    return 'trough';
+  }
+
   function extractTroughs(secText, srcName) {
     const feats = [];
     const flat = secText.replace(/\n/g, ' ');
@@ -585,6 +609,7 @@
       if (pts.length >= 2) {
         feats.push({
           kind: 'trough',
+          subtype: troughKind(flat, m.index), // 'itcz' | 'monsoon' | 'trough'
           line: pts,
           inferred: false,
           source: ('from ' + m[1]).slice(0, 160).trim(),

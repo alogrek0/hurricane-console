@@ -92,6 +92,17 @@ extraction is basin-blind.
    range (`15 to 20 kt`) yields an **uncertainty band** between the slow and fast
    solutions, not a single point.
 
+**Troughs are three features, not one.** `troughKind` tags each polyline `itcz` /
+`monsoon` / `trough` from the sentence that positions it ("Segments of the ITCZ
+are from 07.5N90W to…", "The monsoon trough extends from…") — read, never
+guessed; nearest cue *before* the coordinates wins, so a sentence naming both
+still tags each segment right. Sentence bounds key on `'. '` (period + SPACE),
+never a bare `.`, because the coordinates carry decimal points (`07.5N90W`) and
+splitting on those severs the cue from its segments. The app colour-codes the
+three (ITCZ cyan / monsoon green / trough deep-cyan) — a **house convention, not
+NHC's**: their chart labels the first two in text and dashes the third, so the
+popup always names the feature. `fixtures/expected.json` pins the per-kind counts.
+
 **A cyclone must be real.** NHC routinely discusses storms that do not exist yet
 ("a tropical depression **or** tropical storm **is expected to form** later
 today"). The classification match will happily swallow the next word as the
