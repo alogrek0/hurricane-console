@@ -285,6 +285,25 @@
 <script src="app.js"></script>
 <script>
   if ('serviceWorker' in navigator) {
+    // The shell is served cache-first, so a page that has already booted keeps
+    // running the OLD code even after a new worker installs and caches the new
+    // shell — you stay a launch behind until you happen to tap the banner. When
+    // a new worker takes over right after launch (i.e. the update check on load
+    // found one), reload once and serve the version the user actually has.
+    // Deeper into a session we do NOT: yanking the map out from under someone
+    // watching a storm is worse than being a version behind — that's the
+    // banner's job. hadController excludes the first-ever install, which claims
+    // an uncontrolled page and must not trigger a reload.
+    var hadController = !!navigator.serviceWorker.controller;
+    var bootAt = Date.now();
+    var reloadingForUpdate = false;
+    navigator.serviceWorker.addEventListener('controllerchange', function () {
+      if (reloadingForUpdate || !hadController) return;
+      if (Date.now() - bootAt > 10000) return; // mid-session: leave it to the banner
+      reloadingForUpdate = true;
+      location.reload();
+    });
+
     window.addEventListener('load', function () {
       // updateViaCache 'none': update checks must refetch version.js too —
       // most deploys bump only the version import, not sw.js itself, and

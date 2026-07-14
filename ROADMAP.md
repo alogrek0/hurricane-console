@@ -25,6 +25,15 @@ planned tracks — lived friction beats speculation.
   but took `version.js` — the actual update signal — from the HTTP cache
   (GitHub Pages `max-age=600`). Fixed same day: register with
   `updateViaCache:'none'`.
+- [x] **The app was always one launch behind** (2026-07-14) — reported three
+  times in a day as "I don't see <the thing you just shipped>". Each time the
+  deploy was fine and the SW had already downloaded the new shell; the running
+  page just kept serving the old one, because the shell is cache-first and a
+  booted page doesn't re-read it. The update banner was the only escape, and
+  it's easy to miss. Fixed: a `controllerchange` listener reloads once when a
+  new worker takes over **right after launch** (the update check on load). Not
+  mid-session — auto-reloading someone watching a storm is worse than being a
+  version behind; that stays the banner's job.
 
 ## Track A — Features
 
