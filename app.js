@@ -548,7 +548,7 @@
       var g = ensureGrad(t._path.ownerSVGElement);
       var stops = g.childNodes;
       stops[0].setAttribute('stop-color', sel.color);
-      stops[1].setAttribute('stop-color', lighten(sel.color, 0.48));
+      stops[1].setAttribute('stop-color', lighten(sel.color, 0.40));
       stops[2].setAttribute('stop-color', sel.color);
       // paint through Leaflet (options.color) rather than the DOM, so a redraw
       // re-applies the gradient instead of reverting to the flat color
