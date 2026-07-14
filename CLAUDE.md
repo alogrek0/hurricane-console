@@ -153,6 +153,15 @@ claim a source optimistically before the fetch resolves.
 ## Conventions
 - Plain ES5-ish browser JS, no framework, no bundler. Keep it dependency-free
   except Leaflet from the CDN (already in the SHELL cache list).
+- **Map z-order is declarative, via Leaflet panes** — `hc-mask` (402) <
+  `hc-areas` (410) < `hc-lines` (420) < `hc-points` (430). Never rely on layer
+  add order: Leaflet stacks paths as they are added, and the TCM overlay
+  arrives asynchronously, so add-order stacking silently buried the troughs
+  under the convection boxes (and let the boxes steal their taps). Every new
+  layer picks a pane. **A thin line must win a tap over the area fill it
+  crosses.** The selected feature (popup open) carries `.hc-sel` — identity
+  color kept, stroke thickened, white halo — so it's never ambiguous which
+  shape was hit.
 - Coordinates are `{lat, lon}` with **west and south negative** throughout.
 - **Basemap is all-vector and embedded**: Natural Earth 50m land/coast/borders in
   `basemap.js` render identically online and offline — no tile server, no
