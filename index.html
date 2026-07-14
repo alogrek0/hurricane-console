@@ -106,11 +106,11 @@
   .pop-ctx{color:var(--dim);font-size:.72rem;line-height:1.5;margin-top:.35rem}
   mark.pop-key{background:rgba(196,122,38,.18);color:var(--ink);
     border-bottom:1px solid var(--amber-dim);padding:0 .1em}
-  /* selected feature: keeps its identity color, gains a white halo (app.js adds
-     .hc-sel on popupopen and thickens the stroke). A thin trough crossing a
-     dotted convection box is otherwise ambiguous once tapped. */
-  #map path.hc-sel{filter:drop-shadow(0 0 3px rgba(255,255,255,.76))
-    drop-shadow(0 0 8px rgba(255,255,255,.4))}
+  /* Selected feature (app.js adds .hc-sel on popupopen and thickens the stroke).
+     Crisp, not glowing: a white bloom made the thing look beatified rather than
+     picked. Full opacity + a hairline dark shadow reads as "this trace is lifted
+     off the chart" — an instrument highlight, which is what this is. */
+  #map path.hc-sel{stroke-opacity:1;filter:drop-shadow(0 1px 2px rgba(0,0,0,.85))}
 
   .cyc-label{background:rgba(9,26,38,.9);color:var(--ink);border:1px solid var(--line);
     border-radius:4px;font:600 .68rem/1.2 var(--mono);letter-spacing:.06em;
