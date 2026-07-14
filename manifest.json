@@ -1,7 +1,7 @@
 {
-  "name": "Hurricane Console — Atlantic Tropical Weather",
+  "name": "Hurricane Console — Tropical Weather",
   "short_name": "Hurricane Console",
-  "description": "Parses NHC Tropical Weather Discussions into a live Atlantic basin map. No backend, no API keys.",
+  "description": "Parses NHC Tropical Weather Discussions into a live Atlantic or East Pacific basin map. No backend, no API keys.",
   "id": "./",
   "start_url": "./",
   "scope": "./",

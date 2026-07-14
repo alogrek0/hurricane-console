@@ -37,10 +37,12 @@ planned tracks — lived friction beats speculation.
 - [ ] **Forecast-point wind fields + 12-ft seas ring** — the TCM already
   carries per-point radii out to ~72h and a seas line; tap a track dot to see
   that hour's wind field. Rounds out the active-storm view.
-- [ ] **East Pacific (TWDEP) basin support** — basin abstraction (product id →
-  map extent + gazetteer set). Biggest lift; opens CP later. *PR1 shipped:
-  parser is per-basin (EP gazetteer, cone radii, invest tags, left-basin
-  asymmetry) and pasting a TWDEP works; PR2 = EP map frame + basin switcher.*
+- [x] **East Pacific (TWDEP) basin support** — basin abstraction (product id →
+  map extent + gazetteer set). *PR1: per-basin parser (EP gazetteer, cone radii,
+  invest tags, left-basin asymmetry). PR2: EP map frame (5S–35N / 145W–70W),
+  header-subtitle basin switcher (persisted `hc-basin`), letterbox masks over the
+  widened union basemap, embedded TWDEP/TWOEP samples, per-basin AWIPS/TCM
+  wiring. CP east of 140W is honestly unmapped; alerter stays Atlantic-only.*
 
 ## Track B — App Store readiness
 
