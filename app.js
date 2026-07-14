@@ -480,32 +480,94 @@
     // that twin would style an opacity:0 path (no visible glow at all), so
     // every route must resolve back to the visible line.
     vis._hi = hit._hi = g._hi = vis;
+    vis._isLine = true; // selection sheen applies to lines only (see selHighlight)
     return html ? g.bindPopup(html, POPUP_OPTS) : g;
   }
 
   // --- selection highlight ----------------------------------------------------
   // The popup names the feature, but the map should say so too: a thin trough
   // crossing a dotted convection box is otherwise ambiguous. The selected path
-  // keeps its identity color and gains weight + a white halo (.hc-sel).
-  var sel = null; // { layer, weight } — restore target for the open popup
+  // keeps its identity color, gains weight, and (for lines) a sheen.
+
+  // The sheen is a 3-stop gradient along the line: its own color at both ends,
+  // brightening through the middle. SYMMETRIC on purpose — a one-way fade would
+  // read as the feature weakening along its length, and this map does not imply
+  // information it doesn't have. It's polish, and it only exists while selected.
+  //
+  // userSpaceOnUse, not the objectBoundingBox default: a wave axis is a straight
+  // line of constant longitude, so its bounding box has ZERO width — and SVG
+  // declines to render an objectBoundingBox gradient on a zero-area box, which
+  // would make the selected wave disappear entirely.
+  var GRAD_ID = 'hc-sel-sheen';
+  function ensureGrad(svg) {
+    var found = svg.querySelector('#' + GRAD_ID);
+    if (found) return found;
+    var defs = svg.querySelector('defs');
+    if (!defs) { defs = L.SVG.create('defs'); svg.insertBefore(defs, svg.firstChild); }
+    var g = L.SVG.create('linearGradient');
+    g.setAttribute('id', GRAD_ID);
+    g.setAttribute('gradientUnits', 'userSpaceOnUse');
+    ['0%', '50%', '100%'].forEach(function (off) {
+      var s = L.SVG.create('stop');
+      s.setAttribute('offset', off);
+      g.appendChild(s);
+    });
+    defs.appendChild(g);
+    return g;
+  }
+  // mix a hex color toward white
+  function lighten(hex, amt) {
+    var m = /^#?([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i.exec(hex || '');
+    if (!m) return hex;
+    function up(c) { var v = parseInt(c, 16); return Math.round(v + (255 - v) * amt); }
+    return 'rgb(' + up(m[1]) + ',' + up(m[2]) + ',' + up(m[3]) + ')';
+  }
+  // Anchor the gradient to the line's on-screen run. _parts holds the clipped,
+  // projected points, so this follows pan/zoom (hence the moveend/zoomend hook).
+  function gradCoords(layer, g) {
+    var parts = layer._parts;
+    if (!parts || !parts.length || !parts[0].length) return false;
+    var tail = parts[parts.length - 1];
+    var a = parts[0][0], b = tail[tail.length - 1];
+    if (a.x === b.x && a.y === b.y) return false; // degenerate: no direction to shade
+    g.setAttribute('x1', a.x); g.setAttribute('y1', a.y);
+    g.setAttribute('x2', b.x); g.setAttribute('y2', b.y);
+    return true;
+  }
+
+  var sel = null; // { layer, weight, color, grad } — restore target for the open popup
   function selHighlight(src) {
     var t = (src && src._hi) || src; // tapline group -> its visible line
     if (!t || !t.setStyle || !t._path) return;
-    sel = { layer: t, weight: t.options.weight || 1 };
+    sel = { layer: t, weight: t.options.weight || 1, color: t.options.color, grad: null };
     // additive, not multiplicative: a 1px box border and a 3px wave axis should
     // land in the same "selected" range rather than the thin ones staying thin
     t.setStyle({ weight: sel.weight + 2 });
     L.DomUtil.addClass(t._path, 'hc-sel');
+    if (t._isLine && t._path.ownerSVGElement) {
+      var g = ensureGrad(t._path.ownerSVGElement);
+      var stops = g.childNodes;
+      stops[0].setAttribute('stop-color', sel.color);
+      stops[1].setAttribute('stop-color', lighten(sel.color, 0.55));
+      stops[2].setAttribute('stop-color', sel.color);
+      // paint through Leaflet (options.color) rather than the DOM, so a redraw
+      // re-applies the gradient instead of reverting to the flat color
+      if (gradCoords(t, g)) { sel.grad = g; t.setStyle({ color: 'url(#' + GRAD_ID + ')' }); }
+    }
   }
   function selClear() {
     if (!sel) return;
     var t = sel.layer;
     if (t._path) { // still on the map — a re-render may have removed it
       L.DomUtil.removeClass(t._path, 'hc-sel');
-      t.setStyle({ weight: sel.weight });
+      t.setStyle({ weight: sel.weight, color: sel.color });
     }
     sel = null;
   }
+  // the sheen is pinned to screen coordinates, so re-anchor it as the map moves
+  map.on('moveend zoomend', function () {
+    if (sel && sel.grad) gradCoords(sel.layer, sel.grad);
+  });
   // _source is Leaflet-private but stable across 1.x: the layer the popup opened from
   map.on('popupopen', function (e) { selClear(); selHighlight(e.popup._source); });
   map.on('popupclose', selClear);
