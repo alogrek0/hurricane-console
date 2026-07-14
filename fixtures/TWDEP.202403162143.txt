@@ -1,0 +1,89 @@
+
+000
+AXPZ20 KNHC 162143
+TWDEP
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+2205 UTC Sat Mar 16 2024
+
+Tropical Weather Discussion for the eastern Pacific Ocean from
+03.4S to 30N, east of 120W including the Gulf of California, and
+from the Equator to 30N, between 120W and 140W. The following
+information is based on satellite imagery, weather observations,
+radar, and meteorological analysis.
+
+Based on 1800 UTC surface analysis and satellite imagery through
+2100 UTC.
+
+...INTERTROPICAL CONVERGENCE ZONE/MONSOON TROUGH...
+
+A surface trough extends from 07N78W to 04N90W. The ITCZ 
+continues from 04N90W to 05N140W. Scattered moderate convection 
+from 02N to 07N between 86W and 92W, and S of 10N between 100W 
+and 112W. 
+ 
+...OFFSHORE WATERS WITHIN 250 NM OF MEXICO...
+
+Latest altimeter satellite data indicated moderate seas peaking 
+to 8 ft persist off across the offshore waters mainly N of 14N, 
+primarily due to lingering NW swell. Slight seas are noted over 
+the Gulf of California. Gentle to moderate breezes persist across
+the remainder of the Mexican offshore waters.
+
+For the forecast, surface ridging over the eastern Pacific will 
+maintain gentle to moderate breezes across the Mexican offshore 
+waters into Sun. Expect moderate to fresh NW winds over the 
+central and southern Gulf of California Sun and Sun night, and 
+off Cabo Corrientes by late Mon as the high pressure builds west 
+of the region and low pressure deepens over central Mexico. These
+winds will diminish through late Tue. Farther south, fresh to 
+strong gap will start by late Mon over the Gulf of Tehuantepec, 
+associated with a cold front moving into southern Mexico. These 
+winds will diminish by late Tue.
+
+...OFFSHORE WATERS WITHIN 250 NM OF CENTRAL AMERICA, COLOMBIA, 
+AND WITHIN 750 NM OF ECUADOR
+
+High pressure building north of the western Caribbean supports 
+fresh NE winds across the Gulf of Papagayo region and coast of 
+southwest Nicaragua. Seas in this area are 4-6 ft. This pattern 
+also supports pulsing fresh NE winds in the Gulf of Panama and 
+near the Azuero Peninsula, where seas are 3-5 ft. Elsewhere, 
+light to gentle variable winds and moderate seas prevail across 
+the remainder of the region. Scattered thunderstorms are SW of 
+western Panama.
+
+For the forecast, high pressure north of the area will continue 
+to support pulses of fresh northeast to east winds in the 
+Papagayo region through Sun morning, then possibly returning by
+mid-week. Light to gentle winds and moderate seas will continue 
+elsewhere through the forecast period. Meanwhile, southerly swell
+will build seas slightly from offshore Ecuador to the Galapagos 
+Islands beginning on Sun, reaching near 8 ft SW of the Galapagos
+Islands.
+
+...REMAINDER OF THE AREA...
+
+A weakening frontal boundary extends from 30N137W to 26N140W. 
+Waveheights of 8 to 10 ft accompany this front, primarily due to 
+NW swell propagating into the region. Combined seas are 6 to 8 ft
+elsewhere due to an earlier group of NW swell lingering over the
+region mainly W of 105W. A component of southerly swell is 
+mixing with the NW swell S of 03N between 105W and 115W. Shorter 
+period wind waves from moderate trade wind flow is also mixing 
+with the NW swell over the waters from 05N to 15N W of 110W. No 
+major convection is evident at this time.
+
+For the forecast, the front will continue to weaken and stall 
+through the weekend. Low pressure may develop near 30N140W by 
+late Sun along the stalled out boundary, with winds increasing to 
+fresh along 140W and N of 27N. The low may linger into early next
+week before weakening and opening to a trough. The nearby NW 
+swell of 8-10 ft will reach N of 10N and W of 130W by tonight, 
+gradually decaying thereafter. Mixed swell of 6-8 ft will 
+prevail elsewhere, with winds of mainly moderate or weaker, 
+locally fresh near and just N of the ITCZ.
+
+$$
+ERA

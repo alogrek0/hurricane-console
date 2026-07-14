@@ -158,6 +158,51 @@
         "trackPoints": 8,
         "postTropTrack": true
       }
+    },
+    "ep012024.fstadv.002.txt": {
+      "source": "https://www.nhc.noaa.gov/archive/2024/ep01/ep012024.fstadv.002.shtml",
+      "covers": "weak EP tropical storm with DISSIPATED forecast tail",
+      "snap": {
+        "classification": "Tropical Storm",
+        "name": "Aletta",
+        "stormId": "EP012024",
+        "advisory": 2,
+        "center": {
+          "lat": 17.9,
+          "lon": -107
+        },
+        "windKt": 35,
+        "gustKt": 45,
+        "pressureMb": 1005,
+        "windRadiiKt": [
+          34
+        ],
+        "trackPoints": 4,
+        "postTropTrack": true
+      }
+    },
+    "ep182023.fstadv.009.txt": {
+      "source": "https://www.nhc.noaa.gov/archive/2023/ep18/ep182023.fstadv.009.shtml",
+      "covers": "EP basin advisory (pre-RI Otis) — exercises EP storm-id path",
+      "snap": {
+        "classification": "Tropical Storm",
+        "name": "Otis",
+        "stormId": "EP182023",
+        "advisory": 9,
+        "center": {
+          "lat": 14.8,
+          "lon": -99.1
+        },
+        "windKt": 60,
+        "gustKt": 75,
+        "pressureMb": 993,
+        "windRadiiKt": [
+          34,
+          50
+        ],
+        "trackPoints": 5,
+        "postTropTrack": true
+      }
     }
   },
   "twdat": {
@@ -206,6 +251,52 @@
         "waves": 0,
         "convection": 3,
         "troughs": 1,
+        "fixes": 2,
+        "inferred": 0,
+        "projections": 2
+      }
+    }
+  },
+  "twdep": {
+    "TWDEP.202310241603.txt": {
+      "source": "https://www.nhc.noaa.gov/archive/text/TWDEP/2023/TWDEP.202310241603.txt",
+      "covers": "EP: Tropical Storm Otis in SPECIAL FEATURES (pre-RI), Acapulco prose",
+      "snap": {
+        "sections": 4,
+        "cyclones": [
+          "Tropical Storm Otis"
+        ],
+        "waves": 0,
+        "convection": 4,
+        "troughs": 2,
+        "fixes": 7,
+        "inferred": 0,
+        "projections": 1
+      }
+    },
+    "TWDEP.202403162143.txt": {
+      "source": "https://www.nhc.noaa.gov/archive/text/TWDEP/2024/TWDEP.202403162143.txt",
+      "covers": "EP: quiet season, no SPECIAL FEATURES/WAVES sections, pure gap-wind narrative",
+      "snap": {
+        "sections": 3,
+        "cyclones": [],
+        "waves": 0,
+        "convection": 1,
+        "troughs": 3,
+        "fixes": 1,
+        "inferred": 1,
+        "projections": 0
+      }
+    },
+    "TWDEP.202507180942.txt": {
+      "source": "https://www.nhc.noaa.gov/archive/text/TWDEP/2025/TWDEP.202507180942.txt",
+      "covers": "EP: corrected (CCA) product, 2-of-3 waves (no-latitude axis pinned gap), gap winds",
+      "snap": {
+        "sections": 4,
+        "cyclones": [],
+        "waves": 2,
+        "convection": 0,
+        "troughs": 0,
         "fixes": 2,
         "inferred": 0,
         "projections": 2

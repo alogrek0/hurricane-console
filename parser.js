@@ -1,6 +1,10 @@
 /*
  * parser.js — Hurricane Console
- * NHC Tropical Weather Discussion (TWDAT) / Outlook (TWOAT) text -> geo features.
+ * NHC Tropical Weather Discussion / Outlook text -> geo features.
+ * Per-basin: Atlantic (TWDAT/TWOAT) and East Pacific (TWDEP/TWOEP). The basin
+ * is auto-detected from the product header (detectBasin) and can be overridden
+ * with opts.basin; it selects the gazetteer, the left-basin rule, and the
+ * climatology guards. Coordinate extraction is basin-blind.
  *
  * Three passes:
  *   1. REGEX    explicit coordinates: point fixes, wave axes, convection boxes,
@@ -55,21 +59,38 @@
   // product's own forecast-area edge ("north of the area"), and warning areas.
   // Stripped before the feature-noun gate so "the pressure gradient between the
   // Atlantic ridge and the Colombian low is supporting strong winds" no longer
-  // earns a dot from the "low" inside a climo name.
-  const RE_CLIMO = new RegExp(
-    [
-      '(?:colombian|panama)\\s+low',
-      '(?:bermuda-azores|bermuda|azores)\\s+high',
-      '(?:subtropical|atlantic)\\s+ridge',
-      '\\w+\\s+warning\\s+area',
-      '(?:north|south|east|west)\\s+of\\s+the\\s+(?:forecast\\s+)?area',
-      'this\\s+area',
-    ].join('|'), 'gi'
-  );
+  // earns a dot from the "low" inside a climo name. Per-basin: the EP list adds
+  // the gap-wind vocabulary (Tehuantepec/Papagayo), whose "area"/"event" nouns
+  // would otherwise pass the gate.
+  const CLIMO_COMMON = [
+    '(?:colombian|panama)\\s+low',
+    '(?:bermuda-azores|bermuda|azores)\\s+high',
+    '(?:subtropical|atlantic)\\s+ridge',
+    '\\w+\\s+warning\\s+area',
+    '(?:north|south|east|west)\\s+of\\s+the\\s+(?:forecast\\s+)?area',
+    'this\\s+area',
+  ];
+  const CLIMO_EP_EXTRA = [
+    '(?:tehuantepec|papagayo)\\s+(?:gap\\s+)?winds?(?:\\s+(?:event|area))?',
+    'gap\\s+wind\\s+(?:event|area)',
+  ];
+  const RE_CLIMO = {
+    AT: new RegExp(CLIMO_COMMON.join('|'), 'gi'),
+    EP: new RegExp(CLIMO_COMMON.concat(CLIMO_EP_EXTRA).join('|'), 'gi'),
+  };
 
-  // A feature that has crossed into the Pacific has left the chart; a dot at
-  // its old Atlantic-side anchor would map a feature that is no longer there.
-  const RE_LEFT_BASIN = /\bmoved\s+(?:in)?to\s+the\s+(?:eastern\s+)?pacific\b/i;
+  // A feature that has left the basin is off the chart; a dot at its old
+  // anchor would map a feature that is no longer there. CRITICAL asymmetry:
+  // in a TWDEP, "moved into the eastern Pacific" is an ARRIVAL (waves enter
+  // from the Caribbean), so the Atlantic rule must never run on EP text.
+  // EP phrasings confirmed against archived TWDEPs: "accelerating ... into the
+  // Central Pacific basin", "move W of 140W by the end of the week"; in-basin
+  // dissipation ("will dissipate over southern Mexico") is left to the future-
+  // modal guard, but a past-tense "moved inland" is a real departure.
+  const RE_LEFT_BASIN = {
+    AT: /\bmoved\s+(?:in)?to\s+the\s+(?:eastern\s+)?pacific\b/i,
+    EP: /\b(?:in)?to\s+the\s+central\s+pacific\b|\bw(?:est)?\s+of\s+140w\b|\bcrossed\s+140w\b|\bmoved\s+inland\b/i,
+  };
 
   // Cross-references ("Refer to the Tropical Waves section above...") point at
   // a feature described elsewhere; model attributions ("The GFS model shows a
@@ -124,10 +145,27 @@
     return secs.map((s) => ({ name: s.name, text: s.body.join('\n') }));
   }
 
+  // --- basin detection ---------------------------------------------------------
+  // 'AT' | 'EP' from the product header region ONLY (WMO id + AWIPS id + title
+  // lines) — never the body, where "eastern Pacific" appears in Atlantic
+  // departure prose ("the wave moved into the eastern Pacific").
+  function detectBasin(text) {
+    const head = String(text || '').slice(0, 400);
+    if (/\b(?:TWDEP|TWOEP|AXPZ20|ABPZ20)\b/.test(head)) return 'EP';
+    // area line: "...for the eastern Pacific Ocean from..." (TWDEP) or
+    // "For the eastern and central North Pacific east of 180 longitude:" (TWOEP)
+    if (/\bfor\s+the\s+east(?:ern)?(?:\s+and\s+central)?(?:\s+north)?\s+pacific\b/i.test(head)) return 'EP';
+    return 'AT'; // Atlantic default preserves every pre-basin caller
+  }
+
   // --- gazetteer (pass 2) ----------------------------------------------------
   // Coarse anchor points for prose-only positions. ~0.5deg is plenty at the
-  // resolution TWDAT itself works to; every hit is flagged inferred.
-  const GAZ = {
+  // resolution the discussions themselves work to; every hit is flagged
+  // inferred. Per-basin tables: GAZ_AT is byte-for-byte the pre-basin table
+  // (fixture snapshots pin its behavior); GAZ_EP is self-contained, with its
+  // own Pacific-side anchors for the Central American coast (a shared table
+  // would compromise between an Atlantic-side and Pacific-side anchor).
+  const GAZ_AT = {
     'hispaniola': { lat: 19.0, lon: -71.0 },
     'puerto rico': { lat: 18.2, lon: -66.5 },
     'lesser antilles': { lat: 15.5, lon: -61.3 },
@@ -167,21 +205,71 @@
     'caribbean': { lat: 15.0, lon: -75.0 },
   };
 
-  function gazResolve(phrase) {
+  // East Pacific anchors: water-body centers, island groups, and points ON or
+  // just OFFSHORE the coast (never inland centroids — TWDEP describes waves
+  // along the coast). specific-before-generic: "baja california sur" above
+  // "baja california". DELIBERATELY no Hawaii entry: the basin frame ends at
+  // 140W and TWOEP's Central Pacific systems stay honestly unmapped.
+  const GAZ_EP = {
+    'gulf of tehuantepec': { lat: 16.0, lon: -95.0 },
+    'gulf of california': { lat: 28.0, lon: -112.0 },
+    'baja california sur': { lat: 25.6, lon: -111.9 },
+    'baja california': { lat: 29.0, lon: -114.0 },
+    'revillagigedo islands': { lat: 18.8, lon: -112.8 },
+    'revillagigedo': { lat: 18.8, lon: -112.8 },
+    'socorro island': { lat: 18.8, lon: -111.0 },
+    'clipperton island': { lat: 10.3, lon: -109.2 },
+    'clipperton': { lat: 10.3, lon: -109.2 },
+    'cabo corrientes': { lat: 20.4, lon: -105.7 },
+    'gulf of papagayo': { lat: 10.7, lon: -85.8 },
+    'gulf of fonseca': { lat: 13.3, lon: -87.8 },
+    'gulf of panama': { lat: 8.1, lon: -79.3 },
+    'azuero peninsula': { lat: 7.7, lon: -80.6 },
+    'galapagos': { lat: 0.0, lon: -90.5 },
+    'acapulco': { lat: 16.9, lon: -99.9 },
+    'manzanillo': { lat: 19.1, lon: -104.3 },
+    'salina cruz': { lat: 16.2, lon: -95.2 },
+    'puerto vallarta': { lat: 20.7, lon: -105.3 },
+    'zihuatanejo': { lat: 17.6, lon: -101.6 },
+    // offshore-waters anchor, not an inland centroid
+    'southwestern mexico': { lat: 17.0, lon: -102.0 },
+    // coastal-state anchors: on/just offshore each state's coastline
+    'jalisco': { lat: 20.5, lon: -105.6 },
+    'colima': { lat: 19.0, lon: -104.6 },
+    'michoacan': { lat: 17.8, lon: -102.3 },
+    'guerrero': { lat: 17.0, lon: -100.9 },
+    'oaxaca': { lat: 15.7, lon: -97.3 },
+    'chiapas': { lat: 14.5, lon: -92.6 },
+    // Central America: landmass anchors (TWDEP waves cross the isthmus), so
+    // honduras/nicaragua use country centers; yucatan matches the Atlantic
+    // table so the same landmass never maps to two different dots.
+    'yucatan peninsula': { lat: 20.0, lon: -88.5 },
+    'yucatan': { lat: 20.0, lon: -88.5 },
+    'guatemala': { lat: 14.0, lon: -92.2 },
+    'el salvador': { lat: 13.3, lon: -89.4 },
+    'honduras': { lat: 15.0, lon: -86.5 },
+    'nicaragua': { lat: 12.9, lon: -85.1 },
+    'costa rica': { lat: 9.8, lon: -85.0 },
+    'panama': { lat: 8.8, lon: -80.0 },
+  };
+
+  const GAZ = { AT: GAZ_AT, EP: GAZ_EP };
+
+  function gazResolve(phrase, gaz) {
     const p = phrase.toLowerCase();
     // "between A and B" -> midpoint of the two anchors
     const btw = p.match(/between (.+?) and (?:the )?(.+?)(?:[.,]|$)/);
     if (btw) {
-      const a = anchor(btw[1]);
-      const b = anchor(btw[2]);
+      const a = anchor(btw[1], gaz);
+      const b = anchor(btw[2], gaz);
       if (a && b) return { lat: (a.lat + b.lat) / 2, lon: (a.lon + b.lon) / 2 };
     }
-    return anchor(p);
+    return anchor(p, gaz);
   }
-  function anchor(name) {
+  function anchor(name, gaz) {
     const key = name.trim().replace(/^the\s+/, '').replace(/[.,]$/, '');
-    if (GAZ[key]) return GAZ[key];
-    for (const k of Object.keys(GAZ)) if (key.includes(k)) return GAZ[k];
+    if (gaz[key]) return gaz[key];
+    for (const k of Object.keys(gaz)) if (key.includes(k)) return gaz[k];
     return null;
   }
 
@@ -312,6 +400,11 @@
         // carry a short place interjection: "from 19N in Haiti southward".
         const south = flat.match(/\b(?:south|s)\s+of\s+(\d{1,2}(?:\.\d)?)\s*([NS])/i) ||
           flat.match(/\bfrom\s+(\d{1,2}(?:\.\d)?)\s*([NS])(?:\s+(?:in|near|over)\s+[A-Za-z .-]{1,25}?)?\s+southward/i);
+        // Northern extent — the TWDEP mirror: waves run from a low latitude up
+        // to the Central American/Mexican coast ("north of 01N to across
+        // portions of El Salvador", "from 03N northward to the coast").
+        const north = flat.match(/\b(?:north|n)\s+of\s+(\d{1,2}(?:\.\d)?)\s*([NS])/i) ||
+          flat.match(/\bfrom\s+(\d{1,2}(?:\.\d)?)\s*([NS])(?:\s+(?:in|near|over)\s+[A-Za-z .-]{1,25}?)?\s+northward/i);
         // Latitude span: "from 05N to 17N", or the hyphenated "from 12-19N". The
         // negative lookahead skips a "from A to B between C and D" phrase — that's
         // a convection box (longitude-bounded by "between"), not the wave axis.
@@ -321,7 +414,7 @@
         // convection latitudes come later in the chunk ("Precipitation: ...
         // from 07N to 12N"), so when several forms match, the earliest
         // occurrence wins — not a fixed precedence.
-        const kind = [[range, 'range'], [hrange, 'hrange'], [south, 'south']]
+        const kind = [[range, 'range'], [hrange, 'hrange'], [south, 'south'], [north, 'north']]
           .filter((c) => c[0])
           .sort((a, b) => a[0].index - b[0].index)
           .map((c) => c[1])[0];
@@ -340,6 +433,11 @@
           const top = lat(south[1], south[2]);
           axis.push({ lat: top, lon: lo });
           axis.push({ lat: Math.max(2, top - 12), lon: lo }); // extend toward ITCZ
+        } else if (kind === 'north') {
+          // mirror of 'south': stated bottom, extend toward the coast
+          const bottom = lat(north[1], north[2]);
+          axis.push({ lat: bottom + 12, lon: lo });
+          axis.push({ lat: bottom, lon: lo });
         }
       }
       // fall back to any explicit pairs on the line
@@ -481,7 +579,7 @@
   }
 
   // gazetteer pass over any sentence that names a place but has no coords
-  function extractInferred(secText, srcName) {
+  function extractInferred(secText, srcName, basin) {
     const feats = [];
     secText.split(/(?<=[.])\s+/).forEach((sent) => {
       if (RE_PAIR.test(sent)) { RE_PAIR.lastIndex = 0; return; }
@@ -490,20 +588,20 @@
       // "61W" or "18N" with no paired mate) is not the gazetteer's job. Emitting
       // no dot is more honest than force-fitting it to a coarse place centroid.
       if (RE_COORD_TOKEN.test(sent)) return;
-      // (c) A feature that departed for the Pacific is off the chart; a
+      // (c) A feature that departed the basin is off the chart; a
       // cross-reference or model-field sentence is not an analyzed position.
-      if (RE_LEFT_BASIN.test(sent) || RE_XREF_OR_MODEL.test(sent)) return;
+      if (RE_LEFT_BASIN[basin].test(sent) || RE_XREF_OR_MODEL.test(sent)) return;
       // (d) Positions after a future modal are forecasts, not fixes: resolve
       // only the pre-modal prefix. "For the forecast, ..." dies here too
       // (prefix "For the " carries no feature noun).
       const present = sent.split(RE_FUTURE)[0];
       // (e) Climo names must not satisfy the noun gate ("Colombian low").
-      const gated = present.replace(RE_CLIMO, ' ');
+      const gated = present.replace(RE_CLIMO[basin], ' ');
       // (b) Only infer when the sentence actually introduces/locates a feature.
       // Otherwise a place merely named in narrative ("trades over the Gulf of
       // Honduras will pulse") gets a spurious dot.
       if (!RE_FEATURE_NOUN.test(gated)) return;
-      const g = gazResolve(present);
+      const g = gazResolve(present, GAZ[basin]);
       if (g) {
         feats.push({
           kind: 'inferred',
@@ -571,10 +669,13 @@
     return m ? { cat: m[1].toLowerCase(), pct: parseInt(m[2], 10) } : null;
   }
 
-  function parseTWO(raw) {
+  function parseTWO(raw, opts) {
     const text = dehyphenate(String(raw || ''));
+    const basin = (opts && opts.basin) || detectBasin(text);
+    const gaz = GAZ[basin];
     const out = {
       issued: (text.match(/\b(\d{3,4})\s+(?:AM|PM|UTC)?\s*[A-Z]{3,4}\b.*\d{4}/) || [null])[0],
+      basin,
       disturbances: [],
       text,
     };
@@ -595,11 +696,15 @@
         const prose = body.split('\n').filter((ln) => !/^\s*\*/.test(ln)).join(' ')
           .replace(/\s+/g, ' ').trim();
         let pos = null;
-        const title = prose.match(/^\s*\d+\.\s*(.+?):/);
-        if (title) pos = gazResolve(title[1]);
+        // Atlantic numbers its titled entries ("1. Central Tropical Atlantic
+        // (AL92):"); EP does not ("Offshore of Southwestern Mexico (EP96):").
+        // The no-period guard keeps a leading prose sentence containing a
+        // colon from masquerading as a title.
+        const title = prose.match(/^\s*(?:\d+\.\s*)?([^:.]{1,80}):/);
+        if (title) pos = gazResolve(title[1], gaz);
         if (!pos) {
           for (const sent of prose.split(/(?<=[.])\s+/)) {
-            pos = gazResolve(sent);
+            pos = gazResolve(sent, gaz);
             if (pos) break;
           }
         }
@@ -607,8 +712,10 @@
         out.disturbances.push({
           kind: 'disturbance',
           id: 'D' + (out.disturbances.length + 1),
-          // invest tag from the title line ("1. Central Tropical Atlantic (AL92):")
-          invest: title ? (((title[1].match(/\((AL\d{2})\)/i) || [])[1] || '').toUpperCase() || null) : null,
+          // invest tag from the title line ("1. Central Tropical Atlantic (AL92):",
+          // "Offshore of Southwestern Mexico (EP96):", "(CP91)" near Hawaii —
+          // CP tags are captured even though their locations stay unmapped)
+          invest: title ? (((title[1].match(/\(((?:AL|EP|CP)\d{2})\)/i) || [])[1] || '').toUpperCase() || null) : null,
           lat: pos ? pos.lat : null,   // null = honest "not mappable", never invented
           lon: pos ? pos.lon : null,
           inferred: true,              // ALWAYS — prose location
@@ -716,18 +823,23 @@
   }
 
   // --- cone geometry ---------------------------------------------------------
-  // NHC published cone circle radii (nm) by forecast hour, Atlantic basin.
+  // NHC published cone circle radii (nm) by forecast hour, PER BASIN.
   // Source: https://www.nhc.noaa.gov/aboutcone.shtml (current season; update
-  // annually). CONE_SEASON is the season the radii were taken from — bump BOTH
-  // together; a test fails when the season falls behind the calendar year.
-  // Hour 0 uses a small fixed radius so the cone starts at the center.
+  // annually — the page publishes Atlantic and a combined "Eastern/Central
+  // N. Pacific" column, so CP deliberately aliases EP). CONE_SEASON is the
+  // season the radii were taken from — bump ALL tables together; a test fails
+  // when the season falls behind the calendar year.
+  // Hour 0 uses a small fixed radius so the cone starts at the center (NHC's
+  // table starts at 12h).
   const CONE_SEASON = 2026;
-  const CONE_RADII_NM = [
-    [0, 10], [12, 25], [24, 39], [36, 49], [48, 62], [60, 77], [72, 95], [96, 134], [120, 200],
-  ];
+  const CONE_RADII_NM = {
+    AL: [[0, 10], [12, 25], [24, 39], [36, 49], [48, 62], [60, 77], [72, 95], [96, 134], [120, 200]],
+    EP: [[0, 10], [12, 25], [24, 37], [36, 48], [48, 56], [60, 66], [72, 78], [96, 106], [120, 138]],
+  };
+  CONE_RADII_NM.CP = CONE_RADII_NM.EP; // NHC publishes one Eastern/Central column
 
-  function coneRadiusNm(hours) {
-    const t = CONE_RADII_NM;
+  function coneRadiusNm(hours, basin) {
+    const t = CONE_RADII_NM[basin] || CONE_RADII_NM.AL;
     if (hours <= t[0][0]) return t[0][1];
     for (let i = 1; i < t.length; i++) {
       if (hours <= t[i][0]) {
@@ -787,7 +899,9 @@
 
   // Track points (with .hours) -> cone polygon ring. The standard construction:
   // perpendicular left/right offsets at each point's radius, semicircular caps.
-  function coneFromTrack(points) {
+  // basin ('AL'|'EP'|'CP') selects the radii table; omitted -> Atlantic, so
+  // every pre-basin caller is unchanged.
+  function coneFromTrack(points, basin) {
     if (!points || points.length < 2) return null;
     const left = [], right = [];
     const hdgs = [];
@@ -796,7 +910,7 @@
       const hdg = i === 0 ? headingDeg(points[0], points[1])
         : i === points.length - 1 ? headingDeg(points[i - 1], points[i])
         : meanHeading(headingDeg(points[i - 1], p), headingDeg(p, points[i + 1]));
-      const r = coneRadiusNm(p.hours || 0);
+      const r = coneRadiusNm(p.hours || 0, basin);
       hdgs.push(hdg);
       left.push(offsetNm(p, hdg - 90, r));
       right.push(offsetNm(p, hdg + 90, r));
@@ -809,9 +923,9 @@
     const last = points[points.length - 1], first = points[0];
     const lastHdg = hdgs[hdgs.length - 1], firstHdg = hdgs[0];
     const ring = left
-      .concat(arc(last, lastHdg - 90, lastHdg + 90, coneRadiusNm(last.hours || 0)))
+      .concat(arc(last, lastHdg - 90, lastHdg + 90, coneRadiusNm(last.hours || 0, basin)))
       .concat(right.slice().reverse())
-      .concat(arc(first, firstHdg + 90, firstHdg + 270, coneRadiusNm(first.hours || 0)));
+      .concat(arc(first, firstHdg + 90, firstHdg + 270, coneRadiusNm(first.hours || 0, basin)));
     return ring;
   }
 
@@ -876,11 +990,13 @@
     });
   }
 
-  function parse(raw) {
+  function parse(raw, opts) {
     const text = dehyphenate(String(raw || ''));
+    const basin = (opts && opts.basin) || detectBasin(text);
     const secs = sections(text);
     const result = {
       issued: (text.match(/\b(\d{3,4})\s+(?:AM|PM|UTC)?\s*[A-Z]{3,4}\b.*\d{4}/) || [null])[0],
+      basin,
       cyclones: [], waves: [], convection: [], troughs: [], fixes: [], inferred: [],
       projections: [], sections: secs.map((s) => s.name),
     };
@@ -906,7 +1022,7 @@
       if (!isSpecial && !cycs.length) result.fixes.push(...extractFixes(s.text, s.name));
       // The preamble is product boilerplate ("...to the African coast...");
       // running the gazetteer over it only manufactures phantom positions.
-      if (!isPreamble && !isSpecial) result.inferred.push(...extractInferred(s.text, s.name));
+      if (!isPreamble && !isSpecial) result.inferred.push(...extractInferred(s.text, s.name, basin));
     }
 
     // Gazetteer dots must represent features with no coordinate representation;
@@ -925,6 +1041,6 @@
     return result;
   }
 
-  root.BasinParser = { parse, parseTWO, parseTCM, parseIssued, coneFromTrack, windFieldFromTCM, CONE_SEASON, pairsIn, sections, dehyphenate, parseMotion, project };
+  root.BasinParser = { parse, parseTWO, parseTCM, parseIssued, coneFromTrack, windFieldFromTCM, detectBasin, CONE_SEASON, CONE_RADII_NM, pairsIn, sections, dehyphenate, parseMotion, project };
   if (typeof module !== 'undefined' && module.exports) module.exports = root.BasinParser;
 })(typeof window !== 'undefined' ? window : globalThis);

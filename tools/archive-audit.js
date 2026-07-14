@@ -53,6 +53,12 @@ const BASE = 'https://www.nhc.noaa.gov/archive/';
 // TCMs live at archive/{year}/al{NN}/al{NN}{YYYY}.fstadv.{NNN}.shtml (raw
 // teletype inside a <pre>). Expectations are checked case-insensitively.
 const TCMS = [
+  { path: '2023/ep18/ep182023.fstadv.009.shtml',
+    expect: { classification: 'Tropical Storm', name: 'Otis' },
+    covers: 'EP basin advisory (pre-RI Otis) — exercises EP storm-id path' },
+  { path: '2024/ep01/ep012024.fstadv.002.shtml',
+    expect: { classification: 'Tropical Storm', name: 'Aletta' },
+    covers: 'weak EP tropical storm with DISSIPATED forecast tail' },
   { path: '2024/al08/al082024.fstadv.001.shtml',
     expect: { classification: 'Potential Tropical Cyclone', name: 'Eight', postTropTrack: true },
     covers: 'PTC + INLAND/TROPICAL CYCLONE/DISSIPATED forecast-line suffixes' },
@@ -76,21 +82,34 @@ const TCMS = [
     covers: 'SPECIAL FORECAST/ADVISORY' },
 ];
 
-// Archived TWDATs are plain text at archive/text/TWDAT/{year}/TWDAT.{YYYYMMDDHHMM}.txt.
-// Exact minute stamps are unpredictable, so each entry is a timestamp PREFIX
-// resolved against the year's directory listing. If a resolved product's
-// SPECIAL FEATURES doesn't match the expectation, nudge the prefix by a few
-// hours before suspecting the parser — storms come and go between issuances.
-const TWDATS = [
-  { year: 2023, prefix: '202309151',
+// Archived discussions are plain text at archive/text/{TYPE}/{year}/{TYPE}.{YYYYMMDDHHMM}.txt
+// (TYPE = TWDAT Atlantic, TWDEP East Pacific). Exact minute stamps are
+// unpredictable, so each entry is a timestamp PREFIX resolved against the
+// year's directory listing. If a resolved product's SPECIAL FEATURES doesn't
+// match the expectation, nudge the prefix by a few hours before suspecting
+// the parser — storms come and go between issuances.
+const TWDS = [
+  { type: 'TWDAT', year: 2023, prefix: '202309151',
     expect: { cyclones: 2, names: ['Lee', 'Margot'] },
     covers: 'two simultaneous cyclones, ALL-CAPS archive text' },
-  { year: 2023, prefix: '202307161',
+  { type: 'TWDAT', year: 2023, prefix: '202307161',
     expect: { cyclones: 1, names: ['Don'] },
     covers: 'single (subtropical) cyclone' },
-  { year: 2023, prefix: '202308291',
+  { type: 'TWDAT', year: 2023, prefix: '202308291',
     expect: { cyclones: 2, names: ['Idalia', 'Franklin'] },
     covers: 'two hurricanes, warning-laden prose' },
+  { type: 'TWDEP', year: 2023, prefix: '2023102416',
+    expect: { cyclones: 1, names: ['Otis'] },
+    covers: 'EP: Tropical Storm Otis in SPECIAL FEATURES (pre-RI), Acapulco prose' },
+  // wavesMin is 2 of 3 DELIBERATELY: the first wave ("axis north of 85W to
+  // inland Central America") states no latitude anywhere — a known phrasing
+  // gap, pinned as a wart rather than papered over with an invented extent.
+  { type: 'TWDEP', year: 2025, prefix: '2025071809',
+    expect: { cyclones: 0, names: [], wavesMin: 2 },
+    covers: 'EP: corrected (CCA) product, 2-of-3 waves (no-latitude axis pinned gap), gap winds' },
+  { type: 'TWDEP', year: 2024, prefix: '2024031621',
+    expect: { cyclones: 0, names: [] },
+    covers: 'EP: quiet season, no SPECIAL FEATURES/WAVES sections, pure gap-wind narrative' },
 ];
 
 // --- fetch + cache ---------------------------------------------------------------
@@ -115,25 +134,29 @@ function stripPre(html) {
     .replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&');
 }
 
-// Resolve a TWDAT timestamp prefix to the first matching filename in the
+// Resolve a discussion timestamp prefix to the first matching filename in the
 // year's directory listing (listing itself is cached too).
-async function resolveTWDAT(year, prefix) {
-  const listing = await fetchCached(BASE + 'text/TWDAT/' + year + '/', 'TWDAT-listing-' + year + '.html');
-  const names = [...new Set((listing.match(/TWDAT\.\d{12}\.txt/g) || []))].sort();
-  return names.find((n) => n.startsWith('TWDAT.' + prefix)) || null;
+async function resolveTWD(type, year, prefix) {
+  const listing = await fetchCached(BASE + 'text/' + type + '/' + year + '/', type + '-listing-' + year + '.html');
+  const names = [...new Set((listing.match(new RegExp(type + '\\.\\d{12}\\.txt', 'g')) || []))].sort();
+  return names.find((n) => n.startsWith(type + '.' + prefix)) || null;
 }
 
 // --- audits ----------------------------------------------------------------------
-// Same Atlantic sanity box as tools/parser-audit.js (TWDAT features only —
-// the discussion covers Equator to 31N).
+// Per-basin sanity boxes. Atlantic matches tools/parser-audit.js; the EP
+// discussion declares coverage 03.4S-30N out to 140W (features can reference
+// the Caribbean side of a cross-basin wave, hence east to -70).
 const SANE = (p) => p.lat >= -8 && p.lat <= 45 && p.lon >= -105 && p.lon <= 5;
-// TCM forecast tracks legitimately run well into the North Atlantic —
-// post-tropical Lee (2023) reached 52.3N before dissipating — so tracks get a
-// taller box.
+const SANE_EP = (p) => p.lat >= -5 && p.lat <= 35 && p.lon >= -145 && p.lon <= -70;
+// TCM forecast tracks legitimately run well beyond the discussion frames —
+// post-tropical Lee (2023) reached 52.3N; EP recurvers cross 140W — so tracks
+// get taller/wider boxes.
 const SANE_TCM = (p) => p.lat >= -8 && p.lat <= 65 && p.lon >= -105 && p.lon <= 10;
+const SANE_TCM_EP = (p) => p.lat >= 0 && p.lat <= 50 && p.lon >= -180 && p.lon <= -80;
 const same = (a, b) => String(a || '').toLowerCase() === String(b || '').toLowerCase();
 
-function auditTCM(txt, expect) {
+function auditTCM(txt, expect, sane) {
+  const saneTcm = sane || SANE_TCM;
   const r = P.parseTCM(txt);
   const flags = [];
   if (!r) return { flags: ['parse-null'], stats: {} };
@@ -141,16 +164,16 @@ function auditTCM(txt, expect) {
     flags.push('expected-classification:' + expect.classification + '/got:' + r.classification);
   if (!same(r.name, expect.name)) flags.push('expected-name:' + expect.name + '/got:' + r.name);
   if (!r.track.length) flags.push('no-track-points');
-  if (r.track.some((p) => !isFinite(p.lat) || !isFinite(p.lon) || !SANE_TCM(p)))
+  if (r.track.some((p) => !isFinite(p.lat) || !isFinite(p.lon) || !saneTcm(p)))
     flags.push('track-point-out-of-basin');
-  if (r.center && !SANE_TCM(r.center)) flags.push('center-out-of-basin(' + r.center.lat + ',' + r.center.lon + ')');
+  if (r.center && !saneTcm(r.center)) flags.push('center-out-of-basin(' + r.center.lat + ',' + r.center.lon + ')');
   if (r.windKt == null) flags.push('no-wind');
   if (expect.postTropTrack && !r.track.some((p) => p.state === 'post-tropical'))
     flags.push('no-post-trop-tag');
   return { flags, stats: { adv: r.advisory, cls: r.classification, name: r.name, track: r.track.length, wind: r.windKt, press: r.pressureMb, motion: !!r.motion } };
 }
 
-function auditTWDAT(txt, expect) {
+function auditTWD(txt, expect, sane) {
   const r = P.parse(txt);
   const flags = [];
   const cyc = r.cyclones || [];
@@ -159,27 +182,31 @@ function auditTWDAT(txt, expect) {
     if (!cyc.some((c) => same(c.name, n))) flags.push('missing-cyclone:' + n);
   });
   cyc.forEach((c) => {
-    if (!isFinite(c.lat) || !isFinite(c.lon) || !SANE(c)) flags.push('cyclone-out-of-basin:' + c.name);
+    if (!isFinite(c.lat) || !isFinite(c.lon) || !sane(c)) flags.push('cyclone-out-of-basin:' + c.name);
     if (c.windKt == null) flags.push('cyclone-no-wind:' + c.name);
   });
+  if (expect.wavesMin != null && r.waves.length < expect.wavesMin)
+    flags.push('waves-min:' + expect.wavesMin + '/got:' + r.waves.length);
   if (r.sections.length <= 1) flags.push('sections-not-split');
-  return { flags, stats: { sec: r.sections.length, cyc: cyc.length, names: cyc.map((c) => c.classification + ' ' + c.name).join('; ') } };
+  return { flags, stats: { basin: r.basin, sec: r.sections.length, cyc: cyc.length, waves: r.waves.length, names: cyc.map((c) => c.classification + ' ' + c.name).join('; ') } };
 }
 
 // --- runner ----------------------------------------------------------------------
 (async () => {
-  const report = { TCM: [], TWDAT: [] };
+  const report = { TCM: [], TWDAT: [], TWDEP: [] };
   // --save-fixtures accumulator; `_txt` holds the LF-normalized fixture body
   // and is stripped before expected.json is written.
-  const fixtures = { tcm: {}, twdat: {} };
+  const fixtures = { tcm: {}, twdat: {}, twdep: {} };
 
   for (const item of TCMS) {
     const tag = item.path.split('/').pop().replace(/\.shtml$/, '');
+    // EP advisories (archive/{year}/ep{NN}/...) get the EP track box
+    const sane = /\/ep\d/.test(item.path) ? SANE_TCM_EP : SANE_TCM;
     let row;
     try {
       const raw = stripPre(await fetchCached(BASE + item.path, tag + '.html'));
       fs.writeFileSync(path.join(OUT, tag + '.txt'), raw);
-      row = { id: tag, covers: item.covers, ...auditTCM(raw, item.expect) };
+      row = { id: tag, covers: item.covers, ...auditTCM(raw, item.expect, sane) };
       if (SAVE) {
         const txt = raw.replace(/\r\n?/g, '\n');
         fixtures.tcm[tag + '.txt'] = { source: BASE + item.path, covers: item.covers, snap: SUM.summarizeTCM(P.parseTCM(txt)), _txt: txt };
@@ -190,24 +217,25 @@ function auditTWDAT(txt, expect) {
     report.TCM.push(row);
   }
 
-  for (const item of TWDATS) {
+  for (const item of TWDS) {
+    const sane = item.type === 'TWDEP' ? SANE_EP : SANE;
     let row;
     try {
-      const fname = await resolveTWDAT(item.year, item.prefix);
-      if (!fname) throw new Error('no TWDAT matching prefix ' + item.prefix + ' in ' + item.year);
-      const raw = await fetchCached(BASE + 'text/TWDAT/' + item.year + '/' + fname, fname);
-      row = { id: fname, covers: item.covers, ...auditTWDAT(raw, item.expect) };
+      const fname = await resolveTWD(item.type, item.year, item.prefix);
+      if (!fname) throw new Error('no ' + item.type + ' matching prefix ' + item.prefix + ' in ' + item.year);
+      const raw = await fetchCached(BASE + 'text/' + item.type + '/' + item.year + '/' + fname, fname);
+      row = { id: fname, covers: item.covers, ...auditTWD(raw, item.expect, sane) };
       if (SAVE) {
         const txt = raw.replace(/\r\n?/g, '\n');
-        fixtures.twdat[fname] = { source: BASE + 'text/TWDAT/' + item.year + '/' + fname, covers: item.covers, snap: SUM.summarizeTWDAT(P.parse(txt)), _txt: txt };
+        fixtures[item.type.toLowerCase()][fname] = { source: BASE + 'text/' + item.type + '/' + item.year + '/' + fname, covers: item.covers, snap: SUM.summarizeTWDAT(P.parse(txt)), _txt: txt };
       }
     } catch (e) {
-      row = { id: 'TWDAT.' + item.prefix + '*', covers: item.covers, flags: ['fetch-error:' + e.message], stats: {} };
+      row = { id: item.type + '.' + item.prefix + '*', covers: item.covers, flags: ['fetch-error:' + e.message], stats: {} };
     }
-    report.TWDAT.push(row);
+    report[item.type].push(row);
   }
 
-  for (const type of ['TCM', 'TWDAT']) {
+  for (const type of ['TCM', 'TWDAT', 'TWDEP']) {
     const rows = report[type];
     const flagged = rows.filter((r) => r.flags.length);
     console.log(`\n===== ${type}: ${rows.length} products, ${flagged.length} flagged =====`);
@@ -223,7 +251,7 @@ function auditTWDAT(txt, expect) {
   console.log('corpus + report saved to', OUT);
 
   if (SAVE) {
-    const flagged = [...report.TCM, ...report.TWDAT].filter((r) => r.flags.length);
+    const flagged = [...report.TCM, ...report.TWDAT, ...report.TWDEP].filter((r) => r.flags.length);
     if (flagged.length) {
       console.error('\n--save-fixtures: REFUSING to write fixtures — ' + flagged.length +
         ' product(s) failed the manifest expectations above. Fix the parser (or the manifest) first.');
@@ -234,10 +262,10 @@ function auditTWDAT(txt, expect) {
       _readme: 'Pinned parser snapshots for the committed archive corpus (checked by node test.js). ' +
         'Regenerate deliberately with: node tools/archive-audit.js --save-fixtures (network, dev-only), ' +
         'then review the git diff — a changed snap is a parser behavior change. Never hand-edit.',
-      tcm: {}, twdat: {},
+      tcm: {}, twdat: {}, twdep: {},
     };
     let n = 0;
-    for (const type of ['tcm', 'twdat']) {
+    for (const type of ['tcm', 'twdat', 'twdep']) {
       for (const name of Object.keys(fixtures[type]).sort()) {
         const e = fixtures[type][name];
         fs.writeFileSync(path.join(FIXDIR, name), e._txt);
