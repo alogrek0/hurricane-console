@@ -184,16 +184,25 @@
 
   var lineLayer = basemapLayer(['usStates', 'countries', 'coast']).addTo(map);
 
-  // Letterbox masks. The embedded basemap now spans a box (145W..5E) wider than
+  // Z-ORDER IS DECLARATIVE. Leaflet stacks paths in the order they are ADDED, so
+  // add-order stacking is a trap here: a convection box drawn after a trough
+  // covers it and steals its taps, and the TCM cone/wind polygons arrive later
+  // still (loadTCM resolves after render). Panes pin the stacking regardless of
+  // when anything is added: masks < areas < lines < points. A thin line must win
+  // a tap over the area fill it crosses — that is the whole point.
+  // (overlayPane, which holds the basemap + graticule, is 400; .grat-labels is
+  // 450 and the legend/scrub chips 500, so these all stay clear.)
+  var PANES = { mask: 402, areas: 410, lines: 420, points: 430 };
+  Object.keys(PANES).forEach(function (name) {
+    map.createPane('hc-' + name).style.zIndex = PANES[name];
+  });
+
+  // Letterbox masks. The embedded basemap spans a box (145W..5E) wider than
   // either frame, so land exists OUTSIDE the current frame (AT would leak
   // Pacific Mexico west of 110W; EP would leak the Caribbean east of 70W and the
-  // US coast north of 35N). Four oversized rectangles paint the box-minus-frame
-  // in the map background color, sitting ABOVE the basemap+graticule but BELOW
-  // the feature groups (added here, before the cat groups).
-  // Z-ORDER INVARIANT: never rebuild masks while feature paths exist. Rectangles
-  // re-added to the overlay pane paint OVER whatever is already there, so a
-  // rebuild after features are drawn would bury them. switchBasin clears ALL
-  // cats before calling buildMasks(); every later render appends above.
+  // US coast north of 35N). Four rectangles paint the box-minus-frame in the map
+  // background color. They live in their own pane, so a rebuild can never bury
+  // the features (the old add-order invariant is gone).
   var maskGroup = L.layerGroup().addTo(map);
   function buildMasks() {
     maskGroup.clearLayers();
@@ -202,7 +211,8 @@
     // basemap's east edge, and an ultrawide viewport at the zoom-3 floor can
     // show >200deg of longitude — any finite margin invites a leak. Latitude
     // caps at 85 (Leaflet's Mercator clamp).
-    var style = { stroke: false, fillColor: '#04101a', fillOpacity: 1, interactive: false };
+    var style = { stroke: false, fillColor: '#04101a', fillOpacity: 1, interactive: false,
+      pane: 'hc-mask' };
     maskGroup.addLayer(L.rectangle([[-85, -540], [85, w]], style)); // west of frame
     maskGroup.addLayer(L.rectangle([[-85, e], [85, 540]], style));  // east of frame
     maskGroup.addLayer(L.rectangle([[n, w], [85, e]], style));      // north of frame
@@ -218,7 +228,12 @@
   TWD_CATS.concat(TCM_CATS).concat(['two']).forEach(function (k) {
     cat[k] = L.layerGroup().addTo(map);
   });
-  function clearCats(keys) { keys.forEach(function (k) { cat[k].clearLayers(); }); }
+  // selClear first: a re-render (refresh, scrubber step, basin switch) can pull
+  // the highlighted path out from under an open popup.
+  function clearCats(keys) {
+    selClear();
+    keys.forEach(function (k) { cat[k].clearLayers(); });
+  }
 
   // Legend rows carry data-cat="key [key2]"; clicking hides/shows those groups.
   // Hidden groups still receive features on re-render (they're just not on the
@@ -456,12 +471,42 @@
   // tap still opens it. The twin lives in the same category group, so the
   // legend toggle hides both.
   function tapline(latlngs, style, html) {
-    var g = L.featureGroup([
-      L.polyline(latlngs, style),
-      L.polyline(latlngs, { weight: 16, opacity: 0 })
-    ]);
+    var vis = L.polyline(latlngs, L.extend({}, style, { pane: 'hc-lines' }));
+    var hit = L.polyline(latlngs, { weight: 16, opacity: 0, pane: 'hc-lines' });
+    var g = L.featureGroup([vis, hit]);
+    // _hi = the layer the selection highlight styles. Tagged on ALL THREE
+    // because L.FeatureGroup rewrites popup._source to the CHILD that was
+    // clicked — usually the invisible twin, which sits on top. Highlighting
+    // that twin would style an opacity:0 path (no visible glow at all), so
+    // every route must resolve back to the visible line.
+    vis._hi = hit._hi = g._hi = vis;
     return html ? g.bindPopup(html, POPUP_OPTS) : g;
   }
+
+  // --- selection highlight ----------------------------------------------------
+  // The popup names the feature, but the map should say so too: a thin trough
+  // crossing a dotted convection box is otherwise ambiguous. The selected path
+  // keeps its identity color and gains weight + a white halo (.hc-sel).
+  var sel = null; // { layer, weight } — restore target for the open popup
+  function selHighlight(src) {
+    var t = (src && src._hi) || src; // tapline group -> its visible line
+    if (!t || !t.setStyle || !t._path) return;
+    sel = { layer: t, weight: t.options.weight || 1 };
+    t.setStyle({ weight: sel.weight + 3 });
+    L.DomUtil.addClass(t._path, 'hc-sel');
+  }
+  function selClear() {
+    if (!sel) return;
+    var t = sel.layer;
+    if (t._path) { // still on the map — a re-render may have removed it
+      L.DomUtil.removeClass(t._path, 'hc-sel');
+      t.setStyle({ weight: sel.weight });
+    }
+    sel = null;
+  }
+  // _source is Leaflet-private but stable across 1.x: the layer the popup opened from
+  map.on('popupopen', function (e) { selClear(); selHighlight(e.popup._source); });
+  map.on('popupclose', selClear);
 
   function render(parsed) {
     clearCats(TWD_CATS);
@@ -475,7 +520,8 @@
     parsed.convection.forEach(function (c) {
       L.rectangle([[c.bbox.s, c.bbox.w], [c.bbox.n, c.bbox.e]], {
         color: c.strong ? '#ff6b5a' : '#ffb98a', weight: 1, dashArray: '3 3',
-        fillColor: c.strong ? '#ff6b5a' : '#ff9d6a', fillOpacity: 0.10
+        fillColor: c.strong ? '#ff6b5a' : '#ff9d6a', fillOpacity: 0.10,
+        pane: 'hc-areas'
       }).bindPopup(popup(c.strong ? 'CONVECTION · STRONG' : 'CONVECTION', c.source, false,
         c.context, c.srcSection), POPUP_OPTS)
         .addTo(cat.convection);
@@ -486,7 +532,8 @@
         popup('WAVE ' + w.id, w.source, false, w.context, w.srcSection))
         .addTo(cat.wave);
       // small motion arrowhead label at the axis head
-      L.circleMarker(ll(w.axis[0]), { radius: 3, color: '#ffa23a', fillOpacity: 1 })
+      L.circleMarker(ll(w.axis[0]), { radius: 3, color: '#ffa23a', fillOpacity: 1,
+        pane: 'hc-points' })
         .addTo(cat.wave);
     });
 
@@ -496,10 +543,10 @@
       var isHur = /hurricane/i.test(c.classification);
       var isStorm = /storm/i.test(c.classification);
       var style = isHur
-        ? { radius: 9, color: '#ff6b5a', fillColor: '#ff6b5a', fillOpacity: 0.9, weight: 2 }
+        ? { radius: 9, color: '#ff6b5a', fillColor: '#ff6b5a', fillOpacity: 0.9, weight: 2, pane: 'hc-points' }
         : isStorm
-          ? { radius: 7, color: '#ffa23a', fillColor: '#ffa23a', fillOpacity: 0.85, weight: 2 }
-          : { radius: 6, color: '#dce8ef', fillColor: '#dce8ef', fillOpacity: 0.7, weight: 2 };
+          ? { radius: 7, color: '#ffa23a', fillColor: '#ffa23a', fillOpacity: 0.85, weight: 2, pane: 'hc-points' }
+          : { radius: 6, color: '#dce8ef', fillColor: '#dce8ef', fillOpacity: 0.7, weight: 2, pane: 'hc-points' };
       var motionTxt = !c.motion ? 'motion n/a'
         : c.motion.stationary ? 'stationary'
           : c.motion.bearing + '° at ' + c.motion.slowKt +
@@ -523,28 +570,29 @@
         tapline([ll(p.from), ll(p.fast)], { color: '#9a86c9', weight: 2, dashArray: '5 4' },
           popup('+24h ' + (p.id || p.waveId) + ' (fast)', p.source, true, p.context, p.srcSection))
           .addTo(cat.projection);
-        L.circleMarker(ll(p.slow), { radius: 3, color: '#9a86c9', fillOpacity: .6 })
+        L.circleMarker(ll(p.slow), { radius: 3, color: '#9a86c9', fillOpacity: .6, pane: 'hc-points' })
           .bindPopup(popup('+24h ' + (p.id || p.waveId) + ' (slow)', p.source, true, p.context, p.srcSection), POPUP_OPTS).addTo(cat.projection);
-        L.circleMarker(ll(p.fast), { radius: 3, color: '#9a86c9', fillOpacity: .6 })
+        L.circleMarker(ll(p.fast), { radius: 3, color: '#9a86c9', fillOpacity: .6, pane: 'hc-points' })
           .bindPopup(popup('+24h ' + (p.id || p.waveId) + ' (fast)', p.source, true, p.context, p.srcSection), POPUP_OPTS).addTo(cat.projection);
       } else {
         tapline([ll(p.from), ll(p.slow)], { color: '#9a86c9', weight: 2, dashArray: '5 4' },
           popup('+24h ' + (p.id || p.waveId), p.source, true, p.context, p.srcSection))
           .addTo(cat.projection);
-        L.circleMarker(ll(p.slow), { radius: 3, color: '#9a86c9', fillOpacity: .6 })
+        L.circleMarker(ll(p.slow), { radius: 3, color: '#9a86c9', fillOpacity: .6, pane: 'hc-points' })
           .bindPopup(popup('+24h ' + (p.id || p.waveId), p.source, true, p.context, p.srcSection), POPUP_OPTS).addTo(cat.projection);
       }
     });
 
     parsed.fixes.forEach(function (f) {
-      L.circleMarker(ll(f), { radius: 4, color: '#dce8ef', weight: 1.5, fillOpacity: 0 })
+      L.circleMarker(ll(f), { radius: 4, color: '#dce8ef', weight: 1.5, fillOpacity: 0, pane: 'hc-points' })
         .bindPopup(popup('FIX', f.source, false, f.context, f.srcSection), POPUP_OPTS)
         .addTo(cat.fix);
     });
 
     parsed.inferred.forEach(function (f) {
       L.circleMarker(ll(f), {
-        radius: 5, color: '#9a86c9', weight: 1.5, dashArray: '3 3', fillOpacity: 0
+        radius: 5, color: '#9a86c9', weight: 1.5, dashArray: '3 3', fillOpacity: 0,
+        pane: 'hc-points'
       }).bindPopup(popup('POSITION', f.source, true, f.context, f.srcSection), POPUP_OPTS)
         .addTo(cat.inferred);
     });
@@ -573,7 +621,7 @@
         ' / 7d ' + (d.chance7 ? d.chance7.pct + '%' : 'n/a');
       L.circle(ll(d), {
         radius: 300000, color: color, weight: 2, dashArray: '6 5',
-        fillColor: color, fillOpacity: 0.08
+        fillColor: color, fillOpacity: 0.08, pane: 'hc-areas'
       }).bindPopup(popup(label, d.source, true, d.context), POPUP_OPTS).addTo(cat.two);
     });
     var n = parsed.disturbances.length;
@@ -831,7 +879,7 @@
       if (ring) {
         L.polygon(ring.map(ll), {
           color: '#7ea3b8', weight: 1.5, dashArray: '4 4',
-          fillColor: '#dce8ef', fillOpacity: 0.07, interactive: true
+          fillColor: '#dce8ef', fillOpacity: 0.07, interactive: true, pane: 'hc-areas'
         }).bindPopup(popup('CONE ' + s.name.toUpperCase(),
           'Computed from NHC seasonal cone radii - the official cone lives at hurricanes.gov. Advisory #' + s.advisory + ' issued ' + s.issued + '.',
           true)).addTo(cat.cone);
@@ -846,7 +894,7 @@
           color: windBandColor(band.kt), weight: 1, opacity: 0.7,
           fillColor: windBandColor(band.kt),
           fillOpacity: band.kt >= 64 ? 0.22 : band.kt >= 50 ? 0.15 : 0.10,
-          interactive: true
+          interactive: true, pane: 'hc-areas'
         }).bindPopup(popup(band.kt + ' KT WIND FIELD · ' + s.name.toUpperCase(),
           'Official advisory wind radii, nm (largest anywhere in quadrant): NE ' +
           q.ne + ' / SE ' + q.se + ' / SW ' + q.sw + ' / NW ' + q.nw +
@@ -862,7 +910,7 @@
       }
       s.track.forEach(function (p) {
         L.circleMarker(ll(p), {
-          radius: 5, color: intensityColor(p.windKt || 0),
+          radius: 5, pane: 'hc-points', color: intensityColor(p.windKt || 0),
           fillColor: intensityColor(p.windKt || 0), fillOpacity: 0.85, weight: 1.5
         }).bindPopup(popup('+' + p.hours + 'h · ' + p.validZ,
           (p.windKt != null ? p.windKt + ' kt' : 'wind n/a') +
