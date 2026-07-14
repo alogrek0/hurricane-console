@@ -7,7 +7,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>Hurricane Console — Atlantic Tropical Weather</title>
+<title>Hurricane Console — Tropical Weather</title>
 <link rel="manifest" href="manifest.json">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" href="icon-192.png" sizes="192x192">
@@ -30,6 +30,17 @@
   header .glyph{width:22px;height:22px;flex:0 0 auto}
   header h1{font-size:.95rem;font-weight:600;letter-spacing:.02em;margin:0}
   header h1 small{color:var(--dim);font-weight:400;letter-spacing:.06em;font-size:.7rem;display:block}
+  /* basin switcher lives in the subtitle: a tappable token, not a <button>
+     (which would inherit the toolbar button chrome). Matches the legendHead
+     role=button a11y idiom. */
+  #basinBtn{color:var(--cyan);cursor:pointer;user-select:none;white-space:nowrap}
+  #basinBtn:hover{color:#fff}
+  #basinBtn:focus-visible{outline:2px solid var(--amber);outline-offset:2px;border-radius:2px}
+  /* coarse pointers: pad the hit-box out to a real touch target, pulled back
+     with negative margin so the subtitle layout is unchanged */
+  @media (pointer:coarse){
+    #basinBtn{padding:.5rem;margin:-.5rem}
+  }
   .badge{margin-left:auto;font-size:.66rem;letter-spacing:.12em;font-weight:700;
     padding:.2rem .5rem;border-radius:3px;border:1px solid currentColor}
   .badge.LIVE{color:#5fd08a} .badge.CACHED{color:var(--cyan)}
@@ -170,7 +181,7 @@
       <path d="M12 9.6 C7 8 5.5 12 7.2 15" fill="none" stroke="#ffa23a" stroke-width="1.6" stroke-linecap="round"/>
       <path d="M12 14.4 C17 16 18.5 12 16.8 9" fill="none" stroke="#ffa23a" stroke-width="1.6" stroke-linecap="round"/>
     </svg>
-    <h1>Hurricane Console<small>NHC TWDAT · ATLANTIC · UNOFFICIAL</small></h1>
+    <h1>Hurricane Console<small>NHC <span id="prodTag">TWDAT</span> · <span id="basinBtn" role="button" tabindex="0" aria-label="Switch to East Pacific basin">ATLANTIC ⇄</span> · UNOFFICIAL</small></h1>
     <span id="badge" class="badge SAMPLE" role="status">SAMPLE</span>
   </header>
 
@@ -234,7 +245,8 @@
 <dialog id="pasteDlg" aria-labelledby="pasteTitle">
   <h2 id="pasteTitle">Paste an NHC product</h2>
   <p style="color:var(--dim);font-size:.75rem;margin:.2rem 0 .5rem">
-    Any TWDAT (discussion) or archived issuance from the
+    Any TWDAT/TWOAT or TWDEP/TWOEP (discussion or outlook) or archived issuance
+    from the
     <a class="link" href="https://www.nhc.noaa.gov/text/" target="_blank" rel="noopener">NHC text archive</a>.
   </p>
   <textarea id="pasteText" placeholder="TWDAT&#10;Tropical Weather Discussion&#10;..."></textarea>

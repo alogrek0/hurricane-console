@@ -1,8 +1,10 @@
 # Hurricane Console — project guide for Claude Code
 
 A static, installable PWA that fetches the latest NHC **Tropical Weather
-Discussion (TWDAT)**, parses the raw teletype text into geospatial features, and
-plots them on an Atlantic basin map. **No backend, no build step, no API keys.**
+Discussion** (TWDAT / TWDEP), parses the raw teletype text into geospatial
+features, and plots them on an **Atlantic or East Pacific** basin map. A basin
+switcher in the header subtitle toggles the frame + data source (persisted in
+`hc-basin`, default Atlantic). **No backend, no build step, no API keys.**
 It deploys to GitHub Pages by pushing to `main`.
 
 ## How to run
@@ -42,12 +44,12 @@ Everything is client side. Files:
 | file             | role |
 |------------------|------|
 | `index.html`     | app shell, styles, script order |
-| `app.js`         | fetch → parse → render on Leaflet; badge + paste/refresh/history-scrubber UI |
-| `parser.js`      | TWDAT text-to-geo engine — runs in browser AND node |
+| `app.js`         | fetch → parse → render on Leaflet; per-basin frame/graticule/masks (`BASINS` config, `switchBasin`); badge + paste/refresh/history-scrubber + basin-switcher UI |
+| `parser.js`      | TWDAT/TWDEP text-to-geo engine (per-basin) — runs in browser AND node |
 | `basemap.js`     | embedded Natural Earth 50m basemap: land, coast, country borders, US-only state lines — GENERATED, do not hand-edit (regenerate: `node tools/build-basemap.js`) |
 | `tools/build-basemap.js` | dev-only generator: downloads/clips NE 50m → basemap.js |
 | `tools/make-icons.html` | dev-only icon generator: canvas-draws the header glyph at every icon size (any/maskable/apple + favicon.svg is hand-authored from the same art) — regeneration procedure in the file header |
-| `sample.js`      | embedded Jul 7 2026 TWDAT/TWOAT/TCM fallback (SAMPLE state) |
+| `sample.js`      | embedded SAMPLE-state fallbacks: Atlantic TWDAT/TWOAT/TCM (Jul 7 2026 + Lee) and East Pacific TWDEP/TWOEP (recent-real captures; no EP TCM sample) |
 | `version.js`     | app version, single source (CalVer) — shared by page, SW, and tests |
 | `sw.js`          | service worker: cache-first shell, network-first data |
 | `tools/hooks/`   | committed git hooks; pre-push delegates to the shared version guard; enable once per clone: `git config core.hooksPath tools/hooks` |
@@ -56,7 +58,7 @@ Everything is client side. Files:
 | `tools/archive-audit.js` | dev-only, network: audits parser vs curated archived NHC products; `--save-fixtures` regenerates `fixtures/` |
 | `fixtures/`      | committed archive corpus: 15 real NHC products across both basins (LF-pinned via `.gitattributes`) + pinned snapshots in `expected.json` — regenerate only via `--save-fixtures`, never hand-edit |
 | `.github/workflows/ci.yml` | CI: `node test.js` on push-to-main + PRs; version guard on PRs |
-| `.github/workflows/alerts.yml` | invest alerts: twice-hourly cron polls the TWOAT, diffs vs cached state, pushes to ntfy.sh (`NTFY_TOPIC` repo secret; unset = dry-run) |
+| `.github/workflows/alerts.yml` | invest alerts (Atlantic-only by design): twice-hourly cron polls the TWOAT, diffs vs cached state, pushes to ntfy.sh (`NTFY_TOPIC` repo secret; unset = dry-run) |
 | `tools/alert-invests.js` | the alerter: fetch/diff/push; pure logic (stateFromTWO/diffAlerts/formatAlert) unit-tested offline in test.js |
 | `manifest.json`  | PWA manifest |
 | `ROADMAP.md`     | session agenda (features + App Store tracks, friction log, maintenance calendar) — the weekly check-in routine reads it; topmost unchecked item is the default proposal |
@@ -104,7 +106,9 @@ keyword matches survive — this was a real bug; keep the hyphen.
 - `api.weather.gov` sends `Access-Control-Allow-Origin: *`, so the browser fetches
   products directly — no proxy. Product types are the 3-letter AWIPS categories
   (`TWD`, `TWO`, `TCM`), which mix basins/offices: the app scans the newest few
-  and selects by AWIPS id in the text (`TWDAT`, `TWOAT`) or storm ID (`AL...`).
+  (12 for TWD/TWO, since the list interleaves basins) and selects by the active
+  basin's AWIPS id in the text (`TWDAT`/`TWOAT` for Atlantic, `TWDEP`/`TWOEP` for
+  East Pacific) or storm ID prefix (`AL…` Atlantic; `EP…`/`CP…` East Pacific).
 - `sw.js` is network-first for `api.weather.gov` and stamps cache-served responses
   with `X-From-Cache: 1` so the badge reads **CACHED** honestly.
 - Versioning is CalVer (`YYYY.MM.DD`, `.N` suffix for same-day re-deploys), single
@@ -160,7 +164,9 @@ precision the parser doesn't have.
   `tools/alert-invests.js`): new invest / new outlook area / 7-day chance
   crossing 40%/60%. The app itself is still fully static — the alerter is a
   repo sidecar that never runs in the browser.
-- ~~East Pacific support: paste a TWDEP to see how the parser handles another
-  basin~~ DONE (parser is per-basin; pasting a TWDEP/TWOEP parses with EP rules
-  and renders — clipped to the Atlantic frame until the basin-switcher PR adds
-  the EP map frame).
+- ~~East Pacific support~~ DONE (fully): PR1 made the parser per-basin (EP
+  gazetteer, cone radii, invest tags); PR2 added the EP map frame (5S–35N /
+  145W–70W) and a header-subtitle basin switcher (persisted `hc-basin`, default
+  Atlantic), with letterbox masks over the widened union basemap and embedded
+  TWDEP/TWOEP samples. Central Pacific (east of 140W) is honestly unmapped; the
+  invest alerter stays Atlantic-only.

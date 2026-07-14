@@ -9,11 +9,50 @@
 (function () {
   'use strict';
 
-  var BASIN = { minLat: 0, maxLat: 34, minLon: -100, maxLon: -6 };
+  // Per-basin config. Everything that differs between the Atlantic and East
+  // Pacific views lives here so the setup section reads it once and the runtime
+  // switches by swapping the object. Frame edges are documented per basin.
+  //   AT: 5S..45N / 110W..4W — the pre-basin frame, unchanged.
+  //   EP: 5S..35N / 145W..70W — south 5S (03.4S coverage + shared basemap clip),
+  //       west 145W (140W coverage + label margin; CP east of 140W is honestly
+  //       unmapped), north 35N (30N coverage + Gulf of California + Baja), east
+  //       70W (monsoon trough starts ~74W; cross-basin waves).
+  var BASINS = {
+    AT: {
+      id: 'AT',
+      frame: [[-5, -110], [45, 4]],
+      portraitCenter: [16, -63],
+      awipsTWD: 'TWDAT', awipsTWO: 'TWOAT',
+      tcmPrefixes: ['AL'],
+      label: 'ATLANTIC',
+      gratLon: [-100, 0], gratLat: [-5, 45],
+      samples: { TWD: 'TWD_SAMPLE', TWO: 'TWO_SAMPLE', TCM: 'TCM_SAMPLE' }
+    },
+    EP: {
+      id: 'EP',
+      frame: [[-5, -145], [35, -70]],
+      portraitCenter: [14, -100],
+      awipsTWD: 'TWDEP', awipsTWO: 'TWOEP',
+      tcmPrefixes: ['EP', 'CP'],
+      label: 'E PACIFIC',
+      gratLon: [-140, -75], gratLat: [-5, 35],
+      samples: { TWD: 'TWDEP_SAMPLE', TWO: 'TWOEP_SAMPLE', TCM: null }
+    }
+  };
+  // Resolve the basin BEFORE map init (from localStorage) so the whole setup
+  // section is per-basin — no Atlantic flash when EP is the persisted view.
+  var BASIN_KEY = 'hc-basin';
+  var basin = BASINS.AT;
+  try { var savedBasin = localStorage.getItem(BASIN_KEY); if (BASINS[savedBasin]) basin = BASINS[savedBasin]; } catch (e) { }
+
   var TWD_URL = 'https://api.weather.gov/products/types/TWD';
   var TWO_URL = 'https://api.weather.gov/products/types/TWO';
   var TCM_URL = 'https://api.weather.gov/products/types/TCM';
   var mode = 'TWD'; // or 'TWO' (outlook formation areas, gazetteer-inferred)
+  // Monotonic load token: every loadTWD/loadTWO/paste/switchBasin bumps it so a
+  // fetch that resolves after a basin switch or newer load bails instead of
+  // rendering into the wrong context.
+  var loadGen = 0;
 
   // --- map setup -------------------------------------------------------------
   var map = L.map('map', {
@@ -26,7 +65,7 @@
     // quarter-step per notch give a usable, smooth range.
     zoomSnap: 0.125, zoomDelta: 0.25, wheelPxPerZoomLevel: 400
   });
-  var PAN_BOUNDS = [[-5, -110], [45, 4]]; // 5S hard southern edge — nothing south of it is pannable
+  var PAN_BOUNDS = basin.frame; // 5S hard southern edge — nothing south of it is pannable
   map.setMaxBounds(PAN_BOUNDS);
 
   // Zoom-out floor: the whole basin fits the viewport (chart-fit). Below the
@@ -38,19 +77,22 @@
     map.setMinZoom(fit);
     if (map.getZoom() < fit) map.setZoom(fit);
   }
-  fitMinZoom();
   // Opening view. Landscape/desktop: chart-fit (the old fixed 17N 55W @ zoom 4
   // approximated it only on wide windows; on other aspects it opened on an
   // arbitrary mid-ocean slice). Portrait: chart-fit letterboxes badly — the
   // basin is wide, phones are tall — so fill the frame instead, centered on
-  // the eastern-Caribbean wave alley; the rest of the basin pans.
-  if (map.getSize().x < map.getSize().y) {
-    // snap UP to the zoomSnap grid so the basin truly fills (no dark bands)
-    var fill = Math.ceil(map.getBoundsZoom(PAN_BOUNDS, true) * 8) / 8;
-    map.setView([16, -63], fill, { animate: false });
-  } else {
-    map.setView(L.latLngBounds(PAN_BOUNDS).getCenter(), map.getMinZoom(), { animate: false });
+  // the basin's wave alley (portraitCenter); the rest of the basin pans.
+  function applyOpeningView() {
+    if (map.getSize().x < map.getSize().y) {
+      // snap UP to the zoomSnap grid so the basin truly fills (no dark bands)
+      var fill = Math.ceil(map.getBoundsZoom(PAN_BOUNDS, true) * 8) / 8;
+      map.setView(basin.portraitCenter, fill, { animate: false });
+    } else {
+      map.setView(L.latLngBounds(PAN_BOUNDS).getCenter(), map.getMinZoom(), { animate: false });
+    }
   }
+  fitMinZoom();
+  applyOpeningView();
   window.addEventListener('resize', fitMinZoom);
   // The map container also resizes WITHOUT a window resize — the toolbar grows
   // when the readout fills in after a fetch — and Leaflet only watches the
@@ -81,12 +123,19 @@
   }
   var landLayer = basemapLayer(['land']).addTo(map);
 
-  // graticule every 5deg
+  // graticule every 5deg — lines span the frame, drawn at the basin's label
+  // longitudes/latitudes. Rebuilt per basin switch (AT output is byte-identical
+  // to the pre-basin hardcoded loops).
   var graticule = L.layerGroup().addTo(map);
-  for (var la = -5; la <= 45; la += 5) graticule.addLayer(
-    L.polyline([[la, -110], [la, 4]], { color: '#0f2f42', weight: 1, interactive: false }));
-  for (var lo = -100; lo <= 0; lo += 5) graticule.addLayer(
-    L.polyline([[-5, lo], [45, lo]], { color: '#0f2f42', weight: 1, interactive: false }));
+  function buildGraticule() {
+    graticule.clearLayers();
+    var fs = PAN_BOUNDS[0][0], fw = PAN_BOUNDS[0][1], fn = PAN_BOUNDS[1][0], fe = PAN_BOUNDS[1][1];
+    for (var la = basin.gratLat[0]; la <= basin.gratLat[1]; la += 5) graticule.addLayer(
+      L.polyline([[la, fw], [la, fe]], { color: '#0f2f42', weight: 1, interactive: false }));
+    for (var lo = basin.gratLon[0]; lo <= basin.gratLon[1]; lo += 5) graticule.addLayer(
+      L.polyline([[fs, lo], [fn, lo]], { color: '#0f2f42', weight: 1, interactive: false }));
+  }
+  buildGraticule();
 
   // graticule labels: chart-frame style — longitude along the bottom edge,
   // latitude along the left, repositioned as the view moves. Density follows
@@ -107,22 +156,22 @@
     // extends past it
     // 18px keep-out matches the latitude column's bottom margin — enough for
     // the full glyph box + halo even one frame before a size invalidation
-    var yRow = Math.min(size.y - 18, map.latLngToContainerPoint([-7, 0]).y + 9);
-    // (the row anchors 2° below the frame's 5S bottom edge, floating in the
-    // letterbox margin when the whole frame is on screen; north edge is 45N)
-    var xCol = Math.max(4, map.latLngToContainerPoint([0, -110]).x + 6);
-    for (var lo = -100; lo <= 0; lo += 5) {
+    var yRow = Math.min(size.y - 18, map.latLngToContainerPoint([basin.gratLat[0] - 2, 0]).y + 9);
+    // (the row anchors 2° below the frame's bottom edge, floating in the
+    // letterbox margin when the whole frame is on screen)
+    var xCol = Math.max(4, map.latLngToContainerPoint([0, PAN_BOUNDS[0][1]]).x + 6);
+    for (var lo = basin.gratLon[0]; lo <= basin.gratLon[1]; lo += 5) {
       if (lo % step || lo < b.getWest() || lo > b.getEast()) continue;
       var x = map.latLngToContainerPoint([0, lo]).x;
       if (x < 16 || x > size.x - 16) continue;
       html += '<span style="left:' + Math.round(x) + 'px;top:' + Math.round(yRow) +
         'px;transform:translate(-50%,-50%)">' + fmtDeg(lo, 'E', 'W') + '</span>';
     }
-    for (var la = -5; la <= 45; la += 5) {
+    for (var la = basin.gratLat[0]; la <= basin.gratLat[1]; la += 5) {
       if (la % step || la < b.getSouth() || la > b.getNorth() + 0.01) continue;
       var y = map.latLngToContainerPoint([la, 0]).y;
       // clamp the frame-top label into view instead of suppressing it —
-      // 45N must stay labeled even when it sits at the viewport's top edge
+      // the north edge must stay labeled even when it sits at the viewport's top edge
       if (y >= -2 && y < 12) y = 12;
       if (y < 12 || y > size.y - 18 || Math.abs(y - yRow) < 12) continue;
       html += '<span style="left:' + Math.round(xCol) + 'px;top:' + Math.round(y) +
@@ -134,6 +183,32 @@
   drawGratLabels();
 
   var lineLayer = basemapLayer(['usStates', 'countries', 'coast']).addTo(map);
+
+  // Letterbox masks. The embedded basemap now spans a box (145W..5E) wider than
+  // either frame, so land exists OUTSIDE the current frame (AT would leak
+  // Pacific Mexico west of 110W; EP would leak the Caribbean east of 70W and the
+  // US coast north of 35N). Four oversized rectangles paint the box-minus-frame
+  // in the map background color, sitting ABOVE the basemap+graticule but BELOW
+  // the feature groups (added here, before the cat groups).
+  // Z-ORDER INVARIANT: never rebuild masks while feature paths exist. Rectangles
+  // re-added to the overlay pane paint OVER whatever is already there, so a
+  // rebuild after features are drawn would bury them. switchBasin clears ALL
+  // cats before calling buildMasks(); every later render appends above.
+  var maskGroup = L.layerGroup().addTo(map);
+  function buildMasks() {
+    maskGroup.clearLayers();
+    var s = PAN_BOUNDS[0][0], w = PAN_BOUNDS[0][1], n = PAN_BOUNDS[1][0], e = PAN_BOUNDS[1][1];
+    // Full-coverage spans, not a fixed margin: the EP frame sits 75deg from the
+    // basemap's east edge, and an ultrawide viewport at the zoom-3 floor can
+    // show >200deg of longitude — any finite margin invites a leak. Latitude
+    // caps at 85 (Leaflet's Mercator clamp).
+    var style = { stroke: false, fillColor: '#04101a', fillOpacity: 1, interactive: false };
+    maskGroup.addLayer(L.rectangle([[-85, -540], [85, w]], style)); // west of frame
+    maskGroup.addLayer(L.rectangle([[-85, e], [85, 540]], style));  // east of frame
+    maskGroup.addLayer(L.rectangle([[n, w], [85, e]], style));      // north of frame
+    maskGroup.addLayer(L.rectangle([[-85, w], [s, e]], style));     // south of frame
+  }
+  buildMasks();
 
   // One layer group per feature category so the legend can toggle each class
   // independently. 'fix' has no legend row (small explicit markers, always on).
@@ -551,7 +626,7 @@
   // Keyed on the fetched text itself (per product mode); pasted products don't
   // participate — the comparison is strictly fetch-vs-previous-fetch. Only a
   // LIVE (non-cached) answer earns the toast: a cache hit proves nothing.
-  var lastFetched = { TWD: null, TWO: null };
+  var lastFetched = {}; // keyed basin.id + mode, so the "no new product" toast never crosses basins
   var toastTimer = null;
   function toast(msg) {
     var el = document.getElementById('toast');
@@ -572,59 +647,78 @@
 
   function loadTWD(fromUser) {
     resetHistory();
+    var gen = ++loadGen; // a later load or basin switch supersedes this fetch
     setBadge('LOADING'); // in-flight; resolves to the real source below
-    fetchLatestMatching(TWD_URL, 'TWDAT', 8).then(function (res) {
+    // n 8->12: the TWD list mixes basins (TWDAT + TWDEP + ...), so scan deeper
+    // for the wanted AWIPS id; sequential tryNext makes the deeper scan free.
+    fetchLatestMatching(TWD_URL, basin.awipsTWD, 12).then(function (res) {
+      if (gen !== loadGen) return; // stale: a basin switch / newer load won
       if (!res.text) throw new Error('empty');
       // Fetch succeeded: a parse/render failure here is a real error, and
       // falling back to SAMPLE would lie about the data source.
       try {
-        render(window.BasinParser.parse(res.text));
+        render(window.BasinParser.parse(res.text, { basin: basin.id }));
         setBadge(res.cached ? 'CACHED' : 'LIVE');
         twdState = res.cached ? 'cached' : 'live';
-        if (fromUser && !res.cached && res.text === lastFetched.TWD) noNewProductToast();
-        if (!res.cached) lastFetched.TWD = res.text;
+        var key = basin.id + 'TWD';
+        if (fromUser && !res.cached && res.text === lastFetched[key]) noNewProductToast();
+        if (!res.cached) lastFetched[key] = res.text;
       } catch (e) {
         setBadge('ERROR');
         twdState = 'error';
       }
-      loadTCM();
+      loadTCM(gen);
     }).catch(function () {
+      if (gen !== loadGen) return;
       // no network + nothing cached -> embedded sample
-      if (!window.TWD_SAMPLE) { setBadge('ERROR'); twdState = 'error'; loadTCM(); return; }
+      var sample = sampleText('TWD');
+      if (!sample) { setBadge('ERROR'); twdState = 'error'; loadTCM(gen); return; }
       try {
-        render(window.BasinParser.parse(window.TWD_SAMPLE));
+        render(window.BasinParser.parse(sample, { basin: basin.id }));
         setBadge('SAMPLE');
         twdState = 'sample';
       } catch (e) {
         setBadge('ERROR');
         twdState = 'error';
       }
-      loadTCM();
+      loadTCM(gen);
     });
   }
 
   function loadTWO(fromUser) {
     resetHistory();
+    var gen = ++loadGen;
     setBadge('LOADING'); // in-flight; resolves to the real source below
-    fetchLatestMatching(TWO_URL, 'TWOAT', 8).then(function (res) {
+    fetchLatestMatching(TWO_URL, basin.awipsTWO, 12).then(function (res) {
+      if (gen !== loadGen) return;
       if (!res.text) throw new Error('empty');
       try {
-        renderTWO(window.BasinParser.parseTWO(res.text));
+        renderTWO(window.BasinParser.parseTWO(res.text, { basin: basin.id }));
         setBadge(res.cached ? 'CACHED' : 'LIVE');
-        if (fromUser && !res.cached && res.text === lastFetched.TWO) noNewProductToast();
-        if (!res.cached) lastFetched.TWO = res.text;
+        var key = basin.id + 'TWO';
+        if (fromUser && !res.cached && res.text === lastFetched[key]) noNewProductToast();
+        if (!res.cached) lastFetched[key] = res.text;
       } catch (e) {
         setBadge('ERROR');
       }
     }).catch(function () {
-      if (!window.TWO_SAMPLE) { setBadge('ERROR'); return; }
+      if (gen !== loadGen) return;
+      var sample = sampleText('TWO');
+      if (!sample) { setBadge('ERROR'); return; }
       try {
-        renderTWO(window.BasinParser.parseTWO(window.TWO_SAMPLE));
+        renderTWO(window.BasinParser.parseTWO(sample, { basin: basin.id }));
         setBadge('SAMPLE');
       } catch (e) {
         setBadge('ERROR');
       }
     });
+  }
+
+  // Resolve the current basin's embedded sample for a product kind (TWD/TWO/TCM),
+  // or null when that basin ships none (EP has no TCM sample).
+  function sampleText(kind) {
+    var name = basin.samples[kind];
+    return name ? window[name] : null;
   }
 
   // like fetchLatest but returns the newest n product texts
@@ -687,13 +781,13 @@
   var twdState = 'sample'; // 'live' | 'cached' | 'sample' | 'error' — set by loadTWD
   var tcmNote = '';
 
-  function loadTCM() {
+  function loadTCM(gen) {
     fetchRecent(TCM_URL, 8).then(function (texts) {
-      if (mode !== 'TWD') return;
+      if ((gen != null && gen !== loadGen) || mode !== 'TWD') return;
       var byStorm = {};
       texts.forEach(function (t) {
         var p = window.BasinParser.parseTCM(t);
-        if (!p || !p.stormId || p.stormId.slice(0, 2) !== 'AL') return;
+        if (!p || !p.stormId || basin.tcmPrefixes.indexOf(p.stormId.slice(0, 2)) === -1) return;
         if (!byStorm[p.stormId] || byStorm[p.stormId].advisory < p.advisory) byStorm[p.stormId] = p;
       });
       var storms = Object.keys(byStorm).map(function (k) { return byStorm[k]; });
@@ -701,10 +795,13 @@
       tcmNote = storms.length ? plural(storms.length, 'track') : '';
       updateMeta();
     }).catch(function () {
-      if (mode !== 'TWD') return;
-      // SAMPLE state demos the feature; a live TWD with dead TCM is reported honestly
-      if (twdState === 'sample' && window.TCM_SAMPLE) {
-        var p = window.BasinParser.parseTCM(window.TCM_SAMPLE);
+      if ((gen != null && gen !== loadGen) || mode !== 'TWD') return;
+      if (twdState === 'sample') {
+        // SAMPLE demos the TCM feature only where a sample exists (Atlantic Lee).
+        // EP ships no TCM sample by design: render nothing and stay quiet.
+        // 'track n/a' is reserved for a LIVE TWD whose TCM fetch actually failed.
+        var s = sampleText('TCM');
+        var p = s ? window.BasinParser.parseTCM(s) : null;
         renderTCM(p ? [p] : []);
         tcmNote = p ? '1 track (sample)' : '';
       } else {
@@ -728,7 +825,9 @@
     clearCats(TCM_CATS);
     (storms || []).forEach(function (s) {
       var pts = [{ hours: 0, lat: s.center.lat, lon: s.center.lon }].concat(s.track);
-      var ring = window.BasinParser.coneFromTrack(pts);
+      // Cone radii are per-basin; derive the basin from the storm id so a pasted
+      // EP TCM gets EP radii for free (AL/EP/CP). windFieldFromTCM needs no basin.
+      var ring = window.BasinParser.coneFromTrack(pts, s.stormId ? s.stormId.slice(0, 2) : undefined);
       if (ring) {
         L.polygon(ring.map(ll), {
           color: '#7ea3b8', weight: 1.5, dashArray: '4 4',
@@ -784,6 +883,7 @@
     resetHistory(); // covers the paste path too — every paste branch calls setMode first
     mode = m;
     whichBtn.textContent = mode === 'TWD' ? 'TWD / TWO' : 'TWO / TWD';
+    updateSubtitle(); // prodTag follows the product (TWDAT/TWOAT/TWDEP/TWOEP)
     // One badge, one product: never show both products at once.
     if (mode === 'TWD') cat.two.clearLayers();
     else { clearCats(TWD_CATS.concat(TCM_CATS)); tcmNote = ''; }
@@ -791,6 +891,54 @@
   whichBtn.addEventListener('click', function () {
     setMode(mode === 'TWD' ? 'TWO' : 'TWD');
     mode === 'TWD' ? loadTWD() : loadTWO();
+  });
+
+  // --- basin switcher (header subtitle toggle) -------------------------------
+  // The subtitle carries the live product tag and a tap-to-switch basin control.
+  // basinBtn follows the legendHead a11y idiom (role=button + tabindex, not a
+  // <button> — which would inherit the toolbar's button chrome).
+  var prodTagEl = document.getElementById('prodTag');
+  var basinBtnEl = document.getElementById('basinBtn');
+  function updateSubtitle() {
+    prodTagEl.textContent = mode === 'TWD' ? basin.awipsTWD : basin.awipsTWO;
+    basinBtnEl.textContent = basin.label + ' ⇄';
+    // aria-label names the DESTINATION basin (the tap target), not the current one
+    basinBtnEl.setAttribute('aria-label',
+      'Switch to ' + (basin.id === 'AT' ? 'East Pacific' : 'Atlantic') + ' basin');
+  }
+
+  // Switch the whole map frame + data source to the other basin.
+  function switchBasin(id) {
+    if (!BASINS[id] || basin.id === id) return;
+    basin = BASINS[id];
+    try { localStorage.setItem(BASIN_KEY, id); } catch (e) { }
+    loadGen++; // kill any in-flight fetch that would resolve into the old basin
+    // Clear ALL feature paths BEFORE rebuilding masks (z-order invariant above).
+    clearCats(TWD_CATS.concat(TCM_CATS).concat(['two']));
+    tcmNote = '';
+    PAN_BOUNDS = basin.frame;
+    map.setMaxBounds(PAN_BOUNDS);
+    // Release the min-zoom ratchet BEFORE refitting: getBoundsZoom clamps its
+    // result to the CURRENT minZoom, so a tighter previous basin (EP->AT) would
+    // keep minZoom pinned too high without dropping to the floor first.
+    map.setMinZoom(3);
+    fitMinZoom();
+    buildMasks();
+    buildGraticule();
+    applyOpeningView();
+    drawGratLabels();
+    updateSubtitle();
+    mode === 'TWD' ? loadTWD() : loadTWO();
+  }
+  basinBtnEl.addEventListener('click', function () {
+    switchBasin(basin.id === 'AT' ? 'EP' : 'AT');
+  });
+  basinBtnEl.addEventListener('keydown', function (ev) {
+    // 'Spacebar' covers older iOS Safari key values
+    if (ev.key === 'Enter' || ev.key === ' ' || ev.key === 'Spacebar') {
+      ev.preventDefault(); // Space must not scroll the page
+      switchBasin(basin.id === 'AT' ? 'EP' : 'AT');
+    }
   });
 
   // --- history scrubber: ◀ steps back through past issuances, ▶ forward ------
@@ -817,8 +965,8 @@
     var t = hist.texts[i];
     var parsed;
     try {
-      parsed = mode === 'TWD' ? window.BasinParser.parse(t)
-        : window.BasinParser.parseTWO(t);
+      parsed = mode === 'TWD' ? window.BasinParser.parse(t, { basin: basin.id })
+        : window.BasinParser.parseTWO(t, { basin: basin.id });
     } catch (e) {
       toast('Could not parse that issuance.');
       return;
@@ -833,7 +981,7 @@
     hist.idx = i;
     // -0 restores the true source badge captured when the scan started
     setBadge(i > 0 ? 'HISTORY' : hist.srcBadge);
-    if (returning0 && mode === 'TWD') loadTCM();
+    if (returning0 && mode === 'TWD') loadTCM(loadGen);
   }
 
   scrubBack.addEventListener('click', function () {
@@ -849,7 +997,7 @@
     hist.loading = true;
     var gen = hist.gen;
     updateScrub();
-    fetchHistory(mode === 'TWD' ? TWD_URL : TWO_URL, mode === 'TWD' ? 'TWDAT' : 'TWOAT')
+    fetchHistory(mode === 'TWD' ? TWD_URL : TWO_URL, mode === 'TWD' ? basin.awipsTWD : basin.awipsTWO)
       .then(function (texts) {
         if (gen !== hist.gen) return; // a refresh/mode switch invalidated this scan
         hist.loading = false;
@@ -883,7 +1031,10 @@
     var txt = document.getElementById('pasteText').value;
     dlg.close();
     if (!txt.trim()) return;
-    // Route by product: TCM check first, then TWO, then TWD.
+    loadGen++; // a pasted product supersedes any in-flight fetch (no resolve-over)
+    // Route by product: TCM check first, then TWO, then TWD. Paste stays opts-less
+    // (parser auto-detects the basin — a pasted TWDEP still renders clipped in the
+    // AT frame if AT is active; the PASTED badge covers that documented looseness).
     try {
       if (/FORECAST\/ADVISORY/i.test(txt.slice(0, 400))) {
         setMode('TWD');
@@ -914,10 +1065,13 @@
   });
 
   // --- boot ------------------------------------------------------------------
-  // Render the embedded sample instantly so the map is never blank, then try
-  // live data. If the fetch wins it silently replaces the sample.
+  // Sync the subtitle to the persisted basin, then render its embedded sample
+  // instantly so the map is never blank, then try live data. If the fetch wins
+  // it silently replaces the sample.
+  updateSubtitle();
   try {
-    render(window.BasinParser.parse(window.TWD_SAMPLE));
+    var bootSample = sampleText('TWD');
+    if (bootSample) render(window.BasinParser.parse(bootSample, { basin: basin.id }));
   } catch (e) {
     setBadge('ERROR');
   }

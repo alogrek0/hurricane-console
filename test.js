@@ -494,14 +494,15 @@ ok('basemap: geometry types per layer',
 ok('basemap: layer volumes sane', layers.land.coordinates.length >= 120 &&
   layers.coast.coordinates.length >= 150 && layers.countries.coordinates.length >= 50 &&
   layers.usStates.coordinates.length >= 80);
-// clip keeps one continuity vertex past each frame edge, so allow 1 deg margin
-const inClip = ([x, y]) => x >= -111 && x <= 6 && y >= -6 && y <= 46;
+// clip box is the union of both basin frames (lon -145..5 / lat -5..45).
+// Lines keep one continuity vertex past each edge, so allow 1 deg margin.
+const inClip = ([x, y]) => x >= -146 && x <= 6 && y >= -6 && y <= 46;
 ok('basemap: all line coords inside clip box (+1 deg margin)',
   ['coast', 'countries', 'usStates'].every(k =>
     layers[k].coordinates.every(line => line.every(inClip))));
 ok('basemap: land rings clipped hard to the box (no margin)',
   layers.land.coordinates.every(poly => poly[0].every(([x, y]) =>
-    x >= -110 && x <= 5 && y >= -5 && y <= 45)));
+    x >= -145 && x <= 5 && y >= -5 && y <= 45)));
 // border policy: US state lines live in US latitudes; no admin-1 south of 24N
 // (Mexican/Brazilian internals would violate this)
 ok('basemap: admin-1 confined to the US (border policy)',
