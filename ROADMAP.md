@@ -38,7 +38,9 @@ planned tracks — lived friction beats speculation.
   carries per-point radii out to ~72h and a seas line; tap a track dot to see
   that hour's wind field. Rounds out the active-storm view.
 - [ ] **East Pacific (TWDEP) basin support** — basin abstraction (product id →
-  map extent + gazetteer set). Biggest lift; opens CP later.
+  map extent + gazetteer set). Biggest lift; opens CP later. *PR1 shipped:
+  parser is per-basin (EP gazetteer, cone radii, invest tags, left-basin
+  asymmetry) and pasting a TWDEP works; PR2 = EP map frame + basin switcher.*
 
 ## Track B — App Store readiness
 

@@ -715,9 +715,153 @@ ok('TCM: hyphenated classification title-cased NHC-style',
 
 // Seasonal-constant guard: CONE_RADII_NM must be refreshed each season from
 // nhc.noaa.gov/aboutcone.shtml. This DELIBERATELY starts failing every January
-// until the radii (and CONE_SEASON beside them) are updated.
+// until the radii (and CONE_SEASON beside them) are updated. One CONE_SEASON
+// governs every basin table (the page updates them together).
 ok('cone: CONE_SEASON (' + P.CONE_SEASON + ') is not behind the calendar year',
   P.CONE_SEASON >= new Date().getUTCFullYear());
+
+// Per-basin cone tables: AL and EP from the two aboutcone.shtml columns; CP
+// aliases EP because NHC publishes one combined Eastern/Central column.
+ok('cone: AL/EP/CP tables exist with sane shape',
+  ['AL', 'EP', 'CP'].every((b) => {
+    const t = P.CONE_RADII_NM[b];
+    return Array.isArray(t) && t.length >= 8 &&
+      t.every(([h, r], i) => r > 0 && (i === 0 || h > t[i - 1][0]));
+  }));
+ok('cone: CP aliases EP (single published column)', P.CONE_RADII_NM.CP === P.CONE_RADII_NM.EP);
+ok('cone: EP table differs from AL at long lead (120h: 138 vs 200 nm)',
+  P.CONE_RADII_NM.EP[P.CONE_RADII_NM.EP.length - 1][1] !==
+  P.CONE_RADII_NM.AL[P.CONE_RADII_NM.AL.length - 1][1]);
+ok('cone: one-arg coneFromTrack is byte-identical to explicit AL (backcompat)',
+  (() => {
+    const pts = [{ lat: 15, lon: -100, hours: 0 }, { lat: 17, lon: -104, hours: 48 },
+      { lat: 19, lon: -108, hours: 120 }];
+    return JSON.stringify(P.coneFromTrack(pts)) === JSON.stringify(P.coneFromTrack(pts, 'AL'));
+  })());
+ok('cone: EP cone is narrower than AL for the same track',
+  (() => {
+    const pts = [{ lat: 15, lon: -100, hours: 0 }, { lat: 17, lon: -104, hours: 48 },
+      { lat: 19, lon: -108, hours: 120 }];
+    const spread = (ring) => Math.max(...ring.map((p) => p.lat)) - Math.min(...ring.map((p) => p.lat));
+    return spread(P.coneFromTrack(pts, 'EP')) < spread(P.coneFromTrack(pts, 'AL'));
+  })());
+
+// --- basin detection + East Pacific parsing ------------------------------------
+
+ok('basin: TWDEP/AXPZ20 header detects EP',
+  P.detectBasin('\n000\nAXPZ20 KNHC 140801\nTWDEP \n\nTropical Weather Discussion\n') === 'EP');
+ok('basin: TWOEP/ABPZ20 header detects EP',
+  P.detectBasin('\n000\nABPZ20 KNHC 141151\nTWOEP \n\nTropical Weather Outlook\n') === 'EP');
+ok('basin: area line alone detects EP',
+  P.detectBasin('Tropical Weather Outlook\nNWS National Hurricane Center Miami FL\n' +
+    '500 AM PDT Tue Jul 14 2026\n\nFor the eastern and central North Pacific east of 180 longitude:\n') === 'EP');
+ok('basin: TWDAT fixture detects AT',
+  P.detectBasin(fs.readFileSync(__dirname + '/fixtures/TWDAT.202308291005.txt', 'utf8')) === 'AT');
+ok('basin: garbage/empty default AT',
+  P.detectBasin('') === 'AT' && P.detectBasin('hello world') === 'AT');
+ok('basin: body mention of "eastern Pacific" does NOT flip an Atlantic product',
+  (() => {
+    // "moved into the eastern Pacific" prose sits deep in the body, past the
+    // 400-char header window detectBasin examines
+    const t = 'TWDAT \n\nTropical Weather Discussion\n' + 'x'.repeat(400) +
+      '\nThe wave moved into the eastern Pacific.';
+    return P.detectBasin(t) === 'AT';
+  })());
+
+const TWDEP_SYNTH = `
+000
+AXPZ20 KNHC 140801
+TWDEP
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+1005 UTC Tue Jul 14 2026
+
+Tropical Weather Discussion for the eastern Pacific Ocean from
+03.4S to 30N, east of 120W including the Gulf of California.
+
+...TROPICAL WAVES...
+
+The axis of a tropical wave is near 88.5W, north of 01N to across
+portions of El Salvador, moving quickly westward at 20 to 25 kt.
+Scattered moderate convection is noted from 11N to 13.5N between
+87W and 93W.
+
+...INTERTROPICAL CONVERGENCE ZONE/MONSOON TROUGH...
+
+The monsoon trough extends from 11N74W to 09N88W. Segments of the
+ITCZ are from 07.5N89W to 05N122W to 03.4S135W.
+
+...OFFSHORE WATERS WITHIN 250 NM OF MEXICO...
+
+A broad area of low pressure is over the Gulf of Tehuantepec.
+Fresh to strong gap winds are pulsing across the Gulf of
+Tehuantepec area tonight.
+`;
+
+const epr = P.parse(TWDEP_SYNTH);
+ok('EP: basin auto-detected on parse', epr.basin === 'EP');
+ok('EP: opts.basin override wins', P.parse(TWDEP_SYNTH, { basin: 'AT' }).basin === 'AT');
+ok('EP: decimal wave axis near 88.5W parsed',
+  epr.waves.length === 1 && Math.abs(epr.waves[0].axis[0].lon - -88.5) < 1e-9);
+ok('EP: decimal convection box (13.5N)',
+  epr.convection.length >= 1 && epr.convection.some((c) => c.bbox.n === 13.5));
+ok('EP: ITCZ polyline carries a south-latitude point (03.4S)',
+  epr.troughs.some((t) => t.line.some((p) => Math.abs(p.lat - -3.4) < 1e-9)),);
+ok('EP: Tehuantepec low earns an inferred dot at the EP anchor',
+  epr.inferred.some((f) => f.lat === 16.0 && f.lon === -95.0 && /low pressure/i.test(f.source)));
+ok('EP: gap-wind sentence with "area" noun suppressed by EP climo guard',
+  !epr.inferred.some((f) => /gap winds/i.test(f.source)));
+
+// The load-bearing left-basin asymmetry: in an EP product, "moved into the
+// eastern Pacific" is an ARRIVAL and must keep its dot; departures (central
+// Pacific / inland) must lose theirs. The Atlantic rule is unchanged.
+const EP_HEAD = '\n000\nAXPZ20 KNHC 140801\nTWDEP \n\nTropical Weather Discussion\n\n...TROPICAL WAVES...\n\n';
+ok('EP: departure to the central Pacific -> no dot',
+  P.parse(EP_HEAD + 'The remnant low moved into the central Pacific near the Revillagigedo Islands.')
+    .inferred.length === 0);
+ok('EP: arrival "moved into the eastern Pacific" keeps its dot',
+  P.parse(EP_HEAD + 'A tropical wave moved into the eastern Pacific and is now a disturbance over the Gulf of Tehuantepec.')
+    .inferred.length === 1);
+ok('AT: departure to the Pacific still drops the dot (unchanged)',
+  P.parse('TWDAT \n\nTropical Weather Discussion\n\n...TROPICAL WAVES...\n\n' +
+    'The wave moved into the eastern Pacific from the northwestern Caribbean disturbance area.')
+    .inferred.length === 0);
+
+// TWOEP: EP/CP invest tags captured; CP location honestly unmapped (no Hawaii
+// anchor exists BY DESIGN — the frame ends at 140W).
+const TWOEP_SYNTH = `
+000
+ABPZ20 KNHC 141151
+TWOEP
+
+Tropical Weather Outlook
+NWS National Hurricane Center Miami FL
+500 AM PDT Tue Jul 14 2026
+
+For the eastern and central North Pacific east of 180 longitude:
+
+Offshore of Southwestern Mexico (EP96):
+Showers and thunderstorms have become better organized offshore of
+southwestern Mexico.
+* Formation chance through 48 hours...high...90 percent.
+* Formation chance through 7 days...high...near 100 percent.
+
+Well South of the Hawaiian Islands (CP91):
+Shower and thunderstorm activity has decreased south of the
+Hawaiian Islands.
+* Formation chance through 48 hours...medium...60 percent.
+* Formation chance through 7 days...medium...60 percent.
+`;
+const eptwo = P.parseTWO(TWOEP_SYNTH);
+ok('TWOEP: basin detected EP', eptwo.basin === 'EP');
+ok('TWOEP: two disturbances', eptwo.disturbances.length === 2);
+ok('TWOEP: EP96 invest tag captured + mapped at the offshore anchor',
+  (() => { const d = eptwo.disturbances[0];
+    return d.invest === 'EP96' && d.lat === 17.0 && d.lon === -102.0 && d.chance7.pct === 100; })());
+ok('TWOEP: CP91 tag captured but location honestly unmapped',
+  (() => { const d = eptwo.disturbances[1];
+    return d.invest === 'CP91' && d.lat === null && d.lon === null && d.chance48.pct === 60; })());
 
 // --- issuance time parsing -----------------------------------------------------
 
@@ -751,8 +895,9 @@ const EXP = JSON.parse(fs.readFileSync(FIXDIR + '/expected.json', 'utf8'));
 for (const [type, summarize, parseFn] of [
   ['tcm', SUM.summarizeTCM, (t) => P.parseTCM(t)],
   ['twdat', SUM.summarizeTWDAT, (t) => P.parse(t)],
+  ['twdep', SUM.summarizeTWDAT, (t) => P.parse(t)],
 ]) {
-  for (const [file, want] of Object.entries(EXP[type])) {
+  for (const [file, want] of Object.entries(EXP[type] || {})) {
     const txt = fs.readFileSync(FIXDIR + '/' + file, 'utf8');
     // CRLF would silently change parse results; .gitattributes pins these to LF,
     // and this assertion turns a misconfigured checkout into one loud failure.
@@ -770,7 +915,7 @@ for (const [type, summarize, parseFn] of [
 ok('corpus: every fixtures/*.txt has expectations',
   fs.readdirSync(FIXDIR)
     .filter((f) => f.endsWith('.txt'))
-    .every((f) => EXP.tcm[f] || EXP.twdat[f]));
+    .every((f) => EXP.tcm[f] || EXP.twdat[f] || EXP.twdep[f]));
 
 // --- app version (single source, CalVer) ---------------------------------------
 

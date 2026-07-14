@@ -54,7 +54,7 @@ Everything is client side. Files:
 | `tools/check-version-guard.sh` | the version-bump check itself (`BASE HEAD` args) — single source, called by the pre-push hook AND CI |
 | `tools/corpus-summary.js` | snapshot shape for the archive corpus — shared by test.js (checker) and archive-audit.js (writer) |
 | `tools/archive-audit.js` | dev-only, network: audits parser vs curated archived NHC products; `--save-fixtures` regenerates `fixtures/` |
-| `fixtures/`      | committed archive corpus: 10 real NHC products (LF-pinned via `.gitattributes`) + pinned snapshots in `expected.json` — regenerate only via `--save-fixtures`, never hand-edit |
+| `fixtures/`      | committed archive corpus: 15 real NHC products across both basins (LF-pinned via `.gitattributes`) + pinned snapshots in `expected.json` — regenerate only via `--save-fixtures`, never hand-edit |
 | `.github/workflows/ci.yml` | CI: `node test.js` on push-to-main + PRs; version guard on PRs |
 | `.github/workflows/alerts.yml` | invest alerts: twice-hourly cron polls the TWOAT, diffs vs cached state, pushes to ntfy.sh (`NTFY_TOPIC` repo secret; unset = dry-run) |
 | `tools/alert-invests.js` | the alerter: fetch/diff/push; pure logic (stateFromTWO/diffAlerts/formatAlert) unit-tested offline in test.js |
@@ -63,6 +63,17 @@ Everything is client side. Files:
 | `test.js`        | node parser test harness (includes the corpus snapshot checks) |
 
 ### The parser (three passes, in `parser.js`)
+Per-basin: Atlantic AND East Pacific. `detectBasin` reads the product header
+(`TWDEP`/`TWOEP`/`AXPZ20`/`ABPZ20` or the "for the eastern ... Pacific" area
+line) — never the body, where "eastern Pacific" appears in Atlantic departure
+prose; `opts.basin` overrides. The basin selects the gazetteer (`GAZ.AT` /
+`GAZ.EP` — self-contained tables; EP has NO Hawaii entry by design, Central
+Pacific systems stay honestly unmapped), the left-basin rule (in a TWDEP,
+"moved into the eastern Pacific" is an ARRIVAL — the asymmetry is load-bearing
+and tested), and the climo guards (EP adds Tehuantepec/Papagayo gap-wind
+vocabulary). `CONE_RADII_NM` is keyed `AL`/`EP`/`CP` (CP aliases EP — NHC
+publishes one combined column) under a single `CONE_SEASON`. Coordinate
+extraction is basin-blind.
 1. **Regex** — explicit coordinates: wave axes (`along 46W south of 17N`),
    convection boxes (`from 07N to 11N between 40W and 50W`), trough polylines
    (`from 08N27W to 08N44W to 09N57W`), point fixes (`near 14N76W`). Confidence high.
@@ -149,4 +160,7 @@ precision the parser doesn't have.
   `tools/alert-invests.js`): new invest / new outlook area / 7-day chance
   crossing 40%/60%. The app itself is still fully static — the alerter is a
   repo sidecar that never runs in the browser.
-- East Pacific support: paste a TWDEP to see how the parser handles another basin.
+- ~~East Pacific support: paste a TWDEP to see how the parser handles another
+  basin~~ DONE (parser is per-basin; pasting a TWDEP/TWOEP parses with EP rules
+  and renders — clipped to the Atlantic frame until the basin-switcher PR adds
+  the EP map frame).
