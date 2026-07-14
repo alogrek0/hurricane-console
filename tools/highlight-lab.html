@@ -36,6 +36,9 @@
   .wrap{display:flex;flex-wrap:wrap;gap:1rem;padding:1rem;align-items:flex-start}
   .chart{background:#04101a;border:1px solid var(--line);border-radius:6px;
     flex:1 1 480px;min-width:320px;touch-action:manipulation}
+  /* selection eases in/out; --ms is driven by the speed dial */
+  .feat{transition:stroke-width var(--ms,140ms) ease-out,filter var(--ms,140ms) ease-out}
+  @media (prefers-reduced-motion:reduce){ .feat{transition:none} }
   .side{flex:1 1 320px;min-width:280px;display:flex;flex-direction:column;gap:.9rem}
   .card{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:.7rem}
   .card b{display:block;color:var(--dim);font-size:.62rem;letter-spacing:.1em;margin-bottom:.5rem}
@@ -118,25 +121,31 @@
 // Each returns how a selected path should be painted. `crisp`+`sheen` is what
 // ships today; the rest are alternatives worth seeing side by side.
 var PRESETS = {
-  shipped:   { label: 'Shipped (crisp + sheen)', bump: 1.5, sheen: .33, shadow: .68, blur: 2, dy: 1 },
-  crisp:     { label: 'Crisp only',              bump: 1.5, sheen: 0,   shadow: .68, blur: 2, dy: 1 },
-  sheenOnly: { label: 'Sheen only',              bump: 1.5, sheen: .33, shadow: 0,   blur: 0, dy: 0 },
-  bold:      { label: 'Bold (thicker)',          bump: 4,   sheen: .40, shadow: .85, blur: 2, dy: 1 },
-  whisper:   { label: 'Whisper',                 bump: 1,   sheen: .25, shadow: .5,  blur: 2, dy: 1 },
-  whiteGlow: { label: 'White glow',              bump: 2, sheen: 0,   shadow: 0,   blur: 0, dy: 0, glow: 'white' },
-  colorGlow: { label: 'Colored glow',            bump: 2, sheen: 0,   shadow: 0,   blur: 0, dy: 0, glow: 'color' },
-  casing:    { label: 'Highlighter casing',      bump: 2, sheen: 0,   shadow: .85, blur: 2, dy: 1, casing: true },
-  ants:      { label: 'Marching ants',           bump: 2, sheen: 0,   shadow: .85, blur: 2, dy: 1, ants: true }
+  shipped:   { label: 'Shipped (crisp + sheen)', bump: 1.5, sheen: .33, shadow: .68, blur: 2, dy: 1, ms: 140 },
+  crisp:     { label: 'Crisp only',              bump: 1.5, sheen: 0,   shadow: .68, blur: 2, dy: 1, ms: 140 },
+  sheenOnly: { label: 'Sheen only',              bump: 1.5, sheen: .33, shadow: 0,   blur: 0, dy: 0, ms: 140 },
+  bold:      { label: 'Bold (thicker)',          bump: 4,   sheen: .40, shadow: .85, blur: 2, dy: 1, ms: 140 },
+  whisper:   { label: 'Whisper',                 bump: 1,   sheen: .25, shadow: .5,  blur: 2, dy: 1, ms: 140 },
+  snap:      { label: 'No ease (snap)',          bump: 1.5, sheen: .33, shadow: .68, blur: 2, dy: 1, ms: 0 },
+  slow:      { label: 'Slow ease (260ms)',       bump: 1.5, sheen: .33, shadow: .68, blur: 2, dy: 1, ms: 260 },
+  whiteGlow: { label: 'White glow',              bump: 2,   sheen: 0,   shadow: 0,   blur: 0, dy: 0, ms: 140, glow: 'white' },
+  colorGlow: { label: 'Colored glow',            bump: 2,   sheen: 0,   shadow: 0,   blur: 0, dy: 0, ms: 140, glow: 'color' },
+  casing:    { label: 'Highlighter casing',      bump: 2,   sheen: 0,   shadow: .68, blur: 2, dy: 1, ms: 140, casing: true },
+  ants:      { label: 'Marching ants',           bump: 2,   sheen: 0,   shadow: .68, blur: 2, dy: 1, ms: 140, ants: true }
 };
 var DIALS = [
   { key: 'bump',   label: 'weight bump', min: 0, max: 6, step: .5,  unit: 'px' },
   { key: 'sheen',  label: 'sheen mix',   min: 0, max: 1, step: .02, unit: '' },
   { key: 'shadow', label: 'shadow alpha',min: 0, max: 1, step: .05, unit: '' },
   { key: 'blur',   label: 'shadow blur', min: 0, max: 8, step: .5,  unit: 'px' },
-  { key: 'dy',     label: 'shadow lift', min: 0, max: 4, step: .5,  unit: 'px' }
+  { key: 'dy',     label: 'shadow lift', min: 0, max: 4, step: .5,  unit: 'px' },
+  { key: 'ms',     label: 'ease speed',  min: 0, max: 400, step: 10, unit: 'ms' }
 ];
 
 var cur = Object.assign({}, PRESETS.shipped), curName = 'shipped';
+function applyEase() {
+  document.getElementById('chart').style.setProperty('--ms', (cur.ms || 0) + 'ms');
+}
 var selected = null, casingEl = null, antsEl = null;
 
 function lighten(hex, amt) {
@@ -232,7 +241,8 @@ Object.keys(PRESETS).forEach(function (name) {
   b.textContent = PRESETS[name].label;
   b.onclick = function () {
     curName = name;
-    cur = Object.assign({ bump: 2, sheen: 0, shadow: 0, blur: 0, dy: 0 }, PRESETS[name]);
+    cur = Object.assign({ bump: 2, sheen: 0, shadow: 0, blur: 0, dy: 0, ms: 140 }, PRESETS[name]);
+    applyEase();
     syncDials();
     if (selected) { var s = selected; clearSel(); select(s); } else render();
   };
@@ -251,6 +261,10 @@ DIALS.forEach(function (d) {
     cur[d.key] = Number(input.value);
     row.querySelector('output').textContent = input.value + d.unit;
     curName = 'custom';
+    applyEase();
+    // re-selecting would restart the transition from the base value — for the
+    // ease dial just repaint in place so you can feel the new speed on the
+    // NEXT tap, which is when it actually matters
     if (selected) { var s = selected; clearSel(); select(s); } else render();
   };
   dialsEl.appendChild(row);
@@ -285,7 +299,9 @@ function render() {
     (cur.casing ? '  + casing underlay (wide translucent band)\n' : '') +
     (cur.ants ? '  + marching-ants overlay (animated dashes)\n' : '') +
     '\nindex.html  #map path.hc-sel:\n' +
-    '  filter: <em>' + filt + '</em>';
+    '  filter: <em>' + filt + '</em>\n' +
+    '\nindex.html  feature panes:\n' +
+    '  transition: stroke-width <em>' + (cur.ms || 0) + 'ms</em> ease-out, filter <em>' + (cur.ms || 0) + 'ms</em> ease-out';
 }
 
 Array.prototype.forEach.call(document.querySelectorAll('.feat'), function (el) {
@@ -295,6 +311,7 @@ Array.prototype.forEach.call(document.querySelectorAll('.feat'), function (el) {
   el.addEventListener('click', function (e) { e.stopPropagation(); select(el); });
 });
 document.getElementById('chart').addEventListener('click', clearSel);
+applyEase();
 syncDials();
 render();
 select(document.getElementById('f-trough')); // open on the case that started this
