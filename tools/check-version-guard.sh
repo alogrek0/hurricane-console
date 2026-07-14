@@ -16,7 +16,7 @@ if [ -z "$BASE" ] || [ -z "$HEAD" ]; then
 fi
 
 changed=$(git diff --name-only "$BASE".."$HEAD")
-shell_changed=$(printf '%s\n' "$changed" | grep -E '^(index\.html|app\.js|parser\.js|basemap\.js|sample\.js|sw\.js|manifest\.json)$')
+shell_changed=$(printf '%s\n' "$changed" | grep -E '^(index\.html|app\.js|parser\.js|basemap\.js|sample\.js|sw\.js|manifest\.json|favicon\.svg|icon-.*\.png|apple-touch-icon-180\.png)$')
 ver_changed=$(printf '%s\n' "$changed" | grep -E '^version\.js$')
 
 if [ -n "$shell_changed" ] && [ -z "$ver_changed" ]; then

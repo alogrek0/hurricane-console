@@ -161,20 +161,30 @@
     var rows = Array.prototype.slice.call(document.querySelectorAll('#legend [data-cat]'));
     rows.forEach(function (row) {
       var keys = row.getAttribute('data-cat').split(' ');
-      if (keys.every(function (k) { return offCats.indexOf(k) !== -1; })) {
-        row.classList.add('off');
-        setCatVisible(keys, false);
+      // one sync point for class + toggle-button state + map layers
+      function setRow(off) {
+        row.classList.toggle('off', off);
+        row.setAttribute('aria-pressed', String(!off));
+        setCatVisible(keys, !off);
       }
-      row.addEventListener('click', function () {
+      if (keys.every(function (k) { return offCats.indexOf(k) !== -1; })) setRow(true);
+      function toggle() {
         var turningOff = !row.classList.contains('off');
-        row.classList.toggle('off', turningOff);
-        setCatVisible(keys, !turningOff);
+        setRow(turningOff);
         keys.forEach(function (k) {
           var i = offCats.indexOf(k);
           if (turningOff && i === -1) offCats.push(k);
           if (!turningOff && i !== -1) offCats.splice(i, 1);
         });
         try { localStorage.setItem(LAYERS_OFF_KEY, JSON.stringify(offCats)); } catch (e) { }
+      }
+      row.addEventListener('click', toggle);
+      row.addEventListener('keydown', function (ev) {
+        // 'Spacebar' covers older iOS Safari key values
+        if (ev.key === 'Enter' || ev.key === ' ' || ev.key === 'Spacebar') {
+          ev.preventDefault(); // Space must not scroll the page
+          toggle();
+        }
       });
     });
   }
@@ -182,17 +192,40 @@
 
   // On phones the legend starts as a chip; tapping the header expands it and
   // tapping the map collapses it again so it never lingers over the chart.
-  // Desktop keeps the always-open legend (header click still works, harmless).
+  // Desktop keeps the always-open legend, and the toggle is gated on the
+  // phone breakpoint so aria-expanded never claims "collapsed" while all
+  // nine rows are plainly visible.
   var PHONE = matchMedia('(max-width:520px)');
   var legendEl = document.getElementById('legend');
-  if (PHONE.matches) legendEl.classList.add('collapsed');
-  document.getElementById('legendHead').addEventListener('click', function (e) {
-    e.stopPropagation(); // a chip tap must not fall through as a row toggle
+  var legendHeadEl = document.getElementById('legendHead');
+  function syncLegendHead() {
+    // Desktop never collapses (the collapse CSS lives behind the phone
+    // breakpoint), so a leftover .collapsed class from a phone-sized window
+    // must not leak into aria-expanded after a resize.
+    legendHeadEl.setAttribute('aria-expanded',
+      String(!(PHONE.matches && legendEl.classList.contains('collapsed'))));
+  }
+  function toggleLegend() {
+    if (!PHONE.matches) return; // desktop legend never collapses
     legendEl.classList.toggle('collapsed');
+    syncLegendHead();
+  }
+  if (PHONE.matches) legendEl.classList.add('collapsed');
+  syncLegendHead();
+  legendHeadEl.addEventListener('click', function (e) {
+    e.stopPropagation(); // a chip tap must not fall through as a row toggle
+    toggleLegend();
+  });
+  legendHeadEl.addEventListener('keydown', function (ev) {
+    if (ev.key === 'Enter' || ev.key === ' ' || ev.key === 'Spacebar') {
+      ev.preventDefault();
+      toggleLegend();
+    }
   });
   map.on('click', function () {
-    if (PHONE.matches) legendEl.classList.add('collapsed');
+    if (PHONE.matches) { legendEl.classList.add('collapsed'); syncLegendHead(); }
   });
+  PHONE.addEventListener('change', syncLegendHead); // resync across the breakpoint
 
   // --- rendering -------------------------------------------------------------
   function ll(p) { return [p.lat, p.lon]; }
