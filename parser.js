@@ -460,9 +460,36 @@
   }
 
   // SPECIAL FEATURES: active tropical cyclones. Case-insensitive because
-  // archived TWDATs are ALL CAPS; the captured name is title-cased.
+  // archived TWDATs are ALL CAPS; the captured name is title-cased. GLOBAL so
+  // extractCyclones can walk past a genesis mention to a real storm in the same
+  // paragraph (reset .lastIndex per chunk — a global regex carries state).
   const RE_CYCLONE =
-    /\b(Hurricane|Tropical Storm|Tropical Depression|Subtropical Storm|Subtropical Depression|Potential Tropical Cyclone|Post-Tropical Cyclone|Remnants of)\s+([A-Z][A-Za-z]+(?:-[A-Za-z]+)?)/i;
+    /\b(Hurricane|Tropical Storm|Tropical Depression|Subtropical Storm|Subtropical Depression|Potential Tropical Cyclone|Post-Tropical Cyclone|Remnants of)\s+([A-Za-z][A-Za-z]*(?:-[A-Za-z]+)?)/gi;
+
+  // A CYCLONE MUST BE REAL. NHC discusses storms that do not exist yet — "a
+  // tropical depression OR tropical storm IS expected to form later today" —
+  // and the classification match happily swallows the next word as the storm's
+  // name, fabricating "Tropical Depression Or" and plotting it at whatever
+  // coordinate is nearby. A named cyclone that does not exist is the worst lie
+  // this map can tell, so a match must clear three gates:
+  //   (a) the word after the classification is never a storm name (function
+  //       words, modals, and the genesis vocabulary). Checked case-insensitively
+  //       because archived products are ALL CAPS; verified against the Atlantic/
+  //       EP/CP name lists and the spelled-number TD names (One..Twenty-two) —
+  //       no real name collides.
+  const NOT_A_NAME = /^(?:or|is|are|was|were|will|would|could|can|may|might|should|has|have|had|and|but|to|of|the|an?|that|this|it|its|near|over|along|with|from|in|on|by|as|at|expected|forecast|likely|possible|probable|forms?|forming|formation|develops?|developing|development|conditions|activity|force|watch|warnings?|center|intensity|strength|remnants|status|category)$/i;
+  //   (b) in mixed-case text a real name is ALWAYS capitalized, so a lowercase
+  //       token is prose, not a name. (ALL-CAPS archives carry no case signal —
+  //       there (a) is the backstop.)
+  //   (c) an indefinite article before the classification means a generic,
+  //       usually forecast, storm: "a tropical depression is expected to form".
+  //       NHC never writes "a Tropical Storm Otis".
+  const RE_INDEFINITE = /\b(?:a|an)\s+$/i;
+
+  function validCycloneName(raw, allCaps) {
+    if (NOT_A_NAME.test(raw)) return false;
+    return allCaps || raw[0] === raw[0].toUpperCase();
+  }
 
   function titleCase(s) {
     // \b\w capitalizes after hyphens too — NHC style is "Post-Tropical Cyclone".
@@ -473,8 +500,19 @@
     const feats = [];
     secText.split(/\n\s*\n/).forEach((chunk) => {
       const flat = chunk.replace(/\n/g, ' ').replace(/\s+/g, ' ').trim();
-      const cm = flat.match(RE_CYCLONE);
-      if (!cm) return; // Gale Warnings etc. also live under SPECIAL FEATURES
+      // First VALID match, not the first match: a paragraph can mention a
+      // storm-to-be before naming the storm that already exists.
+      const allCaps = flat === flat.toUpperCase();
+      let cm = null;
+      RE_CYCLONE.lastIndex = 0;
+      let m;
+      while ((m = RE_CYCLONE.exec(flat)) !== null) {
+        if (RE_INDEFINITE.test(flat.slice(0, m.index))) continue; // "a tropical depression ..."
+        if (!validCycloneName(m[2], allCaps)) continue;
+        cm = m;
+        break;
+      }
+      if (!cm) return; // genesis prose, Gale Warnings etc. also live under SPECIAL FEATURES
 
       // center: stated fix, falling back to the first coordinate pair
       const ctr = flat.match(
@@ -1019,7 +1057,12 @@
       if (isWave) result.waves.push(...extractWaves(s.text, s.name));
       result.convection.push(...extractConvection(s.text, s.name));
       if (isITCZ || /TROUGH/i.test(s.text)) result.troughs.push(...extractTroughs(s.text, s.name));
-      if (!isSpecial && !cycs.length) result.fixes.push(...extractFixes(s.text, s.name));
+      // `!cycs.length` is what actually prevents a named center from
+      // double-registering as a bare fix — so SPECIAL FEATURES with no cyclone
+      // (a genesis paragraph: "a 1007 mb low has developed near 14.5N 106W, a
+      // tropical depression is expected to form") still earns an honest fix at
+      // the stated center, instead of rendering nothing at all.
+      if (!cycs.length) result.fixes.push(...extractFixes(s.text, s.name));
       // The preamble is product boilerplate ("...to the African coast...");
       // running the gazetteer over it only manufactures phantom positions.
       if (!isPreamble && !isSpecial) result.inferred.push(...extractInferred(s.text, s.name, basin));

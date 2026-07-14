@@ -301,6 +301,34 @@
         "inferred": 0,
         "projections": 2
       }
+    },
+    "TWDEP.202607140308.txt": {
+      "source": "https://www.nhc.noaa.gov/archive/text/TWDEP/2026/TWDEP.202607140308.txt",
+      "covers": "EP: genesis prose \"a tropical depression is expected to form\" — no phantom cyclone",
+      "snap": {
+        "sections": 5,
+        "cyclones": [],
+        "waves": 3,
+        "convection": 3,
+        "troughs": 5,
+        "fixes": 3,
+        "inferred": 1,
+        "projections": 2
+      }
+    },
+    "TWDEP.202607141611.txt": {
+      "source": "https://www.nhc.noaa.gov/archive/text/TWDEP/2026/TWDEP.202607141611.txt",
+      "covers": "EP: genesis prose \"a tropical depression or tropical storm is expected to form\" — no phantom cyclone",
+      "snap": {
+        "sections": 5,
+        "cyclones": [],
+        "waves": 2,
+        "convection": 5,
+        "troughs": 4,
+        "fixes": 1,
+        "inferred": 1,
+        "projections": 0
+      }
     }
   }
 }

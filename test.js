@@ -864,6 +864,63 @@ ok('TWOEP: CP91 tag captured but location honestly unmapped',
   (() => { const d = eptwo.disturbances[1];
     return d.invest === 'CP91' && d.lat === null && d.lon === null && d.chance48.pct === 60; })());
 
+// --- a cyclone must be REAL (no fabricated storms) ------------------------------
+// NHC discusses storms that don't exist yet ("a tropical depression OR tropical
+// storm IS expected to form"). The classification match used to swallow the next
+// word as the name and plot "Tropical Depression Or" at a nearby coordinate —
+// a named storm that does not exist. These pin the guards. Verbatim prose from
+// TWDEP 2026-07-14 (the products that shipped the bug) leads the list.
+
+// Every genesis phrasing must yield ZERO cyclones.
+[
+  ['live "or" phrasing (the phantom "Or")',
+    'Environmental conditions are favorable for continued development, and a tropical depression or tropical storm is expected to form later today or tonight while the system moves west-northwestward.'],
+  ['live "is expected" phrasing (the phantom "Is")',
+    'A tropical depression is expected to form over the next couple of days while the system moves generally westward.'],
+  ['"could form" phrasing',
+    'A tropical depression could form by the end of the weekend while it moves west-northwestward.'],
+  ['ALL-CAPS archive genesis',
+    'A TROPICAL DEPRESSION IS EXPECTED TO FORM DURING THE NEXT DAY OR SO WHILE THE SYSTEM MOVES WESTWARD.'],
+].forEach(([label, prose]) => {
+  const r = P.parse('TWDAT\n\n...SPECIAL FEATURES...\n\nA 1007 mb low is near 14.5N 106W. ' + prose);
+  ok('cyclone: genesis forecast is NOT a cyclone — ' + label, r.cyclones.length === 0);
+});
+
+// ...but the analyzed low in that same paragraph still earns an honest fix,
+// rather than vanishing along with the phantom.
+ok('cyclone: cyclone-less SPECIAL FEATURES still fixes the stated center',
+  (() => {
+    const r = P.parse('TWDAT\n\n...SPECIAL FEATURES...\n\nA 1007 mb low pressure circulation ' +
+      'has developed near 14.5N 106W. A tropical depression is expected to form later today.');
+    return r.cyclones.length === 0 && r.fixes.length === 1 &&
+      r.fixes[0].lat === 14.5 && r.fixes[0].lon === -106 && r.fixes[0].inferred === false;
+  })());
+
+// Real storms must survive every guard.
+[
+  ['mixed-case', 'Tropical Storm Otis is centered near 14.8N 99.1W, moving north at 8 kt.', 'Tropical Storm', 'Otis'],
+  ['ALL-CAPS archive', 'HURRICANE LEE IS CENTERED NEAR 25.0N 65.0W. MAXIMUM SUSTAINED WINDS ARE 105 KT.', 'Hurricane', 'Lee'],
+  ['spelled-number TD', 'Tropical Depression Ten is centered near 25.0N 85.0W.', 'Tropical Depression', 'Ten'],
+  ['post-tropical (hyphen)', 'Post-Tropical Cyclone Lee is centered near 45.0N 67.0W.', 'Post-Tropical Cyclone', 'Lee'],
+  ['remnants', 'Remnants of Otis are located near 17.0N 100.0W.', 'Remnants Of', 'Otis'],
+  ['"landfall as a category 5 hurricane" prose',
+    'Hurricane Otis made landfall in Acapulco as a category 5 hurricane with maximum sustained winds of 145 kt. Otis is centered near 16.8N 99.9W.',
+    'Hurricane', 'Otis'],
+].forEach(([label, prose, cls, name]) => {
+  const r = P.parse('TWDAT\n\n...SPECIAL FEATURES...\n\n' + prose);
+  ok('cyclone: real storm survives — ' + label,
+    r.cyclones.length === 1 && r.cyclones[0].name === name && r.cyclones[0].classification === cls);
+});
+
+// The scan walks PAST a genesis mention to the real storm in the same paragraph
+// (it used to stop at the first match, phantom or not).
+ok('cyclone: genesis prose before a real storm yields the REAL storm',
+  (() => {
+    const r = P.parse('TWDAT\n\n...SPECIAL FEATURES...\n\nA tropical depression is expected to ' +
+      'form later today. Elsewhere, Hurricane Lee is centered near 25.0N 65.0W.');
+    return r.cyclones.length === 1 && r.cyclones[0].name === 'Lee';
+  })());
+
 // --- issuance time parsing -----------------------------------------------------
 
 const iss1 = P.parseIssued('805 AM EDT Mon Jul 7 2026');
