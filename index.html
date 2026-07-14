@@ -111,6 +111,19 @@
      picked. Full opacity + a hairline dark shadow reads as "this trace is lifted
      off the chart" — an instrument highlight, which is what this is. */
   #map path.hc-sel{stroke-opacity:1;filter:drop-shadow(0 1px 2px rgba(0,0,0,.68))}
+  /* Selecting is a state change, not a jump: ease the weight and the shadow in
+     and out. Feature panes only — the basemap's widths never change, so there's
+     nothing to transition there. (The gradient swap can't be interpolated — a
+     paint-server URL doesn't tween with a color — but it's the subtlest part of
+     the treatment, and the weight/shadow ease carries the motion.) */
+  .leaflet-hc-lines-pane path,
+  .leaflet-hc-areas-pane path,
+  .leaflet-hc-points-pane path{transition:stroke-width .14s ease-out,filter .14s ease-out}
+  @media (prefers-reduced-motion:reduce){
+    .leaflet-hc-lines-pane path,
+    .leaflet-hc-areas-pane path,
+    .leaflet-hc-points-pane path{transition:none}
+  }
 
   .cyc-label{background:rgba(9,26,38,.9);color:var(--ink);border:1px solid var(--line);
     border-radius:4px;font:600 .68rem/1.2 var(--mono);letter-spacing:.06em;
