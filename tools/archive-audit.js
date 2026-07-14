@@ -110,6 +110,16 @@ const TWDS = [
   { type: 'TWDEP', year: 2024, prefix: '2024031621',
     expect: { cyclones: 0, names: [] },
     covers: 'EP: quiet season, no SPECIAL FEATURES/WAVES sections, pure gap-wind narrative' },
+  // The two products that shipped the phantom-cyclone bug: NHC's genesis prose
+  // ("a tropical depression OR tropical storm IS expected to form") used to be
+  // read as an existing storm named "Or" / "Is". Both must parse to ZERO
+  // cyclones while still fixing the analyzed low they describe.
+  { type: 'TWDEP', year: 2026, prefix: '2026071416',
+    expect: { cyclones: 0, names: [] },
+    covers: 'EP: genesis prose "a tropical depression or tropical storm is expected to form" — no phantom cyclone' },
+  { type: 'TWDEP', year: 2026, prefix: '2026071403',
+    expect: { cyclones: 0, names: [] },
+    covers: 'EP: genesis prose "a tropical depression is expected to form" — no phantom cyclone' },
 ];
 
 // --- fetch + cache ---------------------------------------------------------------

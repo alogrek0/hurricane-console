@@ -56,7 +56,7 @@ Everything is client side. Files:
 | `tools/check-version-guard.sh` | the version-bump check itself (`BASE HEAD` args) — single source, called by the pre-push hook AND CI |
 | `tools/corpus-summary.js` | snapshot shape for the archive corpus — shared by test.js (checker) and archive-audit.js (writer) |
 | `tools/archive-audit.js` | dev-only, network: audits parser vs curated archived NHC products; `--save-fixtures` regenerates `fixtures/` |
-| `fixtures/`      | committed archive corpus: 15 real NHC products across both basins (LF-pinned via `.gitattributes`) + pinned snapshots in `expected.json` — regenerate only via `--save-fixtures`, never hand-edit |
+| `fixtures/`      | committed archive corpus: 17 real NHC products across both basins (LF-pinned via `.gitattributes`) + pinned snapshots in `expected.json` — regenerate only via `--save-fixtures`, never hand-edit |
 | `.github/workflows/ci.yml` | CI: `node test.js` on push-to-main + PRs; version guard on PRs |
 | `.github/workflows/alerts.yml` | invest alerts (Atlantic-only by design): twice-hourly cron polls the TWOAT, diffs vs cached state, pushes to ntfy.sh (`NTFY_TOPIC` repo secret; unset = dry-run) |
 | `tools/alert-invests.js` | the alerter: fetch/diff/push; pure logic (stateFromTWO/diffAlerts/formatAlert) unit-tested offline in test.js |
@@ -90,6 +90,21 @@ extraction is basin-blind.
 3. **Dead-reckoning** — projects +24h wave positions from stated motion. A speed
    range (`15 to 20 kt`) yields an **uncertainty band** between the slow and fast
    solutions, not a single point.
+
+**A cyclone must be real.** NHC routinely discusses storms that do not exist yet
+("a tropical depression **or** tropical storm **is expected to form** later
+today"). The classification match will happily swallow the next word as the
+storm's name — this shipped a fabricated *"Tropical Depression Or"* plotted at a
+nearby low's coordinates. `extractCyclones` now requires: the following token is
+not genesis/function vocabulary (`NOT_A_NAME`; ALL-CAPS archives have no case
+signal, so this is the backstop there), the token is capitalized in mixed-case
+text, and the classification is not preceded by an indefinite article ("a
+tropical depression" is generic; NHC never writes "a Tropical Storm Otis"). The
+scan walks past a genesis mention to a real storm in the same paragraph. A
+cyclone-less SPECIAL FEATURES still emits a **fix** at any stated center, so the
+analyzed low survives the phantom's removal. A named storm that does not exist is
+the worst lie this map can tell — fixtures `TWDEP.2026071416*`/`TWDEP.2026071403*`
+pin the exact prose that broke it.
 4. **TCM pass** — `parseTCM` reads the official forecast/advisory (track points,
    intensity, current-position 34/50/64-kt quadrant wind radii); `coneFromTrack`
    computes the cone from NHC's published seasonal radii (update `CONE_RADII_NM`
