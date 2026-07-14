@@ -492,7 +492,9 @@
     var t = (src && src._hi) || src; // tapline group -> its visible line
     if (!t || !t.setStyle || !t._path) return;
     sel = { layer: t, weight: t.options.weight || 1 };
-    t.setStyle({ weight: sel.weight + 3 });
+    // additive, not multiplicative: a 1px box border and a 3px wave axis should
+    // land in the same "selected" range rather than the thin ones staying thin
+    t.setStyle({ weight: sel.weight + 2 });
     L.DomUtil.addClass(t._path, 'hc-sel');
   }
   function selClear() {
