@@ -217,6 +217,7 @@
         "waves": 4,
         "convection": 4,
         "troughs": 0,
+        "troughKinds": "itcz:0 monsoon:0 trough:0",
         "fixes": 1,
         "inferred": 1,
         "projections": 5
@@ -234,6 +235,7 @@
         "waves": 2,
         "convection": 3,
         "troughs": 0,
+        "troughKinds": "itcz:0 monsoon:0 trough:0",
         "fixes": 4,
         "inferred": 1,
         "projections": 4
@@ -251,6 +253,7 @@
         "waves": 0,
         "convection": 3,
         "troughs": 1,
+        "troughKinds": "itcz:0 monsoon:1 trough:0",
         "fixes": 2,
         "inferred": 0,
         "projections": 2
@@ -269,6 +272,7 @@
         "waves": 0,
         "convection": 4,
         "troughs": 2,
+        "troughKinds": "itcz:0 monsoon:1 trough:1",
         "fixes": 7,
         "inferred": 0,
         "projections": 1
@@ -283,6 +287,7 @@
         "waves": 0,
         "convection": 1,
         "troughs": 3,
+        "troughKinds": "itcz:1 monsoon:0 trough:2",
         "fixes": 1,
         "inferred": 1,
         "projections": 0
@@ -297,6 +302,7 @@
         "waves": 2,
         "convection": 0,
         "troughs": 0,
+        "troughKinds": "itcz:0 monsoon:0 trough:0",
         "fixes": 2,
         "inferred": 0,
         "projections": 2
@@ -311,6 +317,7 @@
         "waves": 3,
         "convection": 3,
         "troughs": 5,
+        "troughKinds": "itcz:4 monsoon:1 trough:0",
         "fixes": 3,
         "inferred": 1,
         "projections": 2
@@ -325,6 +332,7 @@
         "waves": 2,
         "convection": 5,
         "troughs": 4,
+        "troughKinds": "itcz:3 monsoon:1 trough:0",
         "fixes": 1,
         "inferred": 1,
         "projections": 0

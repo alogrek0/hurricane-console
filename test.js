@@ -864,6 +864,34 @@ ok('TWOEP: CP91 tag captured but location honestly unmapped',
   (() => { const d = eptwo.disturbances[1];
     return d.invest === 'CP91' && d.lat === null && d.lon === null && d.chance48.pct === 60; })());
 
+// --- ITCZ vs monsoon trough vs surface trough ----------------------------------
+// Three different features. The product names each in the sentence that
+// positions it, so the classification is read, never guessed. Prose below is
+// verbatim from the live TWDEP of 2026-07-14.
+const TROUGH_TXT = 'TWDEP\n\n...INTERTROPICAL CONVERGENCE ZONE/MONSOON TROUGH...\n\n' +
+  'The monsoon trough extends from 11N74.5W to 10N83W to 08N88W. ' +
+  'Segments of the ITCZ are from 07.5N90W to 10N103.5W, then from ' +
+  '10.5N110.5W to 06.5N125W to 09.5N130W, then from 13.5N136W to 10.5N140W.\n\n' +
+  '...OFFSHORE WATERS...\n\n' +
+  'A surface trough is analyzed from 17N127W to 10N126.5W.';
+const tk = P.parse(TROUGH_TXT).troughs;
+ok('trough: monsoon trough classified from its own sentence',
+  tk.filter((t) => t.subtype === 'monsoon').length === 1);
+ok('trough: every ITCZ segment in the "then from ..." chain is tagged itcz',
+  tk.filter((t) => t.subtype === 'itcz').length === 3);
+ok('trough: a plain surface trough is not swept into the ITCZ',
+  tk.filter((t) => t.subtype === 'trough').length === 1);
+ok('trough: subtypes carry the right geometry (monsoon starts at 11N 74.5W)',
+  (() => { const m = tk.find((t) => t.subtype === 'monsoon');
+    return m.line[0].lat === 11 && m.line[0].lon === -74.5; })());
+// a sentence naming BOTH must still tag each polyline by its nearest cue
+ok('trough: one sentence naming both tags each segment by the nearest cue',
+  (() => {
+    const r = P.parse('TWDAT\n\n...ITCZ...\n\nThe monsoon trough runs from 10N20W to 09N30W, ' +
+      'while the ITCZ continues from 08N40W to 07N50W.');
+    return r.troughs.length === 2 && r.troughs[0].subtype === 'monsoon' && r.troughs[1].subtype === 'itcz';
+  })());
+
 // --- a cyclone must be REAL (no fabricated storms) ------------------------------
 // NHC discusses storms that don't exist yet ("a tropical depression OR tropical
 // storm IS expected to form"). The classification match used to swallow the next
