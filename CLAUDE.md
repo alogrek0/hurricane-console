@@ -49,6 +49,7 @@ Everything is client side. Files:
 | `basemap.js`     | embedded Natural Earth 50m basemap: land, coast, country borders, US-only state lines — GENERATED, do not hand-edit (regenerate: `node tools/build-basemap.js`) |
 | `tools/build-basemap.js` | dev-only generator: downloads/clips NE 50m → basemap.js |
 | `tools/make-icons.html` | dev-only icon generator: canvas-draws the header glyph at every icon size (any/maskable/apple + favicon.svg is hand-authored from the same art) — regeneration procedure in the file header |
+| `tools/highlight-lab.html` | dev-only selection-highlight lab: real feature shapes + a menu of treatments and live dials; prints the exact app.js/index.html constants. Reachable on a phone (Pages serves the repo root) — how a selection *looks* is judged by looking, not by shipping a release per constant |
 | `sample.js`      | embedded SAMPLE-state fallbacks: Atlantic TWDAT/TWOAT/TCM (Jul 7 2026 + Lee) and East Pacific TWDEP/TWOEP (recent-real captures; no EP TCM sample) |
 | `version.js`     | app version, single source (CalVer) — shared by page, SW, and tests |
 | `sw.js`          | service worker: cache-first shell, network-first data |

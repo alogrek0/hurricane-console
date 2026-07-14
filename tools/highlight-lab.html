@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<!--
+  tools/highlight-lab.html — dev-only selection-highlight lab. Never shipped as
+  part of the app (not in the SW SHELL list, not referenced by index.html), but
+  it IS reachable on a phone because Pages serves the repo root:
+    https://<user>.github.io/hurricane-console/tools/highlight-lab.html
+
+  Why it exists: how a selected feature should look is a judgment call that can
+  only be made by LOOKING at it, on the device it will be used on. Shipping a
+  release per constant is a terrible feedback loop. Pick a preset here, nudge
+  the dials, and the page prints the exact app.js/index.html constants to apply.
+
+  The shapes reproduce the real render styles from app.js (same palette, weights,
+  dash patterns, panes/z-order) so what you judge here is what you get:
+    trough #4fc3d6 w2 · wave axis #ffa23a w3 (VERTICAL — the zero-width case)
+    convection #ffb98a w1 dashed · cone #7ea3b8 w1.5 dashed · track #dce8ef w2
+  Tap any shape to select it. Only one selection at a time, like the app.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Highlight lab — Hurricane Console (dev)</title>
+<style>
+  :root{
+    --bg:#071620; --panel:#0c2233; --line:#173347; --ink:#dce8ef;
+    --dim:#7ea3b8; --amber:#ffa23a; --cyan:#4fc3d6; --strong:#ff6b5a;
+    --mono:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 var(--mono)}
+  header{padding:.6rem .8rem;border-bottom:1px solid var(--line);
+    background:linear-gradient(180deg,#0a1e2c,#071620)}
+  h1{margin:0;font-size:.95rem;letter-spacing:.02em}
+  h1 small{display:block;color:var(--dim);font-weight:400;font-size:.7rem;letter-spacing:.06em}
+  .wrap{display:flex;flex-wrap:wrap;gap:1rem;padding:1rem;align-items:flex-start}
+  .chart{background:#04101a;border:1px solid var(--line);border-radius:6px;
+    flex:1 1 480px;min-width:320px;touch-action:manipulation}
+  .side{flex:1 1 320px;min-width:280px;display:flex;flex-direction:column;gap:.9rem}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:.7rem}
+  .card b{display:block;color:var(--dim);font-size:.62rem;letter-spacing:.1em;margin-bottom:.5rem}
+  .presets{display:flex;flex-wrap:wrap;gap:.35rem}
+  .presets button{font:inherit;font-size:.72rem;color:var(--ink);background:#123246;
+    border:1px solid var(--line);border-radius:4px;padding:.45rem .6rem;cursor:pointer;
+    min-height:38px}
+  .presets button.on{background:var(--amber);color:#231400;border-color:var(--amber);font-weight:600}
+  .dial{display:grid;grid-template-columns:8.5rem 1fr 3rem;align-items:center;gap:.5rem;
+    margin-bottom:.45rem;font-size:.72rem;color:var(--dim)}
+  .dial input{width:100%}
+  .dial output{color:var(--ink);text-align:right;font-variant-numeric:tabular-nums}
+  .dial.off{opacity:.35}
+  pre{margin:0;white-space:pre-wrap;word-break:break-word;color:var(--dim);
+    font-size:.7rem;line-height:1.5}
+  pre em{color:var(--amber);font-style:normal}
+  .hint{color:var(--dim);font-size:.68rem;margin-top:.4rem}
+</style>
+</head>
+<body>
+<header>
+  <h1>Highlight lab<small>DEV ONLY · tap a feature to select it · pick a treatment, tune it, send me the numbers</small></h1>
+</header>
+
+<div class="wrap">
+  <svg class="chart" id="chart" viewBox="0 0 600 420" role="img" aria-label="Sample chart features">
+    <defs>
+      <linearGradient id="sheen" gradientUnits="userSpaceOnUse"><stop offset="0%"/><stop offset="50%"/><stop offset="100%"/></linearGradient>
+      <!-- graticule -->
+      <pattern id="grat" width="60" height="60" patternUnits="userSpaceOnUse">
+        <path d="M60 0 L0 0 0 60" fill="none" stroke="#0f2f42" stroke-width="1"/>
+      </pattern>
+    </defs>
+    <rect width="600" height="420" fill="url(#grat)"/>
+
+    <!-- areas (below lines, like the hc-areas pane) -->
+    <rect id="f-conv" class="feat" data-kind="convection" x="150" y="150" width="230" height="150"
+      fill="#ff9d6a" fill-opacity=".10" stroke="#ffb98a" stroke-width="1" stroke-dasharray="3 3"/>
+    <polygon id="f-cone" class="feat" data-kind="cone"
+      points="420,330 470,240 540,190 560,215 500,265 460,345"
+      fill="#dce8ef" fill-opacity=".07" stroke="#7ea3b8" stroke-width="1.5" stroke-dasharray="4 4"/>
+
+    <!-- lines (above areas) -->
+    <polyline id="f-trough" class="feat" data-kind="trough" points="20,250 140,215 300,235 420,200 580,220"
+      fill="none" stroke="#4fc3d6" stroke-width="2"/>
+    <line id="f-wave" class="feat" data-kind="wave" x1="250" y1="70" x2="250" y2="360"
+      stroke="#ffa23a" stroke-width="3"/>
+    <polyline id="f-track" class="feat" data-kind="track" points="430,340 470,255 530,205"
+      fill="none" stroke="#dce8ef" stroke-width="2"/>
+
+    <!-- points (above lines) -->
+    <circle id="f-fix" class="feat" data-kind="fix" cx="120" cy="120" r="4"
+      fill="none" stroke="#dce8ef" stroke-width="1.5"/>
+    <circle id="f-inf" class="feat" data-kind="inferred" cx="380" cy="100" r="5"
+      fill="none" stroke="#9a86c9" stroke-width="1.5" stroke-dasharray="3 3"/>
+  </svg>
+
+  <div class="side">
+    <div class="card">
+      <b>TREATMENT</b>
+      <div class="presets" id="presets"></div>
+      <div class="hint">The wave axis is deliberately vertical — a zero-width bounding box is where naive gradients disappear.</div>
+    </div>
+
+    <div class="card">
+      <b>DIALS</b>
+      <div id="dials"></div>
+    </div>
+
+    <div class="card">
+      <b>APPLY THIS (send me these)</b>
+      <pre id="out"></pre>
+    </div>
+  </div>
+</div>
+
+<script>
+'use strict';
+// ---- the treatments on the menu -------------------------------------------
+// Each returns how a selected path should be painted. `crisp`+`sheen` is what
+// ships today; the rest are alternatives worth seeing side by side.
+var PRESETS = {
+  shipped:   { label: 'Shipped (crisp + sheen)', bump: 2, sheen: .40, shadow: .85, blur: 2, dy: 1 },
+  crisp:     { label: 'Crisp only',              bump: 2, sheen: 0,   shadow: .85, blur: 2, dy: 1 },
+  sheenOnly: { label: 'Sheen only',              bump: 2, sheen: .40, shadow: 0,   blur: 0, dy: 0 },
+  bold:      { label: 'Bold (thicker)',          bump: 4, sheen: .40, shadow: .85, blur: 2, dy: 1 },
+  whisper:   { label: 'Whisper',                 bump: 1, sheen: .25, shadow: .5,  blur: 2, dy: 1 },
+  whiteGlow: { label: 'White glow',              bump: 2, sheen: 0,   shadow: 0,   blur: 0, dy: 0, glow: 'white' },
+  colorGlow: { label: 'Colored glow',            bump: 2, sheen: 0,   shadow: 0,   blur: 0, dy: 0, glow: 'color' },
+  casing:    { label: 'Highlighter casing',      bump: 2, sheen: 0,   shadow: .85, blur: 2, dy: 1, casing: true },
+  ants:      { label: 'Marching ants',           bump: 2, sheen: 0,   shadow: .85, blur: 2, dy: 1, ants: true }
+};
+var DIALS = [
+  { key: 'bump',   label: 'weight bump', min: 0, max: 6, step: 1,   unit: 'px' },
+  { key: 'sheen',  label: 'sheen mix',   min: 0, max: 1, step: .02, unit: '' },
+  { key: 'shadow', label: 'shadow alpha',min: 0, max: 1, step: .05, unit: '' },
+  { key: 'blur',   label: 'shadow blur', min: 0, max: 8, step: .5,  unit: 'px' },
+  { key: 'dy',     label: 'shadow lift', min: 0, max: 4, step: .5,  unit: 'px' }
+];
+
+var cur = Object.assign({}, PRESETS.shipped), curName = 'shipped';
+var selected = null, casingEl = null, antsEl = null;
+
+function lighten(hex, amt) {
+  var m = /^#?([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i.exec(hex || '');
+  if (!m) return hex;
+  function up(c) { var v = parseInt(c, 16); return Math.round(v + (255 - v) * amt); }
+  return 'rgb(' + up(m[1]) + ',' + up(m[2]) + ',' + up(m[3]) + ')';
+}
+function baseColor(el) { return el.dataset.color || el.getAttribute('stroke'); }
+function baseWeight(el) { return parseFloat(el.dataset.weight || el.getAttribute('stroke-width')); }
+function isLine(el) { return ['trough', 'wave', 'track'].indexOf(el.dataset.kind) !== -1; }
+
+function clearSel() {
+  if (casingEl) { casingEl.remove(); casingEl = null; }
+  if (antsEl) { antsEl.remove(); antsEl = null; }
+  if (!selected) return;
+  selected.setAttribute('stroke', baseColor(selected));
+  selected.setAttribute('stroke-width', baseWeight(selected));
+  selected.style.filter = '';
+  selected = null;
+}
+// paint the current treatment onto `el`
+function paint(el) {
+  var color = baseColor(el), w = baseWeight(el);
+  el.setAttribute('stroke-width', w + Number(cur.bump));
+
+  // sheen: 3-stop gradient along the line (own color -> lighter -> own color).
+  // userSpaceOnUse, anchored to the shape's actual endpoints, because the wave
+  // axis has a ZERO-WIDTH bounding box and an objectBoundingBox gradient would
+  // simply not render on it.
+  if (cur.sheen > 0 && isLine(el)) {
+    var g = document.getElementById('sheen');
+    var pts = el.tagName === 'line'
+      ? [[+el.getAttribute('x1'), +el.getAttribute('y1')], [+el.getAttribute('x2'), +el.getAttribute('y2')]]
+      : (function () {
+          var p = el.getAttribute('points').trim().split(/\s+/).map(function (s) { return s.split(',').map(Number); });
+          return [p[0], p[p.length - 1]];
+        })();
+    g.setAttribute('x1', pts[0][0]); g.setAttribute('y1', pts[0][1]);
+    g.setAttribute('x2', pts[1][0]); g.setAttribute('y2', pts[1][1]);
+    var stops = g.querySelectorAll('stop');
+    stops[0].setAttribute('stop-color', color);
+    stops[1].setAttribute('stop-color', lighten(color, Number(cur.sheen)));
+    stops[2].setAttribute('stop-color', color);
+    el.setAttribute('stroke', 'url(#sheen)');
+  }
+
+  var f = [];
+  if (cur.glow === 'white') f.push('drop-shadow(0 0 3px rgba(255,255,255,.9)) drop-shadow(0 0 8px rgba(255,255,255,.5))');
+  if (cur.glow === 'color') f.push('drop-shadow(0 0 3px ' + color + ') drop-shadow(0 0 8px ' + color + ')');
+  if (cur.shadow > 0) f.push('drop-shadow(0 ' + cur.dy + 'px ' + cur.blur + 'px rgba(0,0,0,' + cur.shadow + '))');
+  el.style.filter = f.join(' ');
+
+  // casing: a wide translucent band of the feature's color, behind it
+  if (cur.casing) {
+    casingEl = el.cloneNode(false);
+    casingEl.removeAttribute('id');
+    casingEl.style.filter = '';
+    casingEl.setAttribute('stroke', color);
+    casingEl.setAttribute('stroke-width', (w + Number(cur.bump)) * 3.2);
+    casingEl.setAttribute('stroke-opacity', '.22');
+    casingEl.setAttribute('stroke-dasharray', 'none');
+    casingEl.setAttribute('fill', 'none');
+    casingEl.style.pointerEvents = 'none';
+    el.parentNode.insertBefore(casingEl, el);
+  }
+  // marching ants: an animated dashed outline over the top
+  if (cur.ants) {
+    antsEl = el.cloneNode(false);
+    antsEl.removeAttribute('id');
+    antsEl.style.filter = '';
+    antsEl.setAttribute('stroke', '#fff');
+    antsEl.setAttribute('stroke-width', w + Number(cur.bump) + 2);
+    antsEl.setAttribute('stroke-opacity', '.9');
+    antsEl.setAttribute('stroke-dasharray', '6 6');
+    antsEl.setAttribute('fill', 'none');
+    antsEl.style.pointerEvents = 'none';
+    antsEl.innerHTML = '<animate attributeName="stroke-dashoffset" from="12" to="0" dur="0.6s" repeatCount="indefinite"/>';
+    el.parentNode.appendChild(antsEl);
+  }
+}
+function select(el) {
+  clearSel();
+  selected = el;
+  paint(el);
+  render();
+}
+
+// ---- UI --------------------------------------------------------------------
+var presetsEl = document.getElementById('presets');
+Object.keys(PRESETS).forEach(function (name) {
+  var b = document.createElement('button');
+  b.textContent = PRESETS[name].label;
+  b.onclick = function () {
+    curName = name;
+    cur = Object.assign({ bump: 2, sheen: 0, shadow: 0, blur: 0, dy: 0 }, PRESETS[name]);
+    syncDials();
+    if (selected) { var s = selected; clearSel(); select(s); } else render();
+  };
+  presetsEl.appendChild(b);
+});
+var dialsEl = document.getElementById('dials');
+DIALS.forEach(function (d) {
+  var row = document.createElement('label');
+  row.className = 'dial';
+  row.id = 'dial-' + d.key;
+  row.innerHTML = '<span>' + d.label + '</span>' +
+    '<input type="range" min="' + d.min + '" max="' + d.max + '" step="' + d.step + '" value="' + cur[d.key] + '">' +
+    '<output>' + cur[d.key] + d.unit + '</output>';
+  var input = row.querySelector('input');
+  input.oninput = function () {
+    cur[d.key] = Number(input.value);
+    row.querySelector('output').textContent = input.value + d.unit;
+    curName = 'custom';
+    if (selected) { var s = selected; clearSel(); select(s); } else render();
+  };
+  dialsEl.appendChild(row);
+});
+function syncDials() {
+  DIALS.forEach(function (d) {
+    var row = document.getElementById('dial-' + d.key);
+    row.querySelector('input').value = cur[d.key];
+    row.querySelector('output').textContent = cur[d.key] + d.unit;
+    // a dial that this preset ignores is dimmed, not hidden
+    var dead = (d.key === 'sheen' && cur.glow) ||
+      ((d.key === 'shadow' || d.key === 'blur' || d.key === 'dy') && cur.glow);
+    row.classList.toggle('off', !!dead);
+  });
+}
+function render() {
+  Array.prototype.forEach.call(document.querySelectorAll('#presets button'), function (b) {
+    b.classList.toggle('on', b.textContent === (PRESETS[curName] || {}).label);
+  });
+  var glowLine = cur.glow === 'white'
+    ? 'drop-shadow(0 0 3px rgba(255,255,255,.9)) drop-shadow(0 0 8px rgba(255,255,255,.5))'
+    : cur.glow === 'color' ? 'drop-shadow(0 0 3px <color>) drop-shadow(0 0 8px <color>)' : '';
+  var filt = glowLine || (cur.shadow > 0
+    ? 'drop-shadow(0 ' + cur.dy + 'px ' + cur.blur + 'px rgba(0,0,0,' + cur.shadow + '))'
+    : 'none');
+  document.getElementById('out').innerHTML =
+    'preset: <em>' + ((PRESETS[curName] || {}).label || 'custom') + '</em>\n\n' +
+    'app.js  selHighlight:\n' +
+    '  weight: sel.weight + <em>' + cur.bump + '</em>\n' +
+    '  sheen mix: lighten(sel.color, <em>' + Number(cur.sheen).toFixed(2) + '</em>)' +
+      (cur.sheen > 0 ? '' : '   (sheen off)') + '\n' +
+    (cur.casing ? '  + casing underlay (wide translucent band)\n' : '') +
+    (cur.ants ? '  + marching-ants overlay (animated dashes)\n' : '') +
+    '\nindex.html  #map path.hc-sel:\n' +
+    '  filter: <em>' + filt + '</em>';
+}
+
+Array.prototype.forEach.call(document.querySelectorAll('.feat'), function (el) {
+  el.dataset.color = el.getAttribute('stroke');
+  el.dataset.weight = el.getAttribute('stroke-width');
+  el.style.cursor = 'pointer';
+  el.addEventListener('click', function (e) { e.stopPropagation(); select(el); });
+});
+document.getElementById('chart').addEventListener('click', clearSel);
+syncDials();
+render();
+select(document.getElementById('f-trough')); // open on the case that started this
+</script>
+</body>
+</html>
