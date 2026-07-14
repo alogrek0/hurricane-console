@@ -118,18 +118,18 @@
 // Each returns how a selected path should be painted. `crisp`+`sheen` is what
 // ships today; the rest are alternatives worth seeing side by side.
 var PRESETS = {
-  shipped:   { label: 'Shipped (crisp + sheen)', bump: 2, sheen: .40, shadow: .85, blur: 2, dy: 1 },
-  crisp:     { label: 'Crisp only',              bump: 2, sheen: 0,   shadow: .85, blur: 2, dy: 1 },
-  sheenOnly: { label: 'Sheen only',              bump: 2, sheen: .40, shadow: 0,   blur: 0, dy: 0 },
-  bold:      { label: 'Bold (thicker)',          bump: 4, sheen: .40, shadow: .85, blur: 2, dy: 1 },
-  whisper:   { label: 'Whisper',                 bump: 1, sheen: .25, shadow: .5,  blur: 2, dy: 1 },
+  shipped:   { label: 'Shipped (crisp + sheen)', bump: 1.5, sheen: .33, shadow: .68, blur: 2, dy: 1 },
+  crisp:     { label: 'Crisp only',              bump: 1.5, sheen: 0,   shadow: .68, blur: 2, dy: 1 },
+  sheenOnly: { label: 'Sheen only',              bump: 1.5, sheen: .33, shadow: 0,   blur: 0, dy: 0 },
+  bold:      { label: 'Bold (thicker)',          bump: 4,   sheen: .40, shadow: .85, blur: 2, dy: 1 },
+  whisper:   { label: 'Whisper',                 bump: 1,   sheen: .25, shadow: .5,  blur: 2, dy: 1 },
   whiteGlow: { label: 'White glow',              bump: 2, sheen: 0,   shadow: 0,   blur: 0, dy: 0, glow: 'white' },
   colorGlow: { label: 'Colored glow',            bump: 2, sheen: 0,   shadow: 0,   blur: 0, dy: 0, glow: 'color' },
   casing:    { label: 'Highlighter casing',      bump: 2, sheen: 0,   shadow: .85, blur: 2, dy: 1, casing: true },
   ants:      { label: 'Marching ants',           bump: 2, sheen: 0,   shadow: .85, blur: 2, dy: 1, ants: true }
 };
 var DIALS = [
-  { key: 'bump',   label: 'weight bump', min: 0, max: 6, step: 1,   unit: 'px' },
+  { key: 'bump',   label: 'weight bump', min: 0, max: 6, step: .5,  unit: 'px' },
   { key: 'sheen',  label: 'sheen mix',   min: 0, max: 1, step: .02, unit: '' },
   { key: 'shadow', label: 'shadow alpha',min: 0, max: 1, step: .05, unit: '' },
   { key: 'blur',   label: 'shadow blur', min: 0, max: 8, step: .5,  unit: 'px' },

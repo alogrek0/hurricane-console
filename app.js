@@ -542,13 +542,13 @@
     sel = { layer: t, weight: t.options.weight || 1, color: t.options.color, grad: null };
     // additive, not multiplicative: a 1px box border and a 3px wave axis should
     // land in the same "selected" range rather than the thin ones staying thin
-    t.setStyle({ weight: sel.weight + 2 });
+    t.setStyle({ weight: sel.weight + 1.5 });
     L.DomUtil.addClass(t._path, 'hc-sel');
     if (t._isLine && t._path.ownerSVGElement) {
       var g = ensureGrad(t._path.ownerSVGElement);
       var stops = g.childNodes;
       stops[0].setAttribute('stop-color', sel.color);
-      stops[1].setAttribute('stop-color', lighten(sel.color, 0.40));
+      stops[1].setAttribute('stop-color', lighten(sel.color, 0.33));
       stops[2].setAttribute('stop-color', sel.color);
       // paint through Leaflet (options.color) rather than the DOM, so a redraw
       // re-applies the gradient instead of reverting to the flat color
