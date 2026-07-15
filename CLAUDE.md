@@ -47,9 +47,11 @@ Everything is client side. Files:
 | `app.js`         | fetch → parse → render on Leaflet; per-basin frame/graticule/masks (`BASINS` config, `switchBasin`); badge + paste/refresh/history-scrubber + basin-switcher UI |
 | `parser.js`      | TWDAT/TWDEP text-to-geo engine (per-basin) — runs in browser AND node |
 | `basemap.js`     | embedded Natural Earth 50m basemap: land, coast, country borders, US-only state lines — GENERATED, do not hand-edit (regenerate: `node tools/build-basemap.js`) |
-| `tools/build-basemap.js` | dev-only generator: downloads/clips NE 50m → basemap.js |
+| `countries.js`   | invisible per-country hover hit-polygons (named, simplified) for the desktop country-name tooltip — GENERATED alongside basemap.js, do not hand-edit; loaded lazily by app.js on hover-capable pointers only (phones never fetch it) |
+| `tools/build-basemap.js` | dev-only generator: downloads/clips NE 50m → basemap.js + countries.js |
 | `tools/make-icons.html` | dev-only icon generator: canvas-draws the header glyph at every icon size (any/maskable/apple + favicon.svg is hand-authored from the same art) — regeneration procedure in the file header |
 | `tools/highlight-lab.html` | dev-only selection-highlight lab: real feature shapes + a menu of treatments and live dials; prints the exact app.js/index.html constants. Reachable on a phone (Pages serves the repo root) — how a selection *looks* is judged by looking, not by shipping a release per constant |
+| `tools/hover-lab.html` | dev-only country-hover lab: real Leaflet + basemap.js + countries.js (live hit-testing is the thing under judgment — mask suppression, features-win-hover, border alignment), treatment menu + dials, prints the exact constants |
 | `sample.js`      | embedded SAMPLE-state fallbacks: Atlantic TWDAT/TWOAT/TCM (Jul 7 2026 + Lee) and East Pacific TWDEP/TWOEP (recent-real captures; no EP TCM sample) |
 | `version.js`     | app version, single source (CalVer) — shared by page, SW, and tests |
 | `sw.js`          | service worker: cache-first shell, network-first data |

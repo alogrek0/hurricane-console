@@ -295,6 +295,52 @@
   }
   buildMasks();
 
+  // Country-name hover (desktop pointers only). countries.js carries invisible
+  // per-country hit polygons (generated alongside basemap.js from the same NE
+  // snapshot, so hit edges match the drawn borders). Loaded lazily ONLY on
+  // hover-capable pointers: phones never download or parse the ~87 KB, and
+  // land stays non-interactive there. Treatment picked in tools/hover-lab.html:
+  // cursor chip + faint acknowledgment fill on the hovered country.
+  if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    var countryScript = document.createElement('script');
+    countryScript.src = 'countries.js';
+    countryScript.onload = function () {
+      var ACK_FILL = 0.06; // hovered-country acknowledgment (hover-lab dial)
+      var countryTip = L.tooltip({ direction: 'top', className: 'country-tip',
+        offset: [0, -8], opacity: 1 });
+      var hoveredCountry = null;
+      var countryHitLayer = L.geoJSON(window.HC_COUNTRIES, {
+        // Default overlayPane (400): under the mask (402) and every feature
+        // pane, so parsed features always win the pointer. No click handler —
+        // path clicks bubble to the map (bubblingMouseEvents default), so
+        // click-to-close-popup on land keeps working.
+        style: { stroke: false, fillColor: '#dce8ef', fillOpacity: 0,
+          className: 'hc-country-hit' },
+        interactive: true
+      }).addTo(map);
+      function clearCountryHover() {
+        if (hoveredCountry) { hoveredCountry.setStyle({ fillOpacity: 0 }); hoveredCountry = null; }
+        if (map.hasLayer(countryTip)) map.removeLayer(countryTip);
+      }
+      countryHitLayer.on('mousemove', function (e) {
+        // The letterbox masks are interactive:false, so the pointer reaches hit
+        // polygons UNDER them — refuse to name land outside the active frame.
+        // Reading PAN_BOUNDS live means switchBasin needs no hook here.
+        if (!L.latLngBounds(PAN_BOUNDS).contains(e.latlng)) { clearCountryHover(); return; }
+        var layer = e.propagatedFrom || e.layer;
+        if (hoveredCountry !== layer) {
+          if (hoveredCountry) hoveredCountry.setStyle({ fillOpacity: 0 });
+          hoveredCountry = layer;
+          layer.setStyle({ fillOpacity: ACK_FILL });
+        }
+        countryTip.setContent(layer.feature.properties.name).setLatLng(e.latlng);
+        if (!map.hasLayer(countryTip)) countryTip.addTo(map);
+      });
+      countryHitLayer.on('mouseout', clearCountryHover);
+    };
+    document.head.appendChild(countryScript);
+  }
+
   // One layer group per feature category so the legend can toggle each class
   // independently. 'fix' has no legend row (small explicit markers, always on).
   // Convergence features, coloured apart. Keep them in the same cyan/teal family

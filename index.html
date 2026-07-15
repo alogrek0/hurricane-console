@@ -130,6 +130,16 @@
     padding:.15rem .35rem;box-shadow:none}
   .cyc-label::before{display:none}
 
+  /* country-name hover chip (desktop pointers only; constants picked in
+     tools/hover-lab.html). The invisible hit polygon under it keeps the pan
+     cursor — land is not clickable and must not claim to be. */
+  path.hc-country-hit{cursor:grab}
+  .leaflet-dragging path.hc-country-hit{cursor:grabbing}
+  .country-tip{background:rgba(9,26,38,.94);color:var(--ink);border:1px solid var(--line);
+    border-radius:4px;font:600 .78rem/1.2 var(--mono);letter-spacing:.06em;
+    padding:.15rem .35rem;box-shadow:none;pointer-events:none}
+  .country-tip::before{display:none}
+
   /* graticule frame labels: quiet chart numerals, halo for legibility over the land fill */
   .grat-labels{position:absolute;inset:0;z-index:450;pointer-events:none}
   .grat-labels span{position:absolute;font:600 .68rem/1 var(--mono);color:#9dbfd3;

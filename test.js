@@ -538,6 +538,47 @@ ok('basemap: land rings clipped hard to the box (no margin)',
 ok('basemap: admin-1 confined to the US (border policy)',
   layers.usStates.coordinates.every(line => line.every(([, y]) => y >= 24)));
 
+// --- countries.js integrity (generated hover hit-targets) ----------------------
+
+const CT = require('./countries.js');
+ok('countries: FeatureCollection of named MultiPolygons',
+  CT.type === 'FeatureCollection' && CT.features.every(f =>
+    f.geometry.type === 'MultiPolygon' &&
+    typeof f.properties.name === 'string' && f.properties.name.length > 0));
+// exact count is brittle across NE revisions; a range guards a bad regeneration
+ok('countries: feature count sane (55-80)',
+  CT.features.length >= 55 && CT.features.length <= 80);
+ok('countries: rings clipped hard to the box, closed, non-trivial',
+  CT.features.every(f => f.geometry.coordinates.every(poly => {
+    const ring = poly[0];
+    const [fx, fy] = ring[0], [lx, ly] = ring[ring.length - 1];
+    return ring.length >= 4 && fx === lx && fy === ly &&
+      ring.every(([x, y]) => x >= -145 && x <= 5 && y >= -5 && y <= 45);
+  })));
+// hover hit-targets must not blow the payload budget a bad eps would
+ok('countries: payload under 130 KB',
+  fs.statSync(__dirname + '/countries.js').size <= 130 * 1024);
+// ray-cast point-in-polygon: does any country's MultiPolygon contain [lon,lat]?
+function countryAt(lon, lat) {
+  for (const f of CT.features) {
+    for (const poly of f.geometry.coordinates) {
+      const ring = poly[0];
+      let inside = false;
+      for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+        const [xi, yi] = ring[i], [xj, yj] = ring[j];
+        if ((yi > lat) !== (yj > lat) && lon < (xj - xi) * (lat - yi) / (yj - yi) + xi)
+          inside = !inside;
+      }
+      if (inside) return f.properties.name;
+    }
+  }
+  return null;
+}
+ok('countries: 23N 102W is Mexico', countryAt(-102, 23) === 'Mexico');
+ok('countries: 33N 81W is the US', countryAt(-81, 33) === 'United States of America');
+ok('countries: 22.3N 80W is Cuba', countryAt(-80, 22.3) === 'Cuba');
+ok('countries: open Atlantic (25N 55W) is no country', countryAt(-55, 25) === null);
+
 // --- TCM forecast/advisory -----------------------------------------------------
 
 const TCM_FIX = `ZCZC MIATCMAT3 ALL
