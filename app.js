@@ -21,7 +21,12 @@
     AT: {
       id: 'AT',
       frame: [[-5, -110], [45, 4]],
-      portraitCenter: [16, -63],
+      portraitCenter: [13, -45], // fallback if openBounds is absent
+      // Phone opening region, centred on the Main Development Region (~13N 45W).
+      // The portrait view fills this box, so it opens on the MDR at a regional
+      // zoom — wide enough to show the tropical wave belt / ITCZ with context,
+      // not a tight crop of empty ocean, and not the whole (wide) basin.
+      openBounds: [[-3, -58], [29, -32]],
       awipsTWD: 'TWDAT', awipsTWO: 'TWOAT',
       tcmPrefixes: ['AL'],
       label: 'ATLANTIC',
@@ -68,6 +73,17 @@
   var PAN_BOUNDS = basin.frame; // 5S hard southern edge — nothing south of it is pannable
   map.setMaxBounds(PAN_BOUNDS);
 
+  // Opening-focus state (portrait/phone). The default fill view centers on the
+  // basin's portraitCenter (Atlantic = the MDR), UNLESS an invest-or-higher is
+  // active, in which case the first render frames that system instead. The
+  // focus is a one-shot opening gesture: consumed once applied, and cancelled
+  // the instant the user pans/zooms — so a later refresh never yanks the view.
+  var wantOpeningFocus = false; // armed just before the live boot load, so the placeholder sample render never consumes it
+  var userMoved = false;
+  var programmaticMove = false; // true while WE move the map, so it isn't read as a user pan
+  map.on('movestart zoomstart', function () { if (!programmaticMove) userMoved = true; });
+  function moveProgrammatic(fn) { programmaticMove = true; try { fn(); } finally { programmaticMove = false; } }
+
   // Zoom-out floor: the whole basin fits the viewport (chart-fit). Below the
   // window's aspect this letterboxes with dark margins, but the frame edges
   // stay labeled so they read as chart borders — and nothing is ever hidden.
@@ -83,12 +99,71 @@
   // basin is wide, phones are tall — so fill the frame instead, centered on
   // the basin's wave alley (portraitCenter); the rest of the basin pans.
   function applyOpeningView() {
-    if (map.getSize().x < map.getSize().y) {
-      // snap UP to the zoomSnap grid so the basin truly fills (no dark bands)
-      var fill = Math.ceil(map.getBoundsZoom(PAN_BOUNDS, true) * 8) / 8;
-      map.setView(basin.portraitCenter, fill, { animate: false });
+    moveProgrammatic(function () {
+      if (map.getSize().x < map.getSize().y) {
+        // Portrait/phone: fill the viewport with the opening REGION (Atlantic =
+        // the MDR) so it opens centred on that region at a regional zoom, not on
+        // the whole wide basin. Filling an interior box leaves no dark bands.
+        // Basins without an openBounds fall back to filling the whole frame on
+        // portraitCenter (the original behaviour). Snap UP to the zoomSnap grid.
+        var region = basin.openBounds ? L.latLngBounds(basin.openBounds) : L.latLngBounds(PAN_BOUNDS);
+        var fill = Math.ceil(map.getBoundsZoom(region, true) * 8) / 8;
+        map.setView(basin.openBounds ? region.getCenter() : basin.portraitCenter, fill, { animate: false });
+      } else {
+        map.setView(L.latLngBounds(PAN_BOUNDS).getCenter(), map.getMinZoom(), { animate: false });
+      }
+    });
+  }
+
+  // The invest-or-higher opening focus (portrait only). Called at the end of
+  // render()/renderTWO(): while the opening gesture is still pending (not yet
+  // consumed, user hasn't moved) and we're in the fill view, frame any active
+  // system instead of the MDR default. TWD contributes cyclones (TD and up);
+  // TWO contributes AL9x invests that have a mapped spot. A plain disturbance or
+  // wave stays below the threshold and does not trigger. When the discussion is
+  // quiet (no cyclones), peek at the outlook ONCE for an invest before settling
+  // on the MDR — so the common "storm is up" path adds no extra network.
+  var openingPeeked = false;
+  function activePoints(parsed, kind) {
+    var pts = [];
+    if (kind === 'TWD') {
+      (parsed.cyclones || []).forEach(function (c) {
+        if (c.lat != null && c.lon != null) pts.push(ll(c));
+      });
     } else {
-      map.setView(L.latLngBounds(PAN_BOUNDS).getCenter(), map.getMinZoom(), { animate: false });
+      (parsed.disturbances || []).forEach(function (d) {
+        if (d.lat != null && /^AL9\d$/.test(d.invest || '')) pts.push(ll(d));
+      });
+    }
+    return pts;
+  }
+  function focusPoints(pts) {
+    moveProgrammatic(function () {
+      map.fitBounds(L.latLngBounds(pts), { padding: [48, 48], maxZoom: 5.25, animate: false });
+    });
+    wantOpeningFocus = false; // consumed
+  }
+  function portrait() { return map.getSize().x < map.getSize().y; }
+  function focusOpening(parsed, kind) {
+    if (!wantOpeningFocus || userMoved || !portrait()) return;
+    var pts = activePoints(parsed, kind);
+    if (pts.length) { focusPoints(pts); return; } // focuses + consumes the opening
+    // Quiet discussion (no cyclones): peek at the outlook once for an invest,
+    // then settle. Consume the opening after the peek resolves so a later
+    // refresh or TWO-mode switch never re-grabs the view.
+    if (kind === 'TWD' && !openingPeeked) {
+      openingPeeked = true;
+      var gen = loadGen;
+      fetchLatestMatching(TWO_URL, basin.awipsTWO, 12).then(function (res) {
+        if (gen !== loadGen || userMoved || !portrait()) return; // superseded — let the newer load decide
+        if (wantOpeningFocus && res && res.text) {
+          var inv = activePoints(window.BasinParser.parseTWO(res.text, { basin: basin.id }), 'TWO');
+          if (inv.length) focusPoints(inv);
+        }
+        wantOpeningFocus = false; // decision made: system or MDR default
+      }).catch(function () { wantOpeningFocus = false; }); // no network → keep the MDR default
+    } else {
+      wantOpeningFocus = false; // no system and no peek to run → settle on the default
     }
   }
   fitMinZoom();
@@ -681,6 +756,7 @@
       (nCyc ? ' · ' + plural(nCyc, 'cyclone') : '');
     issuedStr = parsed.issued || null;
     updateMeta();
+    focusOpening(parsed, 'TWD');
   }
 
   // TWO formation areas: prose locations, so every circle is inferred by
@@ -706,6 +782,7 @@
       (unmapped ? ' · ' + unmapped + ' not mappable — see product text' : '');
     issuedStr = parsed.issued || null;
     updateMeta();
+    focusOpening(parsed, 'TWO');
   }
 
   // --- data source -----------------------------------------------------------
@@ -1038,6 +1115,9 @@
     basin = BASINS[id];
     try { localStorage.setItem(BASIN_KEY, id); } catch (e) { }
     loadGen++; // kill any in-flight fetch that would resolve into the old basin
+    // A basin switch is a fresh opening gesture: re-arm the invest-or-higher
+    // focus (and its one-shot outlook peek) for the incoming basin's first load.
+    wantOpeningFocus = true; userMoved = false; openingPeeked = false;
     // Clear ALL feature paths BEFORE rebuilding masks (z-order invariant above).
     clearCats(TWD_CATS.concat(TCM_CATS).concat(['two']));
     tcmNote = '';
@@ -1200,5 +1280,6 @@
   } catch (e) {
     setBadge('ERROR');
   }
+  wantOpeningFocus = true; // arm: the first LIVE render decides MDR vs. focus-on-system
   loadTWD();
 })();
