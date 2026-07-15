@@ -865,6 +865,9 @@
         var key = basin.id + 'TWD';
         if (fromUser && !res.cached && res.text === lastFetched[key]) noNewProductToast();
         if (!res.cached) lastFetched[key] = res.text;
+        // Persist the last REAL product (live or cached) so a refresh can repaint
+        // it instantly instead of flashing the fictional embedded sample.
+        try { localStorage.setItem('hc-last-' + basin.id + '-TWD', res.text); } catch (e) { }
       } catch (e) {
         setBadge('ERROR');
         twdState = 'error';
@@ -900,6 +903,7 @@
         var key = basin.id + 'TWO';
         if (fromUser && !res.cached && res.text === lastFetched[key]) noNewProductToast();
         if (!res.cached) lastFetched[key] = res.text;
+        try { localStorage.setItem('hc-last-' + basin.id + '-TWO', res.text); } catch (e) { }
       } catch (e) {
         setBadge('ERROR');
       }
@@ -1270,16 +1274,18 @@
   });
 
   // --- boot ------------------------------------------------------------------
-  // Sync the subtitle to the persisted basin, then render its embedded sample
-  // instantly so the map is never blank, then try live data. If the fetch wins
-  // it silently replaces the sample.
+  // Sync the subtitle to the persisted basin, then repaint the LAST REAL product
+  // (persisted from the previous visit) instantly so a refresh doesn't flash the
+  // fictional sample — then try live data, which silently replaces it. On a
+  // first-ever visit there's nothing to repaint: the map shows basemap-only
+  // under LOADING, and loadTWD's catch still renders the embedded SAMPLE if the
+  // fetch fails (offline / sandboxed preview). The badge is left to loadTWD.
   updateSubtitle();
   try {
-    var bootSample = sampleText('TWD');
-    if (bootSample) render(window.BasinParser.parse(bootSample, { basin: basin.id }));
-  } catch (e) {
-    setBadge('ERROR');
-  }
+    var lastReal = null;
+    try { lastReal = localStorage.getItem('hc-last-' + basin.id + '-TWD'); } catch (e) { }
+    if (lastReal) render(window.BasinParser.parse(lastReal, { basin: basin.id }));
+  } catch (e) { /* stale/unparseable cache — ignore; loadTWD will render live */ }
   wantOpeningFocus = true; // arm: the first LIVE render decides MDR vs. focus-on-system
   loadTWD();
 })();
