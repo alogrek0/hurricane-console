@@ -40,6 +40,14 @@ planned tracks — lived friction beats speculation.
 - [x] **Product-history scrubber** — fetch the last ~8 TWDAT/TWO issuances and
   step through time; watch waves march and formation odds evolve. Pairs
   naturally with an invest alert ("what changed since yesterday?").
+- [ ] **Better Lesser Antilles detail** — the islands are used as location
+  references when a storm passes through that area, but the embedded Natural
+  Earth **50m** basemap under-resolves the small Antilles (many read as dots or
+  vanish). Add higher-resolution coastline for that region — NE **10m** clipped
+  to roughly 10–19N / 65–59W — via `tools/build-basemap.js` (basemap is
+  generated + embedded; don't hand-edit `basemap.js`). Keep the border policy
+  (country borders; US-only admin-1) and label the key islands enough to name a
+  passing storm's position.
 - [ ] **Tide-gauge overlay (Charleston/Lowcountry)** — NOAA CO-OPS
   (`tidesandcurrents.noaa.gov`, CORS-open) water levels for local surge
   context. Build it *before* something aims at the SE coast.
