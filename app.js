@@ -161,7 +161,7 @@
           if (inv.length) focusPoints(inv);
         }
         wantOpeningFocus = false; // decision made: system or MDR default
-      }).catch(function () { wantOpeningFocus = false; }); // no network → keep the MDR default
+      }).catch(function (e) { console.warn('outlook peek failed', e); wantOpeningFocus = false; }); // no network → keep the MDR default
     } else {
       wantOpeningFocus = false; // no system and no peek to run → settle on the default
     }
@@ -267,7 +267,7 @@
   // a tap over the area fill it crosses — that is the whole point.
   // (overlayPane, which holds the basemap + graticule, is 400; .grat-labels is
   // 450 and the legend/scrub chips 500, so these all stay clear.)
-  var PANES = { mask: 402, areas: 410, lines: 420, points: 430 };
+  var PANES = { mask: 402, areas: 410, lines: 420, points: 430, diff: 405 };
   Object.keys(PANES).forEach(function (name) {
     map.createPane('hc-' + name).style.zIndex = PANES[name];
   });
@@ -338,6 +338,9 @@
       });
       countryHitLayer.on('mouseout', clearCountryHover);
     };
+    countryScript.onerror = function () {
+      console.warn('countries.js failed to load — country hover disabled');
+    };
     document.head.appendChild(countryScript);
   }
 
@@ -354,7 +357,7 @@
   var cat = {};
   var TWD_CATS = ['itcz', 'monsoon', 'trough', 'convection', 'wave', 'cyclone', 'projection', 'fix', 'inferred'];
   var TCM_CATS = ['track', 'cone', 'wind'];
-  TWD_CATS.concat(TCM_CATS).concat(['two']).forEach(function (k) {
+  TWD_CATS.concat(TCM_CATS).concat(['two', 'diff']).forEach(function (k) {
     cat[k] = L.layerGroup().addTo(map);
   });
   // selClear first: a re-render (refresh, scrubber step, basin switch) can pull
@@ -479,6 +482,9 @@
 
   var featureLine = '—'; // "N features · X waves ..." — set by render/renderTWO
   var issuedStr = null;  // raw product issuance line, or null
+  var curParsed = null;  // last parsed product actually DRAWN — the diff's "current" side
+  var diffOn = false;    // issuance-diff overlay toggle (scrubber row Δ button)
+  var diffNote = '';     // "Δ vs <old time>: ..." folded into the meta line while on
   var badgeState = 'SAMPLE'; // last badge; gates the "next update" hint
 
   // "1 wave" / "3 waves" — count with a naively pluralized noun.
@@ -549,7 +555,8 @@
   //   3  next ~HHMMZ in ...            (live cycle only)      <version, right>
   function updateMeta() {
     // Line 1: features, with the forecast-track count folded in from tcmNote.
-    var line1 = featureLine + (tcmNote ? ' · ' + tcmNote : '');
+    var line1 = featureLine + (tcmNote ? ' · ' + tcmNote : '') +
+      (diffNote ? ' · ' + diffNote : '');
 
     var d = issuedDate();
 
@@ -702,6 +709,7 @@
   map.on('popupclose', selClear);
 
   function render(parsed) {
+    curParsed = parsed;
     clearCats(TWD_CATS);
 
     // The ITCZ, the monsoon trough and an ordinary surface trough are different
@@ -808,6 +816,7 @@
   // TWO formation areas: prose locations, so every circle is inferred by
   // definition. Colored by the 7-day chance using NHC's yellow/orange/red.
   function renderTWO(parsed) {
+    curParsed = parsed;
     clearCats(TWD_CATS);
     cat.two.clearLayers();
     var unmapped = 0;
@@ -841,12 +850,41 @@
     updateScrub(); // scrubber visibility follows the badge (hidden unless LIVE/CACHED/HISTORY)
   }
 
+  // A parse/render throw must never strand a half-drawn (or stale) map under
+  // the previous product's readout: ERROR always means blank features and an
+  // honest meta line. setBadge repaints the meta, so no updateMeta here.
+  function clearToError(site, e) {
+    console.error(site + ' failed', e);
+    curParsed = null;
+    clearCats(TWD_CATS.concat(TCM_CATS).concat(['two', 'diff']));
+    tcmNote = '';
+    featureLine = '—';
+    issuedStr = null;
+    setBadge('ERROR');
+  }
+
+  // api.weather.gov can accept the connection and then stall, which would pulse
+  // LOADING forever — and LOADING is the one badge state that must resolve.
+  // Bound every fetch so a stall falls into the normal catch → CACHED/SAMPLE/
+  // ERROR chain instead of hanging.
+  var FETCH_TIMEOUT_MS = 15000;
+  function fetchTimed(url, opts) {
+    if (typeof AbortController === 'undefined') return fetch(url, opts);
+    var ctl = new AbortController();
+    var timer = setTimeout(function () { ctl.abort(); }, FETCH_TIMEOUT_MS);
+    opts = opts || {};
+    opts.signal = ctl.signal;
+    return fetch(url, opts).then(
+      function (r) { clearTimeout(timer); return r; },
+      function (e) { clearTimeout(timer); throw e; });
+  }
+
   // api.weather.gov's product types are 3-letter AWIPS categories (TWD, TWO)
   // that mix basins and offices — the newest TWD may be the East Pacific
   // issuance or Guam's. Scan the recent list for the newest product carrying
   // the wanted AWIPS id (TWDAT / TWOAT, on the product's third line).
   function fetchLatestMatching(listUrl, awipsId, n) {
-    return fetch(listUrl, { headers: { Accept: 'application/ld+json' } }).then(function (r) {
+    return fetchTimed(listUrl, { headers: { Accept: 'application/ld+json' } }).then(function (r) {
       var cached = r.headers.get('X-From-Cache') === '1';
       if (!r.ok) throw new Error('list ' + r.status);
       return r.json().then(function (j) {
@@ -856,13 +894,19 @@
         function tryNext() {
           if (idx >= items.length) throw new Error('no ' + awipsId + ' in newest ' + n);
           var it = items[idx++];
-          return fetch(it['@id'] || it.id).then(function (pr) {
+          return fetchTimed(it['@id'] || it.id).then(function (pr) {
             var c2 = cached || pr.headers.get('X-From-Cache') === '1';
             return pr.json().then(function (p) {
-              var text = p.productText || '';
-              if (text.indexOf(awipsId) !== -1) return { text: text, cached: c2 };
-              return tryNext();
+              return { text: p.productText || '', cached: c2 };
             });
+          }).then(function (got) {
+            if (got.text.indexOf(awipsId) !== -1) return got;
+            return tryNext();
+          }, function (e) {
+            // One failed/malformed item must not abort the whole scan — a good
+            // product may sit further down the list. Treat it as a no-match.
+            console.warn('product scan item failed', e);
+            return tryNext();
           });
         }
         return tryNext();
@@ -905,7 +949,10 @@
       // Fetch succeeded: a parse/render failure here is a real error, and
       // falling back to SAMPLE would lie about the data source.
       try {
-        render(window.BasinParser.parse(res.text, { basin: basin.id }));
+        // Parse fully before touching the map, so a parser throw can't leave
+        // the previous product's layers up under a fresh readout.
+        var parsed = window.BasinParser.parse(res.text, { basin: basin.id });
+        render(parsed);
         setBadge(res.cached ? 'CACHED' : 'LIVE');
         twdState = res.cached ? 'cached' : 'live';
         var key = basin.id + 'TWD';
@@ -915,21 +962,22 @@
         // it instantly instead of flashing the fictional embedded sample.
         try { localStorage.setItem('hc-last-' + basin.id + '-TWD', res.text); } catch (e) { }
       } catch (e) {
-        setBadge('ERROR');
+        clearToError('TWD render', e);
         twdState = 'error';
       }
       loadTCM(gen);
-    }).catch(function () {
+    }).catch(function (e) {
       if (gen !== loadGen) return;
       // no network + nothing cached -> embedded sample
+      console.warn('TWD fetch failed', e);
       var sample = sampleText('TWD');
-      if (!sample) { setBadge('ERROR'); twdState = 'error'; loadTCM(gen); return; }
+      if (!sample) { clearToError('TWD fetch (no sample)', e); twdState = 'error'; loadTCM(gen); return; }
       try {
         render(window.BasinParser.parse(sample, { basin: basin.id }));
         setBadge('SAMPLE');
         twdState = 'sample';
-      } catch (e) {
-        setBadge('ERROR');
+      } catch (e2) {
+        clearToError('TWD sample render', e2);
         twdState = 'error';
       }
       loadTCM(gen);
@@ -944,24 +992,27 @@
       if (gen !== loadGen) return;
       if (!res.text) throw new Error('empty');
       try {
-        renderTWO(window.BasinParser.parseTWO(res.text, { basin: basin.id }));
+        // Parse-before-render, as in loadTWD: never mutate layers on a throw.
+        var parsed = window.BasinParser.parseTWO(res.text, { basin: basin.id });
+        renderTWO(parsed);
         setBadge(res.cached ? 'CACHED' : 'LIVE');
         var key = basin.id + 'TWO';
         if (fromUser && !res.cached && res.text === lastFetched[key]) noNewProductToast();
         if (!res.cached) lastFetched[key] = res.text;
         try { localStorage.setItem('hc-last-' + basin.id + '-TWO', res.text); } catch (e) { }
       } catch (e) {
-        setBadge('ERROR');
+        clearToError('TWO render', e);
       }
-    }).catch(function () {
+    }).catch(function (e) {
       if (gen !== loadGen) return;
+      console.warn('TWO fetch failed', e);
       var sample = sampleText('TWO');
-      if (!sample) { setBadge('ERROR'); return; }
+      if (!sample) { clearToError('TWO fetch (no sample)', e); return; }
       try {
         renderTWO(window.BasinParser.parseTWO(sample, { basin: basin.id }));
         setBadge('SAMPLE');
-      } catch (e) {
-        setBadge('ERROR');
+      } catch (e2) {
+        clearToError('TWO sample render', e2);
       }
     });
   }
@@ -975,13 +1026,13 @@
 
   // like fetchLatest but returns the newest n product texts
   function fetchRecent(listUrl, n) {
-    return fetch(listUrl, { headers: { Accept: 'application/ld+json' } }).then(function (r) {
+    return fetchTimed(listUrl, { headers: { Accept: 'application/ld+json' } }).then(function (r) {
       if (!r.ok) throw new Error('list ' + r.status);
       return r.json().then(function (j) {
         var items = (j['@graph'] || j.features || []).slice(0, n);
         if (!items.length) return [];
         return Promise.all(items.map(function (it) {
-          return fetch(it['@id'] || it.id)
+          return fetchTimed(it['@id'] || it.id)
             .then(function (pr) { return pr.json(); })
             .then(function (p) { return p.productText || ''; })
             .catch(function (e) { console.warn('TCM product fetch failed', e); return ''; });
@@ -1008,19 +1059,24 @@
     hist.idx = 0;
     hist.srcBadge = null;
     hist.loading = false;
+    // The diff overlay compares against this history — it dies with it.
+    diffOn = false;
+    diffNote = '';
+    cat.diff.clearLayers();
+    syncDiffUI();
     updateScrub();
   }
 
   function fetchHistory(listUrl, awipsId) {
-    return fetch(listUrl, { headers: { Accept: 'application/ld+json' } }).then(function (r) {
+    return fetchTimed(listUrl, { headers: { Accept: 'application/ld+json' } }).then(function (r) {
       if (!r.ok) throw new Error('list ' + r.status);
       return r.json().then(function (j) {
         var items = (j['@graph'] || j.features || []).slice(0, HIST_SCAN);
         return Promise.all(items.map(function (it) {
-          return fetch(it['@id'] || it.id)
+          return fetchTimed(it['@id'] || it.id)
             .then(function (pr) { return pr.json(); })
             .then(function (p) { return p.productText || ''; })
-            .catch(function () { return ''; });
+            .catch(function (e) { console.warn('history item fetch failed', e); return ''; });
         }));
       });
     }).then(function (texts) {
@@ -1046,8 +1102,9 @@
       renderTCM(storms);
       tcmNote = storms.length ? plural(storms.length, 'track') : '';
       updateMeta();
-    }).catch(function () {
+    }).catch(function (e) {
       if ((gen != null && gen !== loadGen) || mode !== 'TWD') return;
+      console.warn('TCM fetch failed', e);
       if (twdState === 'sample') {
         // SAMPLE demos the TCM feature only where a sample exists (Atlantic Lee).
         // EP ships no TCM sample by design: render nothing and stay quiet.
@@ -1169,7 +1226,7 @@
     // focus (and its one-shot outlook peek) for the incoming basin's first load.
     wantOpeningFocus = true; userMoved = false; openingPeeked = false;
     // Clear ALL feature paths BEFORE rebuilding masks (z-order invariant above).
-    clearCats(TWD_CATS.concat(TCM_CATS).concat(['two']));
+    clearCats(TWD_CATS.concat(TCM_CATS).concat(['two', 'diff']));
     tcmNote = '';
     PAN_BOUNDS = basin.frame;
     map.setMaxBounds(PAN_BOUNDS);
@@ -1201,6 +1258,7 @@
   var scrubBack = document.getElementById('scrubBack');
   var scrubFwd = document.getElementById('scrubFwd');
   var scrubLbl = document.getElementById('scrubLabel');
+  var diffBtn = document.getElementById('scrubDiff');
 
   function updateScrub() {
     // Only the fetched-product states can scrub; SAMPLE/PASTED/ERROR/LOADING
@@ -1209,8 +1267,13 @@
     scrubEl.hidden = !show;
     if (!show) return;
     var maxIdx = hist.texts ? hist.texts.length - 1 : null;
-    scrubBack.disabled = hist.loading || (maxIdx !== null && hist.idx >= maxIdx);
+    var atOldest = maxIdx !== null && hist.idx >= maxIdx;
+    scrubBack.disabled = hist.loading || atOldest;
     scrubFwd.disabled = hist.loading || hist.idx === 0;
+    // The diff needs an older neighbour; at the oldest issuance (or mid-scan)
+    // there is none. Before the first scan it stays enabled — the first tap
+    // runs the same lazy scan as scrubBack.
+    diffBtn.disabled = hist.loading || atOldest;
     scrubLbl.textContent = hist.loading ? 'loading…'
       : hist.idx === 0 ? 'latest'
         : statedTime(issuedStr || '') + ' −' + hist.idx + '/' + maxIdx;
@@ -1223,6 +1286,7 @@
       parsed = mode === 'TWD' ? window.BasinParser.parse(t, { basin: basin.id })
         : window.BasinParser.parseTWO(t, { basin: basin.id });
     } catch (e) {
+      console.warn('history parse failed', e);
       toast('Could not parse that issuance.');
       return;
     }
@@ -1234,21 +1298,20 @@
     var returning0 = i === 0 && hist.idx !== 0;
     if (mode === 'TWD') render(parsed); else renderTWO(parsed);
     hist.idx = i;
+    renderDiff(); // recompute against the new step's older neighbour
     // -0 restores the true source badge captured when the scan started
     setBadge(i > 0 ? 'HISTORY' : hist.srcBadge);
     if (returning0 && mode === 'TWD') loadTCM(loadGen);
   }
 
-  scrubBack.addEventListener('click', function () {
-    if (hist.texts) {
-      if (hist.idx < hist.texts.length - 1) scrubTo(hist.idx + 1);
-      return;
-    }
-    // First tap: scan the recent list once, then step. Note texts[0] is the
-    // scan's newest — if NOAA issued between load and this tap, -0 will show
-    // that newer text under the badge captured here; network-first transport
-    // keeps the badge truthful, and Refresh self-heals the window.
-    hist.srcBadge = badgeState; // LIVE or CACHED — control is hidden otherwise
+  // First use of the scrubber OR the diff toggle runs the history scan once;
+  // done() fires only if the scan is still current and found >=2 issuances.
+  // Note texts[0] is the scan's newest — if NOAA issued between load and this
+  // tap, -0 will show that newer text under the badge captured here;
+  // network-first transport keeps the badge truthful, and Refresh self-heals.
+  function ensureHistory(done) {
+    if (hist.texts) { done(); return; }
+    hist.srcBadge = badgeState; // LIVE or CACHED — controls are hidden otherwise
     hist.loading = true;
     var gen = hist.gen;
     updateScrub();
@@ -1258,17 +1321,149 @@
         hist.loading = false;
         if (texts.length < 2) { toast('No older issuances found.'); updateScrub(); return; }
         hist.texts = texts;
-        scrubTo(1);
+        done();
       })
-      .catch(function () {
+      .catch(function (e) {
         if (gen !== hist.gen) return;
+        console.warn('history fetch failed', e);
         hist.loading = false;
         toast('Could not fetch history.');
         updateScrub();
       });
+  }
+
+  scrubBack.addEventListener('click', function () {
+    if (hist.texts) {
+      if (hist.idx < hist.texts.length - 1) scrubTo(hist.idx + 1);
+      return;
+    }
+    ensureHistory(function () { scrubTo(1); });
   });
   scrubFwd.addEventListener('click', function () {
     if (hist.texts && hist.idx > 0) scrubTo(hist.idx - 1);
+  });
+
+  // --- issuance diff (Δ) ------------------------------------------------------
+  // "What changed since the previous issuance?" Ghosts of the prior product's
+  // high-signal features under the live ones — dashed, faded, and labeled with
+  // the OLD issuance time, so past data can never read as current (the same
+  // honesty rule as the badge and the inferred dots). The overlay never touches
+  // the badge: that reports the CURRENT product's provenance; every ghost popup
+  // carries its own. Compares curParsed against hist.texts[hist.idx + 1].
+  var GHOST_ALPHA = 0.35;
+  function syncDiffUI() {
+    diffBtn.setAttribute('aria-pressed', diffOn ? 'true' : 'false');
+    diffBtn.classList.toggle('on', diffOn);
+  }
+  function pctDelta(o, n) { // chance objects ({pct}|null) → "40%→60% ▲"
+    var op = o ? o.pct + '%' : 'n/a', np = n ? n.pct + '%' : 'n/a';
+    if (op === np) return np;
+    return op + '→' + np + (o && n ? (n.pct > o.pct ? ' ▲' : ' ▼') : '');
+  }
+  function ghostMark(pt, color, title, body) {
+    L.circleMarker(pt, { radius: 6, color: color, weight: 1.5, dashArray: '2 4',
+      fillOpacity: 0, opacity: GHOST_ALPHA, pane: 'hc-diff' })
+      .bindPopup(popup(title, body, true), POPUP_OPTS).addTo(cat.diff);
+  }
+  function ghostAxis(axis, color, title, body) {
+    L.polyline(axis.map(ll), { color: color, weight: 2, dashArray: '2 6',
+      opacity: GHOST_ALPHA, pane: 'hc-diff' })
+      .bindPopup(popup(title, body, true), POPUP_OPTS).addTo(cat.diff);
+  }
+  function ghostConnector(a, b, color) {
+    L.polyline([a, b], { color: color, weight: 1, dashArray: '1 5',
+      opacity: GHOST_ALPHA, interactive: false, pane: 'hc-diff' }).addTo(cat.diff);
+  }
+  function renderDiff() {
+    cat.diff.clearLayers();
+    diffNote = '';
+    if (!diffOn || !curParsed || !hist.texts || hist.idx + 1 >= hist.texts.length) {
+      updateMeta();
+      return;
+    }
+    var d;
+    try {
+      var opts = { basin: basin.id };
+      var prev = mode === 'TWD'
+        ? window.BasinParser.parse(hist.texts[hist.idx + 1], opts)
+        : window.BasinParser.parseTWO(hist.texts[hist.idx + 1], opts);
+      d = window.HCDiff.diffProducts(prev, curParsed, mode);
+    } catch (e) {
+      console.warn('diff failed', e);
+      diffOn = false;
+      syncDiffUI();
+      updateMeta();
+      toast('Could not compare with the previous issuance.');
+      return;
+    }
+    var oldT = (d.prevIssued && statedTime(d.prevIssued)) || 'previous issuance';
+    var was = 'was here · ' + oldT;
+    var gonch = 'gone from this issuance · ' + oldT;
+    var moved = 0, added = 0, gone = 0;
+    if (mode === 'TWD') {
+      d.cyclones.pairs.forEach(function (p) {
+        moved++;
+        var color = /hurricane/i.test(p.cur.classification) ? '#ff6b5a'
+          : /storm/i.test(p.cur.classification) ? '#ffa23a' : '#dce8ef';
+        ghostConnector(ll(p.prev), ll(p.cur), color);
+        var dk = (p.prev.windKt != null && p.cur.windKt != null && p.prev.windKt !== p.cur.windKt)
+          ? ' · ' + p.prev.windKt + '→' + p.cur.windKt + ' kt' +
+            (p.cur.windKt > p.prev.windKt ? ' ▲' : ' ▼')
+          : '';
+        ghostMark(ll(p.prev), color,
+          p.cur.classification.toUpperCase() + ' ' + p.cur.name.toUpperCase(), was + dk);
+      });
+      added += d.cyclones.added.length;
+      d.cyclones.removed.forEach(function (c) {
+        gone++;
+        ghostMark(ll(c), '#dce8ef',
+          c.classification.toUpperCase() + ' ' + c.name.toUpperCase(), gonch);
+      });
+      d.waves.pairs.forEach(function (p) {
+        moved++;
+        var shift = Math.round(Math.abs(
+          window.HCDiff.meanLon(p.cur.axis) - window.HCDiff.meanLon(p.prev.axis)));
+        ghostAxis(p.prev.axis, '#ffa23a', 'WAVE ' + p.cur.id,
+          was + (shift ? ' · moved ~' + shift + '°' : ''));
+        ghostConnector(ll(p.prev.axis[0]), ll(p.cur.axis[0]), '#ffa23a');
+      });
+      added += d.waves.added.length;
+      d.waves.removed.forEach(function (w) {
+        gone++;
+        ghostAxis(w.axis, '#ffa23a', 'WAVE ' + w.id, gonch);
+      });
+    } else {
+      d.disturbances.pairs.forEach(function (p) {
+        var label = 'TWO ' + (p.cur.invest || p.cur.id);
+        var deltas = '48h ' + pctDelta(p.prev.chance48, p.cur.chance48) +
+          ' · 7d ' + pctDelta(p.prev.chance7, p.cur.chance7);
+        if (p.prev.lat == null) return; // honest: no old spot, nothing to ghost
+        if (p.cur.lat != null && (p.prev.lat !== p.cur.lat || p.prev.lon !== p.cur.lon)) {
+          moved++;
+          ghostConnector(ll(p.prev), ll(p.cur), '#ffd23a');
+          ghostMark(ll(p.prev), '#ffd23a', label, was + ' · ' + deltas);
+        } else {
+          ghostMark(ll(p.prev), '#ffd23a', label, oldT + ' · ' + deltas);
+        }
+      });
+      added += d.disturbances.added.length;
+      d.disturbances.removed.forEach(function (dd) {
+        gone++;
+        if (dd.lat != null) ghostMark(ll(dd), '#ffd23a', 'TWO ' + (dd.invest || dd.id), gonch);
+      });
+    }
+    diffNote = 'Δ vs ' + oldT + ': ' +
+      moved + ' moved · ' + added + ' new · ' + gone + ' gone';
+    updateMeta();
+  }
+  diffBtn.addEventListener('click', function () {
+    if (diffOn) { diffOn = false; syncDiffUI(); renderDiff(); return; }
+    ensureHistory(function () {
+      diffOn = true;
+      syncDiffUI();
+      updateScrub(); // the first tap's scan may have just populated hist.texts
+      renderDiff();
+    });
   });
 
   var aboutDlg = document.getElementById('aboutDlg');
@@ -1290,11 +1485,13 @@
     // Route by product: TCM check first, then TWO, then TWD. Paste stays opts-less
     // (parser auto-detects the basin — a pasted TWDEP still renders clipped in the
     // AT frame if AT is active; the PASTED badge covers that documented looseness).
+    // Parse BEFORE mutating any UI state: a bad paste must leave the prior
+    // mode/map exactly as they were, with only the badge reporting the failure.
     try {
       if (/FORECAST\/ADVISORY/i.test(txt.slice(0, 400))) {
-        setMode('TWD');
         var ptcm = window.BasinParser.parseTCM(txt);
         if (!ptcm) throw new Error('unparseable TCM');
+        setMode('TWD');
         // Replace whatever was on screen: a pasted TCM stands alone, so drop the
         // previous product's features and its readout provenance rather than
         // leaving a stale issuance/counts under the PASTED badge.
@@ -1305,16 +1502,19 @@
         tcmNote = '1 track (pasted)';
         updateMeta();
       } else if (/tropical weather outlook/i.test(txt.slice(0, 300))) {
+        var ptwo = window.BasinParser.parseTWO(txt);
         setMode('TWO');
-        renderTWO(window.BasinParser.parseTWO(txt));
+        renderTWO(ptwo);
       } else {
+        var ptwd = window.BasinParser.parse(txt);
         setMode('TWD');
         clearCats(TCM_CATS);
         tcmNote = '';
-        render(window.BasinParser.parse(txt));
+        render(ptwd);
       }
       setBadge('PASTED');
     } catch (e) {
+      console.error('paste parse failed', e);
       setBadge('ERROR');
     }
   });
@@ -1331,7 +1531,7 @@
     var lastReal = null;
     try { lastReal = localStorage.getItem('hc-last-' + basin.id + '-TWD'); } catch (e) { }
     if (lastReal) render(window.BasinParser.parse(lastReal, { basin: basin.id }));
-  } catch (e) { /* stale/unparseable cache — ignore; loadTWD will render live */ }
+  } catch (e) { console.warn('cached repaint failed', e); /* stale/unparseable cache — loadTWD will render live */ }
   wantOpeningFocus = true; // arm: the first LIVE render decides MDR vs. focus-on-system
   loadTWD();
 })();

@@ -1104,5 +1104,78 @@ ok('corpus: every fixtures/*.txt has expectations',
 const VER = require('./version.js');
 ok('version: CalVer format YYYY.MM.DD[.N]', /^\d{4}\.\d{2}\.\d{2}(\.\d+)?$/.test(VER));
 
+// --- issuance diff (diff.js) ----------------------------------------------------
+
+const D = require('./diff.js');
+
+// real consecutive EP fixture pair (same-day issuances, both genesis-prose —
+// zero pinned cyclones on either side, so any cyclone pair here is a phantom)
+{
+  const a = P.parse(fs.readFileSync(FIXDIR + '/TWDEP.202607140308.txt', 'utf8'));
+  const b = P.parse(fs.readFileSync(FIXDIR + '/TWDEP.202607141611.txt', 'utf8'));
+  const d = D.diffProducts(a, b, 'TWD');
+  ok('diff: fixture pair invents no cyclones',
+    d.cyclones.pairs.length === 0 && d.cyclones.added.length === 0 &&
+    d.cyclones.removed.length === 0);
+  ok('diff: fixture pair carries both issuance stamps', !!d.prevIssued && !!d.curIssued);
+  ok('diff: wave pairing is one-to-one and accounts for every wave',
+    d.waves.pairs.length + d.waves.added.length === b.waves.length &&
+    d.waves.pairs.length + d.waves.removed.length === a.waves.length);
+}
+
+// synthetic TWD cases
+{
+  const wave = (lon) => ({ id: 'W', axis: [{ lat: 10, lon }, { lat: 16, lon }] });
+  const cyc = (name, kt, lat, lon) =>
+    ({ name, classification: 'Hurricane', windKt: kt, lat, lon });
+  const d = D.diffProducts(
+    { issued: null, waves: [wave(-40)], cyclones: [cyc('ERIN', 85, 20, -60), cyc('OLD', 40, 12, -30)] },
+    { issued: null, waves: [wave(-43), wave(-70)], cyclones: [cyc('Erin', 95, 21, -62)] }, 'TWD');
+  ok('diff: cyclone matched by name, case-insensitive, deltas readable',
+    d.cyclones.pairs.length === 1 && d.cyclones.pairs[0].prev.windKt === 85 &&
+    d.cyclones.pairs[0].cur.windKt === 95);
+  ok('diff: unmatched previous cyclone lands in removed, none invented',
+    d.cyclones.removed.length === 1 && d.cyclones.removed[0].name === 'OLD' &&
+    d.cyclones.added.length === 0);
+  ok('diff: wave within 6° pairs; the far one is added',
+    d.waves.pairs.length === 1 && d.waves.added.length === 1 && d.waves.removed.length === 0);
+  const far = D.diffProducts(
+    { issued: null, waves: [wave(-40)], cyclones: [] },
+    { issued: null, waves: [wave(-50)], cyclones: [] }, 'TWD');
+  ok('diff: wave beyond the 6° threshold does NOT pair (added + removed instead)',
+    far.waves.pairs.length === 0 && far.waves.added.length === 1 && far.waves.removed.length === 1);
+}
+
+// synthetic TWO cases
+{
+  const dist = (invest, lat, lon, p48, p7) => ({ id: 1, invest, lat, lon,
+    chance48: p48 == null ? null : { pct: p48 }, chance7: p7 == null ? null : { pct: p7 } });
+  const d = D.diffProducts(
+    { issued: null, disturbances: [dist('AL92', 15, -45, 20, 40), dist(null, 25, -75, 10, 20)] },
+    { issued: null, disturbances: [dist('AL92', 16, -50, 40, 60), dist(null, 26, -76, 10, 20), dist(null, 10, -30, 0, 10)] },
+    'TWO');
+  ok('diff: invest tag pairs across a 5° move (identity beats the proximity gate)',
+    d.disturbances.pairs.some((p) => p.prev.invest === 'AL92' && p.cur.chance7.pct === 60));
+  ok('diff: untagged disturbance pairs by proximity; the new one is added',
+    d.disturbances.pairs.length === 2 && d.disturbances.added.length === 1 &&
+    d.disturbances.removed.length === 0);
+  const ren = D.diffProducts(
+    { issued: null, disturbances: [dist('AL92', 15, -45, 20, 40)] },
+    { issued: null, disturbances: [dist('AL93', 15, -45, 20, 40)] }, 'TWO');
+  ok('diff: two DIFFERENT invest tags never pair (no silent rename)',
+    ren.disturbances.pairs.length === 0 && ren.disturbances.added.length === 1 &&
+    ren.disturbances.removed.length === 1);
+}
+
+// empty-product edges
+{
+  const empty = { issued: null, waves: [], cyclones: [], disturbances: [] };
+  const one = { issued: null, waves: [{ id: 'W', axis: [{ lat: 10, lon: -40 }] }], cyclones: [] };
+  ok('diff: everything added from an empty previous product',
+    D.diffProducts(empty, one, 'TWD').waves.added.length === 1);
+  ok('diff: everything removed into an empty current product',
+    D.diffProducts(one, empty, 'TWD').waves.removed.length === 1);
+}
+
 console.log('\n' + pass + ' passed, ' + fail + ' failed');
 process.exit(fail ? 1 : 0);

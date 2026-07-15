@@ -60,6 +60,19 @@ planned tracks — lived friction beats speculation.
   header-subtitle basin switcher (persisted `hc-basin`), letterbox masks over the
   widened union basemap, embedded TWDEP/TWOEP samples, per-basin AWIPS/TCM
   wiring. CP east of 140W is honestly unmapped; alerter covers AT + EP (CP out of scope).*
+- [x] **Issuance diff (Δ)** — scrubber-row toggle ghosts the previous issuance's
+  high-signal features under the current ones (cyclones by name, waves by axis
+  longitude, TWO areas by invest tag then proximity) — dashed + faded + stamped
+  with the old issuance time, connectors on moved pairs, chance deltas in TWO
+  popups, "moved · new · gone" meta note. Pure pairing logic in `diff.js`
+  (node-tested); ITCZ/monsoon/convection deliberately excluded as noise.
+- [ ] **My-spot impact view** — a localStorage pin (never leaves the device):
+  distance to each feature, computed-cone cover, earliest plausible TS-wind
+  arrival from the parsed TCM track + radii — labeled with honest uncertainty.
+- [ ] **Formation-chance trend sparklines** — per-invest 48h/7d chance history
+  across the last ~8 TWO issuances; reuses fetchHistory + parseTWO.
+- [ ] **Recon overlay** — parse and plot Hurricane Hunter HDOB/vortex text
+  products (api.weather.gov AWIPS types) near active storms; new mini-parser.
 
 ## Track B — App Store readiness
 
