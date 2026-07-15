@@ -48,11 +48,11 @@ version-bump guard.
 
 ## Invest alerts (optional)
 
-A GitHub Actions cron (`alerts.yml`) checks the latest Atlantic Tropical
-Weather Outlook twice an hour and pushes a phone notification via
-[ntfy.sh](https://ntfy.sh) when:
+A GitHub Actions cron (`alerts.yml`) checks the latest Atlantic **and East
+Pacific** Tropical Weather Outlooks twice an hour and pushes a phone
+notification via [ntfy.sh](https://ntfy.sh) when:
 
-- a new **invest** is designated (AL90–AL99 tag appears),
+- a new **invest** is designated (AL90–AL99 / EP90–EP99 tag appears),
 - a **new disturbance area** shows up in the outlook, or
 - an area's **7-day formation chance crosses 40% or 60%**.
 

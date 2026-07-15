@@ -1,7 +1,7 @@
-# Atlantic invest alerts: poll the latest TWOAT twice hourly, diff against the
-# previous run's state (actions/cache), push alerts to ntfy.sh (NTFY_TOPIC
-# repo secret; unset = the run is a harmless dry-run that just logs).
-# tools/alert-invests.js documents the alert conditions.
+# Invest alerts (Atlantic + East Pacific): poll the latest TWOAT and TWOEP twice
+# hourly, diff against the previous run's per-basin state (actions/cache), push
+# alerts to ntfy.sh (NTFY_TOPIC repo secret; unset = the run is a harmless
+# dry-run that just logs). tools/alert-invests.js documents the alert conditions.
 #
 # NOTE: GitHub disables cron schedules after ~60 days without repo activity —
 # re-enable from the Actions tab if the repo goes quiet over the winter.

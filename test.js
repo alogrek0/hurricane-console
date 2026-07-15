@@ -864,6 +864,31 @@ ok('TWOEP: CP91 tag captured but location honestly unmapped',
   (() => { const d = eptwo.disturbances[1];
     return d.invest === 'CP91' && d.lat === null && d.lon === null && d.chance48.pct === 60; })());
 
+// --- invest alerter, East Pacific (both-basin support) -------------------------
+// The alerter now polls TWOAT + TWOEP and keeps per-basin state. Reuse the EP
+// fixture above: EP96 fires a headline new-invest stamped basin 'EP' with
+// East-Pacific-labelled copy; CP91 must NOT get the headline invest treatment.
+const epPrime = { productId: 'ep-0', disturbances: [] };
+const epCur = ALERTS.stateFromTWO(eptwo, 'ep-1');
+ok('alerts EP: EP96 invest key captured', epCur.disturbances[0].key === 'EP96');
+ok('alerts EP: new EP invest fires, stamped basin EP', (() => {
+  const inv = ALERTS.diffAlerts(epPrime, epCur, 'EP').find((x) => x.type === 'new-invest');
+  return !!inv && inv.d.invest === 'EP96' && inv.basin === 'EP';
+})());
+ok('alerts EP: CP91 is not treated as a headline invest',
+  !ALERTS.diffAlerts(epPrime, epCur, 'EP').some((x) => x.type === 'new-invest' && x.d.invest === 'CP91'));
+ok('alerts EP: formatAlert labels East Pacific; Atlantic stays the default', (() => {
+  const ep = ALERTS.formatAlert({ type: 'new-area', basin: 'EP', d: { pct7: 30, where: null } });
+  const at = ALERTS.formatAlert({ type: 'new-area', d: { pct7: 20, where: null } });
+  return /East Pacific/.test(ep.title) && /East Pacific/.test(ep.body) && /New Atlantic/.test(at.title);
+})());
+ok('alerts: loadBasinStates migrates an old flat state into AT, EP cold-starts', (() => {
+  const flat = { productId: 'old-1', disturbances: [{ key: 'AL92' }] };
+  const m = ALERTS.loadBasinStates(flat);
+  const shaped = ALERTS.loadBasinStates({ AT: flat, EP: { productId: 'ep-9', disturbances: [] } });
+  return m.AT === flat && m.EP === null && shaped.AT === flat && shaped.EP.productId === 'ep-9';
+})());
+
 // --- ITCZ vs monsoon trough vs surface trough ----------------------------------
 // Three different features. The product names each in the sentence that
 // positions it, so the classification is read, never guessed. Prose below is
