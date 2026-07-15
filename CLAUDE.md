@@ -59,7 +59,7 @@ Everything is client side. Files:
 | `tools/archive-audit.js` | dev-only, network: audits parser vs curated archived NHC products; `--save-fixtures` regenerates `fixtures/` |
 | `fixtures/`      | committed archive corpus: 17 real NHC products across both basins (LF-pinned via `.gitattributes`) + pinned snapshots in `expected.json` — regenerate only via `--save-fixtures`, never hand-edit |
 | `.github/workflows/ci.yml` | CI: `node test.js` on push-to-main + PRs; version guard on PRs |
-| `.github/workflows/alerts.yml` | invest alerts (Atlantic-only by design): twice-hourly cron polls the TWOAT, diffs vs cached state, pushes to ntfy.sh (`NTFY_TOPIC` repo secret; unset = dry-run) |
+| `.github/workflows/alerts.yml` | invest alerts (Atlantic + East Pacific): twice-hourly cron polls the TWOAT and TWOEP, diffs vs per-basin cached state, pushes to ntfy.sh (`NTFY_TOPIC` repo secret; unset = dry-run). Central Pacific out of scope |
 | `tools/alert-invests.js` | the alerter: fetch/diff/push; pure logic (stateFromTWO/diffAlerts/formatAlert) unit-tested offline in test.js |
 | `manifest.json`  | PWA manifest |
 | `ROADMAP.md`     | session agenda (features + App Store tracks, friction log, maintenance calendar) — the weekly check-in routine reads it; topmost unchecked item is the default proposal |
@@ -99,7 +99,7 @@ guessed; nearest cue *before* the coordinates wins, so a sentence naming both
 still tags each segment right. Sentence bounds key on `'. '` (period + SPACE),
 never a bare `.`, because the coordinates carry decimal points (`07.5N90W`) and
 splitting on those severs the cue from its segments. The app colour-codes the
-three (ITCZ cyan / monsoon green / trough deep-cyan) — a **house convention, not
+three (ITCZ cyan / monsoon green / trough slate-teal) — a **house convention, not
 NHC's**: their chart labels the first two in text and dashes the third, so the
 popup always names the feature. `fixtures/expected.json` pins the per-kind counts.
 
@@ -204,5 +204,6 @@ precision the parser doesn't have.
   gazetteer, cone radii, invest tags); PR2 added the EP map frame (5S–35N /
   145W–70W) and a header-subtitle basin switcher (persisted `hc-basin`, default
   Atlantic), with letterbox masks over the widened union basemap and embedded
-  TWDEP/TWOEP samples. Central Pacific (east of 140W) is honestly unmapped; the
-  invest alerter stays Atlantic-only.
+  TWDEP/TWOEP samples. Central Pacific (east of 140W) is honestly unmapped. The
+  invest alerter now covers **both basins** (TWOAT + TWOEP, per-basin state);
+  Central Pacific (CP9x) is out of scope — no headline invest alert.

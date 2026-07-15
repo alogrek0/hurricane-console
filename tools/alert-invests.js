@@ -1,13 +1,16 @@
 /*
- * tools/alert-invests.js — Atlantic invest / formation-chance alerter.
+ * tools/alert-invests.js — invest / formation-chance alerter (Atlantic + East Pacific).
  *
  * Runs from .github/workflows/alerts.yml on a twice-hourly cron: fetches the
- * latest Atlantic Tropical Weather Outlook (TWOAT), parses it with the app's
- * own parser.js, diffs against the previous run's state, and pushes alerts to
- * an ntfy.sh topic. Alert conditions:
- *   1. a new invest designation appears (AL90-AL99 tag in a disturbance title)
+ * latest Atlantic AND East Pacific Tropical Weather Outlooks (TWOAT + TWOEP),
+ * parses each with the app's own parser.js, diffs against the previous run's
+ * per-basin state, and pushes alerts to an ntfy.sh topic. Alert conditions,
+ * evaluated independently per basin:
+ *   1. a new invest designation appears (AL90-99 / EP90-99 tag in a title)
  *   2. a NEW disturbance area shows up in the outlook
  *   3. a disturbance's 7-day formation chance crosses 40% or 60% upward
+ * Central Pacific (CP9x) is out of scope — no headline invest alert, matching
+ * the app's honest "CP stays unmapped" stance.
  *
  * Usage:  node tools/alert-invests.js [--test]
  *   NTFY_TOPIC   ntfy.sh topic to POST to; unset = dry-run (print, don't send)
@@ -16,10 +19,12 @@
  *
  * State losses are safe: an unknown/corrupt state file re-primes silently
  * (record current state, alert nothing) — never spam on a cold start. The
- * same product id seen twice never re-alerts.
+ * same product id seen twice never re-alerts. An old single-basin state file
+ * (flat {productId, disturbances}) migrates into the Atlantic slot via
+ * loadBasinStates, so Atlantic keeps its history and East Pacific cold-starts.
  *
- * The pure pieces (stateFromTWO, diffAlerts, formatAlert) are exported for
- * test.js, which must stay offline; only the runner below touches the network.
+ * The pure pieces (stateFromTWO, diffAlerts, formatAlert, loadBasinStates) are
+ * exported for test.js, which stays offline; only the runner touches the network.
  * Zero dependencies; never runs in the browser. The PWA itself stays static —
  * this is a repo sidecar.
  */
@@ -46,10 +51,11 @@ function stateFromTWO(parsed, productId) {
   };
 }
 
-function diffAlerts(prev, cur) {
+function diffAlerts(prev, cur, basin) {
   if (!prev || !prev.productId) return [];            // cold start: prime silently
   if (prev.productId === cur.productId) return [];    // same issuance re-fetched
   const alerts = [];
+  const stamp = (a) => { a.basin = basin || 'AT'; return a; };
   const prevByKey = {};
   const prevInvests = {};
   for (const d of prev.disturbances) {
@@ -57,21 +63,22 @@ function diffAlerts(prev, cur) {
     if (d.invest) prevInvests[d.invest] = d;
   }
   for (const d of cur.disturbances) {
-    // (1) fresh invest designation — the headline event
-    if (d.invest && /^AL9\d$/.test(d.invest) && !prevInvests[d.invest]) {
-      alerts.push({ type: 'new-invest', d });
+    // (1) fresh invest designation — the headline event (AL9x / EP9x; CP is
+    // out of scope, so a CP tag falls through to the new-area path instead)
+    if (d.invest && /^(AL|EP)9\d$/.test(d.invest) && !prevInvests[d.invest]) {
+      alerts.push(stamp({ type: 'new-invest', d }));
       continue; // don't also fire new-area/threshold for the same event
     }
     const was = prevByKey[d.key];
     if (!was) {
       // (2) new area being watched (pre-invest heads-up)
-      alerts.push({ type: 'new-area', d });
+      alerts.push(stamp({ type: 'new-area', d }));
       continue;
     }
     // (3) 7-day chance crossing a threshold upward
     if (d.pct7 != null && was.pct7 != null) {
       for (const t of THRESHOLDS) {
-        if (was.pct7 < t && d.pct7 >= t) { alerts.push({ type: 'threshold', d, t, from: was.pct7 }); break; }
+        if (was.pct7 < t && d.pct7 >= t) { alerts.push(stamp({ type: 'threshold', d, t, from: was.pct7 })); break; }
       }
     }
   }
@@ -79,7 +86,8 @@ function diffAlerts(prev, cur) {
 }
 
 function formatAlert(a) {
-  const where = a.d.where ? a.d.where.trim() : 'Atlantic';
+  const label = a.basin === 'EP' ? 'East Pacific' : 'Atlantic';
+  const where = a.d.where ? a.d.where.trim() : label;
   const pct = a.d.pct7 != null ? a.d.pct7 + '%' : 'n/a';
   if (a.type === 'new-invest') return {
     title: 'Invest ' + a.d.invest + ' designated',
@@ -87,7 +95,7 @@ function formatAlert(a) {
     tags: 'cyclone', priority: '4',
   };
   if (a.type === 'new-area') return {
-    title: 'New Atlantic disturbance',
+    title: 'New ' + label + ' disturbance',
     body: where + ' — 7-day formation chance ' + pct + '.',
     tags: 'eyes', priority: '3',
   };
@@ -98,22 +106,37 @@ function formatAlert(a) {
   };
 }
 
+// Read the on-disk state into a per-basin { AT, EP } shape. An old single-basin
+// file is the flat { productId, disturbances } form — migrate it into the
+// Atlantic slot so AT keeps its history and EP cold-starts (primes silently).
+function loadBasinStates(raw) {
+  const s = raw && typeof raw === 'object' ? raw : {};
+  if (s.productId !== undefined || s.disturbances !== undefined) return { AT: s, EP: null };
+  return { AT: s.AT || null, EP: s.EP || null };
+}
+
 // --- network + state runner (not exercised by test.js) --------------------------
 const UA = { headers: { 'User-Agent': 'hurricane-console-alerts (opt08400@gmail.com)' } };
 const LIST = 'https://api.weather.gov/products/types/TWO';
 
-async function latestTWOAT() {
+// Newest TWOAT and TWOEP from a single list fetch. The TWO type interleaves
+// basins (AT/EP/CP), so scan the newest ~12 (8 can miss one) and keep the first
+// match per basin. Either can be absent — the caller logs and skips it.
+async function latestTWOs() {
   const res = await fetch(LIST, { headers: { ...UA.headers, Accept: 'application/ld+json' } });
   if (!res.ok) throw new Error('list HTTP ' + res.status);
-  const items = ((await res.json())['@graph'] || []).slice(0, 8);
+  const items = ((await res.json())['@graph'] || []).slice(0, 12);
+  const found = {};
   for (const it of items) {
+    if (found.AT && found.EP) break;
     const r = await fetch(it['@id'], UA);
     if (!r.ok) continue;
     const j = await r.json();
     const txt = j.productText || '';
-    if (/^TWOAT\b/m.test(txt)) return { id: j.id || it.id, text: txt };
+    if (!found.AT && /^TWOAT\b/m.test(txt)) found.AT = { id: j.id || it.id, text: txt };
+    else if (!found.EP && /^TWOEP\b/m.test(txt)) found.EP = { id: j.id || it.id, text: txt };
   }
-  throw new Error('no TWOAT among the newest ' + items.length + ' TWO products');
+  return found;
 }
 
 async function send(topic, msg) {
@@ -135,25 +158,33 @@ async function main() {
     return;
   }
 
-  const prod = await latestTWOAT();
-  const cur = stateFromTWO(P.parseTWO(prod.text), prod.id);
+  const found = await latestTWOs();
 
   let prev = null;
   try { prev = JSON.parse(fs.readFileSync(statePath, 'utf8')); } catch (e) { /* first run */ }
+  const prevStates = loadBasinStates(prev);
+  const next = { AT: prevStates.AT, EP: prevStates.EP };
 
-  const alerts = diffAlerts(prev, cur);
-  console.log('product', cur.productId, '·', cur.disturbances.length, 'disturbance(s) ·', alerts.length, 'alert(s)');
-  for (const a of alerts) {
-    const msg = formatAlert(a);
-    console.log(' ', msg.title, '—', msg.body);
-    if (topic) await send(topic, msg);
+  const LABEL = { AT: 'TWOAT', EP: 'TWOEP' };
+  for (const basin of ['AT', 'EP']) {
+    const prod = found[basin];
+    if (!prod) { console.log(basin + ': no ' + LABEL[basin] + ' among the newest products; skipping'); continue; }
+    const cur = stateFromTWO(P.parseTWO(prod.text, { basin }), prod.id);
+    const alerts = diffAlerts(prevStates[basin], cur, basin);
+    console.log(basin, 'product', cur.productId, '·', cur.disturbances.length, 'disturbance(s) ·', alerts.length, 'alert(s)');
+    for (const a of alerts) {
+      const msg = formatAlert(a);
+      console.log(' ', msg.title, '—', msg.body);
+      if (topic) await send(topic, msg);
+    }
+    if (!topic && alerts.length) console.log('dry-run (no NTFY_TOPIC): nothing sent');
+    next[basin] = cur;
   }
-  if (!topic && alerts.length) console.log('dry-run (no NTFY_TOPIC): nothing sent');
 
-  fs.writeFileSync(statePath, JSON.stringify(cur, null, 1));
+  fs.writeFileSync(statePath, JSON.stringify(next, null, 1));
 }
 
-module.exports = { stateFromTWO, diffAlerts, formatAlert, THRESHOLDS };
+module.exports = { stateFromTWO, diffAlerts, formatAlert, loadBasinStates, THRESHOLDS };
 if (require.main === module) {
   main().catch((e) => { console.error(e.message || e); process.exit(1); });
 }

@@ -51,7 +51,7 @@ planned tracks — lived friction beats speculation.
   invest tags, left-basin asymmetry). PR2: EP map frame (5S–35N / 145W–70W),
   header-subtitle basin switcher (persisted `hc-basin`), letterbox masks over the
   widened union basemap, embedded TWDEP/TWOEP samples, per-basin AWIPS/TCM
-  wiring. CP east of 140W is honestly unmapped; alerter stays Atlantic-only.*
+  wiring. CP east of 140W is honestly unmapped; alerter covers AT + EP (CP out of scope).*
 
 ## Track B — App Store readiness
 

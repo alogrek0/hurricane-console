@@ -11,6 +11,6 @@
  */
 (function (root) {
   'use strict';
-  root.APP_VERSION = '2026.07.14.15';
+  root.APP_VERSION = '2026.07.15';
   if (typeof module !== 'undefined' && module.exports) module.exports = root.APP_VERSION;
 })(typeof self !== 'undefined' ? self : globalThis);
