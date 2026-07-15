@@ -59,8 +59,8 @@ Everything is client side. Files:
 | `tools/archive-audit.js` | dev-only, network: audits parser vs curated archived NHC products; `--save-fixtures` regenerates `fixtures/` |
 | `fixtures/`      | committed archive corpus: 17 real NHC products across both basins (LF-pinned via `.gitattributes`) + pinned snapshots in `expected.json` — regenerate only via `--save-fixtures`, never hand-edit |
 | `.github/workflows/ci.yml` | CI: `node test.js` on push-to-main + PRs; version guard on PRs |
-| `.github/workflows/alerts.yml` | invest alerts (Atlantic + East Pacific): twice-hourly cron polls the TWOAT and TWOEP, diffs vs per-basin cached state, pushes to ntfy.sh (`NTFY_TOPIC` repo secret; unset = dry-run). Central Pacific out of scope |
-| `tools/alert-invests.js` | the alerter: fetch/diff/push; pure logic (stateFromTWO/diffAlerts/formatAlert) unit-tested offline in test.js |
+| `.github/workflows/alerts.yml` | invest alerts (Atlantic + East Pacific): cron (two offset twice-hourly schedules — GitHub cron is best-effort) polls the TWOAT and TWOEP, diffs vs per-basin cached state, pushes to ntfy.sh (`NTFY_TOPIC` repo secret; unset = dry-run). Central Pacific out of scope |
+| `tools/alert-invests.js` | the alerter: fetch/diff/push; api.weather.gov primary, falls back to the tgftp.nws.noaa.gov text mirror when the newest visible product is stale (>7 h — the list API can lag an issuance by an hour+); pure logic (stateFromTWO/diffAlerts/formatAlert/isStale/tgftpProduct) unit-tested offline in test.js |
 | `manifest.json`  | PWA manifest |
 | `ROADMAP.md`     | session agenda (features + App Store tracks, friction log, maintenance calendar) — the weekly check-in routine reads it; topmost unchecked item is the default proposal |
 | `test.js`        | node parser test harness (includes the corpus snapshot checks) |
