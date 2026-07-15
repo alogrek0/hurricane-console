@@ -99,7 +99,7 @@ guessed; nearest cue *before* the coordinates wins, so a sentence naming both
 still tags each segment right. Sentence bounds key on `'. '` (period + SPACE),
 never a bare `.`, because the coordinates carry decimal points (`07.5N90W`) and
 splitting on those severs the cue from its segments. The app colour-codes the
-three (ITCZ cyan / monsoon green / trough deep-cyan) — a **house convention, not
+three (ITCZ cyan / monsoon green / trough slate-teal) — a **house convention, not
 NHC's**: their chart labels the first two in text and dashes the third, so the
 popup always names the feature. `fixtures/expected.json` pins the per-kind counts.
 

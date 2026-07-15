@@ -227,7 +227,7 @@
   var TROUGH_STYLES = {
     itcz:    { color: '#4fc3d6', tag: 'ITCZ', cat: 'itcz' },
     monsoon: { color: '#46c98d', tag: 'MONSOON TROUGH', cat: 'monsoon' },
-    trough:  { color: '#2e8fa5', tag: 'TROUGH', cat: 'trough' }
+    trough:  { color: '#1a5c6e', tag: 'TROUGH', cat: 'trough' }
   };
 
   var cat = {};
