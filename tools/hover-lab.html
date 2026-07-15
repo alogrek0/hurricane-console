@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<!--
+  tools/hover-lab.html — dev-only country-name hover lab. Never shipped as part
+  of the app (not in the SW SHELL list, not referenced by index.html), but it IS
+  reachable once pushed because Pages serves the repo root:
+    https://<user>.github.io/hurricane-console/tools/hover-lab.html
+
+  Why it exists: how the country-name hover should look and FEEL is a judgment
+  call that can only be made by hovering it. Unlike highlight-lab's SVG mock,
+  this page loads the real Leaflet + the real generated basemap.js/countries.js,
+  because the thing being judged is live hit-testing against real geometry:
+  border alignment, letterbox suppression, and features-win-hover included.
+  Pick a treatment, nudge the dials, and the page prints the exact
+  app.js/index.html constants to apply.
+
+  Treatments:
+    A  cursor-following chip (cyc-label style)
+    B  chip + faint acknowledgment fill on the hovered country
+    C  fixed corner label, no cursor chasing
+  The dashed box over Colombia/Venezuela is a fake convection area in the real
+  hc-areas pane — hovering it must show ITS identity (no country tip), proving
+  parsed features still win. Land west/east of the frame is letterboxed like the
+  app; hovering the mask must show nothing.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hover lab — Hurricane Console (dev)</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"
+  integrity="sha512-h9FcoyWjHcOcmEVkxOfTLnmZFWIH0iZhZT1H2TbOq55xssQGEJHEaIm+PgoUaZbRvQTNTluNOEfb1ZRy6D3BOw=="
+  crossorigin="anonymous">
+<style>
+  :root{
+    --bg:#071620; --panel:#0c2233; --line:#173347; --ink:#dce8ef;
+    --dim:#7ea3b8; --amber:#ffa23a; --cyan:#4fc3d6;
+    --mono:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 var(--mono)}
+  header{padding:.6rem .8rem;border-bottom:1px solid var(--line);
+    background:linear-gradient(180deg,#0a1e2c,#071620)}
+  h1{margin:0;font-size:.95rem;letter-spacing:.02em}
+  h1 small{display:block;color:var(--dim);font-weight:400;font-size:.7rem;letter-spacing:.06em}
+  .wrap{display:flex;flex-wrap:wrap;gap:1rem;padding:1rem;align-items:flex-start}
+  #map{background:#04101a;border:1px solid var(--line);border-radius:6px;
+    flex:1 1 560px;min-width:340px;height:70vh;min-height:380px}
+  .leaflet-container{background:#04101a;font:inherit}
+  .side{flex:1 1 320px;min-width:280px;display:flex;flex-direction:column;gap:.9rem}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:.7rem}
+  .card b{display:block;color:var(--dim);font-size:.62rem;letter-spacing:.1em;margin-bottom:.5rem}
+  .presets{display:flex;flex-wrap:wrap;gap:.35rem}
+  .presets button{font:inherit;font-size:.72rem;color:var(--ink);background:#123246;
+    border:1px solid var(--line);border-radius:4px;padding:.45rem .6rem;cursor:pointer;
+    min-height:38px}
+  .presets button.on{background:var(--amber);color:#231400;border-color:var(--amber);font-weight:600}
+  .dial{display:grid;grid-template-columns:8.5rem 1fr 3rem;align-items:center;gap:.5rem;
+    margin-bottom:.45rem;font-size:.72rem;color:var(--dim)}
+  .dial input{width:100%}
+  .dial output{color:var(--ink);text-align:right;font-variant-numeric:tabular-nums}
+  .dial.off{opacity:.35}
+  pre{margin:0;white-space:pre-wrap;word-break:break-word;color:var(--dim);
+    font-size:.7rem;line-height:1.5}
+  pre em{color:var(--amber);font-style:normal}
+  .hint{color:var(--dim);font-size:.68rem;margin-top:.4rem}
+
+  /* --- the candidate hover treatments ---------------------------------------- */
+  /* invisible hit polygons should not turn the grab cursor into a pointer */
+  path.hc-country-hit{cursor:grab}
+  .leaflet-dragging path.hc-country-hit{cursor:grabbing}
+  /* A/B: cursor-following chip — starts from the app's .cyc-label treatment */
+  .country-tip{background:rgba(9,26,38,var(--tip-a,.9));color:var(--ink);
+    border:1px solid var(--line);border-radius:4px;
+    font:600 var(--tip-fs,.68rem)/1.2 var(--mono);letter-spacing:.06em;
+    padding:.15rem .35rem;box-shadow:none;pointer-events:none}
+  .country-tip::before{display:none}
+  /* C: fixed corner chip, bottom-left of the frame */
+  #cornerTip{position:absolute;left:10px;bottom:10px;z-index:800;display:none;
+    background:rgba(9,26,38,var(--tip-a,.9));color:var(--ink);
+    border:1px solid var(--line);border-radius:4px;
+    font:600 var(--tip-fs,.68rem)/1.2 var(--mono);letter-spacing:.06em;
+    padding:.15rem .35rem;pointer-events:none}
+  /* fake convection box, real app style (app.js CONVECTION render) */
+  .fake-feat-tip{background:rgba(9,26,38,.9);color:var(--amber);border:1px solid var(--line);
+    border-radius:4px;font:600 .68rem/1.2 var(--mono);padding:.15rem .35rem}
+  .fake-feat-tip::before{display:none}
+</style>
+</head>
+<body>
+<header>
+  <h1>Country hover lab<small>DEV ONLY · hover the land · pick a treatment, tune it, send me the numbers</small></h1>
+</header>
+
+<div class="wrap">
+  <div id="map"></div>
+  <div class="side">
+    <div class="card">
+      <b>TREATMENT</b>
+      <div class="presets" id="presets"></div>
+      <div class="hint">A follows the cursor. B also acknowledges the country with a faint
+        fill. C parks the name in the frame corner. The dashed box over Colombia is a fake
+        convection area — hovering it must NOT show a country name (features win).
+        Letterboxed land (pan toward Mexico's Pacific coast) must show nothing.</div>
+    </div>
+    <div class="card">
+      <b>BASIN FRAME</b>
+      <div class="presets" id="basins"></div>
+    </div>
+    <div class="card">
+      <b>DIALS</b>
+      <div id="dials"></div>
+    </div>
+    <div class="card">
+      <b>CONSTANTS TO APPLY</b>
+      <pre id="out"></pre>
+    </div>
+  </div>
+</div>
+<div id="cornerTip"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"
+  integrity="sha512-puJW3E/qXDqYp9IfhAI54BJEaWIfloJ7JWs7OeD5i6ruC9JZL1gERT1wjtwXFlh7CjE7ZJ+/vcRZRkIYIb6p4g=="
+  crossorigin="anonymous"></script>
+<script src="../basemap.js"></script>
+<script src="../countries.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  // frames straight from app.js BASINS
+  var FRAMES = {
+    AT: [[-5, -110], [45, 4]],
+    EP: [[-5, -145], [35, -70]]
+  };
+  var frameId = 'AT';
+
+  var map = L.map('map', {
+    center: [17, -70], zoom: 4, minZoom: 3, maxZoom: 7,
+    zoomControl: true, attributionControl: false, worldCopyJump: false,
+    maxBoundsViscosity: 1.0,
+    zoomSnap: 0.125, zoomDelta: 0.25, wheelPxPerZoomLevel: 400
+  });
+  map.setMaxBounds(FRAMES[frameId]);
+
+  // corner tip lives inside the map box so "frame corner" reads honestly
+  document.getElementById('map').appendChild(document.getElementById('cornerTip'));
+
+  // basemap, app styles
+  var BASEMAP_STYLES = {
+    land: { stroke: false, fillColor: '#10202b', fillOpacity: 1 },
+    usStates: { color: '#1b3a4a', weight: 1, dashArray: '3 3', fill: false },
+    countries: { color: '#24485c', weight: 1.2, fill: false },
+    coast: { color: '#2c5870', weight: 1, fill: false }
+  };
+  L.geoJSON(window.BASIN_BASEMAP, {
+    style: function (f) { return BASEMAP_STYLES[f.properties.layer]; },
+    interactive: false
+  }).addTo(map);
+
+  // panes + letterbox masks, as in app.js
+  var PANES = { mask: 402, areas: 410, lines: 420, points: 430 };
+  Object.keys(PANES).forEach(function (n) {
+    map.createPane('hc-' + n).style.zIndex = PANES[n];
+  });
+  var maskGroup = L.layerGroup().addTo(map);
+  function buildMasks() {
+    maskGroup.clearLayers();
+    var f = FRAMES[frameId];
+    var s = f[0][0], w = f[0][1], n = f[1][0], e = f[1][1];
+    var style = { stroke: false, fillColor: '#04101a', fillOpacity: 1, interactive: false, pane: 'hc-mask' };
+    [[[-85, -540], [85, w]], [[-85, e], [85, 540]], [[n, w], [85, e]], [[-85, w], [s, e]]]
+      .forEach(function (b) { maskGroup.addLayer(L.rectangle(b, style)); });
+  }
+  buildMasks();
+
+  // fake convection box in the REAL hc-areas pane: proves features win hover
+  L.rectangle([[6, -76], [12, -68]], {
+    pane: 'hc-areas', color: '#ffb98a', weight: 1, dashArray: '4 4',
+    fillColor: '#ffb98a', fillOpacity: 0.08, interactive: true
+  }).bindTooltip('MODERATE CONVECTION (fake, for stacking test)', {
+    sticky: true, direction: 'top', className: 'fake-feat-tip'
+  }).addTo(map);
+
+  // --- the hover layer under judgment ----------------------------------------
+  function frameContains(latlng) {
+    return L.latLngBounds(FRAMES[frameId]).contains(latlng);
+  }
+  var tip = L.tooltip({ direction: 'top', className: 'country-tip', offset: [0, -8], opacity: 1 });
+  var corner = document.getElementById('cornerTip');
+  var hoveredLayer = null;
+
+  var hitLayer = L.geoJSON(window.HC_COUNTRIES, {
+    style: { stroke: false, fillColor: '#dce8ef', fillOpacity: 0, className: 'hc-country-hit' },
+    interactive: true
+  }).addTo(map);
+
+  function clearHover() {
+    if (hoveredLayer) { hoveredLayer.setStyle({ fillOpacity: 0 }); hoveredLayer = null; }
+    if (map.hasLayer(tip)) map.removeLayer(tip);
+    corner.style.display = 'none';
+  }
+  hitLayer.on('mousemove', function (e) {
+    var layer = e.propagatedFrom || e.layer;
+    if (!frameContains(e.latlng)) { clearHover(); return; } // masked land: stay silent
+    var name = layer.feature.properties.name;
+    if (hoveredLayer !== layer) {
+      if (hoveredLayer) hoveredLayer.setStyle({ fillOpacity: 0 });
+      hoveredLayer = layer;
+      if (state.treatment === 'B') layer.setStyle({ fillOpacity: state.ack });
+    }
+    if (state.treatment === 'C') {
+      if (map.hasLayer(tip)) map.removeLayer(tip);
+      corner.textContent = name;
+      corner.style.display = 'block';
+    } else {
+      corner.style.display = 'none';
+      tip.setContent(name).setLatLng(e.latlng);
+      if (!map.hasLayer(tip)) tip.addTo(map);
+    }
+  });
+  hitLayer.on('mouseout', clearHover);
+
+  // --- treatment menu + dials -------------------------------------------------
+  var state = { treatment: 'A', fs: 0.68, alpha: 0.9, ack: 0.05 };
+  var TREATMENTS = {
+    A: 'A · cursor chip',
+    B: 'B · chip + country fill',
+    C: 'C · fixed corner label'
+  };
+  var DIALS = [
+    { key: 'fs',    label: 'chip font size (rem)', min: 0.58, max: 0.85, step: 0.01 },
+    { key: 'alpha', label: 'chip bg opacity',      min: 0.5,  max: 1,    step: 0.02 },
+    { key: 'ack',   label: 'B: country fill',      min: 0,    max: 0.15, step: 0.01, only: 'B' }
+  ];
+
+  function apply() {
+    document.documentElement.style.setProperty('--tip-fs', state.fs + 'rem');
+    document.documentElement.style.setProperty('--tip-a', state.alpha);
+    if (hoveredLayer) hoveredLayer.setStyle({
+      fillOpacity: state.treatment === 'B' ? state.ack : 0
+    });
+    if (state.treatment !== 'C') corner.style.display = 'none';
+    document.querySelectorAll('#presets button').forEach(function (b) {
+      b.classList.toggle('on', b.dataset.k === state.treatment);
+    });
+    DIALS.forEach(function (d) {
+      var row = document.getElementById('dial-' + d.key);
+      row.classList.toggle('off', !!d.only && d.only !== state.treatment);
+    });
+    var out = 'treatment: <em>' + state.treatment + '</em>\n\n' +
+      'index.html .country-tip:\n' +
+      '  background:rgba(9,26,38,<em>' + state.alpha + '</em>)\n' +
+      '  font:600 <em>' + state.fs + 'rem</em>/1.2 var(--mono)\n';
+    if (state.treatment === 'B') out += '\napp.js hover ack fill:\n  fillOpacity: <em>' + state.ack + '</em>\n';
+    if (state.treatment === 'C') out += '\napp.js: corner label variant (no cursor tooltip)\n';
+    document.getElementById('out').innerHTML = out;
+  }
+
+  var presets = document.getElementById('presets');
+  Object.keys(TREATMENTS).forEach(function (k) {
+    var b = document.createElement('button');
+    b.textContent = TREATMENTS[k];
+    b.dataset.k = k;
+    b.onclick = function () { state.treatment = k; clearHover(); apply(); };
+    presets.appendChild(b);
+  });
+
+  var basins = document.getElementById('basins');
+  Object.keys(FRAMES).forEach(function (k) {
+    var b = document.createElement('button');
+    b.textContent = k === 'AT' ? 'ATLANTIC' : 'E PACIFIC';
+    b.dataset.k = k;
+    b.classList.toggle('on', k === frameId);
+    b.onclick = function () {
+      frameId = k;
+      map.setMaxBounds(FRAMES[k]);
+      map.fitBounds(FRAMES[k]);
+      buildMasks();
+      clearHover();
+      basins.querySelectorAll('button').forEach(function (x) {
+        x.classList.toggle('on', x.dataset.k === k);
+      });
+    };
+    basins.appendChild(b);
+  });
+
+  var dials = document.getElementById('dials');
+  DIALS.forEach(function (d) {
+    var row = document.createElement('div');
+    row.className = 'dial';
+    row.id = 'dial-' + d.key;
+    var lab = document.createElement('span'); lab.textContent = d.label;
+    var inp = document.createElement('input');
+    inp.type = 'range'; inp.min = d.min; inp.max = d.max; inp.step = d.step; inp.value = state[d.key];
+    var val = document.createElement('output'); val.textContent = state[d.key];
+    inp.oninput = function () {
+      state[d.key] = parseFloat(inp.value);
+      val.textContent = inp.value;
+      apply();
+    };
+    row.appendChild(lab); row.appendChild(inp); row.appendChild(val);
+    dials.appendChild(row);
+  });
+
+  apply();
+
+  // dev hook: lets Playwright convert lat/lng -> container px to drive hovers
+  window.__hoverLab = { map: map };
+})();
+</script>
+</body>
+</html>
