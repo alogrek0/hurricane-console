@@ -1,14 +1,20 @@
-# Invest alerts (Atlantic + East Pacific): poll the latest TWOAT and TWOEP twice
-# hourly, diff against the previous run's per-basin state (actions/cache), push
+# Invest alerts (Atlantic + East Pacific): poll the latest TWOAT and TWOEP,
+# diff against the previous run's per-basin state (actions/cache), push
 # alerts to ntfy.sh (NTFY_TOPIC repo secret; unset = the run is a harmless
-# dry-run that just logs). tools/alert-invests.js documents the alert conditions.
+# dry-run that just logs). tools/alert-invests.js documents the alert
+# conditions and the tgftp.nws.noaa.gov fallback used when api.weather.gov
+# serves a stale product list.
 #
-# NOTE: GitHub disables cron schedules after ~60 days without repo activity —
+# NOTE: GitHub cron is best-effort — runs get delayed or dropped under load
+# (observed ~2h gaps on a twice-hourly schedule). The two offset schedules
+# below buy more chances to fire; they do not make timing reliable. GitHub
+# also disables cron schedules after ~60 days without repo activity —
 # re-enable from the Actions tab if the repo goes quiet over the winter.
 name: alerts
 on:
   schedule:
-    - cron: '7,37 * * * *' # twice hourly, off the congested :00/:30 marks
+    - cron: '7,37 * * * *' # off the congested :00/:30 marks
+    - cron: '22,52 * * * *' # second offset schedule (see best-effort note above)
   workflow_dispatch:
     inputs:
       test:

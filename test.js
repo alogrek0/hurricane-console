@@ -352,6 +352,36 @@ ok('alerts: formatAlert produces a titled message for each type', (() => {
   return /Invest AL92/.test(inv.title) && /Atlantic/.test(area.body) && /Crossed 60%/.test(thr.body);
 })());
 
+// Staleness + tgftp fallback (pure pieces; the mirror fetch itself is network
+// and stays untested here, like latestTWOs). Fixed clocks — no wall time.
+const NOW = Date.parse('2026-07-15T12:00:00Z');
+ok('alerts: a 2h-old product is fresh, an 8h-old one is stale',
+  !ALERTS.isStale('2026-07-15T10:00:00+00:00', NOW) &&
+  ALERTS.isStale('2026-07-15T04:00:00+00:00', NOW));
+ok('alerts: unprovable issuance counts as stale',
+  ALERTS.isStale(null, NOW) && ALERTS.isStale('not a date', NOW));
+ok('alerts: WMO stamp resolves against the current month',
+  ALERTS.wmoStampToDate('151143', NOW).toISOString() === '2026-07-15T11:43:00.000Z');
+ok('alerts: WMO stamp with a future day-of-month rolls back a month',
+  ALERTS.wmoStampToDate('302351', Date.parse('2026-07-01T02:00:00Z'))
+    .toISOString() === '2026-06-30T23:51:00.000Z');
+ok('alerts: malformed or impossible WMO stamps yield null',
+  ALERTS.wmoStampToDate('9x1143', NOW) === null &&
+  ALERTS.wmoStampToDate('321143', NOW) === null &&
+  ALERTS.wmoStampToDate('151160', NOW) === null);
+ok('alerts: tgftpProduct builds a stable synthetic id + issuance from the header', (() => {
+  const p = ALERTS.tgftpProduct('\n000\nABNT20 KNHC 151143\nTWOAT \n\nTropical Weather Outlook\n', NOW);
+  return p && p.id === 'tgftp-ABNT20-151143' && p.issuanceTime === '2026-07-15T11:43:00.000Z';
+})());
+ok('alerts: tgftpProduct refuses text without a readable WMO line',
+  ALERTS.tgftpProduct('Tropical Weather Outlook\nno header here\n', NOW) === null);
+ok('alerts: api<->tgftp product-id churn on the same issuance fires nothing', (() => {
+  const viaApi = ALERTS.stateFromTWO(two, '10c93f07-uuid');
+  const viaMirror = ALERTS.stateFromTWO(two, 'tgftp-ABNT20-151143');
+  return ALERTS.diffAlerts(viaApi, viaMirror).length === 0 &&
+    ALERTS.diffAlerts(viaMirror, viaApi).length === 0;
+})());
+
 // --- gazetteer over-firing guards (extractInferred hardening) ------------------
 // extractInferred used to fire on ANY place mention, producing two failure modes:
 // TYPE 1 — a sentence with singleton coords ("along 61W-62W, south of 18N")

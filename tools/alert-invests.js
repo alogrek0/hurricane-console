@@ -23,8 +23,22 @@
  * (flat {productId, disturbances}) migrates into the Atlantic slot via
  * loadBasinStates, so Atlantic keeps its history and East Pacific cold-starts.
  *
- * The pure pieces (stateFromTWO, diffAlerts, formatAlert, loadBasinStates) are
- * exported for test.js, which stays offline; only the runner touches the network.
+ * api.weather.gov is the primary source (real product ids, same contract as
+ * the app), but its product list can lag an issuance by an hour or more
+ * (observed 73+ min on 2026-07-15, which turned a 20%-chance new-area alert
+ * into a 3-hour-late one). When the newest visible product is STALE — older
+ * than STALE_HOURS; TWOs are 6-hourly, so this needs no hardcoded cycle
+ * times and survives DST shifts and off-cycle specials — the run falls back
+ * to NHC's raw text mirror (tgftp.nws.noaa.gov), which updates within
+ * minutes. The mirror has no product id, so one is synthesized from the WMO
+ * header stamp (stable per issuance — the same-product guard still holds);
+ * when the api catches up the id flips back to a uuid, but the disturbance
+ * keys are unchanged, so the flip can never fire a spurious alert. The
+ * mirror is only adopted when it is strictly newer than the api product.
+ *
+ * The pure pieces (stateFromTWO, diffAlerts, formatAlert, loadBasinStates,
+ * isStale, wmoStampToDate, tgftpProduct) are exported for test.js, which
+ * stays offline; only the runner touches the network.
  * Zero dependencies; never runs in the browser. The PWA itself stays static —
  * this is a repo sidecar.
  */
@@ -33,6 +47,43 @@ const P = require('../parser.js');
 const fs = require('fs');
 
 const THRESHOLDS = [40, 60];
+const STALE_HOURS = 7; // TWOs are 6-hourly; older than this = the source is lagging
+
+// A product older than STALE_HOURS cannot be the current 6-hourly issuance.
+// Unknown/unparseable issuance counts as stale: freshness we can't prove
+// isn't freshness.
+function isStale(issuanceISO, nowMs) {
+  const t = Date.parse(issuanceISO || '');
+  return !(nowMs - t <= STALE_HOURS * 3600e3);
+}
+
+// WMO header stamp (DDHHMM, e.g. "151143" in "ABNT20 KNHC 151143") -> UTC Date.
+// The stamp carries no month/year: anchor on nowMs and step back one month
+// while the stamped day-of-month lies in the future (with 6h slack for clock
+// skew), so a day-30 stamp read on the 1st resolves to last month. Null on
+// malformed input or an impossible date (the Date.UTC roll-over check).
+function wmoStampToDate(stamp, nowMs) {
+  const m = /^(\d{2})(\d{2})(\d{2})$/.exec(String(stamp || ''));
+  if (!m) return null;
+  const day = +m[1], hh = +m[2], min = +m[3];
+  if (day < 1 || day > 31 || hh > 23 || min > 59) return null;
+  const now = new Date(nowMs);
+  for (let back = 0; back < 2; back++) {
+    const d = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() - back, day, hh, min));
+    if (d.getUTCDate() === day && d.getTime() <= nowMs + 6 * 3600e3) return d;
+  }
+  return null;
+}
+
+// Raw tgftp mirror text -> { id, issuanceTime, text }, or null when the WMO
+// header is unreadable (the caller then skips the fallback rather than diff
+// text it can't date). The synthetic id is stable per issuance.
+function tgftpProduct(text, nowMs) {
+  const m = /^(AB(?:NT|PZ)20) KNHC (\d{6})/m.exec(text || '');
+  const when = m && wmoStampToDate(m[2], nowMs);
+  if (!when) return null;
+  return { id: 'tgftp-' + m[1] + '-' + m[2], issuanceTime: when.toISOString(), text };
+}
 
 // parsed TWO + product id -> compact state for diffing between runs.
 // key: invest tag if present, else the gazetteer position on a 5-degree grid,
@@ -133,10 +184,25 @@ async function latestTWOs() {
     if (!r.ok) continue;
     const j = await r.json();
     const txt = j.productText || '';
-    if (!found.AT && /^TWOAT\b/m.test(txt)) found.AT = { id: j.id || it.id, text: txt };
-    else if (!found.EP && /^TWOEP\b/m.test(txt)) found.EP = { id: j.id || it.id, text: txt };
+    if (!found.AT && /^TWOAT\b/m.test(txt)) found.AT = { id: j.id || it.id, text: txt, issuanceTime: j.issuanceTime || it.issuanceTime };
+    else if (!found.EP && /^TWOEP\b/m.test(txt)) found.EP = { id: j.id || it.id, text: txt, issuanceTime: j.issuanceTime || it.issuanceTime };
   }
   return found;
+}
+
+const TGFTP = {
+  AT: 'https://tgftp.nws.noaa.gov/data/raw/ab/abnt20.knhc.two.at.txt',
+  EP: 'https://tgftp.nws.noaa.gov/data/raw/ab/abpz20.knhc.two.ep.txt',
+};
+
+async function fetchTgftp(basin) {
+  const res = await fetch(TGFTP[basin], UA);
+  if (!res.ok) throw new Error('tgftp HTTP ' + res.status);
+  const text = await res.text();
+  if (!new RegExp('^TWO' + basin + '\\b', 'm').test(text)) throw new Error('tgftp text is not a TWO' + basin);
+  const prod = tgftpProduct(text, Date.now());
+  if (!prod) throw new Error('tgftp TWO' + basin + ' has no readable WMO stamp');
+  return prod;
 }
 
 async function send(topic, msg) {
@@ -167,8 +233,22 @@ async function main() {
 
   const LABEL = { AT: 'TWOAT', EP: 'TWOEP' };
   for (const basin of ['AT', 'EP']) {
-    const prod = found[basin];
-    if (!prod) { console.log(basin + ': no ' + LABEL[basin] + ' among the newest products; skipping'); continue; }
+    let prod = found[basin];
+    if (!prod || isStale(prod.issuanceTime, Date.now())) {
+      const why = prod ? 'stale (issued ' + (prod.issuanceTime || 'unknown') + ')' : 'missing from the newest products';
+      try {
+        const mirror = await fetchTgftp(basin);
+        if (!prod || Date.parse(mirror.issuanceTime) > (Date.parse(prod.issuanceTime || '') || 0)) {
+          console.log(basin + ': api ' + LABEL[basin] + ' ' + why + '; using tgftp mirror (issued ' + mirror.issuanceTime + ')');
+          prod = mirror;
+        } else {
+          console.log(basin + ': api ' + LABEL[basin] + ' ' + why + '; tgftp is no newer — keeping the api product');
+        }
+      } catch (e) {
+        console.log(basin + ': api ' + LABEL[basin] + ' ' + why + '; tgftp fallback failed (' + (e.message || e) + ')');
+      }
+    }
+    if (!prod) { console.log(basin + ': no ' + LABEL[basin] + ' from api or mirror; skipping'); continue; }
     const cur = stateFromTWO(P.parseTWO(prod.text, { basin }), prod.id);
     const alerts = diffAlerts(prevStates[basin], cur, basin);
     console.log(basin, 'product', cur.productId, '·', cur.disturbances.length, 'disturbance(s) ·', alerts.length, 'alert(s)');
@@ -184,7 +264,7 @@ async function main() {
   fs.writeFileSync(statePath, JSON.stringify(next, null, 1));
 }
 
-module.exports = { stateFromTWO, diffAlerts, formatAlert, loadBasinStates, THRESHOLDS };
+module.exports = { stateFromTWO, diffAlerts, formatAlert, loadBasinStates, isStale, wmoStampToDate, tgftpProduct, THRESHOLDS, STALE_HOURS };
 if (require.main === module) {
   main().catch((e) => { console.error(e.message || e); process.exit(1); });
 }
