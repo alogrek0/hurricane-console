@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<!--
+  tools/phonetics-lab.html — dev-only phonetic-name typography lab. Never shipped
+  as part of the app (not in the SW SHELL list, not referenced by index.html),
+  but it IS reachable on a phone because Pages serves the repo root:
+    https://<user>.github.io/hurricane-console/tools/phonetics-lab.html
+
+  Why it exists: how the NHC phonetic respelling should sit next to a storm name
+  in a popup title (separator, size, weight, color) is a judgment call made by
+  LOOKING, on the device it will be read on. Pick a preset, nudge the dials, and
+  the page prints the exact index.html CSS + app.js constants to apply.
+
+  The popup cards reproduce the real popup chrome from index.html (same palette,
+  .pop-tag sizes/colors, the app's real maxWidth) and pull names from the REAL
+  ../phonetics.js table, so what you judge here is what you get. The six cards
+  are the six cases that matter:
+    TWD cyclone (amber tag) · TCM cone (purple ◇ INFERRED lands AFTER the
+    phonetic — the ordering trap) · wind field (double-middot collision check)
+    · track · worst-case-length name (wrap check) · Lee (identity entry —
+    suppressed, deliberately shows NO phonetic).
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Phonetics lab — Hurricane Console (dev)</title>
+<style>
+  :root{
+    --bg:#071620; --panel:#0c2233; --line:#173347; --ink:#dce8ef;
+    --dim:#7ea3b8; --amber:#ffa23a; --amber-dim:#c47a26; --cyan:#4fc3d6;
+    --inferred:#9a86c9;
+    --mono:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 var(--mono)}
+  header{padding:.6rem .8rem;border-bottom:1px solid var(--line);
+    background:linear-gradient(180deg,#0a1e2c,#071620)}
+  h1{margin:0;font-size:.95rem;letter-spacing:.02em}
+  h1 small{display:block;color:var(--dim);font-weight:400;font-size:.7rem;letter-spacing:.06em}
+  .wrap{display:flex;flex-wrap:wrap;gap:1rem;padding:1rem;align-items:flex-start}
+  .cards{flex:1 1 420px;min-width:300px;display:flex;flex-direction:column;gap:.9rem}
+  .case b{display:block;color:var(--dim);font-size:.62rem;letter-spacing:.1em;margin-bottom:.3rem}
+
+  /* ---- popup chrome, copied from index.html so what's judged is what ships */
+  .pop{background:#0c2233;color:var(--ink);border:1px solid var(--line);
+    border-radius:6px;font:inherit;padding:13px 20px;width:fit-content;
+    max-width:min(340px, 100vw - 90px)}
+  .pop-tag{font-size:.62rem;letter-spacing:.1em;font-weight:700;color:var(--amber)}
+  .pop-tag.inf{color:var(--inferred)}
+  .pop-src{color:var(--dim);font-size:.72rem;margin-top:.3rem;max-width:240px}
+  .pop-sub{color:var(--ink);font-size:.7rem;margin-top:.25rem}
+  /* .hc-phon is written live by render() into #phonStyle */
+
+  .side{flex:1 1 320px;min-width:280px;display:flex;flex-direction:column;gap:.9rem}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:.7rem}
+  .card b{display:block;color:var(--dim);font-size:.62rem;letter-spacing:.1em;margin-bottom:.5rem}
+  .presets{display:flex;flex-wrap:wrap;gap:.35rem}
+  .presets button,.swatches button{font:inherit;font-size:.72rem;color:var(--ink);background:#123246;
+    border:1px solid var(--line);border-radius:4px;padding:.45rem .6rem;cursor:pointer;
+    min-height:38px}
+  .presets button.on,.swatches button.on{background:var(--amber);color:#231400;
+    border-color:var(--amber);font-weight:600}
+  .swatches{display:flex;gap:.35rem;margin-top:.5rem}
+  .swatches i{display:inline-block;width:.7em;height:.7em;border-radius:2px;margin-right:.35em;
+    vertical-align:-.05em}
+  .dial{display:grid;grid-template-columns:8.5rem 1fr 3.4rem;align-items:center;gap:.5rem;
+    margin-bottom:.45rem;font-size:.72rem;color:var(--dim)}
+  .dial input{width:100%}
+  .dial output{color:var(--ink);text-align:right;font-variant-numeric:tabular-nums}
+  pre{margin:0;white-space:pre-wrap;word-break:break-word;color:var(--dim);
+    font-size:.7rem;line-height:1.5}
+  pre em{color:var(--amber);font-style:normal}
+  .hint{color:var(--dim);font-size:.68rem;margin-top:.4rem}
+</style>
+</head>
+<body>
+<header>
+  <h1>Phonetics lab<small>DEV ONLY · storm-name pronunciation in popup titles · pick a treatment, tune it, send me the numbers</small></h1>
+</header>
+
+<div class="wrap">
+  <div class="cards" id="cards"></div>
+
+  <div class="side">
+    <div class="card">
+      <b>TREATMENT</b>
+      <div class="presets" id="presets"></div>
+      <div class="swatches" id="swatches"></div>
+      <div class="hint">Lee shows nothing on purpose — its phonetic IS its name, so
+        the suffix is suppressed. The cone card is the ordering trap: ◇ INFERRED
+        lands after the phonetic. The wind-field card shows the double-middot
+        collision if the middot treatment is picked.</div>
+    </div>
+
+    <div class="card">
+      <b>DIALS</b>
+      <div id="dials"></div>
+    </div>
+
+    <div class="card">
+      <b>APPLY THIS (send me these)</b>
+      <pre id="out"></pre>
+    </div>
+  </div>
+</div>
+
+<style id="phonStyle"></style>
+<script src="../phonetics.js"></script>
+<script>
+'use strict';
+// ---- the six cases that matter ---------------------------------------------
+// prefix + name compose the popup tag exactly as app.js builds it; `inf` adds
+// the ◇ INFERRED suffix AFTER the phonetic, like popup() does (app.js).
+var CARDS = [
+  { cap: 'TWD CYCLONE (amber tag)', pre: 'HURRICANE ', name: 'Erin', inf: false,
+    sub: '90 kt · 952 mb · 285° at 12 kt',
+    src: 'Hurricane Erin is centered near 24.4N 70.9W moving northwest at 12 kt.' },
+  { cap: 'TCM CONE (◇ ORDERING TRAP)', pre: 'CONE ', name: 'Erin', inf: true,
+    src: 'Computed from NHC seasonal radii — not the official cone.' },
+  { cap: 'WIND FIELD (MIDDOT COLLISION CHECK)', pre: '34 KT WIND FIELD · ', name: 'Erin', inf: false,
+    src: 'Official advisory quadrant wind radii.' },
+  { cap: 'TCM TRACK', pre: 'TRACK ', name: 'Erin', inf: false,
+    src: 'Forecast positions through +120h from the advisory.' },
+  { cap: 'WORST-CASE LENGTH (WRAP CHECK)', pre: 'TROPICAL STORM ', name: 'Sebastien', inf: false,
+    sub: '45 kt · 1002 mb · 300° at 9 kt',
+    src: 'Tropical Storm Sebastien is centered near 15.1N 51.3W.' },
+  { cap: 'IDENTITY ENTRY (SUPPRESSED — SHOWS NOTHING)', pre: 'HURRICANE ', name: 'Lee', inf: false,
+    sub: '100 kt · 950 mb · 300° at 10 kt',
+    src: 'Hurricane Lee is centered near 24.4N 60.9W.' },
+];
+
+// ---- the treatments on the menu ---------------------------------------------
+// sep sits OUTSIDE the styled span (title color); pre/post wrap the phonetic
+// INSIDE it — exactly how app.js withPhonetic() will compose the title.
+var PRESETS = {
+  middot:     { label: 'Middot suffix',  sep: ' · ', pre: '', post: '', size: .58, weight: 400, ls: .04, color: '#7ea3b8' },
+  guillemets: { label: 'Guillemets «»',  sep: ' ',   pre: '«', post: '»', size: .58, weight: 400, ls: .04, color: '#7ea3b8' },
+  paren:      { label: 'Parenthetical',  sep: ' ',   pre: '(', post: ')', size: .55, weight: 400, ls: .03, color: '#7ea3b8' },
+};
+var SWATCHES = [
+  { label: 'dim',       color: '#7ea3b8' },
+  { label: 'ink',       color: '#dce8ef' },
+  { label: 'amber-dim', color: '#c47a26' },
+  { label: 'cyan',      color: '#4fc3d6' },
+];
+var DIALS = [
+  { key: 'size',   label: 'font size',      min: .45, max: .75, step: .01, unit: 'rem' },
+  { key: 'weight', label: 'weight',         min: 400, max: 700, step: 100, unit: '' },
+  { key: 'ls',     label: 'letter-spacing', min: 0,   max: .14, step: .01, unit: 'em' },
+];
+
+var cur = Object.assign({}, PRESETS.middot), curName = 'middot';
+
+function esc(s) {
+  return String(s).replace(/[&<>"]/g, function (c) {
+    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+  });
+}
+// same logic app.js withPhonetic() will ship: real-table lookup, identity-suppress
+function phonTitle(name) {
+  var p = (PHONETICS.AT || {})[name.toLowerCase()];
+  var up = name.toUpperCase();
+  if (!p || p.toLowerCase() === name.toLowerCase()) return esc(up);
+  return esc(up) + esc(cur.sep) + '<span class="hc-phon">' + esc(cur.pre + p + cur.post) + '</span>';
+}
+
+var cardsEl = document.getElementById('cards');
+CARDS.forEach(function (c, i) {
+  var d = document.createElement('div');
+  d.className = 'case';
+  d.innerHTML = '<b>' + c.cap + '</b>' +
+    '<div class="pop"><span class="pop-tag' + (c.inf ? ' inf' : '') + '" id="tag' + i + '"></span>' +
+    (c.sub ? '<div class="pop-sub">' + esc(c.sub) + '</div>' : '') +
+    '<div class="pop-src">' + esc(c.src) + '</div></div>';
+  cardsEl.appendChild(d);
+});
+function paintCards() {
+  CARDS.forEach(function (c, i) {
+    document.getElementById('tag' + i).innerHTML =
+      esc(c.pre) + phonTitle(c.name) + (c.inf ? ' ◇ INFERRED' : '');
+  });
+}
+
+// ---- UI ----------------------------------------------------------------------
+var presetsEl = document.getElementById('presets');
+Object.keys(PRESETS).forEach(function (name) {
+  var b = document.createElement('button');
+  b.textContent = PRESETS[name].label;
+  b.onclick = function () {
+    curName = name;
+    cur = Object.assign({}, PRESETS[name]);
+    syncDials(); render();
+  };
+  presetsEl.appendChild(b);
+});
+var swEl = document.getElementById('swatches');
+SWATCHES.forEach(function (s) {
+  var b = document.createElement('button');
+  b.innerHTML = '<i style="background:' + s.color + '"></i>' + s.label;
+  b.dataset.color = s.color;
+  b.onclick = function () { cur.color = s.color; render(); };
+  swEl.appendChild(b);
+});
+var dialsEl = document.getElementById('dials');
+DIALS.forEach(function (d) {
+  var row = document.createElement('label');
+  row.className = 'dial';
+  row.id = 'dial-' + d.key;
+  row.innerHTML = '<span>' + d.label + '</span>' +
+    '<input type="range" min="' + d.min + '" max="' + d.max + '" step="' + d.step + '" value="' + cur[d.key] + '">' +
+    '<output>' + cur[d.key] + d.unit + '</output>';
+  var input = row.querySelector('input');
+  input.oninput = function () {
+    cur[d.key] = Number(input.value);
+    row.querySelector('output').textContent = input.value + d.unit;
+    curName = 'custom';
+    render();
+  };
+  dialsEl.appendChild(row);
+});
+function syncDials() {
+  DIALS.forEach(function (d) {
+    var row = document.getElementById('dial-' + d.key);
+    row.querySelector('input').value = cur[d.key];
+    row.querySelector('output').textContent = cur[d.key] + d.unit;
+  });
+}
+function cssRule() {
+  return '.pop-tag .hc-phon{font-size:' + cur.size + 'rem;font-weight:' + cur.weight +
+    ';letter-spacing:' + cur.ls + 'em;color:' + cur.color + '}';
+}
+function render() {
+  Array.prototype.forEach.call(document.querySelectorAll('#presets button'), function (b) {
+    b.classList.toggle('on', b.textContent === (PRESETS[curName] || {}).label);
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('#swatches button'), function (b) {
+    b.classList.toggle('on', b.dataset.color === cur.color);
+  });
+  document.getElementById('phonStyle').textContent = cssRule();
+  paintCards();
+  document.getElementById('out').innerHTML =
+    'preset: <em>' + ((PRESETS[curName] || {}).label || 'custom') + '</em>\n\n' +
+    'index.html  (after .pop-tag.inf):\n' +
+    '  <em>' + esc(cssRule()) + '</em>\n\n' +
+    'app.js  withPhonetic constants:\n' +
+    '  PHON_SEP  = <em>' + JSON.stringify(cur.sep) + '</em>\n' +
+    '  PHON_PRE  = <em>' + JSON.stringify(cur.pre) + '</em>\n' +
+    '  PHON_POST = <em>' + JSON.stringify(cur.post) + '</em>';
+}
+syncDials();
+render();
+</script>
+</body>
+</html>
