@@ -1,0 +1,25 @@
+
+000
+ABNT20 KNHC 171144
+TWOAT 
+
+Tropical Weather Outlook
+NWS National Hurricane Center Miami FL
+800 AM EDT Wed Jun 17 2026
+
+For the North Atlantic...Caribbean Sea and the Gulf of America:
+
+Active Systems:
+The National Hurricane Center is issuing advisories on Potential 
+Tropical Cyclone One, located near the middle Texas coast.
+* Formation chance through 48 hours...medium...60 percent.
+* Formation chance through 7 days...medium...60 percent.
+
+&&
+Public Advisories on Potential Tropical Cyclone One are issued 
+under WMO header WTNT31 KNHC and under AWIPS header MIATCPAT1.
+Forecast/Advisories on Potential Tropical Cyclone One are issued 
+under WMO header WTNT21 KNHC and under AWIPS header MIATCMAT1.
+
+$$
+Forecaster Kelly

@@ -1,0 +1,137 @@
+
+000
+AXNT20 KNHC 072207
+TWDAT 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+0015 UTC Wed Jul 8 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 1800 UTC surface analysis and satellite imagery through 
+2200 UTC.
+
+...SPECIAL FEATURES...
+
+Caribbean Sea Gale Warning: The pressure gradient between the 
+Bermuda- Azores High north of the area along with lower pressure 
+over N South America will produce fresh to near gale trades over 
+the central Caribbean for the next several days. Peak winds should
+reach gales just north of Colombia tonight before slightly 
+diminishing tomorrow. Expect rough to locally rough seas with the
+peak winds. Please refer to the latest NWS High Seas Forecast at
+website: https://www.nhc.noaa.gov/text/MIAHSFEP2.shtml for more
+details.
+
+...TROPICAL WAVES...
+
+A tropical wave is just southwest of the Cabo Verde Islands. Its 
+axis is along 26.5W south of 17N. It is moving westward at 15 to 
+20 kt. Any nearby convection is described in the monsoon 
+trough/ITCZ section below.
+
+A well defined tropical wave is along 47W south of 17N, moving 
+westward at around 15 kt. Any nearby convection is described in 
+the monsoon trough/ITCZ section below.
+
+Another tropical wave is analyzed near 62W entering the far
+eastern Caribbean Sea, and extends southward into far eastern
+Venezuela. It is moving westward at 20 to 25 kt. Any nearby 
+convection is described in the monsoon trough/ITCZ section below.
+
+The tropical wave previously located along 85W is relocated 
+farther E along 82W based on tropical wave diagnostic and surface
+observations. Any nearby convection is described in the monsoon 
+trough/ITCZ section below.
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough axis enters the Atlantic through the coast of
+Africa near 14N16W and continues southwestward to 09N26W. The 
+ITCZ extends from 08N28W to 09N45W to 09N59W. Scattered moderate
+isolated strong convection is noted from 06N to 11N between 21W
+and 34W. Scattered moderate convection is noted from 06N to 09N 
+between 36W and 42W, and also from 08N to 13N between 42W and 
+54W.
+
+...GULF OF AMERICA...
+
+A weak ridge continues the dominate the Gulf region producing a
+gentle to moderate wind flow, except moderate to fresh in the
+central Bay of Campeche due to a weak surface trough analyzed from
+along 94W. Slight to moderate seas are noted across the basin,
+highest in the central Bay of Campeche. An upper-level low over 
+the western Gulf is enhancing the development of showers and 
+thunderstorms over parts of the basin, more concentrated over the 
+Bay of Campeche and near the northern Yucatan Peninsula. 
+
+For the forecast, the diurnal trough moving westward from the 
+Yucatan peninsula will cause fresh NE to E winds offshore of the 
+peninsula nightly through the weekend. An upper-level low will 
+cause scattered showers and isolated thunderstorms over the Gulf 
+for the next couple of days. Elsewhere, winds and seas should be 
+quiescent. 
+
+...CARIBBEAN SEA...
+
+Please refer to the Special Features section above for details on
+a Gale Warning.
+
+A tight pressure gradient is present over the central Caribbean
+due to the Bermuda-Azores high north of the area and lower
+pressure over northern South America resulting in fresh to near
+gale-force winds there. Rough seas dominate this area. Moderate to
+fresh trades prevail elsewhere along with moderate seas, except 
+gentle to moderate in the lee of Cuba. Scattered showers and 
+thunderstorms are occurring over portions of the western 
+Caribbean, particularly W of 85W, including in the vicinity of the
+Gulf of Honduras. Patches of low level moisture, embedded in the 
+trade wind flow, are moving westward across the area producing 
+isolated to scattered passing showers.
+
+For the forecast, the pressure gradient between the Bermuda-
+Azores High north of the area along with lower pressure over N 
+South America will produce fresh to near gale trades over the 
+central Caribbean for the next several days. Peak winds should 
+reach gales just north of Colombia tonight before slightly 
+diminishing tomorrow. Additionally, trades over the Gulf of 
+Honduras will pulse to fresh to strong late afternoons and 
+evenings through the weekend. A vigorous tropical wave should 
+reach the Lesser Antilles Wed evening, bringing fresh to strong 
+trades over the E Caribbean on Thu and Fri. 
+
+...ATLANTIC OCEAN...
+
+Three tropical waves are moving westward between W Africa and the
+Lesser Antilles. Please, see the Tropical Waves section for more
+details. The Saharan Air Layer (SAL) from CIMSS and the Geocolor
+satellite imagery show abundant African dust over this area into 
+the eastern Caribbean. 
+
+As it is normal for this time of the year, the Bermuda-Azores 
+High dominates the Atlantic forecast waters. Moderate to fresh 
+winds are observed along the southern periphery of its associated 
+ridge, with the exception of fresh to strong winds just north of 
+Hispaniola and Puerto Rico. Light to gentle winds are near the 
+ridge axis, mainly N of 25N. Seas are generally moderate across
+the basin, except slight to moderate from 25N to 29N under the
+ridge and corresponding lighter winds. An exception is fresh to
+strong N-NE winds from offshore northern Africa near the Canary
+and Madeira Islands to the Cabo Verde Islands and just WNW of
+there. An upper-level low spinning between Hispaniola and the 
+southeastern Bahamas is generating some shower activity.
+
+For the forecast west of 55W, ridging associated with the 
+Bermuda- Azores High will remain farther south than usual - near 
+27N. Waters north of 29N will have moderate to fresh SW to W winds
+beginning tomorrow night for the next several days. Additionally,
+fresh to strong trades will continue just north of Hispaniola and
+over the approaches to the Windward Passage through the weekend. 
+
+$$
+Lewitsky

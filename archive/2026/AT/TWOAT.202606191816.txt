@@ -1,0 +1,30 @@
+
+000
+ABNT20 KNHC 191816
+TWOAT 
+
+Tropical Weather Outlook...RESENT
+NWS National Hurricane Center Miami FL
+200 PM EDT Fri Jun 19 2026
+
+For the North Atlantic...Caribbean Sea and the Gulf of America:
+
+Offshore the East Coast of the United States (Remnants of Arthur):
+Showers and thunderstorms located near the southeastern United 
+States coast and adjacent offshore waters are associated with a 
+trough of low pressure (the remnants of Arthur). Strong upper-level 
+winds and interaction with a nearby frontal system are expected to 
+limit any subtropical or tropical development of this system tonight 
+while it moves northeastward at 25 to 30 mph over the western 
+Atlantic Ocean. By early Saturday, the system is forecast to merge 
+with the front while it continues northeastward over cooler waters. 
+More information on this system, including Gale Warnings, is 
+available in High Seas Forecasts issued by the National Weather 
+Service under AWIPS header NFDHSFAT1, WMO header FZNT01 KWBC, and 
+online at ocean.weather.gov/shtml/NFDHSFAT1.php
+* Formation chance through 48 hours...low...near 0 percent.
+* Formation chance through 7 days...low...near 0 percent.
+
+
+$$
+Forecaster Reinhart

@@ -1,0 +1,101 @@
+
+000
+AXNT20 KNHC 102109
+TWDAT 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+0015 UTC Sat Jul 11 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 1800 UTC surface analysis and satellite imagery through 
+2100 UTC.
+
+...SPECIAL FEATURES...
+
+Caribbean Gale Warning: The pressure gradient between the central
+Atlantic high pressure and lower pressures over northern South 
+America will support strong to near gale-force northeast to east 
+trades over the south-central Caribbean, including the Gulf of 
+Venezuela into early next week. Winds are forecast to pulse to 
+gale- force off the coast of Colombia and the Gulf of Venezuela 
+tonight and again Sat night. Seas are expected to peak to around 
+14 ft off Colombia Sat night. 
+
+Please refer to the latest NWS High Seas Forecast at website: 
+https://www.nhc.noaa.gov/text/MIAHSFEP2.shtml for more details.
+
+...TROPICAL WAVES...
+
+The axis of a central Atlantic tropical wave is near 54W, south 
+of 16N. It is moving westward at 10-15 kt. Scattered showers and 
+isolated thunderstorms are seen near the wave axis.
+
+The axis of a Caribbean tropical wave is near 82W south of 19N
+into the eastern north Pacific, moving westward at about 15-20 
+kt. Active convection is along the wave axis.
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough enters the Atlantic through the coast of 
+Mauritania near 18N16W and continues southwestward to 08N28W. The
+ITCZ continues from 08N28W to 09N53W. Scattered moderate and
+isolated strong convection is from 06N to 11N between 16W and 23W.
+
+...GULF OF AMERICA...
+
+Widely scattered showers and thunderstorms are noted across the 
+western and northern Gulf. A relatively weak pressure gradient
+over the area is supporting gentle to locally moderate winds,
+along with slight seas, across the region.
+
+For the forecast, ridging will dominate into next week, 
+supporting mainly gentle SE winds. Fresh E winds will pulse 
+offshore the Yucatan Peninsula each night. 
+
+...CARIBBEAN SEA...
+
+Please refer to the Special Features section above for details on
+gale conditions forecast for offshore Colombia and in the Gulf 
+of Venezuela.
+
+The pressure gradient between the Atlantic ridge and the Colombian
+low is supporting strong winds over the central Caribbean,
+reaching near gale force off Colombia. Moderate to fresh trades 
+and moderate seas prevail across the remainder of the Caribbean.
+
+For the forecast, the pressure gradient between central Atlantic 
+high pressure and lower pressure over northern South America will 
+support strong trades over the central Caribbean through next 
+week. Winds will pulse to gale-force off Colombia and in the Gulf 
+of Venezuela tonight and Sat night. Trades over the Gulf of 
+Honduras will pulse to strong each evening through early next 
+week. 
+
+...ATLANTIC OCEAN...
+
+A surface trough extends from 31N53W to 30N60W. Scattered showers
+are in the vicinity of the trough. Moderate winds, and seas of 4-6
+ft, are N of the trough. Farther east, a cold front enters the
+waters near 31N18W and extends to 28N32W to 30N36W. Gentle to
+moderate winds are N of the front. High pressure dominates the
+remainder of the waters N of 20N, anchored by a 1024 mb high near
+28N38W, and a 1024 mb high near 26N64W. Light to gentle winds are
+in the vicinity of the high. Moderate to fresh winds are noted
+elsewhere. Seas are moderate or less across the discussion waters. 
+
+For the forecast west of 55W, the subtropical ridge will remain 
+dominant through the period, supporting moderate to fresh trades S
+of 23N, with mainly gentle winds to the N. Pulsing strong winds 
+are expected each N offshore Hispaniola and in the Windward 
+Passage. An upper-level low pressure will move W from the Bahamas 
+and Florida through the weekend, bringing thunderstorms with 
+locally strong winds and frequent lightning. 
+
+$$
+AL

@@ -1,0 +1,106 @@
+
+189 
+AXNT20 KNHC 110431
+TWDAT 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+0615 UTC Thu Jun 11 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 0000 UTC surface analysis and satellite imagery through 
+0431 UTC.
+
+...TROPICAL WAVES...
+
+A new tropical waves has emerged off the coast of West Africa. 
+This wave is near 17W, S of 11.5N. Scattered to numerous moderate 
+convection is depicted from 02.5N to 10N and east of 20W. 
+
+The axis of a tropical wave is near 46W, S of 15N, moving west at
+10 to 15 kt. Scattered moderate convection is noted from 05N to 
+07N between 44W and 50W.
+
+The axis of a tropical wave is near 58W, S of 15N, moving 
+westward at around 15 kt. Isolated moderate convection is noted
+from 09N to 13N between 57W and 61W.
+
+The axis of a tropical wave is near 64W, S of 18N, moving 
+westward at 10 to 15 kt. No convection is depicted at this time in
+association to this wave. 
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough extends off the coast of Africa near 14N17W 
+and extends SW to 05N29W. The ITCZ extends from 05N29W to 04N50W.
+Scattered moderate to strong convection is noted from 02N to 10N 
+between 20W and 34.5W.
+
+...GULF OF AMERICA...
+
+A surface trough is across the Yucatan Peninsula, supporting 
+scattered moderate and isolated strong convection near the 
+Yucatan Channel as well as over the Yucatan peninsula, and the
+eastern Bay of Campeche. Gentle to moderate east winds prevail
+across the Gulf, except north of the Yucatan Peninsula, where 
+fresh to locally strong easterly winds prevail. Seas 2 to 5 ft 
+prevail across the basin, except for seas 5 to 6 ft north of the 
+Yucatan Peninsula. 
+
+For the forecast, a weak surface ridge will continue to support 
+gentle to moderate E to SE winds over the eastern and north- 
+central Gulf into early next week. A trough or weak low pressure 
+center may emerge from the Yucatan Peninsula into the Bay of 
+Campeche on Thu night and then track slowly northwestward through 
+the weekend. It will enhance the gradient with the surface ridge, 
+causing fresh to strong SE winds across the south-central and 
+west-central Gulf. It will also trigger scattered to numerous 
+thunderstorms and rough seas across the same area into Sun. 
+
+...CARIBBEAN SEA...
+
+Scattered moderate convection is depicted west of 80W. The 
+pressure gradient between high pressure N of the area, the eastern
+north Pacific monsoon trough, and broad low pressure around TD 
+Cristina is supporting fresh to locally strong winds over central 
+and western Caribbean. Seas over these waters are in the 4-7 ft 
+range. Over the eastern Caribbean, gentle to moderate winds and 
+seas of 3-5 ft prevail. 
+
+For the forecast, the pressure gradient between a building ridge 
+of high pressure in the western Atlantic and T.D. Cristina in the 
+Eastern Pacific offshore of El Salvador will sustain fresh to 
+strong E to SE winds with moderate to rough seas from the south- 
+central to northwestern basin into early next week. 
+
+...ATLANTIC OCEAN...
+
+A weakening frontal boundary extends from 31N52W across the 
+northern waters to near 30N77W. A surface trough is found S of the
+front from 29N58W to 21N70W, with a weak 1016 mb surface low 
+along the trough near 26N62W. Isolated moderate convection is near
+the low along the trough. High pressure prevails across the 
+remainder of the waters N of 20N, anchored by a 1029 mb high 
+centered near 40N26W. Light to gentle winds, and seas of 4-6 ft, 
+prevail over the waters N of 20N and W of 55W. South of 20N, and 
+between 35W and the Lesser Antilles moderate to fresh NE to E 
+winds prevail along with seas 5 to 7 ft. Fresh to strong winds, 
+and seas of 6-8 ft are noted N of 20N and E of 25W. Elsewhere, 
+light to gentle winds, and moderate seas, prevail.
+
+For the forecast west of 55W, The low will dissipate as it moves 
+northeastward along the trough through Thu. Meanwhile, a 
+stationary frontal boundary currently along 28N will dissipate 
+overnight. The Atlantic ridge will then build across the region 
+late Thu through Fri along roughly 25N. Looking ahead, this 
+pattern will support moderate to fresh E to SE winds north of 
+Hispaniola at night from Fri night through early next week.
+
+$$
+KRV
+

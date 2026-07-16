@@ -1,0 +1,92 @@
+
+000
+AXPZ20 KNHC 191604
+TWDEP
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+1605 UTC Fri Jun 19 2026
+
+Tropical Weather Discussion for the eastern Pacific Ocean from
+03.4S to 30N, east of 120W including the Gulf of California, and
+from the Equator to 30N, between 120W and 140W. The following
+information is based on satellite imagery, weather observations,
+radar, and meteorological analysis.
+
+Based on 1200 UTC surface analysis and satellite imagery through
+1500 UTC.
+
+...TROPICAL WAVES...
+
+A tropical wave is along 88W, south of 16N, moving west at 5 to 10
+kt. Scattered moderate convection is near the wave axis.
+
+A tropical wave is along 97W, south of 15N, moving west at 5 to 10
+kt. Scattered moderate to isolated strong convection is observed
+from 02N to 08N and between 90W and 98W, and from 10N to 16N
+between 98W and 103W.
+
+A tropical wave is along 115W, south of 18N, moving west at 5 to 10
+kt. Scattered moderate to isolated strong convection is noted from
+07N to 16N between 110W AND 118W.
+
+...INTERTROPICAL CONVERGENCE ZONE/MONSOON TROUGH...
+
+The monsoon trough extends from 08N83W to 07N95W to 12N112 to 
+06N128W. The ITCZ stretches from 06N128W to beyond 04N140W. 
+Scattered moderate convection is present from 04N to 12N and 
+between 120W and 133W. Aside from the convection associated with
+the tropical waves, scattered moderate convection is noted from
+06N to 11N between 126W to 136W. 
+
+...OFFSHORE WATERS WITHIN 250 NM OF MEXICO...
+
+A ridge dominates the offshore forecast waters of Baja California
+supporting moderate to fresh NW to N winds N of Cabo San Lazaro,
+and gentle to moderate winds between Cabo San Lazaro and Cabo San
+Lucas. Moderate seas are within these winds. In the Gulf of 
+California, light to gentle winds prevail with slight seas, 
+except near the entrance to the Gulf where seas of 3 to 4 ft are 
+noted. Elsewhere across the Mexican offshore waters, including 
+the Gulf of Tehuantepec, moderate or lighter winds and slight to 
+moderate seas in SW swell prevail.
+
+For the forecast, a ridge will remain in place across the offshore
+waters of Baja California promoting gentle to moderate northerly
+winds, except for locally fresh speeds pulsing at night through 
+the weekend. Looking ahead, a surface trough moving across the
+Bay of Campeche will force fresh to strong northerly gap winds 
+in the Gulf of Tehuantepec late Tue night into Wed, with seas 
+building to 8 or 9 ft by Wed night. 
+
+....OFFSHORE WATERS WITHIN 250 NM OF CENTRAL AMERICA, COLOMBIA,
+AND WITHIN 750 NM OF ECUADOR...
+
+Gentle to moderate southerly winds and seas of 4 to 6 ft are 
+found south of 03N. Elsewhere, light to gentle winds and slight 
+to moderate seas in SW swell prevail.
+
+For the forecast, gentle to moderate southerly winds and moderate
+seas will prevail across the offshore waters between Ecuador and
+the Galapagos Islands through early next week. Meanwhile, moderate
+to fresh NE to E winds are expected in the Papagayo region most 
+of the forecast period. Light to gentle winds and slight to moderate
+seas in southwest swell are forecast elsewhere through the next 
+several days.
+
+...REMAINDER OF THE AREA...
+
+A ridge dominate most of the waters N of 1%N and W of 110W, supporting
+gentle to moderate winds with the exception of moderate to 
+locally fresh NE to E winds across the trade wind zone, 
+particularly W of 120W. Elsewhere, light to gentle winds and 
+moderate seas are prevalent.
+
+For the forecast, additional pulses of SW swell will continue to 
+propagate across the forecast waters E of 120W generating moderate
+to locally rough seas. Otherwise, little changes are expected in
+winds and seas through the upcoming weekend and into early next 
+week.
+
+$$
+GR

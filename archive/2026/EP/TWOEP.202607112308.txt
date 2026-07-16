@@ -1,0 +1,44 @@
+
+000
+ABPZ20 KNHC 112308
+TWOEP 
+
+Tropical Weather Outlook
+NWS National Hurricane Center Miami FL
+500 PM PDT Sat Jul 11 2026
+
+For the eastern and central North Pacific east of 180 longitude:
+
+Offshore of Southwestern Mexico:
+A broad area of low pressure located several hundred miles south 
+of the southern coast of Mexico is producing a large area of 
+disorganized showers and thunderstorms.  Environmental conditions 
+appear favorable for gradual development of this system, and a 
+tropical depression is expected to form during the early or 
+middle portions of next week while the system moves generally 
+west-northwestward well off the coast of Mexico. 
+* Formation chance through 48 hours...medium...40 percent. 
+* Formation chance through 7 days...high...90 percent.
+
+Central and Western East Pacific:
+A weak and elongated area of low pressure located about 1500 miles 
+southwest of the Baja California peninsula continues to produce 
+showers and thunderstorms.  Some additional development is possible 
+over the next couple of days before the system moves 
+west-northwestward into a region of strong upper-level winds and 
+drier air. 
+* Formation chance through 48 hours...low...20 percent. 
+* Formation chance through 7 days...low...20 percent.
+
+Well South-Southeast of the Hawaiian Islands:
+A trough of low pressure located several hundred miles 
+south-southeast of the Hawaiian Islands is producing a limited 
+amount of shower activity.  Some slow development of this system is 
+possible during the next several days as it moves generally westward 
+across the central Pacific, remaining well south of the Hawaiian 
+Islands. 
+* Formation chance through 48 hours...low...10 percent. 
+* Formation chance through 7 days...low...30 percent.
+
+$$
+Forecaster Gibbs/Cangialosi

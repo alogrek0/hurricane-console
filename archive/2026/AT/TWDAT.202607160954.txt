@@ -1,0 +1,128 @@
+
+000
+AXNT20 KNHC 160954
+TWDAT 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+1215 UTC Thu Jul 16 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 0600 UTC surface analysis and satellite imagery through 
+0930 UTC.
+
+...SPECIAL FEATURE...
+
+Caribbean Gale Warning: A tight pressure gradient between high 
+pressure north of the basin and the Colombian low will support
+fresh to strong NE-E winds in the south-central Caribbean during
+the next several days. Winds will pulse to gale-force across the 
+waters N of Colombia each night through Sat night. Rough to very 
+rough seas will prevail with these winds.
+
+Please read the latest HIGH SEAS FORECAST 
+issued by the National Hurricane Center at website - 
+https://www.nhc.noaa.gov/text/MIAHSFAT2.shtml for more details.
+
+...TROPICAL WAVES...
+
+An eastern Atlantic tropical wave is analyzed along 21W, south of
+16N, moving westward at 15 kt. Scattered moderate convection is 
+present from 08N to 13N and east of 23W and remains disorganized.
+Some slow development is possible during the next couple of days 
+while the system moves generally west-northwestward at about 10 
+mph. By this weekend, the system is forecast to move into a less 
+conducive environment, and further development is not expected. 
+The disturbance has a low chance of development over the next 7 
+days.
+
+An eastern Atlantic tropical wave is along 32W, south of 18N, 
+moving westward at 15 kt. No significant convection is noted with
+this wave at this time.
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough enters the Atlantic through the coast of
+Africa near 21N17W and continues southwestward to a 1013 mb low 
+pres near 12N21W to 09N34W. The ITCZ extends from 09N34W to 
+07N58W. Scattered moderate convection is noted S of the monsoon
+trough between 23W-29W, and along the ITCZ between 46W-52W. 
+
+...GULF OF AMERICA...
+
+A 1022 mb high pressure system positioned over the northern Gulf 
+near 29N88W. The high supports moderate to fresh E-SE winds 
+across much of the western and SE Gulf. Seas are 3-5 ft in these 
+waters. In the rest of the basin, light to gentle winds and slight
+seas prevail. A few showers are present north of Yucatan and in 
+the eastern Bay of Campeche, while drier conditions are noted in 
+the remainder of the Gulf.
+
+For the forecast, fresh to strong winds will pulse offshore the 
+Yucatan Peninsula each night. Gentle to moderate winds, and slight
+to moderate seas, will prevail elsewhere. 
+
+Looking ahead, an area of low pressure is forecast to form this
+weekend over the northeastern Gulf of America. Some gradual 
+development of this system is possible while it moves slowly 
+northeastward over the northeastern Gulf and near the coast of the
+southeastern United States early next week.
+
+...CARIBBEAN SEA...
+
+A Gale Warning is in effect for the south-central Caribbean offshore
+of Colombia. Please, refer to the Special Features section for 
+more details.
+
+The Atlantic subtropical ridge centered north of the Caribbean
+forces strong to gale easterly trade winds across the central 
+Caribbean, with the strongest winds occurring off Colombia and in 
+the Gulf of Venezuela. Rough to very rough seas are found in these
+waters. Fresh NE winds and moderate seas are noted in the 
+Windward Passage and Gulf of Honduras. Meanwhile, moderate to 
+fresh easterly winds and moderate seas are present in the eastern 
+Caribbean. Elsewhere, moderate or weaker winds and slight to 
+moderate seas are prevalent. 
+
+A diffluent pattern aloft combined with abundant tropical moisture
+is generating a large area of showers and thunderstorms over the
+NW Caribbean and the Yucatan Peninsula, particularly in the Gulf
+of Honduras. Gusty winds, frequent lightning, and higher seas are
+likely with this convective activity.
+
+For the forecast, the pressure gradient between high pressure north of
+the basin and the Colombian low will support pulsing NE winds to
+gale-force across the waters N of Colombia each night through Sat
+night. Otherwise, strong to near-gale trade winds and rough seas
+will prevail across the central Caribbean into early next week. 
+East winds will pulse fresh to strong each evening in the Gulf of
+Honduras and Windward Passage. 
+
+...ATLANTIC OCEAN...
+
+A surface trough along 76W and north of 24W is producing a
+scattered showers west of 72W and north of 22N. The tropical 
+Atlantic is under the influence of broad high pressure. Moderate 
+to fresh easterly winds and moderate seas are occurring south of 
+the SE Bahamas and north of Haiti and eastern Cuba. Moderate 
+easterly winds and moderate seas are found south of 22N and 
+between Africa and the Lesser Antilles. Meanwhile, in the far 
+eastern Atlantic, fresh to strong and seas of 5-8 ft are noted 
+north of the monsoon trough and east of 23W. Fresh to strong SW 
+winds and seas of 5-8 ft are evident south of the monsoon trough 
+and east of 23W. Elsewhere, moderate or weaker winds and moderate 
+seas prevail.
+
+For the forecast west of 55W, the subtropical ridge will remain
+dominant through the forecast period. The weather pattern will 
+support moderate to fresh trades south of 25N, with gentle winds 
+to the north. Pulsing strong winds are expected each night 
+offshore Hispaniola and in the Windward Passage. 
+
+$$
+ERA

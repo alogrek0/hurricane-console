@@ -1,0 +1,141 @@
+
+000
+AXPZ20 KNHC 122113
+TWDEP 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+2205 UTC Sun Jul 12 2026
+
+Tropical Weather Discussion for the eastern Pacific Ocean from
+03.4S to 30N, east of 120W including the Gulf of California, and
+from the Equator to 30N, between 120W and 140W. The following
+information is based on satellite imagery, weather observations,
+radar, and meteorological analysis.
+
+Based on 1800 UTC surface analysis and satellite imagery through
+2100 UTC.
+
+...SPECIAL FEATURES...
+
+A broad area of low pressure located several hundred miles south
+of the coast of southern Mexico continues to produce a large area
+of disorganized showers and thunderstorms. Environmental conditions
+remain favorable for gradual development of this system, and a 
+tropical depression is expected to form during the early to middle
+part of the week while the system moves generally west-northwestward,
+well off the coast of Mexico. This system is along a tropical wave
+with axis along 98W/99W. Recent scatterometer data indicate increasing
+winds across the area, particularly from 11N to 16N between 95W and
+98W. However, some of these winds could be associated with the strongest
+convection there. The latest Tropical Weather Outlook gives this system
+a medium chance of tropical cyclone formation in the next 48 hours,
+and a high chance through 7 days.
+
+Please read the latest Tropical Weather Outlook issued by the 
+National Hurricane Center at www.hurricanes.gov for further 
+details. 
+
+...TROPICAL WAVES...
+
+The axis of a tropical wave is near 98W/99W, and extends northward
+over SE Mexico, moving westward at 15 to 20 kt. Scattered moderate
+to isolated strong convection is noted from 10N to 16N between 
+91W AND 100W.
+
+The axis of a tropical wave is along 131W/132W from 06N to 18N, 
+moving westward at 5 to 10 kt. A 1008 mb low pressure is analyzed
+along the wave axis near 13N131.5W. Scattered moderate to 
+isolated strong convection is noted from 10N to 14N between 128W 
+and 135W.
+ 
+...INTERTROPICAL CONVERGENCE ZONE/MONSOON TROUGH...
+
+The monsoon trough extends from 08N83W to 07N87W to 10N97W to 
+06N110W to 07N115W, then resumes W of a trough located along 120W 
+near 11N124W and continues along 13N131.5W to 07N140W. Aside 
+from the convection associated with the tropical waves, scattered
+moderate isolated strong convection can be found from 02N to 07N
+E of 82W to the coast of Colombia, from 11N to 17N between 100W 
+and 105W, and from 07N to 11N W of 135W.
+
+...OFFSHORE WATERS WITHIN 250 NM OF MEXICO...
+
+A ridge dominates the offshore forecast waters of Baja California
+supporting light to gentle winds with moderate seas in mixed swell.
+Similar wind speeds are also noted in the Gulf of California where
+slight seas prevail, except near the entrance to the Gulf where 
+seas are in the 3 to 4 ft range. Moderate to fresh northerly
+winds are blowing in the Gulf of Tehuantepec with moderate seas.
+An area of fresh to strong winds extends from the coast of Oaxaca
+to about 11N between 95W and 98W. Over the remainder of the 
+Mexican offshore waters, winds are gentle to moderate from the NW
+and seas are generally moderate, primarily in SW swell.
+
+For the forecast, a ridge will continue to dominate the offshore
+forecast waters of Baja California through early Thu, allowing 
+for gentle to moderate NW to N winds to continue along with 
+moderate seas in mixed swell. In the Gulf of California, gentle 
+to moderate winds and slight seas will prevail during this 
+period. A surface trough moving across the Bay of Campeche will
+support pulses of fresh to strong winds in the Tehuantepec region
+Mon and Tue, then mainly moderate to fresh winds are expected
+through Thu. Otherwise, a broad area of low pressure located 
+several hundred miles south of the coast of southern Mexico 
+continues to produce a large area of disorganized showers and 
+thunderstorms. Please, see the Special Features section for more
+details. 
+
+....OFFSHORE WATERS WITHIN 250 NM OF CENTRAL AMERICA, COLOMBIA,
+AND WITHIN 750 NM OF ECUADOR...
+
+Recent satellite derived wind data provide observations of
+moderate to fresh winds across the Papagayo region and downwind 
+to about 89W. Moderate or weaker winds and moderate seas in SW 
+prevail elsewhere. 
+
+For the forecast, fresh to strong gap winds will prevail in the 
+Papagayo region mainly at night through Fri night along with 
+moderate to rough seas. Fresh to locally strong winds and rough 
+seas are forecast to impact the offshore waters of El Salvador 
+and Guatemala tonight and Mon as a broad area of low pressure 
+persists several hundred miles south of the coast of southern 
+Mexico. Moderate or weaker winds and moderate seas in SW swell 
+will prevail elsewhere, except in the lee of the Galapagos Islands
+where slight seas are expected. 
+
+...REMAINDER OF THE AREA...
+
+A surface ridge prevails across the waters N of 20N W of 110W. 
+Under the influence of the ridge, mainly light to gentle winds 
+are observed with moderate seas in mixed swell. S of 20N, there 
+are two tropical waves and surface trough. The surface trough 
+runs from 18N118W to 12N120W to 06N121W. A few showers are near
+the trough axis. Moderate or weaker winds are elsewhere along 
+with moderate seas.
+
+For the forecast: The National Hurricane Center (NHC) is monitoring
+several areas with the potential for tropical cyclone development
+across the eastern and central Pacific. Three of those disturbances
+are located in the eastern Pacific region. One is a broad area of 
+low pressure located several hundred miles south of the coast of
+southern Mexico that continues to produce a large area of disorganized
+showers and thunderstorms. Please, see the Special Features section
+for more details. The second one is an area of low pressure located
+well west-southwest of the Baja California Peninsula that continues
+to produce disorganized showers and thunderstorms primarily east
+of its center. Some additional development of this system is possible
+over the next day or so before it moves west-northwestward into 
+a less favorable environment. Currently, the Tropical Weather Outlook
+gives this system a low chance of tropical cyclone formation in the
+next 48 hours, and also through 7 days. An area of low pressure is
+expected to form by the middle of this week several hundred miles
+south of the coast of southern Mexico. Environmental conditions 
+appear conducive for gradual development of this system later this
+week, and a tropical depression could form by the end of the week
+while it moves generally west- northwestward well offshore of Mexico.
+This system has a medium chance of tropical cyclone formation through
+7 days.
+
+$$
+GR

@@ -1,0 +1,92 @@
+
+000
+AXNT20 KNHC 232049
+TWDAT 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+0015 UTC Wed Jun 24 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 1800 UTC surface analysis and satellite imagery through 
+2030 UTC.
+
+...TROPICAL WAVES...
+
+The axis of an eastern tropical wave is near 24/25W from 15N 
+southward, moving westward at around 15 kt. Scattered moderate 
+convection is observed from 03N to 15N between 20W and 30W. 
+
+The axis of a tropical wave is near 51W from 15N southward, 
+moving westward at 15 to 20 kt. Isolated moderate convection is 
+seen from 07N to 09N between 50W and 55W.
+
+The axis of a tropical wave is near 60W from 17N southward, 
+moving westward at 10 to 15 kt. Scattered moderate to isolated 
+strong convection is from 08N to 12N between 56W and 61W. 
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough enters the Atlantic ocean near 20N16W and 
+curves southwestward to 04N36W. The ITCZ extends from 04N36W to 
+04N50W. Convection near these areas is discussed in the Tropical 
+Waves section above. 
+
+...GULF OF AMERICA...
+
+High pressure prevails across the area, anchored by a 1021 mb high
+centered near 27N87W. Light winds, and smooth seas, are in the 
+vicinity of the high center. Gentle to moderate winds, and 
+slight to moderate seas, prevail elsewhere. 
+
+For the forecast, high pressure will dominate the basin through 
+the weekend. Gentle to moderate anticyclonic winds will generally 
+prevail across the basin during this time, except for fresh to 
+strong NE to E winds pulsing off the northwestern Yucatan 
+Peninsula nightly through Wed night, then mainly fresh winds there
+afterward. 
+
+...CARIBBEAN SEA...
+
+High pressure prevails N of the area. The pressure gradient
+between this area of high pressure and the Colombian low is
+supporting fresh to strong winds over the central Caribbean, with
+seas in the 8-14 ft range. Moderate to fresh winds, and seas of
+6-8 ft, prevail elsewhere. 
+
+For the forecast, the pressure gradient between high pressure N of
+the area and the Colombian low will support fresh to strong trade
+winds, and rough seas in the central basin through Wed morning, 
+then become confined to the south-central basin Wed and Wed night 
+before expanding northward again Thu through the weekend. Expect 
+winds near-gale force offshore of northwestern Colombia, during 
+the nighttime and early morning hours, except for Wed night 
+through Thu morning. Pulsing fresh to strong winds and moderate to
+locally rough seas are expected in the Gulf of Honduras nightly. 
+Fresh trades with rough seas should persist east of the Lesser 
+Antilles through Thu morning, diminishing to moderate winds and 
+seas afterward. 
+
+...ATLANTIC OCEAN...
+
+High pressure dominates the discussion waters N of 20N. Light to
+gentle winds prevail N of 25N between 40W and 70W. Gentle to
+moderate winds, and moderate seas, are elsewhere N of 20N. S of 
+20N, moderate to fresh winds, and moderate to rough seas, are 
+noted.
+
+For the forecast west of 55W, high pressure will dominate the 
+region through the weekend. Fresh to strong easterly winds with 
+locally rough seas are expected near the N coast of Hispaniola 
+each late afternoon through night through Sat night. Otherwise, 
+moderate to locally fresh trade winds and moderate seas are 
+expected S of 22N through Thu before diminishing. Moderate or 
+lighter winds and moderate seas will prevail elsewhere. 
+
+$$
+AL

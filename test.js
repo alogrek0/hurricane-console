@@ -1099,6 +1099,109 @@ ok('corpus: every fixtures/*.txt has expectations',
     .filter((f) => f.endsWith('.txt'))
     .every((f) => EXP.tcm[f] || EXP.twdat[f] || EXP.twdep[f]));
 
+// --- archive derived-data shape (Track C M1) ------------------------------------
+// tools/derive-summary.js is the shared writer/checker shape module (like
+// corpus-summary.js): archive-sync.js --derive WRITES archive/derived/ with it,
+// and these checks validate the committed records against the same module. The
+// pure-helper units always run; the data-dependent block is GUARDED on archive/
+// existing, so the suite stays green on the tool-only commit before the backfill
+// lands in the same PR (then the backfill makes the cross-checks bite).
+
+const NTA = require('./tools/nhc-text-archive.js');
+const SYNC = require('./tools/archive-sync.js');
+const DER = require('./tools/derive-summary.js');
+
+// listingNames: a real listing repeats each name (link text + href) and carries
+// out-of-pattern hrefs; the helper must dedupe, type-filter, and sort.
+{
+  const html = '<a href="TWDAT.202606011800.txt">TWDAT.202606011800.txt</a> ' +
+    '<a href="TWDAT.202606010600.txt">TWDAT.202606010600.txt</a> ' +
+    'TWDAT.notastamp.txt TWDEP.202606011200.txt';
+  const names = NTA.listingNames(html, 'TWDAT');
+  ok('listingNames: unique + sorted, type-filtered',
+    names.length === 2 && names[0] === 'TWDAT.202606010600.txt' && names[1] === 'TWDAT.202606011800.txt');
+  ok('listingNames: drops other types and malformed stamps',
+    !names.some((n) => /TWDEP|notastamp/.test(n)));
+}
+
+// stampOf / stampDate: filename -> 12-digit stamp -> UTC Date.
+ok('stampOf: pulls the 12-digit stamp', NTA.stampOf('TWDAT.202607141800.txt') === '202607141800');
+ok('stampOf: null when there is no stamp', NTA.stampOf('README.md') === null);
+{
+  const d = NTA.stampDate('202607141800');
+  ok('stampDate: UTC Y/M/D/H/M', d && d.getTime() === Date.UTC(2026, 6, 14, 18, 0));
+  ok('stampDate: null on malformed / impossible date',
+    NTA.stampDate('nope') === null && NTA.stampDate('202602300000') === null);
+}
+
+// archive-sync pure helpers: type -> basin/kind, and the --since boundary.
+ok('basinForType: AT/EP suffix', SYNC.basinForType('TWDAT') === 'AT' && SYNC.basinForType('TWOEP') === 'EP');
+ok('kindForType: TWD/TWO prefix', SYNC.kindForType('TWDEP') === 'TWD' && SYNC.kindForType('TWOAT') === 'TWO');
+{
+  // boundary is inclusive of 00:00Z on the since day; the May 31 file drops.
+  const names = ['TWDAT.202605312300.txt', 'TWDAT.202606010000.txt', 'TWDAT.202607010600.txt'];
+  const kept = SYNC.filterSince(names, '2026-06-01');
+  ok('filterSince: keeps stamps >= since 00:00Z, drops earlier',
+    kept.length === 2 && !kept.includes('TWDAT.202605312300.txt') && kept.includes('TWDAT.202606010000.txt'));
+}
+
+// derive-summary over an existing fixture — pins WRITER behavior with no network.
+const TWD_KEYS = ['file', 'kind', 'stamp', 'issuedISO', 'cyclones', 'waves', 'convection', 'troughs', 'fixes', 'inferred', 'projections'];
+const TWO_KEYS = ['file', 'kind', 'stamp', 'issuedISO', 'disturbances'];
+const ERR_KEYS = ['file', 'kind', 'stamp', 'error'];
+{
+  const txt = fs.readFileSync(FIXDIR + '/TWDAT.202308291005.txt', 'utf8');
+  const rec = DER.summarizeTWD(P.parse(txt, { basin: 'AT' }),
+    { file: 'TWDAT.202308291005.txt', kind: 'TWD', stamp: '202308291005' });
+  ok('derive TWD: literal key order matches the module shape',
+    JSON.stringify(Object.keys(rec)) === JSON.stringify(TWD_KEYS));
+  ok('derive TWD: both hurricanes captured (Idalia + Franklin)',
+    ['Idalia', 'Franklin'].every((n) => rec.cyclones.some((c) => c.name === n)));
+  ok('derive TWD: cyclone records carry classification/lat/lon/windKt',
+    rec.cyclones.every((c) => 'classification' in c && 'lat' in c && 'lon' in c && 'windKt' in c));
+  ok('derive TWD: waves carry axis geometry + inferred flag + motion slot',
+    rec.waves.every((w) => Array.isArray(w.axis) && 'inferred' in w && 'motion' in w));
+  ok('derive TWD: convection/troughs recorded as counts',
+    typeof rec.convection === 'number' && typeof rec.troughs === 'number');
+}
+
+// When the backfill has landed, validate every committed derived file offline.
+const archiveDir = __dirname + '/archive';
+if (fs.existsSync(archiveDir)) {
+  const keyset = (arr) => JSON.stringify(arr.slice().sort());
+  const SHAPES = [keyset(TWD_KEYS), keyset(TWO_KEYS), keyset(ERR_KEYS)];
+  const RAW_RE = /^TW[DO](?:AT|EP)\.\d{12}\.txt$/;
+  for (const basin of ['AT', 'EP']) {
+    const jf = archiveDir + '/derived/' + SYNC.SEASON + '-' + basin + '.json';
+    if (!fs.existsSync(jf)) continue; // a basin may legitimately have no products yet
+    let data = null;
+    try { data = JSON.parse(fs.readFileSync(jf, 'utf8')); } catch (e) { /* asserted below */ }
+    ok('archive ' + basin + ': derived JSON parses', !!data);
+    if (!data) continue;
+    ok('archive ' + basin + ': season/basin fields match the filename',
+      data.season === SYNC.SEASON && data.basin === basin);
+    const recs = data.products || [];
+    // records sorted by ascending stamp, ties broken by filename — the writer's
+    // exact order (TWD and TWO share the dir, so equal stamps are legitimate)
+    let monotone = true;
+    for (let i = 1; i < recs.length; i++) {
+      const a = recs[i - 1], b = recs[i];
+      if (!(a.stamp < b.stamp || (a.stamp === b.stamp && a.file < b.file))) monotone = false;
+    }
+    ok('archive ' + basin + ': records sorted by stamp then filename', monotone);
+    // every record is either a known-shape summary or an honest {file,kind,stamp,error}
+    ok('archive ' + basin + ': every record matches a known shape',
+      recs.every((r) => SHAPES.indexOf(keyset(Object.keys(r))) !== -1));
+    // 1:1 raw-file <-> derived-record cross-check, both directions at once
+    const rawDir = archiveDir + '/' + SYNC.SEASON + '/' + basin;
+    const rawFiles = fs.existsSync(rawDir)
+      ? fs.readdirSync(rawDir).filter((f) => RAW_RE.test(f)).sort() : [];
+    const recFiles = recs.map((r) => r.file).sort();
+    ok('archive ' + basin + ': one derived record per raw file (and vice versa)',
+      rawFiles.length === recFiles.length && rawFiles.every((f, i) => f === recFiles[i]));
+  }
+}
+
 // --- app version (single source, CalVer) ---------------------------------------
 
 const VER = require('./version.js');

@@ -1,0 +1,44 @@
+
+752 
+ABPZ20 KNHC 091746
+TWOEP 
+
+Tropical Weather Outlook
+NWS National Hurricane Center Miami FL
+1100 AM PDT Thu Jul 9 2026
+
+For the eastern and central North Pacific east of 180 longitude:
+
+Central Pacific (CP90):
+Showers and thunderstorms near a trough of low pressure located 
+several hundred miles southeast of the Hawaiian Islands are showing 
+some signs of organization. Environmental conditions appear 
+conducive for gradual development of this system through early next 
+week, and a tropical depression could form as the system moves 
+westward to west-northwestward across the central Pacific, remaining 
+well south of the Hawaiian Islands.
+* Formation chance through 48 hours...medium...40 percent. 
+* Formation chance through 7 days...medium...60 percent.
+
+Well Southeast of the Hawaiian Islands:
+Another area of showers and thunderstorms is associated with a 
+trough of low pressure located more than 1000 miles east-southeast 
+of the Hawaiian Islands. Environmental conditions appear favorable 
+for slow development of this system this weekend into early next 
+week as it moves westward or west-southwestward into the central 
+Pacific, remaining well south of the Hawaiian Islands. 
+* Formation chance through 48 hours...low...near 0 percent. 
+* Formation chance through 7 days...low...30 percent.
+
+Offshore of Southwestern Mexico:
+An area of low pressure is expected to form late this weekend or 
+early next week several hundred miles south-southwest of the coast 
+of southwestern Mexico. Environmental conditions appear favorable 
+for gradual development thereafter, and a tropical depression could 
+form next week while the system moves generally west-northwestward. 
+* Formation chance through 48 hours...low...near 0 percent. 
+* Formation chance through 7 days...medium...60 percent.
+
+$$
+Forecaster Katz/Berg
+

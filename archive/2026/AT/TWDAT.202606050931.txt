@@ -1,0 +1,126 @@
+
+000
+AXNT20 KNHC 050931
+TWDAT 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+1215 UTC Fri Jun 5 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 0600 UTC surface analysis and satellite imagery through 
+0930 UTC.
+
+...SPECIAL FEATURES...
+
+Gale Warning East of 35W: The pressure gradient between a 1028 mb  
+high pressure system centered southwest of the Azores near 34N36W 
+and lower pressures in northwest Africa supports strong to gale- 
+force northerly winds in the marine zone of Agadir. Scatterometer
+data confirmed the presence of these wind speeds off the coast of
+Morocco. Gale-force winds are expected to occur through 05/0000 
+UTC, with severe gusts. These winds will create rough seas of 10 
+ft and higher. Similar conditions will continue into the weekend.
+For more details, refer to the Meteo-France High Seas Forecast 
+listed on their website https://wwmiws.wmo.int.
+
+...TROPICAL WAVES...
+
+A tropical wave is along 20W, south of 13N, moving west at 10 kt.
+Scattered moderate convection is present from 05N to 08N between 
+18W and 25W.
+
+A tropical wave is along 45W, south of 12N, moving westward at 
+15 to 20 kt. Scattered moderate to isolated strong convection is 
+evident from 04N to 09N between 40W and 50W, more concentrated on
+the east side of the wave axis. Moderate to fresh winds are
+associated with the wave. 
+
+Another tropical wave is along 57W, south of 16N, moving westward
+at 15 kt. Scattered moderate convection is near the wave axis S of
+11N. This tropical wave will move across the Windward Islands
+tonight into Sat increasing the likelihood of showers.
+
+A tropical wave is over the eastern caribbean along 70W, south of
+15N, moving westward at 15 kt. Convection is limited over the 
+Caribbean waters. Currently, the wave appears to enhance convection
+over Lake Maracaibo in western Venezuela. 
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough enters the Atlantic through the coast of Mauritania
+near 18N16W and continues southwestward to 06N27W. The ITCZ extends
+from 06N27W to 04N40W to the coast of Brazil near 00N50W. The convection
+in this area is mainly associated with the tropical waves previously
+mentioned. 
+
+...GULF OF AMERICA...
+
+Recent satellite derived wind data indicate fresh to strong E to
+SE winds over the eastern Gulf and north of a stationary front 
+that extends across western Cuba into the SE Gulf to near 23N87W. 
+Similar wind speeds are also noted over the eastern Bay of 
+Campeche, and in the NW Gulf north of 28N between 92W and 95W.
+Moderate to rough seas are within the strongest winds, except in 
+the Bay of Campeche where slight to moderate seas are noted. 
+Elsewhere, moderate or weaker winds and slight seas prevail. 
+Scattered showers and thunderstorms are near the frontal boundary.
+
+For the forecast, the fresh to strong E to SE winds over the 
+eastern Gulf will diminish to gentle to moderate speeds later 
+today as the Atlantic ridge builds westward across the Gulf 
+region. The exception will be off the Yucatan Peninsula, where a 
+diurnal trough will allow moderate winds to pulse to fresh, 
+occasionally strong, during the evenings. 
+
+...CARIBBEAN SEA...
+
+The Atlantic ridge, anchored by a 1028 mb high pressure located 
+near 34N36W, reaches the NE Caribbean. The ridge, combined with 
+the Colombian low, supports fresh to strong easterly trade winds 
+and moderate seas in the south-central Caribbean. Meanwhile, a 
+stationary front extends across western Cuba and the SE Gulf of 
+America. Scattered showers and thunderstorms are noted near the 
+front. Farther south, fresh to strong easterly winds and moderate 
+to rough seas are observed in the Gulf of Honduras likely due to 
+the pressure gradient between high pressure over the SE of the 
+United States and a broad are of low pressure in the eastern 
+Pacific, offshore of Central America. Elsewhere, moderate or 
+lighter winds and slight to moderate seas prevail.
+
+For the forecast, moderate to fresh E to SE trade winds and 
+moderate seas will persist across the Caribbean into Sat as the 
+Atlantic ridge north of the area weakens and shifts eastward. The 
+exception will be fresh to strong pulses in the Gulf of Honduras 
+tonight. Then, winds will begin to increase again over the central
+Caribbean by Sat night, and over the NW part of the basin early 
+next week as the Atlantic ridge rebuilds north of area.
+
+...ATLANTIC OCEAN...
+
+Please read the Special Features section about a Gale Warning in
+the Meteo-France forecast region. 
+
+A frontal boundary extends from near Bermuda to the central Bahamas
+and western Cuba. Scattered showers and isolated thunderstorms 
+are along the front, particularly north of 27N. High pressure
+located over the SE of the United States follows this system. The
+remainder of the Atlantic forecast area is dominated by a broad 
+subtropical ridge, supporting a gentle to moderate anticyclonic
+flow N of 20N E of front to about 30W. Fresh to strong N to NE 
+winds and rough seas are found north of 18N and east of 30W.
+Moderate to fresh trades and moderate seas are S of 20N between
+the coast of Africa and the Lesser Antilles. 
+
+For the forecast west of 55W, the front will dissipate late today
+into Sat, as high pressure builds across the area. This pattern 
+will allow gentle to moderate winds and moderate seas into early 
+next week. 
+
+$$
+GR

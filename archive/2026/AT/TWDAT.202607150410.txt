@@ -1,0 +1,110 @@
+
+000
+AXNT20 KNHC 150410
+TWDAT 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+0615 UTC Wed Jul 15 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 0000 UTC surface analysis and satellite imagery through 
+0355 UTC.
+
+...TROPICAL WAVES...
+
+An eastern Atlantic tropical wave is along 24W, south of 18N, 
+moving westward at 15 kt. Numerous moderate to isolated strong
+convection is noted from 04N to 15N and east of 27W.
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough enters the Atlantic through the coast of
+Mauritania near 20N16W and continues southwestward to 09N35W. The
+ITCZ extends from 09N35W to 04N52W. See the Tropical Waves section
+for details on the convection near these features.
+
+...GULF OF AMERICA...
+
+A stalled frontal boundary draped across the southern and 
+southeastern United States, from eastern Texas to off the Georgia
+coast. An east to west upper trough across this same area is 
+combining with plenty of low level moisture and diurnal heating to
+support scattered moderate isolated strong convection across much
+of the northern Gulf waters north of 25N. The strongest convection
+is found in the NE Gulf waters. Similar storms are see in the
+eastern Bay of Campeche.
+
+Outside of convection, the Atlantic ridge extends across Florida 
+and into the central Gulf. This pattern is supporting moderate to 
+fresh NE-E winds and moderate seas off Yucatan and in the Bay of 
+Campeche. Elsewhere, moderate or lighter winds and slight seas 
+prevail.
+
+For the forecast, a stationary front will prevail just N of the 
+area through midweek, enhancing thunderstorms across the northern 
+Gulf waters. Mariners can expect gusty winds, frequent lightning, 
+and locally higher seas near the stronger thunderstorms. Fresh to 
+strong easterly winds will pulse offshore the Yucatan Peninsula 
+each night. Elsewhere, gentle to moderate winds will prevail. 
+
+...CARIBBEAN SEA...
+
+The tight pressure gradient between the persistent subtropical 
+Atlantic ridge north of the islands and lower pressures in northern
+South America continue to support strong to near gale-force 
+easterly winds and rough locally rough seas in the south-central 
+Caribbean. A recent scatterometer satellite pass captured winds up
+to 32 kt. Fresh to strong NE-E winds and moderate to rough seas 
+are occurring in the remainder of the central Caribbean. Meanwhile,
+moderate to fresh easterly winds and moderate seas are noted in 
+the eastern Caribbean, the Windward Passage, and the Gulf of 
+Honduras. Elsewhere, moderate or weaker winds and slight to 
+moderate seas are prevalent. 
+
+Divergence aloft associated with an upper level trough and 
+abundant tropical moisture continue to support scattered moderate 
+to strong convection covers the area between west of Jamaica and 
+south of 20N. The strongest storms are along the NE coasts of 
+Honduras and Nicaragua. These storms can produce gusty winds to
+near gale-force, frequent lightning and suddenly higher seas.
+
+For the forecast, the pressure gradient between high pressure north of
+the basin and lower pressures over northern South America will
+support strong to near-gale force trade winds across the central
+Caribbean through the remainder of the week and weekend. Rough
+seas will prevail with these winds. East winds will pulse fresh
+to locally strong each evening in the Gulf of Honduras and
+Windward Passage. 
+
+...ATLANTIC OCEAN...
+
+A stationary frontal boundary extends from the central Atlantic to
+the coast of Georgia, within 30N to 32N. Scattered showers are
+noted north of 27N and between 55W and 65W. Moderate to locally
+fresh SW winds and moderate seas are present in those waters.
+Convection is suppressed elsewhere across much of the basin due to
+a large plume of Saharan dust and mid-latitude dry air.
+
+The Atlantic subtropical ridge persists across the basin,
+supporting moderate to fresh easterly trade winds south of the SE
+Bahamas and between 70W and 77W. Moderate to locally fresh
+easterly winds and moderate seas are occurring south of 22N and
+west of 35W to the Lesser Antilles. Meanwhile, in the far eastern
+Atlantic, fresh to locally strong SW winds and seas of 4-8 ft are
+evident south of 10N and east of 27W. Elsewhere, gentle to 
+moderate or lighter winds and moderate seas prevail.
+
+For the forecast west of 55W, the subtropical ridge will remain
+dominant through the forecast period. The weather pattern will 
+support moderate to fresh trades south of 23N, with gentle winds 
+to the north. Pulsing strong winds are expected each night 
+offshore Hispaniola and in the Windward Passage. 
+
+$$
+Delgado

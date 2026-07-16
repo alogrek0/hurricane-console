@@ -1,0 +1,109 @@
+
+000
+AXPZ20 KNHC 050804
+TWDEP 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+1005 UTC Sun Jul 5 2026
+
+Tropical Weather Discussion for the eastern Pacific Ocean from
+03.4S to 30N, east of 120W including the Gulf of California, and
+from the Equator to 30N, between 120W and 140W. The following
+information is based on satellite imagery, weather observations,
+radar, and meteorological analysis.
+
+Based on 0600 UTC surface analysis and satellite imagery through
+0748 UTC.
+
+...TROPICAL WAVES...
+
+A tropical wave is analyzed along 110W, south of 17N, moving 
+west at 10 to 15 kt. Associated convection is described below in 
+the Intertropical Convergence Zone/Monsoon Trough section.
+
+...INTERTROPICAL CONVERGENCE ZONE/MONSOON TROUGH...
+
+The monsoon trough extends from 08.5N79W to 07N96W. The ITCZ 
+extends from 07N96W to 08.5N109W, then resumes from 08N113W to 
+06N130W to beyond 05N140W. Scattered to numerous moderate 
+convection is noted from N of 03N and E of 95W, from 05N to 
+08.5N between 88W and 98W, from 08N to 17N between 95W and 120W,
+and from 01N to 11N between 120W and 140W. 
+
+...OFFSHORE WATERS WITHIN 250 NM OF MEXICO...
+
+A broad ridge extends from the NE Pacific across the Baja California
+waters to the Revillagigedo Islands. The pressure gradient
+between this ridge and lower pressure over Mexico is supporting 
+moderate to locally fresh NW winds offshore Baja California and 
+seas 4 to 6 ft. Moderate to locally fresh winds are also present 
+over the Gulf of Tehuantepec along with seas 4 to 6 ft. 
+Elsewhere, gentle to moderate NW to N winds prevail, with 5-7 ft 
+seas in merging NW and SW swell, except for light winds and seas 
+1 to 3 ft over the Gulf of California. 
+
+For the forecast, the ridge extending into the Baja California 
+waters will continue to strengthens across the area today 
+through Tue night, leading to moderate to fresh winds across the 
+Baja California waters. Moderate to fresh gap winds across the 
+Gulf of Tehuantepec will continue through this morning, then 
+diminish through the day. Winds will pulse to fresh speeds over
+the Gulf of Tehuantepec each night through Thu. Cross- 
+equatorial SW swell will reach the waters off southern Mexico on 
+Mon, building seas to around 7 ft. Expect fresh southerly winds 
+across the northern Gulf of California Tue and Wed becoming 
+strong on Thu. 
+
+....OFFSHORE WATERS WITHIN 250 NM OF CENTRAL AMERICA, COLOMBIA,
+AND WITHIN 750 NM OF ECUADOR...
+
+Scattered moderate convection is depicted across the waters N of
+06N, across Panama, and Costa Rica. Fresh to strong NE gap winds
+continuing across the Papagayo region and extends offshore to 
+91W, where seas are 4-8 ft. Mostly gentle to moderate SE to S 
+winds are noted elsewhere S of 10N, along with seas seas of 4-6 
+ft in cross-equatorial SW swell.
+
+For the forecast, fresh NE to E gap winds across the Papagayo 
+region will continue to pulse to strong each night through Thu 
+leading to rough seas. Large cross-equatorial southerly swell 
+will move into the waters off Ecuador and the Galapagos Islands 
+late Sun through Tue, building seas to 8 to 9 ft, and 6 to 7 ft 
+across much of the remaining waters farther N. The combination of
+the southerly swell with shorter period seas associated with gap
+winds will allow combined seas to build to 8 ft offshore of 
+northern Central America Tue through Wed.
+
+...REMAINDER OF THE AREA...
+
+A broad ridge continues across the NE Pacific and north of the
+area, extending southeastward to the Revillagigedo Islands. The 
+pressure gradient between this ridge and the remnant low of 
+Douglas, now a 1012 mb low near 23N130W, is producing fresh to 
+strong winds around the low, from 24N to 28N between 127W and 
+133W. Peak seas are still to 10 ft across the NW quadrant of 
+this low. The ridge draping over this low pressure area continues
+to support mostly gentle to moderate NE to E winds elsewhere 
+north of 20N and west of 120W, with 5-8 ft seas in a mix of 
+swell. East of 120W, a long plume of fresh E winds and 6-8 ft 
+seas emerging from the Papagayo gap area is reaching as far west 
+as 100W, from 08N to 11N. Gentle breezes are noted elsewhere 
+east of 120W. Wave heights are 6-8 ft there in SW swell.
+Information for convection across the area can be found in the 
+TROPICAL WAVES and INTERTROPICAL CONVERGENCE ZONE/MONSOON TROUGH
+sections above. 
+
+For the forecast, winds and seas near the remnants of Douglas 
+will gradually diminish through tonight as the remnant low moves
+NW, weakens and opens into a trough. The ridge will drift 
+southwestward and generally persist across the region through 
+early next week, supporting moderate to locally fresh trade winds
+farther south into the tropics. The tropical wave along 110W is 
+producing disorganized shower activity. Development of this 
+system is no longer anticipated as it moves westward across the 
+central and western portions of the East Pacific basin during the
+next several days.
+
+$$
+KRV

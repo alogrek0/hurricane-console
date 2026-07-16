@@ -1,0 +1,115 @@
+
+000
+AXNT20 KNHC 012232
+TWDAT
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+0015 UTC Thu Jul 2 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 1800 UTC surface analysis and satellite imagery through 
+2200 UTC.
+
+ ...TROPICAL WAVES...
+
+A tropical wave has been re-analyzed to the east, and is now
+positioned with an axis near 22W, from 02N to 16W, moving W at 5
+to 10 kt. Convection previously associated with this wave has
+diminished this evening. 
+
+A tropical wave extends from 02N to 15N with axis near 49W, 
+moving westward at 10 kt. Scattered moderate convection is noted
+from 05N to 09N between 45W and 50W. 
+
+A Caribbean tropical wave is along 79W, S of Jamaica, moving W at
+15 to 20 kt. No significant convection is associated with this
+wave at this time. 
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough enters the Atlantic near 22N17W and continues 
+southwestward to 07N31W. The ITCZ extends from 07N31W to 09N46W 
+where it is broken by a tropical wave. The ITCZ then continues 
+from 07N50W to 08N59W. Aside from the convection associated with 
+the tropical waves, scattered moderate convection is evident from
+06N to 10N between 55W and 60W. 
+
+...GULF OF AMERICA...
+
+Scattered moderate convection is occurring near surface trough
+axes along 95W from 20N to 25N and SE from the mouth of the
+Mississippi River to around 26N85W. Otherwise, a weak pressure
+gradient is leading to light to gentle winds and slight seas
+through the basin. 
+
+For the forecast, a ridge across the northern Gulf will continue 
+to dominate the basin for the remainder of the week. A weakening 
+frontal trough extending from SE Louisiana to offshore of SW 
+Florida will gradually dissipate through Thu, with scattered 
+showers and thunderstorms persisting along the trough. Fresh to 
+locally strong NE to E winds will pulse off the NW Yucatan 
+Peninsula nightly through Sun night due to local effects 
+associated with a daily surface trough. Gentle to moderate E to SE
+winds will prevail across the western half of the Gulf while 
+moderate or weaker winds are expected elsewhere E of 90W. 
+
+...CARIBBEAN SEA...
+
+The subtropical ridge north of the basin continues to force fresh
+to near-gale easterly trade winds across much of the central 
+Caribbean. Seas in these waters are 6-10 ft. The strongest winds 
+and highest seas are offshore Colombia and in the Gulf of
+Venezuela. Moderate to fresh easterly breezes and moderate seas 
+are found in the eastern Caribbean. Elsewhere, moderate or lighter
+winds and slight to moderate seas prevail.
+
+For the forecast, the Azores High extends a ridge southwestward 
+across the central Atlantic to the central Bahamas this afternoon,
+and will generally remain in place through the weekend. The 
+pressure gradient between this ridge and the Colombian Low will 
+support fresh to strong trade winds and moderate to rough seas 
+over the central Caribbean through Fri morning, then diminish 
+slightly through Sun. Expect winds to reach near gale- force each 
+night offshore of Colombia and in the Gulf of Venezuela. 
+Otherwise, moderate to fresh trades will continue in the eastern 
+Caribbean while moderate or weaker winds will prevail over the NW 
+part of the basin. Active showers and thunderstorms are expected 
+across the SE Caribbean Thu night through Fri night as an upper- 
+level trough sinks across the basin. 
+
+...ATLANTIC OCEAN...
+
+A stationary front is across the NW waters, extending from 31N71W
+to the NW Bahamas. The boundary also extends NE to the north of
+area, and convection sags S of 31N to around 29N between 50W and
+60W in association with this portion of the front. A surface
+trough along 70W E of the Bahamas is inducing scattered moderate
+convection. The Azores High extends a ridge across the remainder 
+of the subtropical Atlantic waters. Winds across the waters S of 
+22N are moderate to fresh with moderate seas to 6 ft. N of 22N and
+E of 35W, a tighter pressure gradient with lower pressures over 
+NW Africa is leading to fresh to locally strong NE winds along 
+with rough seas to 10 ft, including the Canary Islands. Moderate 
+or weaker winds and moderate seas prevail elsewhere.
+
+For the forecast west of 55W, the Azores High extends a ridge 
+southwestward across the central Atlantic to the central Bahamas 
+this afternoon. A weakening stationary front is across the NW 
+waters, from 31N71.5W through the NW Bahamas to the south- central
+coast of Florida. The front will gradually dissipate through Thu 
+while drifting northwestward toward the southeastern U.S. coast. 
+The Atlantic ridge will then build weakly westward into central 
+Florida through the weekend. This pattern will support moderate to
+locally fresh E-SE trade winds S of 22N, and moderate or weaker 
+winds elsewhere. Expect fresh to locally strong winds each late 
+afternoon into the early evening hours near the coasts of 
+Hispaniola and Puerto Rico.
+
+$$
+Konarik

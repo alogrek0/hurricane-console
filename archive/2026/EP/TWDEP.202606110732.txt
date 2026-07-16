@@ -1,0 +1,133 @@
+
+000
+AXPZ20 KNHC 110732
+TWDEP 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+1005 UTC Thu Jun 11 2026
+
+Tropical Weather Discussion for the eastern Pacific Ocean from
+03.4S to 30N, east of 120W including the Gulf of California, and
+from the Equator to 30N, between 120W and 140W. The following
+information is based on satellite imagery, weather observations,
+radar, and meteorological analysis.
+
+Based on 0600 UTC surface analysis and satellite imagery through
+0700 UTC.
+
+...SPECIAL FEATURES...
+
+The Remnants of Cristina are centered near 13.2N 89.1W at 
+11/0600 UTC, moving northwest at 6 kt. Estimated minimum central 
+pressure is 1007 mb. Maximum sustained wind speed is 20 kt with 
+gusts to 25 kt. Peak seas are currently 7-8 ft or 2-2.5 m. Nearby
+convection includes numerous strong in the Gulf of Tehuantepec
+and adjacent areas from 12N to 18N between 92W and 97W. Scattered
+to numerous moderate convection is found elsewhere from 12N to
+21N between 81W and 92W with the majority concentrated over land.
+Recent satellite-derived winds from ASCAT-B and -C, along with 
+proxy-visible satellite images, indicate that Cristina no longer has 
+a well-defined circulation center and has degenerated into a weak 
+surface trough near the coast of El Salvador. The remnants are 
+moving toward the northwest near and this general motion is 
+expected to continue today. Heavy rainfall associated with the 
+remnants of Cristina will impact coastal portions of Central 
+America through today. This rainfall may produce life-threatening
+flooding and mudslides, especially in areas of steep terrain.
+Please read the final HIGH SEAS FORECAST issued by the National 
+Hurricane Center at website - 
+https://www.nhc.noaa.gov/text/MIAHSFEP2.shtml and the latest 
+Cristina NHC Forecast/Advisory and Public Advisory at 
+www.hurricanes.gov for more details.
+
+...INTERTROPICAL CONVERGENCE ZONE/MONSOON TROUGH...
+
+The monsoon trough extends from 1009 mb low pressure over
+northern Colombia at 10.5N74W to across the SW Caribbean Sea to
+across portions of Panama, Costa Rica and Nicaragua, emerging
+offshore in the Pacific near 12N87W to 13.5N91W to 08N105W to
+10N140W. Scattered moderate to strong convection is noted from
+02N to 06N between 85.5W and 91.5W, and from 05.5N to 11N between
+130W and 137W. Scattered moderate isolated strong convection is
+noted from 03N to 08N between 99W and 116W, and from 06N to 10N
+between 119W and 125W. Additional convection is described above
+with the Remnants of Cristina.
+
+...OFFSHORE WATERS WITHIN 250 NM OF MEXICO...
+
+Broad and elongated troughing extends from offshore Baja
+California near 30N122W southwestward to 10N129W, disrupting and
+backing off the ridge to the W. Under this pressure pattern 
+winds are mainly moderate or weaker across the offshore waters, 
+including in the Gulf of California, except local moderate to 
+fresh westerly winds near the southern tip of Baja California 
+Sur, and just N of there through the gaps into portions of the 
+southern Gulf of California, as well as in the Gulf of California
+N of 30N. Seas are in the 6-7 ft range across the open waters, 
+and 3 ft or less in the Gulf of California N of the entrance, 
+except 7-9 ft well offshore Baja California Norte mixed with NW 
+swell. Winds and seas may be higher in any deep convection off
+southern Mexico including the Gulf of Tehuantepec area as
+described above in the Special Features section.
+
+For the forecast, light to gentle winds will prevail across the 
+waters of Baja California. Gentle to moderate, locally fresh, SW 
+to S winds are expected inside the Gulf of California and near
+the tip of Baja California Sur. Gentle to locally moderate NW to
+W winds will dominate the waters between Cabo Corrientes and 
+Tehunatepec through Fri, then weaken into the weekend. Rough seas
+in mixed swells off Baja Norte will linger through today before
+decaying.
+
+....OFFSHORE WATERS WITHIN 250 NM OF CENTRAL AMERICA, COLOMBIA,
+AND WITHIN 750 NM OF ECUADOR...
+
+Please see the Special Features section for details on recently
+downgraded Remnants of Cristina.
+
+Otherwise, winds are moderate or weaker across the offshore
+waters, except moderate to locally fresh SE winds from offshore
+southern Ecuador to the Galapagos Islands. seas are 5-7 ft in
+decaying S-SW swell across the offshore waters, locally to 8 ft
+near the Remnants of Cristina.
+
+For the forecast, the Remnants of Cristina will dissipate later
+this morning. Otherwise, gentle to moderate winds and moderate 
+seas will prevail across the offshore waters today into the 
+weekend, except locally rough seas in new southerly swell near 
+the Galapagos Islands later today and tonight. Winds may pulse 
+to moderate to locally fresh in diurnal offshore flow in the 
+immediate Gulf of Papagayo and near the Gulf of Guayaquil during 
+the upcoming weekend into early next week.
+
+...REMAINDER OF THE AREA...
+
+Broad and elongated troughing extends from offshore Baja
+California near 30N122W southwestward to 10N129W, disrupting and
+backing off the ridge to the W. Under this pressure pattern 
+winds are N-NE at moderate to locally fresh speeds N of 10N and 
+W of the troughing. Seas are 6-8 ft in mainly long-period 
+southerly swells across these waters, except higher at 7-10 ft 
+mixed with northerly swell N of 27N between 119W and 131W. Winds 
+elsewhere N of the monsoon trough and E of the elongated 
+troughing to the N are gentle,with 6-7 ft seas dominated by the 
+southerly swell. Winds are mainly moderate S of the monsoon 
+trough with 6-8 ft seas, except slightly lower E of 90W. Some 
+active convective clusters are present along portions of the 
+monsoon trough as described above.
+
+For the forecast, the pressure gradient will loosen W of the
+elongated troughing, with winds diminishing there slightly 
+today. Winds will then be moderate or weaker across the entire 
+open waters, except at least moderate to fresh near transient 
+embedded low pressure areas along western portions of the monsoon
+trough. Northerly swells mixed with the longer period southerly 
+swells with seas of 7-9 ft will linger across the N-central 
+waters through the remainder of the week before decaying. 
+Otherwise, moderate seas will dominate the open waters, locally 
+rough in the S-central waters through the end of the week, as 
+well as near any of the embedded monsoon trough lows.
+ 
+$$
+Lewitsky

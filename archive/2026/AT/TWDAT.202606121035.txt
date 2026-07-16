@@ -1,0 +1,156 @@
+
+000
+AXNT20 KNHC 121035
+TWDAT
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+1215 UTC Fri Jun 12 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 0600 UTC surface analysis and satellite imagery through 
+0900 UTC.
+
+...SPECIAL FEATURE...
+
+Heavy rainfall across the Yucatan peninsula and northern Belize: 
+Broad low pressure is expected to develop over northern Central
+America and southern Mexico over the next couple of days. The
+combination of sustained upper-level divergence east of an upper
+low that is located over the eastern Bay of Campeche, and a
+tropical wave moving through the Yucatan Peninsula while abundant
+deep tropical moisture remains in place will provide the potential
+for heavy rainfall over Belize and the Yucatan Peninsula into Sat.
+Increasing deep convection is presently over the eastern Bay of
+Campeche and portions of the Yucatan Peninsula. The heaviest
+rainfall accumulations may be as high as 6 to 8 inches over this 
+48 hour period, primarily across northern Belize and southern part
+of the Mexican state of Quintana Roo. Rainfall of up to 2 to 4 
+inches is possible across eastern Campeche and eastern Yucatan 
+states as well. Localized flooding is possible. Please refer to 
+local meteorological agencies for further guidance.
+
+...TROPICAL WAVES...
+
+A far eastern tropical wave has its axis near 26W-27W, S of 16N, 
+moving westward 10 to 15 kt. Nearby convection is discussed in 
+the Monsoon trough/ITCZ section below. 
+
+A central Atlantic tropical wave has been added to the 06Z
+analysis along 46W, S of 15N, moving westward near 15 kt. The wave
+axis is clearly identified in precipitable water imagery. Nearby
+convection is discussed in the Monsoon trough/ITCZ section below.
+
+A central Atlantic tropical wave has its axis near 56W-57W, S of 
+12N, moving westward at 15 to 20 kt. Nearby convection is discussed
+in the Monsoon trough/ITCZ section below. 
+
+The axis of an eastern Caribbean tropical wave is near 68W, S of
+17N, moving westward at 15 to 20 kt. Scattered showers prevail 
+between the wave axis and 61W, to the south of 15N.
+
+Another eastern Caribbean tropical wave has its axis near 73W-74W,
+south of 18N, moving westward at about 15 kt. No significant 
+convection is occurring at the present time near this wave.
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough axis extends off the coast of Africa near 
+14N17W and extends southwestward to 08N25W, where it transitions 
+to the ITCZ, continuing on to the coast of Brazil near 05.5N53W. 
+Scattered to numerous moderate to strong convection is across the
+waters of W Africa from 02N to 12N E of 18W. Scattered moderate 
+isolated strong convection is noted from 04.5N to 11.5N between 
+19W and 32W, from 05N to 07.5N between 36W and 41W, and from 05.5N
+to 07N between 51W and 54W.
+
+...GULF OF AMERICA...
+
+A surface trough extends from the eastern Bay of Campeche
+northeastward to the offshore waters of the Yucatan Peninsula, 
+and extends into the middle atmosphere. Recent satellite 
+scatterometer data showed fresh to strong E to SE winds across the
+northern coast of the Yucatan Peninsula to 24N, and east of the 
+surface trough. This feature is producing scattered showers and 
+isolated thunderstorms across the basin S of 25N between the 
+Yucatan Channel and 93.5W. Weak high pressure across the western 
+Atlantic extends a ridge westward across Florida and into the NE 
+Gulf, and is producing a modest pressure gradient between the 
+ridge and the trough. Seas are estimated to be 5-7 ft across this 
+area. Elsewhere across the basin, moderate SE winds prevail across
+the western Gulf, with 3-5 ft seas, with gentle southerly winds 
+over the eastern Gulf and 2-3 ft seas. 
+
+For the forecast, high pressure will persist across northeastern 
+Gulf through Tue. Farther south, a broad trough of low pressure 
+extending from the Yucatan Peninsula northeastward into the 
+southern Gulf will shift slowly northwestward through the 
+weekend, and move inland across NE Mexico and S Texas on Sun. This
+pattern will support fresh to strong SE winds and moderate to 
+rough seas shifting from the northwestern Yucatan Peninsula to the
+coast of Texas through early Sun, accompanied by numerous showers
+and thunderstorms. Winds and seas will diminish Mon and Tue after
+the low pressure moves inland and weakens. 
+
+...CARIBBEAN SEA...
+
+1019 mb high pressure near 29N69W extends a ridge westward across
+Florida and the NE Gulf of America. Two tropical waves are moving
+quickly across the central Caribbean overnight, south of the
+ridge. Recent satellite scatterometer data showed fresh to strong
+SE winds across the far northwest Caribbean west of 80W, with 
+near- gale force wind between Roatan and northern Belize. These 
+winds are occurring between the Atlantic ridge to the northeast, 
+and a surface trough over northern Central America. Seas are 
+likely 5-8 ft in this area. Scattered showers and isolated 
+thunderstorms are occurring across the northwest Caribbean W of
+81W. This pattern is also supporting fresh trade winds across the
+south- central and southeast Caribbean, with strong winds pulsing
+off northeast Colombia and northwest Venezuela, where seas are 7-9
+ft. Moderate E winds prevail elsewhere with 4-6 ft seas. 
+ 
+For the forecast, the Atlantic ridge will generally remain in 
+place north of region through early next week to support a 
+large area of fresh to strong trade winds and moderate to rough 
+seas across the central Caribbean through Sun, as a pair of 
+tropical waves move westward across the region. Expect highest 
+winds and seas off the coast of Colombia. Fresh to strong SE winds
+and rough seas will also persist over the northwestern Caribbean,
+to the W of 83W, including the Gulf of Honduras, through Sat 
+evening. Expect active showers and thunderstorms across portions 
+of the Yucatan Channel and adjacent Yucatan waters through early 
+Sat. 
+
+...ATLANTIC OCEAN...
+
+Scattered showers and isolated thunderstorms remain active N of
+26N between 50W and 59W, associated with a weak area of low
+pressure near 29.5N58.5W, with an lingering frontal trough 
+extending eastward to 31N41W. A broad ridge extends from the 
+Azores to south of the trough near 24N55W. 1019 mb high pressure
+is centered W of the low pressure near 29N69W and extends a weak
+ridge westward across Florida into the eastern Gulf. This pattern
+is support moderate to fresh NE to E trade winds and 5-7 ft seas 
+south of 22N and between 35W and 60W, and moderate E to SE winds @
+of 22N between 60W and 80W. Mostly gentle breezes and 4-6 ft seas
+prevail elsewhere within the ridge.
+
+For the forecast west of 55W, the current western Atlantic ridge 
+will generally remain in place through early next week. The weak 
+low pressure near 29.5N58.5W will shift NE and out of the 
+forecast waters through early Sat, then allow the ridge to 
+reorganize across the area through early next week. This pattern 
+will support moderate E-SE trade winds S of 22N and gentle 
+anticyclonic winds elsewhere through Sun. Fresh SW winds will 
+develop across the NW waters N of 29N and W of 74W Sun evening 
+through Tue, as a weak frontal system moves through the SE U.S. 
+Expect fresh to strong winds each afternoon through late evening 
+across waters near Puerto Rico and Hispaniola. 
+
+$$
+Stripling

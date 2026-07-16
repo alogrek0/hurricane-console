@@ -1,0 +1,99 @@
+
+000
+AXNT20 KNHC 291009
+TWDAT 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+1215 UTC Mon Jun 29 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 0600 UTC surface analysis and satellite imagery through 
+1000 UTC.
+
+ ...TROPICAL WAVES...
+
+A far eastern Atlantic tropical wave has its axis along 29W, 
+south of 16N, moving westward at 10-15 kt. Scattered moderate 
+convection is found from 04-08N between 27W-31W.
+
+A central Atlantic tropical wave has its axis along 58W, south of
+14N, moving westward at 10-15 kt. Scattered moderate convection 
+is found along the wave axis and N of 06N.
+
+A tropical wave is over the eastern Caribbean along 68W, south of
+20N, moving westward near 10-15 kt. No convection is noted at this
+time.
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough enters the Atlantic near 19N16W and continues 
+southwestward to 11N28W. The ITCZ extends from 06N30W to 06N57W. 
+Aside from the convection related to the tropical waves described
+above, no significant convection is present at this time.
+
+...GULF OF AMERICA...
+
+The subtropical ridge over the central Atlantic extends westward
+into the Gulf waters, supporting fresh NE-E winds W of 90W, and 
+moderate SE winds E of 90W. Moderate seas prevail across the
+basin.
+
+For the forecast, fresh to strong NE to E winds will pulse off 
+the NW Yucatan Peninsula nightly through Thu night. Moderate to 
+fresh E to SE winds across the western half of the Gulf will 
+diminish to gentle to moderate speeds Tue morning and then prevail
+the remainder forecast period. Moderate or weaker winds are 
+expected elsewhere E of 90W, except for light to gentle winds in 
+the NE Gulf. 
+
+...CARIBBEAN SEA...
+
+The subtropical ridge north of the basin continues to force fresh
+to near-gale easterly trade winds across much of the central 
+Caribbean. Seas in these waters are 8-10 ft. The strongest winds 
+and highest seas are found off NW Colombia. Moderate to fresh 
+easterly breezes and moderate seas are found in the eastern 
+Caribbean. Elsewhere, moderate or lighter winds and slight to 
+moderate seas prevail.
+
+For the forecast, the Bermuda-Azores High north of the basin 
+combined with the Colombian Low will support fresh to strong 
+tradewinds over the central Caribbean through the forecast period,
+reaching near-gale speeds offshore of Colombia at night. Moderate
+or lighter winds are forecast across the remainder of the basin 
+during the next several days.  
+
+...ATLANTIC OCEAN...
+
+An upper-level low centered north of the Leeward Islands combine 
+with a surface trough along 63W to produce scattered showers and  
+thunderstorms from 20N to 26N and between 57W and 64W. The 
+remainder of the tropical Atlantic is dominated by a broad 
+subtropical ridge, supporting moderate to fresh easterly winds 
+and seas of 5-8 ft south of 25N and east of 30W. 
+
+In the far eastern Atlantic, fresh to near gale-force northerly 
+winds and seas of 5-8 ft are evident north of 18N and east of 20W. 
+Elsewhere, moderate or weaker winds and moderate seas are 
+prevalent.
+
+For the forecast west of 55W, the Bermuda-Azores High will 
+dominate the forecast area through today. While most of the basin 
+will experience moderate or weaker winds, trades just north of 
+Hispaniola will freshen in the afternoons and early evenings for 
+the next several days. A weak cold front will push off of the SE 
+United States coast today and extend from 31N73W to the central 
+Florida peninsula by Tue morning. While the front is anticipated 
+to dissipate on Wed, a broad low pressure area is expected to form
+along the western end of the frontal system today or Tuesday. 
+Gradual development of this system is possible thereafter while it
+drifts westward over our NW waters north of 28N.
+
+$$
+ERA

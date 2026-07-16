@@ -1,0 +1,100 @@
+
+000
+AXNT20 KNHC 020944
+TWDAT 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+1215 UTC Thu Jul 2 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 0600 UTC surface analysis and satellite imagery through 
+0925 UTC.
+
+ ...TROPICAL WAVES...
+
+A eastern Atlantic tropical wave is along 20W, south of 16N, 
+moving W at 5 to 10 kt. Scattered moderate convection is noted 
+from 06N to 10N and east of 27W.
+
+A central Atlantic tropical wave is along 51W, south of 16N, moving
+westward at 10 kt. Scattered moderate convection is present south
+of 12N between 45W and 58W.
+
+A Caribbean tropical wave is along 81W, south of 20N, moving
+westward at 15 to 20 kt. No significant convection is associated 
+with this wave at this time. 
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough enters the Atlantic through the coast of
+Western Sahara near 23N16W and continues southwestward to 07N35W.
+The ITCZ extends from 07N35W to 06N48W. Scattered moderate 
+convection is evident from 04N to 10N and between 27W and 40W.
+
+...GULF OF AMERICA...
+
+A weak high pressure dominates the Gulf waters, supporting
+moderate or lighter winds and slight seas across the basin. 
+Divergence aloft is producing a few showers and isolated 
+thunderstorms over the Bay of Campeche.
+
+For the forecast, a weak ridge will dominate the basin through the
+forecast period. Fresh to occasionally strong NE to E winds will 
+pulse off the NW Yucatan Peninsula nightly through early next week 
+due to local effects associated with a daily surface trough. 
+Gentle to moderate easterly winds will prevail across the western
+half of the Gulf while moderate or lighter winds are expected 
+elsewhere E of 90W. 
+
+...CARIBBEAN SEA...
+
+A tight pressure gradient between the subtropical ridge centered
+north of the islands and lower pressures in northern Colombia
+supported fresh to locally near gale-force easterly trade winds
+and seas of 6-11 ft. The strongest winds and highest seas are
+found off Colombia. Moderate to fresh easterly winds and moderate
+seas are occurring in the eastern Caribbean. Elsewhere, moderate 
+or lighter winds and slight to moderate seas prevail. A few
+showers and isolated thunderstorms are seen in the lee of Cuba and
+off Panama and Costa Rica.
+
+For the forecast, the pressure gradient between the subtropical ridge
+north of the islands and the Colombian Low will support fresh to strong
+trade winds and moderate to rough seas over the central Caribbean
+through Fri morning, then diminish slightly through Sun. Expect winds
+to reach near gale-force each night offshore of Colombia and in 
+the Gulf of Venezuela. Otherwise, moderate to fresh trades will 
+continue in the eastern Caribbean while moderate or weaker winds 
+will prevail over the NW part of the basin. Active showers and 
+thunderstorms are expected across the SE Caribbean Thu night through
+Fri night as an upper-level trough sinks across the basin.
+
+...ATLANTIC OCEAN...
+
+A 1034 mb high pressure system centered north of the Azores
+extends a ridge southwestward to the Bahamas. Moderate to fresh
+easterly winds and seas of 4-8 ft are found south of 22N and west
+of 35W. Moderate to fresh N-NE winds and seas of 5-8 ft are
+present north of 20N and east of 35W. Elsewhere, moderate or
+lighter winds and moderate seas prevail. A surface trough extends
+from 31N72W to the NW Bahamas and a few showers are evident in 
+the NW Bahamas and off SE Florida. Similar convection is occurring
+north of 27N and between 50W and 62W.
+
+For the forecast west of 55W, the aforementioned trough will 
+gradually dissipate today while drifting northwestward toward the 
+southeastern U.S. coast. The Atlantic ridge will then build weakly
+westward into central Florida through early next week. This 
+pattern will support moderate to locally fresh E-SE trade winds S 
+of 22N, and moderate or weaker winds elsewhere. Expect fresh to 
+locally strong winds each late afternoon into the early evening 
+hours near the coasts of Hispaniola and Puerto Rico. 
+
+$$
+Delgado

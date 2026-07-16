@@ -1,0 +1,32 @@
+
+000
+ABPZ20 KNHC 222319
+TWOEP 
+
+Tropical Weather Outlook
+NWS National Hurricane Center Miami FL
+500 PM PDT Mon Jun 22 2026
+
+For the eastern and central North Pacific east of 180 longitude:
+
+Central and Western Portion of the East Pacific (EP94):
+A tropical wave located a few hundred miles south-southwest of the 
+coast of southwestern Mexico is producing an large area of showers 
+and thunderstorms. This disturbance is forecast to move westward to 
+west-northwestward at 10 to 15 mph across the central portion of the 
+East Pacific basin, and some additional development is possible 
+through midweek before environmental conditions become unfavorable 
+late this week.
+* Formation chance through 48 hours...low...30 percent.
+* Formation chance through 7 days...low...30 percent.
+
+Well Offshore of Southwestern Mexico:
+A low pressure system is expected to form late this week several 
+hundred miles offshore of the coast of southwestern Mexico. Some 
+slow development of this system is possible after that time while it 
+moves west-northwestward at 10 to 15 mph.
+* Formation chance through 48 hours...low...near 0 percent.
+* Formation chance through 7 days...low...30 percent.
+
+$$
+Forecaster Kelly

@@ -1,0 +1,118 @@
+
+000
+AXNT20 KNHC 030504
+TWDAT 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+0615 UTC Fri Jul 3 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 0000 UTC surface analysis and satellite imagery through 
+0503 UTC.
+
+ ...TROPICAL WAVES...
+
+A eastern Atlantic tropical wave is along 21.5W, south of 16N, 
+moving W at around 5 kt. Scattered moderate convection is noted 
+from 06.5N to 11N between 20W and 30W. Isolated scattered
+convection is found from 06.5N to 12N between the wave axis and 
+27W. 
+
+A central Atlantic tropical wave has been repositioned based on
+tropical wave diagnostics and visible satellite imagery and is 
+now along 59W, south of 19N. Scattered moderate and isolated 
+strong convection is noted from 11N to 18N between 52W and 65W.
+
+The western Caribbean tropical wave has moved to the eastern 
+Pacific. More information about this wave can be found in the 
+Tropical Weather Discussion for the eastern Pacific Ocean (TWDEP).
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough enters the Atlantic near 18N16.5W and 
+continues southwestward to 08N33W. The ITCZ extends from 08N33W 
+to 06N54W. Scattered moderate convection is evident from 05N to 
+12N between 28W and 51W. 
+
+...GULF OF AMERICA...
+
+Weak high pressure extends from the western Atlantic southwestward
+across the SE U.S. and the northern Gulf waters, supporting 
+moderate or lighter winds and slight seas across most of the 
+basin, except for locally N to NE fresh winds over the eastern Bay
+of Campeche. Divergence aloft is supporting a few showers and 
+isolated thunderstorms over the eastern Bay of Campeche and 
+Mexican coastal waters south of Tampico. Scattered afternoon 
+thunderstorms across southern Florida are moving westward and 
+reaching the coasts between Tampa Bay and Naples.
+
+For the forecast, a weak surface ridge will dominate the basin 
+through the forecast period. Fresh to strong NE to E winds will 
+pulse off the NW Yucatan Peninsula nightly through early next week
+due to local effects associated with a daily surface trough. 
+Gentle to moderate easterly winds will prevail across the western 
+half of the Gulf while moderate or lighter winds are expected 
+elsewhere E of 90W. 
+
+...CARIBBEAN SEA...
+
+The pressure gradient between the subtropical ridge north of the 
+islands and the Colombian Low has tightened behind a tropical 
+wave moving into the eastern Pacific. This pressure gradient is
+supporting fresh to strong easterly trade winds and seas of 8-10 
+ft in the central to SW Caribbean. The strongest winds and highest
+seas are found off NW Colombia. Moderate to fresh easterly winds 
+and moderate seas are occurring in the eastern Caribbean. 
+Elsewhere, moderate or lighter winds and slight to moderate seas 
+prevail. Convection over the eastern Carribbean can be found in
+the Tropical Waves section above. Scattered thunderstorms are 
+along the monsoon trough S of 11N across the coastal waters of 
+western Colombia, Panama, and Costa Rica. Afternoon convection
+over Cuba has drifted southward and is now affecting the waters
+south of the island as it weakens. 
+
+For the forecast, the aforementioned pressure gradient will 
+continue to support fresh to strong trade winds and moderate to 
+rough seas over the central Caribbean through Fri morning, then 
+diminish slightly through the weekend. Expect winds to reach near-
+gale force each night offshore of Colombia and in the Gulf of 
+Venezuela. Otherwise, moderate to fresh trades will continue in 
+the eastern Caribbean while moderate or weaker winds will prevail 
+over the NW part of the basin. Active showers and thunderstorms 
+are expected across the SE Caribbean tonight through Fri night as 
+an upper- level trough sinks across the basin. 
+
+...ATLANTIC OCEAN...
+
+A stationary front along about 31N, extends from 55W to a 1017 mb
+low pressure near 31.5N73W, then becomes a surface trough that 
+extends from 31N74W to Freeport, The Bahamas, northern adjacent 
+waters. Low level convergence south of the front, and along the 
+trough are aiding in the development of scattered moderate 
+convection between the NW Bahamas and SE Florida, and S of the 
+front to 27.5N between 44W and 67W. A 1033 mb high pressure system
+centered NE of the Azores extends a ridge southwestward. Moderate
+to fresh easterly winds and seas of 4-8 ft are found south of 22N
+and west of 35W to the SE Bahamas. Moderate to fresh N-NE winds 
+and seas of 5-8 ft are present north of 16N and east of 35W. 
+Elsewhere, moderate or lighter winds and moderate seas prevail. 
+
+For the forecast west of 55W, a surface trough, remnants of a 
+stationary front, extending from a 1017 mb low near 31N73W to 
+Freeport northern adjacent waters, will gradually dissipate 
+tonight while drifting northwestward toward the southeastern U.S. 
+coast. The Atlantic ridge will then build weakly westward into 
+central Florida through early next week. This pattern will support
+moderate to fresh E-SE trade winds S of 22N, and moderate or 
+weaker winds elsewhere. Expect fresh to strong winds each late 
+afternoon into the early evening hours near the coasts of 
+Hispaniola and Puerto Rico. 
+
+$$ 
+KRV

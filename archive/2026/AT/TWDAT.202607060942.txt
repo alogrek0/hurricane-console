@@ -1,0 +1,115 @@
+
+000
+AXNT20 KNHC 060942
+TWDAT 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+1215 UTC Mon Jul 6 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 0600 UTC surface analysis and satellite imagery through 
+0930 UTC.
+
+...TROPICAL WAVES...
+
+A tropical wave is along 33W S of 17N, moving W at 10 to 15 kt. 
+Convection is described in the Monsoon Trough/ITCZ section below. 
+
+An Atlantic tropical wave is near 41W and S of 18N, moving W at 
+10 to 15 kt. Convection is described in the Monsoon Trough/ITCZ 
+section below.
+
+An Atlantic tropical wave is near 50W south of 19N, moving W at 
+around 15 kt. Convection is described in the Monsoon Trough/ITCZ 
+section below.
+
+A Caribbean tropical wave is near 79W, south of 19N, moving W at 
+at 10-15 kt. Scattered moderate convection is active from 09N to 
+20N between 80W and 87W. 
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough enters the Atlantic near 20N16W to 10N20W.
+Segments of the ITCZ extend from 10N22W to 08N32W, from 06N33W to
+06N40W, from 07N42W to 07N50W, and from 07N52W to 06N57W. 
+Scattered moderate convection is noted within 240 nm on either 
+side of the ITCZ and west of 25W.
+
+...GULF OF AMERICA...
+
+The subtropical ridge extends across the Florida Peninsula and 
+across the northern Gulf to the coast of Texas. A surface trough
+reaches from Mobile Bay, Alabama to Tampa, Florida. Scattered showers and 
+thunderstorms are active off the western Florida Panhandle along
+this trough. Scattered showers and thunderstorms are also active over the
+southeast Gulf, under divergent flow aloft. Farther south, a weak
+trough is positioned over the Bay of Campeche. This pattern is 
+supporting fresh NE winds off the west coast of the Yucatan 
+Peninsula, as noted in a recent scatterometer satellite pass. 
+Gentle to moderate breezes are observed elsewhere. Seas are 
+generally 1-3 ft across the basin.
+
+For the forecast, surface ridging is forecast to prevail across the
+basin through the forecast period, thus supporting gentle to
+moderate winds over the western half of the Gulf, except for
+locally fresh to strong ENE winds offshore the Yucatan peninsula
+at night. Locally moderate or weaker winds are forecast for the
+eastern half of the Gulf while mainly slight seas are forecast
+basin-wide. 
+
+...CARIBBEAN SEA...
+
+The subtropical ridge extending north of the area across the
+western Atlantic is supporting moderate to fresh trade winds
+across the eastern and central Caribbean, with strong E winds 
+noted off northeast Colombia and northwest Venezuela. Seas are
+7-10 ft over the south-central Caribbean in the area of strongest
+trade winds, and 6-7 ft elsewhere east of 80W. A recent
+scatterometer satellite pass indicated fresh to strong easterly
+winds across the Gulf of Honduras, likely related to scattered
+showers and a few thunderstorms active in that area, associated
+with divergent flow aloft on the east side of an upper low
+centered over the Yucatan Peninsula. Seas across the Gulf of
+Honduras are 4-6 ft, and 2-4 ft elsewhere over the northwest
+Caribbean.
+
+For the forecast, the pressure gradient between the Atlantic ridge
+north of the basin and the Colombian Low will continue to
+support fresh to strong trade winds and moderate to rough seas
+over the central Caribbean through the weekend. The aerial
+extent of these winds will continue to increase today as the 
+Atlantic ridge continues to build westward. By Wed, the fresh to 
+strong winds are expected to extend across most of the east, 
+central and SW Caribbean. Expect winds to reach near-gale force at
+night offshore of Colombia and in the Gulf of Venezuela through 
+Fri. Moderate or weaker winds will prevail over the NW part of the
+basin, except in the Gulf of Honduras where fresh to locally 
+strong E to SE winds are forecast at night through the forecast 
+period. 
+
+...ATLANTIC OCEAN...
+
+The Atlantic subtropical ridge dominates the Atlantic north of 
+20N, and is anchored by 1025 mb high pressure centered near 
+29N39W. The pattern is supporting gentle to moderate breezes and 
+3-5 ft seas along and west of the ridge axis, and moderate to 
+fresh NE to E trade winds and 5-7 ft seas east and south of the 
+ridge axis. Upper divergent flow is supporting a few showers and 
+thunderstorms from 25N to 30N 45W and 70W. 
+
+For the forecast west of 55W, the Atlantic subtropical ridge will stay
+in place through the forecast period, developing a center of high
+pressure E of the Bahamas by Fri. This pattern will continue to 
+support moderate to fresh E to SE trade winds S of 23N, and 
+moderate or weaker winds elsewhere. Locally strong winds, with 
+moderate to rough seas are expected at night north of Hispaniola, 
+including approaches to the Windward Passage, through Fri night.
+
+$$
+Christensen

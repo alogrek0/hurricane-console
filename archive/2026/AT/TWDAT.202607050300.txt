@@ -1,0 +1,118 @@
+
+729 
+AXNT20 KNHC 050300
+TWDAT 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+0615 UTC Sun Jul 5 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 0000 UTC surface analysis and satellite imagery through 
+0250 UTC.
+
+...TROPICAL WAVES...
+
+A tropical wave moving off the coast of Africa was added to the
+analysis. The tropical wave extends along 21W from 04N-16N, and is
+moving west at 10-15 kt. Convection is described in the Monsoon
+trough/ITCZ section below.
+
+An Atlantic tropical wave is near 30N, south of 16N, moving W at 
+10-15 kt. Convection is described in the Monsoon trough/ITCZ 
+section below.
+
+An Atlantic tropical wave is near 41W, south of 17N, moving W at 
+around 15 kt. Convection is described in the Monsoon trough/ITCZ 
+section below.
+
+A Caribbean tropical wave is near 72W, south of 20N, moving W at 
+at 15-20 kt. Numerous moderate to isolated strong convection is
+active on the northern end of the tropical wave moving northward
+toward the Turks and Caicos Islands.
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough enters the Atlantic near 13N17W and continues 
+southwestward to 10N20W. Segments of the ITCZ extend from 09N22W
+to 08N29W, from 08N31N to 08N40W, and from 07N42W to 07N56W.
+Scattered moderate convection is active from 05N to 11N between
+25W and 45W.
+
+...GULF OF AMERICA...
+
+1017 mb high pressure is centered near 25N85W. Farther south, a
+trough reaches across southern Mexico from Chiapas to the Yucatan
+Channel. Scattered showers and thunderstorms are active off
+western Cuba on the northern end of this trough. This pattern is
+supporting moderate to fresh NE winds and 2-3 ft seas off the 
+west coast of the Yucatan Peninsula, and gentle breezes with 1-3 
+ft seas elsewhere.
+
+For the forecast, the weak surface ridge will continue to dominate the
+Gulf waters through the forecast period supporting gentle to
+moderate winds over the western Gulf and light to gentle winds
+over the eastern Gulf. The exception will be pulsing winds
+reaching fresh to locally strong speeds off the northwestern
+Yucatan Peninsula nightly through midweek. These winds are the
+result of local effects associated with a surface trough. Slight
+to moderate seas are expected.  
+
+...CARIBBEAN SEA...
+
+The subtropical ridge extending north of the area across the
+western Atlantic is supporting moderate to fresh trade winds
+across the eastern and central Caribbean, with strong E winds
+noted off northeast Colombia and northwest Venezuela. Seas are 4-6
+ft. Fresh E winds are noted off the coast of Honduras, but gentle
+to moderate breezes and 1-3 ft seas are noted elsewhere over the 
+northwest Caribbean. A mid to upper level trough extends from the
+western Atlantic across eastern Cuba and Jamaica, and toward
+Nicaragua. Upper level divergent flow along with convergent lower
+level trade wind flow is support scattered showers and
+thunderstorms off southern Haiti and northeast Nicaragua.
+Scattered showers and thunderstorms are also active near the
+Yucatan Channel near the northern end of a trough reaching across
+southern Mexico. 
+
+For the forecast, the pattern will continue to support fresh to 
+strong trade winds and moderate to rough seas over the central 
+Caribbean through midweek. The aerial extent of these winds will 
+increase Sun night into Mon. Expect winds to reach near-gale force
+at night offshore of Colombia and in the Gulf of Venezuela from 
+Sun through Wed. Moderate to fresh trades will continue in the 
+eastern Caribbean while moderate or weaker winds will prevail over
+the NW part of the basin. Otherwise, a tropical wave, with axis 
+along 70W, is generating scattered showers and thunderstorms, more
+concentrated over the Dominican Republic and its Caribbean 
+waters. The wave and its associated moisture will continue to 
+impact parts of the eastern and central Caribbean, including 
+Hispaniola, the rest of this afternoon and tonight.
+
+...ATLANTIC OCEAN...
+
+1022 mb high pressure is centered off the central Bahamas near 
+27N73W. A trough east of this high pressure reaching from 29N64W
+to 26N70W separates the high pressure from the dominant
+subtropical ridge which extends from the Azores southwestward
+toward 25N65W. This pattern is supporting gentle to moderate
+breezes and 3-5 ft seas along and west of the ridge axis, and
+moderate to fresh NE to E trade winds and 5-8 ft seas east and
+south of the ridge axis. 
+
+For the forecast west of 55W, the subtropical ridge will continue
+to build westward across the western Atlantic into central 
+Florida through midweek. This pattern will support moderate to 
+fresh E to SE trade winds S of 22N, and moderate or weaker winds 
+elsewhere. Locally strong winds are likely at night N of 
+Hispaniola, including approaches to the Windward Passage, 
+beginning on Sun.
+
+$$
+Christensen
+

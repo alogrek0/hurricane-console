@@ -1,0 +1,102 @@
+
+000
+AXNT20 KNHC 132039
+TWDAT
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+0015 UTC Sun Jun 14 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 1800 UTC surface analysis and satellite imagery through 
+2030 UTC.
+
+...TROPICAL WAVES...
+
+A far eastern Atlantic tropical wave has its axis near 21/22W 
+S of 15N, moving westward at 10-15 kt. Nearby convection is
+discussed in the MONSOON TROUGH/ITCZ section below.
+
+Another eastern Atlantic tropical wave has its axis near 37W from
+02N to 16N, moving westward at about 15 kt. No significant 
+convection is currently occurring with this wave.
+
+A central Atlantic tropical wave has its axis near 54W south of 
+19N. It is moving westward near 15 kt. No significant convection 
+is currently occurring with this wave.
+
+A central Caribbean tropical wave has its axis near 80/81W south 
+of 18N, moving westward at 10 kt. Most convection with this wave
+is in the eastern North Pacific waters.
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough enters the Atlantic near 12.5N17W and 
+continues southwestward to 07N26W. The ITCZ extends from 07N26W 
+to 05N34W. It resumes from 04N38W to 00N49W. Scattered moderate
+and isolated strong convection is noted from 02N to 08N between
+02W and 30W. 
+
+...GULF OF AMERICA...
+
+A persistent broad area of low pressure present is over the
+southwestern Gulf just offshore Mexico. Scattered moderate and
+isolated strong convection is noted within 240 nm NE of the low. A
+1019 mb high is centered over the NE Gulf. The pressure gradient
+between these features is supporting fresh to strong winds NE of
+the low. Light winds are in the vicinity of the high center.
+Gentle to moderate winds prevail elsewhere. Seas are in the 6-8 ft
+range over the western Gulf, and 2-4 ft elsewhere. 
+
+For the forecast, the pressure gradient between the area of low 
+pressure area and a ridge over the NE Gulf will support fresh to 
+strong SE winds and moderate to rough seas, accompanied by 
+scattered showers and thunderstorms, through Sun night. The 
+Atlantic ridge will build westward into the Gulf Tue through Thu, 
+and in combination with lower pressure over South Texas and 
+northeastern Mexico will promote fresh to strong southerly winds 
+over the western Gulf, and moderate to fresh winds over the 
+eastern Gulf. 
+
+...CARIBBEAN SEA...
+
+Fresh to strong winds, and seas of 7-10 ft, prevail over the
+central Caribbean. Moderate to fresh winds, and moderate seas, are
+over the remainder of the Caribbean waters.  
+
+For the forecast, a ridge will prevail N of the area through Sun 
+to support a large area of fresh to strong trade winds and 
+moderate to rough seas across the central Caribbean. Expect 
+highest winds and seas off the coast of Colombia. Pulsing winds to
+fresh to strong speeds are expected in the Gulf of Honduras 
+nightly through Thu. The ridge north of the area will reorganize 
+Sun night through Mon then shift slowly NE through midweek, 
+leading to a slight decrease in wind and seas across the basin. 
+
+...ATLANTIC OCEAN...
+
+High pressure prevails across the discussion waters, anchored by a
+1022 mb high centered near 25N58W and another 1026 mb high
+centered near 31N30W. Light to gentle winds are in the vicinity of
+the high centers. Gentle to moderate winds are elsewhere N of 20N.
+Moderate to fresh winds prevail S of 20N. Seas are in the 5-7 ft
+range S of 20N, and 3-5 ft N of 20N. 
+
+For the forecast west of 55W, high pressure over the area will 
+generally remain in place through Sun. The ridge will reorganize 
+Sun night and Mon, then shift slowly NE Tue through Wed. This 
+pattern will support moderate E to SE trade winds S of 22N and a 
+gentle anticyclonic flow elsewhere through Sun. Fresh SW winds 
+will briefly develop across the NW waters N of 29N and W of 74W 
+late Sun into Sun night, as a weak frontal system moves through 
+the SE U.S. Expect fresh to strong winds each afternoon through 
+late evening across Atlantic waters near Puerto Rico and 
+Hispaniola. 
+
+$$
+AL

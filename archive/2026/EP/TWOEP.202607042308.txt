@@ -1,0 +1,23 @@
+
+212 
+ABPZ20 KNHC 042308
+TWOEP 
+
+Tropical Weather Outlook
+NWS National Hurricane Center Miami FL
+500 PM PDT Sat Jul 4 2026
+
+For the eastern and central North Pacific east of 180 longitude:
+
+Western East Pacific:
+A tropical wave located several hundred miles to the southwest of 
+the coast of southwestern Mexico is producing disorganized shower 
+activity. Development of this system appears unlikely as it moves 
+westward across the central and western portions of the East Pacific 
+basin during the next several days.
+* Formation chance through 48 hours...low...near 0 percent. 
+* Formation chance through 7 days...low...10 percent.
+
+$$
+Forecaster Adams/Beven
+

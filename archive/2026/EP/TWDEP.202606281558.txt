@@ -1,0 +1,125 @@
+
+000
+AXPZ20 KNHC 281558
+TWDEP
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+1605 UTC Sun Jun 28 2026
+
+Tropical Weather Discussion for the eastern Pacific Ocean from
+03.4S to 30N, east of 120W including the Gulf of California, and
+from the Equator to 30N, between 120W and 140W. The following
+information is based on satellite imagery, weather observations,
+radar, and meteorological analysis.
+
+Based on 1200 UTC surface analysis and satellite imagery through
+1545 UTC.
+
+...TROPICAL WAVES...
+
+A tropical wave has its axis along 95W north of 03N to the 
+Gulf of Tehuantepec region moving westward at 10 to 15 kt. 
+Scattered moderate to isolated convection is within 180 nm either
+side of the wave from 03N to 06N.
+
+A tropical wave has its axis along 121W from 03N to 18N, moving 
+westward at around 15 kt. Scattered moderate to isolated strong
+convection is seen from 11N to 17N between 110W and 120W.
+Scattered moderate convection is between the wave and 128W from
+10N to 15N. An overnight scatterometer data pass indicated a
+swath of moderate to fresh east to southeast winds east of the 
+wave axis to near 110W from 10N to 16N. Seas with these winds 
+are 6 to 8 ft.
+
+A weakening tropical wave axis is along 139W from 12N to 23N, 
+moving westward near 15 kt. No significant convection is noted 
+at the present time with this wave.
+
+...INTERTROPICAL CONVERGENCE ZONE/MONSOON TROUGH...
+
+The monsoon trough extends from 1007 mb low pressure in 
+northwest Colombia west-southwestward to across the border
+between Costa Rica and Panama, and continues to the coast at 
+09N84W and to 07N100W to 11N113W to 11N121W and to 07N129W,
+where it transitions to the ITCZ to 07N129W to 05N134W and 
+to beyond 05N140W. Numerous moderate to isolated strong 
+convection is within 180 nm south of the ITCZ between 129W-137W. 
+Scattered moderate to isolated strong convection is from 05N to 
+10N between 111W-118W. Scattered moderate convection is within 60
+nm south of the trough between 126W-129W.
+ 
+...OFFSHORE WATERS WITHIN 250 NM OF MEXICO...
+
+The pressure difference between high pressure ridging over the Gulf 
+of America and relatively lower pressure in southeastern Mexico,
+southward to the monsoon trough over the eastern Pacific is 
+supporting fresh to strong gap winds in the Gulf of Tehuantepec. 
+Seas up to 8 ft prevail with these winds. In the Gulf of 
+California, moderate to fresh southwest winds are over the 
+northern portion from 30N to 31N along with seas of 2 to 4 ft.
+The pressure gradient is slightly tighter over that portion of
+the Gulf due to the presence of the diurnal trough. Seas over 
+the rest of the Gulf are also 3 to 4 ft, except at the entrance, 
+where higher seas of 4 to 6 ft in long-period south to southwest 
+swell are present. Latest scatterometer satellite data passes 
+generally reveal light to gentle winds are elsewhere over the 
+Mexican offshore waters along with seas of 4 to 6 ft in long- 
+period south to southwest swell.
+
+For the forecast, the fresh to strong north to northeast gap 
+winds will continue pulsing in the Gulf of Tehuantepec region 
+through late Mon morning. Elsewhere, winds and seas across the 
+Mexican offshore waters are expected to remain rather calm 
+into the early part of the week. Northwest swell with seas to 8 
+ft is expected to move into the far northern waters off Baja 
+California Norte beginning early Mon, and linger into Tue 
+afternoon.
+
+....OFFSHORE WATERS WITHIN 250 NM OF CENTRAL AMERICA, COLOMBIA,
+AND WITHIN 750 NM OF ECUADOR...
+
+Fresh to near-gale northeast gap winds are across the Gulf of 
+Papagayo and off the southern coast of Nicaragua. Overnight
+altimeter satellite data passes indicated seas of 8 to 9 ft 
+downstream of these winds, from 09N to 11N between 87W and 94W. 
+Moderate or weaker winds are elsewhere. Seas are 6 to 8 ft in 
+long-period southerly swell over the equatorial waters as 
+detected by multiple altimeter satellite data passes, and 5 to 6 
+ft in long-period southwest swell across the remainder of the 
+offshore waters.
+
+For the forecast, fresh to near-gale gap winds and rough seas 
+will prevail across the Gulf of Papagayo through early Tue. These
+conditions may spread as far west as 105W through tonight before
+diminishing. Farther south, large southerly swell moving into 
+the equatorial waters will continue through early next week.
+
+...REMAINDER OF THE AREA...
+
+Broad ridging dominates the remainder of the area north of
+about 20N. The moderate pressure gradient between the ridge and 
+lower pressure in the vicinity of the monsoon trough/ITCZ is 
+supporting moderate to fresh trade winds over most of the area
+north of 10N and west of 119W. Seas are 6 to 8 ft west of 112W 
+due to the combination of long-period north to northeast swell 
+with trade wind generated waves. To the south, southeast swell 
+is inducing seas up to 10 ft south of 02N between 87W and 120W as 
+noted in various altimeter satellite data passes from the
+overnight and early morning hours. Elsewhere, winds are 
+mostly moderate or weaker. Seas are 6 to 8 ft in mixed north and
+southwest swell.
+
+For the forecast, the tropical wave near 121W is forecast to 
+undergo possible gradual development during the next few days and
+a tropical depression could form by the middle of this week while
+the system moves generally westward then northwestward. Environmental
+conditions are forecast to become less conducive for development
+by late week as the system encounters increasing shear and 
+cooler waters. Outside of this system, little change in winds 
+are expected for the next several days. Large southerly swell 
+moving through the far south-central waters is expected to begin 
+to decay during the early part of the upcoming week.
+
+$$
+Aguirre

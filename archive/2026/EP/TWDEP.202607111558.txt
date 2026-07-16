@@ -1,0 +1,106 @@
+
+000
+AXPZ20 KNHC 111558
+TWDEP
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+1605 UTC Sat Jul 11 2026
+
+Tropical Weather Discussion for the eastern Pacific Ocean from
+03.4S to 30N, east of 120W including the Gulf of California, and
+from the Equator to 30N, between 120W and 140W. The following
+information is based on satellite imagery, weather observations,
+radar, and meteorological analysis.
+
+Based on 1200 UTC surface analysis and satellite imagery through
+1500 UTC.
+
+...TROPICAL WAVES...
+
+The axis of a tropical wave is near 87W, and extends from the
+eastern Yucatan Peninsula southward, moving westward at around 
+10 to 15 kt. Scattered moderate to isolated strong convection is
+from 02N to 10N E of 90W. 
+
+The axis of a tropical wave is along 101W, from 04N to 15N, 
+moving westward at around 10 kt. Scattered moderate to isolated 
+strong convection is from 06N to 16N between 90W and 101W.
+
+The axis of a tropical wave is along 130W from 07N to 19N, moving
+westward at 10 kt. A cluster of moderate to strong convection is
+noted from 09N to 14N between 127W and 130W.
+
+...INTERTROPICAL CONVERGENCE ZONE/MONSOON TROUGH...
+
+The monsoon trough extends from a 1008 mb low pressure located
+over northern Colombia near 10N76w to 07N80W to 10N90W to 07N101W
+to 14N115W to beyond 05N140W. Aside from the convection associated
+with the tropical waves, scattered moderate convection is seen 
+from 05N to 15N between 108W and 120W, and from 04N to 08N W of 
+134W.
+
+...OFFSHORE WATERS WITHIN 250 NM OF MEXICO...
+
+High pressure prevails west of the Baja California peninsula,
+with a surface trough over the Gulf of California. The pressure
+gradient between these features is supporting moderate to fresh 
+SE winds along the Gulf of California. A surface trough moving
+across the Bay of Campeche is helping to induce fresh to strong 
+northerly gap winds in the Gulf of Tehuantepec. Light to gentle 
+winds prevail elsewhere along with moderate seas.
+
+For the forecast, moderate or weaker winds will prevail across 
+the Baja California offshore waters through the middle of next 
+week along with slight to moderate seas in mixed swell. Fresh to 
+strong SE winds across the Gulf of California will diminish to 
+gentle to moderate speeds late today. Pulses of fresh to strong 
+winds will persist in the Tehuantepec region through early next 
+week. Otherwise, an area of low pressure is expected to form over
+the next couple of days, several hundred miles south- southwest 
+of the southwestern coast of Mexico. Environmental conditions 
+appear favorable for gradual development thereafter, and a 
+tropical depression is likely to form by mid-next week while the 
+system moves generally west-northwestward. Regardless of tropical
+cyclone formation, the lowering pressure may induce at least 
+fresh to strong winds and rough to very rough seas across the 
+offshore waters of SW Mexico starting late Sun or Sun night.
+
+....OFFSHORE WATERS WITHIN 250 NM OF CENTRAL AMERICA, COLOMBIA,
+AND WITHIN 750 NM OF ECUADOR...
+
+A tropical wave along 87W is helping to induce scattered moderate
+to isolated strong convection across the forecast waters from
+Colombia to Guatemala. Fresh E winds are blowing across the
+Papagayo region and downwind to 89W. Gentle to moderate winds
+prevail elsewhere with the exception of light to gentle winds 
+between Ecuador and the Galapagos Islands. Seas are generally
+moderate in long period SW swell.
+
+For the forecast, fresh to strong gap winds will prevail in the 
+Papagayo region through the middle of next week with moderate to
+rough seas. Otherwise, fresh to strong winds and rough seas may 
+impact the waters offshore El Salvador and Guatemala Sun through 
+Mon night. 
+
+...REMAINDER OF THE AREA...
+
+High pressure prevails across the waters N of 18N. The pressure
+gradient between this area of high pressure and lower pressure in
+the vicinity of the ITCZ and within the monsoon trough is 
+supporting moderate to fresh winds N of the ITCZ and monsoon
+trough and W of 125W. Moderate or weaker winds are elsewhere
+along with moderate seas.  
+
+For the forecast, an area of low pressure is expected to form 
+over the next couple of days, several hundred miles south- 
+southwest of the southwestern coast of Mexico. Environmental 
+conditions appear favorable for gradual development thereafter, 
+and a tropical depression is likely to form by mid-next week 
+while the system moves generally west-northwestward. Regardless 
+of development, this system is expected to bring strong winds 
+and rough seas to the SW Mexican offshore waters Sun through 
+midweek.
+
+$$
+GR

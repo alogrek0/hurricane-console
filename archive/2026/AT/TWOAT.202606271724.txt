@@ -1,0 +1,21 @@
+
+000
+ABNT20 KNHC 271724
+TWOAT 
+
+Tropical Weather Outlook
+NWS National Hurricane Center Miami FL
+200 PM EDT Sat Jun 27 2026
+
+For the North Atlantic...Caribbean Sea and the Gulf of America:
+
+Off of the southeastern coast of the U. S.:
+A low pressure area is expected to form offshore of the southeastern 
+coast of the United States along the western end of a frontal 
+system early next week. Slow development of this system will be 
+possible thereafter while it moves slowly westward.
+* Formation chance through 48 hours...low...near 0 percent.
+* Formation chance through 7 days...low...20 percent.
+
+$$
+Forecaster Beven

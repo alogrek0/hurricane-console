@@ -1,0 +1,120 @@
+
+000
+AXPZ20 KNHC 030939
+TWDEP
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+1005 UTC Fri Jul 3 2026
+
+Tropical Weather Discussion for the eastern Pacific Ocean from
+03.4S to 30N, east of 120W including the Gulf of California, and
+from the Equator to 30N, between 120W and 140W. The following
+information is based on satellite imagery, weather observations,
+radar, and meteorological analysis.
+
+Based on 0600 UTC surface analysis and satellite imagery through
+0930 UTC.
+
+...SPECIAL FEATURES...
+
+Gale warning: Post-Tropical Cyclone Douglas is centered near 
+18.8N 127.6W at 03/0300 UTC, moving north-northwest at 6 kt. 
+Estimated minimum central pressure is 1003 mb. Maximum sustained 
+wind speed is 35 kt with gusts to 45 kt. Seas of up to 4.0 m 
+extend up to 90 nm from the center. Douglas is no longer a 
+tropical storm, and showers and thunderstorms are diminishing 
+around Douglas as the storm moves over cooler waters. However, a 
+recent scatterometer satellite pass showed tropical storm force 
+winds persisting within 150 nm in the norther quadrant of the 
+center. Therefore, a gale warning remains in effect for the 
+remaining overnight period. Douglas is predicted to gradually 
+weaken this weekend and then open into a trough and dissipate by 
+Sunday.
+
+Please read the latest High Seas Forecast issued by the National
+Hurricane Center at website - https://www.nhc.noaa.gov/text/MIAHSFEP2.shtml
+and the latest Douglas NHC Forecast/Advisory and Public Advisory
+at www.hurricanes.gov for more details.
+
+...TROPICAL WAVES...
+
+A tropical wave is along 89W, south of 20N in the NW Caribbean, 
+moving west at 15 to 20 kt. Associated convection is described 
+below in the Intertropical Convergence Zone/Monsoon Trough 
+section.
+
+A tropical wave is analyzed along 100W, south of 15N, moving 
+west at 5-10 kt. Associated convection is also described below 
+in the Intertropical Convergence Zone/Monsoon Trough section.
+
+...INTERTROPICAL CONVERGENCE ZONE/MONSOON TROUGH...
+
+The monsoon trough extends from 10N84W to 05N100W to 10N125W to
+11N135W. The ITCZ extends from 11N135W to beyond 10N140W. 
+Scattered moderate isolated strong convection is noted from 05N 
+to 14N east of 105W.
+
+...OFFSHORE WATERS WITHIN 250 NM OF MEXICO...
+
+Fresh to strong gap winds with locally rough seas are pulsing 
+across the Gulf of Tehuantepec, between high pressure north of 
+the region and lower pressure over the tropics. Associated seas 
+are reaching 8 ft in the plume of these gap winds. Farther north,
+a ridge off Baja California will maintain gentle to moderate 
+breezes, with 4-6 ft seas off Baja. Gentle breezes and slight 
+seas are noted elsewhere.
+
+For the forecast, the fresh to strong gap winds with locally 
+rough seas will pulse across the Gulf of Tehuantepec this 
+morning, then diminish. Farther north, the ridge off Baja 
+California will maintain gentle to moderate breezes through Sat, 
+becoming moderate to occasionally fresh near the coast of Baja 
+California starting Sun as the high pressure builds. Looking 
+ahead, large SW swell may reach the waters off southern Mexico 
+early next week. 
+
+....OFFSHORE WATERS WITHIN 250 NM OF CENTRAL AMERICA, COLOMBIA,
+AND WITHIN 750 NM OF ECUADOR...
+
+Fresh to strong NE gap winds continue to dominate the Papagayo 
+region and extend offshore to near 90W. Seas are 6 to 8 ft across
+this area. Gentle to moderate SW breezes are noted elsewhere. 
+Cross- equatorial SW swell to 8 ft dominate waters S of 02N 
+between the Galapagos Islands and Ecuador, with 4-6 ft seas 
+elsewhere. Scattered to numerous strong convection continues 
+across the waters N of 05N from Colombia to offshore of 
+Guatemala, producing strong gusty winds and locally rough seas.
+
+For the forecast, fresh to strong NE to E gap winds will pulse 
+in the Papagayo region into early next week, leading to 
+occasional rough seas. Cross- equatorial southerly swell will 
+dominate area seas through the weekend and keep seas moderate to 
+the S of 05N through Mon, increasing to near 8 ft off Ecuador and
+the Galapagos Sun night through Tue. Large SW swell may also 
+reach the waters off northern Central America early next week.
+
+...REMAINDER OF THE AREA...
+
+Please see the Special Features section on the gale warning
+associated with Post-Tropical Cyclone Douglas. Fresh to strong 
+winds and rough seas extend 360 to 480 nm from the center of 
+Douglas. Moderate to fresh NE winds and 6-7 ft seas are noted 
+elsewhere north of 15N and west of 120W. Farther east, fresh 
+winds and locally rough seas accompany the tropical wave along 
+100W. Mostly gentle breezes and 4-6 ft in mixed swell are noted 
+elsewhere. 
+
+For the forecast, winds and seas near Douglas will diminish
+through Sun night as the remnant low opens into a trough. The 
+ridge will then drift southwestward and generally persist across
+the region through early next week, supporting moderate to fresh
+trade winds farther south into the tropics. Looking ahead, weak
+low pressure may form about 360 nm south of the Revillagigedo
+Islands by Sun night. Environmental conditions could 
+support some gradual development of this system while it moves 
+generally westward at 10-15 kt through the early part of next
+week, although chances of development at this time are low.
+
+$$
+Christensen

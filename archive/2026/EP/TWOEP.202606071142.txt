@@ -1,0 +1,47 @@
+
+000
+ABPZ20 KNHC 071142
+TWOEP 
+
+Tropical Weather Outlook
+NWS National Hurricane Center Miami FL
+500 AM PDT Sun Jun 7 2026
+
+For the eastern and central North Pacific east of 180 longitude:
+
+Active Systems:
+The National Hurricane Center is issuing advisories on Tropical 
+Depression Amanda, located well east-southeast of the Hawaiian 
+Islands.
+
+Offshore Southern and Southwestern Mexico (EP91):
+A low pressure system located a couple of hundred miles south of 
+Acapulco, Mexico is producing a broad area of showers and 
+thunderstorms. This disturbance is gradually becoming better 
+organized, and a tropical depression will likely form later today. 
+The system is forecast to move northeastward and then northward, and 
+will approach the coast of southern Mexico tonight and Monday. 
+Interests in southern Mexico should monitor the progress of this 
+system.  Regardless of development, heavy rainfall and 
+life-threatening flash flooding are possible across portions of 
+southern Mexico through early this week. 
+* Formation chance through 48 hours...high...90 percent.
+* Formation chance through 7 days...high...90 percent.
+
+Offshore of Central America (EP92):
+Shower and thunderstorm activity associated with a broad area of low 
+pressure offshore of Central America has changed little in 
+organization this morning. Some development is still expected, 
+however, and a tropical depression is likely to form during the 
+next day or two while the system moves slowly northward toward the 
+coast of Central America. Interests along the Pacific coasts of 
+northwestern Costa Rica, Nicaragua, Honduras, and El Salvador should 
+monitor the progress of this system. Regardless of development, 
+heavy rainfall and life-threatening flash flooding are possible 
+across portions of Costa Rica, Nicaragua, El Salvador, and Guatemala 
+through early this week. 
+* Formation chance through 48 hours...high...70 percent.
+* Formation chance through 7 days...high...70 percent.
+
+$$
+Forecaster Pasch

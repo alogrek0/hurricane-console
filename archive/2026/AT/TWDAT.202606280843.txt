@@ -1,0 +1,114 @@
+
+000
+AXNT20 KNHC 280843
+TWDAT 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+1215 UTC Sun Jun 28 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 0600 UTC surface analysis and satellite imagery through 
+0800 UTC.
+
+...SPECIAL FEATURES...
+
+Caribbean Gale Warning: A tight pressure gradient between the
+Bermuda-Azores High in the central Atlantic and the Colombian Low 
+will support strong to gale-force NE-E winds and rough to locally 
+very rough seas in the south-central Caribbean for the remainder
+of tonight. An OSCAT scatterometer pass at 0528 UTC reported ENE
+winds of around 35 kt. At 0500 UTC, the Jason-3 altimeter observed
+a large swath of seas 10-12 ft west of the peak wind region. Winds
+will drop below gale this morning, but fresh to strong winds and 
+rough seas will persist through at least the upcoming week.
+
+Please refer to High Seas and Offshore Waters Forecasts issued by
+the National Hurricane Center at websites:
+https://www.nhc.noaa.gov/text/MIAHSFAT2.shtml for more information.
+
+...TROPICAL WAVES...
+
+A tropical in the far eastern Atlantic is along 20W, south of 
+16N. The wave is moving westward at 10-15 kt. Scattered moderate 
+convection is observed from 05N-10N between 18W-25W.
+
+A central Atlantic tropical wave is along 47W, south of 12N, 
+moving westward at 15-20 kt. Scattered moderate convection is 
+found from 03N-09N between 43W-53W.
+
+A tropical wave is over the Lesser Antilles along 60W, south of 
+19N, moving westward at 15-20 kt. Scattered moderate convection is
+occurring from 13N-18N between 56W-64W.
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough axis enters the Atlantic through the coast of
+Senegal near 13N17W and continues southwestward to 08N27W. The 
+ITCZ extends from 08N27W to 06N46W and then from 06N49W and to 
+04N52W. Scattered moderate convection is occurring from 13N-18N 
+between 56W-64W.
+
+...GULF OF AMERICA...
+
+Winds in the NW Gulf are moderate to fresh SE with seas 3-5 ft.
+Winds in the SW Gulf are also moderate to fresh E with seas 3-5
+ft. Elsewhere, winds over the E Gulf are gentle with seas 1-3 ft,
+Scattered moderate convection is occurring in the SW Gulf south of
+20N west of 95W.
+
+For the forecast, fresh to locally strong NE to E winds will 
+pulse off the NW Yucatan Peninsula nightly through Thu night. 
+Moderate to fresh SE to S winds are expected across the NW Gulf 
+through Mon. Elsewhere, ridging will support only gentle to 
+moderate winds for the next several days.
+
+...CARIBBEAN SEA...
+
+Please read the Special Features section for details regarding the
+on-going gale conditions for offshore Colombia.
+
+Aside from the expected gale conditions, fresh to strong E winds
+are occurring over the Gulf of Honduras, fresh to strong NE winds
+are observed through the Windward Passage, and fresh winds to the
+lee of central Cuba are noted. Seas over the Gulf of Honduras are
+5-8 ft, over the Windward Passage are 4-7 ft, and in the lee of
+Cuba are 3-4 ft. Elsewhere over the Caribbean, winds are moderate
+or weaker with seas 3-5 ft.
+
+For the forecast, the Bermuda-Azores High north of the basin 
+combined with the Colombian Low will support fresh to strong 
+tradewinds over the central Caribbean through the forecast period.
+Winds to gale-force offshore of Colombia will be diminishing 
+shortly. Moderate or lighter winds are forecast across the 
+remainder of the basin during the next several days. 
+
+...ATLANTIC OCEAN...
+
+Ridging along 33N combined with lower pressure over the
+ITCZ/monsoon trough are contributing toward moderate to fresh
+trades with seas 4-7 ft. Some NE strong winds are also occurring
+between the Canary Islands and just offshore of S Western Sahara.
+A prominent tropical upper-tropospheric trough extends from 
+30N50W to 22N85W with scattered moderate convection occurring 
+along the trough axis from 25N-28N between 57W-63W.
+
+For the forecast west of 55W, an expansive Bermuda-Azores High 
+will dominate the forecast area through Mon. While most of the 
+basin will experience moderate or weaker winds, trades just north 
+of Hispaniola will freshen afternoons and early evenings for the 
+next several days. On Mon, a weak cold front should push off of 
+the SE United States coast and extend from 31N73W to the central 
+Florida peninsula by Tue morning. While the cold front is 
+anticipated to dissipate on Wed, a broad low pressure area is 
+expected to form in its wake. Gradual development of this system 
+will be possible thereafter, while it moves slowly westward over 
+our NW waters north of 28N.
+
+$$
+Landsea

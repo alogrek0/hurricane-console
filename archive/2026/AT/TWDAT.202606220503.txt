@@ -1,0 +1,109 @@
+
+733 
+AXNT20 KNHC 220503
+TWDAT 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+0615 UTC Mon Jun 22 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 0000 UTC surface analysis and satellite imagery through 
+0500 UTC.
+
+...TROPICAL WAVES...
+
+A eastern Atlantic tropical wave has its axis along 33W from 02N 
+to 16N. It is moving westward at 15 to 20 kt. Scattered showers
+and isolated thunderstorms are seen from 02N to 10N between 30W
+and 40W.
+
+A central Atlantic tropical wave has its axis along 46W from 01N 
+to 16N moving westward at around 15 kt. No significant convection
+is observed near this tropical wave.
+
+An eastern Caribbean tropical wave has its axis along 69W south 
+of 18N to inland Venezuela. It is moving westward at around 15 
+kt. No significant convection is observed near this tropical 
+wave.
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough axis enters the Atlantic ocean near 16N16W, 
+and continues southwestward to 05N34W and to near 07N44W. No ITCZ
+is analyzed at this time. In addition to the convection in the
+Tropical Waves section above, scattered moderate convection is
+seen from 02N to 10N and E of 26W.
+
+...GULF OF AMERICA...
+
+1017 mb high pressure is centered over the northeast Gulf near
+26N85W, with a ridge extending toward the northeast coast of
+Mexico. This pattern is supporting gentle breezes and 1-4 ft over
+the eastern Gulf, and moderate to locally fresh SE winds and 4-6
+ft over the western Gulf. Decaying convection is seen in satellite
+imagery off the NW coast of Cuba.
+
+For the forecast, high pressure will dominate the basin this 
+week. Fresh to locally strong easterly winds will pulse off 
+Yucatan nightly during the first half of the week. Meanwhile, a 
+moderate pressure gradient will maintain mostly fresh southerly 
+winds over the western and central Gulf through late Mon night 
+before diminishing to gentle to moderate speeds. Slight to 
+moderate seas will be with these winds. Light winds along with 
+slight seas will be over the eastern Gulf through the week. 
+
+...CARIBBEAN SEA...
+
+The pressure gradient between the subtropical ridge N of the area,
+the Colombia Low, and the tropical wave over the eastern 
+Caribbean is supporting fresh to strong E to SE winds across the
+central Caribbean and the Gulf of Honduras, strongest offshore
+northern Colombia. Moderate to fresh trades prevail across the
+eastern Caribbean as well as portions of the SW and NW Caribbean.
+Gentle to moderate or weaker winds prevail elsewhere. Seas are 5-8
+ft across much of the Caribbean S of 18N, and 2-5 ft elsewhere. 
+Upper level jet dynamics and convergent surface winds support 
+numerous moderate to strong convection across portions of Central 
+America from Guatemala south and eastward to Panama.
+
+For the forecast, the pressure gradient between ridging north of 
+the area and the Colombian low will support fresh to strong trade 
+winds and moderate to rough seas over much of the basin, including
+the Gulf of Honduras. The trade winds are expected to increase to
+near gale across the central portion of the basin over a large 
+area south of 15N, including along the coast of Colombia and in 
+the Gulf of Venezuela starting Mon night through Tue night. Seas 
+are expected to build to around 13 ft with these winds. Lastly, 
+fresh to locally strong easterly winds and seas to 10 ft are also 
+forecast east of the Lesser Antilles during much of this week.
+
+...ATLANTIC OCEAN...
+
+Broad ridging stemming from a 1026 mb high near 35N34W expands 
+across much of the Atlantic, supporting moderate to fresh trade 
+winds and moderate seas across most of the Atlantic south of about
+22N along with seas 5 to 8 ft, as well as N of 22N and E of 25W. 
+Fresh to strong trades are confirmed by scatterometer data S of 
+20N and W of 50W to the Lesser Antilles. Another, smaller area of 
+fresh to strong trades is occurring along the northern coast of 
+Hispaniola. Gentle to moderate or weaker winds are north of 22N 
+and west of 25W along with seas of 2 to 5 ft. Upper- level jet 
+dynamics along the southeastern periphery of a broad upper trough 
+over the U.S. east coast are sustaining an area of scattered 
+showers and thunderstorms north of 28N between 60W and 70W. 
+
+For the forecast west of 55W, high pressure will dominate the 
+region through the forecast period. Winds will pulse nightly fresh
+to locally strong speeds off northern Hispaniola and seas may 
+build up to 8 ft. Moderate or lighter winds and moderate seas will
+prevail elsewhere.
+
+$$
+Adams
+

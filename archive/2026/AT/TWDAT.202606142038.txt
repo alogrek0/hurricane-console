@@ -1,0 +1,113 @@
+
+000
+AXNT20 KNHC 142038
+TWDAT
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+0015 UTC Mon Jun 15 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 1800 UTC surface analysis and satellite imagery through 
+2030 UTC.
+
+...TROPICAL WAVES...
+
+A far eastern Atlantic tropical wave has its axis near 29W south 
+of 17N moving westward at 10 to 15 kt. Scattered moderate 
+convection is within 180 nm either side of the wave from 05N to 
+09N.
+
+A central Atlantic tropical wave has its axis near 46/47W south 
+of 18N moving westward at about 15 kt. No deep convection is 
+presently occurring near this wave.
+
+An eastern Caribbean Sea tropical wave is along 65/66W south of 
+18N, moving westward at 15 to 20 kt. Scattered moderate 
+convection in the wake of the wave is along and just inland the 
+coast of South America between 62W and 64W.
+
+A western Caribbean Sea tropical wave has its axis near 86W south
+of 19N to inland Central America. It is moving westward at about 
+10 to 15 kt. Most associated convection associated with this wave
+is in the eastern north pacific. 
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough exits the coast of Africa near 12N16W and
+extends SW to near 06N24W. The ITCZ extends from 06N24W to 05N27W.
+It resumes from 04N31W to 04N45W. Aside from convection noted in
+the TROPICAL WAVES section above, scattered moderate and isolated
+strong convection is noted from 01N to 14N between 10W and 20W.
+
+...GULF OF AMERICA...
+
+A 1018 mb high is centered over the NE Gulf. A 1007 mb low is
+centered over central Mexico. The pressure gradient between these
+features is supporting moderate winds W of 90W. Light to gentle
+winds prevail over the waters E of 90W. Seas are in the 4-6 ft
+range W of 90W, and 1-2 ft E of 90W. 
+
+For the forecast, a broad area of low pressure located over 
+eastern Mexico is producing disorganized shower and thunderstorm 
+activity. Development is not expected during the next day or so 
+while the low remains inland over northeastern Mexico or southern 
+Texas. The system could then re-emerge over the northwestern Gulf 
+of America around midweek while interacting with a frontal 
+boundary, but conditions there are expected to be only marginally 
+conducive for development. The pressure gradient between the low 
+pressure area and 1019 mb high pressure over the NE Gulf will 
+support fresh to strong SE winds and moderate to rough seas across
+the western Gulf through tonight, while scattered showers and 
+thunderstorms continue there through Mon. The Atlantic ridge will 
+build westward into the Gulf Tue through Thu, and combine with 
+lower pressure over South Texas and northeastern Mexico will 
+promote fresh to strong southerly winds over the western Gulf, and
+moderate to fresh winds over the eastern Gulf. 
+
+...CARIBBEAN SEA...
+
+Fresh to strong winds, and seas of 8-10 ft prevail over the
+central Caribbean. Moderate to fresh winds, and seas of 5-7 ft 
+are over the eastern Caribbean. Gentle to moderate winds, and seas
+of 3-6 ft, are found over the western Caribbean. 
+
+For the forecast, high pressure north of the area will generally 
+remain in place through early Mon and will support a large area of
+fresh to strong trade winds and moderate to rough seas across the
+central Caribbean. Expect highest winds and seas off the coast of
+Colombia. Pulsing winds to fresh to strong speeds are expected in
+the Gulf of Honduras nightly through Thu. The ridge will 
+reorganize Mon through early Tue then shift slowly NE through Thu,
+leading to a slight decrease in wind and seas across the basin.
+
+...ATLANTIC OCEAN...
+
+High pressure dominates the discussion waters N of 20N, anchored
+by a 1023 mb high near 27N53W, and a 1026 mb high near 29N32W. The
+pressure gradient between the area of high pressure, and falling
+pressure over Africa with a tropical wave over western Africa, is
+supporting fresh to strong winds N of 20N and E of 20W to the
+coast of Africa. Moderate to fresh winds, and seas of 5-7 ft, 
+prevail elsewhere over the waters E of 30W, and S of 20N. Light to
+gentle winds, and seas of 3-4 ft, prevail elsewhere.  
+
+For the forecast west of 55W, high pressure will generally remain
+in place through early Mon, then reorganize Mon through early 
+Tue, then shift slowly NE through Thu. This pattern will support 
+moderate E to SE trade winds S of 22N, then become moderate to 
+fresh through Wed. Gentle anticyclonic flow will prevail elsewhere
+through tonight then become gentle to moderate SE to S winds Mon 
+through Wed. Fresh SW winds develop across the NW waters N of 29N 
+and W of 74W late Sun through early Mon, then expand eastward to 
+70W through early Wed, as a weak frontal system moves through the 
+SE U.S. Expect fresh to strong winds each afternoon through late 
+evening across Atlantic waters near Puerto Rico and Hispaniola. 
+
+$$
+AL

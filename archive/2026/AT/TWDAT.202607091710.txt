@@ -1,0 +1,139 @@
+
+000
+AXNT20 KNHC 091710
+TWDAT
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+1815 UTC Thu Jul 9 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 1200 UTC surface analysis and satellite imagery through 
+1800 UTC.
+
+...SPECIAL FEATURES...
+
+Caribbean Gale Warning: The pressure gradient between the central
+Atlantic high pressure and lower pressures over northern South 
+America will support strong to near gale-force northeast to east 
+trades over the south-central Caribbean, including the Gulf of 
+Venezuela into the weekend. Winds are forecast to pulse to gale- 
+force off the coast of Colombia and the Gulf of Venezuela Fri 
+night and again Sat night. Seas are expected to peak around 14 ft
+off Colombia Sat night. 
+
+Please refer to the latest NWS High Seas Forecast at website: 
+https://www.nhc.noaa.gov/text/MIAHSFEP2.shtml for more details.
+
+...TROPICAL WAVES...
+
+An eastern Atlantic tropical wave has its axis near 40W south of 
+15N moving westward at 15-20 kt. No significant convection is 
+occurring near the wave.
+
+An eastern Caribbean tropical wave is along 67W south of 18N 
+moving westward at 15-20 kt. Scattered showers and thunderstorms 
+are occurring from the Mona Passage south to about 14N between 64W
+and 70W.
+
+A central Caribbean tropical wave is analyzed along 76W from 19N
+southward. It is moving westward around 10-15 kt. Numerous strong
+and large convective clusters have recently formed over Colombia
+and the offshore waters S of 11N and E of 78W.
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough axis enters the Atlantic through the coast of 
+Mauritania near 19N16W and continues southwestward to 10N24W, 
+where it transitions to the ITCZ to 10N37W. It resumes at 08N42W 
+to 05N52W. Scattered moderate convection is S of 08N and W of 49W.
+
+...GULF OF AMERICA...
+
+Numerous moderate to strong convection is ongoing along a surface
+trough running from the Bay of Campeche to the W Gulf. Upper 
+level troughing N of the region as well as convergent surface 
+winds in the E Gulf also support widely scattered showers and 
+isolated thunderstorms across portions of the Gulf N of 24N 
+between 85W and 90W. Outside of convection, gentle to moderate or 
+weaker E to SE winds and slight seas prevail across the Gulf.
+
+For the forecast, high pressure extending westward from the 
+Atlantic across central Florida and over the Gulf will change 
+little through Sat, then shift slightly southeastward afterward. 
+The weather pattern will support gentle to moderate east to 
+southeast winds south of 26N east of 94W, and light to gentle 
+southeast to south-southwest winds north of 26N into the weekend. 
+Light and variable winds are south of 26N west of 94W. These winds
+will gentle to moderate east to southeast winds tonight and 
+change little into next week. The exception will be occasional 
+fresh to strong northeast to east winds offshore the Yucatan 
+peninsula at night. A mid-level trough combined with a very moist 
+and unstable environment is generating scattered to numerous 
+showers and thunderstorms over the SW Gulf. Isolated showers and 
+thunderstorms are elsewhere south of about 28N. This activity is 
+expected to persist into tonight as it lifts north. 
+
+...CARIBBEAN SEA...
+
+Please refer to the Special Features section above for details on
+gale conditions offshore Colombia and in the Gulf of Venezuela
+later this week and weekend.
+
+The pressure gradient between ridging over the Atlantic and lower
+pressures over northern South America continues to support fresh
+to strong trades and rough seas across much of the central to SW
+Caribbean, as well as through the Windward Passage. An altimeter 
+pass from early this morning confirmed seas of 13-15 ft occurring 
+offshore NW Colombia. Moderate to fresh trades and moderate seas 
+prevail in the eastern Caribbean and the Gulf of Honduras. Gentle 
+to moderate or weaker winds and 2-5 ft seas prevail elsewhere. 
+Scattered moderate convection is ongoing across the SW Caribbean, 
+enhanced by the eastern extension of the East Pacific monsoon 
+trough. Scattered showers and isolated thunderstorms are also 
+occurring over the waters between Jamaica, Cuba, and Haiti.
+
+For the forecast, the pressure gradient between central Atlantic 
+high pressure and lower pressure over northern South America will 
+support fresh to near gale trades over the central Caribbean for 
+the next several days. Winds will pulse to gale-force Fri night, 
+and Sat night off Colombia. Gale-force winds are also expected in 
+the Gulf of Venezuela Fri night and Sat night. Trades over the 
+Gulf of Honduras will pulse to fresh to strong speeds in the late 
+afternoons and evenings through early next week. A tropical wave 
+in the eastern Caribbean is accompanied by scattered showers and 
+isolated thunderstorms. This activity will continue near the 
+tropical wave as it moves rapidly across the central and western 
+Caribbean the next couple of days.
+
+...ATLANTIC OCEAN...
+
+A weak stationary front segment runs along 30/31N between 34W and
+44W. No notable convection or changes in marine conditions are
+occurring. Ridging prevails across much of the tropical and
+subtropical Atlantic, with moderate to fresh trades and moderate
+seas prevailing across areas S of 22N and W of 35W. Locally
+strong trades are seen along the northern coast of Hispaniola and
+into the Windward Passage, as well as from 02N to 08N between 40W
+and the Lesser Antilles. Another area of fresh to strong winds 
+from the NE is occurring N of 22N and E of 35W between a stronger 
+pressure gradient between Atlantic high pressure and lower 
+pressures over Africa. Gentle to moderate or weaker winds and 3-6 
+ft seas prevail elsewhere.
+
+For the forecast west of 55W, high pressure ridging near 27N will
+change little through the period. The weather pattern will 
+generally support moderate to fresh trades south of 23N, and light
+to gentle winds north of 23N, except north of 29N where moderate 
+to fresh south to southwest winds will prevail through Sat night. 
+Strong winds along with moderate to rough seas are expected at 
+night north of Hispaniola, including the approaches to the 
+Windward Passage through early next week. 
+
+$$
+Adams

@@ -35,6 +35,19 @@ planned tracks — lived friction beats speculation.
   mid-session — auto-reloading someone watching a storm is worse than being a
   version behind; that stays the banner's job.
 
+## Parser gaps (found in real products, awaiting their own PR)
+
+- [ ] **TWO invest tag lost when a "Regardless of..." paragraph precedes the
+  star lines** (2026-07-16, found by the M1 backfill) — in
+  `archive/2026/AT/TWOAT.202606160502.txt` / `...161142.txt` the chunk holding
+  the `* Formation chance` lines starts with a "Regardless of tropical cyclone
+  formation..." paragraph, so parseTWO's prev-chunk prepend (keyed on the chunk
+  *starting* with `*`) never fires and the `Northwestern Gulf of America (AL90):`
+  title — tag and location — is lost (chances still parse; derived record is
+  honestly null-tagged). Fix in parser.js (walk back to a titled chunk), add
+  these products as the first TWOAT fixtures, regenerate snapshots, version
+  bump. Matters for M2/M4: AL90's sightings can't chain by tag until fixed.
+
 ## Track A — Features
 
 - [x] **Product-history scrubber** — fetch the last ~8 TWDAT/TWO issuances and
@@ -117,11 +130,20 @@ the parser improves); derived JSON is regenerated, never hand-edited; the app
 loads it lazily. A wrong lineage is this feature's "Tropical Depression Or":
 prefer broken chains over invented links.
 
-- [ ] **M1 — Archive foundation**: `tools/archive-sync.js` (reuse
+- [x] **M1 — Archive foundation**: `tools/archive-sync.js` (reuse
   archive-audit.js URL/UA/entity helpers; idempotent; `--derive` builds
   `archive/derived/*.json`), backfill 2026-06-01→now (TWDAT/TWDEP/TWOAT/TWOEP
   into `archive/{year}/{basin}/`), 6-hourly `archive.yml` cron committing to
   main (no version bump — archive/ isn't a shell path), derived-shape tests.
+  *Shipped: `tools/nhc-text-archive.js` (BASE/UA/`listingNames`/stamp helpers,
+  extracted from archive-audit.js — not duplicated), `tools/archive-sync.js`
+  (`--since`/`--derive`, idempotent skip-existing, skip-and-log per product,
+  red on an unreachable listing, deterministic derive), `tools/derive-summary.js`
+  (shared writer/checker shape: TWD keeps cyclones + wave axes, counts for
+  convection/troughs; TWO keeps invests/positions/chances; `issuedISO` via
+  parseIssued, null when unparseable), `archive.yml` (cron `23 1,7,13,19`,
+  commit-only-if-changed, one rebase retry), `.gitattributes` LF pins, and
+  offline derived-shape tests guarded on `archive/` existing.*
 - [ ] **M2 — Lineage engine**: `tools/build-lineage.js` — compose diff.js
   pairing across the season into entity chains (waves by axis progression,
   invests by tag, cyclones by name) + genesis links (wave→invest→cyclone),

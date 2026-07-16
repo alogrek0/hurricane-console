@@ -1,0 +1,109 @@
+
+000
+AXPZ20 KNHC 101007
+TWDEP 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+1005 UTC Fri Jul 10 2026
+
+Tropical Weather Discussion for the eastern Pacific Ocean from
+03.4S to 30N, east of 120W including the Gulf of California, and
+from the Equator to 30N, between 120W and 140W. The following
+information is based on satellite imagery, weather observations,
+radar, and meteorological analysis.
+
+Based on 0600 UTC surface analysis and satellite imagery through
+0910 UTC.
+
+...TROPICAL WAVES...
+
+A tropical wave extends from 01N to 16N with axis near 95W, 
+moving westward at 5-10 kt. Numerous moderate to strong
+convection is observed from 03N to 10N between 88W and 100W. 
+
+A tropical wave extends from 02N to 16N with axis near 119W, 
+moving westward at 10-15 kt. Scattered moderate isolated strong
+convection is observed from 05N to 13N between 109W and 130W. 
+ 
+...INTERTROPICAL CONVERGENCE ZONE/MONSOON TROUGH...
+
+The monsoon trough extends from 10N85W to 11N114W to 06N132W. 
+The ITCZ is from 06N132W to 06N140W. Aside from the convection
+associated with the tropical waves, scattered moderate isolated 
+strong convection is active from 00N to 11N E of 88W. Scattered 
+moderate convection is elsewhere from 03N to 14N between 102W 
+and 112W. 
+
+...OFFSHORE WATERS WITHIN 250 NM OF MEXICO...
+
+Recent scatterometer data show light to gentle NW winds across 
+the offshore waters off Baja California while altimeter data
+indicate moderate seas to 6 ft, which is being influenced by
+mixed SW and NW swell. In the Gulf of California, winds are  
+fresh from the SE with 3 to 4 ft seas. Strong N winds prevail 
+across the Gulf of Tehuantepec, where seas are estimated to be 
+7-8 ft. Elsewhere, winds are moderate or weaker and seas are 
+moderate in SW swell. 
+
+For the forecast, moderate or weaker NW winds will prevail across
+the Baja California offshores through Tue night along with slight
+to moderate seas in mixed swell. Fresh to strong SE winds across
+the Gulf of California will diminish to gentle to moderate speeds
+by late Sat. Pulses of fresh to strong northerly gap winds across
+the Gulf of Tehuantepec will reach near gale-force speed Mon
+night, which will continue to affect the region through at least
+midweek. Otherwise, an area of low pressure is expected to form 
+late this weekend or early next week several hundred miles south-
+southwest of the coast of southwestern Mexico. Environmental 
+conditions appear favorable for gradual development thereafter, 
+and a tropical depression is likely to form next week while the 
+system moves generally west-northwestward. Regardless of tropical
+cyclone formation, the lowering pressure may induce at least 
+fresh to strong winds and rough to very rough seas across the
+offshore waters of SW Mexico Sun night through Tue night.
+
+....OFFSHORE WATERS WITHIN 250 NM OF CENTRAL AMERICA, COLOMBIA,
+AND WITHIN 750 NM OF ECUADOR...
+
+Fresh to strong NE to E gap winds continue this morning across 
+the Papagayo region, affecting with rough seas to 9 ft the
+offshore waters of Nicaragua. Between Ecuador and the Galapagos
+Islands, winds remain moderate or weaker and seas moderate to 6
+ft in SW swell. Light to gentle winds are across the remainder 
+Central America offshores along with slight to moderate seas. 
+
+For the forecast, fresh to strong gap winds in Papagayo will 
+remain constant through at least Tue night with moderate to rough
+seas. Otherwise, an area of low pressure is expected to form 
+late this weekend or early next week several hundred miles south-
+southwest of the coast of southwestern Mexico. Environmental 
+conditions appear favorable for gradual development thereafter, 
+and a tropical depression is likely to form next week while the 
+system moves generally west-northwestward. Regardless of 
+tropical cyclone formation, the lowering pressure may induce fresh
+to strong winds and rough to very rough seas offshore El 
+Salvador and Guatemala Sat evening through late Sun.
+
+...REMAINDER OF THE AREA...
+
+A broad ridge dominates the waters north of 17N and W of 120W, 
+supporting moderate to fresh NE to E winds and moderate seas,
+except rough W of 133W per recent altimeter data. Moderate or
+weaker winds and moderate seas are ongoing elsewhere. Otherwise,
+decaying NW swell continue to support an small area of rough seas
+to 8 ft just W of Punta Eugenia offshore waters. 
+
+For the forecast, swell of 8-9 ft will persist north of 25N to 
+the east of 125W through today. Otherwise, an area of low 
+pressure is expected to form late this weekend or early next week
+several hundred miles south-southwest of the coast of 
+southwestern Mexico. Environmental conditions appear favorable 
+for gradual development thereafter, and a tropical depression is 
+likely to form next week while the system moves generally west- 
+northwestward. Regardless of development, this system will bring
+strong winds and rough seas to the SW Mexican offshore immediate
+open waters Sun through midweek.
+
+$$
+Ramos

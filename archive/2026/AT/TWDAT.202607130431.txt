@@ -1,0 +1,86 @@
+
+000
+AXNT20 KNHC 130431
+TWDAT 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+0615 UTC Mon Jul 13 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 0000 UTC surface analysis and satellite imagery through 
+0425 UTC.
+
+...TROPICAL WAVES...
+
+A central Caribbean tropical wave is along 77W, south of 19N,
+moving westward at 15-20 kt. Numerous scattered to isolated strong
+convection is occurring over NW Colombia and Panama along the
+southern portion of the wave.
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough enters the Atlantic through the coast of Mauritania
+near 19N16W and continues southwestward to 09N35W. The ITCZ 
+extends from 09N35W to the coast of Guyana near 08N60W. A few
+showers are found from 07N to 14N and east of 31W. Similar
+convection is present from 06N to 14N and between 49W and the
+Lesser Antilles.
+
+...GULF OF AMERICA...
+
+Divergence aloft supports a few showers over the north-central and
+NE Gulf waters and while similar convection is noted off Veracruz.
+A 1022 mb high pressure over the eastern Gulf sustains mainly
+fresh easterly winds south of 24N and between 87W and 95W. This 
+was confirmed by a recent scatterometer satellite pass. Seas in 
+these waters are 3-5 ft. Elsewhere, moderate or lighter winds and
+slight to moderate seas prevail.
+
+For the forecast, a stationary front will reside just N of the area
+through midweek, enhancing thunderstorms across the northern
+Gulf waters. Mariners can expect gusty winds, frequent lightning,
+and locally higher seas near the stronger thunderstorms. Fresh to
+strong easterly winds will pulse offshore the Yucatan Peninsula 
+each night. Elsewhere, high pressure will dominate, supporting 
+gentle to moderate SE winds. 
+
+...CARIBBEAN SEA...
+
+A broad subtropical ridge centered north of the Caribbean forces
+strong to near gale-force easterly trade winds across the central
+Caribbean. A recent scatterometer satellite pass captured winds up
+to 32 kt off NW Colombia. Seas of 7-10 ft are occurring in the 
+central Caribbean. Fresh to strong NE-E winds and seas of 5-8 ft
+are noted in the Windward Passage and the Gulf of Honduras.
+Moderate to locally fresh NE-E winds and moderate seas are evident
+in the eastern Caribbean and the lee of Cuba. Elsewhere, moderate
+or weaker winds and slight to moderate seas are prevalent.
+
+For the forecast, the pressure gradient between high pressure north of
+the basin and lower pressures over northern South America will continue
+to support strong to near-gale force trade winds across the central
+Caribbean into mid-week. East winds will pulse strong each 
+evening in the Gulf of Honduras and Windward Passage.
+
+...ATLANTIC OCEAN...
+
+An extensive subtropical ridge dominates the tropical Atlantic,
+supporting fresh to locally strong easterly trade winds south of
+the SE Bahamas and between 71W and 75W. Moderate easterly winds
+and moderate seas are occurring south of 22N and west of 40W.
+Elsewhere, moderate or lighter winds and moderate seas prevail.
+
+For the forecast west of 55W, the subtropical ridge will remain
+dominant through the forecast period, supporting moderate to fresh
+trades south of 23N, with gentle winds to the north. Pulsing 
+strong winds are expected each night offshore Hispaniola and in 
+the Windward Passage.
+
+$$
+Delgado

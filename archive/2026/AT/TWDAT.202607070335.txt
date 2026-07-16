@@ -1,0 +1,118 @@
+
+000
+AXNT20 KNHC 070335
+TWDAT
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+0615 UTC Tue Jul 7 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 0000 UTC surface analysis and satellite imagery through 
+0325 UTC.
+
+...TROPICAL WAVES...
+
+A tropical wave has been introduced in the far eastern Atlantic,
+along 24W, south of 13N, based on wave guidance data. The wave is
+moving westward at 15-20 kt. No significant convection is noted
+near the trough axis.
+
+A central Atlantic tropical wave is along 44W, south of 17N, 
+moving westward at 15-20 kt. Scattered moderate to isolated strong
+convection is present from 02N to 11N and between 33W and 51W. 
+
+Another central Atlantic tropical wave is along 57W, south of 
+18N, moving westward at 15 kt. Scattered moderate to isolated 
+strong convection is observed from 02N to 13N and between 51W and 
+59W.
+
+A western Caribbean Sea tropical wave along 84W, south of 18N, 
+moving westward at 10 kt. No significant convection is noted
+near the trough axis.
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough enters the Atlantic through the coast of
+Mauritania near 21N16W and continues southwestward to 09N26W. The
+ITCZ extends from 09N26W to 07N43W, then continues from 07N45W to
+07N56W. Numerous moderate to isolated strong convection is 
+evident from 06N to 15N and east of 21W. 
+
+...GULF OF AMERICA...
+
+Diurnal storms that formed over the western Yucatan peninsula are
+racing westward at about 25-30 kt as a squall line over the 
+eastern Bay of Campeche. Mariners in these waters can expect
+gusty winds to 30 kt, suddenly higher seas and some lightning 
+strikes. A few showers are also noted in the eastern Gulf waters. 
+
+At the surface, a 1018 mb high pressure system situated south of
+the mouth of the Mississippi River supports fresh to locally
+strong easterly winds and seas of 2-4 ft south of 23N and between
+89W and 95W. Elsewhere, moderate or lighter winds and slight seas
+prevail.
+
+For the forecast, relatively weak high pressure extending westward
+across the basin from the Atlantic will change little through Thu
+night, then shift northward to near the northern Gulf coast Fri 
+through Sat night. The related pressure gradient will generally
+maintain gentle to moderate winds east to southeast winds across 
+the Gulf south of about 26N, and light to gentle southeast to 
+south winds north of about 26N, except for fresh to strong 
+northeast to east winds offshore the Yucatan peninsula at night. 
+Slight seas are forecast throughout the basin for the forecast 
+period. 
+
+...CARIBBEAN SEA...
+
+A strong subtropical ridge over the central Atlantic is forcing
+strong to near gale-force easterly trade winds and rough seas
+across the central Caribbean Sea. The strongest winds and highest
+seas are found off NW Colombia. Moderate to fresh easterly breezes
+and moderate seas are present in the eastern Caribbean, Windward
+Passage and Gulf of Honduras. Elsewhere, moderate or lighter winds
+and slight to moderate seas are prevalent. 
+
+For the forecast, the pressure gradient between Atlantic high
+pressure and relatively lower pressures in Colombia will continue
+to support fresh to strong trades across the central Caribbean 
+through the period, while mostly fresh trades will be elsewhere 
+south of 18N. Moderate to rough seas will accompany these winds. 
+Expect winds to pulse to near-gale force at night offshore of 
+Colombia and in the Gulf of Venezuela through Sat, except on Thu. 
+Moderate or weaker winds will continue over the northwestern part 
+of the basin, except in the Gulf of Honduras where fresh to strong
+east to southeast winds are forecast at night through the 
+forecast period. A tropical wave currently near 56W will move 
+across the eastern Caribbean Wed and Wed night, across the central
+Caribbean Thu through Fri night, and across the eastern part of 
+the western Caribbean Sat and Sat night. Scattered showers and 
+thunderstorms are expected to accompany the wave. 
+
+...ATLANTIC OCEAN...
+
+Divergence aloft is producing isolated showers north of 26N and
+west of 44W. The tropical Atlantic is under the influence of a
+broad subtropical ridge along 27N. Moderate to fresh easterly
+trade winds and seas of 4-8 ft are found south of 24N and west of
+30W. However, strong winds are noted off northern Hispaniola.
+Moderate to locally strong N-NE winds and seas of 4-8 ft are
+evident from 18N to 29N and east of 30W. Elsewhere, moderate or
+weaker winds and moderate seas prevail.
+
+For the forecast west of 55W, high pressure over the area will
+change little through the forecast period. The associated 
+gradient will continue to support moderate to fresh trades south 
+of 23N, and moderate or weaker winds elsewhere. Strong winds along
+with moderate to rough seas are expected at night north of 
+Hispaniola, including approaches to the Windward Passage through 
+Sat night.
+
+$$
+Delgado

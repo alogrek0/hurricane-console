@@ -45,9 +45,9 @@ fs.mkdirSync(OUT, { recursive: true });
 const SAVE = process.argv.includes('--save-fixtures');
 const FIXDIR = path.join(__dirname, '..', 'fixtures');
 const SUM = require('./corpus-summary.js');
-
-const UA = { headers: { 'User-Agent': 'hurricane-console-archive-audit (opt08400@gmail.com)' } };
-const BASE = 'https://www.nhc.noaa.gov/archive/';
+// BASE/UA/listingNames are shared with tools/archive-sync.js so the crawl
+// identity and the directory-listing parse can't drift between the two tools.
+const { BASE, UA, listingNames } = require('./nhc-text-archive.js');
 
 // --- curated manifest ----------------------------------------------------------
 // TCMs live at archive/{year}/al{NN}/al{NN}{YYYY}.fstadv.{NNN}.shtml (raw
@@ -148,7 +148,7 @@ function stripPre(html) {
 // year's directory listing (listing itself is cached too).
 async function resolveTWD(type, year, prefix) {
   const listing = await fetchCached(BASE + 'text/' + type + '/' + year + '/', type + '-listing-' + year + '.html');
-  const names = [...new Set((listing.match(new RegExp(type + '\\.\\d{12}\\.txt', 'g')) || []))].sort();
+  const names = listingNames(listing, type);
   return names.find((n) => n.startsWith(type + '.' + prefix)) || null;
 }
 

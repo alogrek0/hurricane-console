@@ -1,0 +1,25 @@
+
+000
+ABNT20 KNHC 130506
+TWOAT 
+
+Tropical Weather Outlook
+NWS National Hurricane Center Miami FL
+200 AM EDT Sat Jun 13 2026
+
+For the North Atlantic...Caribbean Sea and the Gulf of America:
+
+Western Gulf:
+Showers and thunderstorms associated with a broad area of low 
+pressure moving west-northwestward over the Bay of Campeche remain 
+disorganized. Environmental conditions are forecast to be only 
+marginally conducive for development before the system moves inland 
+over eastern Mexico by Sunday. The system could re-emerge over the 
+northwestern Gulf on Tuesday or Wednesday while interacting with a 
+frontal boundary, but conditions there are also expected to be only 
+marginally conducive for development.
+* Formation chance through 48 hours...low...20 percent.
+* Formation chance through 7 days...low...20 percent.
+
+$$
+Forecaster Gibbs

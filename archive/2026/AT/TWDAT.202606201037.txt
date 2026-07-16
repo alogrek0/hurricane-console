@@ -1,0 +1,167 @@
+
+000
+AXNT20 KNHC 201037
+TWDAT 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+1215 UTC Sat Jun 20 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 0600 UTC surface analysis and satellite imagery through 
+1015 UTC.
+
+...TROPICAL WAVES...
+
+A far eastern Atlantic tropical wave has its axis along 21W from 
+03N to 16N. It is moving westward near 10 kt. Numerous moderate 
+to strong convection is within 240 nm east of the wave from 07N 
+to 13N. Scattered moderate to isolated strong convection is 
+within 120 nm west of the wave from 07N to 11N.
+
+An eastern Atlantic tropical wave has its axis along 35W from 
+02N to 16N moving westward at 15 to 20 kt. Isolated showers 
+and thunderstorms are seen within 180 nm either side of 
+the wave from 02N to 06N.
+
+A central Atlantic tropical wave is along 56W south of 18N to 
+inland Suriname. Scattered showers and thunderstorms are within 
+120 nm east of the wave from 08N to 12N and close to the wave 
+axis near 05N56W.
+
+A central Caribbean tropical wave is along 77W south of 19N. It 
+is moving westward at about 15 to 20 kt. An upper-level low west 
+of the wave near 18N84W is providing upper divergence. This is 
+helping to fire-up scattered moderate to isolated strong 
+convection west of the wave to near 81W from 15N to 18N. Isolated 
+showers and thunderstorms are within 60 nm east of the wave over 
+Colombia.
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough axis enters the Atlantic off the coast of
+Mauritania, and continues southwestward to near 08N27W, then 
+westward to 07N41W, where it transitions to the ITCZ to 08N46W 
+and to 07N55W. Scattered moderate convection is from 04N to 08N 
+between 23W and 33W.
+
+...GULF OF AMERICA...
+
+Relatively weak high pressure ridging stretches westward from the
+western Atlantic to across Florida and to the central Gulf. A 
+1018 mb high center is along the ridge near 27N84W. The pressure 
+gradient between the ridge, and a trough that extends from 25N88W 
+to 22N92W and to inland Mexico at 18N92W has induced mostly fresh 
+southeast winds offshore the northern Yucatan Peninsula, reaching 
+north to near 26N and between 88W and 92W. Seas are 5 to 7 ft with
+these winds. Elsewhere, moderate to fresh east to southeast winds
+are over most of the basin west of 88W, while gentle to moderate 
+or weaker winds remain east of 88W. Both buoy and satellite 
+altimeter data indicate seas of 4 to 6 ft across the basin, except
+for slightly higher seas of 5 to 7 ft over the north-central and 
+NW sections.
+
+Scattered showers and thunderstorms are offshore the Texas coast
+from just northeast of Padre Island to near Matagorda Island. This
+activity extends east to near 96W. Meanwhile, isolated showers and 
+thunderstorms, albeit less in coverage than a few hours ago, are 
+over the southeast Gulf and near the lower Florida Keys.
+
+For the forecast, the pressure gradient between the high pressure
+ridge and relatively lower pressures over Texas and northeastern 
+Mexico will generally support mostly fresh southerly winds over 
+the western and central Gulf through the weekend. These winds are
+expected to diminish to gentle to moderate speeds early next 
+week. Slight to moderate seas will accompany these winds. Weak 
+high pressure over the eastern Gulf will support light to 
+anticyclonic winds and slight seas there through late Mon. A new 
+high center will become established over the central Gulf by 
+midweek, with similar conditions expected over much of the basin 
+at that time. 
+
+...CARIBBEAN SEA...
+
+The pressure gradient between high pressure over the central
+Atlantic and relatively lower pressures in northern South America
+is sustaining fresh to strong trade winds over a good portion of 
+the central Caribbean. Seas with these winds are in the range of 6 
+to 9 ft as detected by earlier satellite altimeter data passes 
+across that portion of the sea. Fresh to strong trade winds are over 
+the Gulf of Honduras surrounding waters. Seas are 6 to 8 ft over 
+this area. Moderate to fresh trade winds along with seas of 5 to 7 
+ft in east swell are over the eastern section of the basin. Gentle 
+to moderate east to southeast trade winds are over the north-central 
+and northwestern portions of the sea along with seas of 4 to 6 ft, 
+except fluctuating at times to 5 to 7 ft over the waters between 
+Jamaica and 15N and from 18N to 15N between 70W and 76W. Mostly 
+gentle trade winds are elsewhere along with seas of about 3 to 4 ft.
+
+An area of recently developed scattered moderate to isolated
+strong convection is southwest of Jamaica from 15N to 17N between
+77W and 81W. This activity is developing under upper divergence 
+provided by an upper-level low near 18N84W as seen in water 
+vapor imagery. Similar convection is confined to the southwestern
+section of the Caribbean south of 11N to along the coasts of Costa 
+Rica and Panama, primarily due to the close proximity of the eastern 
+segment of the East Pacific monsoon trough.
+
+For the forecast, high pressure will prevail north of the area 
+into next week. The pressure gradient between the high pressure and 
+lower pressures in northern South America will support fresh to 
+strong trade winds and moderate to rough seas in the central 
+Caribbean through the forecast period, with highest winds and seas
+expected off the coast of Colombia. Pulsing fresh to strong winds
+and moderate to rough seas are expected in the Gulf of Honduras 
+nightly well into the upcoming week. Moderate to fresh winds are 
+expected over much of the remainder of the Caribbean through the
+middle portion of next week. A tropical wave currently east of 
+the Lesser Antilles near 56W will move through the eastern 
+Caribbean Sun through late Mon, and across the rest of the basin 
+through late Wed. Scattered showers and thunderstorms are expected
+near the wave.
+
+...ATLANTIC OCEAN...
+
+Three tropical waves are moving westward between West Africa and 
+the Lesser Antilles. Please see the Tropical Waves section for 
+details on these features.
+
+High pressure dominates the Atlantic forecast region, with a 1022
+mb high center analyzed near 27N57W. The pressure gradient 
+between the high and relatively lower pressure to the south, 
+including near the tropical waves, is sustaining mostly moderate to 
+fresh trade winds over the majority of the waters south of about 22N 
+as well as over the waters between the southeastern Bahamas and 
+Hispaniola. A satellite scatterometer data pass from yesterday 
+evening revealed fresh to strong north winds over the far eastern 
+Atlantic between the coast of Africa and 20W from 18N to 24N as a 
+tight gradient exists there between low pressures over Africa and 
+the southeast periphery of Atlantic high pressure. Seas are in the 
+range of 5 to 6 ft over these waters as suggested by a satellite 
+altimeter pass from last night. Latest scatterometer satellite data 
+passes indicate that light to moderate winds are elsewhere across 
+the domain.
+
+Isolated showers and thunderstorms are observed over and near 
+the central Bahamas and between southeast Florida and Andros 
+Island. Similar activity is seen north of 29N between 74W and 80W
+as a mid to upper-level trough slides eastward east of northern 
+Florida. Isolated weak showers are north of 29N between 43W and 
+57W.
+
+For the forecast west of 55W, the relatively weak high pressure 
+will continue over the basin at least into the early part of next 
+week. A weak frontal boundary will move offshore northeast 
+Florida today, then stall and lift north as a warm front tonight 
+into Sun. Fresh southwest winds north of 29N and between 65W and 
+74W will diminish this afternoon. Moderate to fresh trade winds 
+will pulse to strong south of 22N into early next week, then be at
+mostly fresh speeds through the rest of the forecast period. 
+
+$$
+Aguirre

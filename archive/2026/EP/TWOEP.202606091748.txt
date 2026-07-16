@@ -1,0 +1,21 @@
+
+000
+ABPZ20 KNHC 091748
+TWOEP 
+
+Tropical Weather Outlook
+NWS National Hurricane Center Miami FL
+1100 AM PDT Tue Jun 9 2026
+
+For the eastern and central North Pacific east of 180 longitude:
+
+Active Systems:
+The National Hurricane Center is issuing advisories on Tropical 
+Storm Cristina, located near the northwestern coast of Nicaragua. 
+The National Hurricane Center has issued the last advisory on 
+Post-Tropical Cyclone  Boris, located inland over southern Mexico. 
+
+Tropical cyclone formation is not expected during the next 7 days.
+
+$$
+Forecaster Beven

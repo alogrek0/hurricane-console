@@ -1,0 +1,142 @@
+
+452 
+AXNT20 KNHC 070337
+TWDAT
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+0615 UTC Sun Jun 7 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 0000 UTC surface analysis and satellite imagery through 
+0300 UTC.
+
+...TROPICAL WAVES...
+
+The tropical wave in the eastern Atlantic has it axis along 
+21.5W, south of 12N, moving westward at around 15 kt. Widely 
+scattered moderate isolated strong convection is depicted from 03N
+to 06N between 20W and 25.5W. 
+
+A tropical wave is in the central Atlantic near 34W, south of 
+13N, moving westward at 15-20 kt. Scattered moderate convection 
+is noted from 04N to 05.5N between 35W and 40W near the ITCZ to 
+the W.
+
+A tropical wave is in the Tropical N Atlantic approaching the
+Lesser Antilles, along 59.5W, south of 17N to across Barbados and
+Guyana, moving westward at around 20 kt. No significant 
+convection is noted over water.
+
+A tropical wave is in the eastern Caribbean Sea along 67W, south 
+of the Mona Passage at 18N, moving westward at around 10 kt. The
+wave is enhancing convection over portions of Venezuela and
+Colombia but not over water away from from shore.
+
+A tropical wave is in the western Caribbean Sea along 82W, south 
+of 20N to across western Panama and into the eastern tropical
+Pacific Ocean, slowly moving around 5 kt. The tropical wave
+continues to interact with an upper trough near 80W with
+scattered to numerous moderate to strong convection from 15N to
+21N between 71W and 80W impacting portions of Jamaica, eastern
+Cuba, and Haiti, continuing to portions of the SE Bahamas and
+Turks and Caicos Islands.
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough enters the Atlantic through the coast of
+Senegal near 14N17W and continues southwestward to 04N32W. The 
+ITCZ extends from 03N35W to the coast of Brazil near 02N51W. Other
+than the convection associated with two tropical waves as
+described above, scattered moderate is also noted from 02N to
+03.5N between 40.5W and 43.5W.
+
+...GULF OF AMERICA...
+
+High pressure of 1018 mb is analyzed in the NE Gulf near Apalachee
+Bay at 29.5W84W. The diurnal surface trough is analyzed over the 
+western coast of the Yucatan Peninsula resulting in fresh to 
+strong NE-E winds within about 60-120 nm of the northern and 
+western Yucatan. Otherwise, mainly Gentle to moderate E-SE flow 
+dominates the basin, locally fresh through the Straits of Florida.
+Seas are 3-5 ft N of 21N and W of 87W, and 2-4 ft elsewhere. Some
+scattered convection is evident near the coast of Tampico, and 
+from offshore Mississippi to the western Florida Panhandle.
+
+For the forecast, a ridge will continue to dominate the Gulf 
+region supporting gentle to moderate E to SE winds over the 
+eastern Gulf and moderate to fresh SE to S winds over the western 
+Gulf through Mon. Winds will be easterly at mostly fresh speeds 
+across most of the western and central Gulf S of 26N through 
+midweek. The exception will be off the Yucatan Peninsula, where a 
+diurnal trough will support moderate winds to pulse to fresh, 
+occasionally strong, during the evenings through Wed. Slight to 
+moderate seas will prevail with these winds. 
+
+...CARIBBEAN SEA...
+
+Two tropical waves are moving westward across the Caribbean Sea
+with a third in the tropical N Atlantic approaching the Lesser
+Antilles, Please see the Tropical Waves section above for more 
+details including significant convection. 
+
+Otherwise, high pressure ridging prevails N of the area and E of
+70W with surface troughing W of 70W over portions of the Bahamas.
+This pressure pattern combined with the passing tropical waves
+supports mainly moderate to fresh easterly trades across much of
+the basin, except for weaker winds in the Lee of Cuba and in the
+SW Caribbean where the pressure gradient is weaker. Seas are 4-6
+ft from 11N to 18N to the E of 77W, and mainly 2-4 ft elsewhere.
+
+For the forecast, moderate to fresh E to SE trade winds and 
+moderate seas will persist across the Caribbean through Sun as the
+Atlantic ridge north of the area weakens and shifts eastward. 
+Winds will begin to increase again over the central Caribbean late
+tonight into Sun, and over the NW part of the basin Sun night 
+into Mon as the pressure gradient tightens between the Atlantic 
+ridge and a broad area of low pressure located over the eastern 
+Pacific offshore of Central America. 
+
+...ATLANTIC OCEAN...
+
+Three tropical waves are moving westward between the western 
+coast of Africa and the Lesser Antilles. Please refer to the 
+Tropical Waves section for more details including any related
+significant convection.
+
+A dissipating stationary front extends from 31N58W to 28N65W with
+the remnant western portion as a frontal trough to the Central
+Bahamas. Some isolated to widely scattered showers and
+thunderstorms are possible near the boundary. More prevalent and
+deeper convection is over the SE Bahamas and Turks and Caicos
+Islands due to an upper level trough extending from the Caribbean
+near 80W. Moderate to fresh winds are prevailing near this
+convection. Otherwise, high pressure centered just N of the area
+along 33N to the E of the dissipating front dominates the weather
+pattern across our waters. Gentle to moderate winds, mainly return
+flow, dominates N of 22N and W of 45W with 4-5 ft seas in easterly
+swell. To the E, a tight pressure gradient between the ridging and
+troughing over NW Africa continues to support fresh to strong N-NE
+winds N of 16N and E of 40W with 6-10 ft seas, highest NE of the
+Canary and Madeira Islands. Mainly moderate to fresh trades and
+4-7 ft seas in NE-E swells dominate the remainder of the waters.
+
+For the forecast west of 55W, a weakening frontal boundary 
+extending from near 31N57W to near 27N65W will dissipate tonight. 
+A surface trough extending from near 27N65W to the southeastern 
+Bahamas will drift westward through Mon night. A cold front will 
+move across the waters N of 27N Tue through Wed, and gradually 
+dissipate by Thu. High pressure will follow the front, and will be
+centered near Bermuda by Wed. This weather pattern will generally
+support gentle to moderate winds and moderate seas into next 
+week, except for moderate to fresh trades S of 22N between 
+Hispaniola and Cuba starting late Wed.
+
+$$
+Lewitsky
+

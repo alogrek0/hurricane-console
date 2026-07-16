@@ -1,0 +1,95 @@
+
+000
+AXPZ20 KNHC 251955
+TWDEP 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+2205 UTC Thu Jun 25 2026
+
+Tropical Weather Discussion for the eastern Pacific Ocean from
+03.4S to 30N, east of 120W including the Gulf of California, and
+from the Equator to 30N, between 120W and 140W. The following
+information is based on satellite imagery, weather observations,
+radar, and meteorological analysis.
+
+Based on 1800 UTC surface analysis and satellite imagery through
+1930 UTC.
+
+...TROPICAL WAVES...
+
+The axis of a tropical wave is near 107W, south of 17N, moving 
+westward at around 10 kt. Numerous moderate and scattered strong 
+convection is noted from 10N-18N between 98W-108W.
+
+The axis of a tropical wave is near 122W, south of 21N, moving 
+westward at around 10 to 15 kt. No significant deep convection is
+occurring with this system this morning.
+
+...INTERTROPICAL CONVERGENCE ZONE/MONSOON TROUGH...
+
+The monsoon trough extends from coastal Costa Rica at 09N84W to 
+07N97W to 11N119W to 09N124W. The ITCZ extends from 10N124W to 
+beyond 08N140W. Numerous moderate and scattered strong 
+convection is noted from 10N-18N between 98W-108W. Scattered
+moderate and isolated strong convection is also noted from
+03N-06N between 103W-109W, from 02N-07N between 91W-96W, and
+north of 03N between 81W-87W.
+
+...OFFSHORE WATERS WITHIN 250 NM OF MEXICO...
+
+A Tehuantepec gap wind event is producing fresh to strong N to 
+NE winds with seas 7-8 ft this afternoon. A surface ridge 
+extends from 27N120W southeastward to 20N110W. Winds elsewhere 
+across the offshore waters are moderate or weaker. Seas on the 
+Pacific waters are 5-6 ft in S to SW swell and are 1-3 ft over 
+the Gulf of California waters. 
+
+For the forecast, low pressure over the deep tropics will 
+continue inducing fresh to strong N to NE gap winds across the 
+Gulf of Tehuantepec through tomorrow night. Elsewhere, winds and 
+seas across the Mexican offshore waters should be quiescent 
+through early next week. Looking ahead, large NW swell may move 
+into the waters off Baja California Norte starting Sun night. 
+
+....OFFSHORE WATERS WITHIN 250 NM OF CENTRAL AMERICA, COLOMBIA,
+AND WITHIN 750 NM OF ECUADOR...
+
+A gap wind event is forcing fresh to strong NE winds across the
+Gulf of Papagayo region this afternoon with seas 7-9 ft. 
+Elsewhere winds are moderate or weaker. Seas are 7-9 ft in S 
+swell over the equatorial waters and 5-6 ft in SW swell over the 
+remainder of the offshore waters. 
+
+For the forecast, the pressure difference between high pressure 
+north of the area and the monsoon trough farther south is 
+supporting a Gulf of Papagayo region gap wind event. Fresh to 
+strong NE to E winds should last through early next week. 
+Elsewhere, winds should remain quiescent. Large S swell moving 
+into the equatorial waters will continue through Sat night. 
+
+...REMAINDER OF THE AREA...
+
+A 1008 mb low is centered near 18N122W. Winds within 180 NM in 
+the N semicircle are fresh to strong with seas 6-8 ft. A surface
+ridge extends from a 1032 mb high at 37N154W southeastward to 
+30N128W to 27N120W to 20N110W. The moderate pressure gradient 
+between the ridge and lower pressure over the monsoon trough/ITCZ
+is forcing moderate to fresh NE trades between 10N and the 
+ridge. Elsewhere, winds across the open Pacific are moderate or 
+weaker. Seas are 5-8 ft in mixed SW and N swell.
+
+For the forecast, the low is no longer a candidate for tropical
+development and should open up into a trough tomorrow. The 
+tropical wave near 107W is forecast to encounter more favorable 
+conditions for development over the weekend across the central 
+portion of the East Pacific basin. A tropical depression is 
+likely to form by the early to middle part of next week while the
+wave moves westward to west-northwestward at 10 to 15 kt over 
+the west-central eastern Pacific. Outside of this system, little
+change in winds are expected for the next several days. A large
+SE swell should reach our southern border tonight and reach up to 
+01N with at least 8 ft seas for the next several days.
+
+$$
+Landsea

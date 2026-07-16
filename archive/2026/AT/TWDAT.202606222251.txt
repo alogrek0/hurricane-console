@@ -1,0 +1,104 @@
+
+000
+AXNT20 KNHC 222251
+TWDAT
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+0015 UTC Tue Jun 23 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 1800 UTC surface analysis and satellite imagery through 
+2230 UTC.
+
+...TROPICAL WAVES...
+
+An eastern Atlantic tropical wave has it axis along 17W, south of
+16N. The wave is moving westward at 15 kt. Scattered moderate to 
+isolated strong convection is observed from 03N to 14N and east 
+of 27W.
+
+Another eastern Atlantic tropical wave has its axis along 39W, 
+south of 16N, moving westward at 15 to 20 kt. No significant deep
+convection is occurring at this time in association with the
+wave.
+
+A central Atlantic tropical wave has its axis along 51W, south of
+17N, moving westward at 15 to 20 kt. Scattered moderate convection
+is occurring from 07N-10N between 50W-56W.
+
+A central Caribbean tropical wave has its axis along 77W, south 
+of 19N, moving westward at 15 kt. No significant deep convection 
+is occurring at this time in association with the wave.
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough enters the Atlantic near 17N16W along the coast
+of Mauritania and continues southwestward to 04N45W. Scattered 
+moderate to isolated strong convection is observed from 03N to 14N
+and east of 27W.
+
+...GULF OF AMERICA...
+
+A 1023 mb high is centered in the NE Gulf contributing toward
+moderate or weaker winds across the Gulf. Seas are 1-3 ft in the E
+Gulf of 4-6 ft in the W Gulf. No significant deep convection is
+occurring this afternoon.
+
+For the forecast, high pressure will dominate the basin this week.
+Fresh to locally strong easterly winds will pulse off the
+Yucatan peninsula nightly during the first half of the week. A
+moderate pressure gradient will maintain mostly fresh southerly
+winds over the western and central Gulf through late tonight
+before diminishing to gentle to moderate speeds. Slight to
+moderate seas will be with these winds. Light winds along with
+slight seas will prevail over the eastern Gulf through the week. 
+
+...CARIBBEAN SEA...
+
+The pressure gradient between ridging north of the area and a 
+1010 mb Colombian Low is forcing fresh to strong trades over the 
+central Caribbean and over the Gulf of Honduras. Elsewhere, the 
+trades are moderate to locally fresh. Seas are 7-9 ft over the 
+central Caribbean and 3-6 ft elsewhere. No significant deep 
+convection is occurring this afternoon.
+
+For the forecast, high pressure will prevail north of the area. 
+The pressure gradient between the area of high pressure and the 
+Colombian low will support fresh to strong trade winds and 
+moderate to rough seas in the central Caribbean through the 
+forecast period. The trade winds are expected to increase to near 
+gale across the central portion of the basin over a large area 
+south of 15N, including along the coast of Colombia and in the 
+Gulf of Venezuela tonight through Tue night. Seas are expected to 
+build to around 13 ft with these winds. Pulsing fresh to strong 
+winds and moderate to rough seas are expected in the Gulf of 
+Honduras nightly. Moderate to fresh winds are expected over much 
+of the remainder of the Caribbean through the week. 
+
+...ATLANTIC OCEAN...
+
+An expansive surface ridge extends from a 1029 mb Bermuda-Azores 
+High near 34N35W to 26N80W in the west. The pressure gradient
+between the ridge and lower pressure over the monsoon trough is
+forcing a large area of moderate to fresh trades south of 22N.
+From 15N-23N east of 35W, the NE trades are fresh to locally 
+strong. Finally, the trades are fresh to strong just north of
+Hispaniola. Elsewhere, winds are moderate or weaker. Seas are 6-8
+ft in the areas of fresh to strong trades and 3-6 ft elsewhere. 
+No other deep convection is occurring away from the two 
+convectively- active tropical waves over the Atlantic.
+
+For the forecast west of 55W, the high pressure will dominate the
+region through the forecast period. Winds will pulse nightly 
+fresh to locally strong speeds off northern Hispaniola and seas 
+may build up to 8 ft. Moderate or lighter winds and moderate seas 
+will prevail elsewhere.
+
+$$
+Landsea

@@ -1,0 +1,21 @@
+
+000
+ABNT20 KNHC 101715
+TWOAT 
+
+Tropical Weather Outlook
+NWS National Hurricane Center Miami FL
+200 PM EDT Wed Jun 10 2026
+
+For the North Atlantic...Caribbean Sea and the Gulf of America:
+
+Bay of Campeche:
+A broad area of low pressure could form over the Bay of Campeche 
+late this week from a westward-moving tropical wave.  Conditions 
+are not expected to be favorable for significant development, and 
+the system should move inland over eastern Mexico late this weekend.
+* Formation chance through 48 hours...low...near 0 percent.
+* Formation chance through 7 days...low...10 percent.
+
+$$
+Forecaster Pasch/Katz

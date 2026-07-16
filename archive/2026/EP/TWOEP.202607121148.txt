@@ -1,0 +1,63 @@
+
+857 
+ABPZ20 KNHC 121148
+TWOEP 
+
+Tropical Weather Outlook
+NWS National Hurricane Center Miami FL
+500 AM PDT Sun Jul 12 2026
+
+For the eastern and central North Pacific east of 180 longitude:
+
+Offshore of Southwestern Mexico:
+A broad area of low pressure located several hundred miles south of 
+the coast of southern Mexico is producing a large area of 
+disorganized showers and thunderstorms. Environmental conditions 
+appear favorable for gradual development of this system, and a 
+tropical depression is expected to form during the early to middle 
+part of this week while the system moves generally 
+west-northwestward well off the coast of Mexico. 
+* Formation chance through 48 hours...medium...40 percent. 
+* Formation chance through 7 days...high...90 percent.
+
+Central and Western East Pacific:
+An area of low pressure located well west-southwest of the Baja 
+California Peninsula continues to produce disorganized showers and 
+thunderstorms. Some gradual development is possible over the next 
+day or two before the system moves west-northwestward into a less 
+favorable environment. 
+* Formation chance through 48 hours...low...20 percent. 
+* Formation chance through 7 days...low...20 percent.
+
+Well South of the Hawaiian Islands:
+A trough of low pressure located several hundred miles 
+south-southeast of the Hawaiian Islands is producing disorganized 
+showers and thunderstorms. Gradual development of this system is 
+possible during the next several days as it moves slowly westward 
+across the central Pacific, remaining well south of the Hawaiian 
+Islands. 
+* Formation chance through 48 hours...low...10 percent. 
+* Formation chance through 7 days...low...30 percent.
+
+Well South-Southwest of the Hawaiian Islands (Ex-CP90):
+Shower and thunderstorm activity has increased with a trough of low 
+pressure located several hundred miles to the south-southwest of the 
+Hawaiian Islands. Environmental conditions appear favorable for 
+gradual development of this system during the next several days as 
+it moves slowly westward to west-northwestward, remaining southwest 
+of the Hawaiian Islands. 
+* Formation chance through 48 hours...low...10 percent. 
+* Formation chance through 7 days...low...20 percent.
+
+Offshore of Southern and Southwestern Mexico:
+An area of low pressure is expected to form by the middle of this 
+week several hundred miles south of the coast of southern Mexico.  
+Environmental conditions appear conducive for gradual development of 
+this system later this week while it moves generally 
+west-northwestward well offshore of Mexico.
+* Formation chance through 48 hours...low...near 0 percent.
+* Formation chance through 7 days...low...30 percent.
+
+$$
+Forecaster Papin
+

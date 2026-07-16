@@ -1,0 +1,134 @@
+
+000
+AXPZ20 KNHC 040915
+TWDEP
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+1005 UTC Thu Jun 4 2026
+
+Tropical Weather Discussion for the eastern Pacific Ocean from
+03.4S to 30N, east of 120W including the Gulf of California, and
+from the Equator to 30N, between 120W and 140W. The following
+information is based on satellite imagery, weather observations,
+radar, and meteorological analysis.
+
+Based on 0600 UTC surface analysis and satellite imagery through
+0900 UTC.
+
+...SPECIAL FEATURES...
+
+Tropical Storm Amanda is centered near 12.2N 129.8W at 04/0900 UTC,
+moving northwest at 7 kt. A gradual turn toward the west-northwest
+and west is expected during the next couple of days. A turn toward
+the southwest at a slower forward speed is forecast this weekend.
+Estimated minimum central pressure is 1006 mb. Maximum sustained
+wind speed is 35 kt with gusts to 45 kt. Some strengthening is
+forecast today and tonight. A weakening trend is forecast to 
+begin by Friday night or Saturday. Numerous moderate to strong 
+convection is observed within 75 nm W of the center. 
+
+Please read the latest HIGH SEAS FORECAST issued by the National
+Hurricane Center at website - 
+https://www.nhc.noaa.gov/text/MIAHSFEP2.shtml and the latest 
+Amanda NHC Forecast/Advisory and Public Advisory at www.hurricanes.gov
+for more details.
+
+...TROPICAL WAVES...
+
+A tropical wave has its axis along 92W from 03N N to near the
+Guatemala/Mexico border, moving W at 5 to 10 kt. Scattered 
+moderate convection is from 07N to 10N between 85W and 92W. A
+cluster of moderate to strong convection is near the northern end
+of the wave axis N of 11N between 87W and 90W. This convective 
+activity is affecting parts of El Salvador and the Gulf of
+Fonseca. 
+
+...INTERTROPICAL CONVERGENCE ZONE/MONSOON TROUGH...
+
+The monsoon trough extends from 11N85W to 09N92W to 1010 mb low
+pressure located near 13N105.5W to 11N125W. It resumes SW of 
+Tropical Storm Amanda near 09N132W and continues to 05N140W.
+Scattered to numerous moderate to strong convection is noted from
+06N to 13N between 98W and 106W. Scattered moderate to isolated
+strong convection can be found from 02N to 08N E of 90W to the
+coast of Colombia, from 10N to 14N between 124W and 128W, and
+from 02N to 10N W of 134W. 
+
+...OFFSHORE WATERS WITHIN 250 NM OF MEXICO...
+
+A ridge, anchored by a 1031 mb high pressure center located near
+32N141W, dominates the offshore forecast waters of Baja 
+California producing moderate to locally fresh NW winds with 
+seas of 5 to 7 ft. Inside the Gulf of California, light winds 
+prevail, with seas of 1 to 3 ft, except seas of 3 to 5 ft in 
+long-period S to SW swell near the entrance to the Gulf. For the 
+remainder of the offshore waters, light to gentle winds dominate 
+along with moderate seas, primarily in long-period S to SW swell,
+including the Gulf of Tehuantepec.
+
+For the forecast, a ridge will remain in control of the weather
+pattern across the waters W of Baja California through the
+upcoming weekend supporting gentle to moderate NW to N winds. 
+Rough seas, in NW swell, will propagate across the outer offshore
+waters N of Punta Eugenia late today into Fri. Additional pulses
+of NW swell will continue to reach the region into early next 
+week. An area of low pressure is forecast to form offshore of 
+southern and southwestern Mexico during the next few days. 
+Environmental conditions also appear conducive for gradual 
+development of this system into early next week, and a tropical 
+depression could form during this time as it moves slowly 
+northward or northwestward, near the coast of southern Mexico. 
+Currently, this system has a medium chance of tropical cyclone 
+formation in 7 days.
+
+....OFFSHORE WATERS WITHIN 250 NM OF CENTRAL AMERICA, COLOMBIA,
+AND WITHIN 750 NM OF ECUADOR...
+
+Light to gentle winds are over the Central American offshore 
+waters under a weak pressure pattern along with moderate seas of 
+5 to 7 ft in long-period S to SW swell. Higher winds are noted
+near the convective activity. Gentle to locally moderate S to SW
+winds along with seas of 5 to 7 ft in long-period SW swell are 
+over the waters S of the monsoon trough between the Galapagos 
+Islands and Ecuador.
+
+For the forecast, long period SW swell will continue to propagate
+across the region creating moderate to rough seas. The highest
+seas are expected between Ecuador and the Galapagos Islands. 
+Otherwise, an area of low pressure is forecast to form offshore 
+of Central America and southern Mexico late this week. Environmental
+conditions appear conducive for development of this system thereafter,
+and a tropical depression could form late this weekend or early 
+next week while it moves slowly northwestward or northward. Currently,
+this system has a medium chance of tropical cyclone formation in
+7 days. 
+
+...REMAINDER OF THE AREA...
+
+Please see the Special Features section for information on Tropical
+Storm Amanda located well SW of the southern tip of Baja California.
+
+Otherwise, high pressure dominates the waters N of 16N and W of 
+110W, including the Revillagigedo Islands. The pressure gradient
+between the ridge and T.S. Amanda is promoting fresh to locally
+strong NE to E winds across most of the area N of 10N and W of 
+120W based on scatterometer data. Seas over these waters are in 
+the 7 to 9 ft range in a mix of trade wind waves and NW to N 
+swell. Mainly gentle winds are S of the monsoon trough with seas
+of 5 to 7 ft, except for S of the Equator, where long-period 
+southerly swell has created rough seas W of the Galapagos Islands.
+
+The aforementioned high pressure will weaken some toward the end of 
+the week as Tropical Storm Amanda tracks toward the NW and W over
+the western portion of the area, resulting in diminishing winds 
+across the trade wind zone. Little change is expected elsewhere.
+
+Tropical Storm Amanda will move to 12.8N 130.7W this afternoon, 
+13.4N 132.0W Fri morning, 13.6N 133.0W Fri afternoon, 13.4N 
+133.6W Sat morning, 13.1N 134.1W Sat afternoon, and weaken to a 
+tropical depression near 12.7N 134.5W Sun morning. Amanda will 
+become a remnant low as it moves to near 12.2N 135.3W early Mon.
+
+$$
+GR

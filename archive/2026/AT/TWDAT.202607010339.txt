@@ -1,0 +1,114 @@
+
+000
+AXNT20 KNHC 010339
+TWDAT 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+0615 UTC Wed Jul 1 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 0000 UTC surface analysis and satellite imagery through 
+0335 UTC.
+
+ ...TROPICAL WAVES...
+
+An eastern Atlantic tropical wave has its axis along 24W, south 
+of 16N, moving westward at 15 kt. Scattered moderate convection 
+is observed from 05N to 10N and between 22W and 27W.
+
+A central Atlantic tropical wave has its axis along 41W, south of
+16N, moving westward at 15-20 kt. Scattered moderate convection 
+is present from 05N to 10N and between 35W and 45W.
+
+A central Caribbean tropical wave has its axis along 72W, south 
+of 18N, moving westward at 15 kt. No significant convection is
+noted along the trough axis over the Caribbean waters.
+
+A SW Caribbean tropical wave has its axis along 82W, south of 
+19N, moving westward near 15 kt. No convection is found along the
+trough axis.
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough enters the Atlantic through the coast of
+Mauritania near 21N16W and continues southwestward to 08N31W. The
+ITCZ extends from 08N31W to 07N40W and continues from 07N42W to 
+07N58W. Scattered moderate convection is evident from 04N to 10N 
+and between 27W and 35W and also south of 09N and west of 45W.
+
+...GULF OF AMERICA...
+
+Diurnal storms the developed over Florida and the NE Gulf coast
+are affecting the nearshore waters. Similarly, thunderstorms over
+western Yucatan are moving into the eastern Bay of Campeche. The
+Gulf is dominated by a weak ridge that supports moderate to 
+locally fresh NE-E and seas of 2-4 ft off Yucatan and the eastern
+Bay of Campeche. Elsewhere, moderate or lighter winds and slight
+seas prevail.
+
+For the forecast, a ridge will continue to dominate the Gulf region
+the remainder of the week. Fresh to locally strong NE to E winds
+will pulse off the NW Yucatan Peninsula nightly through Sun
+night due to local effects associated with a surface trough.
+Gentle to moderate E to SE winds will prevail across the western
+half of the Gulf while moderate or weaker winds are expected
+elsewhere E of 90W, except for light to gentle winds in the NE
+Gulf.
+
+...CARIBBEAN SEA...
+
+A few showers and isolated thunderstorms are occurring in Cuba and
+Hispaniola and affecting the nearshore waters. Similar convection
+is seen in the Gulf of Honduras. The subtropical ridge north of
+the basin continues to force fresh to near-gale easterly trade 
+winds across much of the central Caribbean. A recent scatterometer
+satellite pass captured winds to 30 kt. Seas in these waters are 
+5-10 ft. The strongest winds and highest seas are found off NW 
+Colombia. Moderate to fresh easterly breezes and moderate seas are
+found in the eastern Caribbean. Elsewhere, moderate or lighter 
+winds and slight to moderate seas prevail.
+
+For the forecast, the Bermuda-Azores High north of the basin combined
+with the Colombian Low will support fresh to strong trade winds
+over the central Caribbean through Sun night, except offshore
+Colombia and in the Gulf of Venezuela where winds are likely to
+reach near gale-force at night. Moderate to rough seas are
+expected with the strongest winds. Otherwise, moderate to fresh
+trades will continue in the eastern Caribbean while moderate or
+weaker winds will prevail over the NW part of the basin.
+
+...ATLANTIC OCEAN...
+
+A frontal boundary draped along 31N over the SW North Atlantic is
+producing scattered showers and isolated thunderstorms north of
+28N and between 55W and 73W. Meanwhile, a surface trough in the
+north-central Atlantic supports isolated showers from 24N to 29N
+and between 43W and 50W. The remainder of the basin is dominated
+by an extensive subtropical ridge. Moderate to locally fresh NE
+winds and moderate seas are found north of 28N and west of 75W.
+Moderate to locally fresh easterly winds and seas of 3-6 ft south
+of 22N and east of 30W. 
+
+In the far eastern Atlantic, fresh to near gale-force northerly 
+winds and seas of 6-10 ft are evident north of 22N and east of 
+25W. A recent scatterometer satellite pass showed winds up to 33 
+kt between the water passages in the Canary Islands. Elsewhere, 
+moderate or weaker winds and moderate seas are prevalent.
+
+For the forecast west of 55W, a stationary front is across the NW
+waters, and extends from 30N70W to 28N77W. The front will dissipate
+and its remnant trough will drift southward trough Wed morning, 
+then begin moving westward toward the southeastern U.S. coast late
+Wed into Thu. Under this weather pattern, moderate or weaker 
+winds are expected, except for moderate to fresh winds offshore 
+Hispaniola mainly late in the afternoons into the early evening 
+hours. 
+
+$$
+Delgado

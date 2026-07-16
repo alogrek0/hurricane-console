@@ -1,0 +1,41 @@
+
+000
+ABPZ20 KNHC 161114
+TWOEP 
+
+Tropical Weather Outlook
+NWS National Hurricane Center Miami FL
+500 AM PDT Thu Jul 16 2026
+
+For the eastern and central North Pacific east of 180 longitude:
+
+Active Systems:
+The National Hurricane Center is issuing advisories on Tropical 
+Storm Elida, located several hundred miles southwest of the southern 
+tip of the Baja California Peninsula. 
+
+Well Southwest of the Hawaiian Islands (CP90):
+A broad area of low pressure located several hundred miles southwest 
+of the Hawaiian Islands and around 400 miles southeast of Johnston 
+Atoll is producing limited shower and thunderstorm activity. 
+Environmental conditions appear conducive for gradual development 
+over the next day or so, and a tropical depression could still form 
+by Friday as the system moves slowly northwestward toward the 
+vicinity of Johnston Atoll. By this weekend, this system is 
+expected to move into unfavorable environmental conditions, likely 
+ending its opportunity to develop.
+* Formation chance through 48 hours...low...30 percent. 
+* Formation chance through 7 days...low...30 percent.
+
+Offshore of Southern and Southwestern Mexico:
+A tropical wave located several hundred miles south of the coast of 
+southern Mexico is producing a large area of disorganized showers 
+and thunderstorms. Environmental conditions appear conducive for 
+gradual development of this system thereafter, and a tropical 
+depression is likely to form by this weekend into early next week 
+while it moves generally west-northwestward well offshore of Mexico.
+* Formation chance through 48 hours...low...10 percent.
+* Formation chance through 7 days...high..90 percent.
+
+$$
+Forecaster Kelly
