@@ -618,6 +618,45 @@
         });
       }
     }
+    // Fallback — a polyline described WITHOUT the "from" anchor. Real phrasing
+    // (live TWDAT, 2026-07-16): "The monsoon trough enters the Atlantic
+    // through the coast of Africa near 21N17W and continues southwestward to
+    // a 1013 mb low pres near 12N21W to 09N34W." No "from", prose between the
+    // vertices — the chain regex above cannot see it, so the trough degraded
+    // to two "near" fixes and the tail vertex (09N34W) vanished entirely.
+    // Per sentence ('. ' bounds — decimal coordinates make a bare '.'
+    // unusable): if the sentence names the feature BEFORE its first
+    // coordinate, produced no from-chain, isn't convection prose, and carries
+    // 2+ full coordinate pairs, those pairs ARE the polyline, in prose order.
+    const COORD = /\d{1,2}(?:\.\d)?\s*[NS]\s*\d{1,3}(?:\.\d)?\s*[EW]/g;
+    let start = 0;
+    while (start < flat.length) {
+      let end = flat.indexOf('. ', start);
+      end = end === -1 ? flat.length : end + 1;
+      const sent = flat.slice(start, end);
+      const cueAt = sent.search(/monsoon trough|itcz|trough/i);
+      COORD.lastIndex = 0;
+      const first = COORD.exec(sent);
+      if (cueAt !== -1 && first && cueAt < first.index &&
+          !/convection/i.test(sent) && !/\bfrom\s+\d/i.test(sent)) {
+        const pts = pairsIn(sent);
+        if (pts.length >= 2) {
+          let last = first, m2;
+          while ((m2 = COORD.exec(sent)) !== null) last = m2;
+          feats.push({
+            kind: 'trough',
+            subtype: troughKind(flat, start + first.index),
+            line: pts,
+            inferred: false,
+            source: sent.slice(first.index, last.index + last[0].length).slice(0, 160),
+            context: sentenceAround(flat, start + first.index,
+              last.index + last[0].length - first.index),
+            srcSection: srcName,
+          });
+        }
+      }
+      start = end + 1;
+    }
     return feats;
   }
 
@@ -1092,6 +1131,16 @@
       // running the gazetteer over it only manufactures phantom positions.
       if (!isPreamble && !isSpecial) result.inferred.push(...extractInferred(s.text, s.name, basin));
     }
+
+    // A fallback-parsed trough is built from the same "near <coord>" spans the
+    // fix pass reads, so its vertices would double-plot as bare fixes. The
+    // vertex already carries the sentence in its popup; drop the duplicates.
+    result.fixes = result.fixes.filter(function (f) {
+      return !result.troughs.some(function (t) {
+        return t.srcSection === f.srcSection &&
+          t.line.some(function (p) { return p.lat === f.lat && p.lon === f.lon; });
+      });
+    });
 
     // Gazetteer dots must represent features with no coordinate representation;
     // drop the ones that duplicate parsed geometry.
