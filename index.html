@@ -133,13 +133,18 @@
 
   /* country-name hover chip (desktop pointers only; constants picked in
      tools/hover-lab.html). The invisible hit polygon under it keeps the pan
-     cursor — land is not clickable and must not claim to be. */
+     cursor — land is not clickable and must not claim to be. The fade-in only
+     plays when the chip (re)enters the DOM — i.e. when the pause-to-show delay
+     elapses — never while it follows the cursor. */
   path.hc-country-hit{cursor:grab}
   .leaflet-dragging path.hc-country-hit{cursor:grabbing}
+  @keyframes tipfade{from{opacity:0}}
   .country-tip{background:rgba(9,26,38,.94);color:var(--ink);border:1px solid var(--line);
     border-radius:4px;font:600 .78rem/1.2 var(--mono);letter-spacing:.06em;
-    padding:.15rem .35rem;box-shadow:none;pointer-events:none}
+    padding:.15rem .35rem;box-shadow:none;pointer-events:none;
+    animation:tipfade 200ms ease-out}
   .country-tip::before{display:none}
+  @media (prefers-reduced-motion:reduce){.country-tip{animation:none}}
 
   /* graticule frame labels: quiet chart numerals, halo for legibility over the land fill */
   .grat-labels{position:absolute;inset:0;z-index:450;pointer-events:none}

@@ -300,15 +300,22 @@
   // snapshot, so hit edges match the drawn borders). Loaded lazily ONLY on
   // hover-capable pointers: phones never download or parse the ~87 KB, and
   // land stays non-interactive there. Treatment picked in tools/hover-lab.html:
-  // cursor chip + faint acknowledgment fill on the hovered country.
+  // cursor chip + faint acknowledgment fill on the hovered country, with a
+  // pause-to-show delay — the fill acknowledges the hover immediately, but the
+  // name appears only once the cursor RESTS, so it never flickers across every
+  // country the pointer merely passes through.
   if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
     var countryScript = document.createElement('script');
     countryScript.src = 'countries.js';
     countryScript.onload = function () {
-      var ACK_FILL = 0.06; // hovered-country acknowledgment (hover-lab dial)
+      var ACK_FILL = 0.06;       // hovered-country acknowledgment (hover-lab dial)
+      var HOVER_DELAY_MS = 300;  // pause-to-show rest time (hover-lab dial)
       var countryTip = L.tooltip({ direction: 'top', className: 'country-tip',
         offset: [0, -8], opacity: 1 });
       var hoveredCountry = null;
+      var hoverTimer = null;     // pending pause-to-show timeout, or null
+      var tipShown = false;      // is the name currently displayed
+      var lastHover = null;      // latest {name, latlng} for the timer to show
       var countryHitLayer = L.geoJSON(window.HC_COUNTRIES, {
         // Default overlayPane (400): under the mask (402) and every feature
         // pane, so parsed features always win the pointer. No click handler —
@@ -319,6 +326,8 @@
         interactive: true
       }).addTo(map);
       function clearCountryHover() {
+        clearTimeout(hoverTimer); hoverTimer = null;
+        tipShown = false;
         if (hoveredCountry) { hoveredCountry.setStyle({ fillOpacity: 0 }); hoveredCountry = null; }
         if (map.hasLayer(countryTip)) map.removeLayer(countryTip);
       }
@@ -328,13 +337,30 @@
         // Reading PAN_BOUNDS live means switchBasin needs no hook here.
         if (!L.latLngBounds(PAN_BOUNDS).contains(e.latlng)) { clearCountryHover(); return; }
         var layer = e.propagatedFrom || e.layer;
-        if (hoveredCountry !== layer) {
+        var entered = hoveredCountry !== layer;
+        if (entered) {
           if (hoveredCountry) hoveredCountry.setStyle({ fillOpacity: 0 });
           hoveredCountry = layer;
-          layer.setStyle({ fillOpacity: ACK_FILL });
+          layer.setStyle({ fillOpacity: ACK_FILL }); // fill is immediate; the name waits
         }
-        countryTip.setContent(layer.feature.properties.name).setLatLng(e.latlng);
-        if (!map.hasLayer(countryTip)) countryTip.addTo(map);
+        lastHover = { name: layer.feature.properties.name, latlng: e.latlng };
+        if (tipShown && !entered) {
+          // already showing this country's name: just follow the cursor
+          countryTip.setContent(lastHover.name).setLatLng(e.latlng);
+        } else {
+          // pause-to-show: every move restarts the clock; the name appears only
+          // once the cursor rests HOVER_DELAY_MS (hover-lab behavior 2).
+          tipShown = false;
+          if (map.hasLayer(countryTip)) map.removeLayer(countryTip);
+          clearTimeout(hoverTimer);
+          hoverTimer = setTimeout(function () {
+            hoverTimer = null;
+            if (!hoveredCountry) return; // hover cleared while the clock ran
+            tipShown = true;
+            countryTip.setContent(lastHover.name).setLatLng(lastHover.latlng);
+            if (!map.hasLayer(countryTip)) countryTip.addTo(map);
+          }, HOVER_DELAY_MS);
+        }
       });
       countryHitLayer.on('mouseout', clearCountryHover);
     };
