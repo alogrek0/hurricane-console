@@ -185,6 +185,14 @@ claim a source optimistically before the fetch resolves.
   non-Mercator display CRS (see docs/PROJECTION_DECISION.md), which raster tiles
   would not survive.
 
+## ECC toolkit (session plugin, not a repo dependency)
+The ECC plugin is installed user-level in Claude Code and supplies extra
+commands/agents in this project — useful ones here: `/ecc:code-review`
+(diff review), the `ecc:security-reviewer` agent, `/ecc:harness-audit`.
+Nothing from ECC is installed into this repo, deliberately: the repo stays
+dependency-free, and the project's own skills (`audit`, `ship`, `verify`)
+remain the canonical workflows. Don't copy ECC files into `.claude/`.
+
 ## Deploy (GitHub Pages)
 Push to `main`, then repo **Settings → Pages → Deploy from a branch → `main` /
 `/ (root)`**. Live at `https://<user>.github.io/<repo>/` within a minute. Any push

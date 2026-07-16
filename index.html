@@ -91,6 +91,7 @@
   .scrub button{background:transparent;border:none;padding:.25rem .55rem;
     font-size:.75rem;line-height:1;min-height:0}
   .scrub button:disabled{opacity:.3;cursor:default}
+  .scrub button.on{color:#4fc3d6} /* diff toggle active state */
   .scrub span{color:var(--dim);letter-spacing:.04em;white-space:nowrap;
     font-variant-numeric:tabular-nums;min-width:3.2em;text-align:center}
 
@@ -234,6 +235,7 @@
       <button id="scrubBack" aria-label="Older issuance">◀</button>
       <span id="scrubLabel" aria-live="polite" aria-atomic="true">latest</span>
       <button id="scrubFwd" aria-label="Newer issuance" disabled>▶</button>
+      <button id="scrubDiff" aria-label="Compare with previous issuance" aria-pressed="false">Δ</button>
     </div>
   </div>
 
@@ -291,6 +293,7 @@
 <script src="version.js"></script>
 <script src="basemap.js"></script>
 <script src="parser.js"></script>
+<script src="diff.js"></script>
 <script src="sample.js"></script>
 <script src="app.js"></script>
 <script>
