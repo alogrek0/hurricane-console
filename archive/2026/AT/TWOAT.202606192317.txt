@@ -1,0 +1,27 @@
+
+540 
+ABNT20 KNHC 192317 CCA
+TWOAT 
+
+Tropical Weather Outlook...Corrected
+NWS National Hurricane Center Miami FL
+800 PM EDT Fri Jun 19 2026
+
+For the North Atlantic...Caribbean Sea and the Gulf of America:
+
+Offshore the East Coast of the United States (Remnants of Arthur):
+The remnants of Arthur have merged with a frontal system east of 
+the coast of North Carolina, and no subtropical or tropical 
+development is expected. 
+* Formation chance through 48 hours...low...near 0 percent.
+* Formation chance through 7 days...low...near 0 percent.
+
+&&
+More information on this system, including Gale Warnings, is 
+available in High Seas Forecasts issued by the National Weather 
+Service under AWIPS header NFDHSFAT1, WMO header FZNT01 KWBC, and 
+online at ocean.weather.gov/shtml/NFDHSFAT1.php
+
+$$
+Forecaster Beven
+

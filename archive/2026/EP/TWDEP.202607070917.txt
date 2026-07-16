@@ -1,0 +1,114 @@
+
+000
+AXPZ20 KNHC 070917
+TWDEP
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+1005 UTC Tue Jul 7 2026
+
+Tropical Weather Discussion for the eastern Pacific Ocean from
+03.4S to 30N, east of 120W including the Gulf of California, and
+from the Equator to 30N, between 120W and 140W. The following
+information is based on satellite imagery, weather observations,
+radar, and meteorological analysis.
+
+Based on 0600 UTC surface analysis and satellite imagery through
+0900 UTC.
+
+...TROPICAL WAVES...
+
+A tropical wave is analyzed along 85W north of 06N, moving 
+westward around 10-15 kt. No significant convection is noted with
+this tropical wave.
+
+A tropical wave is analyzed along 125W from 02N to 16N, moving 
+quickly westward at around 20-25 kt. Any nearby convection is 
+described in the monsoon trough/ITCZ section below.
+ 
+...INTERTROPICAL CONVERGENCE ZONE/MONSOON TROUGH...
+
+The monsoon trough axis extends from 08N78W to 09N95W to 05N90W. 
+The ITCZ extends from 05N90W to 07N120W to 05N125W, and from 
+06N130W to 08N135W. Scattered moderate convection is active from
+03N to 13N between 105W and 140W.
+
+...OFFSHORE WATERS WITHIN 250 NM OF MEXICO...
+
+A ridge extends from 1025 mb high pressure near 35N140W
+southeastward to off the coast of Baja California then to just
+west of the Revillagigedo Islands. Scattered showers and
+thunderstorms have been active over the past several hours over
+southern Sonora and northern Sinaloa have resulted in fresh to
+strong winds over the southern and central Gulf of California
+along the eastern shore. Moderate to fresh N to NE winds and 5-7
+ft seas are occurring off Baja California Norte between the ridge
+and lower pressure over northwest Mexico. Moderate E winds and
+6-7 ft seas are noted off western Oaxaca beyond 90 nm offshore,
+and north of lowering pressure over the deep tropics. Gentle to 
+moderate breezes and 4-6 ft are noted elsewhere, except 1-3 ft 
+seas in the Gulf of California.
+
+For the forecast, the ridging will persist off Baja California through mid
+week, with lower pressure inland over northwest Mexico. This
+pattern will support fresh to occasionally strong NW winds off
+Baja California Norte through Wed night, with rough seas in NW
+swell near Guadalupe Island. These winds will diminish Thu, as
+low pressure moves off the Pacific into the lower Colorado River
+Valley. This will result in fresh to strong S winds and rough
+seas late Thu into Fri over the northern Gulf of California.
+Looking ahead, lowering pressure across the tropical eastern
+Pacific will induce moderate to fresh N gap winds and
+occasionally rough seas across the Gulf of Tehuantepec later in
+the week. 
+
+....OFFSHORE WATERS WITHIN 250 NM OF CENTRAL AMERICA, COLOMBIA,
+AND WITHIN 750 NM OF ECUADOR...
+
+A recent scatterometer satellite pass from 05 UTC confirmed a 
+plume of fresh to strong NE to E gap winds persist across the 
+Papagayo region and extend offshore to near 90W, where seas are 
+5-7 ft. Moderate to locally fresh winds are elsewhere to the N of
+09N. Moderate SE winds are offshore Ecuador to the Galapagos 
+Islands, where seas are 6-9 ft in SW swell. Light to gentle winds
+are across the remainder of the waters, along with 4-7 ft mainly
+in SW swell.
+
+For the forecast, fresh to strong NE-E gap winds will pulse in the
+Gulf of Papagayo region into early Thu, then moderate to fresh
+thereafter. Cross equatorial SW swell will move through the 
+waters off Ecuador and the Galapagos Islands through early Wed, 
+with seas peaking around 9 ft. The combination of the southerly 
+swell with shorter period seas associated with gap winds will 
+allow combined seas to build to a peak of about 8 ft offshore of 
+northern Central America through Wed. Gentle to moderate breezes
+and slight to moderate seas will persist elsewhere. 
+
+...REMAINDER OF THE AREA...
+
+A trough, the remnant of Douglas, is along 133W/134W from 21N to
+28N. A recent scatterometer satellite pass from 0630 UTC indicated
+fresh NE winds within 60 nm northwest of this trough. Elsewhere,
+a broad ridge dominates the waters north of 15N, supporting 
+moderate NE winds and 5-7 ft seas in a mix of N and SW swell. 
+Fresh NE winds and seas to 9 ft are also noted farther south 
+ahead of the tropical wave near 125W, specifically from 10N to 
+15N between 125W and 135W. Scattered showers and thunderstorms
+are ongoing near a surface trough along 137W from 03N to 10N.
+Recent scatterometer satellite data indicate fresh to strong
+winds are within 90 nm of the trough, and rough seas are likely
+accompanying the strong winds. Gentle to moderate breezes are 
+noted elsewhere. Long period SW swell to 8 ft is reaching 08N 
+between 90W and 130W. Combined seas are 5-7 ft elsewhere. 
+
+For the forecast, strong winds and rough seas will follow the
+trough near 137W as it moves west of 140W tonight. Strong winds 
+and rough seas will also accompany the tropical wave near 125W at
+it moves westward at 20 to 25 kt through 135W by Wed night and 
+past 140W by late Fri. Farther north, swell of 8-9 ft will
+persist north of 25N east of 125W through Fri. Farther south,
+large swell to 7-8 ft will persist south of 01N between 95W and
+120W through Fri.
+
+$$
+Christensen

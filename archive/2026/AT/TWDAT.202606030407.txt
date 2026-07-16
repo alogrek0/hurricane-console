@@ -1,0 +1,133 @@
+
+000
+AXNT20 KNHC 030407
+TWDAT 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+0615 UTC Wed Jun 3 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 0000 UTC surface analysis and satellite imagery through 
+0355 UTC.
+
+...SPECIAL FEATURES...
+
+Gale Warning E of 35W: The pressure gradient between the 1034 mb 
+high pressure system centered SW of the Azores and lower 
+pressures in NW Africa result in strong to near gale-force 
+northerly winds in the Agadir High Seas Marine Zones. Gale-force 
+winds are expected 03/1500 to at least 04/0000 UTC with severe 
+gusts. These winds will produce rough seas. Similar conditions 
+will persist into the weekend. For more details, refer to the 
+Meteo- France High Seas Forecast listed on their website 
+https://wwmiws.wmo.int 
+
+...TROPICAL WAVES...
+
+An eastern Atlantic tropical wave is along 25W, south of 13N,
+moving westward at 10-15 kt. Scattered moderate convection is
+observed from 03N to 10N and between 25W and 30W.
+
+A central Atlantic tropical wave is along 44N, south of 14N, moving
+westward at 10-15 kt. No significant convection is noted near this
+trough.
+
+A central Atlantic tropical wave has been analyzed along 54W, 
+south of 16N, moving westward at 10-15 kt. No convection is
+present near this trough at this time.
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough enters the Atlantic through the coast of 16N16W
+and continues southwestward to 02N27W. The ITCZ extends from 
+02N27W to 01N50W. No significant convection is evident near the
+monsoon trough and ITCZ.
+
+...GULF OF AMERICA...
+
+Divergence aloft, tropical moisture and diurnal heating support
+scattered showers and isolated thunderstorms across much of the
+basin and the Yucatan peninsula. A weak pressure gradient
+dominates the Gulf waters, supporting moderate to locally fresh
+winds and slight to moderate seas..
+ 
+For the forecast, high pressure over the eastern Gulf will support 
+gentle to moderate easterly to southerly winds and slight seas through
+tonight. A late-season cold front will enter the northeastern 
+Gulf Wed morning, then stall from near Punta Gorda, Florida to New
+Orleans, Louisiana through Thu night before dissipating Fri. 
+Anticipate fresh to strong E to SE winds and rough seas behind 
+this front and also north of the Yucatan Peninsula. By Fri night, 
+ridging should rebuild across the central and northeastern Gulf, 
+resuming gentle to moderate E to SE winds and moderate seas for 
+the entire Gulf. An upper-level trough across the western Gulf 
+will continue to support showers and thunderstorms across the 
+south-central and southeast Gulf through Wed.
+
+...CARIBBEAN SEA...
+
+A recent, partial scatterometer satellite pass captured near 
+gale-force easterly winds, up to 31 kt, in the Gulf of Venezuela.
+This is due to the very tight pressure gradient between the 
+expanding 1034 mb high pressure system SW of the Azores and very 
+low pressures in northern Colombia. Fresh to near gale-force 
+easterly trade winds and rough seas are found in the central 
+Caribbean. Fresh to locally strong easterly breezes and moderate 
+seas are noted in the eastern Caribbean. Elsewhere, moderate or 
+lighter winds and slight to moderate seas prevail. 
+
+For the forecast, the Atlantic ridge north of the area will weaken and
+shift east through late Wed. This pattern shift will allow fresh 
+to strong trade winds and moderate to rough seas across the central
+Caribbean to diminish slightly, although fresh to strong winds may
+pulse off Venezuela and in the Gulf of Honduras at night through 
+Fri. Looking ahead, the Atlantic ridge may rebuild by Sun, 
+supporting fresh to strong winds and building seas across the 
+central and northwest Caribbean.
+
+...ATLANTIC OCEAN...
+
+Please read the Special Features section about a Gale Warning in
+the far NE Atlantic.
+
+A cold front is sinking across the waters off NE Florida,
+extending from 31N74W to near Daytona Beach, Florida. Scattered
+moderate to isolated strong convection is occurring south of the
+front to the NW Bahamas and west of 75W. A tight pressure gradient
+between the front results fresh to strong NE-E winds and moderate
+to rough seas. Farther east, a cold front extends from 31N65W to
+27N74W, followed by a stationary front to 27N78W. Scattered
+moderate to isolated strong convection is present ahead of the
+front to 62W and north of 27N. Fresh to strong southerly winds and
+rough seas are present ahead of the front to 55W and north of 27N.
+
+The remainder of the tropical Atlantic is dominated by a broad
+subtropical bridge centered southwest of the Azores. The pressure
+gradient between this ridge and lower pressures in Africa result
+in fresh to strong N-NE winds and rough seas east of 25W. Moderate
+to locally fresh and seas of 6-9 ft are noted between 25W and 70W.
+Elsewhere, moderate or weaker winds and moderate seas prevail.
+
+For the forecast west of 55W, a 1009 mb low pressure area is
+moving northeast past Bermuda, with a stalling frontal boundary 
+extending to the northern Bahamas. Fresh to strong SW winds, rough
+seas, and scattered showers and thunderstorms will persist into 
+Wed southwest of Bermuda, north of 27N. A second low pressure area
+is moving from Cape Hatteras to Bermuda with a reinforcing front 
+currently reaching from 31N74W to Daytona Beach, Florida, followed
+by fresh to strong NE winds and moderate to rough seas. The 
+fronts merge into one front from Bermuda to the northern Bahamas 
+by Wed night. The merged front will stall from just east of 
+Bermuda to the central Bahamas and South Florida by Thu night, 
+then meander northward as it weakens through Sun. Farther south, 
+fresh winds will persist off the northern coast of Hispaniola 
+tonight. 
+
+$$
+Delgado

@@ -1,0 +1,134 @@
+
+000
+AXNT20 KNHC 042315
+TWDAT 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+0015 UTC Fri Jun 5 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 1800 UTC surface analysis and satellite imagery through 
+2230 UTC.
+
+...SPECIAL FEATURES...
+
+Gale Warning East of 35W: The pressure gradient between the 1030 
+mb high pressure system centered southwest of the Azores and lower
+pressures in northwest Africa result in strong to near gale- 
+force northerly winds in the Agadir High Seas Marine Zones.
+Scatterometer data from 1014 UTC today showed strong to near gale
+force winds occurring off the coast of Morocco. Gale-force winds 
+are expected to occur through 05/0000 UTC with severe gusts. These
+winds will produce rough seas 10 ft and higher. Similar 
+conditions will persist into the weekend. For more details, refer 
+to the Meteo- France High Seas Forecast listed on their website 
+https://wwmiws.wmo.int.
+
+...TROPICAL WAVES...
+
+An eastern Atlantic tropical wave is analyzed near 18W south of 
+14N, moving west at 5-10 kt. Scattered moderate convection is 
+active from 06N to 10N between 15W and 21W.
+
+An Atlantic tropical wave is along 40W, south of 12N, moving 
+westward at 15-20 kt. Scattered moderate isolated strong convection
+is seen from 01N to 07.5N between 37W and 46W.
+
+An Atlantic tropical wave is along 52W-53W, south of 14N, moving 
+westward at 10-15 kt. Scattered moderate isolated strong convection
+is noted from 03N to 13N between 48W and 57W. 
+
+An eastern Caribbean tropical wave is along 65W, south of 15N, 
+moving westward at 15 kt. No deep convection is noted over the
+Caribbean waters. The wave is enhancing shower and thunderstorm 
+activity across NE South America.
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough enters the Atlantic through the coast of
+Senegal near 15N17W and continues southwestward to 06N27W. The 
+ITCZ extends from 06N27W to 04N39W where it is broken by a 
+tropical wave, then resumes from 02N43W to the coast of Brazil
+near 01.5N50W. Scattered showers and isolated thunderstorms are 
+along and within 150 nm of the ITCZ.
+
+...GULF OF AMERICA...
+
+A weakening stationary front and frontal remnant trough extend 
+through the Florida Straits to offshore of SW Louisiana near
+27N93W. A tight pressure gradient north of the front is forcing 
+fresh to strong easterly winds and moderate to rough seas to 9 ft
+to the N of 27N across much of the NE and north-central Gulf. 
+Moderate to fresh easterly winds and slight to moderate seas are 
+present across the southeast Gulf and the Straits of Florida. 
+Elsewhere, moderate or weaker winds and slight seas prevail. 
+Divergence aloft and plenty of low-level tropical moisture are
+resulting in numerous moderate and isolated strong convection 
+over the Gulf waters from 23N to 27N and E of 91W.
+
+For the forecast, fresh to strong E to SE winds and moderate to 
+rough seas persist north of a weakening stationary front over the 
+SE waters. Scattered thunderstorms will continue this evening over
+the south- central and southeast Gulf. Winds and seas will 
+diminish starting Fri as a ridge builds from the western Atlantic 
+into the eastern Gulf. This pattern will support gentle to 
+moderate E to SE winds and slight to moderate seas into early next
+week, except for occasionally fresh to strong pulses off 
+northwest Yucatan during the evenings.
+
+...CARIBBEAN SEA...
+
+A ridge extends from 1031 mb high pressure system centered 
+SW of the Azores southwestward to near 25N70W. This pattern is 
+supporting fresh to strong easterly trade winds and moderate to 
+rough seas in the south- central Caribbean. Moderate to fresh 
+easterly winds and moderate seas are noted in the north-central 
+and eastern Caribbean as well as the Gulf of Honduras. Elsewhere, 
+moderate or lighter winds and slight to moderate seas prevail. 
+Scattered moderate convection is occurring in the SW Caribbean, 
+along the eastern extension of the East Pacific monsoon trough and
+extends inland across Nicaragua.
+
+For the forecast, moderate to fresh E to SE trade winds and moderate
+seas will persist across the Caribbean into Sat as the Atlantic
+ridge NE of the area weakens and shifts eastward. The exceptions 
+will be fresh to strong pulses off Venezuela tonight, and in the 
+Gulf of Honduras tonight and Fri night. Fresh to strong SE winds 
+and building are possible over the northwest and north-central 
+Caribbean late Sat through early next week as the Atlantic ridge 
+rebuilds north of area. 
+
+...ATLANTIC OCEAN...
+
+Please read the Special Features section about a Gale Warning in
+the far northeast Atlantic.
+
+A cold front extends from the central Atlantic through 31N66W to 
+the central Bahamas then become stationary westward through the 
+Straits of Florida. Scattered showers and thunderstorms are 
+present along and just ahead of the front, and are most numerous over
+the central and northern Bahamas to 80W. Moderate to fresh N-NE 
+winds and rough seas in NE swell to 8 ft along 31N are found 
+behind the front. Fresh to strong southerly winds and moderate 
+seas are evident N of 27N and W of 60W to the front. Across the 
+remainder of the tropical Atlantic, the basin is being dominated 
+by ridging centered around a 1030 mb high located SW of the 
+Azores, leading to moderate to fresh easterly trade winds S of 
+22N and moderate to locally rough seas. Saharan air dominates the
+deep tropics S of 24N and E of 40W.
+
+For the forecast west of 55W, a frontal boundary reaches from 
+31N66W to the central Bahamas then through the Florida Straits. 
+The front will dissipate Fri into Sat, as high pressure builds
+from the SE U.S. into the western Atlantic. This pattern will 
+allow gentle to moderate winds and moderate seas into early next 
+week. 
+
+$$
+Stripling

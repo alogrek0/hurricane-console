@@ -1,0 +1,103 @@
+
+000
+AXPZ20 KNHC 220403
+TWDEP
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+0405 UTC Mon Jun 22 2026
+
+Tropical Weather Discussion for the eastern Pacific Ocean from
+03.4S to 30N, east of 120W including the Gulf of California, and
+from the Equator to 30N, between 120W and 140W. The following
+information is based on satellite imagery, weather observations,
+radar, and meteorological analysis.
+
+Based on 0000 UTC surface analysis and satellite imagery through
+0350 UTC.
+
+...TROPICAL WAVES...
+
+A tropical wave is along 90W, south of 16N, moving westward at 
+15-20 kt. Scattered moderate to isolated strong convection is 
+present from 03N to 13N between 82W and 94W.
+
+A tropical wave is along 97W, south of 15N, drifting westward at
+5-10 kt. Scattered moderate convection is active from 05N to 09N
+and between 94W and 100W.
+
+A tropical wave is along 106W, south of 16N, moving westward at 
+5-10 kt. Scattered moderate convection is observed from 07N to 
+13N between 100W and 110W.
+
+A tropical wave is along 122W, south of 17N, drifting westward 
+at 5 kt. No significant convection is evident near this wave.
+
+...INTERTROPICAL CONVERGENCE ZONE/MONSOON TROUGH...
+
+The monsoon trough extends from 10N85W to 13N110W to 09N125W. 
+The ITCZ extends from 09N125W and beyond 08N140W. Aside from the
+convection associated with the tropical waves, scattered 
+moderate convection is evident in the Gulf of Panama and from 
+07N to 12N between 109W and 118W.
+
+...OFFSHORE WATERS WITHIN 250 NM OF MEXICO...
+
+Moderate to fresh NW winds are across the Baja California 
+offshore waters along with 5-7 ft seas. The strongest winds are 
+N of Cabo San Lazaro. Elsewhere, light to gentle winds and 
+slight to moderate seas prevail.
+
+For the forecast, ridging over the eastern Pacific will support
+moderate to fresh NW winds off Baja California through Mon
+night, and gentle to moderate breezes elsewhere. Winds off Baja
+California will diminish starting Tue as the high pressure
+weakens ahead of a trough moving into the area from off southern
+California. This pattern will also support moderate to fresh
+southerly winds across the Gulf of California Tue ahead of the 
+trough. Looking ahead, expect fresh to strong northerly gap winds
+and rough seas across the Gulf of Tehuantepec by midweek, as
+pressure lowers farther south into the tropics.
+
+....OFFSHORE WATERS WITHIN 250 NM OF CENTRAL AMERICA, COLOMBIA,
+AND WITHIN 750 NM OF ECUADOR...
+
+A small plume of 15 kt easterly gap winds and seas to 5 ft are 
+evident across the Gulf of Papagayo region, extending downstream 
+to 88W. Farther south, moderate southerly winds and moderate 
+seas are occurring south of 03N. Elsewhere, light to gentle winds
+and slight to moderate seas prevail.
+
+For the forecast, moderate to fresh easterly trade winds and 
+moderate seas are expected in the Papagayo region into early next
+week. Winds will reach fresh to strong speeds starting late Mon 
+with seas building to 9 ft by late Tue. The gap winds in the Gulf
+of Tehuantepec will produce seas to 9 ft in the far offshore 
+waters of Guatemala by midweek. Meanwhile, mainly moderate 
+southerly winds and moderate to locally rough seas will prevail 
+across the offshore waters between Ecuador and the Galapagos 
+Islands through at least midweek. 
+
+...REMAINDER OF THE AREA...
+
+The subtropical ridge centered well north of our waters extends 
+into the remainder of the tropical eastern Pacific north of 20N.
+Gentle to moderate NE to E winds and moderate seas are found 
+north of 10N and west of 115W. Farther south, long period SW 
+swell with wave heights of 7-9 ft are moving into the waters 
+south of 02N between 106W and 120W. Elsewhere, moderate or 
+weaker winds and moderate seas prevail.
+
+For the forecast, additional pulses of SW swell will continue to 
+propagate across the forecast waters east of 125W generating 
+moderate to locally rough seas. Otherwise, little changes are 
+expected in winds and seas through early next week as a ridge 
+remains in control of the weather pattern across the area.
+Looking ahead, a low pressure system is expected to form late 
+this week several hundred miles offshore of the coast of 
+southwestern Mexico. Some slow development of this system is 
+possible after that time while it moves west-northwestward at 10 
+to 15 kt. 
+
+$$
+Ramos

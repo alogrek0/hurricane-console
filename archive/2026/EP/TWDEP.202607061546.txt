@@ -1,0 +1,131 @@
+
+000
+AXPZ20 KNHC 061546
+TWDEP
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+1605 UTC Mon Jul 6 2026
+
+Tropical Weather Discussion for the eastern Pacific Ocean from
+03.4S to 30N, east of 120W including the Gulf of California, and
+from the Equator to 30N, between 120W and 140W. The following
+information is based on satellite imagery, weather observations,
+radar, and meteorological analysis.
+
+Based on 1200 UTC surface analysis and satellite imagery through
+1500 UTC.
+
+...TROPICAL WAVES...
+
+A tropical wave is analyzed along 82W north of 06N to across
+western Panama and continuing into the western Caribbean Sea,
+moving westward around 20 kt. Any nearby convection is described
+in the monsoon trough/ITCZ section below.
+
+A tropical wave is analyzed along 119W from 02N to 17N, moving
+westward at 15 to 20 kt. Any nearby convection is described
+in the monsoon trough/ITCZ section below.
+ 
+...INTERTROPICAL CONVERGENCE ZONE/MONSOON TROUGH...
+
+The monsoon trough axis extends from western Colombia from 
+08N77W to near the southern coast of Panama to 09N90W. The ITCZ 
+extends from 09N92W to 07N105W to 09N116W, then resumes west of a
+tropical wave from 07N123W to beyond 08N140W. Scattered moderate
+isolated strong convection is noted from 05.5N to 08.5N between 
+77W and 82W, from 06N to 08N between 100W and 106W, from 06N to 
+15N between 109W and 122W, and from 00N to 12N between 122W and 
+140W. Similar convection is noted within 210 nm of the coast 
+between 89W and 102W.
+
+...OFFSHORE WATERS WITHIN 250 NM OF MEXICO...
+
+A broad surface ridge extends from the northeast Pacific across 
+the Baja California waters to near 18N112W. The pressure 
+gradient between this ridge and relatively lower pressures over 
+northwest Mexico is generally supporting moderate to fresh 
+NW winds offshore Baja California to the west of 114W. Seas are 
+4 to 6 ft over these waters in mixed long period SW swell and NW 
+swell. Fresh to strong N-NE winds are in the Gulf of 
+Tehuantepec. Seas are 6 to 8 ft in long period SW swell. 
+Elsewhere, gentle to moderate mainly NW-N winds are present, with
+seas of 4 to 6 ft in long period SW swell. Inside the of 
+California, moderate to locally fresh SE winds are in the central
+and northern Gulf, and gentle to moderate in the southern Gulf. 
+Seas are 1 to 3 ft in the Gulf except higher near the entrance.
+
+Active convection is present within 210 nm of the coast of SW and
+southern Mexico to the east of 102W.
+
+For the forecast, the surface ridge will build east-southeastward 
+across the offshore waters of Baja California through Wed night, 
+with the resultant gradient leading to moderate to fresh NW 
+winds over these same waters, locally strong to the north of
+Punta Eugenia through Tue night. Moderate to fresh gap winds in 
+the Gulf of Tehuantepec will pulse at fresh to strong speeds at 
+night into the mornings through the rest of the week with seas to
+rough at times. Little change in winds is forecast elsewhere, 
+except increasing and pulsing to fresh to strong in the central 
+and northern Gulf of California by the end of the week as the 
+gradient tightens there. Fresh NW swell off California will push
+southward off Baja California Norte late Tue night into early
+Wed, continuing through early Fri. Moderate seas are forecast
+elsewhere.
+
+....OFFSHORE WATERS WITHIN 250 NM OF CENTRAL AMERICA, COLOMBIA,
+AND WITHIN 750 NM OF ECUADOR...
+
+Fresh to strong northeast winds are continuing across the Papagayo 
+region and extend offshore to near 90W, where seas are 6 to 8 ft.
+Moderate to locally fresh winds are elsewhere to the north of
+10N. Moderate northerly winds are in the Gulf of Panama, while 
+moderate SE winds are offshore Ecuador to the Galapagos Islands, 
+where seas are 5 to 8 ft in SW swell. Light to gentle winds are 
+across the remainder of the waters, along with 4 to 7 ft mainly 
+in SW swell.
+
+For the forecast, fresh to strong NE-E gap winds in the Gulf of 
+Papagayo region will continue into early Thu, then moderate to
+fresh thereafter. Moderate to fresh N-NE winds will pulse in the
+Gulf of Panama through Tue night. Little change in winds is
+forecast elsewhere through the week. Cross equatorial SW swell 
+will move through the waters off Ecuador and the Galapagos 
+Islands through early Wed, building seas to a peak of 9 ft. The 
+combination of the southerly swell with shorter period seas 
+associated with gap winds will allow combined seas to build to a 
+peak of about 8 ft offshore of northern Central America Tue 
+through Wed with mainly moderate seas otherwise. 
+
+...REMAINDER OF THE AREA...
+
+A broad ridge continues across the northeast Pacific and north 
+of the discussion area. It extends southeastward to near 
+the Revillagigedo Islands. The pressure gradient between this 
+ridge and the remnant trough of Douglas analyzed from near
+28N131W to 21N132W is producing fresh northeast winds within 180
+nm west of the trough from 25N to 29N. Seas are to 8 ft in a mix
+of easterly swells over these waters. Winds are mainly gentle to
+moderate across the remainder of the waters to the north of the
+ITCZ, except moderate to locally fresh to the north of the ITCZ
+to 18N and to the west of 115W. Mainly moderate to locally fresh
+winds are south of the ITCZ. Seas are 6 to 9 ft in S to SW swell
+across the waters mainly south of 14N, and 5 to 7 ft in mixed
+swell across the remainder of the waters. Very active convection
+is present over the waters near a tropical wave at 119W as
+described above.
+
+For the forecast, the remnant trough of Douglas will continue 
+drifting westward through the rest of the week. The ridge will 
+build east-southeastward through Wed night, with the gradient 
+between it and the remnant Douglas trough leading to a solid
+area of fresh trades over the western half of the area along 
+with seas of 7 to 8 ft. Large southerly swell with seas up to 9
+ft will continue impacting the waters south of 06N through at
+least mid-week. Large northerly swells off California will build
+seas to around 9 ft offshore Baja California Norte by mid-week.
+Meanwhile, the tropical wave will continue moving westward with 
+scattered moderate convection.
+
+$$
+Lewitsky

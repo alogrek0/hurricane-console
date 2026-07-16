@@ -1,0 +1,129 @@
+
+000
+AXNT20 KNHC 231039
+TWDAT
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+1215 UTC Tue Jun 23 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 0600 UTC surface analysis and satellite imagery through 
+1030 UTC.
+
+...TROPICAL WAVES...
+
+A far eastern tropical wave is near 23W from 13N southward, and 
+moving westward at 15 to 20 kt. Scattered moderate to isolated 
+strong convection is observed from 02N to 07N between 23W and 
+29W.
+
+An eastern tropical wave is near 46W from 15N southward, and 
+moving westward at 15 to 20 kt. Scattered moderate convection is
+seen from 06N to 09N between 44W and 52W.
+
+A central Atlantic tropical wave is near 58W from 16N southward, 
+and moving westward near 15 kt. Scattered moderate to isolated
+strong convection is found from 06N to 10N between 53W and 60W.
+
+A western Caribbean tropical wave is near 82W from 15N southward,
+and moving westward near 15 kt. Scattered moderate to isolated
+strong convection is found over the northern coast of western 
+Panama, and nearby Caribbean waters.
+
+...MONSOON TROUGH/ITCZ...
+
+A monsoon trough enters the Atlantic along the Mauritania coast
+near Nouakchott, then curves southwestward to 05N33W. An ITCZ
+continues westward from 05N33W to 05N45W to the northern coast of
+Suriname. Scattered moderate to isolated strong convection is
+flaring up south of the monsoon trough from 11N to 13N west of 
+19W. No significant convection is evident near the ITCZ.
+
+The eastern end of the East Pacific monsoon trough is generating
+scattered heavy showers and strong thunderstorms near the northern
+coast of eastern Panama, and nearby Caribbean waters.
+
+...GULF OF AMERICA...
+
+An modest upper-level trough extends southwestward from the
+northeastern Gulf to beyond near Veracruz, Mexico. This feature is
+triggering scattered showers and isolated thunderstorms at the
+western Bay of Campeche. Otherwise, a 1021 mb high at the east-
+central Gulf continues to dominate the Gulf, with light to gentle
+winds and 1 to 3 ft seas across the eastern Gulf. Moderate to
+fresh SE to S winds and seas of 4 to 6 ft prevail for the western
+Gulf, including the Bay of Campeche.
+
+For the forecast, high pressure south of the Florida Panhandle 
+will dominate the Gulf through the weekend. Fresh to strong NE to 
+E winds will pulse off the northwestern Yucatan Peninsula nightly 
+through Wed night, then mainly fresh afterward. A moderate 
+pressure gradient will maintain moderate to fresh southerly winds 
+over the western and south-central Gulf through early this morning
+before diminishing to between gentle and moderate by late this 
+morning. Slight to moderate seas will be with these winds. Light 
+winds along with slight seas will prevail over the eastern Gulf 
+through the week. 
+
+...CARIBBEAN SEA...
+
+A broad Atlantic Ridge near 29N continues to support a robust
+trade-wind regime across the entire basin. Convergent trades are
+producing scattered moderate convection south of the Cayman
+Islands, and in the Gulf of Honduras. Refer to the Monsoon
+Trough/ITCZ section for additional convection in the Caribbean
+Sea. Strong with locally near-gale NE to E winds and seas of 12 
+to 14 ft are present at the south-central basin, while fresh to 
+strong E winds and 8 to 11 ft seas exist at the north-central 
+basin. Gentle to moderate E winds and seas at 3 to 5 ft are noted 
+at the northwestern basin. Moderate to fresh ENE to E winds with 4
+to 6 ft seas prevail for the rest of the basin, including the 
+Gulf of Honduras.
+
+For the forecast, the Atlantic Ridge of high pressure will 
+prevail north of the area near 29N. The pressure gradient between 
+this ridge and the Colombian low will support fresh to strong 
+trade winds, and moderate to rough seas in the central basin 
+through Wed morning. For Wed afternoon and night, fresh to strong 
+trades should be confined to the south-central basin before 
+expanding northward again Thu through the weekend. These winds are
+expected to peak at near-gale force offshore of northwestern 
+Colombia, south of 14N during the nighttime and early morning 
+hours, except for Wed night and Thu morning. Pulsing fresh to 
+strong winds and moderate to locally rough seas are expected in 
+the Gulf of Honduras nightly. Moderate to fresh trades with rough 
+seas should persist east of the Lesser Antilles until Wed morning,
+then moderate winds and seas afterward. Moderate to fresh winds 
+are expected over much of the remainder of the Caribbean through 
+the week. 
+
+...ATLANTIC OCEAN...
+
+An upper-level low near 27N60W is triggering isolated thunderstorms
+25N to 29N between 60W and 65W. Refer to the Monsoon Trough/ITCZ 
+and Tropical Waves sections for additional weather in the Atlantic
+Basin. An expansive surface ridge extends from a 1028 mb high at 
+the central Atlantic near 33N41W across 31N40W to beyond southern 
+Florida. This feature is supporting gentle to moderate E to SE to
+SW winds and seas of 3 to 5 ft, north of 23N between 35W and the
+Florida east coast/Bahamas. For the tropical Atlantic from 08N to
+23N between 35W and the Lesser Antilles, moderate to fresh NE to E
+trades and 6 to 9 ft seas are seen. Gentle to moderate E to SE
+winds and seas at 4 to 6 ft prevail elsewhere in the Atlantic
+Basin west of 35W.
+
+For the forecast west of 55W, high pressure will dominate the 
+western Atlantic through the weekend. Fresh to strong easterly 
+winds with locally rough seas are expected off northern Hispaniola
+each night through Sat night. Moderate or lighter winds and 
+moderate seas will prevail elsewhere. 
+
+$$
+
+Chan

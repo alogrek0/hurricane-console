@@ -1,0 +1,50 @@
+
+000
+ABPZ20 KNHC 111144
+TWOEP 
+
+Tropical Weather Outlook
+NWS National Hurricane Center Miami FL
+500 AM PDT Sat Jul 11 2026
+
+For the eastern and central North Pacific east of 180 longitude:
+
+South of the Hawaiian Islands (CP90):
+A trough of low pressure, located several hundred miles south of the 
+Hawaiian Islands, is producing a small area of showers.  Further 
+development of the system appears to be diminishing while it moves 
+generally westward across the central Pacific, remaining well south 
+of the Hawaiian Islands.
+* Formation chance through 48 hours...low...near 0 percent. 
+* Formation chance through 7 days...low...30 percent.
+
+Well Southeast of the Hawaiian Islands:
+A trough of low pressure located several hundred miles southeast of 
+the Hawaiian Islands is producing disorganized showers and 
+thunderstorms.  Environmental conditions appear favorable for 
+gradual development of this system, and a tropical depression could 
+form by mid-next week while it moves generally westward across the 
+central Pacific, remaining well south of the Hawaiian Islands. 
+* Formation chance through 48 hours...low...10 percent. 
+* Formation chance through 7 days...medium...40 percent.
+
+Central and Western East Pacific:
+A tropical wave located well southwest of the Baja California 
+peninsula is producing disorganized showers and thunderstorms.  
+Some slow development of this system is possible while it moves 
+slowly west-northwestward.
+* Formation chance through 48 hours...low...10 percent. 
+* Formation chance through 7 days...low...20 percent.
+
+Offshore of Southwestern Mexico:
+An area of low pressure is expected to form over the next couple of 
+days, several hundred miles south-southwest of the southwestern 
+coast of Mexico.  Environmental conditions appear favorable for 
+gradual development thereafter, and a tropical depression is likely 
+to form by mid-next week while the system moves generally 
+west-northwestward. 
+* Formation chance through 48 hours...low...20 percent. 
+* Formation chance through 7 days...high...80 percent.
+
+$$
+Forecaster Roberts

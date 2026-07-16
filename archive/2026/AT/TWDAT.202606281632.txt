@@ -1,0 +1,100 @@
+
+000
+AXNT20 KNHC 281632
+TWDAT 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+1815 UTC Sun Jun 28 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 1200 UTC surface analysis and satellite imagery through 
+1630 UTC.
+
+ ...TROPICAL WAVES...
+
+A tropical in the far eastern Atlantic is along 22W, south of 
+16N. The wave is moving westward at around 15 kt. Scattered 
+moderate convection is observed from 05N-10N between 20W-26W.
+
+A central Atlantic tropical wave is along 50W, south of 12N, 
+moving westward at around 20 kt. Scattered to numerous moderate 
+convection is found from 04N-10N between 46W-53W.
+
+A tropical wave is over eastern Carribbean along 63W, south of 
+20N, moving westward at around 20 kt. No convection is depicted
+near the wave at this time. 
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough axis enters the Atlantic through the coast of
+Senegal near 13N17W and continues southwestward to 07N28W. The 
+ITCZ extends from 07N28W to 0743W. Scattered moderate convection 
+is occurring from 05N-10N and west of 19.5W.
+
+...GULF OF AMERICA...
+
+Moderate to fresh SE winds along with seas 3 to 5 ft prevail over
+the western Gulf. Elsewhere, gentle or weaker winds along with 
+seas 1 to 3 ft prevail. Scattered moderate convection is occurring 
+over the western Gulf, off of Veracruz. Similar convection is 
+also occurring near the Florida Keys waters.
+
+For the forecast, fresh to locally strong NE to E winds will 
+pulse off the NW Yucatan Peninsula nightly through Thu night. 
+Moderate to fresh E to SE winds across the western half of the 
+Gulf will diminish to gentle to moderate speeds Tue morning and 
+then prevail the remainder forecast period. Moderate or weaker 
+winds are expected elsewhere E of 90W, except for light to gentle 
+winds in the NE Gulf.
+
+...CARIBBEAN SEA...
+
+Please read the Tropical Waves section for details regarding a
+tropical wave moving across the basin. 
+
+Strong to near-gale force easterly winds along with seas 8 to 12 
+ft prevail over the south-cetral Caribbean. Mainly fresh E winds 
+along with seas 5 to 8 ft prevail over the central part of the 
+basin. Fresh easterly winds are also present in the Gulf of 
+Honduras, through the Windward Passage, and the lee of Cuba. Seas 
+within these winds are 3 to 5 ft. Elsewhere, gentle to moderate 
+easterly winds prevails with seas 3 to 5 ft. Scattered moderate 
+convection is ongoing over the Windward Passage. 
+
+For the forecast, the Bermuda-Azores High north of the basin 
+combined with the Colombian Low will support fresh to strong 
+tradewinds over the central Caribbean through the forecast period,
+reaching near gale-force speeds offshore of Colombia at night. 
+Moderate or lighter winds are forecast across the remainder of the
+basin during the next several days. 
+
+...ATLANTIC OCEAN...
+
+Ridging along 25N combined with lower pressure over the 
+ITCZ/monsoon trough are contributing toward moderate to fresh 
+trades with seas 5-8 ft over the tropical Atlantic. Some NE strong
+winds are also occurring between the Canary Islands and just 
+offshore of S Western Sahara. Elsewhere moderate or weaker winds
+along with seas 3 to 5 ft prevail. 
+
+For the forecast west of 55W, an expansive Bermuda-Azores High 
+will dominate the forecast area through Mon. While most of the 
+basin will experience moderate or weaker winds, trades just north 
+of Hispaniola will freshen in the afternoons and early evenings 
+for the next several days. On Mon, a weak cold front should push 
+off of the SE United States coast and extend from approximately 
+31N73W to the central Florida peninsula by Tue morning. While the 
+cold front is anticipated to dissipate on Wed, a broad low 
+pressure area is expected to form along the western end of the 
+frontal system on Monday or Tuesday. Gradual development of this 
+system is possible thereafter while it drifts westward over our NW
+waters north of 28N. 
+
+$$
+KRV

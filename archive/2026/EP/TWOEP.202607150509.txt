@@ -1,0 +1,57 @@
+
+000
+ABPZ20 KNHC 150509
+TWOEP 
+
+Tropical Weather Outlook
+NWS National Hurricane Center Miami FL
+1100 PM PDT Tue Jul 14 2026
+
+For the eastern and central North Pacific east of 180 longitude:
+
+Active Systems:
+The National Hurricane Center is issuing advisories on Tropical 
+Depression Five-E, located several hundred miles southwest of the 
+southwestern coast of Mexico.
+
+Well South-Southeast of the Hawaiian Islands (CP91):
+A broad area of low pressure located several hundred miles 
+south-southeast of the Hawaiian Islands is producing very little 
+shower and thunderstorm activity. Environmental conditions appear 
+conducive for some gradual development over the next couple of days 
+while the system remains nearly stationary. The disturbance is 
+expected to move into less favorable environmental conditions later 
+this week, likely ending its chances for further development.
+* Formation chance through 48 hours...low...30 percent. 
+* Formation chance through 7 days...low...30 percent.
+
+Well Southwest of the Hawaiian Islands (CP90):
+A trough of low pressure located well southwest of the Hawaiian 
+Islands and several hundred miles south-southeast of Johnston Island 
+continues to produce disorganized showers and thunderstorms. 
+Environmental conditions appear conducive for gradual development, 
+and the system could become a tropical depression later this week 
+while it moves slowly northwestward toward the vicinity of Johnston 
+Island.
+* Formation chance through 48 hours...medium...40 percent. 
+* Formation chance through 7 days...medium...60 percent.
+
+Offshore of Southern and Southwestern Mexico:
+An area of low pressure is expected to form later this week several 
+hundred miles south of the coast of southern Mexico. Environmental 
+conditions appear conducive for gradual development of this system 
+thereafter, and a tropical depression is likely to form by the end 
+of the weekend while it moves generally west-northwestward well 
+offshore of Mexico.
+* Formation chance through 48 hours...low...near 0 percent.
+* Formation chance through 7 days...high...70 percent.
+
+&&
+
+Public Advisories on Tropical Depression Five-E are issued under WMO 
+header WTPZ35 KNHC and under AWIPS header MIATCPEP5. 
+Forecast/Advisories on Tropical Depression Five-E are issued under 
+WMO header WTPZ25 KNHC and under AWIPS header MIATCMEP5.
+
+$$
+Forecaster Gibbs

@@ -1,0 +1,132 @@
+
+000
+AXNT20 KNHC 201637
+TWDAT 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+1815 UTC Sat Jun 20 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 1200 UTC surface analysis and satellite imagery through 
+1637 UTC.
+
+...TROPICAL WAVES...
+
+A far eastern Atlantic tropical wave has its axis along 22.5W 
+from 03N to 15.5N. It is moving westward at 10 to 15 kt. Numerous
+moderate convection is depicted from 03N to 11N between 26W and
+the west coast of Africa. 
+
+An eastern Atlantic tropical wave has its axis along 37W from 02N
+to 16N moving westward at 15 to 20 kt. Scattered moderate 
+convection is depicted from 00N to 05N between 30W and 39W. 
+
+A central Atlantic tropical wave has its axis along 59W south of 
+18N. Scattered showers and thunderstorms are depicted from 08.5N
+to 16.5N between 51W and 62W. This is wave is supporting moderate
+to locally fresh winds over the area. 
+
+A western Caribbean tropical wave is along 78.5W south of 18N. It
+is moving westward at about 15 to 20 kt. This wave is interacting
+with an upper- level low, which is generating scattered moderate
+convection south of 18N and west of 76W. 
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough axis enters the Atlantic ocean near 19N16.5W, 
+and continues southwestward to 10N25W to 08N40W, where it 
+transitions to the ITCZ to 10N56W. Scattered moderate convection 
+is from 01N to 09N between 26W and 30W.
+
+...GULF OF AMERICA...
+
+Relatively weak high pressure ridging stretches westward from the
+western Atlantic to across Florida and to the central Gulf. The 
+pressure gradient between the ridge, and the relatively lower 
+pressures over Texas and northeastern Mexico has induced moderate 
+to fresh SE winds west of 88W. Seas are 4 to 7 ft with these 
+winds. Elsewhere, light to gentle winds prevail along with seas 1
+to 4 ft. Scattered showers and thunderstorms are offshore the 
+Texas and NE Mexico coasts. 
+
+For the forecast, a weak ridge of high pressure extends westward 
+from the western Atlantic to across Florida and to the central 
+Gulf. The pressure gradient between the high pressure and 
+relatively lower pressures over Texas and northeastern Mexico will
+generally support mostly fresh southerly winds over the western 
+and central Gulf through the weekend. These winds are expected to 
+diminish to gentle to moderate speeds early next week. Slight to 
+moderate seas will accompany these winds. Weak high pressure over 
+the eastern Gulf will support light winds and slight seas there 
+through late Mon. A new high center will become established over 
+the central Gulf by midweek, with similar conditions expected over
+much of the basin at that time.
+
+...CARIBBEAN SEA...
+
+Please refer to the Tropical Waves section above for convection
+across the basin. 
+
+The pressure gradient between high pressure over the central 
+Atlantic and relatively lower pressures in northern South America 
+is sustaining fresh to strong trade winds over a good portion of 
+the central Caribbean. Seas with these winds are in the range of 6
+to 9 ft. Fresh trade winds are over the Gulf of Honduras 
+surrounding waters. Seas are 6 to 8 ft over this area. Moderate to
+fresh trade winds along with seas of 5 to 7 ft in east swell are 
+over the eastern section of the basin. Gentle to moderate 
+southeast winds are over the northwestern portion of the sea 
+along with seas of 2 to 5 ft. 
+
+For the forecast, high pressure will prevail north of the area 
+into next week. The pressure gradient between the high pressure 
+and the Colombian low will support fresh to strong trade winds and
+moderate to rough seas in the central Caribbean through the 
+forecast period, with highest winds and seas expected off the 
+coast of Colombia. Pulsing fresh to strong winds and moderate to 
+rough seas are expected in the Gulf of Honduras nightly well into 
+the upcoming week. Moderate to fresh winds are expected over much 
+of the remainder of the Caribbean through the middle portion of 
+next week. A tropical wave currently east of the Lesser Antilles 
+will move through the eastern Caribbean Sun through late Mon, and 
+across the rest of the basin through late Wed. Scattered showers 
+and thunderstorms are expected near the wave. 
+
+...ATLANTIC OCEAN...
+
+Three tropical waves are moving westward between West Africa and 
+the Lesser Antilles. Please see the Tropical Waves section for 
+details on these features.
+
+High pressure dominates the Atlantic forecast region, with a 1022
+mb high center analyzed near 27N55W. The pressure gradient 
+between the high and relatively lower pressure to the south, 
+including near the tropical waves, is sustaining mostly moderate 
+to locally fresh trade winds over the majority of the waters 
+south of about 22N as well as over the waters between the 
+southeastern Bahamas and Hispaniola. Seas are in the range of 5 
+to 8 ft over these waters. Elsewhere, light to moderate winds
+prevail along with seas 3 to 5 ft. 
+
+Isolated showers and thunderstorms are observed between southeast
+Florida and Andros Island. Similar activity is seen north of 29N 
+between 72W and 75W as a mid to upper-level trough slides 
+eastward east of over the western Atlantic. 
+
+For the forecast west of 55W, relatively weak high pressure 
+remains over the basin. A weak frontal boundary will move offshore
+northeast Florida today, then stall and lift north as a warm 
+front tonight into Sun. Fresh southwest winds north of 29N between
+65W and 74W will diminish this afternoon. Moderate to fresh trade
+winds will pulse to strong south of 22N into early next week, 
+then be at mostly fresh speeds through the rest of the forecast 
+period. 
+
+$$
+KRV

@@ -1,0 +1,122 @@
+
+000
+AXNT20 KNHC 032235
+TWDAT
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+0015 UTC Thu Jun 4 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 1800 UTC surface analysis and satellite imagery through 
+2130 UTC.
+
+...SPECIAL FEATURES...
+
+Gale Warning East of 35W: The pressure gradient between the 1033 
+mb high pressure system centered southwest of the Azores and lower
+pressures in northwest Africa result in strong to near gale- 
+force northerly winds in the Agadir High Seas Marine Zones. Gale- 
+force winds are expected to persist through at least 04/0000 UTC 
+with severe gusts. These winds will produce rough seas. Similar 
+conditions will persist into the weekend. For more details, refer 
+to the Meteo- France High Seas Forecast listed on their website 
+https://wwmiws.wmo.int 
+
+...TROPICAL WAVES...
+
+An eastern Atlantic tropical wave axis analyzed along 31W, moving
+W at around 15 kt. Convection previously associated with this wave
+has diminished this evening. 
+
+A central Atlantic tropical wave is along 47W, south of 14N, 
+moving westward at 10-15 kt. Scattered moderate convection is
+noted from 09N to 12N between 45W and 48W. 
+
+A central Atlantic tropical wave has been analyzed along 59W, 
+south of 15N, moving westward at around 15 kt. Scattered moderate
+convection is observed from 07N to 10N between 55W and 60W.
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough enters the Atlantic near 16N16W and continues 
+southwestward to 02N27W. The ITCZ extends from 01N33W to 
+01N42W. No significant convection is associated with these
+features at this time.
+
+...GULF OF AMERICA...
+
+A cold front has moved into the NE Gulf and extends from SW
+Florida to near the mouth of the Mississippi River. Scattered
+moderate convection is noted within about 90 nm on either side of
+the boundary. To the N of the front, fresh E winds and moderate
+seas are present. A deep layer trough that extends southward from
+the front through the central basin, to just offshore the NW
+Yucatan, is generating scattered moderate to isolated strong
+convection over the SE and south-central Gulf. Seas away from the
+convection for areas S of the front are slight, with mainly gentle
+NE winds. 
+ 
+For the forecast, the aforementioned cold front should begin to 
+stall later this evening. A trough of low pressure is also seen 
+farther south across the central Gulf, which is expected to track 
+north- northwestward through Fri. Interaction between this trough 
+and the front is going to sustain fresh to strong ENE to SE winds 
+with moderate to rough seas across the central and eastern Gulf, 
+north of 25N through Fri evening. In addition, a persistent upper-
+level trough across the western Gulf will continue to enhance 
+sporadic heavy showers and strong thunderstorms near the 
+aforementioned trough and front through Fri night. Gusty winds 
+with low visibility and frequent lightning will accompany the 
+strong thunderstorms. After the low moves into Louisiana and the 
+stationary front dissipates on Sat, the Atlantic Ridge should 
+build westward across northern Florida into the Gulf, bringing 
+moderate to locally fresh SE winds and moderate seas back to the 
+entire Gulf. 
+
+...CARIBBEAN SEA...
+
+The Atlantic ridge is supporting fresh to strong trade winds and
+rough seas across the central Caribbean. Moderate to fresh E to 
+SE winds and 4-7 ft seas are noted elsewhere, except 3-6 ft seas 
+in the northwest Caribbean. Numerous moderate to strong convection
+is active over the far southwest Caribbean along the monsoon 
+trough. 
+
+For the forecast, the Atlantic ridge north of the area will 
+weaken and shift east through Thu, allowing moderate to locally 
+fresh trade winds and moderate seas to dominate much of the the 
+Caribbean by Fri morning. The exception will be pulsing fresh to 
+strong winds off Venezuela and in the Gulf of Honduras mainly at 
+night through Fri. In the long term, the Atlantic ridge may 
+rebuild by Sun, supporting fresh winds and building seas across 
+the central and northwestern Caribbean by Sun night. 
+
+...ATLANTIC OCEAN...
+
+Please read the Special Features section about a Gale Warning in
+the far northeast Atlantic.
+
+A cold front extends from near 31N70W to South Florida, with a
+stationary ahead of it stretching from 31N67W to just E of the
+Bahamas. A zone of scattered moderate to isolated strong
+convection in association with these features is noted of 26N and
+W of 70W, including in the vicinity of the Bahamas Florida
+Straits. N of the cold front, fresh NE winds and rough seas are
+present. To the east of these fronts, the basin is being dominated
+by ridging centered around a 1033 mb high located at 34N32W,
+leading to moderate to fresh trades and moderate seas. 
+
+For the forecast west of 55W, as the aforementioned cold front 
+stalls and dissipates near 67W this weekend, the Atlantic Ridge is
+going to reform and support gentle to moderate E to SE winds and 
+slight to moderate seas for the western Atlantic into midweek next
+week.
+
+$$
+Konarik

@@ -1,0 +1,26 @@
+
+000
+ABPZ20 KNHC 291729
+TWOEP 
+
+Tropical Weather Outlook
+NWS National Hurricane Center Miami FL
+1100 AM PDT Mon Jun 29 2026
+
+For the eastern and central North Pacific east of 180 longitude:
+
+Western East Pacific:
+A tropical wave located well southwest of the southern tip of the 
+Baja California Peninsula is producing a large area of showers and 
+thunderstorms that are beginning to show signs of organization. 
+Gradual development of this system is possible during the next 
+couple of days, and a tropical depression is likely to form by the 
+middle of this week while the system moves generally northwestward 
+and then northward. Environmental conditions are forecast to become 
+less conducive by the end of the week, ending its chances of 
+development. 
+* Formation chance through 48 hours...medium...60 percent.
+* Formation chance through 7 days...high...70 percent.
+
+$$
+Forecaster Adams/Papin

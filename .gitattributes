@@ -7,3 +7,9 @@ fixtures/expected.json text eol=lf
 # sh chokes on CRLF; keep shell scripts LF on Windows checkouts too.
 *.sh                   text eol=lf
 tools/hooks/pre-push   text eol=lf
+
+# Season archive (Track C): raw NHC text is parser ground truth, so like
+# fixtures it must be byte-identical on Windows and Linux CI (parser.js never
+# strips \r); derived JSON is pinned LF so re-derives diff cleanly across OSes.
+archive/**/*.txt       text eol=lf
+archive/derived/*.json text eol=lf

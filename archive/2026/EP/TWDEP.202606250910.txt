@@ -1,0 +1,98 @@
+
+000
+AXPZ20 KNHC 250910
+TWDEP 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+1005 UTC Thu Jun 25 2026
+
+Tropical Weather Discussion for the eastern Pacific Ocean from
+03.4S to 30N, east of 120W including the Gulf of California, and
+from the Equator to 30N, between 120W and 140W. The following
+information is based on satellite imagery, weather observations,
+radar, and meteorological analysis.
+
+Based on 0600 UTC surface analysis and satellite imagery through
+0900 UTC.
+
+...TROPICAL WAVES...
+
+The axis of a tropical wave is near 99W, south of 16N, moving 
+west around 20 kt. Numerous moderate and scattered strong 
+convection is occurring from 10N-16N between 95W-105W. 
+
+The axis of a tropical wave is near 106W, south of 17N, moving 
+westward at around 10 to 15 kt. Convection is described below in
+the ITCZ/Monsoon trough section. 
+
+The axis of a tropical wave is near 120W, south of 20N, moving 
+westward at around 10 to 15 kt. Convection is described below in
+the ITCZ/Monsoon trough section. 
+
+...INTERTROPICAL CONVERGENCE ZONE/MONSOON TROUGH...
+
+The monsoon trough extends from 08N78W to 13N115W to 10N125W. 
+The ITCZ extends from 10N125W to beyond 08N140W. Scattered
+moderate convection is occurring from 03N-07N between 75W-105W,
+and from 08N-18N between 110-120W.
+
+...OFFSHORE WATERS WITHIN 250 NM OF MEXICO...
+
+The pressure difference between lower pressure in the deep
+tropics and higher pressure north of the area is supporting fresh
+to strong gap winds and rough seas across the Gulf of 
+Tehuantepec. Elsewhere, winds are moderate or weaker with seas 
+5-6 ft in S to SW swell for Pacific waters and 1-3 ft over the 
+Gulf of California. 
+
+For the forecast, the low pressure over the deep tropics will be
+inducing fresh to strong N to NE gap winds across the Gulf of 
+Tehuantepec through Fri. Also, expect fresh winds and locally 
+rough seas off Oaxaca and Guerrero Thu night. Elsewhere, winds 
+and seas across the Mexican Offshores should be quiescent. 
+
+....OFFSHORE WATERS WITHIN 250 NM OF CENTRAL AMERICA, COLOMBIA,
+AND WITHIN 750 NM OF ECUADOR...
+
+A recent scatterometer satellite pass confirmed NE to E gap winds
+across and downstream of the Gulf of Papagayo region as far west
+as 95W. A concurrent altimeter satellite pass showed 7-8 ft 
+seas. Elsewhere winds are moderate or weaker with seas of 4-7 ft 
+in S to SW swell.
+
+For the forecast, the pressure gradient between high pressure 
+north of the area and the NE Pacific monsoon trough is supporting
+a Gulf of Papagayo region gap wind event. Fresh to strong NE to 
+E winds should last into early next week. Elsewhere, winds should
+remain quiescent. Large S swell moving into the equatorial 
+waters tonight will continue through the weekend. 
+
+...REMAINDER OF THE AREA...
+
+Broad high pressure covers the waters north of 15N, anchored by
+1032 mb near 37N145W. A weakening 1008 mb low pressure (EP94) is
+centered near 18N120W, along a tropical wave. A recent
+scatterometer satellite pass confirmed fresh to strong NE
+winds within 90 nm in the northwest quadrant of this low. Fresh 
+trade winds and 6-8 ft seas are noted from 10N to 20N elsewhere 
+west of 120W. Gentle to moderate breezes and 4-6 ft seas are 
+noted elsewhere. 
+
+For the forecast, the low known as EP94 near 18N120W will weaken
+to trough through today, but continue to support fresh to strong
+winds and occasional rough seas as it moves westward through Sun.
+Elsewhere, another low pressure system is likely to form this 
+weekend or early next week south of the Revillagigedo Islands. 
+Environmental conditions are forecast to be conducive for gradual
+development, and a tropical depression could form by the early 
+to middle part of next week as the system moves westward to west-
+northwestward at 10 to 15 kt. Tropical cyclone formation chance 
+is near 0 percent through 48 hours, but is high...70 
+percent...through 7 days. Elsewhere, large seas due to mixed SW 
+and SE swell will be moving across our southern border tonight 
+through the weekend. 8 ft seas should reach up to 02N before 
+diminishing.
+
+$$
+Christensen

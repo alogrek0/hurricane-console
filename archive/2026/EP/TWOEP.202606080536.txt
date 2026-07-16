@@ -1,0 +1,40 @@
+
+000
+ABPZ20 KNHC 080536
+TWOEP 
+
+Tropical Weather Outlook
+NWS National Hurricane Center Miami FL
+1100 PM PDT Sun Jun 7 2026
+
+For the eastern and central North Pacific east of 180 longitude:
+
+Active Systems:
+The National Hurricane Center is issuing advisories on Tropical 
+Depression Two-E, located just offshore the southern coast of 
+Mexico. The National Hurricane Center has issued the final advisory 
+on Post-Tropical Cyclone Amanda, located well east-southeast of the 
+Hawaiian Islands.
+
+Offshore of Central America (EP92):
+Showers and thunderstorms are starting to show signs of organization 
+in association with a low pressure area offshore of Central America. 
+Environmental conditions appear conducive for further development of 
+this system, and a tropical depression is likely to form during the 
+next day or two while the system moves slowly northward and then 
+northwestward toward the coast of Central America. Interests along 
+the Pacific coasts of northwestern Costa Rica, Nicaragua, Honduras, 
+El Salvador, and Guatemala should monitor the progress of this 
+system, as heavy rainfall and life-threatening flash flooding are 
+possible through the middle portion of this week.
+* Formation chance through 48 hours...high...90 percent.
+* Formation chance through 7 days...high...90 percent.
+
+&&
+Public Advisories on Tropical Depression Two-E are issued under WMO 
+header WTPZ32 KNHC and under AWIPS header MIATCPEP2.
+Forecast/Advisories on Tropical Depression Two-E are issued under 
+WMO header WTPZ22 KNHC and under AWIPS header MIATCMEP2.
+
+$$
+Forecaster Hagen

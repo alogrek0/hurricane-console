@@ -1,0 +1,22 @@
+
+000
+ABPZ20 KNHC 040513
+TWOEP 
+
+Tropical Weather Outlook
+NWS National Hurricane Center Miami FL
+1100 PM PDT Fri Jul 3 2026
+
+For the eastern and central North Pacific east of 180 longitude:
+
+Western East Pacific:
+A tropical wave is forecast to move westward across the central 
+portion of the East Pacific through the weekend. Environmental 
+conditions are forecast to become less conducive for development by 
+the middle of next week, and the potential for tropical cyclone 
+development appears to be decreasing.
+* Formation chance through 48 hours...low...near 0 percent. 
+* Formation chance through 7 days...low...10 percent.
+
+$$
+Forecaster Gibbs

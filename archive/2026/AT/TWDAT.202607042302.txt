@@ -1,0 +1,118 @@
+
+556 
+AXNT20 KNHC 042302
+TWDAT 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+0015 UTC Sun Jul 5 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 1800 UTC surface analysis and satellite imagery through 
+2230 UTC.
+
+...TROPICAL WAVES...
+
+An Atlantic tropical wave is near 28N, south of 16N, moving W at 
+10-15 kt. Scattered moderate isolated strong convection is noted
+from 04N to 11N between 21W and 27W.
+
+An Atlantic tropical wave is near 39W, south of 17N, moving W at 
+around 15 kt. Scattered moderate convection is seen from 05.5N to
+11.5N between 33W and 39W. 
+
+A Caribbean tropical wave is near 72W, south of 20N, moving W at 
+at 15-20 kt. Scattered moderate convection is noted S of 17N 
+between 66W and 74W.
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough enters the Atlantic near 12N16W and continues 
+southwestward to 09N22W. The ITCZ is analyzed in two segments, 
+from 08N27W to 08.5N36W, and from 09N38W to 06N55W. Aside from 
+the convection associated with the tropical waves, scattered 
+moderate convection is from 04N to 12N between 15W and 51W. 
+
+...GULF OF AMERICA...
+
+High pressure extends a ridge across the western Atlantic SW 
+to Florida, while a weak ridge persists across the SE U.S. and 
+extends south-southwestward across the north Gulf waters. This 
+pattern supports light to gentle winds and slight seas across 
+most of the basin, except for moderate NE to E winds along coastal
+sections of the Yucatan Peninsula associated with afternoon
+thermal trough. Convergent low level winds are leading to 
+scattered showers across the SE Gulf, and scattered showers and a
+few thunderstorms across the north central Gulf.
+
+For the forecast, a weak surface ridge will continue to dominate 
+the Gulf waters through the forecast period, supporting gentle to
+moderate winds over the western Gulf and light to gentle winds 
+over the eastern Gulf. The exception will be pulsing winds 
+reaching fresh to locally strong speeds off the northwestern 
+Yucatan Peninsula nightly through midweek. These winds are the 
+result of local effects associated with a surface trough. Slight 
+to moderate seas are expected. 
+
+...CARIBBEAN SEA...
+
+1025 mb high pressure is centered over the central Atlantic near
+29N37W and extends a relatively narrow ridge westward to the NW
+Bahamas and central Florida. The pressure gradient between this 
+subtropical ridge and a 1010 mb Colombian Low continues to 
+support fresh to locally strong easterly winds and seas of 6-9 ft
+in the central to SW Caribbean. Moderate to fresh easterly winds 
+and moderate seas are across the E Caribbean, behind the tropical
+wave. Elsewhere, moderate or lighter winds and slight to moderate
+seas prevail NW portions. Broad middle to upper-level low 
+pressure across the western half of the basin is supporting 
+scattered strong afternoon convection across Hispaniola and Cuba,
+and across the SW Caribbean south of 14N to the E Pacific 
+extension of the monsoon continues, including inland over Panama, 
+Costa Rica, and southeastern Nicaragua.
+
+For the forecast, the pressure gradient between the Atlantic ridge
+north of the basin and the Colombian Low will continue to
+support fresh to strong trade winds and moderate to rough seas
+over the central Caribbean through midweek. The aerial extent of
+these winds will increase Sun night into Mon, and then expand
+across much of the basin east of 80W Tue through Thu as high
+pressure strengthens north of the basin. Expect winds to reach 
+near-gale force at night offshore of Colombia and in the Gulf of 
+Venezuela from Sun through Wed. Active thunderstorms across SW
+portions of the basin will slowly shift northward into NW portions
+Sun through Tue.
+
+...ATLANTIC OCEAN...
+
+A weakening frontal boundary continues to meander just north of
+the area along 32N-33N between 56W and 74W. Scattered showers and
+thunderstorms persist between the front and 27N between 53W and
+73W. Similar shower activity is farther east within 90 nm either 
+side of a surface trough that extends from 30N46W to 26N53W. 
+Otherwise, the Azores High extends a ridge southwestward into the
+subtropical Atlantic waters, to 1025 mb high pressure near 29N37W,
+then westward to the NW Bahamas and central Florida. This pressure
+pattern is supporting moderate to fresh NE to E winds across much
+of the waters S of 22N between 25W and 70W, where seas are
+generally 6 to 8 ft. North of 22N and W of 40W away from the 
+front and surface trough, winds are moderate or weaker from the S 
+to SE with seas slight.
+
+For the forecast west of 55W, the Atlantic ridge will build 
+westward into central Florida through midweek. This pattern will 
+support moderate to fresh E to SE trade winds S of 22N, and 
+moderate or weaker winds elsewhere. Locally strong winds are 
+likely each evening and night N of Hispaniola and Puerto Rico, 
+including approaches to the Windward Passage, beginning on Sun.
+Look for winds to strengthen to fresh to strong S of 23N Tue night
+and Wed as a strong tropical wave moves approaches the region.
+
+$$
+Stripling
+

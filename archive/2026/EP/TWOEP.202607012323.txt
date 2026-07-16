@@ -1,0 +1,27 @@
+
+701 
+ABPZ20 KNHC 012323
+TWOEP 
+
+Tropical Weather Outlook
+NWS National Hurricane Center Miami FL
+500 PM PDT Wed Jul 1 2026
+
+For the eastern and central North Pacific east of 180 longitude:
+
+Active Systems:
+The National Hurricane Center is issuing advisories on recently 
+upgraded Tropical Storm Douglas, located well west-southwest of the 
+southern tip of the Baja California Peninsula.
+
+Tropical cyclone formation is not expected during the next 7 days.
+
+&&
+Public Advisories on Tropical Storm Douglas are issued under 
+WMO header WTPZ34 KNHC and under AWIPS header MIATCPEP4.
+Forecast/Advisories on Tropical Storm Douglas are issued under 
+WMO header WTPZ24 KNHC and under AWIPS header MIATCMEP4.
+
+$$
+Forecaster Papin
+

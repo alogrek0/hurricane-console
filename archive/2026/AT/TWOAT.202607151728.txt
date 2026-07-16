@@ -1,0 +1,33 @@
+
+000
+ABNT20 KNHC 151728
+TWOAT 
+
+Tropical Weather Outlook
+NWS National Hurricane Center Miami FL
+200 PM EDT Wed Jul 15 2026
+
+For the North Atlantic...Caribbean Sea and the Gulf of America:
+
+Northeastern Gulf of America:
+An area of low pressure is expected to form during the weekend over 
+the northeastern Gulf of America. Subsequent slow development of 
+this system is possible while it moves slowly northeastward over the 
+northeastern Gulf and or near the southeastern coast of the United 
+States by early next week.
+* Formation chance through 48 hours...low...near 0 percent.
+* Formation chance through 7 days...low...20 percent.
+
+Eastern Tropical Atlantic:
+Showers and thunderstorms associated with a tropical wave southeast 
+of the Cabo Verde Islands have become a little better organized 
+during the past 24 hours. Some additional slow development is 
+possible over the next couple of days as the system moves generally 
+west-northwestward.  After that, the system is expected to move into 
+an environment that is not conducive for additional development by 
+the weekend. 
+* Formation chance through 48 hours...low...10 percent.
+* Formation chance through 7 days...low...10 percent.
+
+$$
+Forecaster Beven

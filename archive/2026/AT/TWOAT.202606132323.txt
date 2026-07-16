@@ -1,0 +1,25 @@
+
+000
+ABNT20 KNHC 132323
+TWOAT 
+
+Tropical Weather Outlook
+NWS National Hurricane Center Miami FL
+800 PM EDT Sat Jun 13 2026
+
+For the North Atlantic...Caribbean Sea and the Gulf of America:
+
+Southwestern Gulf of America:
+A broad area of low pressure just offshore of eastern Mexico 
+is producing disorganized shower and thunderstorm activity.  
+Significant development is not anticipated before the low moves 
+inland over eastern Mexico during the next twelve hours.  The 
+system could re-emerge over the northwestern Gulf of America on 
+Tuesday or Wednesday while interacting with a frontal boundary, but 
+conditions there are expected to be only marginally conducive for 
+development.
+* Formation chance through 48 hours...low...10 percent.
+* Formation chance through 7 days...low...20 percent.
+
+$$
+Forecaster Beven

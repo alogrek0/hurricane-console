@@ -1,0 +1,22 @@
+
+000
+ABPZ20 KNHC 210503
+TWOEP 
+
+Tropical Weather Outlook
+NWS National Hurricane Center Miami FL
+1100 PM PDT Sat Jun 20 2026
+
+For the eastern and central North Pacific east of 180 longitude:
+
+Central and Western Portion of the East Pacific:
+A broad area of low pressure is forecast to form well southwest of 
+the Baja California peninsula during the middle to latter part of 
+next week. Some gradual development of this system is possible 
+thereafter while it moves west-northwestward at 10 to 15 mph across 
+central and western portions of the East Pacific basin.
+* Formation chance through 48 hours...low...near 0 percent.
+* Formation chance through 7 days...low...20 percent.
+
+$$
+Forecaster Beven

@@ -1,0 +1,113 @@
+
+000
+AXNT20 KNHC 091020
+TWDAT 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+1215 UTC Tue Jun 9 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 0600 UTC surface analysis and satellite imagery through 
+1015 UTC.
+
+...TROPICAL WAVES...
+
+The axis of a tropical wave is near 29W, from 15N to 05N, moving 
+west at around 15 kt. Nearby convection is discussed in the 
+MONSOON TROUGH/ITCZ section below.
+
+The axis of a tropical wave is near 43W, from 15N to 05N, moving 
+westward at 15 kt. Nearby convection is discussed in the MONSOON 
+TROUGH/ITCZ section below. 
+
+The axis of a tropical wave is near 54W, from 16N to 05N, moving 
+westward at around 10 to 15 kt. Nearby convection is discussed in 
+the MONSOON TROUGH/ITCZ section below. 
+
+The axis of a tropical wave is along 81W, south of 18N to 10N, 
+moving westward at 10 to 15 kt. The tropical wave is interacting 
+with a mid-level trough, which is enhancing convection. Scattered
+moderate to strong convection is noted from 10N to 18N between 
+75W and 83W. 
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough extends off the coast of Africa near 11N15W  
+to 08N18W. The ITCZ extends from 08N18W to 04N51W. Scattered 
+moderate convection is noted within 240 nm N of the ITCZ.
+
+...GULF OF AMERICA...
+
+Surface ridging prevails across the basin, anchored by a 1025 mb
+high pressure centered over the NW Atlantic. A surface trough
+is analyzed from 30N84W to 25N83W. Scattered showers are noted
+in the vicinity of the trough N of 25N and E of 90W. To the SW,
+another trough is analyzed from 22N91W to 19N92W. Scattered
+moderate to strong convection prevails across the Bay of
+Campeche W if the trough and S of 20N. Moderate to fresh E to SE 
+winds prevail over the Gulf waters W of 87W along with 3 to 6 ft 
+seas. Gentle to moderate E to SE winds prevail elsewhere along 
+with slight seas.
+
+For the forecast, the surface ridge will continue to dominate the
+Gulf region through the week, supporting gentle to moderate east 
+to southeast winds over the eastern Gulf, and moderate to fresh 
+winds in the western Gulf. Slight to moderate seas will prevail. 
+The exception will be off the Yucatan Peninsula, where a diurnal 
+trough will support moderate to fresh E winds pulsing to fresh to 
+speeds during the evenings through Wed. A trough or weak low 
+pressure center may emerge from the Yucatan Peninsula into the Bay
+of Campeche, on Thu through Fri night accompanied by numerous 
+showers and thunderstorms along with fresh to strong winds and 
+building seas. 
+
+...CARIBBEAN SEA...
+
+A strong pressure gradient between the Atlantic ridge, a tropical
+wave with axis along 79W, and T.S. Cristina in the Eastern 
+Pacific, offshore of Nicaragua, supports fresh to strong E to SE 
+winds with moderate seas in the NW Caribbean, including the Gulf 
+of Honduras. Moderate to fresh trades and moderate seas prevail 
+elsewhere. 
+
+For the forecast, the aforementioned conditions will likely last 
+through the forecast period. In addition, a trough or weak low 
+pressure center may emerge from the Yucatan Peninsula into the Bay
+of Campeche perhaps later Thu through Fri night, maintaining a 
+tight pressure gradient over the NW Caribbean and the Gulf of 
+Honduras. Elsewhere, moderate to fresh winds and mostly moderate 
+seas will prevail.
+
+...ATLANTIC OCEAN...
+
+A surface trough extends from 27N73W to 23N75W. Another trough is
+analyzed from 31N62W to 27N70W. Scattered showers and isolated 
+thunderstorms are near and E of second trough mainly W of 57W. 
+High pressure dominates the remainder of the discussion waters N 
+of 20N, anchored by a 1033 mb high centered SW of the Azores near
+36N34W. Moderate or weaker winds are N of 20N and W of 50W, 
+moderate to fresh NE to E winds are between 35W and 50W while 
+fresh to strong NE winds are elsewhere E of 35W along with rough 
+seas to 10 ft. Across the tropical Atlantic waters, winds are 
+moderate to fresh and seas moderate to 7 ft.
+
+For the forecast west of 55W, the aforementioned trough will 
+remain nearly stationary through midweek. A weak cold front will 
+move across the N waters Tue, then move very slowly or stall on 
+Wed, gradually dissipating by Thu. High pressure in the wake of 
+the front will shift eastward north of the area through the end of
+the week while weakening, with the associated ridge extending 
+toward Florida and southeastern Georgia. The related pressure 
+gradient will generally allow for gentle to moderate winds and 
+slight to moderate seas. Increasing moisture resulting in 
+unsettled weather conditions is likely to impact the far western 
+section of the basin during the week. 
+
+$$
+ERA

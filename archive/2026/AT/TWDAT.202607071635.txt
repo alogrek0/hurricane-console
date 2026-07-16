@@ -1,0 +1,125 @@
+
+000
+AXNT20 KNHC 071635
+TWDAT
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+1815 UTC Tue Jul 7 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 12OO UTC surface analysis and satellite imagery through 
+1700 UTC.
+
+...TROPICAL WAVES...
+
+A tropical wave is just west of the Cabo Verde Islands. Its axis
+is along 25W south of 17N. It is moving westward at 15 to 20 kt. 
+Scattered moderate convection is noted from 05N to 09N between 20W
+and 27W. Scattered showers are likely over the Cabo Verde Islands
+and surrounding waters.
+
+A well defined tropical wave is along 46W south of 17N, moving 
+westward at around 20 kt. Scattered moderate to isolated strong 
+convection is observed from 07N to 11N between 40W and 50W. This 
+wave should reach the Lesser Antilles Wed evening, bringing fresh 
+to strong trades and moderate to rough seas over the E Caribbean 
+on Thu and Fri. Currently, seas of 6 to 8 ft are noted west of the
+wave axis based on altimeter data. 
+
+Another tropical wave is analyzed near 59W and extends southward 
+into Guyana. It is moving westward at 15 kt. Scattered moderate 
+convection is observed from 07N to 12N between 53W and 60.5W. the 
+wave will move across the Lesser Antilles this evening and tonight
+increasing the chances of rain. It is forecast to reach Puerto 
+Rico on Wed bringing the chance of showers and thunderstorms.
+
+The tropical wave previously located along 85W is relocated 
+farther E along 80W based on tropical wave diagnostic and surface 
+observations. Convection is limited near the wave axis. 
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough axis enters the Atlantic through the coast of
+Mauritania near 18N16W and continues southwestward to 09N25W. The 
+ITCZ extends from 08N27W to 08N44W to 09N57W. Most of the convective
+activity across the area is associated with the above mentioned 
+tropical waves.
+
+...GULF OF AMERICA...
+
+A weak ridge continues the dominate the Gulf region producing a
+gentle to moderate wind flow. Slight to moderate seas are noted 
+with these winds. An upper-level low over the western Gulf is
+enhancing the development of showers and thunderstorms over parts
+of the basin, more concentrated over the west-central Bay of 
+Campeche and near the Veracruz area. 
+
+For the forecast, the diurnal trough moving westward from the 
+Yucatan peninsula will cause fresh to locally strong NE to E winds
+offshore of the peninsula nightly through the weekend. An upper- 
+level low will cause scattered showers and isolated thunderstorms 
+over the Gulf for the next couple of days. Elsewhere, winds and 
+seas should be quiescent.
+
+...CARIBBEAN SEA...
+
+Recent satellite derived wind and altimeter data provide observations
+of fresh to strong winds of 20 to 30 kt over central Caribbean 
+with seas of up to 13 ft. In addition, buoy 42058 located near 
+14N76W is reporting seas up to 10 ft. These winds are the result 
+of the pressure gradient between the Atlantic ridge and the 
+Colombian Low. The scatterometer satellite data passes also reveal
+moderate to fresh trades across the eastern portion of the basin.
+Seas are moderate with these winds. Moderate to locally fresh NE 
+to E winds are seen in the Gulf Honduras, where seas are 4 to 5 
+ft. Elsewhere, moderate or lighter winds along with slight to 
+moderate seas are present. Scattered showers and thunderstorms are
+occurring over the western Caribbean, particularly W of 85W, 
+including in the vicinity of the Gulf of Honduras. Patches of low 
+level moisture, embedded in the trade wind flow, are moving 
+westward across the area producing isolated to scattered passing 
+showers.
+
+For the forecast, the pressure gradient between the Bermuda-Azores
+High north of the area along with lower pressure over N South 
+America will produce fresh to near gale trades over the central 
+Caribbean for the next several days. Likewise, trades over the 
+Gulf of Honduras will pulse to fresh to strong late afternoons and
+evenings through the weekend. A tropical wave centered near 59W 
+currently will enhance showers and thunderstorms over the Windward
+Islands and the SE Caribbean for the next two days. Another stronger
+tropical wave should reach the Lesser Antilles Wed evening, bringing
+fresh to strong trades over the E Caribbean on Thu and Fri. 
+
+...ATLANTIC OCEAN...
+
+Three tropical waves are moving westward between W Africa and the
+Lesser Antilles. Please, see the Tropical Waves section for more
+details. The Saharan Air Layer (SAL) from CIMSS and the Geocolor
+satellite imagery show abundant African dust over this area into 
+the eastern Caribbean. 
+
+As it is normal for this time of the year, the Bermuda-Azores 
+High dominates the Atlantic forecast waters. Moderate to fresh 
+winds are observed along the southern periphery of its associated 
+ridge, with the exception of fresh to strong winds just north of 
+Hispaniola. Light to gentle winds are near the ridge axis, mainly
+N of 25N. Seas are generally moderate with these winds. An upper-
+level low spinning between Hispaniola and the southeastern 
+Bahamas is generating some shower activity.
+
+For the forecast west of 55W, ridging associated with the Bermuda-
+Azores High will remain farther south than usual - near 27N. Waters
+north of 29N will have moderate to fresh W to SW winds for the next
+several days. Additionally, fresh to strong trades will continue 
+just north of Hispaniola and the approaches to the Windward Passage
+through the weekend. 
+
+$$
+GR

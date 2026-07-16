@@ -1,0 +1,133 @@
+
+000
+AXNT20 KNHC 152311
+TWDAT 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+0015 UTC Thu Jul 16 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 1800 UTC surface analysis and satellite imagery through
+2300 UTC.
+
+...SPECIAL FEATURE...
+
+Caribbean Gale Warning: The pressure gradient between high pressure 
+north of the basin and the Colombian low will support pulsing NE
+winds to gale-force across the waters N of Colombia each night through
+Sat night. Rough seas will prevail with these winds. Otherwise, strong
+to near-gale trade winds, and rough seas, will prevail across the
+central Caribbean into early next week. 
+
+Please read the latest HIGH SEAS FORECAST 
+issued by the National Hurricane Center at website - 
+https://www.nhc.noaa.gov/text/MIAHSFAT2.shtml for more details.
+
+...TROPICAL WAVES...
+
+A tropical wave is E of the Cabo Verde Islands with axis along 
+21W and south of 16N, moving westward at 15 to 20 kt. A 1014 mb 
+low pressure is analyzed along the wave axis near 10N. An area of
+moderate to isolated strong convection is noted within about 120
+nm NW quadrant of the low center. The most recent scatterometer 
+data indicate the circulation of the low as well as and area of 
+fresh to strong winds with moderate to rough seas to the south 
+of the low center affecting the waters N of 05N between 16W and 
+21W. The convective activity associated with this tropical wave 
+have become a little better organized during the past 24 hours. 
+Some additional slow development is possible over the next couple
+of days as the system moves generally west- northwestward. After
+that, the system is expected to move into an environment that is
+not conducive for additional development by the weekend. 
+
+Another tropical wave is along 28W, south of 18N, moving westward
+at 15 kt. Convection is limited near the wave axis. 
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough enters the Atlantic near 19N16W and continues
+southwestward to a 1014 mb low pressure near 10.5N21W to 08N36W.
+The ITCZ extends from 09N36W to 06N55W. Aside from the convection
+associated with the tropical wave along 21N, no significant 
+convection is evident. 
+
+...GULF OF AMERICA...
+
+High pressure of 1020 mb located over the central Gulf near 26N90W
+dominates the basin producing gentle to moderate winds with the
+exception of light winds over the NE Gulf, and moderate to fresh
+Ne to E winds across the Straits of Florida. Seas are in general
+3 to 5 ft, except 1 to 3 ft over the NE Gulf. A stationary front
+over southern Texas is helping to induce numerous showers and 
+thunderstorms over eastern Texas and the far NW Gulf. Similar 
+convective activity is also occurring over the Yucatan Peninsula 
+and regional waters.
+
+For the forecast, fresh to occasionally strong winds will pulse offshore
+the Yucatan Peninsula each night. Mainly gentle to moderate winds,
+and slight to locally moderate seas, will prevail elsewhere. 
+
+Looking ahead, an area of low pressure is expected to form during the
+weekend over the northeastern Gulf of America. Subsequent slow development
+of this system is possible while it moves slowly northeastward over
+the northeastern Gulf and or near the southeastern coast of the United
+States by early next week.
+
+...CARIBBEAN SEA...
+
+A Gale Warning is in effect for the south-central Caribbean offshore
+of Colombia. Please, refer to the Special Features section for 
+more details.
+
+The pressure gradient between the Atlantic ridge and the Colombia
+low continues to support fresh to strong winds over the central
+Caribbean, with the strongest winds offshore Colombia. Altimeter
+data provide observations of seas in the 8 to 10 ft range across
+the area. Meanwhile, moderate to fresh easterly winds and moderate
+seas are noted in the eastern Caribbean and in the lee of Cuba. 
+Elsewhere, moderate or weaker winds and slight to moderate seas 
+are prevalent. 
+
+A diffluent pattern aloft combined with abundant tropical moisture
+is generating a large area of showers and thunderstorms over the
+NW Caribbean and the Yucatan Peninsula, particularly from 18N to
+21N W of 82W. Gusty winds, frequent lightning, and higher seas 
+are likely with this convective activity.
+
+For the forecast, the pressure gradient between high pressure 
+north of the basin and the Colombian low will support pulsing NE 
+winds to gale-force across the waters N of Colombia each night 
+through Sat night. Otherwise, strong to near-gale trade winds, 
+and rough seas, will prevail across the central Caribbean into 
+early next week. East winds will pulse fresh to locally strong 
+each evening in the Gulf of Honduras and Windward Passage. 
+
+...ATLANTIC OCEAN...
+
+A cold front extends from a 1013 mb low pressure located N of area
+near 35N52W to 30N61W. Scattered showers and isolated thunderstorms
+are related to the front. Moderate SW winds are S of the front 
+to about 28N. Farther E, a stationary from enter the forecast 
+region near 31N20W and continues SW to 25N26W and to near 24N40W.
+Light to gentle winds follow the front. Mainly low clouds and a 
+few showers are likely associated with the frontal boundary. The 
+remainder of the Atlantic forecast area is under the influence of
+high pressure. Moderate to locally fresh N to NE winds are seen 
+N of 18N E of 20W, including the Canary Islands. Similar wind 
+speeds dominate the tropical Atlantic with moderate seas.
+Moderate or weaker winds and moderate seas are present elsewhere.
+
+For the forecast west of 55W, the subtropical ridge will remain 
+dominant through the forecast period. The weather pattern will 
+support moderate to fresh trades south of 23N, with gentle winds 
+to the north. Pulsing strong winds are expected each night 
+offshore Hispaniola and in the Windward Passage. 
+
+$$
+GR

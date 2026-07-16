@@ -1,0 +1,102 @@
+
+835 
+AXPZ20 KNHC 082057
+TWDEP 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+2205 UTC Wed Jul 8 2026
+
+Tropical Weather Discussion for the eastern Pacific Ocean from
+03.4S to 30N, east of 120W including the Gulf of California, and
+from the Equator to 30N, between 120W and 140W. The following
+information is based on satellite imagery, weather observations,
+radar, and meteorological analysis.
+
+Based on 1800 UTC surface analysis and satellite imagery through
+2030 UTC.
+
+...TROPICAL WAVES...
+
+A tropical wave is analyzed along 86W to the north of 04N, 
+moving westward at 10-15 kt. No significant convection is noted
+at this time.
+
+A tropical wave is analyzed along 109W, from 03N to 16N, moving 
+westward at 10-15 kt. Scattered moderate convection is noted 
+along the wave axis S of 13N.
+
+A tropical wave is analyzed along 135W from 02N to 16N, moving 
+westward at around 10-15 kt. Scattered moderate convection is 
+noted from 10N to 14N between 131W and 138W.
+ 
+...INTERTROPICAL CONVERGENCE ZONE/MONSOON TROUGH...
+
+The monsoon trough extends from 08N78W to 04N124W. The ITCZ is 
+from that point to 05N131W. Scattered moderate convection is 
+active within 90 nm S of the monsoon trough and E of 83W, and
+within 300 nm on either side of the boundaries and W of 94W.
+
+...OFFSHORE WATERS WITHIN 250 NM OF MEXICO...
+
+Fresh NW winds and 6-7 ft seas prevail off Baja California Norte
+between high pressure west of the area and lower pressure over 
+northwest Mexico. Farther south, fresh to strong N to NE gap 
+winds are active across the Tehuantepec region, with 6-8 ft seas.
+Gentle to moderate breezes and 4-6 ft seas are noted elsewhere, 
+except 1-4 ft seas across the Gulf of California. 
+
+For the forecast, fresh NW winds off Baja California Norte 
+through tonight, with rough seas in NW swell near Guadalupe 
+Island into Thu. These winds will diminish Thu, as low pressure 
+moves off the Pacific into the lower Colorado River Valley. This 
+will result in fresh to strong S winds and rough seas late Thu 
+into Fri over the Gulf of California. Fresh to strong northerly 
+gap winds will pulse in the Gulf of Tehuantepec through the week.
+Lowering pressure across the tropical eastern Pacific will 
+induce fresh to strong winds and rough seas offshore southern 
+Mexico by the weekend.
+
+....OFFSHORE WATERS WITHIN 250 NM OF CENTRAL AMERICA, COLOMBIA,
+AND WITHIN 750 NM OF ECUADOR...
+
+Fresh NE to E gap winds persist across the Papagayo region and 
+Nicaragua, extending offshore to near 90W. Seas are estimated to 
+be 6-8 ft. Moderate to fresh winds are elsewhere to the N of 
+08N. Gentle N to NE winds are in the Gulf of Panama downwind to 
+near 07N, with seas to 5 ft. Moderate SE winds are across the 
+offshore waters of the Galapagos Islands, where seas are 5-7 ft 
+in SW swell. Light to gentle winds are across the remainder of 
+the waters, along with 4-6 ft mainly in SW swell.
+
+For the forecast, fresh to strong NE-E gap winds will pulse in the
+Gulf of Papagayo region through late Sun, mainly at night and
+into the morning hours. Cross equatorial SW swell will move 
+through the waters off Ecuador and the Galapagos Islands
+through tonight, with seas peaking around 9 ft. Gentle to 
+moderate breezes and slight to moderate seas will persist 
+elsewhere. Lowering pressure across the tropical eastern Pacific
+will induce fresh to strong winds and rough seas offshore El 
+Salvador and Guatemala by Sun. 
+
+...REMAINDER OF THE AREA...
+
+A surface trough, the remnant of Douglas, is along 140W from 24N
+to 30N. Elsewhere, a broad ridge dominates the waters north of 
+15N, supporting moderate NE winds and 5-7 ft seas in a mix of N 
+and SW swell. Fresh NE winds and seas 7-8 ft are also noted 
+farther S near the tropical wave near 135W. Gentle to moderate 
+breezes are noted elsewhere. Long period SW swell to 8 ft is 
+reaching 05N between 90W and 120W. Combined seas are mainly 5-7 
+ft elsewhere.
+
+For the forecast, strong winds and rough seas will accompany the
+tropical wave near 135W at it moves westward at 10-15 kt, past 
+140W by late Fri. Farther N, swell of 8-9 ft will persist north 
+of 25N to the E of 125W through Fri. Farther S, large swell to 
+7-8 ft will persist south of 05N or so between 95W and 120W 
+through Fri.
+
+$$
+ERA
+

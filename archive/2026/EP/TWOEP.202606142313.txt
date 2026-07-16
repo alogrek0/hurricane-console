@@ -1,0 +1,24 @@
+
+000
+ABPZ20 KNHC 142313
+TWOEP 
+
+Tropical Weather Outlook
+NWS National Hurricane Center Miami FL
+500 PM PDT Sun Jun 14 2026
+
+For the eastern and central North Pacific east of 180 longitude:
+
+Well Southwest of the Baja California Peninsula (EP93):
+A broad area of low pressure located well southwest of the Baja 
+California Peninsula is producing disorganized showers and 
+thunderstorms. Environmental conditions could support some gradual 
+development during the next day or two while the system moves 
+northward and then northwestward at 5 to 10 mph. Thereafter, 
+increasing dry mid-level air is expected to limit further 
+development.
+* Formation chance through 48 hours...low...30 percent.
+* Formation chance through 7 days...low...30 percent.
+
+$$
+Forecaster Gibbs

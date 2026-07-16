@@ -1,0 +1,37 @@
+
+000
+ABPZ20 KNHC 032313
+TWOEP 
+
+Tropical Weather Outlook
+NWS National Hurricane Center Miami FL
+500 PM PDT Wed Jun 3 2026
+
+For the eastern and central North Pacific east of 180 longitude:
+
+Active Systems:
+The National Hurricane Center is issuing advisories on Tropical 
+Storm Amanda, located well southwest of the southern tip of the Baja 
+California Peninsula.
+
+Eastern East Pacific:
+An area of low pressure is forecast to form offshore of Central 
+America and southern Mexico late this week. Environmental conditions 
+appear conducive for development of this system thereafter, and a 
+tropical depression could form late this weekend or early next week 
+while it moves slowly northwestward or northward.
+* Formation chance through 48 hours...low...near 0 percent.
+* Formation chance through 7 days...medium...50 percent.
+
+Offshore Southern and Southwestern Mexico:
+Another area of low pressure is forecast to form offshore of 
+southern and southwestern Mexico by this weekend. Environmental 
+conditions also appear conducive for gradual development of this 
+system into early next week, and a tropical depression could form 
+during this time as it moves slowly northward or northwestward, near 
+the coast of southern Mexico. 
+* Formation chance through 48 hours...low...near 0 percent.
+* Formation chance through 7 days...medium...50 percent.
+
+$$
+Forecaster Papin

@@ -1,0 +1,138 @@
+
+000
+AXPZ20 KNHC 272202
+TWDEP 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+2205 UTC Sat Jun 27 2026
+
+Tropical Weather Discussion for the eastern Pacific Ocean from
+03.4S to 30N, east of 120W including the Gulf of California, and
+from the Equator to 30N, between 120W and 140W. The following
+information is based on satellite imagery, weather observations,
+radar, and meteorological analysis.
+
+Based on 1800 UTC surface analysis and satellite imagery through
+2145 UTC.
+
+...TROPICAL WAVES...
+
+A tropical wave axis is along 89W north of 05N to inland Honduras
+and Belize. It is moving westward at 10 to 15 kt. Isolated 
+showers and thunderstorms are near the southern portion of the 
+wave and where the wave crosses the monsoon trough.
+
+A tropical wave has its axis along 97W north of 08N to inland 
+southeastern Mexico. It is moving westward around 10 kt. Numerous
+to isolated strong convection is west of the wave to near 106W 
+from 10N to 15N.
+
+A tropical wave has its axis along 115W from 08N to 19N, moving 
+westward at around 15 kt. Convection associated with this wave 
+has diminished during the past few hours. Scattered moderate to
+isolated strong convection is seen west of this wave to near 
+118W from 11N to 17N. Scattered moderate convection is east of
+the wave to near 108W from 12N to 17N. Scatterometer satellite 
+data has fresh to strong east to southeast winds east of this 
+wave to near 110W. Seas are 7 to 9 ft with these winds.
+
+A tropical wave is analyzed from 22N132W to 17N135W and to 
+12N136W. A weak 1012 mb low is along the axis near 20N as
+observed on satellite imagery. These features are moving 
+westward at about 10 to 15 kt. No significant convection is noted
+at this time.
+
+...INTERTROPICAL CONVERGENCE ZONE/MONSOON TROUGH...
+
+The monsoon trough extends from low pressure of 1007 mb in 
+northwest Colombia, west-southwestward through central Panama 
+and west-northwestward through southern Costa Rica. From there 
+it reaches the coast at 09N84W and continues to 07N96W, then 
+northwestward to 12N114W and southwestward to 08N120W and to 
+06N125W, where it transitions to the ITCZ to 05N132W and 
+to beyond 06N140W. Numerous to isolated strong convection 
+is from 02N to 07N west of 136W. Scattered moderate to isolated 
+strong convection is from 05N to 09N between 104W-111W, also 
+within 180 nm south of the trough between 116W-121W, and 
+within 120 nm north of the trough between 91W-97W. Scattered 
+moderate convection is within 120 nm south of the trough and 
+the ITCZ between 123W-128W, and within 60 nm south of the trough
+between 98W-100W.
+
+...OFFSHORE WATERS WITHIN 250 NM OF MEXICO...
+
+The pressure difference between high pressure ridging over the Gulf 
+of America and lower pressure from southeastern Mexico southward
+to the monsoon trough over the eastern Pacific is supporting 
+fresh to strong gap winds in the Gulf of Tehuantepec. Seas of 
+8 to 9 ft have been churned up by these winds. In the Gulf of 
+California, moderate to fresh south to southwest winds are over 
+the northern portion east of 114W due to a tighter gradient 
+there between the thermal trough and somewhat relatively higher 
+pressure in western Mexico. Seas are 2 to 4 ft over the Gulf, 
+except for 3 to 5 ft in the southern portion. Light to gentle 
+winds are elsewhere over the Mexican offshore waters along with 
+seas of 5 to 7 ft in long-period south to southwest swell.
+
+For the forecast, the fresh to strong north to northeast gap 
+winds will continue in the Gulf of Tehuantepec region through 
+late Sun morning. Elsewhere, winds and seas across the Mexican 
+offshore waters should be calm through early next week. Large 
+northwest swell is expected to move into the far northern waters
+off Baja California Norte beginning early on Mon, and perhaps 
+linger into Tue afternoon.
+
+....OFFSHORE WATERS WITHIN 250 NM OF CENTRAL AMERICA, COLOMBIA,
+AND WITHIN 750 NM OF ECUADOR...
+
+Fresh to strong northeast gap winds are across the Gulf of 
+Papagayo and off the southern coast of Nicaragua. Latest 
+scatterometer satellite data shows seas of 8 to 9 ft downstream 
+of these winds, namely from 09N to 11N between 87W and 91W. 
+Moderate or weaker winds are elsewhere. Seas are 7 to 9 ft in 
+long-period southerly swell over the equatorial waters, as
+detected by multiple altimeter satellite data passes, and 5 to 
+6 ft in SW swell over the remainder of the offshore waters.
+
+For the forecast, the pressure difference between high pressure
+north of the area and relatively lower pressure in the tropics 
+will support fresh to strong gap winds and rough seas across the 
+Gulf of Papagayo through early Tue. These conditions may spread
+as far west as 105W through Sun night before diminishing. 
+Farther south, large southerly swell moving into the equatorial 
+waters will continue through early next week.
+
+...REMAINDER OF THE AREA...
+
+A weak 1012 mb low is centered on the western most tropical wave
+near 20N133W. Fresh to strong northeast winds prevail north of 
+the low to 23N and between 130W and 140W. Seas with these winds 
+are 8 to 9 ft. Elsewhere, broad ridging dominates the remainder 
+of the area north of 20N. The moderate pressure gradient between 
+the ridge and lower pressure in the vicinity of the monsoon 
+trough/ITCZ is resulting in moderate to fresh trade winds from 
+10N to 28N west of 126W, and from 11N to 21N between 115W and 
+126W. Fresh to strong northeast to east winds are 120 nm north
+and northeast of the low due to a tight pressure gradient between 
+the low and high pressure to the north. Seas are 5 to 7 ft over 
+these waters, except for higher seas 6 to 9 ft from 15N to 20N 
+west of 130W due to the combination of long-period north to 
+northeast swell with trade wind generated waves. Elsewhere, winds
+across the open Pacific waters are moderate or weaker. Seas are 
+6 to 8 ft in mixed north and southwest swell.
+
+For the forecast, the tropical wave near 115W is forecast to 
+undergo possible gradual development during the next few days
+and a tropical depression could form around the middle of next 
+week while the wave moves generally westward to west-northwestward.
+Environmental conditions are forecast to become less conducive 
+for development by the second half of the week as the system 
+moves over the western portion of the eastern North Pacific.
+Outside of this system, little change in winds are expected for 
+the next several days. Large southerly swell moving through far 
+south-central waters is expected to begin to decay during the 
+early part of the upcoming week.
+
+$$
+Aguirre

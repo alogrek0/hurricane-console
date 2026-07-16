@@ -1,0 +1,112 @@
+
+000
+AXNT20 KNHC 291428
+TWDAT 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+1815 UTC Mon Jun 29 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 1200 UTC surface analysis and satellite imagery through 
+1420 UTC.
+
+ ...TROPICAL WAVES...
+
+A far eastern Atlantic tropical wave has its axis along 30W, 
+south of 16N, moving westward at 10-15 kt. Scattered moderate 
+convection is found from 03N-08N between 25W-32W.
+
+A central Atlantic tropical wave has its axis along 61W, south of
+14N, moving westward at 15 kt. Scattered moderate convection is 
+found along the wave axis from 06N-10N between 59W-61W.
+
+A tropical wave is over the central Caribbean along 69W, south of
+20N, moving westward near 10-15 kt. No convection is noted at 
+this time.
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough enters the Atlantic near 18N16W and continues 
+southwestward to 10N20W. The ITCZ extends from 10N20W to 05N40W to
+06N53W. Aside from the convection related to the tropical waves 
+described above, no significant convection is present at this 
+time.
+
+...GULF OF AMERICA...
+
+1019 mb high pressure is centered over the northeast Gulf near
+28N86W. A trough is over the Bay of Campeche in the far southwest
+Gulf along 92W south of 22N. Moderate S to SW winds and 3 to 5 ft
+seas are noted over the western Gulf with gentle breezes and 1 to
+3 ft seas are noted elsewhere. Various observations over southern
+Mexico including Veracruz are showing minor limitations to
+visibility due to haze. 
+
+For the forecast, the ridge will continue to dominate the Gulf region while
+a weak cold front is forecast to reach the NE Gulf late tonight 
+into Tue with little impact in winds and seas. Fresh to locally 
+strong NE to E winds will pulse off the NW Yucatan Peninsula 
+nightly through Fri night due to local effects associated with a 
+thermal trough. Moderate to fresh E to SE winds across the western
+half of the Gulf will diminish to gentle to moderate speeds Tue 
+morning and then prevail the remainder forecast period. Moderate 
+or weaker winds are expected elsewhere E of 90W, except for light 
+to gentle winds in the NE Gulf. 
+
+...CARIBBEAN SEA...
+
+The subtropical ridge north of the basin continues to force fresh
+to near-gale easterly trade winds across much of the central 
+Caribbean. Seas in these waters are 8-10 ft. The strongest winds 
+and highest seas are found off NW Colombia. Moderate to fresh 
+easterly breezes and moderate seas are found in the eastern 
+Caribbean. Elsewhere, moderate or lighter winds and slight to 
+moderate seas prevail. A few thunderstorms are active across
+Trinidad associated with a tropical wave moving into the Windward
+Islands. No significant convection is evident elsewhere.
+
+For the forecast, the subtropical ridge north of the basin 
+combined with the Colombian Low will support fresh to strong trade
+winds over the central Caribbean through the forecast period, 
+reaching near-gale speeds offshore of Colombia at night. Moderate 
+or lighter winds are forecast across the remainder of the basin 
+during the next several days. 
+
+...ATLANTIC OCEAN...
+
+An upper-level low centered north of the Leeward Islands near
+24N65W. Scattered to numerous showers and thunderstorms remain
+active within 180 nm southeast of an associated surface trough
+extending from 26N62W to 21N67W. The remainder of the Atlantic
+discussion area is dominated by the subtropical ridge north of
+20N, interrupted only by a surface trough along roughly 45W from
+20N to 25N. This pattern is supporting moderate winds and 3-5 ft
+seas north of 20N, east of 35W. It is also supporting moderate to
+fresh trade winds farther south over the deep tropics east of 35W
+with 5-7 ft seas, except near 8 ft southeast of Barbados. In the 
+far eastern Atlantic, fresh to near gale-force northerly winds and
+seas of 5-8 ft are evident north of 18N and east of 20W. 
+Moderate or weaker winds and moderate seas are prevalent elsewhere
+east of 35W.
+
+For the forecast west of 55W, the subtropical ridge will dominate
+the forecast area through today. While most of the basin will 
+experience moderate or weaker winds, trades just north of 
+Hispaniola will freshen in the afternoons and early evenings for 
+the next several days. A weak cold front will push off of the SE 
+United States coast today and extend from 31N72W to the central 
+Florida peninsula by Tue morning. While the front is anticipated 
+to dissipate on Wed, a broad low pressure area is expected to form
+along the western end of the frontal system in the next day or 
+two. Gradual development is possible while the system drifts 
+southward and then westward before environmental conditions become
+less conducive later this week.
+
+$$
+Christensen

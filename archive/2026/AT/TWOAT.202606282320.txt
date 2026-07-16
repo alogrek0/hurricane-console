@@ -1,0 +1,24 @@
+
+000
+ABNT20 KNHC 282320
+TWOAT 
+
+Tropical Weather Outlook
+NWS National Hurricane Center Miami FL
+800 PM EDT Sun Jun 28 2026
+
+For the North Atlantic...Caribbean Sea and the Gulf of America:
+
+Offshore of the Southeastern U.S. Coast:
+Disorganized showers and thunderstorms located near the coast of 
+North Carolina are associated with a mid-level disturbance and an 
+approaching frontal system. A broad area of low pressure is forecast 
+to form along the front offshore of the southeastern coast of the 
+United States on Monday or Tuesday. Gradual development is possible 
+while the system drifts southward and then westward before 
+environmental conditions become less conducive later this week.
+* Formation chance through 48 hours...low...10 percent.
+* Formation chance through 7 days...low...10 percent.
+
+$$
+Forecaster Reinhart

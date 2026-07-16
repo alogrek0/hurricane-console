@@ -1,0 +1,54 @@
+
+000
+ABPZ20 KNHC 102327
+TWOEP 
+
+Tropical Weather Outlook
+NWS National Hurricane Center Miami FL
+500 PM PDT Fri Jul 10 2026
+
+For the eastern and central North Pacific east of 180 longitude:
+
+South-Southeast of the Hawaiian Islands (CP90):
+Shower and thunderstorm activity associated with a trough of low 
+pressure located about 500 miles south of Hilo, Hawaii, remains 
+limited and disorganized. Environmental conditions appear conducive 
+for gradual development of this system through early next week, and 
+a tropical depression could form while the system moves generally 
+westward across the central Pacific, remaining well south of the 
+Hawaiian Islands.
+* Formation chance through 48 hours...low...30 percent. 
+* Formation chance through 7 days...medium...50 percent.
+
+Well Southeast of the Hawaiian Islands:
+A trough of low pressure located about 800 miles southeast of Hilo, 
+Hawaii, is producing disorganized showers and thunderstorms. 
+Environmental conditions appear favorable for gradual development of 
+this system, and a tropical depression could form next week as it 
+moves generally westward across the central Pacific, remaining well 
+south of the Hawaiian Islands. 
+* Formation chance through 48 hours...low...10 percent. 
+* Formation chance through 7 days...medium...50 percent.
+
+Central and Western East Pacific:
+A trough of low pressure well southwest of the Baja California 
+peninsula is producing disorganized showers and thunderstorms. Some 
+slow development of this system is possible during the next few 
+days while it drifts northwestward. By early next week, this system 
+is expected to move into unfavorable environmental conditions, 
+likely ending its opportunity to develop.
+* Formation chance through 48 hours...low...10 percent. 
+* Formation chance through 7 days...low...20 percent.
+
+Offshore of Southwestern Mexico:
+An area of low pressure is expected to form late this weekend or 
+early next week several hundred miles south-southwest of the coast 
+of southwestern Mexico. Environmental conditions appear favorable 
+for gradual development thereafter, and a tropical depression is 
+likely to form by the middle of next week while the system moves 
+generally west-northwestward. 
+* Formation chance through 48 hours...low...near 0 percent. 
+* Formation chance through 7 days...high...80 percent.
+
+$$
+Forecaster Gibbs/Cangialosi

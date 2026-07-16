@@ -1,0 +1,52 @@
+
+000
+ABPZ20 KNHC 111743
+TWOEP 
+
+Tropical Weather Outlook
+NWS National Hurricane Center Miami FL
+1100 AM PDT Sat Jul 11 2026
+
+For the eastern and central North Pacific east of 180 longitude:
+
+Offshore of Southwestern Mexico:
+A broad area of low pressure is located several hundred miles south 
+of the southwestern coast of Mexico.  Environmental conditions 
+appear favorable for gradual development of this system, and a 
+tropical depression is likely to form by mid-next week while the 
+system moves generally west-northwestward. 
+* Formation chance through 48 hours...low...30 percent. 
+* Formation chance through 7 days...high...90 percent.
+
+Central and Western East Pacific:
+Showers and thunderstorms have increased during the past several 
+hours in association with a trough of low pressure located well 
+southwest of the Baja California peninsula.  Some slow development 
+of this system is possible over the next couple of days.  By the 
+middle of next week, environmental conditions are expected to 
+become less conducive for development while it moves slowly 
+west-northwestward.
+* Formation chance through 48 hours...low...20 percent. 
+* Formation chance through 7 days...low...20 percent.
+
+Well Southeast of the Hawaiian Islands:
+A trough of low pressure located several hundred miles southeast of 
+the Hawaiian Islands is producing disorganized showers and 
+thunderstorms.  Environmental conditions appear favorable for 
+gradual development of this system, and a tropical depression could 
+form by mid-next week while it moves generally westward across the 
+central Pacific, remaining well south of the Hawaiian Islands. 
+* Formation chance through 48 hours...low...10 percent. 
+* Formation chance through 7 days...medium...40 percent.
+
+South of the Hawaiian Islands (formerly CP90):
+A trough of low pressure, located several hundred miles south of 
+the Hawaiian Islands, is producing a small area of showers.  
+Further development of the system appears to be unlikely while it 
+moves generally westward across the central Pacific, remaining well 
+south of the Hawaiian Islands.
+* Formation chance through 48 hours...low...near 0 percent. 
+* Formation chance through 7 days...low...10 percent.
+
+$$
+Forecaster Roberts

@@ -1,0 +1,112 @@
+
+372 
+AXNT20 KNHC 052243
+TWDAT 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+0015 UTC Mon Jul 6 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 1800 UTC surface analysis and satellite imagery through 
+2230 UTC.
+
+...TROPICAL WAVES...
+
+A tropical wave is along 28W S of 17N, moving W at 10 to 15 kt.
+Scattered moderate convection is noted across the southern half of
+the wave S of 10N. 
+
+An Atlantic tropical wave is near 37W and S of 18N, moving W at 
+10 to 15 kt. Scattered moderate convection is noted across the 
+southern half of the wave S of 10N.
+
+An Atlantic tropical wave is near 46W from 02-17N, moving W at 
+around 15 kt. Scattered moderate convection is noted across the 
+southern half of the wave S of 10N.
+
+A Caribbean tropical wave is near 77W, south of 19N, moving W at 
+at 10-15 kt. Scattered showers are along the wave axis.
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough enters the Atlantic near 14N17W to 10N19W. 
+The ITCZ continues from that point between the tropical waves to 
+08N59W. Scattered moderate convection is noted within 200 nm on 
+either side of the ITCZ and W of 30W.
+
+...GULF OF AMERICA...
+
+The subtropical ridge extends across the Florida Peninsula and 
+across the northern Gulf to the coast of Texas. Farther south, a 
+weak trough is positioned over the Bay of Campeche. This pattern 
+is supporting fresh NE winds off the west coast of the Yucatan 
+Peninsula, as noted in a recent scatterometer satellite pass. 
+Gentle to moderate breezes are observed elsewhere. Seas are 
+generally 1-3 ft across the basin. Scattered moderate convection 
+is active over the eastern Gulf at the base of an upper trough 
+that extends over the Mississippi River valley. 
+
+For the forecast, little change is expected in the weather 
+pattern across the Gulf region as a ridge continues to dominate 
+the basin. Gentle to moderate winds are forecast over the western 
+Gulf with light to gentle winds over the eastern Gulf. The 
+exception will be pulsing winds reaching fresh to strong speeds 
+off the northwestern Yucatan Peninsula nightly through Fri. These 
+winds are the result of local effects associated with a surface 
+trough. Slight to moderate seas are expected basin-wide. 
+
+...CARIBBEAN SEA...
+
+The subtropical ridge extending north of the area across the
+western Atlantic is supporting moderate to fresh trade winds
+across the eastern and central Caribbean as well as the Gulf of
+Honduras, with strong E winds noted off northeast Colombia and 
+northwest Venezuela. Gentle to moderate breezes are noted 
+elsewhere. Seas are 5-7 ft over the eastern and central Caribbean,
+and 3-5 ft elsewhere except 1-3 ft in the far northwest 
+Caribbean. A mid to upper level trough extends from the western 
+Atlantic across eastern Cuba and Jamaica, and toward Nicaragua. 
+Upper level divergent flow along with convergent lower level trade
+wind flow is supporting scattered showers and thunderstorms off 
+the coasts of Nicaragua and Honduras.
+
+For the forecast, the pressure gradient between the Atlantic ridge
+north of the basin and the Colombian Low will continue to support
+fresh to strong trade winds and moderate to rough seas over the 
+central Caribbean through Fri night. The aerial extent of these 
+winds will increase tonight into Mon as the Atlantic ridge 
+continues to build westward. By Wed, the fresh to strong winds are
+expected to extend across most of the east and central Caribbean.
+Expect winds to reach near-gale force at night offshore of 
+Colombia and in the Gulf of Venezuela from tonight through Fri. 
+Moderate or weaker winds will prevail over the NW part of the 
+basin, except in the Gulf of Honduras where fresh to strong E to 
+SE winds are forecast at night tonight through Tue. 
+
+...ATLANTIC OCEAN...
+
+The subtropical ridge dominates the Atlantic north of 20N, and is
+anchored by 1025 mb high pressure centered near 28N38W. Scattered
+moderate convection is occurring along a surface trough analyzed 
+from 31N53W to 29N72W. The pattern is supporting gentle to 
+moderate breezes and 3-5 ft seas along and west of the ridge axis,
+and moderate to fresh NE to E trade winds and 5-7 ft seas east 
+and south of the ridge axis. 
+
+For the forecast west of 55W, the Atlantic ridge will continue to
+build westward across central Florida into the eastern Gulf of 
+America early this week. This pattern will support moderate to 
+fresh E to SE trade winds S of 22N, and moderate or weaker winds 
+elsewhere. Strong winds, with moderate to rough seas, are 
+expected at night north of Hispaniola, including approaches to the
+Windward Passage, from tonight through Fri.
+
+$$
+ERA
+

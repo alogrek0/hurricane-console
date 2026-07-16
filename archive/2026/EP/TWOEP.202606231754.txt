@@ -1,0 +1,35 @@
+
+000
+ABPZ20 KNHC 231754
+TWOEP 
+
+Tropical Weather Outlook
+NWS National Hurricane Center Miami FL
+1100 AM PDT Tue Jun 23 2026
+
+For the eastern and central North Pacific east of 180 longitude:
+
+Central and Western Portion of the East Pacific (EP94):
+Showers and thunderstorms are starting to show some signs of 
+organization in association with the low pressure system located 
+several hundred miles south of the southern tip of the Baja 
+California Peninsula.  Environmental conditions are currently 
+favorable for continued gradual development, and a tropical 
+depression could form within the next day or so as the system moves 
+westward to west-northwestward at 10 to 15 mph.  By Thursday, the 
+system is forecast to move into an unfavorable environment, which 
+should end the chances for further development.
+* Formation chance through 48 hours...medium...50 percent.
+* Formation chance through 7 days...medium...50 percent.
+
+Central and Western East Pacific:
+A low pressure system is likely to form this weekend over the 
+central portion of the East Pacific basin.  Some slow development of 
+this system is possible after that time, and it could become a 
+tropical depression early next week while it moves westward to 
+west-northwestward at 10 to 15 mph.
+* Formation chance through 48 hours...low...near 0 percent.
+* Formation chance through 7 days...medium...40 percent.
+
+$$
+Forecaster Hagen

@@ -1,0 +1,42 @@
+
+000
+ABPZ20 KNHC 051135
+TWOEP 
+
+Tropical Weather Outlook
+NWS National Hurricane Center Miami FL
+500 AM PDT Fri Jun 5 2026
+
+For the eastern and central North Pacific east of 180 longitude:
+
+Active Systems:
+The National Hurricane Center is issuing advisories on Tropical 
+Storm Amanda, located well west-southwest of the southern tip of 
+the Baja California Peninsula.
+
+Offshore Southern and Southwestern Mexico:
+A trough of low pressure located well offshore of southwestern 
+Mexico is producing a large area of disorganized showers and 
+thunderstorms. Environmental conditions appear conducive for 
+development of this system, and a tropical depression is likely to 
+form late this weekend or early next week. The disturbance is 
+forecast to move slowly northeastward or northward near the coast 
+of southern Mexico. Interests in southern Mexico should monitor 
+the progress of this system.  
+* Formation chance through 48 hours...medium...40 percent.
+* Formation chance through 7 days...high...70 percent.
+
+Offshore of Central America:
+A trough of low pressure offshore of Central America is producing 
+disorganized shower and thunderstorm activity. Environmental 
+conditions appear conducive for development of this system, and a 
+tropical depression could form later this weekend or early next 
+week if the system remains offshore.  The low is forecast to move 
+slowly northward toward the coast of Central America. Regardless of 
+development, locally heavy rainfall is possible across portions 
+of Nicaragua, El Salvador, and Guatemala. 
+* Formation chance through 48 hours...low...30 percent.
+* Formation chance through 7 days...medium...60 percent.
+
+$$
+Forecaster Brown/Adams

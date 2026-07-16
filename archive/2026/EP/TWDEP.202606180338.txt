@@ -1,0 +1,126 @@
+
+000
+AXPZ20 KNHC 180338
+TWDEP 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+0405 UTC Thu Jun 18 2026
+
+Tropical Weather Discussion for the eastern Pacific Ocean from
+03.4S to 30N, east of 120W including the Gulf of California, and
+from the Equator to 30N, between 120W and 140W. The following
+information is based on satellite imagery, weather observations,
+radar, and meteorological analysis.
+
+Based on 0000 UTC surface analysis and satellite imagery through
+0315 UTC.
+
+...TROPICAL WAVES...
+
+The southern portion of the axis of a central Caribbean Sea
+tropical wave crosses the central part of Panama and into
+the far eastern part of the Pacific basin along 78W. It is 
+moving westward around 20 kt. Scattered moderate convection 
+is ahead of the axis from 03N to 07N between 82W and 89W.
+
+The axis of a tropical wave is near 93W north of 03N to inland
+southeastern Mexico. It is moving westward at 15 to 20 kt.
+Scattered moderate convection is within 120 nm east of the wave
+from 12N to 14N.
+
+The axis of a tropical wave is near 111.5W from 04N to 16N. It 
+is moving westward at about 15 kt. Scattered moderate convection
+is within 60 nm east of the wave from 04N to 07N, and within 
+60 nm west of the wave from 06.5N to 09N.
+
+...INTERTROPICAL CONVERGENCE ZONE/MONSOON TROUGH...
+
+The monsoon trough axis extends from northern Colombia westward
+to northern Costa Rica to the coast at 10.5N86W, then to 13N103W
+and to 07N118W. The ITCZ extends from 07N118W to 07N130W to 
+beyond 08N140W. Scattered moderate to isolated strong convection
+is within 180 nm south of the ITCZ between 136W-140W. Scattered 
+moderate convection is within 120 nm north of the trough between
+104W-106W, and within 60 nm south of the trough between 106W-109W.
+
+...OFFSHORE WATERS WITHIN 250 NM OF MEXICO...
+
+A surface trough extends from California/Nevada border south-
+southeastward across the northern Gulf of California and across 
+the length of the Baja California  Sur to near the Revillagigedo
+Islands. The pressure gradient between the trough and surface 
+ridging to the west is supporting mainly moderate NW-N winds 
+offshore Baja California to the north of Cabo San Lazaro, and 
+moderate to fresh southeast to south winds in the Gulf of 
+California, locally strong N of 29N. A weak pressure gradient 
+across the remainder discussion waters is supporting light to 
+gentle winds. Moderate seas dominate the offshore waters with 
+heights of 5 to 7 ft in south to southwest swell. Seas are 2 to 4 ft 
+in the Gulf of California, except for higher seas of 3 to 5 ft in 
+long-period south swell in the far southern portion of the Gulf and 
+at the entrance.
+
+For the forecast, gentle to moderate winds will prevail across 
+the waters of Baja California, pulsing to locally fresh speeds at
+night. Gentle to occasionally moderate winds are expected inside
+the Gulf of California and near the tip of Baja California Sur, 
+reaching to locally fresh to strong speeds tonight into early 
+Thu. Light to gentle winds will prevail over the waters between 
+Cabo Corrientes and Tehunatepec during the forecast period. 
+Moderate seas in mainly southerly swell will prevail through the 
+next several days, slight in the Gulf of California. 
+
+....OFFSHORE WATERS WITHIN 250 NM OF CENTRAL AMERICA, COLOMBIA,
+AND WITHIN 750 NM OF ECUADOR...
+
+Mainly light to gentle winds under a weak pressure gradient 
+prevail across the offshore waters along with moderate seas due 
+to long-period south to southwest swell.
+
+Satellite imagery shows numerous thunderstorms over the western
+sections of Nicaragua extending offshore for 60 nm. Scattered
+moderate to isolated strong convection extends from El Salvador 
+and southeastern Honduras southeastward to offshore Nicaragua 
+for 100 nm. This activity also reaches to just inland Nicaragua. 
+Scattered showers and thunderstorms are over southeastern Mexico.
+Isolated showers and thunderstorms are over the offshore waters 
+of Colombia.
+
+For the forecast, gentle to occasionally moderate S to SE winds 
+and moderate seas will prevail across the offshore waters between
+Ecuador and the Galapagos Islands through at least Sun night. 
+Moderate winds will pulse to fresh in diurnal offshore flow in 
+the immediate Gulf of Papagayo. Light to gentle winds and slight
+to moderate seas in SW swell are forecast elsewhere through at
+least the next several days.
+
+...REMAINDER OF THE AREA...
+
+The surface trough that was near 140W earlier has continued to 
+pull farther away from the discussion area. In the wake of 
+the trough, latest satellite scatterometer data passes generally  
+show light to gentle east to southeast winds north of the ITCZ
+to near 12N west of 130W, mostly fresh east to southeast winds 
+from 12N to 15N west of 137W, gentle to moderate trade winds
+from 15N to 21N west of 130W, and light to gentle anticyclonic
+winds north of 21N west of about as ridge axis is analyzed along
+23N/24N west of about 120W. A weak trough is analyzed from near 
+30N132W to west of the area at 28N140W. The scatterometer 
+satellite data indicates moderate to fresh northeast winds north 
+of 30N west of the trough. Latest satellite altimeter data and Sofar 
+Ocean Spotter buoys reveal seas of 5 to 7 ft over the waters waters 
+W of 125W and 4 to 6 ft east of 125W.
+
+Satellite imagery shows scattered showers and isolated thunderstorms
+south of 16N west of 120W.
+
+For the forecast, seas will build to rough state south of and 
+near the Equator and east of 120W beginning Sat as a new set of 
+southerly swell begins to move through this part of the area.
+Winds may pulse to fresh in the west-central waters at times.
+Otherwise, little overall changes are expected in and winds 
+and seas going into the weekend.
+
+$$
+Aguirre

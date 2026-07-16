@@ -1,0 +1,115 @@
+
+724 
+AXNT20 KNHC 110859
+TWDAT 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+1215 UTC Thu Jun 11 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 0600 UTC surface analysis and satellite imagery through 
+0850 UTC.
+
+...TROPICAL WAVES...
+
+A tropical waves is off the coast of West Africa along 18W, S of 
+12N. Convection described in the Monsoon Trough/ITCZ section 
+below. 
+
+The axis of a tropical wave is near 47W, S of 15N, moving west at
+10 to 15 kt. Convection described in the Monsoon Trough/ITCZ section 
+below.
+
+The axis of a tropical wave is near 60W, S of 15N, moving westward
+at around 15 kt. Convection described in the Monsoon Trough/ITCZ 
+section below.
+
+The axis of a tropical wave is near 66W, S of 18N, moving 
+westward at 10 to 15 kt. No convection is depicted at this time in
+association to this wave. 
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough extends off the coast of Africa near 15N17W 
+and extends SW to 09N20W to 05N30W. The ITCZ extends from 05N30W 
+to 03N40W to 04N50W. Scattered moderate to strong convection is 
+noted from 04N to 08N between 06W and 35W. Scattered moderate
+convection is also noted from 04N and 06N between 45W and 52W.
+
+...GULF OF AMERICA...
+
+Scattered showers and a few thunderstorms are active along a 
+surface trough off the Yucatan Peninsula from 22N90W to 
+18.5N93W. Isolated showers and thunderstorms are also active over
+the loop current near 25N86W. A recent scatterometer satellite 
+pass showed fresh to strong SE winds east of the trough to the
+coast of the Yucatan Peninsula. The scatterometer also indicated
+moderate to fresh SE winds elsewhere over the western Gulf, and
+gentle breezes over the eastern Gulf where weak high pressure is
+present. Seas are 4-6 ft between the northwest Yucatan Peninsula
+and the Texas coast, and 2-4 ft elsewhere. 
+
+For the forecast, weak ridging will extend from the western 
+Atlantic across the north-central Gulf into early next week. 
+Farther south, weak low pressure will develop over southern Mexico
+and northern Central America today, then move into the the Bay of
+Campeche this evening. The low pressure will then move 
+northwestward toward the coast of Tamaulipas state in northeast 
+Mexico through Sat night. The gradient between the low pressure 
+and the high pressure over the northeast Gulf will support a plume
+of fresh to strong SE winds and moderate to rough seas from the 
+northwest Yucatan peninsula to the coast of Texas through at least
+Sat night. The low pressure will be accompanied by numerous 
+showers and thunderstorms across the western Gulf. Winds and seas 
+will diminish early next week after the low pressure moves inland 
+and weakens. 
+
+...CARIBBEAN SEA...
+
+Scattered to numerous showers and thunderstorms are active off
+eastern Honduras, under diffluent flow aloft. Scattered showers
+and thunderstorms are also active along the coast of Belize.
+Farther east, a few showers and thunderstorms are active along and
+just west of the Windward Islands, between a couple of tropical
+waves. Fresh to strong SE winds and 5-7 ft seas are noted over the
+northwest Caribbean, and fresh to strong E winds and 6-8 ft seas
+are noted over the south-central Caribbean. Moderate E to SE
+winds and 4-6 ft are noted elsewhere.
+
+For the forecast, a strong ridge across the western Atlantic will
+support a large area of fresh to strong trade winds and moderate 
+to rough seas across the central Caribbean into early next week, 
+with the highest winds and seas off the coast of Colombia. Fresh 
+to strong SE winds and rough seas will also persist over the 
+northwest Caribbean west of 85W through at least Fri night, 
+between the ridge and low pressure over northern Central America 
+and southern Mexico.
+
+...ATLANTIC OCEAN...
+
+Scattered to numerous showers and thunderstorms are active near a
+1016 mb low pressure area centered near 26N61W, which is along a
+trough extending from 30N54W to 24N65W. Farther north, a surface
+ridge extends from 1021 mb high pressure northeast of Bermuda near
+35N60W to northeast Florida. Farther east, another surface ridge
+extends from 1028 mb high pressure near the Azores Islands to
+25N45W. Gentle breezes and 4-5 ft seas are noted west of and along
+this ridge, and moderate to fresh NE winds and 6-7 ft seas are
+evident south of this ridge.
+
+For the forecast west of 55W, the low pressure will dissipate as 
+it moves northeast of the area through this evening. A ridge will 
+extend westward along roughly 29N and remain in place through 
+early next week. This pattern will support gentle to moderate 
+breezes across the basin, except moderate to fresh winds off 
+Hispaniola starting Fri night.
+
+$$
+Christensen
+

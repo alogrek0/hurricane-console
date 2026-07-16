@@ -1,0 +1,125 @@
+
+000
+AXNT20 KNHC 140409
+TWDAT 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+0615 UTC Sun Jun 14 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 0000 UTC surface analysis and satellite imagery through 
+0355 UTC.
+
+...TROPICAL WAVES...
+
+A far eastern Atlantic tropical wave is along 24W, south of 15N, 
+moving westward at 10-15 kt. Scattered moderate convection is
+observed from 02N to 09N and east of 33W .
+
+A central Atlantic tropical wave is along 40W, south of 16N, 
+moving westward at 15 kt. No significant convection is currently 
+occurring with this wave.
+
+Another central Atlantic tropical wave is along 57W, south of 
+19N, moving westward at 15-20 kt. No significant convection is 
+currently occurring with this wave.
+
+A central Caribbean tropical wave is along 82W, south of 18N, 
+moving westward at 10-15 kt. Most convection with this wave is in
+the eastern North Pacific waters.
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough enters the Atlantic through the coast of
+Guinea-Bissau near 12N16W and continues southwestward to 05N27W. 
+The ITCZ extends from 05N27W to 03N29W and then continues from
+03N41W to 00N50W. A few showers are seen near the ITCZ.
+
+...GULF OF AMERICA...
+
+A few showers are noted on satellite imagery near the broad area 
+of low pressure in the western Gulf. The tight pressure gradient 
+between this low and a 1018 mb ridge in the eastern Gulf sustain 
+fresh to locally strong SE winds and moderate to locally rough 
+seas west of a line from southern Louisiana to NE Yucatan and
+north of 22N. Elsewhere, moderate or weaker winds and slight to 
+moderate seas prevail.
+
+For the forecast, an elongated area of low pressure from just 
+offshore of eastern Mexico to the central Bay of Campeche 
+continues to produce bands of shower and thunderstorm activity, 
+mainly across eastern portions. Significant development is not 
+anticipated before the low pressure area shifts inland over 
+eastern Mexico by early Sunday. The system could re-emerge over 
+the northwestern Gulf of America on Tue or Wed while interacting 
+with a frontal boundary. The pressure gradient between the low 
+pressure area and 1018 mb high pressure over the east-central Gulf
+will support fresh to strong SE winds and moderate to rough seas,
+accompanied by scattered showers and thunderstorms, across the 
+western Gulf through Sun night. The Atlantic ridge will build 
+westward into the Gulf Tue through Thu, and combine with lower 
+pressure over South Texas and northeastern Mexico will promote 
+fresh to strong southerly winds over the western Gulf, and 
+moderate to fresh winds over the eastern Gulf. 
+
+...CARIBBEAN SEA...
+
+Divergence aloft and plenty of tropical moisture combined to
+produce scattered showers and isolated thunderstorms, north of 18N
+and between 74W and 82W. This activity is also affecting portions
+of central and eastern Cuba, the Cayman Islands, and Jamaica.
+Similar storms are also noted in the isthmus of Panama, Costa 
+Rica, and nearby waters. 
+
+The tight pressure gradient between the sub-tropical ridge over 
+the central Atlantic and lower pressures in northern South America
+forces fresh to near gale easterly trade winds and moderate to 
+rough seas over much of the basin, south of 19N. A recent
+scatterometer satellite pass captured winds up to 33 kt off
+northern Colombia. Elsewhere, moderate or lighter winds and 
+slight to moderate seas are prevalent.
+
+For the forecast, the Atlantic ridge extends through 26N55W
+westward across central Florida along 28N and into the NE Gulf of
+America. The ridge will generally remain in place through Sun 
+night to support a large area of fresh to strong trade winds and 
+moderate to rough seas across the central Caribbean. Expect 
+highest winds and seas off the coast of Colombia. Pulsing winds to
+fresh to strong speeds are expected in the Gulf of Honduras 
+nightly through Thu. The ridge north of the area will reorganize 
+Sun night through early Tue then shift slowly NE through midweek, 
+leading to a slight decrease in wind and seas across the basin. 
+
+...ATLANTIC OCEAN...
+
+Scattered showers and isolated thunderstorms are affecting the
+central and southeast Bahamas and central and eastern Cuba. The
+remainder of the tropical Atlantic is dominated by broad ridging
+along 27N, supporting moderate to fresh easterly winds and 
+moderate seas south of 22N and west of 35W. Fresh to strong 
+northerly winds and moderate to locally rough seas are found 
+north of 17N and east of 25W. Elsewhere, moderate or weaker winds
+and slight to moderate seas prevail. 
+
+For the forecast west of 55W, the western Atlantic ridge extends
+through 26N55W westward across central Florida along 28N and into
+the NE Gulf of America, and will generally remain in place 
+through Sun night. The ridge will reorganize Sun night through 
+early Tue, then shift slowly NE through Wed. This pattern will 
+support moderate E to SE trade winds S of 22N and a gentle 
+anticyclonic flow elsewhere through Sun evening, then become SE to
+S winds across much of the area waters through midweek. Fresh SW 
+winds will briefly develop across the NW waters N of 29N and W of 
+74W late Sun into Sun night, then become moderate winds through 
+Wed, as a weak frontal system moves through the SE U.S. Expect 
+fresh to strong winds each afternoon through late evening across 
+Atlantic waters near Puerto Rico and Hispaniola. 
+
+$$
+Delgado

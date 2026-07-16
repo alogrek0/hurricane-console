@@ -1,0 +1,132 @@
+
+000
+AXPZ20 KNHC 021536
+TWDEP 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+1605 UTC Thu Jul 2 2026
+
+Tropical Weather Discussion for the eastern Pacific Ocean from
+03.4S to 30N, east of 120W including the Gulf of California, and
+from the Equator to 30N, between 120W and 140W. The following
+information is based on satellite imagery, weather observations,
+radar, and meteorological analysis.
+
+Based on 1200 UTC surface analysis and satellite imagery through
+1500 UTC.
+
+...SPECIAL FEATURES...
+
+Tropical Storm Douglas is centered near 17.4N 127.1W at 1500 
+UTC, moving north at 5 kt. Estimated minimum central pressure is
+1003 mb. Maximum sustained wind speed is 35 kt with gusts to 45 
+kt. Seas of up to 4.5 m extend up to 150 nm from the center. 
+Scattered to numerous moderate isolated strong convection is 
+from 16.5N to 20N between 124.5W and 129W. Douglas is expected 
+to continue northward today and gradually turn to the northwest 
+tonight through Fri, and gradually weaken as is encounters an 
+unfavorable atmospheric and oceanic environment. Douglas is 
+forecast to become a tropical depression tonight, a post- 
+tropical remnant low on Fri, and dissipate over the weekend.
+
+Please read the latest HIGH SEAS FORECAST issued by the National
+Hurricane Center at website
+- https://www.nhc.noaa.gov/text/MIAHSFEP2.shtml and the latest 
+Four-E NHC Forecast/Advisory and Public Advisory at 
+www.hurricanes.gov for more details.
+
+...TROPICAL WAVES...
+
+A tropical wave is analyzed along 98W, south of 15N, moving west 
+at 10-15 kt. Associated convection is described below in the 
+INTERTROPICAL CONVERGENCE ZONE/MONSOON TROUGH section.
+
+A tropical wave has entered the eastern tropical Pacific, and is
+along 83W, south of 20N in the NW Caribbean, moving west at 10-15
+kt. Associated convection is also described below in the 
+INTERTROPICAL CONVERGENCE ZONE/MONSOON TROUGH section.
+
+...INTERTROPICAL CONVERGENCE ZONE/MONSOON TROUGH...
+
+The monsoon trough extends from 10N75.5W to 05.5N79W to 09N87W 
+to 05.5N100W to 15N116.5W, then resumes south of Douglas from
+13N127W to 08.5N140W. Numerous moderate to strong convection is
+noted from 05N to 11N E of 90W, and from 00N to 12N between 90W
+and 107W. Scattered moderate isolated strong convection is noted
+from 00N to 06.5N between 107W and 122W and within 180 nm S of a
+line from 19N122W to 13N127W to 09N135W.
+
+...OFFSHORE WATERS WITHIN 250 NM OF MEXICO...
+
+A broad surface ridge extends from the northeast Pacific, 
+southeastward through 30N124W, then weakly south-southeastward 
+to the Revillagigedo Islands. This pressure pattern is supporting
+gentle to moderate NW to N winds and seas of 5 to 6 ft in NW 
+swell across the Baja California waters, except to 7 ft across
+the far outer waters of Baja Norte. Fresh to locally strong N 
+gap winds continue across the Gulf of Tehuantepec to 14.5N, where
+seas are 6 to 7 ft seas in SW swell. Gentle to moderate SW to S
+winds continue across the northern Gulf of California, where seas
+are 3 ft or less. Light to gentle winds are ongoing elsewhere 
+across the Mexican offshore waters, including the remainder of
+the Gulf of California. Seas are moderate in SW swell in the 
+remainder offshores, except slight in the Gulf of California.
+
+For the forecast, the surface ridge will drift SW and weaken 
+through the remainder of the week, producing gentle to moderate 
+winds for the Baja California offshore waters. Moderate NW swell 
+moving across these waters will maintain moderate seas through 
+through the weekend, as it mixes with cross-equatorial SW swell.
+Fresh to strong N gap winds will pulse nightly in the Tehuantepec
+region through early next week.
+
+....OFFSHORE WATERS WITHIN 250 NM OF CENTRAL AMERICA, COLOMBIA,
+AND WITHIN 750 NM OF ECUADOR...
+
+Fresh to strong NE to E gap winds continue to dominate the 
+Papagayo region and extend offshore to near 90W. Seas are 6 to 8
+ft across this area. Gentle northerly winds are across the Gulf
+of Panama. Moderate SE to S winds and 5 to 7 ft seas in cross-
+equatorial SW swell dominate waters S of 03N between the 
+Galapagos Islands and Ecuador. Light to gentle winds and seas at 
+4 to 6 ft in S to SW swell prevail across the remainder central 
+America and Colombia offshore waters N of 02N. Scattered to
+numerous strong convection continues across the waters N of 05N 
+from Colombia to offshore of Guatemala, producing strong gusty
+winds and locally rough seas.
+
+For the forecast, fresh to strong NE to E gap winds will pulse 
+in the Papagayo region into early next week, leading to 
+occasional rough seas. Cross-equatorial southerly swell will
+dominate area seas through the weekend and keep seas moderate to
+the S of 05N through Mon, increasing to near 8 ft near the 
+Galapagos Islands Mon night. Scattered thunderstorms will 
+persist across the offshore waters through at least Sun as a pair
+of tropical waves move through the region.
+
+...REMAINDER OF THE AREA...
+
+Please see the Special Features section on Tropical Storm
+Douglas.
+
+A broad surface ridge extends from the northeast Pacific
+southeastward through 30N124W, then weakly south-southeastward 
+to the Revillagigedo Islands. This pattern is supporting fresh to
+strong winds within 300 nm to the N and NW of Douglas, where seas
+are 8 to 11 ft. Elsewhere south of the ridge, moderate to fresh 
+NE to E winds, and 6 to 7 ft seas in N swell prevail north of 
+22N and west of 120W, outside the vicinity of Tropical Storm 
+Douglas. Moderate or weaker winds and moderate seas are ongoing 
+elsewhere, except near Douglas and the areas of convection 
+described above.
+
+For the forecast, the ridge will drift southwestward and generally
+persist across the region through early next week. Douglas will 
+move northward to 18.2N 127.3W late this afternoon, weaken to a 
+tropical depression near 19.5N 127.7W Fri morning, then become a 
+remnant low near 20.6N 128.3W late Fri afternoon, and continue 
+northwestward and gradually dissipate through late Sun or Mon.
+
+$$
+Stripling

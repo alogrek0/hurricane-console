@@ -1,0 +1,25 @@
+
+000
+ABPZ20 KNHC 010548
+TWOEP 
+
+Tropical Weather Outlook
+NWS National Hurricane Center Miami FL
+1100 PM PDT Tue Jun 30 2026
+
+For the eastern and central North Pacific east of 180 longitude:
+
+Western East Pacific (EP95):
+Showers and thunderstorms have become better organized in 
+association with the area of low pressure located well to the 
+west-southwest of the southern tip of the Baja California Peninsula. 
+Additionally, satellite wind data indicate that the area of low 
+pressure has become better defined and is producing winds to 35 mph. 
+If current trends continue, then advisories on a tropical depression 
+would likely be initiated on Wednesday morning, while the system 
+moves generally north-northwestward or northward.
+* Formation chance through 48 hours...high...near 100 percent.
+* Formation chance through 7 days...high...near 100 percent.
+
+$$
+Forecaster Hagen

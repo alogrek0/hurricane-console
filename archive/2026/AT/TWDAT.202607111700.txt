@@ -1,0 +1,143 @@
+
+000
+AXNT20 KNHC 111700
+TWDAT 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+1815 UTC Sat Jul 11 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 1200 UTC surface analysis and satellite imagery through 
+1500 UTC.
+
+...SPECIAL FEATURES...
+
+Caribbean Gale Warning: The pressure gradient between the Atlantic
+high pressure ridge extending from the central Atlantic west-
+northwestward to north Florida and the NE Gulf of America, and 
+lower pressures over northern South America, will continue to 
+support strong to near gale-force easterly trade winds over the 
+south- central Caribbean, including the Gulf of Venezuela, into 
+early next week. Morning satellite scatterometer data showed 
+winds near gale-force off the north coast of Colombia, where 
+satellite altimeter data showed seas of 12 to 15 ft. Winds and 
+seas have since diminished slightly across that area. Winds are 
+forecast to pulse to gale- force off the coast of Colombia again 
+tonight through Sun morning. Rough to very rough seas of 12 to 14 
+ft are expected with these winds.
+
+Please refer to the latest NWS High Seas Forecast at website: 
+https://www.nhc.noaa.gov/text/MIAHSFEP2.shtml for more details.
+
+...TROPICAL WAVES...
+
+A tropical wave has entered the Caribbean, along 61W-62W, south 
+of 18N, moving westward around 15 kt. Scattered squalls and moderate
+thunderstorms are seen moving across the SE Caribbean, Windward
+Islands, and adjacent Atlantic waters south of 14N between 
+between 55W and 64W.
+
+A Caribbean tropical wave has entered the Yucatan Peninsula and 
+is now along about 88W, south of 21N and into the eastern Tropical
+Pacific, moving west near 15 kt. Scattered moderate to strong 
+convection is south of 20N, extending from 84.5W westward across 
+the Gulf of Honduras and adjacent waters and well inland.
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough enters the Atlantic through the coast of
+Mauritania near 19N16W and continues southwestward to 09N31W. The
+ITCZ extends from 09N32W to 06N51W to the coast of Guyana near 
+07.5N59W. Scattered moderate isolated strong convection is 
+occurring from 08N to 12N and between 15W and 27W. Scattered
+moderate convection is noted from 06N to 10N between 31W and 57W.
+
+...GULF OF AMERICA...
+
+The western Atlantic surface ridge extends west-northwestward
+across north Florida and the Florida Big Bend today. Associated 
+southeasterly low level flow continues to transport areas of 
+abundant low level moisture into the basin. Clusters of scattered 
+showers and isolated thunderstorms extends from the SE Louisiana 
+southward to near 26N, and area also about the Texas coastal 
+waters. Overnight convection across the Florida Straits and SE 
+Gulf has diminished in intensity, however scattered moderate 
+showers persist there. The subtropical ridge is supporting light
+to gentle winds and seas of 2-4 ft across the waters east of 88W.
+Gentle to moderate SE to S winds generally prevail west of 88W,
+where seas are also 2-4 ft.
+
+For the forecast, a frontal boundary will approach the northern 
+Gulf coast this weekend, enhancing thunderstorm activity across 
+the area into early next week. Mariners should expect gusty 
+winds, frequent lightning, and higher seas near the strongest 
+thunderstorms. Elsewhere, high pressure will dominate into next 
+week, supporting mainly gentle to moderate SE winds. However, 
+fresh to strong easterly winds will pulse offshore the Yucatan 
+Peninsula each night. 
+
+...CARIBBEAN SEA...
+
+Please refer to the Special Features section above for details on
+gale conditions forecast for offshore Colombia. The pressure
+gradient south of the western Atlantic ridge to the north is 
+supporting mostly strong trade winds south of 17.5N between 67W 
+and 80W, based on morning satellite scatterometer data. Seas are 8
+ft 15 ft across this area. Fresh to locally strong E-NE trade 
+winds accompany the tropical wave entering the Caribbean this 
+morning, and extend to the east of the wave axis and into the 
+Tropical Atlantic east of the Lesser Antilles. Squalls and 
+thunderstorms are ahead of the tropical wave in the SE Caribbean. 
+Seas across this area are 6-8 ft.
+
+Divergence aloft and abundant tropical moisture accompanying
+the tropical wave continues to producing scattered showers and 
+thunderstorms over the NW Caribbean west of 84.5W. Similar 
+convection is noted in the SW Caribbean, from western Panama to
+southeast Nicaragua.
+
+For the forecast, high pressure north of the islands and lower 
+environmental pressures over northern South America combine to 
+support strong to near gale-force easterly trades and rough seas 
+over the central Caribbean, including the Windward Passage. This 
+pattern will persist into next week. Winds will pulse to gale- 
+force off Colombia tonight. Trades over the Gulf of Honduras will
+pulse to strong each evening through the forecast period. 
+Finally, moderate to locally fresh easterly breezes and moderate 
+seas are expected in the eastern Caribbean into next week.
+
+...ATLANTIC OCEAN...
+
+A persistent upper level low pressure system over the SE Bahamas
+and eastern Cuba is combining with abundant tropical moisture 
+surging northwestward across the Bahamas and into south Florida  
+to produce scattered showers and thunderstorms across the NW 
+Bahamas, The Florida Straits, and nearby waters. A squall line is
+seen northeast of Abaco moving northeastward. Farther east, 
+divergence aloft and a frontal trough just north of our area
+extending southwestward to near 27N60W support scattered showers 
+and isolated thunderstorms north of 26N and between 53W and 61W. 
+The rest of the tropical Atlantic is under the influence of a 
+broad subtropical ridge that sustains fresh to strong easterly 
+trade winds and moderate seas, except for locally rough seas to 8
+ft off Haiti and eastern Cuba, and across the waters east of the
+Lesser Antilles. Elsewhere, moderate or weaker winds and moderate
+seas prevail.
+
+For the forecast west of 55W, an upper level low pressure
+currently over the NW Bahamas will move westward through the 
+weekend, supporting thunderstorms with locally strong winds, 
+frequent lightning and higher seas. Meanwhile, the subtropical 
+ridge will remain dominant through the period, supporting moderate
+to fresh trades south of 23N, with mainly gentle winds to the 
+north. Pulsing strong and locally rough seas winds are expected 
+each night offshore Hispaniola and in the Windward Passage.
+
+$$
+Stripling

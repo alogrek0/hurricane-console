@@ -1,0 +1,104 @@
+
+000
+AXNT20 KNHC 301730
+TWDAT 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+1815 UTC Tue Jun 30 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 1200 UTC surface analysis and satellite imagery through 
+1700 UTC.
+
+ ...TROPICAL WAVES...
+
+A tropical is just SE of the Cape Verde Islands with axis along 
+22W, moving westward at around 10 kt. Scattered moderate 
+convection is from 04N to 08N between 10W and 26W.
+
+A tropical wave in the central Atlantic extends from 02N to 15N
+with axis near 39W, moving westward at 15-20 kt. Scattered 
+moderate convection is observed from 04N to 10N and between 30W 
+and 41W.
+
+A tropical wave is in the E Caribbean south of 17N to inland 
+Venezuela, with axis near 68W, moving westward at 5 to 10 kt. 
+Scattered moderate convection is over western Venezuela and far
+eastern Colombia.
+
+A tropical wave in the SW Caribbean has its axis near 78W, moving
+westward at 15 kt. No convection is noted at this time.
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough enters the Atlantic near 20N16W and continues 
+southwestward to 09N25W. The ITCZ extends from 09N25W to 07N36W,
+where it is broken by a tropical wave. The ITCZ then resumes from
+07N39W to 06N54W. Aside from the convection associated with the 
+tropical waves, scattered showers and isolated thunderstorms are
+occurring along and within 100 nm of the ITCZ.
+
+...GULF OF AMERICA...
+
+The pressure gradient across the area favors moderate or weaker 
+ESE winds across the western half of the Gulf and light to gentle 
+winds elsewhere. Seas basin-wide are slight. Scattered showers are
+occurring across the central Gulf in advance of a surface trough
+moving southward across the region.
+
+For the forecast, a ridge will continue to dominate the Gulf 
+region. Fresh to locally strong NE to E winds will pulse off the 
+NW Yucatan Peninsula nightly through Sat night due to local 
+effects associated with a surface trough. Gentle to moderate E to 
+SE winds will prevail across the western half of the Gulf while 
+moderate or weaker winds are expected elsewhere E of 90W, except 
+for light to gentle winds in the NE Gulf. 
+
+...CARIBBEAN SEA...
+
+The subtropical ridge north of the basin continues to force fresh
+to strong easterly trade winds across much of the central 
+Caribbean. Seas in these waters are 8-12 ft. The strongest winds 
+and highest seas are found offshore NW Colombia. Moderate to fresh
+easterly breezes and moderate seas are found in the eastern 
+Caribbean while moderate or lighter winds and slight to moderate 
+seas prevail elsewhere. Scattered moderate convection is ongoing 
+in the Gulf of Honduras. 
+
+For the forecast, the Bermuda-Azores High north of the basin 
+combined with the Colombian Low will support fresh to strong trade
+winds over the central Caribbean through Sat night, except 
+offshore Colombia and in the Gulf of Venezuela where winds are 
+likely to reach near gale-force at night. Otherwise, moderate to 
+fresh trades will continue in the eastern Caribbean while moderate
+or weaker winds will prevail over the NW Caribbean. 
+
+...ATLANTIC OCEAN...
+
+A weak cold front is moving across the NE Florida offshore waters
+west of 65W, bringing showers and scattered tstms to the region.
+Another surface trough is bringing scattered showers and isolated
+thunderstorms to the waters E of the Turks and Caicos and N or 
+Hispaniola. The Azores High extends a broad ridge elsewhere across
+the subtropical waters, which is supporting moderate to fresh
+trades and moderate seas across much of the waters W of 25W. East
+of 25W, a tighter pressure gradient between the ridge and lower 
+pressures over NW Africa supports fresh to strong NE winds and 
+rough seas to 9 ft. 
+
+For the forecast west of 55W, a frontal trough is moving across 
+the NW waters, and extends from 30N71W to near Melbourne, Florida.
+The trough will first drift southward trough Wed morning, then 
+begin moving westward late Wed into Thu. Under this weather 
+pattern, moderate or weaker winds are expected, except for 
+moderate to fresh winds offshore Hispaniola mainly late in the 
+afternoons into the early evening hours. 
+
+$$
+Adams

@@ -1,0 +1,117 @@
+
+034 
+AXPZ20 KNHC 040312
+TWDEP 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+0405 UTC Sat Jul 4 2026
+
+Tropical Weather Discussion for the eastern Pacific Ocean from
+03.4S to 30N, east of 120W including the Gulf of California, and
+from the Equator to 30N, between 120W and 140W. The following
+information is based on satellite imagery, weather observations,
+radar, and meteorological analysis.
+
+Based on 0000 UTC surface analysis and satellite imagery through
+0300 UTC.
+
+...TROPICAL WAVES...
+
+A tropical wave is along 94W, south of 16N, moving west at 15 to
+20 kt. Associated convection is described below in the 
+Intertropical Convergence Zone/Monsoon Trough section.
+
+A tropical wave is analyzed along 104W, south of 16N, moving 
+west at 10 kt. Associated convection is also described below in 
+the Intertropical Convergence Zone/Monsoon Trough section.
+
+...INTERTROPICAL CONVERGENCE ZONE/MONSOON TROUGH...
+
+The monsoon trough extends from 11N85W to 09N95W to 08N105W. The
+ITCZ extends from 08N105W to 10N120W to 06N130W to beyond 
+09N140W. Scattered to locally numerous to strong convection is 
+noted from 01.5N to 10.5N east of 92W. Scattered moderate 
+isolated strong convection is noted from 10N to 14.5N between 92W
+and 101W and from 03N to 12.5N between 105W and 128W.
+
+...OFFSHORE WATERS WITHIN 250 NM OF MEXICO...
+
+A broad ridge extends from the NE Pacific across the Baja California
+waters to near the Revillagigedo Islands, and is maintaining 
+gentle to moderate NW to N winds, with 5-7 ft seas in merging NW 
+and SW swell, per earlier satellite altimeter data. Gentle 
+breezes and slight seas are noted elsewhere to Puerto Angel. 
+Fresh NW to N gap winds with locally rough seas to 8 ft continue 
+in a narrow plume across the Gulf of Tehuantepec and downstream 
+to near 14.5N this afternoon. Scattered showers and thunderstorms
+are offshore the coasts from Chiapas and Guerrero, S of 14.5N, 
+and continue to shift westward. 
+
+For the forecast, the ridge extending into the Baja California 
+will maintain gentle to moderate breezes through Sat, becoming 
+moderate to occasionally fresh near the coast of Baja California 
+starting Sat evening through Tue, as the high pressure builds 
+modestly into the area. Moderate to fresh gap winds across the 
+Tehuantepec region will pulse again to strong tonight through Sat
+morning, then diminish through early next week. Looking ahead, 
+large SW swell is expected to reach the waters off southern 
+Mexico early next week.
+
+....OFFSHORE WATERS WITHIN 250 NM OF CENTRAL AMERICA, COLOMBIA,
+AND WITHIN 750 NM OF ECUADOR...
+
+Reports from Liberia, Costa Rica show E to SE winds to 20 kt, 
+hinting there are fresh to strong gap winds across the nearby
+Gulf of Papagayo and off the coast of Nicaragua. Associated seas
+are likely 6-7 ft so far this evening, with a component of SW
+swell. Clusters of showers and thunderstorms remain active along
+the monsoon trough as far west as 95W. Gentle to moderate breezes
+are noted elsewhere with 5-7 ft seas. 
+
+For the forecast, scattered showers and thunderstorms are expected to
+continue to shift westward across the area waters through early
+Sun before activity begin to shift northward into the Caribbean.
+Fresh to strong NE to E gap winds will pulse at night across the
+Papagayo region into early next week, leading to occasional
+rough seas. Cross- equatorial southerly swell will dominate area
+seas through the weekend and keep seas moderate to the N of 04N
+through Sun morning, before increasing to near 8 ft off Ecuador
+and the Galapagos Sun evening through Tue. The combination of the
+southerly swell with shorter period seas associated with gap
+winds will allow combined seas to 8 ft off northern Central 
+America by Tue. 
+
+...REMAINDER OF THE AREA...
+
+A 1005 mb low pressure area, the remnant low of Douglas, is
+centered near 21N129W. A recent scatterometer satellite pass
+indicated fresh to strong winds are still active within 240 nm of
+the center of Douglas, mainly on the northern side between the
+low the subtropical ridge to the north of the area. Concurrent
+altimeter satellite data showed wave heights to 13 ft just to the
+east of the center, indicated maximum seas to 14 ft in the area
+of strongest winds to the north of the center. The presence of
+this low pressure is disrupting the subtropical ridge north of 
+20N. This pattern is supporting mostly gentle to moderate breezes
+elsewhere west of 120W, with 5-7 ft seas in a mix of swell. East
+of 120W, a long plume of fresh E winds and 7-8 ft seas emerging 
+from the Papagayo gap area is reaching as far west as 105W, from 
+08N to 11N. Gentle breezes are noted elsewhere east of 120W. Wave
+heights are 6-8 ft with SW swell. 
+
+For the forecast, winds and seas near the remnants of Douglas 
+will gradually diminish through Sun night as the remnant low 
+weakens and opens into a trough. The ridge will drift 
+southwestward and generally persist across the region through 
+early next week, supporting moderate to fresh trade winds farther
+south into the tropics. Looking ahead, weak low pressure may 
+form south of the Revillagigedo Islands by the early to middle
+part of the coming week. Environmental conditions could support 
+some gradual development of this system while it moves generally 
+westward at 10-15 kt, although chances of development at this 
+time are low.
+
+$$
+Christensen
+

@@ -1,0 +1,123 @@
+
+000
+AXNT20 KNHC 101652
+TWDAT
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+1815 UTC Wed Jun 10 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 1200 UTC surface analysis and satellite imagery through 
+1700 UTC.
+
+...TROPICAL WAVES...
+
+The axis of a tropical wave is near 42W, S of 15N, moving west at
+10 to 15 kt. No significant convection is observed near this wave.
+
+The axis of a tropical wave is near 55W, S of 15N, moving 
+westward at around 15 kt. Scattered moderate convection is
+observed S of 10N between 53W and 58W.
+
+The axis of a tropical wave is near 62W, S of 18N, moving 
+westward at 10 to 15 kt. No significant convection is associated 
+with this wave at this time.
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough extends off the coast of Africa near 12N16W 
+and extends SW to 05N30W. The ITCZ extends from 05N30W to 02N51W.
+Numerous moderate to strong convection is along and within 150 nm
+of the monsoon trough and ITCZ from 30W eastward. Scattered 
+showers and isolated thunderstorms are along and within 100 nm of 
+the remainder of the ITCZ.
+
+...GULF OF AMERICA...
+
+Moderate to fresh E to SE winds persist over the Gulf south of 
+25N, driven by the pressure gradient between a weak subtropical 
+ridge and T.S. Cristina in the Eastern Pacific near the coast of 
+El Salvador. Seas are 5-7 ft in the south-central Gulf, and 2-5 
+feet elsewhere. A surface trough is analyzed from the Bay of 
+Campeche along the Mexican coast from near Veracruz to Tampico, 
+and is supporting scattered moderate to strong convection. Another 
+surface trough analyzed along the eastern Yucatan Peninsula 
+supports scattered moderate convection near the Yucatan Channel.
+Lastly, another surface trough extending off the southern FL
+Peninsula supports scattered moderate convection in the FL
+Straits.
+
+For the forecast, a modest surface ridge will continue to support
+gentle to moderate E to SE winds over the eastern and north- 
+central Gulf into early next week. A trough or weak low pressure 
+center may emerge from the Yucatan Peninsula into the Bay of 
+Campeche on Thu night and then track slowly northwestward through 
+the weekend. It will enhance the gradient with the surface ridge, 
+causing fresh to strong SE winds across the south-central and 
+northwestward Gulf. It will also trigger scattered to numerous 
+thunderstorms and rough seas across the west-central Gulf into 
+Sun.
+
+...CARIBBEAN SEA...
+
+At 1200 UTC, T.S. Cristina was located in the Eastern Pacific 
+near the coast of El Salvador. A surface trough analyzed along 
+the eastern Yucatan Peninsula is interacting with moisture from 
+T.S. Cristina, and supports scattered moderate convection N of 15N
+and W of 80W to the coasts of Belize and Mexico, including the 
+Gulf of Honduras. Scattered moderate convection is also ongoing in
+the SW Caribbean along the East Pacific monsoon trough. The 
+pressure gradient between the Atlantic ridge and T.S. Cristina 
+supports moderate to fresh winds with moderate seas from the 
+central Caribbean to the northwest Caribbean. Winds are locally 
+fresh to strong in the south-central Caribbean offshore Colombia, 
+as well as in the Gulf of Honduras. Gentle to moderate trades and 
+moderate seas prevail elsewhere.
+
+For the forecast, the pressure gradient between the ridge of high
+pressure at the western Atlantic and T.S. Cristina in the Eastern
+Pacific offshore of El Salvador will sustain fresh to strong E to
+SE winds with moderate to rough seas from the south-central to 
+northwestern Caribbean into early week. During the weekend, the 
+high over the western Atlantic is expected to strengthen further, 
+and cause fresh E trades to expand northward into the north- 
+central basin.
+
+...ATLANTIC OCEAN...
+
+A weak 1017 mb low at 25N64W and surface trough extending from 
+31N56W through the low to 22N67W are helping to develop scattered
+moderate convection from 22N to 28N between 60W and 65W. To the
+northwest, a weak cold front is analyzed along 28-29N between 60W
+and 79W. Another surface trough extending off the southern FL 
+Peninsula supports scattered moderate convection in the waters SW
+of the Bahamas and the FL Straits. These features are also 
+helping to maintain a weaker pressure gradient across much of the 
+Atlantic N of 20N and W of 40W, where gentle to moderate trades 
+and 3-6 ft seas prevail, except for 1-3 ft seas from the Bahamas
+to the FL Straits. Ridging from the Azores high expands across 
+the rest of the Atlantic, supporting moderate to fresh trades and 
+moderate seas across much of the basin S of 20N. Scatterometer 
+data indicates fresh to strong NE winds and 6-9 ft seas across 
+areas N of 20N and E of 40W, with the strongest winds occurring in
+between the Canary Islands.
+
+For the forecast west of 55W, thunderstorms persist near a weak 
+1017 mb low pressure at 25N64W on the southern end of a surface 
+trough extending to 31N56W. The low pressure will dissipate as it
+moves northeastward along the trough through Thu. Meanwhile, a 
+weak frontal boundary currently between northeast Florida and 
+Bermuda will shift northward Thu ahead of the weak low pressure. 
+The Atlantic ridge will build across the region late Thu through 
+Fri along roughly 25N. Looking ahead, this pattern will support 
+moderate to fresh E to SE winds north of Hispaniola at night from 
+Fri night through Sun night. 
+
+$$
+Adams

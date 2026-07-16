@@ -1,0 +1,63 @@
+
+718 
+ABPZ20 KNHC 131736
+TWOEP 
+
+Tropical Weather Outlook
+NWS National Hurricane Center Miami FL
+1100 AM PDT Mon Jul 13 2026
+
+For the eastern and central North Pacific east of 180 longitude:
+
+Offshore of Southwestern Mexico (EP96):
+A tropical wave is producing a large area of disorganized 
+thunderstorms and gusty winds a couple of hundred miles south of the 
+coast of southwestern Mexico. Environmental conditions appear 
+favorable for development, and a tropical depression is expected to 
+form over the next couple of days while the system moves generally 
+west-northwestward, remaining off the coast of Mexico. 
+* Formation chance through 48 hours...high...70 percent. 
+* Formation chance through 7 days...high...90 percent.
+
+Well South of the Hawaiian Islands (CP91):
+Showers and thunderstorms are showing signs of organization in 
+association with a broad area of low pressure located several 
+hundred miles south of the Hawaiian Islands. Additional development 
+of this system is possible during the next couple days as it moves 
+little, and a tropical depression could form while the system 
+remains well south of the Hawaiian Islands. 
+* Formation chance through 48 hours...medium...50 percent. 
+* Formation chance through 7 days...medium...50 percent.
+
+Well Southwest of the Hawaiian Islands (CP90):
+A trough of low pressure located several hundred miles to the 
+southwest of the Hawaiian Islands is producing an area of 
+disorganized showers and thunderstorms. Environmental conditions 
+appear favorable for gradual development of this system later this 
+week, and it could become a tropical depression as it moves slowly 
+northwestward, remaining well southwest of the Hawaiian Islands. 
+* Formation chance through 48 hours...low...20 percent. 
+* Formation chance through 7 days...medium...50 percent.
+
+Central and Western East Pacific:
+A trough of low pressure located well west-southwest of the southern 
+tip of the Baja California Peninsula continues to produce scattered 
+showers and thunderstorms to the east of its center. Environmental 
+conditions have become unfavorable for the system, and development 
+is no longer anticipated.
+* Formation chance through 48 hours...low...near 0 percent. 
+* Formation chance through 7 days...low...near 0 percent.
+
+Offshore of Southern and Southwestern Mexico:
+An area of low pressure is expected to form by the middle of the 
+week several hundred miles south of the coast of southern Mexico.  
+Environmental conditions appear conducive for gradual development of 
+this system thereafter, and a tropical depression could form by the 
+end of the weekend while it moves generally west-northwestward well 
+offshore of Mexico.
+* Formation chance through 48 hours...low...near 0 percent.
+* Formation chance through 7 days...medium...60 percent.
+
+$$
+Forecaster Hagen
+

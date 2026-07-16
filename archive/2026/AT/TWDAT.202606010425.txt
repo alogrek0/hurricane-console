@@ -1,0 +1,137 @@
+
+000
+AXNT20 KNHC 010425
+TWDAT
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+0615 UTC Mon Jun 1 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 0000 UTC surface analysis and satellite imagery through 
+0355 UTC.
+
+...SPECIAL FEATURES...
+
+Atlantic Gale Warning: A cold front enters the tropical Atlantic
+near 31N60W and continues southwestward to 25N75W, where it
+becomes a stationary front to NE Florida. A recent scatterometer
+satellite pass captured strong to gale-force SW winds ahead of the
+front to 57W and north of 29N. Rough seas are occurring in these
+waters. Gale-force winds will move north of our area by 0600 UTC.
+Conditions will improve Mon.
+
+Please read the latest High Seas and Offshore Waters Forecast
+issued by the National Hurricane Center at websites -
+https://www.nhc.noaa.gov/text/MIAHSFAT2.shtml and
+https://www.nhc.noaa.gov/marine/offshores.php for more details.
+
+...TROPICAL WAVES...
+
+An eastern Atlantic tropical wave is along 30W, south of 12N and 
+moving westward at 10 to 15 kt. Scattered moderate convection is
+present from 02N to 09N and between 24W and 37W.
+
+A central Caribbean tropical wave is along 72W, south of 17N and moving
+westward at 10 to 15 kt. Relatively dry air over the basin is 
+precluding convection near this wave at this time. 
+
+A western Caribbean tropical wave is along 82W, south of 15N and moving
+westward at around 15 kt. No deep convection is noted around this
+system.
+ 
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough enters the Atlantic through the coast of 
+Mauritania near 18N16W, then curves southwestward to 06N29W. The 
+ITCZ extends from 06N29W to 04N51W. Scattered moderate convection
+is evident from 03N to 13N and east of 24W. Similar convection is
+seen within 120 nm on both sides of the ITCZ.
+
+...GULF OF AMERICA...
+
+Divergence aloft and diurnal heating supported the development of
+showers and thunderstorms over Yucatan during the afternoon and
+evening hours. The storm activity is currently affecting the
+eastern Bay of Campeche and off northern Yucatan. A few showers
+are also noted in the central and eastern Gulf. A weak pressure
+gradient supports moderate to locally fresh E-SE winds and slight
+to moderate seas west of a line from SE Louisiana to western Cuba.
+Elsewhere, light to gentle winds and slight seas prevail.
+
+For the forecast, a ridge will continue to dominate the Gulf waters
+through midweek supporting gentle to moderate E to SE winds with
+moderate seas. The exception will be evening pulses of fresh
+winds off the northern Yucatan Peninsula and in the central Gulf
+through the same period. An upper-level trough across the
+western Gulf will continue to support showers and thunderstorms
+across the east and central Gulf through the early part of the
+week. Expect fresh to strong E winds and moderate to rough seas
+across the NE Gulf Wed and Wed night as a frontal boundary
+reaches the area. 
+
+...CARIBBEAN SEA...
+
+The tight pressure gradient between the subtropical ridge NE of 
+the islands and lower pressures in northern Colombia results in 
+fresh to strong easterly trade winds and seas of 5-8 ft across 
+the central Caribbean. Fresh to locally strong easterly breezes
+and moderate seas are found in the Gulf of Honduras. Moderate to 
+fresh easterly breezes and moderate seas are noted in the eastern 
+and remainder of the NW Caribbean. Elsewhere, light to gentle 
+winds and slight to moderate seas are prevalent.
+
+Divergence aloft and diurnal heating continue to support scattered
+showers and thunderstorms over Cuba, Hispaniola, Yucatan and 
+Central America and nearby waters. Drier conditions are present
+elsewhere in the basin.
+
+For the forecast, the Atlantic ridge combined with the Colombian low
+will support moderate to fresh trade winds across most of the
+basin into Mon, with fresh to strong winds and rough seas over
+the south-central Caribbean. The area of fresh to strong winds
+and rough seas will expand across the east and central Caribbean
+Mon night into Tue as the ridge north of the area strengthens.
+Looking ahead, winds and seas will diminish slightly starting
+late Wed as the ridge north of the basin weakens. 
+
+...ATLANTIC OCEAN...
+
+Please read the Special Features section about a Gale Warning for
+waters SE of Bermuda.
+
+A cold front extends from 31N60W to 25N75W, followed by a
+stationary front to NE Florida. Scattered showers are noted ahead
+of the front to 55W and north of 24N and west of 76W. Fresh to
+strong SW winds and rough seas are present ahead of the front to
+50W and north of 27W. Rough seas are also present behind the front
+to 65W and north of 27W. Moderate or weaker winds and moderate 
+seas are occurring in the remainder of the SW North Atlantic (west
+of 55W, north of 20N).
+
+The rest of the tropical Atlantic are dominated by a broad
+subtropical ridge anchored by a 1029 mb high pressure system 
+centered near 33N33W. The pressure gradient between this ridge 
+and lower pressures in the deep tropics sustain fresh to locally strong
+N-NE winds and rough seas east of a line from 31N33W to the
+northern Leeward Islands. Elsewhere, moderate or weaker winds and
+moderate seas prevail.
+
+For the forecast west of 55W, the cold front will shift 
+southeastward, reaching from 31N58W to 25N70W by early Mon morning
+when fresh to strong SW winds and moderate to locally rough seas 
+will continue to affect the NE waters. Meanwhile, another low 
+pressure system will move off northeast Florida by late Mon and 
+shift eastward toward Bermuda by late Tue before dissipating. 
+Associated winds to minimal gale-force are likely southeast of 
+Bermuda by late Tue. Looking ahead, a third low pressure area will
+dissipate as it moves between northeast Florida and Bermuda Wed 
+and Thu.
+
+$$
+Delgado

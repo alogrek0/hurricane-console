@@ -1,0 +1,89 @@
+
+395 
+AXPZ20 KNHC 251525
+TWDEP 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+1605 UTC Thu Jun 25 2026
+
+Tropical Weather Discussion for the eastern Pacific Ocean from
+03.4S to 30N, east of 120W including the Gulf of California, and
+from the Equator to 30N, between 120W and 140W. The following
+information is based on satellite imagery, weather observations,
+radar, and meteorological analysis.
+
+Based on 1200 UTC surface analysis and satellite imagery through
+1500 UTC.
+
+...TROPICAL WAVES...
+
+The axis of a tropical wave is near 99W, south of 16N, moving 
+west around 20 kt. Scattered moderate and isolated strong 
+convection is occurring from 09N-14N between 99W-103W. 
+
+The axis of a tropical wave is near 106W, south of 17N, moving 
+westward at around 10 kt. Numerous moderate and scattered strong
+convection is noted from 10N-19N between 104W-108W.
+
+The axis of a tropical wave is near 120W, south of 21N, moving 
+westward at around 10 to 15 kt. No significant deep convection is
+occurring with this system this morning.
+
+...INTERTROPICAL CONVERGENCE ZONE/MONSOON TROUGH...
+
+The monsoon trough extends from coastal Costa Rica at 10N84W to
+08N92W to 13N113W to 10N124W. The ITCZ extends from 10N124W to
+beyond 08N140W. Numerous moderate and scattered strong
+convection is noted from 10N-19N between 104W-108W and from
+03N-07N between 93W-97W. Scattered moderate and isolated strong 
+convection is occurring from 09N-14N between 99W-103W and from
+04N-09N between 78W-87W.
+
+...OFFSHORE WATERS WITHIN 250 NM OF MEXICO...
+
+A Tehauntepec gap wind event is producing fresh to strong N to 
+NE winds with seas 7-9 ft this morning. A surface ridge extends 
+from 27N120W southeastward to 20N108W. Winds elsewhere across the
+offshore waters are moderate or weaker. Seas on the Pacific 
+waters are 5-6 ft in S to SW swell and are 2-4 ft over the Gulf 
+of California waters. 
+
+For the forecast, low pressure over the deep tropics will 
+continue inducing fresh to strong N to NE gap winds across the 
+Gulf of Tehuantepec through tomorrow. Elsewhere, winds and seas 
+across the Mexican offshore waters should be quiescent through 
+early next week. Looking ahead, large NW swell may move into the 
+waters off Baja California Norte starting Sun night. 
+
+....OFFSHORE WATERS WITHIN 250 NM OF CENTRAL AMERICA, COLOMBIA,
+AND WITHIN 750 NM OF ECUADOR...
+
+A gap wind event is forcing fresh to strong NE winds across the
+Gulf of Papagayo region this morning with seas 7-9 ft. Elsewhere
+winds are moderate or weaker. Seas are 7-9 ft in S swell over the
+equatorial waters and 5-6 ft in SW swell over the remainder of
+the offshore waters. 
+
+For the forecast, the pressure difference between high pressure 
+north of the area and the monsoon trough farther south is 
+supporting a Gulf of Papagayo region gap wind event. Fresh to 
+strong NE to E winds should last through early next week. 
+Elsewhere, winds should remain quiescent. Large S swell moving 
+into the equatorial waters tonight will continue through Sat 
+night. 
+
+...REMAINDER OF THE AREA...
+
+A 1008 mb low is centered near 18N121W. Winds within 120 NM in
+the N semicircle are fresh to strong with seas 6-7 ft. A surface
+ridge extends from a 1032 mb high at 37N149W southeastward to 
+30N130W to 27N120W to 20N108W. The moderate pressure gradient 
+between the ridge and lower pressure over the monsoon trough/ITCZ
+is forcing moderate to fresh NE trades between 10N and the 
+ridge. Elsewhere, winds across the open Pacific are moderate or
+weaker. Seas are 5-8 ft in mixed SW and N swell.
+
+$$
+Landsea
+

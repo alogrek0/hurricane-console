@@ -1,0 +1,127 @@
+
+464 
+AXPZ20 KNHC 240856
+TWDEP 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+1005 UTC Wed Jun 24 2026
+
+Tropical Weather Discussion for the eastern Pacific Ocean from
+03.4S to 30N, east of 120W including the Gulf of California, and
+from the Equator to 30N, between 120W and 140W. The following
+information is based on satellite imagery, weather observations,
+radar, and meteorological analysis.
+
+Based on 0600 UTC surface analysis and satellite imagery through
+0830 UTC.
+
+...SPECIAL FEATURES...
+
+Low pressure area south of Clarion Island (EP94):
+1008 mb low pressure is centered near 17.5N115W or about 60 nm
+SSW of Clarion Island, along a tropical wave. Scattered to
+numerous showers and thunderstorms are active within 45 nm of the
+center. Recent satellite wind data suggest the circulation is a
+little better defined and a tropical depression could still form
+within the next day or so while environmental conditions remain
+favorable for development. This system is moving to the west to
+west- northwest at 15 to 20 mph, and by Thursday it is forecast
+to move into an unfavorable environment, ending its chances for
+further development. Regardless of development, fresh to strong
+winds and moderate to rough seas may accompany the low pressure
+or remnant trough as it moves westward along roughly 20N through
+Sat.
+
+...TROPICAL WAVES...
+
+The axis of a tropical wave is near 88W, moving west at 15 to 20
+kt. Nearby convection is discussed in the ITCZ/Monsoon Trough 
+section below.
+
+The axis of a tropical wave is near 102W, south of 16N, moving 
+westward at around 10 to 15 kt. Scattered moderate convection is
+active from 13N to 15N between 100W and 102W.
+
+The axis of a tropical wave is near 115W, south of 18N, moving 
+westward at 10 to 15 kt. An area of low pressure, EP94, is along
+this tropical wave near 17.5N115W. Please see the Special 
+Features section above for more information on this low pressure
+system.
+
+...INTERTROPICAL CONVERGENCE ZONE/MONSOON TROUGH...
+
+The monsoon trough extends from 10N85W to 08N95W to 11N115W to 
+08N127W. The ITCZ extends from 08N127W to 08N140W. Scattered 
+moderate convection is noted from 06N to 10N between 84W and
+92W, and from 08N to 10N between 120W and 122W.
+
+...OFFSHORE WATERS WITHIN 250 NM OF MEXICO...
+
+Near-gale force gap winds are likely ongoing across the Gulf of 
+Tehuantepec this morning. These gap winds are due to lowering 
+pressure farther south across the deep tropics. Rough seas up to
+at least 9 ft are building farther downstream in response to the
+strong to near-gale force plume of gap winds. Farther west, a
+recent scatterometer satellite pass confirmed fresh to strong
+just to the southeast of Clarion Island, associated with the 
+developing low pressure area known as EP94 described in the 
+Special Features section. Concurrent altimeter passes showed 5-7
+ft seas across the Revillagigedo Islands. Farther north, the 
+same scatterometer pass indicated moderate to fresh near the 
+coast of Baja California south of San Quintin. Elsewhere, mostly 
+gentle breezes and 4-6 ft combined seas in a mix of swell, except
+for 1-3 ft in the Gulf of California. 
+
+For the forecast, lowering pressure over the deep tropics is 
+inducing near-gale force gap winds and rough seas across the Gulf
+of Tehuantepec today, with fresh to strong gap winds pulsing 
+mainly late at night thereafter through Fri night. Elsewhere, 
+winds and seas across the Mexican Offshores should be quiescent, 
+except for large swell off southern Mexico by the end of the 
+week. 
+
+....OFFSHORE WATERS WITHIN 250 NM OF CENTRAL AMERICA, COLOMBIA,
+AND WITHIN 750 NM OF ECUADOR...
+
+A recent scatterometer satellite pass indicated fresh to strong 
+gap winds over and downstream the Gulf of Papagayo area, where 
+seas are estimated to be 5-7 ft. Gentle to moderate winds and 
+moderate seas are noted elsewhere.
+
+For the forecast, the pressure gradient between high pressure N of the
+area and the eastern north Pacific monsoon trough is supporting
+a Gulf of Papagayo region gap wind event that may last into
+early next week. Elsewhere winds should remain quiescent until
+the end of the week. Large S swell will move into the equatorial
+waters into early next week.
+
+...REMAINDER OF THE AREA...
+
+Please see Special Features section above for more information 
+on EP94.
+
+Broad ridging dominates the waters north of 20N. The pressure
+gradient between this area of high pressure and lower pressure in
+the vicinity of the ITCZ is supporting moderate to fresh winds N
+of the ITCZ to 20N and W of 130W, where seas are in the 6-8 ft
+range. Gentle to moderate winds, and seas of 5-7 ft are elsewhere 
+N of the ITCZ and monsoon trough. Gentle to moderate winds, and
+seas of 6-8 ft with a component of SW swell prevail south of the
+ITCZ and monsoon trough.
+
+For the forecast aside from EP94, another low pressure system is
+likely to form this weekend south of the Revillagigedo Islands. 
+Some slow development of this system is possible after that time,
+and it could become a tropical depression early next week while 
+it moves westward to west-northwestward at 10 to 15 mph. 
+Regardless of development, a plume of fresh E to SE winds and 
+moderate to rough seas may develop from roughly the Gulf of 
+Papagayo to south of the Revillagigedo Islands by late in the 
+week. Farther south, large southerly swell to 8 ft will move into
+the waters south of the equator between 90W and 120W starting
+Thu.
+
+$$
+Christensen
+

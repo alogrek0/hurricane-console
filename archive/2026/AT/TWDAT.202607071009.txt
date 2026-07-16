@@ -1,0 +1,136 @@
+
+000
+AXNT20 KNHC 071009
+TWDAT 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+1215 UTC Tue Jul 07 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 0600 UTC surface analysis and satellite imagery through 
+1000 UTC.
+
+...TROPICAL WAVES...
+
+A recently introduced far eastern Atlantic tropical wave has its 
+axis along 25W south of 14N. It is moving westward at 15 to 20 kt.
+No significant convection is noted near the wave axis, only an 
+isolated shower near 09N26W.
+
+A central Atlantic tropical wave is along 45W south of 18N, 
+moving westward at around 20 kt. Scattered moderate to isolated 
+strong convection is east of the wave from 05N to 10N between 
+40W and 46W. Scattered moderate convection is within 60 nm west 
+of the wave from 07N to 10N. This wave is expected to be attendant 
+by tight gradient producing fresh to strong winds and building 
+seas to 8 ft starting this afternoon as it quickly tracks 
+westward toward 50W.
+
+Another central Atlantic tropical wave is analyzed from near 
+18N57.5W to inland South America at 08N59W. It is moving westward 
+at 15 kt. Scattered moderate to isolated strong convection is 
+observed from 02N to 13N and between 51W and 57W.
+
+A western Caribbean Sea tropical wave is along 85W south of 19N, 
+moving westward at 10 kt. No significant convection is near the 
+wave axis.
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough axis enters the Atlantic through the coast of
+Mauritania near 21N16W and continues southwestward to 09N25W,
+where it transitions to the ITCZ to 08N35W to 08N45W to 08N60W.
+Numerous moderate to isolated strong convection is southeast of
+the trough from 06N to 10N between 18W-23W. Scattered moderate 
+convection is within 180 nm south of the ITCZ between 36W-40W.
+
+...GULF OF AMERICA...
+
+Relatively weak high pressure extends westward across the basin 
+from the Atlantic as a weak 1018 mb high is over eastern Mexico. 
+The related pressure gradient is generally maintaining gentle to 
+moderate winds east to southeast winds across the Gulf south of 
+about 26N, and light to gentle southeast to south winds north of 
+about 26N. Latest satellite altimeter and buoy observations 
+indicate slight seas throughout.
+
+Satellite imagery shows scattered showers and thunderstorms south 
+of 22N between 91W and 97W.
+
+For the forecast, the weak high pressure will change little 
+through Thu night, then shift northward to near the northern Gulf 
+coast Fri through Sat night. The related pressure gradient will 
+generally maintain gentle to moderate winds east to southeast 
+winds across the Gulf south of about 26N, and light to gentle 
+southeast to south winds north of about 26N, except for fresh to 
+strong northeast to east winds offshore the Yucatan peninsula at 
+night. Slight seas are forecast throughout the basin for the 
+forecast period. 
+
+...CARIBBEAN SEA...
+
+The pressure gradient between Atlantic high pressure and 
+relatively lower pressures in Colombia is supporting fresh to 
+strong trades across the central Caribbean as seen in the latest 
+satellite scatterometer data passes. Trades to near gale-force are 
+offshore Colombia and in the Gulf of Venezuela. Rough seas are
+being produced by these trades. The scatterometer satellite data 
+passes also reveal moderate to fresh trades across the eastern 
+portion of the basin. Seas are of moderate state with these 
+trades. Trades of fresh speeds are in the Gulf Honduras, where 
+seas are 4 to 6 ft. Elsewhere, moderate or lighter winds along 
+with slight to moderate seas are present.
+
+For the forecast, the pressure gradient between Atlantic high 
+pressure and relatively lower pressures in Colombia will continue 
+to support fresh to strong trades across the central Caribbean 
+through the period, while mostly fresh trades will be elsewhere 
+south of 18N. Moderate to rough seas will accompany these winds. 
+Expect winds to pulse to near-gale force at night offshore of 
+Colombia and in the Gulf of Venezuela through Sat, except on Thu. 
+Moderate or weaker winds will continue over the northwestern part 
+of the basin, except in the Gulf of Honduras where fresh to strong
+east to southeast winds are forecast at night through the 
+forecast period. A tropical wave currently extending along 59W 
+south of 18N will move across the eastern Caribbean Wed and Wed 
+night, across the central Caribbean Thu through Fri night, and 
+across the eastern part of the western Caribbean Sat and Sat 
+night. Scattered showers and thunderstorms are expected to 
+accompany this wave. Another tropical wave will move across the 
+basin starting Wed night attendant by fresh to strong winds. 
+
+...ATLANTIC OCEAN...
+
+Broad high pressure over the basin is the main feature 
+controlling the general wind flow pattern. One high center of 1023
+mb is centered near 20N62W, and a 1026 mb high center is to the 
+northeast at 29N38.5W. A weak trough extends from near 31N55W to
+26N59W. Scattered showers and thunderstorms are east of the trough 
+from 25N to 29N between 52W and 55W. To the northeast, an area of 
+numerous moderate convection is located from 28N to 31N between
+42W and 48W. An upper shortwave trough is sustaining this
+activity. Otherwise, moderate to fresh trades are south of 
+about 24N and west of 30W, and where seas are 6 to 7 ft. Strong 
+east winds are between Hispaniola and the southeastern Bahamas. 
+Moderate to locally strong north to northeast winds are from 18N 
+to 28N and east of 30W to along the coast of Africa. Seas are 
+6 to 8 ft with these winds per a recent altimeter satellite data
+pass. Moderate or weaker winds along with mostly moderate seas
+are elsewhere.
+
+For the forecast west of 55W, the high pressure over the area 
+will change little through the forecast period. The associated 
+gradient will continue to support moderate to fresh trades south 
+of 23N, and moderate or weaker winds elsewhere. Strong winds along
+with moderate to rough seas are expected at night north of 
+Hispaniola, including approaches to the Windward Passage through 
+Sat night.
+
+$$
+Aguirre
