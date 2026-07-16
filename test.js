@@ -1104,6 +1104,23 @@ ok('corpus: every fixtures/*.txt has expectations',
 const VER = require('./version.js');
 ok('version: CalVer format YYYY.MM.DD[.N]', /^\d{4}\.\d{2}\.\d{2}(\.\d+)?$/.test(VER));
 
+// --- phonetics.js (storm-name respellings, NHC pronunciation guides) ------------
+// Data hygiene only — the display suffix lives in app.js (not node-testable).
+// The syllable check enforces the file's own convention: hyphen-joined syllables,
+// each all-lowercase or ALL-UPPERCASE (uppercase = primary stress), never Title-case.
+
+const PH = require('./phonetics.js');
+ok('phonetics: AT + EP tables, full rotations (120+ names each)',
+  PH && PH.AT && PH.EP &&
+  Object.keys(PH.AT).length >= 120 && Object.keys(PH.EP).length >= 120);
+ok('phonetics: keys are lowercase alpha',
+  ['AT', 'EP'].every((b) => Object.keys(PH[b]).every((k) => /^[a-z]+$/.test(k))));
+ok('phonetics: syllables all-lower or ALL-UPPER, hyphen-joined',
+  ['AT', 'EP'].every((b) => Object.keys(PH[b]).every((k) =>
+    /^([a-z]+|[A-Z]+)(-([a-z]+|[A-Z]+))*$/.test(PH[b][k]))));
+ok('phonetics: spot checks (stressed, identity, EP)',
+  PH.AT.erin === 'AIR-rin' && PH.AT.lee === 'lee' && PH.EP.xavier === 'ZAY-vee-ur');
+
 // --- trough polyline without a "from" anchor ------------------------------------
 // Verbatim from the live TWDAT of 2026-07-16: the chain regex keys on "from",
 // so this monsoon trough degraded to two "near" fixes and dropped 09N34W.
