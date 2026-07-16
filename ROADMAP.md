@@ -70,7 +70,8 @@ planned tracks — lived friction beats speculation.
   distance to each feature, computed-cone cover, earliest plausible TS-wind
   arrival from the parsed TCM track + radii — labeled with honest uncertainty.
 - [ ] **Formation-chance trend sparklines** — per-invest 48h/7d chance history
-  across the last ~8 TWO issuances; reuses fetchHistory + parseTWO.
+  across the last ~8 TWO issuances; reuses fetchHistory + parseTWO. *Absorbed
+  into Track C M4 — build it there over the season archive instead.*
 - [ ] **Recon overlay** — parse and plot Hurricane Hunter HDOB/vortex text
   products (api.weather.gov AWIPS types) near active storms; new mini-parser.
 
@@ -102,6 +103,38 @@ around the exact same files. Ordered milestones:
 - [ ] **App Store review prep** — screenshots, privacy labels (no data
   collected — easy), and the existing "not for life-safety decisions" framing
   as the required weather-app disclaimer.
+
+## Track C — Moat (compounding data)
+
+The strategic bet (decided 2026-07-16, plan in `.claude/plans/`): the app's
+unique asset is the TWD/TWO prose-to-geography parser — no other app or site
+renders the forecasters' written reasoning as interactive geography. The moat
+move is to make it **compound**: archive every issuance, chain features across
+issuances (diff.js pairing composed season-long), and render any storm's full
+pre-genesis life — "tap Hurricane X, rewind to the unnamed wave that left
+Africa 12 days earlier." Raw text is ground truth (committed, re-derivable as
+the parser improves); derived JSON is regenerated, never hand-edited; the app
+loads it lazily. A wrong lineage is this feature's "Tropical Depression Or":
+prefer broken chains over invented links.
+
+- [ ] **M1 — Archive foundation**: `tools/archive-sync.js` (reuse
+  archive-audit.js URL/UA/entity helpers; idempotent; `--derive` builds
+  `archive/derived/*.json`), backfill 2026-06-01→now (TWDAT/TWDEP/TWOAT/TWOEP
+  into `archive/{year}/{basin}/`), 6-hourly `archive.yml` cron committing to
+  main (no version bump — archive/ isn't a shell path), derived-shape tests.
+- [ ] **M2 — Lineage engine**: `tools/build-lineage.js` — compose diff.js
+  pairing across the season into entity chains (waves by axis progression,
+  invests by tag, cyclones by name) + genesis links (wave→invest→cyclone),
+  per-sighting confidence; `lineage-2026.json`; synthetic-sequence unit tests
+  + pinned corpus snapshot; negative tests for every join rule.
+- [ ] **M3 — Lineage UI**: "history" affordance on cyclone/wave/invest popups
+  → lazy-fetch (countries.js pattern) → time-faded trail + genesis segments;
+  trail treatment judged in a lab first; broken chains render as separate
+  segments, never silently bridged.
+- [ ] **M4 — Genesis truth ledger**: per-invest genesis timeline, TWO
+  chance-trend sparklines (absorbs the Track A sparkline item), season
+  calibration table (stated 48h/7d odds vs outcomes) — all over
+  `lineage-2026.json`.
 
 ## Maintenance calendar
 
