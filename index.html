@@ -310,6 +310,18 @@
     var hadController = !!navigator.serviceWorker.controller;
     var bootAt = Date.now();
     var reloadingForUpdate = false;
+    // An update arriving right at launch is about to be handled by the
+    // controllerchange auto-reload below — flashing the banner for the second
+    // or two before that reload reads as a glitch. Inside the launch window,
+    // arm the banner on a timer instead: the reload kills the timer with the
+    // page, and if activation stalls the banner still appears as the fallback.
+    function showUpdateBar() {
+      if (hadController && Date.now() - bootAt <= 10000) {
+        setTimeout(function () { document.getElementById('updateBar').hidden = false; }, 12000);
+      } else {
+        document.getElementById('updateBar').hidden = false;
+      }
+    }
     navigator.serviceWorker.addEventListener('controllerchange', function () {
       if (reloadingForUpdate || !hadController) return;
       if (Date.now() - bootAt > 10000) return; // mid-session: leave it to the banner
@@ -329,12 +341,12 @@
           if (!sw) return;
           sw.addEventListener('statechange', function () {
             if (sw.state === 'installed' && navigator.serviceWorker.controller) {
-              document.getElementById('updateBar').hidden = false;
+              showUpdateBar();
             }
           });
         }
         if (reg.waiting && navigator.serviceWorker.controller) {
-          document.getElementById('updateBar').hidden = false;
+          showUpdateBar();
         }
         watch(reg.installing);
         reg.addEventListener('updatefound', function () { watch(reg.installing); });
