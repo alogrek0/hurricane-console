@@ -1104,6 +1104,27 @@ ok('corpus: every fixtures/*.txt has expectations',
 const VER = require('./version.js');
 ok('version: CalVer format YYYY.MM.DD[.N]', /^\d{4}\.\d{2}\.\d{2}(\.\d+)?$/.test(VER));
 
+// --- trough polyline without a "from" anchor ------------------------------------
+// Verbatim from the live TWDAT of 2026-07-16: the chain regex keys on "from",
+// so this monsoon trough degraded to two "near" fixes and dropped 09N34W.
+
+const NEAR_CHAIN = 'TWDAT\n\n...MONSOON TROUGH/ITCZ...\n\n' +
+  'The monsoon trough enters the Atlantic through the coast of Africa near ' +
+  '21N17W and continues southwestward to a 1013 mb low pres near 12N21W to ' +
+  '09N34W. Scattered moderate convection is observed near 08N30W and near 07N38W.\n\n';
+const nc = P.parse(NEAR_CHAIN);
+const ncMon = nc.troughs.filter((t) => t.subtype === 'monsoon');
+ok('trough: near-anchored chain parses as one monsoon polyline',
+  ncMon.length === 1 && ncMon[0].line.length === 3);
+ok('trough: the "to 09N34W" tail vertex survives',
+  ncMon.length === 1 && ncMon[0].line.some((p) => p.lat === 9 && p.lon === -34));
+ok('trough: near-fixes duplicating polyline vertices are dropped',
+  !nc.fixes.some((f) => (f.lat === 21 && f.lon === -17) || (f.lat === 12 && f.lon === -21)));
+ok('trough: convection sentence in the same section stays out of the fallback',
+  nc.troughs.length === 1);
+ok('trough: non-vertex fixes in the section survive the dedup',
+  nc.fixes.some((f) => f.lat === 8 && f.lon === -30));
+
 // --- issuance diff (diff.js) ----------------------------------------------------
 
 const D = require('./diff.js');
