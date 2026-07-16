@@ -505,6 +505,20 @@
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
     });
   }
+  // Storm-name popup title: NAME (fuh-NEH-tik) — respelling from phonetics.js,
+  // constants picked in tools/phonetics-lab.html. Identity entries (lee -> lee)
+  // are suppressed, and CP-named storms miss honestly (no CP pronunciation
+  // guide). Returns HTML — popup() interpolates the tag unescaped, so only the
+  // escaped phonetic ever rides in the span.
+  var PHON_SEP = ' ', PHON_PRE = '(', PHON_POST = ')';
+  function withPhonetic(name, basinCode) {
+    var t = typeof PHONETICS !== 'undefined' && basinCode ? PHONETICS[basinCode] : null;
+    var p = t && name ? t[String(name).toLowerCase()] : null;
+    var up = String(name).toUpperCase();
+    if (!p || p.toLowerCase() === String(name).toLowerCase()) return up;
+    return up + PHON_SEP + '<span class="hc-phon">' +
+      escapeHtml(PHON_PRE + p + PHON_POST) + '</span>';
+  }
 
   var featureLine = '—'; // "N features · X waves ..." — set by render/renderTWO
   var issuedStr = null;  // raw product issuance line, or null
@@ -788,7 +802,7 @@
         (c.pressureMb != null ? c.pressureMb + ' mb' : 'pressure n/a') + ' · ' + motionTxt;
       L.circleMarker(ll(c), style)
         .bindTooltip(c.name, { permanent: true, direction: 'top', className: 'cyc-label' })
-        .bindPopup(popup(c.classification.toUpperCase() + ' ' + c.name.toUpperCase(),
+        .bindPopup(popup(c.classification.toUpperCase() + ' ' + withPhonetic(c.name, basin.id),
           c.source, false, c.context, c.srcSection, stats), POPUP_OPTS)
         .addTo(cat.cyclone);
     });
@@ -1163,11 +1177,14 @@
       // Cone radii are per-basin; derive the basin from the storm id so a pasted
       // EP TCM gets EP radii for free (AL/EP/CP). windFieldFromTCM needs no basin.
       var ring = window.BasinParser.coneFromTrack(pts, s.stormId ? s.stormId.slice(0, 2) : undefined);
+      // Phonetic basin from the storm id too (a pasted TCM can be either basin,
+      // whatever frame is active). CP is deliberately absent: no CP guide.
+      var phonBasin = { AL: 'AT', EP: 'EP' }[s.stormId ? s.stormId.slice(0, 2) : ''];
       if (ring) {
         L.polygon(ring.map(ll), {
           color: '#7ea3b8', weight: 1.5, dashArray: '4 4',
           fillColor: '#dce8ef', fillOpacity: 0.07, interactive: true, pane: 'hc-areas'
-        }).bindPopup(popup('CONE ' + s.name.toUpperCase(),
+        }).bindPopup(popup('CONE ' + withPhonetic(s.name, phonBasin),
           'Computed from NHC seasonal cone radii - the official cone lives at hurricanes.gov. Advisory #' + s.advisory + ' issued ' + s.issued + '.',
           true)).addTo(cat.cone);
       }
@@ -1182,7 +1199,7 @@
           fillColor: windBandColor(band.kt),
           fillOpacity: band.kt >= 64 ? 0.22 : band.kt >= 50 ? 0.15 : 0.10,
           interactive: true, pane: 'hc-areas'
-        }).bindPopup(popup(band.kt + ' KT WIND FIELD · ' + s.name.toUpperCase(),
+        }).bindPopup(popup(band.kt + ' KT WIND FIELD · ' + withPhonetic(s.name, phonBasin),
           'Official advisory wind radii, nm (largest anywhere in quadrant): NE ' +
           q.ne + ' / SE ' + q.se + ' / SW ' + q.sw + ' / NW ' + q.nw +
           '. Advisory #' + s.advisory + '.', false))
@@ -1190,7 +1207,7 @@
       });
       if (s.track.length) {
         tapline(pts.map(ll), { color: '#dce8ef', weight: 2 },
-          popup('TRACK ' + s.name.toUpperCase(),
+          popup('TRACK ' + withPhonetic(s.name, phonBasin),
             'NHC forecast/advisory #' + s.advisory + ' - positions at ' +
             s.track[0].hours + '-' + s.track[s.track.length - 1].hours + ' h.', false))
           .addTo(cat.track);
