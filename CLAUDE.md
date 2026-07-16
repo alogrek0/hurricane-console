@@ -53,6 +53,8 @@ Everything is client side. Files:
 | `tools/highlight-lab.html` | dev-only selection-highlight lab: real feature shapes + a menu of treatments and live dials; prints the exact app.js/index.html constants. Reachable on a phone (Pages serves the repo root) — how a selection *looks* is judged by looking, not by shipping a release per constant |
 | `tools/hover-lab.html` | dev-only country-hover lab: real Leaflet + basemap.js + countries.js (live hit-testing is the thing under judgment — mask suppression, features-win-hover, border alignment), treatment menu + dials, prints the exact constants |
 | `sample.js`      | embedded SAMPLE-state fallbacks: Atlantic TWDAT/TWOAT/TCM (Jul 7 2026 + Lee) and East Pacific TWDEP/TWOEP (recent-real captures; no EP TCM sample) |
+| `phonetics.js`   | NHC pronunciation-guide respellings for the 2026-2031 name rotations, basin-keyed `{ AT, EP }` like `GAZ` — display data only (app.js popup titles); identity entries (`lee: 'lee'`) kept in data, suppressed at render; annual retired-name updates land here |
+| `tools/phonetics-lab.html` | dev-only phonetic-typography lab: real popup chrome + the six title cases that matter (cone's ◇ INFERRED ordering, wind-field middot collision, identity suppression), treatments + dials, prints the exact index.html/app.js constants |
 | `version.js`     | app version, single source (CalVer) — shared by page, SW, and tests |
 | `sw.js`          | service worker: cache-first shell, network-first data |
 | `tools/hooks/`   | committed git hooks; pre-push delegates to the shared version guard; enable once per clone: `git config core.hooksPath tools/hooks` |

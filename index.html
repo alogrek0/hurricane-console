@@ -100,6 +100,8 @@
   .leaflet-popup-tip{background:#0c2233}
   .pop-tag{font-size:.62rem;letter-spacing:.1em;font-weight:700;color:var(--amber)}
   .pop-tag.inf{color:var(--inferred)}
+  /* phonetic respelling in storm-name titles — constants from tools/phonetics-lab.html */
+  .pop-tag .hc-phon{font-size:0.58rem;font-weight:500;letter-spacing:0.03em;color:#7ea3b8}
   .pop-src{color:var(--dim);font-size:.72rem;margin-top:.3rem;max-width:240px}
   .pop-sec{float:right;margin-left:.6rem;font-size:.58rem;letter-spacing:.08em;
     color:var(--dim);border:1px solid var(--line);border-radius:3px;padding:.05rem .3rem}
@@ -300,6 +302,7 @@
 <script src="parser.js"></script>
 <script src="diff.js"></script>
 <script src="sample.js"></script>
+<script src="phonetics.js"></script>
 <script src="app.js"></script>
 <script>
   if ('serviceWorker' in navigator) {
