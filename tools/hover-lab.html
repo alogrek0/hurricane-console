@@ -17,6 +17,15 @@
     A  cursor-following chip (cyc-label style)
     B  chip + faint acknowledgment fill on the hovered country
     C  fixed corner label, no cursor chasing
+  Delay behaviors (when the name is allowed to appear — the FEEL under judgment):
+    0  instant — the shipped behavior, baseline for comparison
+    1  entry delay — timer arms on entering a country; the name shows after N ms
+       even while the cursor keeps moving; crossing a border restarts the clock
+    2  pause-to-show — the clock restarts on EVERY move; the name shows only once
+       the cursor rests, then follows until the hover clears
+    3  warm hover — OS-tooltip style: the first name waits, but while a name is
+       (or was recently) showing, adjacent countries switch instantly; the warmth
+       expires a grace window after the cursor leaves land
   The dashed box over Colombia/Venezuela is a fake convection area in the real
   hc-areas pane — hovering it must show ITS identity (no country tip), proving
   parsed features still win. Land west/east of the frame is letterboxed like the
@@ -59,6 +68,7 @@
   .dial input{width:100%}
   .dial output{color:var(--ink);text-align:right;font-variant-numeric:tabular-nums}
   .dial.off{opacity:.35}
+  .presets.off{opacity:.35;pointer-events:none}
   pre{margin:0;white-space:pre-wrap;word-break:break-word;color:var(--dim);
     font-size:.7rem;line-height:1.5}
   pre em{color:var(--amber);font-style:normal}
@@ -74,6 +84,11 @@
     font:600 var(--tip-fs,.68rem)/1.2 var(--mono);letter-spacing:.06em;
     padding:.15rem .35rem;box-shadow:none;pointer-events:none}
   .country-tip::before{display:none}
+  /* fade-in dial: a 0ms animation is a no-op; a re-added tooltip (or a corner tip
+     flipping display:none -> block) restarts it, so only the APPEARANCE fades —
+     cursor-following moves never re-trigger it */
+  @keyframes tipfade{from{opacity:0}}
+  .country-tip,#cornerTip{animation:tipfade var(--tip-fade,0ms) ease-out}
   /* C: fixed corner chip, bottom-left of the frame */
   #cornerTip{position:absolute;left:10px;bottom:10px;z-index:800;display:none;
     background:rgba(9,26,38,var(--tip-a,.9));color:var(--ink);
@@ -88,7 +103,7 @@
 </head>
 <body>
 <header>
-  <h1>Country hover lab<small>DEV ONLY · hover the land · pick a treatment, tune it, send me the numbers</small></h1>
+  <h1>Country hover lab<small>DEV ONLY · hover the land · pick a treatment + delay behavior, tune it, send me the numbers</small></h1>
 </header>
 
 <div class="wrap">
@@ -101,6 +116,18 @@
         fill. C parks the name in the frame corner. The dashed box over Colombia is a fake
         convection area — hovering it must NOT show a country name (features win).
         Letterboxed land (pan toward Mexico's Pacific coast) must show nothing.</div>
+    </div>
+    <div class="card">
+      <b>DELAY BEHAVIOR</b>
+      <div class="presets" id="behaviors"></div>
+      <div class="hint">0 names land on first contact (shipped today). 1 waits the delay
+        after entering a country, even while the cursor keeps moving. 2 waits for the
+        cursor to REST — every move restarts the clock. 3 waits once, then switches
+        names instantly across borders while the hover is warm.</div>
+      <b style="margin-top:.6rem">B: FILL TIMING</b>
+      <div class="presets" id="ackTiming"></div>
+      <div class="hint">Does the faint country fill acknowledge the hover immediately
+        (feedback while the name waits), or only appear together with the name?</div>
     </div>
     <div class="card">
       <b>BASIN FRAME</b>
@@ -189,24 +216,26 @@
   var corner = document.getElementById('cornerTip');
   var hoveredLayer = null;
 
+  // delay machinery, mirroring what app.js will get: one timer, armed on country
+  // entry (or on every move, per behavior), cancelled whenever the hover clears.
+  // warmUntil is behavior 3's grace window after a name was last showing. Note
+  // Leaflet fires the group-level mouseout at every border crossing (leave
+  // polygon A, enter polygon B), so clearHover runs between adjacent countries —
+  // behavior 3's instant border switch works BECAUSE the warm window spans it.
+  var hoverTimer = null;   // pending setTimeout id, or null
+  var shown = false;       // is the name currently displayed
+  var warmUntil = 0;       // behavior 3: show instantly until this timestamp
+  var lastPos = null, lastName = '';
+
   var hitLayer = L.geoJSON(window.HC_COUNTRIES, {
     style: { stroke: false, fillColor: '#dce8ef', fillOpacity: 0, className: 'hc-country-hit' },
     interactive: true
   }).addTo(map);
 
-  function clearHover() {
-    if (hoveredLayer) { hoveredLayer.setStyle({ fillOpacity: 0 }); hoveredLayer = null; }
-    if (map.hasLayer(tip)) map.removeLayer(tip);
-    corner.style.display = 'none';
-  }
-  hitLayer.on('mousemove', function (e) {
-    var layer = e.propagatedFrom || e.layer;
-    if (!frameContains(e.latlng)) { clearHover(); return; } // masked land: stay silent
-    var name = layer.feature.properties.name;
-    if (hoveredLayer !== layer) {
-      if (hoveredLayer) hoveredLayer.setStyle({ fillOpacity: 0 });
-      hoveredLayer = layer;
-      if (state.treatment === 'B') layer.setStyle({ fillOpacity: state.ack });
+  function displayName(name, latlng) {
+    shown = true;
+    if (state.treatment === 'B' && !state.ackNow && hoveredLayer) {
+      hoveredLayer.setStyle({ fillOpacity: state.ack }); // fill arrives WITH the name
     }
     if (state.treatment === 'C') {
       if (map.hasLayer(tip)) map.removeLayer(tip);
@@ -214,45 +243,128 @@
       corner.style.display = 'block';
     } else {
       corner.style.display = 'none';
-      tip.setContent(name).setLatLng(e.latlng);
+      tip.setContent(name).setLatLng(latlng);
       if (!map.hasLayer(tip)) tip.addTo(map);
     }
+  }
+  function hideName() {
+    shown = false;
+    if (map.hasLayer(tip)) map.removeLayer(tip);
+    corner.style.display = 'none';
+    if (state.treatment === 'B' && !state.ackNow && hoveredLayer) {
+      hoveredLayer.setStyle({ fillOpacity: 0 });
+    }
+  }
+  function arm(ms) {
+    clearTimeout(hoverTimer);
+    hoverTimer = setTimeout(function () {
+      hoverTimer = null;
+      if (hoveredLayer && lastPos) displayName(lastName, lastPos);
+    }, ms);
+  }
+  function clearHover() {
+    clearTimeout(hoverTimer); hoverTimer = null;
+    if (shown && state.behavior === '3') warmUntil = Date.now() + state.warm;
+    if (hoveredLayer) { hoveredLayer.setStyle({ fillOpacity: 0 }); hoveredLayer = null; }
+    hideName();
+  }
+  hitLayer.on('mousemove', function (e) {
+    var layer = e.propagatedFrom || e.layer;
+    if (!frameContains(e.latlng)) { clearHover(); return; } // masked land: stay silent
+    var name = layer.feature.properties.name;
+    var entered = hoveredLayer !== layer;
+    if (entered) {
+      if (hoveredLayer) hoveredLayer.setStyle({ fillOpacity: 0 });
+      hoveredLayer = layer;
+      if (state.treatment === 'B' && state.ackNow) layer.setStyle({ fillOpacity: state.ack });
+    }
+    lastPos = e.latlng; lastName = name;
+
+    var b = state.behavior, show = false;
+    if (b === '0') show = true;                       // instant — shipped today
+    else if (b === '1') {                             // entry delay
+      if (entered) { hideName(); arm(state.delay); }
+      else if (shown) show = true;
+    } else if (b === '2') {                           // pause-to-show
+      if (shown && !entered) show = true;
+      else { hideName(); arm(state.delay); }          // every move re-arms the clock
+    } else {                                          // 3 · warm hover
+      if (shown || Date.now() < warmUntil) show = true;
+      else if (entered) arm(state.delay);
+    }
+    if (show) displayName(name, e.latlng);
   });
   hitLayer.on('mouseout', clearHover);
 
   // --- treatment menu + dials -------------------------------------------------
-  var state = { treatment: 'A', fs: 0.68, alpha: 0.9, ack: 0.05 };
+  // look defaults = the SHIPPED constants (index.html .country-tip / app.js
+  // ACK_FILL), so the delay behaviors are judged against production reality.
+  var state = { treatment: 'B', behavior: '1', fs: 0.78, alpha: 0.94, ack: 0.06,
+    delay: 400, warm: 600, fade: 0, ackNow: true };
   var TREATMENTS = {
     A: 'A · cursor chip',
     B: 'B · chip + country fill',
     C: 'C · fixed corner label'
   };
+  var BEHAVIORS = {
+    '0': '0 · instant',
+    '1': '1 · entry delay',
+    '2': '2 · pause to show',
+    '3': '3 · warm hover'
+  };
   var DIALS = [
     { key: 'fs',    label: 'chip font size (rem)', min: 0.58, max: 0.85, step: 0.01 },
     { key: 'alpha', label: 'chip bg opacity',      min: 0.5,  max: 1,    step: 0.02 },
-    { key: 'ack',   label: 'B: country fill',      min: 0,    max: 0.15, step: 0.01, only: 'B' }
+    { key: 'ack',   label: 'B: country fill',      min: 0,    max: 0.15, step: 0.01,
+      dim: function () { return state.treatment !== 'B'; } },
+    { key: 'delay', label: 'name delay (ms)',      min: 0,    max: 1500, step: 50,
+      dim: function () { return state.behavior === '0'; } },
+    { key: 'warm',  label: '3: warm window (ms)',  min: 0,    max: 2000, step: 100,
+      dim: function () { return state.behavior !== '3'; } },
+    { key: 'fade',  label: 'chip fade-in (ms)',    min: 0,    max: 300,  step: 20 }
   ];
 
   function apply() {
     document.documentElement.style.setProperty('--tip-fs', state.fs + 'rem');
     document.documentElement.style.setProperty('--tip-a', state.alpha);
+    document.documentElement.style.setProperty('--tip-fade', state.fade + 'ms');
     if (hoveredLayer) hoveredLayer.setStyle({
-      fillOpacity: state.treatment === 'B' ? state.ack : 0
+      fillOpacity: state.treatment === 'B' && (state.ackNow || shown) ? state.ack : 0
     });
     if (state.treatment !== 'C') corner.style.display = 'none';
     document.querySelectorAll('#presets button').forEach(function (b) {
       b.classList.toggle('on', b.dataset.k === state.treatment);
     });
+    document.querySelectorAll('#behaviors button').forEach(function (b) {
+      b.classList.toggle('on', b.dataset.k === state.behavior);
+    });
+    document.querySelectorAll('#ackTiming button').forEach(function (b) {
+      b.classList.toggle('on', (b.dataset.k === 'now') === state.ackNow);
+    });
+    document.getElementById('ackTiming').classList.toggle('off',
+      state.treatment !== 'B' || state.behavior === '0');
     DIALS.forEach(function (d) {
       var row = document.getElementById('dial-' + d.key);
-      row.classList.toggle('off', !!d.only && d.only !== state.treatment);
+      row.classList.toggle('off', !!(d.dim && d.dim()));
     });
-    var out = 'treatment: <em>' + state.treatment + '</em>\n\n' +
-      'index.html .country-tip:\n' +
+    var bname = BEHAVIORS[state.behavior].slice(4);
+    var out = 'treatment: <em>' + state.treatment + '</em>   behavior: <em>' + bname + '</em>\n\n' +
+      'app.js hover:\n';
+    if (state.behavior === '0') {
+      out += '  no delay (shipped behavior)\n';
+    } else {
+      out += '  HOVER_DELAY_MS: <em>' + state.delay + '</em>   (' + bname + ')\n';
+      if (state.behavior === '3') out += '  HOVER_WARM_MS: <em>' + state.warm + '</em>\n';
+    }
+    if (state.treatment === 'B') {
+      out += '  ack fillOpacity: <em>' + state.ack + '</em>   (' +
+        (state.ackNow ? 'immediate on entry' : 'with the name') + ')\n';
+    }
+    if (state.treatment === 'C') out += '  corner label variant (no cursor tooltip)\n';
+    out += '\nindex.html .country-tip:\n' +
       '  background:rgba(9,26,38,<em>' + state.alpha + '</em>)\n' +
       '  font:600 <em>' + state.fs + 'rem</em>/1.2 var(--mono)\n';
-    if (state.treatment === 'B') out += '\napp.js hover ack fill:\n  fillOpacity: <em>' + state.ack + '</em>\n';
-    if (state.treatment === 'C') out += '\napp.js: corner label variant (no cursor tooltip)\n';
+    if (state.fade > 0) out += '  animation:tipfade <em>' + state.fade + 'ms</em> ease-out\n';
     document.getElementById('out').innerHTML = out;
   }
 
@@ -263,6 +375,24 @@
     b.dataset.k = k;
     b.onclick = function () { state.treatment = k; clearHover(); apply(); };
     presets.appendChild(b);
+  });
+
+  var behaviors = document.getElementById('behaviors');
+  Object.keys(BEHAVIORS).forEach(function (k) {
+    var b = document.createElement('button');
+    b.textContent = BEHAVIORS[k];
+    b.dataset.k = k;
+    b.onclick = function () { state.behavior = k; warmUntil = 0; clearHover(); apply(); };
+    behaviors.appendChild(b);
+  });
+
+  var ackTiming = document.getElementById('ackTiming');
+  [['now', 'fill on entry'], ['name', 'fill with name']].forEach(function (p) {
+    var b = document.createElement('button');
+    b.textContent = p[1];
+    b.dataset.k = p[0];
+    b.onclick = function () { state.ackNow = p[0] === 'now'; clearHover(); apply(); };
+    ackTiming.appendChild(b);
   });
 
   var basins = document.getElementById('basins');
@@ -304,8 +434,12 @@
 
   apply();
 
-  // dev hook: lets Playwright convert lat/lng -> container px to drive hovers
-  window.__hoverLab = { map: map };
+  // dev hook: lets Playwright convert lat/lng -> container px to drive hovers,
+  // set state, and assert name visibility around the delay window
+  window.__hoverLab = { map: map, state: state, apply: apply,
+    nameVisible: function () {
+      return map.hasLayer(tip) || corner.style.display === 'block';
+    } };
 })();
 </script>
 </body>
