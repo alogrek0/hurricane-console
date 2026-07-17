@@ -1391,6 +1391,37 @@ const cycF = (name, lat, lon) => ({ name, classification: 'Tropical Storm', lat,
     LIN.linkGenesis('AT', { waves: [], invests: twoInv, cyclones: cycNear }).length === 0);
 }
 
+// rule (symmetric ambiguity, the June 21 EP lesson): one SOURCE may claim at
+// most one target. Gazetteer coarseness can stack two same-product areas on
+// one anchor; a wave linking to both would invent a lineage for a system NHC
+// only forecast. Comparable candidates (within 2°) → link neither.
+{
+  // one wave, two invest chains opening at the same stamp + same anchor
+  const waves = LIN.chainWaves([twdProd('202606010000', [waveF(-44)])], 'AT');
+  const twins = LIN.chainInvests([twoProd('202606011200',
+    [distF('AL90', 12, -45), distF('AL91', 12, -45)])], 'AT');
+  ok('lineage genesis: one wave, two same-anchor invests → links NEITHER',
+    LIN.linkGenesis('AT', { waves, invests: twins, cyclones: [] }).length === 0);
+  // clear margin (dist 1 vs 3.5, margin > 2) → exactly one link, to the nearer
+  const spread = LIN.chainInvests([twoProd('202606011200',
+    [distF('AL90', 12, -45), distF('AL91', 12, -47.5)])], 'AT');
+  const g = LIN.linkGenesis('AT', { waves, invests: spread, cyclones: [] });
+  ok('lineage genesis: one wave, two invests with clear margin → only the nearer links',
+    g.length === 1 && g[0].to === spread.find((c) => c.tag === 'AL90').id);
+  // one invest, two cyclones both qualifying at identical distance
+  const inv = LIN.chainInvests([twoProd('202606010000', [distF('AL90', 14, -45)])], 'AT');
+  const twinCycs = LIN.chainCyclones([twdProd('202606011200', [],
+    [cycF('Alberto', 15, -46), cycF('Beryl', 15, -46)])], 'AT');
+  ok('lineage genesis: one invest, two equidistant cyclones → links NEITHER',
+    LIN.linkGenesis('AT', { waves: [], invests: inv, cyclones: twinCycs }).length === 0);
+  // clear margin (dist 0.5 vs ~2.83) → only the nearer cyclone links
+  const spreadCycs = LIN.chainCyclones([twdProd('202606011200', [],
+    [cycF('Alberto', 14, -45.5), cycF('Beryl', 16, -47)])], 'AT');
+  const gc = LIN.linkGenesis('AT', { waves: [], invests: inv, cyclones: spreadCycs });
+  ok('lineage genesis: one invest, two cyclones with clear margin → only the nearer links',
+    gc.length === 1 && gc[0].to === spreadCycs.find((c) => c.name === 'Alberto').id);
+}
+
 // determinism: the pure builders are order-stable — rebuild == build.
 {
   const seq = [twdProd('202606010000', [waveF(-40)]), twdProd('202606010600', [waveF(-43)]), twdProd('202606011200', [waveF(-46)])];

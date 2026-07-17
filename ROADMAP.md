@@ -58,6 +58,16 @@ planned tracks — lived friction beats speculation.
   ever carried one (none has this season; position falls back to sentence
   scanning and is honestly null). Low urgency; revisit if a real product ever
   pairs a period-bearing title with an invest tag.
+- [ ] **Directional-offset phrases anchor at the landmark** (2026-07-17, found
+  by the automated chain audit) — "several hundred miles south-southwest of
+  the southern tip of the Baja California peninsula" resolves to the Baja
+  anchor itself (29N 114W, mid-peninsula) instead of a point offset south of
+  it; evidence `TWOEP.202606230501.txt` → `...231147.txt`, where EP94's
+  position lurches 17° in 6 h while its tag (correctly) holds the chain
+  together. Same coarseness stacks distinct same-product areas on one anchor
+  (the June 21 collision that motivated the genesis-symmetry rule). Fix is
+  delicate gazetteer/offset work — its own fixtured PR; positions and
+  lineage both improve when it lands.
 
 ## Track A — Features
 
@@ -169,7 +179,12 @@ prefer broken chains over invented links.
   filters, season replay scrubber, REAL/SAMPLE badge) for vetting joins by
   eye; it becomes M3's treatment lab. Season-to-date: AL90 chains June 13→16
   across its designation (12 sightings), EP91 walks 20→80% into the season's
-  first EP depression, CP90's two honestly-broken unmapped chains.*
+  first EP depression, CP90's two honestly-broken unmapped chains. Post-ship
+  automated chain audit (49 flags, all adjudicated innocent — mostly NHC
+  re-analysis jitter, one NHC-stated wave merge) hardened the linker: genesis
+  ambiguity is now symmetric (one wave claims at most one invest, one invest
+  at most one cyclone; comparable candidates → no link), killing the June 21
+  double-link to a same-anchor forecast area.*
 - [ ] **M3 — Lineage UI**: "history" affordance on cyclone/wave/invest popups
   → lazy-fetch (countries.js pattern) → time-faded trail + genesis segments;
   trail treatment judged in a lab first; broken chains render as separate

@@ -238,6 +238,28 @@ function chainCyclones(products, basin) {
 
 function linkGenesis(basin, coll) {
   const links = [];
+  const waveProps = [], cycProps = [];
+
+  // Symmetric ambiguity (the June 21 EP lesson): a wave may claim at most ONE
+  // invest chain, an invest at most ONE cyclone. When one source qualifies for
+  // two targets comparably well (within GENESIS_AMBIG_DEG — including the
+  // degenerate identical-anchor case, where gazetteer coarseness stacks two
+  // same-product areas on one point), link NONE of them: a genesis link
+  // granted by positional coincidence is an invented lineage. Broken beats
+  // invented, in both directions.
+  function uniquePerSource(props) {
+    const bySrc = new Map();
+    for (const p of props) {
+      if (!bySrc.has(p.from)) bySrc.set(p.from, []);
+      bySrc.get(p.from).push(p);
+    }
+    const kept = [];
+    for (const group of bySrc.values()) {
+      group.sort(function (a, b) { return a.dist - b.dist || (a.to < b.to ? -1 : 1); });
+      if (group.length === 1 || (group[1].dist - group[0].dist) > GENESIS_AMBIG_DEG) kept.push(group[0]);
+    }
+    return kept;
+  }
 
   // wave -> invest: at the invest chain's FIRST (mappable) sighting, the wave
   // chains whose axis passes near it in space and time. Two comparably-close
@@ -266,7 +288,7 @@ function linkGenesis(basin, coll) {
     if (!cands.length) continue;
     cands.sort(function (a, b) { return a.dist - b.dist || (a.id < b.id ? -1 : 1); });
     if (cands.length >= 2 && (cands[1].dist - cands[0].dist) <= GENESIS_AMBIG_DEG) continue; // ambiguous
-    links.push({ kind: 'wave-invest', from: cands[0].id, to: inv.id, atStamp: first.stamp, confidence: 'inferred-genesis' });
+    waveProps.push({ from: cands[0].id, to: inv.id, atStamp: first.stamp, dist: cands[0].dist });
   }
 
   // invest -> cyclone: a cyclone's FIRST sighting near an invest chain's LAST
@@ -288,7 +310,14 @@ function linkGenesis(basin, coll) {
       quals.push({ id: inv.id, dist: d });
     }
     if (quals.length !== 1) continue; // 0 = nothing; >=2 = ambiguous -> no link
-    links.push({ kind: 'invest-cyclone', from: quals[0].id, to: cyc.id, atStamp: first.stamp, confidence: 'inferred-genesis' });
+    cycProps.push({ from: quals[0].id, to: cyc.id, atStamp: first.stamp, dist: quals[0].dist });
+  }
+
+  for (const p of uniquePerSource(waveProps)) {
+    links.push({ kind: 'wave-invest', from: p.from, to: p.to, atStamp: p.atStamp, confidence: 'inferred-genesis' });
+  }
+  for (const p of uniquePerSource(cycProps)) {
+    links.push({ kind: 'invest-cyclone', from: p.from, to: p.to, atStamp: p.atStamp, confidence: 'inferred-genesis' });
   }
 
   links.sort(function (a, b) {
