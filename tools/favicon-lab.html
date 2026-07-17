@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<!--
+  tools/favicon-lab.html — dev-only favicon treatment lab. Never shipped as part
+  of the app (not in the SW SHELL list, not referenced by index.html), but IS
+  reachable on a phone because Pages serves the repo root:
+    https://<user>.github.io/hurricane-console/tools/favicon-lab.html
+
+  Why it exists: the browser-tab favicon is judged at 16 CSS px, and how the
+  hurricane glyph survives that size (stroke weight vs elegance, corner radius)
+  is a call made by LOOKING. The reference target is the iPhone home-screen
+  icon (apple-touch-icon-180.png: original art strokes 1.4/1.6, iOS ~22.5%
+  squircle corners) — the user prefers that look over the current favicon's
+  thickened strokes.
+
+  Three candidates, each rendered from the SAME parameterized SVG so what you
+  judge is exactly what would ship:
+    A  exact home-screen match  — strokes 1.4/1.6, rx 5.4 (iOS radius)
+    B  split the difference     — strokes 1.6/1.8, rx 5.4
+    C  current favicon.svg      — strokes 1.8/2.0, rx 4.5 (control)
+  Each shows in fake light/dark browser tab strips at true 16px, then at
+  16/32/64 on both grounds, next to the real apple-touch-icon-180.png. The
+  page prints the exact favicon.svg source for each candidate.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Favicon lab — Hurricane Console (dev)</title>
+<style>
+  :root{
+    --bg:#071620; --panel:#0c2233; --line:#173347; --ink:#dce8ef;
+    --dim:#7ea3b8; --amber:#ffa23a;
+    --mono:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 var(--mono)}
+  header{padding:.6rem .8rem;border-bottom:1px solid var(--line);
+    background:linear-gradient(180deg,#0a1e2c,#071620)}
+  h1{margin:0;font-size:.95rem;letter-spacing:.02em}
+  h1 small{display:block;color:var(--dim);font-weight:400;font-size:.7rem;letter-spacing:.06em}
+  .wrap{padding:1rem;display:flex;flex-direction:column;gap:1.2rem;max-width:900px}
+  section{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:.8rem}
+  section>b{display:block;color:var(--dim);font-size:.62rem;letter-spacing:.1em;margin-bottom:.55rem}
+
+  /* fake browser tab strips — the 16px judgment context */
+  .tabstrip{display:flex;align-items:flex-end;gap:0;padding:6px 8px 0;border-radius:8px 8px 0 0;margin-bottom:2px}
+  .tabstrip.light{background:#dee1e6}
+  .tabstrip.dark{background:#202124}
+  .tab{display:flex;align-items:center;gap:8px;padding:7px 14px;border-radius:8px 8px 0 0;
+    font:12px system-ui,-apple-system,"Segoe UI",sans-serif;white-space:nowrap;min-width:0}
+  .light .tab{background:#fff;color:#202124}
+  .dark .tab{background:#323639;color:#e8eaed}
+  .tab img{width:16px;height:16px;flex:none}
+  .tab span{overflow:hidden;text-overflow:ellipsis}
+
+  /* size ramp */
+  .ramp{display:flex;gap:1.4rem;flex-wrap:wrap;align-items:flex-end}
+  .cell{text-align:center}
+  .cell i{display:block;font-style:normal;color:var(--dim);font-size:.62rem;margin-top:.3rem}
+  .ground{display:inline-flex;gap:12px;align-items:flex-end;padding:10px;border-radius:6px}
+  .ground.light{background:#f1f3f4}
+  .ground.dark{background:#26282b}
+
+  details{margin-top:.5rem}
+  summary{cursor:pointer;color:var(--dim);font-size:.72rem}
+  pre{margin:.4rem 0 0;padding:.6rem;background:#04101a;border:1px solid var(--line);
+    border-radius:6px;font-size:.68rem;line-height:1.5;overflow-x:auto;color:#a8c6d8}
+  .ref{display:flex;gap:1.2rem;align-items:flex-end;flex-wrap:wrap}
+  .note{color:var(--dim);font-size:.72rem;margin:.2rem 0 0}
+</style>
+</head>
+<body>
+<header>
+  <h1>Favicon lab <small>dev only — pick by eye at 16px; A/B/C constants below each card</small></h1>
+</header>
+<div class="wrap" id="wrap">
+  <section>
+    <b>REFERENCE — iPhone home-screen icon (apple-touch-icon-180.png, iOS rounds the corners)</b>
+    <div class="ref">
+      <div class="cell"><img src="../apple-touch-icon-180.png" width="60" height="60" style="border-radius:13.5px"><i>60px, iOS-style radius</i></div>
+      <div class="cell"><img src="../apple-touch-icon-180.png" width="120" height="120" style="border-radius:27px"><i>120px</i></div>
+    </div>
+    <p class="note">This is the look being matched: original stroke weights, softer corners.</p>
+  </section>
+</div>
+<script>
+  'use strict';
+  // One parameterized source of truth — candidate SVGs differ ONLY in these numbers.
+  function svgSource(eyeW, armW, rx) {
+    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">\n' +
+      '  <rect width="24" height="24" rx="' + rx + '" fill="#071620"/>\n' +
+      '  <circle cx="12" cy="12" r="2.4" fill="none" stroke="#ffa23a" stroke-width="' + eyeW + '"/>\n' +
+      '  <path d="M12 9.6 C7 8 5.5 12 7.2 15" fill="none" stroke="#ffa23a" stroke-width="' + armW + '" stroke-linecap="round"/>\n' +
+      '  <path d="M12 14.4 C17 16 18.5 12 16.8 9" fill="none" stroke="#ffa23a" stroke-width="' + armW + '" stroke-linecap="round"/>\n' +
+      '</svg>\n';
+  }
+  var CANDIDATES = [
+    { id: 'A', label: 'A — exact home-screen match (strokes 1.4/1.6, rx 5.4)', eye: 1.4, arm: 1.6, rx: 5.4 },
+    { id: 'B', label: 'B — split the difference (strokes 1.6/1.8, rx 5.4)',   eye: 1.6, arm: 1.8, rx: 5.4 },
+    { id: 'C', label: 'C — current favicon (strokes 1.8/2.0, rx 4.5)',        eye: 1.8, arm: 2.0, rx: 4.5 }
+  ];
+  var SIZES = [16, 32, 64];
+  var wrap = document.getElementById('wrap');
+
+  CANDIDATES.forEach(function (c) {
+    var src = svgSource(c.eye, c.arm, c.rx);
+    var uri = 'data:image/svg+xml,' + encodeURIComponent(src);
+    var sec = document.createElement('section');
+    var html = '<b>' + c.label + '</b>';
+    ['light', 'dark'].forEach(function (theme) {
+      html += '<div class="tabstrip ' + theme + '"><div class="tab">' +
+        '<img src="' + uri + '" alt=""><span>Hurricane Console — TWDAT</span></div></div>';
+    });
+    html += '<div class="ramp">';
+    ['light', 'dark'].forEach(function (theme) {
+      html += '<div class="ground ' + theme + '">' + SIZES.map(function (s) {
+        return '<div class="cell"><img src="' + uri + '" width="' + s + '" height="' + s + '" alt=""><i>' + s + '</i></div>';
+      }).join('') + '</div>';
+    });
+    html += '</div>';
+    html += '<details><summary>favicon.svg source (' + c.id + ')</summary><pre></pre></details>';
+    sec.innerHTML = html;
+    sec.querySelector('pre').textContent = src;
+    wrap.appendChild(sec);
+  });
+</script>
+</body>
+</html>
