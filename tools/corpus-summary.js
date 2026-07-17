@@ -50,4 +50,23 @@ function summarizeTWDAT(r) {
   };
 }
 
-module.exports = { summarizeTCM, summarizeTWDAT };
+// parseTWO() result -> pinned snapshot of each disturbance. Chances collapse
+// to "cat:pct" strings (troughKinds style); null lat/lon stay null — an
+// unmappable formation area is pinned as honestly unmapped, not resolved.
+function summarizeTWO(r) {
+  if (!r) return null;
+  return {
+    basin: r.basin,
+    disturbances: r.disturbances.map(function (d) {
+      return {
+        invest: d.invest,
+        lat: d.lat,
+        lon: d.lon,
+        chance48: d.chance48 ? d.chance48.cat + ':' + d.chance48.pct : null,
+        chance7: d.chance7 ? d.chance7.cat + ':' + d.chance7.pct : null,
+      };
+    }),
+  };
+}
+
+module.exports = { summarizeTCM, summarizeTWDAT, summarizeTWO };

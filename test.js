@@ -318,6 +318,59 @@ const twoInv = P.parseTWO(TWO_INVEST);
 ok('invest tag captured from the title line',
   twoInv.disturbances.length === 1 && twoInv.disturbances[0].invest === 'AL92');
 
+// Real June 2026 TWOATs interpose a "Regardless of tropical cyclone
+// formation..." advisory paragraph between the titled prose and the star
+// lines — in the SAME chunk as the stars. The star chunk then neither starts
+// with '*' nor carries a title, so the titled chunk a step back must be
+// inherited or the invest tag and location vanish (AL90 shipped into the
+// void this way; see fixtures TWOAT.202606160502.txt). The old untitled
+// format (TWO_FIX above) must NOT inherit — its positions pin that.
+const TWO_GAP = `Tropical Weather Outlook
+NWS National Hurricane Center Miami FL
+200 AM EDT Tue Jun 16 2026
+
+For the North Atlantic...Caribbean Sea and the Gulf of America:
+
+Northwestern Gulf of America (AL90):
+A trough of low pressure located inland near the Texas/Mexico border
+continues to produce a large area of disorganized showers and
+thunderstorms.
+
+Regardless of tropical cyclone formation, interests across southern
+and eastern Texas should monitor the progress of this system.
+* Formation chance through 48 hours...low...20 percent.
+* Formation chance through 7 days...medium...60 percent.
+
+$$`;
+const twoGap = P.parseTWO(TWO_GAP);
+ok('gap layout: "Regardless of..." star chunk inherits the titled chunk (tag survives)',
+  twoGap.disturbances.length === 1 && twoGap.disturbances[0].invest === 'AL90');
+ok('gap layout: location resolves from the recovered title, in the Gulf',
+  twoGap.disturbances[0].lat !== null && twoGap.disturbances[0].lat >= 20 && twoGap.disturbances[0].lat <= 31 &&
+  twoGap.disturbances[0].lon >= -100 && twoGap.disturbances[0].lon <= -84);
+ok('gap layout: chances still parse from the star lines',
+  twoGap.disturbances[0].chance7 && twoGap.disturbances[0].chance7.pct === 60);
+
+// Control: the dominant 2026 format — title + prose + stars in ONE chunk —
+// must not inherit anything (310 of 376 archived season products).
+const TWO_SELFTITLED = `Tropical Weather Outlook
+NWS National Hurricane Center Miami FL
+800 AM EDT Tue Jul 8 2026
+
+For the North Atlantic...Caribbean Sea and the Gulf of America:
+
+1. Central Tropical Atlantic (AL93):
+A tropical wave over the central tropical Atlantic continues to
+produce disorganized showers and thunderstorms.
+* Formation chance through 48 hours...low...10 percent.
+* Formation chance through 7 days...low...20 percent.
+
+$$`;
+const twoSelf = P.parseTWO(TWO_SELFTITLED);
+ok('self-titled chunk: tag from its own title, nothing inherited',
+  twoSelf.disturbances.length === 1 && twoSelf.disturbances[0].invest === 'AL93' &&
+  twoSelf.disturbances[0].chance48 && twoSelf.disturbances[0].chance48.pct === 10);
+
 // --- invest alerter (tools/alert-invests.js, pure logic only — offline) --------
 
 const ALERTS = require('./tools/alert-invests.js');
@@ -1078,6 +1131,8 @@ for (const [type, summarize, parseFn] of [
   ['tcm', SUM.summarizeTCM, (t) => P.parseTCM(t)],
   ['twdat', SUM.summarizeTWDAT, (t) => P.parse(t)],
   ['twdep', SUM.summarizeTWDAT, (t) => P.parse(t)],
+  ['twoat', SUM.summarizeTWO, (t) => P.parseTWO(t)],
+  ['twoep', SUM.summarizeTWO, (t) => P.parseTWO(t)],
 ]) {
   for (const [file, want] of Object.entries(EXP[type] || {})) {
     const txt = fs.readFileSync(FIXDIR + '/' + file, 'utf8');
@@ -1097,7 +1152,7 @@ for (const [type, summarize, parseFn] of [
 ok('corpus: every fixtures/*.txt has expectations',
   fs.readdirSync(FIXDIR)
     .filter((f) => f.endsWith('.txt'))
-    .every((f) => EXP.tcm[f] || EXP.twdat[f] || EXP.twdep[f]));
+    .every((f) => EXP.tcm[f] || EXP.twdat[f] || EXP.twdep[f] || EXP.twoat[f] || EXP.twoep[f]));
 
 // --- archive derived-data shape (Track C M1) ------------------------------------
 // tools/derive-summary.js is the shared writer/checker shape module (like

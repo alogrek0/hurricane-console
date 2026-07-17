@@ -788,8 +788,20 @@
       if (/\*\s*formation chance/i.test(chunk)) {
         // Star lines terminate a disturbance. Older products keep prose and
         // stars in one block; the current titled format blank-line-separates
-        // them, in which case the preceding chunk is the prose body.
-        const body = /^\s*\*/.test(chunk) ? prev + '\n' + chunk : chunk;
+        // them, in which case the preceding chunk is the prose body. A third
+        // real layout (June 2026 TWOATs): an advisory paragraph ("Regardless
+        // of tropical cyclone formation...") rides in the same chunk as the
+        // stars while the titled prose sits a chunk back — that chunk must be
+        // inherited or the invest tag and location are lost (AL90 was). Gate
+        // BOTH ways: the star chunk has no first-line colon of its own (inline
+        // titles like "Offshore of the Southeastern U.S. Coast: A broad low"
+        // count as titles), AND prev starts with a clean title line — the
+        // [^:.] class keeps the "For the North Atlantic..." area header and
+        // the old format's untitled prose (which would cross-contaminate
+        // neighboring disturbances) from ever being inherited.
+        const ownTitle = /^[^\n]*:/.test(chunk.replace(/^\s+/, ''));
+        const prevTitled = /^\s*(?:\d+\.\s*)?[^:.\n]{1,80}:/.test(prev);
+        const body = /^\s*\*/.test(chunk) || (!ownTitle && prevTitled) ? prev + '\n' + chunk : chunk;
         const flat = body.replace(/\n/g, ' ').replace(/\s+/g, ' ').trim();
 
         // location: title line first ("1. Central Tropical Atlantic (AL92):"),
