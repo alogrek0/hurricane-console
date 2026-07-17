@@ -1,9 +1,15 @@
 <!DOCTYPE html>
 <!--
-  tools/make-icons.html — dev-only icon generator. Never shipped, never in the
-  SW SHELL list. Draws the header glyph (the exact SVG art from index.html) on
-  <canvas> at every icon size the app needs, so the whole set stays coherent
-  and re-generable from one source.
+  tools/make-icons.html — dev-only icon generator (GEOMETRIC FALLBACK PATH).
+  Never shipped, never in the SW SHELL list. Draws a glyph on <canvas> at every
+  icon size the app needs.
+
+  NOTE (2026-07-17): the currently shipped PNGs (icon-192/512, maskable-512,
+  apple-touch-180) are an EXTERNALLY-DESIGNED set (my_favicons) — the textured
+  tropical-cyclone-over-graticule art — NOT the output of this file, and
+  favicon.svg is a hand-traced crisp vector of that same design. This generator
+  still draws the older geometric mark below and is retained only for reverting
+  to it / future geometric regeneration. It is not the source of the live icons.
 
   Regeneration procedure (one-time, whenever the art changes):
     1. npx -y http-server -p 8000 -s          (repo root, background)

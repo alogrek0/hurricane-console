@@ -1,7 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-  <!-- header glyph art; strokes/corners matched to apple-touch-icon (1.4/1.6, rx 5.4) -->
+  <!-- Tropical-cyclone mark, vector-traced from the my_favicons design and
+       simplified for 16px legibility: eye (ring + dot) + two round-capped hooks
+       in 180° symmetry over a faint chart crosshair. Crisp where the textured
+       PNG goes soft; the PNG icon set carries the full detail. -->
   <rect width="24" height="24" rx="5.4" fill="#071620"/>
-  <circle cx="12" cy="12" r="2.4" fill="none" stroke="#ffa23a" stroke-width="1.4"/>
-  <path d="M12 9.6 C7 8 5.5 12 7.2 15" fill="none" stroke="#ffa23a" stroke-width="1.6" stroke-linecap="round"/>
-  <path d="M12 14.4 C17 16 18.5 12 16.8 9" fill="none" stroke="#ffa23a" stroke-width="1.6" stroke-linecap="round"/>
+  <clipPath id="t"><rect width="24" height="24" rx="5.4"/></clipPath>
+  <g clip-path="url(#t)" stroke="#6f9bb3" stroke-width="0.8" stroke-opacity="0.7">
+    <path d="M12 2.5V21.5M2.5 12H21.5"/>
+  </g>
+  <g fill="none" stroke="#ffa23a" stroke-width="2.5" stroke-linecap="round">
+    <path d="M11.4 9.6 C13.6 8.0 16.4 8.4 17.2 10.8 C17.7 12.3 17.0 13.4 15.8 13.6"/>
+    <path d="M11.4 9.6 C13.6 8.0 16.4 8.4 17.2 10.8 C17.7 12.3 17.0 13.4 15.8 13.6" transform="rotate(180 12 12)"/>
+  </g>
+  <circle cx="12" cy="12" r="1.5" fill="none" stroke="#ffa23a" stroke-width="1.1"/>
+  <circle cx="12" cy="12" r="0.6" fill="#ffa23a"/>
 </svg>
