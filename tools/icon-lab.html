@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<!--
+  tools/icon-lab.html — dev-only icon + favicon treatment lab. Never shipped as
+  part of the app (not in the SW SHELL list, not referenced by index.html), but
+  IS reachable on a phone because Pages serves the repo root:
+    https://<user>.github.io/hurricane-console/tools/icon-lab.html
+
+  Why it exists: the user wants the icon to keep the *graticule* look from their
+  home-screen screenshot (a lat/lon crosshair grid behind the amber swirl), but
+  a graticule that reads at 180px turns to mud at a 16px browser tab. So the two
+  ship differently and must be judged separately:
+
+    LARGE icons (icon-192/512, maskable, apple-touch-180) always ship the FULL
+    graticule — that's the screenshot look, shown at top.
+
+    The FAVICON simplifies. Three candidates, most-graticule to none:
+      A  full thirds-grid      — screenshot-faithful; honest look at 16px
+      B  single center crosshair — a reticle hint that survives small
+      C  glyph only            — graticule dropped, swirl enlarged for legibility
+
+  Everything is drawn from ONE parameterized SVG (iconSVG), so what you judge is
+  exactly what would ship. Each favicon card prints its exact favicon.svg source;
+  the LARGE card prints the graticule/glyph constants for make-icons.html.
+  Pick A/B/C by eye at 16px, tell me, and I regenerate the PNG set + favicon.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Icon lab — Hurricane Console (dev)</title>
+<style>
+  :root{
+    --bg:#071620; --panel:#0c2233; --line:#173347; --ink:#dce8ef;
+    --dim:#7ea3b8; --amber:#ffa23a;
+    --mono:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 var(--mono)}
+  header.top{padding:.6rem .8rem;border-bottom:1px solid var(--line);
+    background:linear-gradient(180deg,#0a1e2c,#071620)}
+  h1{margin:0;font-size:.95rem;letter-spacing:.02em}
+  h1 small{display:block;color:var(--dim);font-weight:400;font-size:.7rem;letter-spacing:.06em}
+  .wrap{padding:1rem;display:flex;flex-direction:column;gap:1.2rem;max-width:900px}
+  section{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:.8rem}
+  section>b{display:block;color:var(--dim);font-size:.62rem;letter-spacing:.1em;margin-bottom:.55rem}
+  section.hero{border-color:#2b5a72}
+
+  /* fake browser tab strips — the 16px judgment context */
+  .tabstrip{display:flex;align-items:flex-end;gap:0;padding:6px 8px 0;border-radius:8px 8px 0 0;margin-bottom:2px}
+  .tabstrip.light{background:#dee1e6}
+  .tabstrip.dark{background:#202124}
+  .tab{display:flex;align-items:center;gap:8px;padding:7px 14px;border-radius:8px 8px 0 0;
+    font:12px system-ui,-apple-system,"Segoe UI",sans-serif;white-space:nowrap;min-width:0}
+  .light .tab{background:#fff;color:#202124}
+  .dark .tab{background:#323639;color:#e8eaed}
+  .tab img{width:16px;height:16px;flex:none}
+  .tab span{overflow:hidden;text-overflow:ellipsis}
+
+  /* size ramps + grounds */
+  .ramp{display:flex;gap:1.4rem;flex-wrap:wrap;align-items:flex-end}
+  .cell{text-align:center}
+  .cell i{display:block;font-style:normal;color:var(--dim);font-size:.62rem;margin-top:.3rem}
+  .ground{display:inline-flex;gap:12px;align-items:flex-end;padding:10px;border-radius:6px}
+  .ground.light{background:#f1f3f4}
+  .ground.dark{background:#26282b}
+
+  details{margin-top:.5rem}
+  summary{cursor:pointer;color:var(--dim);font-size:.72rem}
+  pre{margin:.4rem 0 0;padding:.6rem;background:#04101a;border:1px solid var(--line);
+    border-radius:6px;font-size:.66rem;line-height:1.5;overflow-x:auto;color:#a8c6d8}
+  .note{color:var(--dim);font-size:.72rem;margin:.35rem 0 0}
+  .home{display:inline-flex;flex-direction:column;align-items:center;gap:6px}
+  .home i{color:var(--dim);font-size:.62rem;font-style:normal}
+</style>
+</head>
+<body>
+<header class="top">
+  <h1>Icon lab <small>dev only — LARGE icons keep the full graticule (top); pick how the FAVICON simplifies (A/B/C) by eye at 16px</small></h1>
+</header>
+<div class="wrap" id="wrap"></div>
+<script>
+  'use strict';
+  var BG = '#071620', AMBER = '#ffa23a', GRAT = '#4d7488';
+  var uid = 0;
+
+  // ONE parameterized source of truth. o:
+  //   rx        tile corner radius (ignored when bleed:true)
+  //   bleed     full-bleed background (apple-touch / maskable) vs rounded tile
+  //   grid      thirds graticule (lines at 8 & 16 on both axes)
+  //   cross     single center crosshair (lines at 12)
+  //   ring      range ring (r 9)
+  //   gw,gop    graticule stroke width + opacity
+  //   scale     glyph scale about center (1 = current app glyph span)
+  //   eye,arm   glyph stroke widths (pre-scale)
+  function iconSVG(o) {
+    var id = 'c' + (++uid);
+    var L = [];
+    L.push('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">');
+    L.push(o.bleed
+      ? '  <rect width="24" height="24" fill="' + BG + '"/>'
+      : '  <rect width="24" height="24" rx="' + o.rx + '" fill="' + BG + '"/>');
+    if (o.grid || o.cross || o.ring) {
+      var shape = o.bleed ? '<rect width="24" height="24"/>'
+                          : '<rect width="24" height="24" rx="' + o.rx + '"/>';
+      L.push('  <clipPath id="' + id + '">' + shape + '</clipPath>');
+      L.push('  <g clip-path="url(#' + id + ')" stroke="' + GRAT +
+             '" stroke-width="' + o.gw + '" stroke-opacity="' + o.gop + '">');
+      if (o.grid)  L.push('    <path d="M8 0V24M16 0V24M0 8H24M0 16H24"/>');
+      if (o.cross) L.push('    <path d="M12 0V24M0 12H24"/>');
+      if (o.ring)  L.push('    <circle cx="12" cy="12" r="9" fill="none"/>');
+      L.push('  </g>');
+    }
+    var open = (o.scale && o.scale !== 1)
+      ? '  <g transform="translate(12 12) scale(' + o.scale + ') translate(-12 -12)" fill="none" stroke="' + AMBER + '" stroke-linecap="round">'
+      : '  <g fill="none" stroke="' + AMBER + '" stroke-linecap="round">';
+    L.push(open);
+    L.push('    <circle cx="12" cy="12" r="2.4" stroke-width="' + o.eye + '"/>');
+    L.push('    <path d="M12 9.6 C7 8 5.5 12 7.2 15" stroke-width="' + o.arm + '"/>');
+    L.push('    <path d="M12 14.4 C17 16 18.5 12 16.8 9" stroke-width="' + o.arm + '"/>');
+    L.push('  </g>');
+    L.push('</svg>');
+    return L.join('\n');
+  }
+  function uri(src){ return 'data:image/svg+xml,' + encodeURIComponent(src); }
+  function el(html){ var d = document.createElement('div'); d.innerHTML = html.trim(); return d.firstChild; }
+  var wrap = document.getElementById('wrap');
+
+  // ---- LARGE icons: the screenshot-faithful full graticule (always ships) ----
+  var LARGE = { grid:true, gw:0.5, gop:0.75, scale:1.15, eye:1.4, arm:1.6 };
+  var anyTile = iconSVG(Object.assign({ rx:4.5 }, LARGE));            // icon-192/512 (any)
+  var appleBleed = iconSVG(Object.assign({ bleed:true }, LARGE));     // apple-touch-180 / maskable
+  var hero = el('<section class="hero"><b>LARGE ICONS — full graticule (matches your home-screen screenshot; ships to icon-192/512, maskable, apple-touch-180)</b></section>');
+  var heroRow = el('<div class="ramp"></div>');
+  [['icon-192/512 (rounded tile)', anyTile, 4.5],
+   ['apple-touch / maskable (full-bleed, iOS masks it)', appleBleed, 0]].forEach(function(pair){
+    var box = el('<div class="home"></div>');
+    var img = new Image(); img.src = uri(pair[1]); img.width = 128; img.height = 128;
+    if (pair[2]) img.style.borderRadius = (128 * pair[2] / 24) + 'px';
+    box.appendChild(img);
+    box.appendChild(el('<i>' + pair[0] + '</i>'));
+    heroRow.appendChild(box);
+  });
+  hero.appendChild(heroRow);
+  hero.appendChild(el('<p class="note">Confirm this matches the icon you want on the home screen. Graticule is steel ' + GRAT + ' at 0.5w/0.75 opacity, glyph scaled 1.15. Tell me if the grid should be denser/fainter or the swirl bigger.</p>'));
+  var d1 = el('<details><summary>make-icons.html glyph + graticule constants</summary><pre></pre></details>');
+  d1.querySelector('pre').textContent =
+    'BG   ' + BG + '\nAMBER ' + AMBER + '\nGRAT ' + GRAT + '  (grid lines at 8 & 16 on both axes, 0.5w, 0.75 opacity)\n' +
+    'glyph scale 1.15, eye stroke 1.4, arm stroke 1.6\n\n// full "any" tile source:\n' + anyTile;
+  hero.appendChild(d1);
+  wrap.appendChild(hero);
+
+  // ---- FAVICON candidates: most graticule -> none ----
+  var CANDIDATES = [
+    { id:'A', label:'A — full thirds-grid (screenshot-faithful)',
+      cfg:{ rx:5.4, grid:true, gw:0.6, gop:0.8, scale:1.15, eye:1.4, arm:1.6 } },
+    { id:'B', label:'B — single center crosshair (reticle hint, survives small)',
+      cfg:{ rx:5.4, cross:true, gw:0.8, gop:0.7, scale:1.2, eye:1.5, arm:1.7 } },
+    { id:'C', label:'C — glyph only (graticule dropped, swirl enlarged for legibility)',
+      cfg:{ rx:5.4, scale:1.2, eye:1.5, arm:1.7 } }
+  ];
+  var SIZES = [16, 32, 64, 128];
+
+  CANDIDATES.forEach(function(c){
+    var src = iconSVG(c.cfg);
+    var u = uri(src);
+    var sec = el('<section><b>' + c.label + '</b></section>');
+    ['light','dark'].forEach(function(theme){
+      sec.appendChild(el('<div class="tabstrip ' + theme + '"><div class="tab">' +
+        '<img src="' + u + '" alt=""><span>Hurricane Console — TWDAT</span></div></div>'));
+    });
+    var ramp = el('<div class="ramp"></div>');
+    ['light','dark'].forEach(function(theme){
+      var g = el('<div class="ground ' + theme + '"></div>');
+      SIZES.forEach(function(s){
+        g.appendChild(el('<div class="cell"><img src="' + u + '" width="' + s + '" height="' + s + '" alt=""><i>' + s + '</i></div>'));
+      });
+      ramp.appendChild(g);
+    });
+    sec.appendChild(ramp);
+    var det = el('<details><summary>favicon.svg source (' + c.id + ')</summary><pre></pre></details>');
+    det.querySelector('pre').textContent = src;
+    sec.appendChild(det);
+    wrap.appendChild(sec);
+  });
+</script>
+</body>
+</html>
