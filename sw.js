@@ -21,7 +21,7 @@ const DATA_CACHE = 'data-v1';
 const SHELL = [
   './', './index.html', './app.js', './parser.js', './diff.js', './basemap.js', './countries.js',
   './sample.js', './phonetics.js', './version.js', './manifest.json', './icon-192.png', './icon-512.png',
-  './favicon.svg', './icon-maskable-512.png', './apple-touch-icon-180.png',
+  './favicon.svg', './favicon.ico', './icon-maskable-512.png', './apple-touch-icon-180.png',
   'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css',
   'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js'
 ];

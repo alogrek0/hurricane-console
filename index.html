@@ -10,7 +10,7 @@
 <title>Hurricane Console — Tropical Weather</title>
 <link rel="manifest" href="manifest.json">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="icon" href="icon-192.png" sizes="192x192">
+<link rel="icon" href="favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="apple-touch-icon-180.png">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <style>
@@ -228,9 +228,12 @@
 <div id="app">
   <header>
     <svg class="glyph" viewBox="0 0 24 24" aria-hidden="true">
-      <circle cx="12" cy="12" r="2.4" fill="none" stroke="#ffa23a" stroke-width="1.4"/>
-      <path d="M12 9.6 C7 8 5.5 12 7.2 15" fill="none" stroke="#ffa23a" stroke-width="1.6" stroke-linecap="round"/>
-      <path d="M12 14.4 C17 16 18.5 12 16.8 9" fill="none" stroke="#ffa23a" stroke-width="1.6" stroke-linecap="round"/>
+      <g fill="none" stroke="#ffa23a" stroke-width="2.2" stroke-linecap="round">
+        <path d="M11.4 9.6 C13.6 8.0 16.4 8.4 17.2 10.8 C17.7 12.3 17.0 13.4 15.8 13.6"/>
+        <path d="M11.4 9.6 C13.6 8.0 16.4 8.4 17.2 10.8 C17.7 12.3 17.0 13.4 15.8 13.6" transform="rotate(180 12 12)"/>
+      </g>
+      <circle cx="12" cy="12" r="1.5" fill="none" stroke="#ffa23a" stroke-width="1.0"/>
+      <circle cx="12" cy="12" r="0.6" fill="#ffa23a"/>
     </svg>
     <h1>Hurricane Console<small>NHC <span id="prodTag">TWDAT</span> · <span id="basinBtn" role="button" tabindex="0" aria-label="Switch to East Pacific basin">ATLANTIC ⇄</span> · UNOFFICIAL</small></h1>
     <span id="badge" class="badge SAMPLE" role="status">SAMPLE</span>
