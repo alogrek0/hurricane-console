@@ -338,5 +338,80 @@
         "projections": 0
       }
     }
+  },
+  "twoat": {
+    "TWOAT.202606151151.txt": {
+      "source": "https://www.nhc.noaa.gov/archive/text/TWOAT/2026/TWOAT.202606151151.txt",
+      "covers": "gap layout pre-designation: untagged title, location recovered from the inherited chunk",
+      "snap": {
+        "basin": "AT",
+        "disturbances": [
+          {
+            "invest": null,
+            "lat": 25,
+            "lon": -90,
+            "chance48": "low:20",
+            "chance7": "low:30"
+          }
+        ]
+      }
+    },
+    "TWOAT.202606160502.txt": {
+      "source": "https://www.nhc.noaa.gov/archive/text/TWOAT/2026/TWOAT.202606160502.txt",
+      "covers": "gap layout: \"Regardless of...\" paragraph shares the star chunk, titled prose a chunk back — AL90's tag was lost here",
+      "snap": {
+        "basin": "AT",
+        "disturbances": [
+          {
+            "invest": "AL90",
+            "lat": 25,
+            "lon": -90,
+            "chance48": "medium:60",
+            "chance7": "medium:60"
+          }
+        ]
+      }
+    },
+    "TWOAT.202606271144.txt": {
+      "source": "https://www.nhc.noaa.gov/archive/text/TWOAT/2026/TWOAT.202606271144.txt",
+      "covers": "inline title with periods (\"Off of the southeastern coast of the U. S.:\") — position honestly null, pinned wart",
+      "snap": {
+        "basin": "AT",
+        "disturbances": [
+          {
+            "invest": null,
+            "lat": null,
+            "lon": null,
+            "chance48": "low:0",
+            "chance7": "low:20"
+          }
+        ]
+      }
+    }
+  },
+  "twoep": {
+    "TWOEP.202606051736.txt": {
+      "source": "https://www.nhc.noaa.gov/archive/text/TWOEP/2026/TWOEP.202606051736.txt",
+      "covers": "EP self-titled current format: tagged EP91 + a second untagged area (control)",
+      "snap": {
+        "basin": "EP",
+        "disturbances": [
+          {
+            "invest": "EP91",
+            "lat": 17,
+            "lon": -102,
+            "chance48": "medium:50",
+            "chance7": "high:70"
+          },
+          {
+            "invest": null,
+            "lat": 14,
+            "lon": -92.2,
+            "chance48": "low:30",
+            "chance7": "medium:60"
+          }
+        ]
+      }
+    }
   }
 }

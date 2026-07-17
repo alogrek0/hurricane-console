@@ -122,6 +122,27 @@ const TWDS = [
     covers: 'EP: genesis prose "a tropical depression is expected to form" — no phantom cyclone' },
 ];
 
+// TWOs live beside the TWDs (archive/text/{TWOAT,TWOEP}/{year}/). The first
+// four cover the parseTWO chunk-layout space found by sweeping the committed
+// season archive: the "Regardless of..." gap layout (tag + location recovery),
+// an inline title containing periods (pinned honest-null wart — the title
+// regex stops at '.', so "U. S." defeats it and no gazetteer anchor matches),
+// and the dominant self-titled format as a control.
+const TWOS = [
+  { type: 'TWOAT', year: 2026, prefix: '2026061605',
+    expect: { disturbances: 1, invests: ['AL90'] },
+    covers: 'gap layout: "Regardless of..." paragraph shares the star chunk, titled prose a chunk back — AL90\'s tag was lost here' },
+  { type: 'TWOAT', year: 2026, prefix: '2026061511',
+    expect: { disturbances: 1, invests: [] },
+    covers: 'gap layout pre-designation: untagged title, location recovered from the inherited chunk' },
+  { type: 'TWOAT', year: 2026, prefix: '2026062711',
+    expect: { disturbances: 1, invests: [] },
+    covers: 'inline title with periods ("Off of the southeastern coast of the U. S.:") — position honestly null, pinned wart' },
+  { type: 'TWOEP', year: 2026, prefix: '2026060517',
+    expect: { disturbances: 2, invests: ['EP91'] },
+    covers: 'EP self-titled current format: tagged EP91 + a second untagged area (control)' },
+];
+
 // --- fetch + cache ---------------------------------------------------------------
 async function fetchCached(url, cacheName) {
   const f = path.join(OUT, cacheName);
@@ -201,12 +222,30 @@ function auditTWD(txt, expect, sane) {
   return { flags, stats: { basin: r.basin, sec: r.sections.length, cyc: cyc.length, waves: r.waves.length, names: cyc.map((c) => c.classification + ' ' + c.name).join('; ') } };
 }
 
+function auditTWO(txt, expect, sane) {
+  const r = P.parseTWO(txt);
+  const flags = [];
+  const ds = r.disturbances || [];
+  if (ds.length !== expect.disturbances)
+    flags.push('disturbance-count:' + expect.disturbances + '/got:' + ds.length);
+  expect.invests.forEach((tag) => {
+    if (!ds.some((d) => d.invest === tag)) flags.push('missing-invest:' + tag);
+  });
+  ds.forEach((d) => {
+    // null position is honest (unmappable formation area), never a flag;
+    // a NON-null position outside the basin box is a parse gone wrong.
+    if (d.lat != null && !sane(d)) flags.push('disturbance-out-of-basin:' + (d.invest || 'untagged'));
+    if (!d.chance48 && !d.chance7) flags.push('no-chances:' + (d.invest || 'untagged'));
+  });
+  return { flags, stats: { basin: r.basin, n: ds.length, invests: ds.map((d) => d.invest || '-').join(',') } };
+}
+
 // --- runner ----------------------------------------------------------------------
 (async () => {
-  const report = { TCM: [], TWDAT: [], TWDEP: [] };
+  const report = { TCM: [], TWDAT: [], TWDEP: [], TWOAT: [], TWOEP: [] };
   // --save-fixtures accumulator; `_txt` holds the LF-normalized fixture body
   // and is stripped before expected.json is written.
-  const fixtures = { tcm: {}, twdat: {}, twdep: {} };
+  const fixtures = { tcm: {}, twdat: {}, twdep: {}, twoat: {}, twoep: {} };
 
   for (const item of TCMS) {
     const tag = item.path.split('/').pop().replace(/\.shtml$/, '');
@@ -227,17 +266,23 @@ function auditTWD(txt, expect, sane) {
     report.TCM.push(row);
   }
 
-  for (const item of TWDS) {
-    const sane = item.type === 'TWDEP' ? SANE_EP : SANE;
+  // TWDs and TWOs share the archive/text/ URL scheme and prefix resolution;
+  // only the audit + snapshot functions differ per product family.
+  for (const item of [...TWDS, ...TWOS]) {
+    const isTWO = /^TWO/.test(item.type);
+    const sane = /EP$/.test(item.type) ? SANE_EP : SANE;
     let row;
     try {
       const fname = await resolveTWD(item.type, item.year, item.prefix);
       if (!fname) throw new Error('no ' + item.type + ' matching prefix ' + item.prefix + ' in ' + item.year);
       const raw = await fetchCached(BASE + 'text/' + item.type + '/' + item.year + '/' + fname, fname);
-      row = { id: fname, covers: item.covers, ...auditTWD(raw, item.expect, sane) };
+      row = { id: fname, covers: item.covers, ...(isTWO ? auditTWO(raw, item.expect, sane) : auditTWD(raw, item.expect, sane)) };
       if (SAVE) {
         const txt = raw.replace(/\r\n?/g, '\n');
-        fixtures[item.type.toLowerCase()][fname] = { source: BASE + 'text/' + item.type + '/' + item.year + '/' + fname, covers: item.covers, snap: SUM.summarizeTWDAT(P.parse(txt)), _txt: txt };
+        fixtures[item.type.toLowerCase()][fname] = {
+          source: BASE + 'text/' + item.type + '/' + item.year + '/' + fname, covers: item.covers,
+          snap: isTWO ? SUM.summarizeTWO(P.parseTWO(txt)) : SUM.summarizeTWDAT(P.parse(txt)), _txt: txt,
+        };
       }
     } catch (e) {
       row = { id: item.type + '.' + item.prefix + '*', covers: item.covers, flags: ['fetch-error:' + e.message], stats: {} };
@@ -245,7 +290,7 @@ function auditTWD(txt, expect, sane) {
     report[item.type].push(row);
   }
 
-  for (const type of ['TCM', 'TWDAT', 'TWDEP']) {
+  for (const type of ['TCM', 'TWDAT', 'TWDEP', 'TWOAT', 'TWOEP']) {
     const rows = report[type];
     const flagged = rows.filter((r) => r.flags.length);
     console.log(`\n===== ${type}: ${rows.length} products, ${flagged.length} flagged =====`);
@@ -261,7 +306,7 @@ function auditTWD(txt, expect, sane) {
   console.log('corpus + report saved to', OUT);
 
   if (SAVE) {
-    const flagged = [...report.TCM, ...report.TWDAT, ...report.TWDEP].filter((r) => r.flags.length);
+    const flagged = [...report.TCM, ...report.TWDAT, ...report.TWDEP, ...report.TWOAT, ...report.TWOEP].filter((r) => r.flags.length);
     if (flagged.length) {
       console.error('\n--save-fixtures: REFUSING to write fixtures — ' + flagged.length +
         ' product(s) failed the manifest expectations above. Fix the parser (or the manifest) first.');
@@ -272,10 +317,10 @@ function auditTWD(txt, expect, sane) {
       _readme: 'Pinned parser snapshots for the committed archive corpus (checked by node test.js). ' +
         'Regenerate deliberately with: node tools/archive-audit.js --save-fixtures (network, dev-only), ' +
         'then review the git diff — a changed snap is a parser behavior change. Never hand-edit.',
-      tcm: {}, twdat: {}, twdep: {},
+      tcm: {}, twdat: {}, twdep: {}, twoat: {}, twoep: {},
     };
     let n = 0;
-    for (const type of ['tcm', 'twdat', 'twdep']) {
+    for (const type of ['tcm', 'twdat', 'twdep', 'twoat', 'twoep']) {
       for (const name of Object.keys(fixtures[type]).sort()) {
         const e = fixtures[type][name];
         fs.writeFileSync(path.join(FIXDIR, name), e._txt);

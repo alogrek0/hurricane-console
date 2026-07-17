@@ -37,16 +37,27 @@ planned tracks — lived friction beats speculation.
 
 ## Parser gaps (found in real products, awaiting their own PR)
 
-- [ ] **TWO invest tag lost when a "Regardless of..." paragraph precedes the
-  star lines** (2026-07-16, found by the M1 backfill) — in
+- [x] **TWO invest tag lost when a "Regardless of..." paragraph precedes the
+  star lines** (2026-07-16, found by the M1 backfill; fixed 2026-07-17) — in
   `archive/2026/AT/TWOAT.202606160502.txt` / `...161142.txt` the chunk holding
   the `* Formation chance` lines starts with a "Regardless of tropical cyclone
   formation..." paragraph, so parseTWO's prev-chunk prepend (keyed on the chunk
-  *starting* with `*`) never fires and the `Northwestern Gulf of America (AL90):`
-  title — tag and location — is lost (chances still parse; derived record is
-  honestly null-tagged). Fix in parser.js (walk back to a titled chunk), add
-  these products as the first TWOAT fixtures, regenerate snapshots, version
-  bump. Matters for M2/M4: AL90's sightings can't chain by tag until fixed.
+  *starting* with `*`) never fired and the `Northwestern Gulf of America (AL90):`
+  title — tag and location — was lost. *Fixed: the star chunk inherits the
+  previous chunk when it has no first-line colon of its own AND the previous
+  chunk starts with a clean title line (the `[^:.]` title class keeps the
+  "For the North Atlantic..." header and old-format untitled prose from being
+  inherited). Verified over all 381 archived TWOs: exactly the 5 gap products
+  changed, all 92 raw invest tags now parse. First TWO fixtures added
+  (2 gap + 2 controls); derived JSON regenerated — AL90's genesis chain is
+  tag-chainable for M2.*
+- [ ] **TWO title containing periods defeats the title regex** (2026-07-17,
+  pinned as a wart in fixture `TWOAT.202606271144.txt`) — "Off of the
+  southeastern coast of the U. S.:" never matches the `[^:.]{1,80}:` title
+  pattern, so the tag-from-title path would lose an invest tag if such a title
+  ever carried one (none has this season; position falls back to sentence
+  scanning and is honestly null). Low urgency; revisit if a real product ever
+  pairs a period-bearing title with an invest tag.
 
 ## Track A — Features
 
