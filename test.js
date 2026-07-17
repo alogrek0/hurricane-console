@@ -1257,6 +1257,196 @@ if (fs.existsSync(archiveDir)) {
   }
 }
 
+// --- lineage engine (Track C M2) ------------------------------------------------
+// tools/build-lineage.js composes diff.js's adjacent-issuance pairing across the
+// whole season archive into wave/invest/cyclone chains + genesis links. The
+// credibility rule is absolute — prefer broken chains over invented links — so
+// EVERY join rule gets a negative test alongside its positive. Synthetic units
+// drive the pure exports on parse-shaped objects; the real-corpus block is
+// GUARDED on archive/derived/lineage-2026.json existing (the build runs after
+// this tool commit, in the same PR), and asserts growth-proof INVARIANTS (not
+// counts — the 6-hourly cron grows the archive) plus one immutable-history pin.
+
+const LIN = require('./tools/build-lineage.js');
+
+// product-record builders — the { stamp, file, parsed } shape the streams hold.
+const twdProd = (stamp, waves, cyclones) =>
+  ({ stamp, file: 'TWDAT.' + stamp + '.txt', parsed: { waves: waves || [], cyclones: cyclones || [] } });
+const twoProd = (stamp, disturbances) =>
+  ({ stamp, file: 'TWOAT.' + stamp + '.txt', parsed: { disturbances: disturbances || [] } });
+const waveF = (lon) => ({ axis: [{ lat: 8, lon }, { lat: 16, lon }] });
+const distF = (invest, lat, lon) => ({ invest, lat, lon, chance48: null, chance7: invest ? { cat: 'low', pct: 20 } : null });
+const cycF = (name, lat, lon) => ({ name, classification: 'Tropical Storm', lat, lon, windKt: 40 });
+
+// rule: wave pairing within diff.js's 6° gate holds; beyond it breaks.
+{
+  const near = LIN.chainWaves([twdProd('202606010000', [waveF(-40)]), twdProd('202606010600', [waveF(-43)])], 'AT');
+  ok('lineage wave: within 6° is one chain, second sighting linked "axis"',
+    near.length === 1 && near[0].sightings.length === 2 && near[0].sightings[1].link === 'axis');
+  ok('lineage wave: chain id is <basin>-W-<firstStamp>-n', near[0].id === 'AT-W-202606010000-1');
+  const far = LIN.chainWaves([twdProd('202606010000', [waveF(-40)]), twdProd('202606010600', [waveF(-50)])], 'AT');
+  ok('lineage wave: beyond 6° does NOT chain (two chains, no invented link)', far.length === 2);
+}
+
+// rule: wave drift east > 2° breaks the chain; jitter ≤ 2° holds.
+{
+  const jitter = LIN.chainWaves([twdProd('202606010000', [waveF(-40)]), twdProd('202606010600', [waveF(-39)])], 'AT');
+  ok('lineage wave: 1° eastward jitter (re-analysis) stays one chain', jitter.length === 1);
+  const east = LIN.chainWaves([twdProd('202606010000', [waveF(-40)]), twdProd('202606010600', [waveF(-37)])], 'AT');
+  ok('lineage wave: 3° eastward drift breaks (waves go west) — two chains', east.length === 2);
+  ok('lineage wave: waveDriftReject fires >2° east, not ≤2°',
+    LIN.waveDriftReject([{ lat: 10, lon: -40 }], [{ lat: 10, lon: -37 }]) === true &&
+    LIN.waveDriftReject([{ lat: 10, lon: -40 }], [{ lat: 10, lon: -38.5 }]) === false);
+}
+
+// rule: time-gap guard — ≤18h holds, >18h closes all chains at the gap.
+{
+  const held = LIN.chainWaves([twdProd('202606010000', [waveF(-40)]), twdProd('202606011200', [waveF(-40)])], 'AT');
+  ok('lineage gap: 12h gap keeps the chain', held.length === 1 && held[0].sightings.length === 2);
+  const broke = LIN.chainWaves([twdProd('202606010000', [waveF(-40)]), twdProd('202606012000', [waveF(-40)])], 'AT');
+  ok('lineage gap: 20h gap breaks the chain (no pairing across it)', broke.length === 2);
+  ok('lineage gap: gapExceeded is the 18h boundary',
+    LIN.gapExceeded('202606010000', '202606012000') === true &&
+    LIN.gapExceeded('202606010000', '202606011200') === false);
+}
+
+// rule: invest tag identity beats proximity across a big move; different tags
+// never merge; an untagged→tagged proximity merge (the AL90 pattern) works.
+{
+  const move = LIN.chainInvests([twoProd('202606010000', [distF('AL92', 15, -45)]), twoProd('202606010600', [distF('AL92', 16, -50)])], 'AT');
+  ok('lineage invest: same tag chains across a 5° move, link "tag"',
+    move.length === 1 && move[0].tag === 'AL92' && move[0].sightings[1].link === 'tag');
+  const diff2 = LIN.chainInvests([twoProd('202606010000', [distF('AL92', 15, -45)]), twoProd('202606010600', [distF('AL93', 15, -45)])], 'AT');
+  ok('lineage invest: two DIFFERENT tags never merge (two chains)', diff2.length === 2);
+  const al90 = LIN.chainInvests([
+    twoProd('202606010000', [distF(null, 15, -45)]),
+    twoProd('202606010600', [distF('AL90', 15, -45)]),
+    twoProd('202606011200', [distF('AL90', 15, -46)]),
+  ], 'AT');
+  ok('lineage invest: untagged→tagged proximity then tag (AL90 pattern)',
+    al90.length === 1 && al90[0].tag === 'AL90' &&
+    JSON.stringify(al90[0].sightings.map((s) => s.link)) === JSON.stringify([null, 'proximity', 'tag']));
+  // a different tag can't be dragged in through an untagged bridge either
+  const bridge = LIN.chainInvests([
+    twoProd('202606010000', [distF('AL90', 15, -45)]),
+    twoProd('202606010600', [distF(null, 15, -45)]),
+    twoProd('202606011200', [distF('AL91', 15, -45)]),
+  ], 'AT');
+  ok('lineage invest: an untagged bridge cannot merge AL90 with AL91 (two chains)',
+    bridge.length === 2 && bridge.every((c) => c.sightings.every(() => true)));
+}
+
+// rule: a null-position sighting joins nothing by proximity, but a tag extends it.
+{
+  const nulls = LIN.chainInvests([twoProd('202606010000', [distF(null, null, null)]), twoProd('202606010600', [distF(null, null, null)])], 'AT');
+  ok('lineage invest: untagged null-position sightings join nothing (two chains)', nulls.length === 2);
+  const byTag = LIN.chainInvests([twoProd('202606010000', [distF('AL90', 15, -45)]), twoProd('202606010600', [distF('AL90', null, null)])], 'AT');
+  ok('lineage invest: a null-position sighting still extends by tag match',
+    byTag.length === 1 && byTag[0].sightings.length === 2 && byTag[0].sightings[1].link === 'tag');
+}
+
+// rule: cyclone chains by name identity, classification change within a chain.
+{
+  const cyc = LIN.chainCyclones([
+    twdProd('202606010000', [], [cycF('Alberto', 20, -60)]),
+    twdProd('202606010600', [], [{ name: 'Alberto', classification: 'Hurricane', lat: 21, lon: -62, windKt: 70 }]),
+  ], 'AT');
+  ok('lineage cyclone: name identity holds through a TS→H reclassification',
+    cyc.length === 1 && cyc[0].name === 'Alberto' && cyc[0].sightings[1].link === 'name' &&
+    cyc[0].sightings[1].classification === 'Hurricane');
+  const renamed = LIN.chainCyclones([twdProd('202606010000', [], [cycF('Alberto', 20, -60)]), twdProd('202606010600', [], [cycF('Beryl', 20, -60)])], 'AT');
+  ok('lineage cyclone: a different name is a different storm (two chains)', renamed.length === 2);
+}
+
+// rule: wave→invest genesis link fires within gates; no link on lon>4° or ambiguity.
+{
+  const waves = LIN.chainWaves([twdProd('202606010000', [waveF(-44)])], 'AT');
+  const invNear = LIN.chainInvests([twoProd('202606011200', [distF('AL90', 12, -45)])], 'AT');
+  const gNear = LIN.linkGenesis('AT', { waves, invests: invNear, cyclones: [] });
+  ok('lineage genesis: wave→invest fires within lon/lat/time gates, confidence inferred-genesis',
+    gNear.length === 1 && gNear[0].kind === 'wave-invest' && gNear[0].from === waves[0].id &&
+    gNear[0].to === invNear[0].id && gNear[0].confidence === 'inferred-genesis');
+  const invFar = LIN.chainInvests([twoProd('202606011200', [distF('AL90', 12, -52)])], 'AT');
+  ok('lineage genesis: no wave→invest link when lon is >4° off', LIN.linkGenesis('AT', { waves, invests: invFar, cyclones: [] }).length === 0);
+  const twoWaves = LIN.chainWaves([twdProd('202606010000', [waveF(-44)])], 'AT')
+    .concat(LIN.chainWaves([twdProd('202606010000', [waveF(-45)])], 'AT'));
+  ok('lineage genesis: two waves within 2° → ambiguous → no link',
+    LIN.linkGenesis('AT', { waves: twoWaves, invests: invNear, cyclones: [] }).length === 0);
+}
+
+// rule: invest→cyclone genesis link fires; no link beyond 3° or 36h; ambiguity kills it.
+{
+  const inv = LIN.chainInvests([twoProd('202606010000', [distF('AL90', 14, -45)])], 'AT');
+  const cycNear = LIN.chainCyclones([twdProd('202606011200', [], [cycF('Alberto', 15, -46)])], 'AT');
+  const g = LIN.linkGenesis('AT', { waves: [], invests: inv, cyclones: cycNear });
+  ok('lineage genesis: invest→cyclone fires within 3°/36h',
+    g.length === 1 && g[0].kind === 'invest-cyclone' && g[0].from === inv[0].id && g[0].to === cycNear[0].id);
+  const cycFar = LIN.chainCyclones([twdProd('202606011200', [], [cycF('Alberto', 20, -50)])], 'AT');
+  ok('lineage genesis: no invest→cyclone link beyond 3°', LIN.linkGenesis('AT', { waves: [], invests: inv, cyclones: cycFar }).length === 0);
+  const cycLate = LIN.chainCyclones([twdProd('202606030000', [], [cycF('Alberto', 15, -46)])], 'AT');
+  ok('lineage genesis: no invest→cyclone link beyond 36h', LIN.linkGenesis('AT', { waves: [], invests: inv, cyclones: cycLate }).length === 0);
+  const twoInv = LIN.chainInvests([twoProd('202606010000', [distF('AL90', 14, -45)])], 'AT')
+    .concat(LIN.chainInvests([twoProd('202606010000', [distF('AL91', 15, -46)])], 'AT'));
+  ok('lineage genesis: two qualifying invests → ambiguous → no link',
+    LIN.linkGenesis('AT', { waves: [], invests: twoInv, cyclones: cycNear }).length === 0);
+}
+
+// determinism: the pure builders are order-stable — rebuild == build.
+{
+  const seq = [twdProd('202606010000', [waveF(-40)]), twdProd('202606010600', [waveF(-43)]), twdProd('202606011200', [waveF(-46)])];
+  ok('lineage determinism: rebuilding the same stream is byte-identical',
+    JSON.stringify(LIN.chainWaves(seq, 'AT')) === JSON.stringify(LIN.chainWaves(seq, 'AT')));
+}
+
+// Real-corpus INVARIANTS over the committed lineage JSON — guarded on existence
+// (the main loop builds it after this tool commit, in the same PR). Growth-proof:
+// invariants + one immutable-history pin, never counts.
+{
+  const lf = __dirname + '/archive/derived/lineage-' + LIN.SEASON + '.json';
+  if (fs.existsSync(lf)) {
+    let lin = null;
+    try { lin = JSON.parse(fs.readFileSync(lf, 'utf8')); } catch (e) { /* asserted below */ }
+    ok('lineage corpus: JSON parses', !!lin);
+    if (lin) {
+      ok('lineage corpus: season + AT/EP basins present',
+        lin.season === LIN.SEASON && lin.basins && lin.basins.AT && lin.basins.EP);
+      let filesOk = true, sortedOk = true, tagOk = true, genesisOk = true;
+      let al90 = false;
+      for (const basin of ['AT', 'EP']) {
+        const b = lin.basins[basin];
+        const rawDir = __dirname + '/archive/' + LIN.SEASON + '/' + basin + '/';
+        const waveIds = {}, investIds = {}, cycloneIds = {};
+        (b.waves || []).forEach((c) => { waveIds[c.id] = 1; });
+        (b.invests || []).forEach((c) => { investIds[c.id] = 1; });
+        (b.cyclones || []).forEach((c) => { cycloneIds[c.id] = 1; });
+        const allChains = [].concat(b.waves || [], b.invests || [], b.cyclones || []);
+        for (const c of allChains) {
+          for (let i = 0; i < c.sightings.length; i++) {
+            if (!fs.existsSync(rawDir + c.sightings[i].file)) filesOk = false;
+            if (i > 0 && !(c.sightings[i - 1].stamp < c.sightings[i].stamp)) sortedOk = false; // strictly increasing
+          }
+        }
+        // an invest chain carries a single tag (string or null) — the tag field IS the identity
+        for (const c of (b.invests || [])) {
+          if (!(c.tag === null || typeof c.tag === 'string')) tagOk = false;
+          if (basin === 'AT' && c.tag === 'AL90' && c.sightings[0].stamp <= '202606151151') al90 = true;
+        }
+        // genesis links reference existing chain ids of the correct kinds
+        for (const g of (b.genesis || [])) {
+          if (g.kind === 'wave-invest') { if (!waveIds[g.from] || !investIds[g.to]) genesisOk = false; }
+          else if (g.kind === 'invest-cyclone') { if (!investIds[g.from] || !cycloneIds[g.to]) genesisOk = false; }
+          else genesisOk = false;
+        }
+      }
+      ok('lineage corpus: every sighting file exists in the raw archive', filesOk);
+      ok('lineage corpus: sightings strictly increase in stamp within a chain', sortedOk);
+      ok('lineage corpus: every invest chain has a single tag identity', tagOk);
+      ok('lineage corpus: genesis links reference real chain ids of the right kinds', genesisOk);
+      ok('lineage corpus: AL90 chain exists (AT) with earliest sighting ≤ 202606151151', al90);
+    }
+  }
+}
+
 // --- app version (single source, CalVer) ---------------------------------------
 
 const VER = require('./version.js');
