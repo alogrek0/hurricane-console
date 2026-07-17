@@ -11127,6 +11127,23 @@
               ],
               "inferred": false,
               "link": "axis"
+            },
+            {
+              "stamp": "202607171729",
+              "file": "TWDAT.202607171729.txt",
+              "meanLon": -43.5,
+              "axis": [
+                {
+                  "lat": 18,
+                  "lon": -43.5
+                },
+                {
+                  "lat": 6,
+                  "lon": -43.5
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
             }
           ]
         },
@@ -11315,6 +11332,23 @@
                 {
                   "lat": 5,
                   "lon": -22
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
+            },
+            {
+              "stamp": "202607171729",
+              "file": "TWDAT.202607171729.txt",
+              "meanLon": -22.5,
+              "axis": [
+                {
+                  "lat": 18,
+                  "lon": -22.5
+                },
+                {
+                  "lat": 6,
+                  "lon": -22.5
                 }
               ],
               "inferred": false,
@@ -12587,6 +12621,44 @@
               },
               "tagged": false,
               "link": "proximity"
+            },
+            {
+              "stamp": "202607171721",
+              "file": "TWOAT.202607171721.txt",
+              "lat": 12,
+              "lon": -28,
+              "chance48": {
+                "cat": "low",
+                "pct": 10
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 10
+              },
+              "tagged": false,
+              "link": "proximity"
+            }
+          ]
+        },
+        {
+          "id": "AT-I-202607171721-1",
+          "tag": null,
+          "sightings": [
+            {
+              "stamp": "202607171721",
+              "file": "TWOAT.202607171721.txt",
+              "lat": 27.8,
+              "lon": -81.5,
+              "chance48": {
+                "cat": "low",
+                "pct": 10
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 30
+              },
+              "tagged": false,
+              "link": null
             }
           ]
         }
@@ -19555,6 +19627,23 @@
               ],
               "inferred": false,
               "link": "axis"
+            },
+            {
+              "stamp": "202607171558",
+              "file": "TWDEP.202607171558.txt",
+              "meanLon": -105,
+              "axis": [
+                {
+                  "lat": 17,
+                  "lon": -105
+                },
+                {
+                  "lat": 3,
+                  "lon": -105
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
             }
           ]
         }
@@ -24243,6 +24332,38 @@
               },
               "tagged": true,
               "link": "tag"
+            },
+            {
+              "stamp": "202607171722",
+              "file": "TWOEP.202607171722.txt",
+              "lat": null,
+              "lon": null,
+              "chance48": {
+                "cat": "low",
+                "pct": 0
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 0
+              },
+              "tagged": true,
+              "link": "tag"
+            },
+            {
+              "stamp": "202607171749",
+              "file": "TWOEP.202607171749.txt",
+              "lat": null,
+              "lon": null,
+              "chance48": {
+                "cat": "low",
+                "pct": 0
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 0
+              },
+              "tagged": true,
+              "link": "tag"
             }
           ]
         },
@@ -24545,6 +24666,28 @@
             {
               "stamp": "202607171152",
               "file": "TWOEP.202607171152.txt",
+              "lat": null,
+              "lon": null,
+              "chance48": {
+                "cat": "low",
+                "pct": 0
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 20
+              },
+              "tagged": false,
+              "link": null
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202607171152-2",
+          "tag": "EP97",
+          "sightings": [
+            {
+              "stamp": "202607171152",
+              "file": "TWOEP.202607171152.txt",
               "lat": 17,
               "lon": -102,
               "chance48": {
@@ -24557,16 +24700,70 @@
               },
               "tagged": false,
               "link": null
+            },
+            {
+              "stamp": "202607171722",
+              "file": "TWOEP.202607171722.txt",
+              "lat": 17,
+              "lon": -102,
+              "chance48": {
+                "cat": "high",
+                "pct": 70
+              },
+              "chance7": {
+                "cat": "high",
+                "pct": 90
+              },
+              "tagged": false,
+              "link": "proximity"
+            },
+            {
+              "stamp": "202607171749",
+              "file": "TWOEP.202607171749.txt",
+              "lat": 17,
+              "lon": -102,
+              "chance48": {
+                "cat": "high",
+                "pct": 70
+              },
+              "chance7": {
+                "cat": "high",
+                "pct": 90
+              },
+              "tagged": true,
+              "link": "proximity"
             }
           ]
         },
         {
-          "id": "EP-I-202607171152-2",
+          "id": "EP-I-202607171722-1",
           "tag": null,
           "sightings": [
             {
-              "stamp": "202607171152",
-              "file": "TWOEP.202607171152.txt",
+              "stamp": "202607171722",
+              "file": "TWOEP.202607171722.txt",
+              "lat": null,
+              "lon": null,
+              "chance48": {
+                "cat": "low",
+                "pct": 0
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 20
+              },
+              "tagged": false,
+              "link": null
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202607171749-1",
+          "tag": null,
+          "sightings": [
+            {
+              "stamp": "202607171749",
+              "file": "TWOEP.202607171749.txt",
               "lat": null,
               "lon": null,
               "chance48": {
@@ -25352,6 +25549,15 @@
               "classification": "Tropical Storm",
               "windKt": 55,
               "link": "name"
+            },
+            {
+              "stamp": "202607171558",
+              "file": "TWDEP.202607171558.txt",
+              "lat": 16.8,
+              "lon": -120.8,
+              "classification": "Tropical Storm",
+              "windKt": 55,
+              "link": "name"
             }
           ]
         }
@@ -25388,7 +25594,7 @@
         {
           "kind": "wave-invest",
           "from": "EP-W-202607131528-1",
-          "to": "EP-I-202607171152-1",
+          "to": "EP-I-202607171152-2",
           "atStamp": "202607171152",
           "confidence": "inferred-genesis"
         }
