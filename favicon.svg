@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-  <!-- header glyph art, strokes thickened for 16px legibility -->
-  <rect width="24" height="24" rx="4.5" fill="#071620"/>
-  <circle cx="12" cy="12" r="2.4" fill="none" stroke="#ffa23a" stroke-width="1.8"/>
-  <path d="M12 9.6 C7 8 5.5 12 7.2 15" fill="none" stroke="#ffa23a" stroke-width="2" stroke-linecap="round"/>
-  <path d="M12 14.4 C17 16 18.5 12 16.8 9" fill="none" stroke="#ffa23a" stroke-width="2" stroke-linecap="round"/>
+  <!-- header glyph art; strokes/corners matched to apple-touch-icon (1.4/1.6, rx 5.4) -->
+  <rect width="24" height="24" rx="5.4" fill="#071620"/>
+  <circle cx="12" cy="12" r="2.4" fill="none" stroke="#ffa23a" stroke-width="1.4"/>
+  <path d="M12 9.6 C7 8 5.5 12 7.2 15" fill="none" stroke="#ffa23a" stroke-width="1.6" stroke-linecap="round"/>
+  <path d="M12 14.4 C17 16 18.5 12 16.8 9" fill="none" stroke="#ffa23a" stroke-width="1.6" stroke-linecap="round"/>
 </svg>
