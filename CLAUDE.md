@@ -44,7 +44,7 @@ Everything is client side. Files:
 | file             | role |
 |------------------|------|
 | `index.html`     | app shell, styles, script order |
-| `app.js`         | fetch → parse → render on Leaflet; per-basin frame/graticule/masks (`BASINS` config, `switchBasin`); badge + paste/refresh/history-scrubber + basin-switcher UI |
+| `app.js`         | fetch → parse → render on Leaflet; per-basin frame/graticule/masks (`BASINS` config, `switchBasin`); badge + paste/refresh/history-scrubber + basin-switcher UI; popup **history-trail** affordance (Track C M3): lazy-loads `archive/derived/lineage-2026.json`, draws one chain's breadcrumb trail in the `hc-trail` pane (cyclone/wave/tagged-disturbance popups; untagged omitted) |
 | `parser.js`      | TWDAT/TWDEP text-to-geo engine (per-basin) — runs in browser AND node |
 | `basemap.js`     | embedded Natural Earth 50m basemap: land, coast, country borders, US-only state lines — GENERATED, do not hand-edit (regenerate: `node tools/build-basemap.js`) |
 | `countries.js`   | invisible per-country hover hit-polygons (named, simplified) for the desktop country-name tooltip — GENERATED alongside basemap.js, do not hand-edit; loaded lazily by app.js on hover-capable pointers only (phones never fetch it) |
@@ -177,7 +177,8 @@ claim a source optimistically before the fetch resolves.
 - Plain ES5-ish browser JS, no framework, no bundler. Keep it dependency-free
   except Leaflet from the CDN (already in the SHELL cache list).
 - **Map z-order is declarative, via Leaflet panes** — `hc-mask` (402) <
-  `hc-areas` (410) < `hc-lines` (420) < `hc-points` (430). Never rely on layer
+  `hc-areas` (410) < `hc-trail` (415, the archive history-trail, non-interactive) <
+  `hc-lines` (420) < `hc-points` (430). Never rely on layer
   add order: Leaflet stacks paths as they are added, and the TCM overlay
   arrives asynchronously, so add-order stacking silently buried the troughs
   under the convection boxes (and let the boxes steal their taps). Every new
