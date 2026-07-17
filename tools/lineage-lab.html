@@ -101,6 +101,20 @@
   .row .meta{color:var(--dim);font-size:.66rem;margin-top:.2rem;word-break:break-all}
   .row .nulls{color:var(--genesis);font-size:.64rem;margin-top:.15rem}
   .hint{color:var(--dim);font-size:.66rem;margin-top:.4rem}
+  /* trail-treatment dials — highlight-lab idiom (label · slider · readout) */
+  .dial{display:grid;grid-template-columns:6.5rem 1fr 3.4rem;align-items:center;gap:.5rem;
+    margin-bottom:.45rem;font-size:.72rem;color:var(--dim)}
+  .dial input[type=range]{width:100%}
+  .dial output{color:var(--ink);text-align:right;font-variant-numeric:tabular-nums}
+  .dial.off{opacity:.32}
+  .dial .seg{display:flex;gap:.3rem}
+  .dial .seg button{font:inherit;font-size:.68rem;color:var(--ink);background:#123246;
+    border:1px solid var(--line);border-radius:4px;padding:.25rem .45rem;cursor:pointer}
+  .dial .seg button.on{background:var(--amber);color:#231400;border-color:var(--amber);font-weight:600}
+  pre#trailOut{margin:.1rem 0 0;white-space:pre-wrap;word-break:break-word;color:var(--dim);
+    font-size:.7rem;line-height:1.5}
+  pre#trailOut em{color:var(--amber);font-style:normal}
+  .warn{color:var(--genesis);font-size:.64rem;margin-top:.4rem;line-height:1.4}
   .legend{display:flex;flex-wrap:wrap;gap:.4rem .8rem;font-size:.66rem;color:var(--dim)}
   .legend i{font-style:normal;display:inline-flex;align-items:center;gap:.3rem}
   .legend .ln{width:1.4rem;height:0;border-top:2px solid var(--dim);display:inline-block}
@@ -145,6 +159,24 @@
       <div class="hint">Hide proximity-linked drops the low-confidence (dashed)
         joins so chains break where identity is weak. Hide inferred drops
         inferred wave axes entirely.</div>
+    </div>
+    <div class="card">
+      <b>TRAIL TREATMENT (selected chain)</b>
+      <div class="presets" id="trailModes"></div>
+      <div id="trailDials" style="margin-top:.6rem"></div>
+      <div class="hint">Pick a chain first (click one). The selected chain draws
+        with the treatment; every other chain dims further, so one trail reads at
+        a time — the app's future history affordance shows one chain's trail. The
+        treatment scrubber and confidence filters still compose.</div>
+      <div class="warn">Honesty holds in every treatment (these are invariants,
+        not options): broken chains stay separate segments (never bridged) and
+        keep their &#9675; start / &times; end; proximity &amp; inferred joins stay
+        dashed; genesis stays dotted-gold; null-position sightings stay list-only
+        (the trail skips them, no bridge). Stacked-anchor invests — every sighting
+        at one point, e.g. some real AL90 — honestly collapse to a point; the
+        treatment invents no spatial spread.</div>
+      <b style="margin-top:.6rem">STAGE-B CONSTANTS (select to copy, send me this)</b>
+      <pre id="trailOut"></pre>
     </div>
     <div class="card">
       <b>REPLAY (draw chains up to)</b>
@@ -275,7 +307,10 @@
     conf: 'all',           // 'all' | 'hideProx' | 'hideInferred'
     stamps: [],            // union of stamps for the active basin
     scrub: '999999999999', // upper bound stamp; default = show everything
-    selected: null         // chain id, or null
+    selected: null,        // chain id, or null
+    // trail treatment for the SELECTED chain (stage-A lab feature). mode 'off'
+    // = today's rendering. n 'all' or a last-N window. fade 'linear'|'quadratic'.
+    trail: { mode: 'off', n: 'all', fade: 'linear', w: 3, dotR: 4 }
   };
   var lastSelectTs = 0;
 
@@ -344,6 +379,12 @@
     return [s.lat, s.lon];
   }
   function isSolidLink(link) { return link === 'tag' || link === 'name' || link === 'axis'; }
+  // a join is drawn SOLID only when it is a strong link AND the sighting is not
+  // an inferred wave axis — proximity and inferred both stay dashed (honesty),
+  // inside a treatment as much as in the baseline render.
+  function segSolid(s) { return isSolidLink(s.link) && !s.inferred; }
+  // a trail treatment paints ONLY the selected chain; requires a selection.
+  function treatmentActive() { return state.trail.mode !== 'off' && !!state.selected; }
 
   function basinData() { return (DATA && DATA.basins && DATA.basins[state.basin]) || { waves: [], invests: [], cyclones: [], genesis: [] }; }
 
@@ -410,10 +451,12 @@
 
   // --- drawing ---------------------------------------------------------------
   function drawWaveChain(chain) {
+    // the selected chain is painted by the trail-treatment layer when active
+    if (treatmentActive() && chain.id === state.selected) return;
     var vis = visibleSightings(chain);
     if (!vis.length) return;
     var dimmed = state.selected && state.selected !== chain.id;
-    var base = dimmed ? 0.13 : 1;
+    var base = dimmed ? (treatmentActive() ? 0.06 : 0.13) : 1;
     var color = COL.waves;
     var pts = [];
     vis.forEach(function (s, i) {
@@ -447,9 +490,10 @@
     return 5;
   }
   function drawDotChain(chain, kind) {
+    if (treatmentActive() && chain.id === state.selected) return;
     var vis = visibleSightings(chain);
     var dimmed = state.selected && state.selected !== chain.id;
-    var base = dimmed ? 0.15 : 1;
+    var base = dimmed ? (treatmentActive() ? 0.07 : 0.15) : 1;
     var color = kind === 'invests' ? COL.invests : COL.cyclones;
     var mapped = [];
     vis.forEach(function (s) {
@@ -584,6 +628,111 @@
       '<span>loaded from</span><b>' + (isSample ? 'SAMPLE' : 'REAL') + '</b>';
   }
 
+  // --- trail treatments (stage-A lab) ----------------------------------------
+  // All three paint ONLY the selected chain, within that one chain — never a
+  // connector across a chain break (broken pairs are already separate chain
+  // objects, so this holds structurally). Null-position sightings are dropped
+  // before the trail is built, so the trail skips them without bridging. The
+  // last-N window renders only the newest N mappable sightings.
+  function fadeCurve(recency) {
+    // recency: 0 = oldest shown, 1 = newest. quadratic bites harder into the tail.
+    return state.trail.fade === 'quadratic' ? recency * recency : recency;
+  }
+  function trailPoints(chain, kind) {
+    var pts = [];
+    visibleSightings(chain).forEach(function (s) {
+      var pos = sPos(kind, s);
+      if (pos) pts.push({ pos: pos, s: s });   // null-position sightings never mapped
+    });
+    var n = state.trail.n;
+    if (n !== 'all' && pts.length > n) pts = pts.slice(pts.length - n);
+    return pts;
+  }
+  function isDegenerate(pts) {
+    // AL90-style stacked anchor: every shown sighting at one point. The treatment
+    // must collapse to that point and invent no spread.
+    for (var i = 1; i < pts.length; i++) {
+      if (pts[i].pos[0] !== pts[0].pos[0] || pts[i].pos[1] !== pts[0].pos[1]) return false;
+    }
+    return true;
+  }
+  function dashFor(width) {
+    var d = Math.max(3, Math.round(width * 2));
+    return d + ' ' + (d + 1);
+  }
+  function drawComet(chain, kind, pts, color, degenerate) {
+    var baseW = state.trail.w, last = pts.length - 1;
+    if (degenerate) {   // one point -> a single dot, not a fabricated line
+      L.circleMarker(pts[0].pos, { pane: 'hc-points', radius: Math.max(3, baseW), color: color,
+        weight: 1.6, opacity: 1, fillColor: color, fillOpacity: 0.5 }).addTo(pointPane);
+      return;
+    }
+    // one polyline per segment so width AND opacity can taper with age
+    for (var i = 1; i < pts.length; i++) {
+      var s = pts[i].s;
+      if (state.conf === 'hideProx' && s.link === 'proximity') continue;
+      var recency = last > 0 ? i / last : 1;
+      var f = fadeCurve(recency);
+      var width = 1 + (baseW - 1) * f;                 // newest = baseW, oldest ~1px
+      var op = 0.18 + 0.82 * f;                        // newest full, oldest faint
+      var dashed = !segSolid(s);                       // proximity/inferred stay dashed
+      var pl = L.polyline([pts[i - 1].pos, pts[i].pos], { pane: 'hc-lines', color: color,
+        weight: width, opacity: op, lineCap: 'round',
+        dashArray: dashed ? dashFor(width) : null });
+      attach(pl, chain, kind, s);
+      pl.addTo(linePane);
+    }
+  }
+  function drawBreadcrumbs(chain, kind, pts, color, degenerate) {
+    var last = pts.length - 1, r = state.trail.dotR;
+    if (!degenerate) {
+      for (var i = 1; i < pts.length; i++) {           // thin constant connector
+        var s = pts[i].s;
+        if (state.conf === 'hideProx' && s.link === 'proximity') continue;
+        L.polyline([pts[i - 1].pos, pts[i].pos], { pane: 'hc-lines', color: color,
+          weight: 1.2, opacity: 0.5, interactive: false,
+          dashArray: segSolid(s) ? null : '5 6' }).addTo(linePane);
+      }
+    }
+    pts.forEach(function (p, i) {                       // dots, fill fading with age
+      var recency = last > 0 ? i / last : 1;
+      var f = fadeCurve(recency);
+      var mk = L.circleMarker(p.pos, { pane: 'hc-points', radius: r, color: color,
+        weight: 1.4, opacity: 0.35 + 0.65 * f, fillColor: color, fillOpacity: 0.12 + 0.68 * f });
+      attach(mk, chain, kind, p.s);
+      mk.addTo(pointPane);                              // stacked anchors stack honestly
+    });
+  }
+  function drawGhost(chain, kind, pts, color, degenerate) {
+    var last = pts.length - 1, slate = BASEMAP_STYLES.countries.color;   // basemap border tone
+    if (!degenerate) {
+      for (var i = 1; i < pts.length; i++) {            // dashed slate monochrome, thin, minimal ink
+        var s = pts[i].s;
+        if (state.conf === 'hideProx' && s.link === 'proximity') continue;
+        L.polyline([pts[i - 1].pos, pts[i].pos], { pane: 'hc-lines', color: slate, weight: 1.5,
+          opacity: 0.8, interactive: false,
+          dashArray: segSolid(s) ? '4 5' : '2 5' }).addTo(linePane);  // proximity/inferred sparser
+      }
+    }
+    // ONLY the newest position keeps the chain's identity color
+    var newest = pts[last];
+    var mk = L.circleMarker(newest.pos, { pane: 'hc-points', radius: 5, color: color,
+      weight: 1.6, opacity: 1, fillColor: color, fillOpacity: 0.5 });
+    attach(mk, chain, kind, newest.s);
+    mk.addTo(pointPane);
+  }
+  function drawTrailTreatment(chain, kind) {
+    var color = kind === 'invests' ? COL.invests : kind === 'cyclones' ? COL.cyclones : COL.waves;
+    var pts = trailPoints(chain, kind);
+    if (!pts.length) return;
+    var degenerate = isDegenerate(pts);
+    if (state.trail.mode === 'comet') drawComet(chain, kind, pts, color, degenerate);
+    else if (state.trail.mode === 'breadcrumbs') drawBreadcrumbs(chain, kind, pts, color, degenerate);
+    else if (state.trail.mode === 'ghost') drawGhost(chain, kind, pts, color, degenerate);
+    // the chain's own ○ start / × end glyphs remain in every treatment
+    addEndpoints(pts[0].pos, pts[pts.length - 1].pos, color, 1);
+  }
+
   // --- render ----------------------------------------------------------------
   function render() {
     linePane.clearLayers();
@@ -594,6 +743,11 @@
     if (state.kinds.invests) (b.invests || []).forEach(function (c) { drawDotChain(c, 'invests'); });
     if (state.kinds.cyclones) (b.cyclones || []).forEach(function (c) { drawDotChain(c, 'cyclones'); });
     if (state.kinds.genesis) (b.genesis || []).forEach(drawGenesis);
+    // the selected chain, painted with the active trail treatment, on top
+    if (treatmentActive()) {
+      var entry = findChainById(state.selected);
+      if (entry && state.kinds[entry.kind]) drawTrailTreatment(entry.chain, entry.kind);
+    }
     buildChainList();
     buildSummary();
   }
@@ -665,6 +819,94 @@
         render();
       });
     });
+
+    buildTrailControls();
+  }
+
+  // --- trail-treatment controls (menu + dials + constants readout) -----------
+  function rangeDial(label, min, max, step, val, onset, fmt, disabled) {
+    var row = document.createElement('label');
+    row.className = 'dial' + (disabled ? ' off' : '');
+    row.innerHTML = '<span>' + label + '</span>' +
+      '<input type="range" min="' + min + '" max="' + max + '" step="' + step + '"' +
+        (disabled ? ' disabled' : '') + '>' +
+      '<output></output>';
+    var input = row.querySelector('input'), out = row.querySelector('output');
+    input.value = val; out.textContent = fmt(val);
+    input.oninput = function () {
+      var v = parseInt(input.value, 10);
+      onset(v); out.textContent = fmt(v);
+      updateTrailOut(); render();
+    };
+    return row;
+  }
+  function fadeDial(disabled) {
+    var row = document.createElement('div');
+    row.className = 'dial' + (disabled ? ' off' : '');
+    row.innerHTML = '<span>fade curve</span>';
+    var seg = document.createElement('div');
+    seg.className = 'seg';
+    [['linear', 'linear'], ['quadratic', 'quad']].forEach(function (p) {
+      var b = document.createElement('button');
+      b.textContent = p[1];
+      if (state.trail.fade === p[0]) b.classList.add('on');
+      if (disabled) b.disabled = true;
+      b.onclick = function () {
+        if (disabled) return;
+        state.trail.fade = p[0];
+        buildTrailControls(); render();
+      };
+      seg.appendChild(b);
+    });
+    row.appendChild(seg);
+    row.appendChild(document.createElement('output'));
+    return row;
+  }
+  function buildTrailControls() {
+    var modes = document.getElementById('trailModes');
+    modes.innerHTML = '';
+    [['off', 'off (today)'], ['comet', 'comet'], ['breadcrumbs', 'breadcrumbs'], ['ghost', 'ghost']]
+      .forEach(function (p) {
+        mkBtn(modes, p[1], state.trail.mode === p[0], function () {
+          state.trail.mode = p[0];
+          buildTrailControls();
+          render();
+        });
+      });
+
+    var host = document.getElementById('trailDials');
+    host.innerHTML = '';
+    var mode = state.trail.mode;
+    // trail length: last N (2..30) + an "all" stop at the top of the range
+    host.appendChild(rangeDial('trail length', 2, 31, 1, state.trail.n === 'all' ? 31 : state.trail.n,
+      function (v) { state.trail.n = v >= 31 ? 'all' : v; },
+      function (v) { return v >= 31 ? 'all' : 'last ' + v; }, false));
+    // fade curve — drives Comet taper + Breadcrumbs fade; Ghost ignores it (dimmed)
+    host.appendChild(fadeDial(mode === 'ghost' || mode === 'off'));
+    // base width — Comet newest-segment width only; Breadcrumbs' connector is a
+    // fixed thin line and Ghost a fixed thin width, so the dial is dimmed there
+    host.appendChild(rangeDial('base width', 1, 6, 1, state.trail.w,
+      function (v) { state.trail.w = v; }, function (v) { return v + 'px'; },
+      mode !== 'comet'));
+    // dot radius — Breadcrumbs only
+    host.appendChild(rangeDial('dot radius', 2, 8, 1, state.trail.dotR,
+      function (v) { state.trail.dotR = v; }, function (v) { return v + 'px'; },
+      mode !== 'breadcrumbs'));
+
+    updateTrailOut();
+  }
+  function updateTrailOut() {
+    var t = state.trail;
+    var fade = t.fade === 'quadratic' ? 'quad' : 'linear';
+    var nval = t.n === 'all' ? "'all'" : t.n;
+    document.getElementById('trailOut').innerHTML =
+      'HC_TRAIL = { mode: <em>\'' + t.mode + '\'</em>, n: <em>' + nval +
+        '</em>, fade: <em>\'' + fade + '\'</em>, w: <em>' + t.w +
+        '</em>, dotR: <em>' + t.dotR + '</em> }\n' +
+      '// app.js — history-trail renderer, near the popup builders (popup()/bindPopup ~L805/873)\n' +
+      '// paint within ONE chain only; ○/× endpoints + genesis dotted-gold unchanged;\n' +
+      '// proximity/inferred stay dashed; null-position sightings skipped, not bridged' +
+      (t.mode === 'off' ? '\n// mode \'off\' = today’s rendering (baseline, no trail)' : '');
   }
 
   // --- boot ------------------------------------------------------------------
