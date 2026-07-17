@@ -31,6 +31,10 @@ jobs:
           node-version: '20'
       - name: fetch new issuances and re-derive
         run: node tools/archive-sync.js --derive
+      - name: rebuild season lineage (Track C M2)
+        # composes the chains + genesis links into archive/derived/lineage-2026.json
+        # — under archive/, so the commit step below already stages it
+        run: node tools/build-lineage.js
       - name: commit new archive data
         run: |
           if [ -z "$(git status --porcelain archive/)" ]; then

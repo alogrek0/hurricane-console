@@ -155,11 +155,21 @@ prefer broken chains over invented links.
   parseIssued, null when unparseable), `archive.yml` (cron `23 1,7,13,19`,
   commit-only-if-changed, one rebase retry), `.gitattributes` LF pins, and
   offline derived-shape tests guarded on `archive/` existing.*
-- [ ] **M2 — Lineage engine**: `tools/build-lineage.js` — compose diff.js
+- [x] **M2 — Lineage engine**: `tools/build-lineage.js` — compose diff.js
   pairing across the season into entity chains (waves by axis progression,
   invests by tag, cyclones by name) + genesis links (wave→invest→cyclone),
   per-sighting confidence; `lineage-2026.json`; synthetic-sequence unit tests
   + pinned corpus snapshot; negative tests for every join rule.
+  *Done 2026-07-17: engine + gates (18h gap, 2° east-drift, second-tag
+  refusal), conservative genesis linker (ambiguity = no link), cron rebuilds
+  lineage each sync. Every join rule has a negative test. DEVIATION: the
+  "pinned corpus snapshot" became growth-proof invariants + an immutable AL90
+  pin — exact counts would break CI on every 6-hourly archive commit. Bonus:
+  `tools/lineage-lab.html`, a chain-inspection wall map (basin/kind/confidence
+  filters, season replay scrubber, REAL/SAMPLE badge) for vetting joins by
+  eye; it becomes M3's treatment lab. Season-to-date: AL90 chains June 13→16
+  across its designation (12 sightings), EP91 walks 20→80% into the season's
+  first EP depression, CP90's two honestly-broken unmapped chains.*
 - [ ] **M3 — Lineage UI**: "history" affordance on cyclone/wave/invest popups
   → lazy-fetch (countries.js pattern) → time-faded trail + genesis segments;
   trail treatment judged in a lab first; broken chains render as separate

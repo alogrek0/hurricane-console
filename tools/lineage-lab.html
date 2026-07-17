@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<!--
+  tools/lineage-lab.html — dev-only Track C M2 chain-inspection lab. Never
+  shipped as part of the app (not in the SW SHELL list, not referenced by
+  index.html), but it IS reachable once pushed because Pages serves the repo
+  root:
+    https://<user>.github.io/hurricane-console/tools/lineage-lab.html
+
+  Why it exists: M2 composes diff.js's adjacent-issuance pairing across the whole
+  season into ENTITY CHAINS — waves, invests, cyclones — plus the genesis links
+  between them (archive/derived/lineage-2026.json). The credibility rule is
+  absolute: prefer BROKEN chains over INVENTED links (a wrong lineage is this
+  feature's "Tropical Depression Or"). You cannot vet a season of joins by
+  reading JSON — you vet it by eye, on a wall map, watching the season replay.
+  This is that wall map. Suspicious joins and honest breaks are what you hunt.
+
+  Honesty conventions that BIND here (mirroring the app's provenance norms):
+    * SAMPLE badge — if the real lineage JSON can't be fetched (file:// or not
+      yet built) the page falls back to a small inline demo and says SAMPLE
+      loudly. Never claim a data source you don't have.
+    * Null-position sightings — an invest sighting with lat/lon null has NO
+      mappable position; it is listed in the side panel with a "no mappable
+      position" note and NEVER invented as a dot at 0,0.
+    * Dashed vs solid connectors — pre-designation proximity joins (link
+      'proximity') and inferred wave axes are DASHED; tag/name/axis joins are
+      SOLID. Nothing is ever upgraded; the eye must be able to tell a strong
+      join from a weak one.
+    * Chain endpoints — every chain opens with a ring (start) and closes with a
+      cross (end), so a broken pair reads as two honest segments, not one line.
+    * Genesis links — chain-to-chain, drawn dotted-gold with an arrowhead, always
+      visually distinct from within-chain connectors; confidence shown on click.
+
+  Schema consumed (Agent A's engine output — code against this exactly):
+    { _readme, season, basins: { AT: {
+        waves:    [{id, sightings:[{stamp,file,meanLon,axis:[{lat,lon}...],inferred,link}]}],
+        invests:  [{id, tag, sightings:[{stamp,file,lat,lon,chance48,chance7,tagged,link}]}],
+        cyclones: [{id, name, sightings:[{stamp,file,lat,lon,classification,windKt,link}]}],
+        genesis:  [{kind,from,to,atStamp,confidence}]
+      }, EP: {...} } }
+    lat/lon may be null on invest sightings. link is 'tag'|'name'|'axis'|
+    'proximity' or null/absent on a chain-opening sighting. chance48/chance7 are
+    {cat,pct} or null. Stamps are 'YYYYMMDDHHMM' strings, UTC.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lineage lab — Hurricane Console (dev)</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"
+  integrity="sha512-h9FcoyWjHcOcmEVkxOfTLnmZFWIH0iZhZT1H2TbOq55xssQGEJHEaIm+PgoUaZbRvQTNTluNOEfb1ZRy6D3BOw=="
+  crossorigin="anonymous">
+<style>
+  :root{
+    --bg:#071620; --panel:#0c2233; --line:#173347; --ink:#dce8ef;
+    --dim:#7ea3b8; --amber:#ffa23a; --cyan:#4fc3d6; --cyclone:#ff8c6b;
+    --genesis:#e8c34f; --strong:#ff6b5a;
+    --mono:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 var(--mono)}
+  header{padding:.6rem .8rem;border-bottom:1px solid var(--line);
+    background:linear-gradient(180deg,#0a1e2c,#071620);
+    display:flex;align-items:center;gap:.7rem;flex-wrap:wrap}
+  h1{margin:0;font-size:.95rem;letter-spacing:.02em}
+  h1 small{display:block;color:var(--dim);font-weight:400;font-size:.7rem;letter-spacing:.06em}
+  /* provenance badge — SAMPLE must read loudly, like the app's badge contract */
+  #badge{margin-left:auto;font:700 .68rem/1 var(--mono);letter-spacing:.1em;
+    padding:.35rem .55rem;border-radius:4px;border:1px solid var(--line);
+    background:#123246;color:var(--dim)}
+  #badge.sample{background:#3a2a08;color:var(--genesis);border-color:var(--genesis)}
+  #badge.real{background:#0d2f22;color:#5fd6a0;border-color:#2c7a5a}
+  .wrap{display:flex;flex-wrap:wrap;gap:1rem;padding:1rem;align-items:flex-start}
+  #map{background:#04101a;border:1px solid var(--line);border-radius:6px;
+    flex:1 1 560px;min-width:340px;height:70vh;min-height:380px}
+  .leaflet-container{background:#04101a;font:inherit}
+  .side{flex:1 1 340px;min-width:290px;display:flex;flex-direction:column;gap:.9rem}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:.7rem}
+  .card b{display:block;color:var(--dim);font-size:.62rem;letter-spacing:.1em;margin-bottom:.5rem}
+  .presets{display:flex;flex-wrap:wrap;gap:.35rem}
+  .presets button{font:inherit;font-size:.72rem;color:var(--ink);background:#123246;
+    border:1px solid var(--line);border-radius:4px;padding:.45rem .6rem;cursor:pointer;
+    min-height:38px}
+  .presets button.on{background:var(--amber);color:#231400;border-color:var(--amber);font-weight:600}
+  .presets button .sw{display:inline-block;width:.7rem;height:.7rem;border-radius:2px;
+    margin-right:.35rem;vertical-align:-1px}
+  .scrub{display:flex;align-items:center;gap:.5rem;font-size:.72rem;color:var(--dim)}
+  .scrub input{flex:1}
+  .scrub output{color:var(--ink);font-variant-numeric:tabular-nums;min-width:9.5rem;text-align:right}
+  .summary{display:grid;grid-template-columns:1fr 1fr;gap:.3rem .8rem;font-size:.72rem}
+  .summary span{color:var(--dim)}
+  .summary b{display:inline;color:var(--ink);font-weight:700}
+  #chains{max-height:34vh;overflow:auto;display:flex;flex-direction:column;gap:.3rem}
+  .row{border:1px solid var(--line);border-radius:4px;padding:.4rem .5rem;cursor:pointer;
+    background:#0a1c2a}
+  .row:hover{border-color:var(--dim)}
+  .row.on{border-color:var(--amber);background:#12283a}
+  .row .hd{display:flex;align-items:center;gap:.4rem;font-size:.72rem}
+  .row .hd .dot{width:.7rem;height:.7rem;border-radius:50%;flex:0 0 auto}
+  .row .hd .nm{color:var(--ink);font-weight:600}
+  .row .hd .ct{margin-left:auto;color:var(--dim)}
+  .row .meta{color:var(--dim);font-size:.66rem;margin-top:.2rem;word-break:break-all}
+  .row .nulls{color:var(--genesis);font-size:.64rem;margin-top:.15rem}
+  .hint{color:var(--dim);font-size:.66rem;margin-top:.4rem}
+  .legend{display:flex;flex-wrap:wrap;gap:.4rem .8rem;font-size:.66rem;color:var(--dim)}
+  .legend i{font-style:normal;display:inline-flex;align-items:center;gap:.3rem}
+  .legend .ln{width:1.4rem;height:0;border-top:2px solid var(--dim);display:inline-block}
+  .legend .ln.dash{border-top-style:dashed}
+  .legend .ln.dot{border-top:2px dotted var(--genesis)}
+  /* Leaflet popup + tooltip, app-dark styling */
+  .leaflet-popup-content-wrapper,.leaflet-popup-tip{background:#0c2233;color:var(--ink);
+    border:1px solid var(--line);box-shadow:none}
+  .leaflet-popup-content{margin:.5rem .6rem;font:12px/1.4 var(--mono)}
+  .pop b{color:var(--amber)}
+  .pop .dim{color:var(--dim)}
+  .pop i{color:var(--genesis);font-style:normal}
+  .gen-tip{background:#3a2a08;color:var(--genesis);border:1px solid var(--genesis);
+    border-radius:4px;font:600 .66rem/1.2 var(--mono);padding:.15rem .35rem}
+  .gen-tip::before{display:none}
+  /* endpoint + arrowhead glyphs */
+  .ep{background:none;border:none}
+  .ep span{display:block;width:14px;height:14px;line-height:14px;text-align:center;
+    font-weight:700;text-shadow:0 0 2px #04101a,0 0 2px #04101a}
+  .gen-head span{display:block;font-size:11px;line-height:12px;text-align:center;
+    text-shadow:0 0 2px #04101a}
+</style>
+</head>
+<body>
+<header>
+  <h1>Lineage lab<small>DEV ONLY · Track C M2 chain wall map · vet season joins by eye — broken beats invented</small></h1>
+  <span id="badge">LOADING</span>
+</header>
+
+<div class="wrap">
+  <div id="map"></div>
+  <div class="side">
+    <div class="card">
+      <b>BASIN</b>
+      <div class="presets" id="basins"></div>
+    </div>
+    <div class="card">
+      <b>SHOW</b>
+      <div class="presets" id="kinds"></div>
+      <b style="margin-top:.6rem">CONFIDENCE</b>
+      <div class="presets" id="confs"></div>
+      <div class="hint">Hide proximity-linked drops the low-confidence (dashed)
+        joins so chains break where identity is weak. Hide inferred drops
+        inferred wave axes entirely.</div>
+    </div>
+    <div class="card">
+      <b>REPLAY (draw chains up to)</b>
+      <div class="scrub">
+        <input type="range" id="scrub" min="0" max="0" step="1" value="0">
+        <output id="scrubOut">—</output>
+      </div>
+      <div class="hint">Slide back in time to watch the season assemble; each
+        chain is drawn only through the shown issuance.</div>
+    </div>
+    <div class="card">
+      <b>SUMMARY</b>
+      <div class="summary" id="summary"></div>
+      <div class="legend" style="margin-top:.5rem">
+        <i><span class="ln"></span> tag/name/axis join</i>
+        <i><span class="ln dash"></span> proximity / inferred</i>
+        <i><span class="ln dot"></span> genesis link</i>
+        <i>○ chain start</i><i>&times; chain end</i>
+      </div>
+    </div>
+    <div class="card">
+      <b>CHAINS (click to zoom + highlight)</b>
+      <div id="chains"></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"
+  integrity="sha512-puJW3E/qXDqYp9IfhAI54BJEaWIfloJ7JWs7OeD5i6ruC9JZL1gERT1wjtwXFlh7CjE7ZJ+/vcRZRkIYIb6p4g=="
+  crossorigin="anonymous"></script>
+<script src="../basemap.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  // ---------------------------------------------------------------------------
+  // SAMPLE fallback — inline demo used ONLY when the real lineage JSON can't be
+  // fetched (file:// or not yet built). Labeled SAMPLE in the badge so we never
+  // claim a source we don't have. It deliberately exercises EVERY render path:
+  //   AT: a wave chain (axis polylines drifting west) -> genesis -> an invest
+  //   chain with an untagged->tagged transition AND a null-position sighting ->
+  //   genesis -> a cyclone chain with a TD->TS->H classification change; plus a
+  //   visibly BROKEN wave pair (two short chains, >18h apart, honestly separate)
+  //   and one inferred wave sighting (dashed). EP: a wave chain and an EP91
+  //   invest chain with a rising 48h/7d chance walk.
+  // ---------------------------------------------------------------------------
+  function axis(lat0, lat1, lon) {
+    return [{ lat: lat0, lon: lon }, { lat: (lat0 + lat1) / 2, lon: lon - 0.3 }, { lat: lat1, lon: lon - 0.6 }];
+  }
+  var SAMPLE = {
+    _readme: 'INLINE SAMPLE — not the real season lineage. See archive/derived/lineage-2026.json.',
+    season: 2026,
+    basins: {
+      AT: {
+        waves: [
+          { id: 'AT-W-202606141800-0', sightings: [
+            { stamp: '202606141800', file: 'TWDAT.202606141800.txt', meanLon: -42, axis: axis(8, 18, -42), inferred: false },
+            { stamp: '202606150000', file: 'TWDAT.202606150000.txt', meanLon: -44, axis: axis(8, 18, -44), inferred: false, link: 'axis' },
+            { stamp: '202606150600', file: 'TWDAT.202606150600.txt', meanLon: -46, axis: axis(8, 18, -46), inferred: false, link: 'axis' },
+            { stamp: '202606151200', file: 'TWDAT.202606151200.txt', meanLon: -48, axis: axis(8, 18, -48), inferred: false, link: 'axis' },
+            { stamp: '202606151800', file: 'TWDAT.202606151800.txt', meanLon: -50, axis: axis(8, 18, -50), inferred: true, link: 'axis' }
+          ] },
+          // broken pair, segment A (ends)
+          { id: 'AT-W-202606150600-1', sightings: [
+            { stamp: '202606150600', file: 'TWDAT.202606150600.txt', meanLon: -68, axis: axis(14, 20, -68), inferred: false },
+            { stamp: '202606151200', file: 'TWDAT.202606151200.txt', meanLon: -70, axis: axis(14, 20, -70), inferred: false, link: 'axis' }
+          ] },
+          // broken pair, segment B — starts >18h later, honestly a NEW chain
+          { id: 'AT-W-202606161200-2', sightings: [
+            { stamp: '202606161200', file: 'TWDAT.202606161200.txt', meanLon: -73, axis: axis(14, 20, -73), inferred: false },
+            { stamp: '202606161800', file: 'TWDAT.202606161800.txt', meanLon: -75, axis: axis(14, 20, -75), inferred: false, link: 'axis' }
+          ] }
+        ],
+        invests: [
+          { id: 'AT-I-202606151800-0', tag: 'AL90', sightings: [
+            { stamp: '202606151800', file: 'TWOAT.202606151800.txt', lat: 12.0, lon: -50.0, chance48: { cat: 'low', pct: 20 }, chance7: { cat: 'low', pct: 30 }, tagged: false },
+            { stamp: '202606160000', file: 'TWOAT.202606160000.txt', lat: 12.6, lon: -51.2, chance48: { cat: 'low', pct: 30 }, chance7: { cat: 'medium', pct: 40 }, tagged: false, link: 'proximity' },
+            { stamp: '202606160600', file: 'TWOAT.202606160600.txt', lat: 13.1, lon: -52.3, chance48: { cat: 'medium', pct: 40 }, chance7: { cat: 'medium', pct: 50 }, tagged: true, link: 'proximity' },
+            { stamp: '202606161200', file: 'TWOAT.202606161200.txt', lat: 13.7, lon: -53.5, chance48: { cat: 'medium', pct: 50 }, chance7: { cat: 'high', pct: 70 }, tagged: true, link: 'tag' },
+            { stamp: '202606161800', file: 'TWOAT.202606161800.txt', lat: null, lon: null, chance48: { cat: 'high', pct: 60 }, chance7: { cat: 'high', pct: 80 }, tagged: true, link: 'tag' },
+            { stamp: '202606170000', file: 'TWOAT.202606170000.txt', lat: 14.6, lon: -55.6, chance48: { cat: 'high', pct: 70 }, chance7: { cat: 'high', pct: 90 }, tagged: true, link: 'tag' }
+          ] }
+        ],
+        cyclones: [
+          { id: 'AT-C-202606170600-0', name: 'Barry', sightings: [
+            { stamp: '202606170600', file: 'TWDAT.202606170600.txt', lat: 15.2, lon: -57.0, classification: 'Tropical Depression', windKt: 30 },
+            { stamp: '202606171200', file: 'TWDAT.202606171200.txt', lat: 15.9, lon: -58.4, classification: 'Tropical Storm', windKt: 45, link: 'name' },
+            { stamp: '202606171800', file: 'TWDAT.202606171800.txt', lat: 16.7, lon: -59.8, classification: 'Tropical Storm', windKt: 60, link: 'name' },
+            { stamp: '202606180000', file: 'TWDAT.202606180000.txt', lat: 17.6, lon: -61.1, classification: 'Hurricane', windKt: 70, link: 'name' }
+          ] }
+        ],
+        genesis: [
+          { kind: 'wave-invest', from: 'AT-W-202606141800-0', to: 'AT-I-202606151800-0', atStamp: '202606151800', confidence: 'axis (mean lon within 4 deg, <24h)' },
+          { kind: 'invest-cyclone', from: 'AT-I-202606151800-0', to: 'AT-C-202606170600-0', atStamp: '202606170600', confidence: 'proximity (2.1 deg, 30h)' }
+        ]
+      },
+      EP: {
+        waves: [
+          { id: 'EP-W-202606150000-0', sightings: [
+            { stamp: '202606150000', file: 'TWDEP.202606150000.txt', meanLon: -110, axis: axis(10, 16, -110), inferred: false },
+            { stamp: '202606150600', file: 'TWDEP.202606150600.txt', meanLon: -112, axis: axis(10, 16, -112), inferred: false, link: 'axis' },
+            { stamp: '202606151200', file: 'TWDEP.202606151200.txt', meanLon: -114, axis: axis(10, 16, -114), inferred: false, link: 'axis' }
+          ] }
+        ],
+        invests: [
+          { id: 'EP-I-202606160000-0', tag: 'EP91', sightings: [
+            { stamp: '202606160000', file: 'TWOEP.202606160000.txt', lat: 12.0, lon: -108.0, chance48: { cat: 'low', pct: 20 }, chance7: { cat: 'low', pct: 30 }, tagged: false },
+            { stamp: '202606160600', file: 'TWOEP.202606160600.txt', lat: 12.4, lon: -109.0, chance48: { cat: 'low', pct: 30 }, chance7: { cat: 'medium', pct: 50 }, tagged: false, link: 'proximity' },
+            { stamp: '202606161200', file: 'TWOEP.202606161200.txt', lat: 12.9, lon: -110.2, chance48: { cat: 'medium', pct: 50 }, chance7: { cat: 'high', pct: 70 }, tagged: true, link: 'proximity' },
+            { stamp: '202606161800', file: 'TWOEP.202606161800.txt', lat: 13.3, lon: -111.5, chance48: { cat: 'high', pct: 60 }, chance7: { cat: 'high', pct: 80 }, tagged: true, link: 'tag' }
+          ] }
+        ],
+        cyclones: [],
+        genesis: []
+      }
+    }
+  };
+
+  // frames straight from app.js BASINS (lat/lon, west+south negative)
+  var FRAMES = { AT: [[-5, -110], [45, 4]], EP: [[-5, -145], [35, -70]] };
+  var COL = { waves: '#ffa23a', invests: '#4fc3d6', cyclones: '#ff8c6b', genesis: '#e8c34f' };
+
+  var DATA = null, loadedFrom = '', isSample = false;
+
+  var state = {
+    basin: 'AT',
+    kinds: { waves: true, invests: true, cyclones: true, genesis: true },
+    conf: 'all',           // 'all' | 'hideProx' | 'hideInferred'
+    stamps: [],            // union of stamps for the active basin
+    scrub: '999999999999', // upper bound stamp; default = show everything
+    selected: null         // chain id, or null
+  };
+  var lastSelectTs = 0;
+
+  // --- map + basemap ---------------------------------------------------------
+  var map = L.map('map', {
+    center: [17, -55], zoom: 3.5, minZoom: 2.5, maxZoom: 8,
+    zoomControl: true, attributionControl: false, worldCopyJump: false,
+    maxBoundsViscosity: 1.0, zoomSnap: 0.125, zoomDelta: 0.25, wheelPxPerZoomLevel: 400
+  });
+  var BASEMAP_STYLES = {
+    land: { stroke: false, fillColor: '#10202b', fillOpacity: 1 },
+    usStates: { color: '#1b3a4a', weight: 1, dashArray: '3 3', fill: false },
+    countries: { color: '#24485c', weight: 1.2, fill: false },
+    coast: { color: '#2c5870', weight: 1, fill: false }
+  };
+  L.geoJSON(window.BASIN_BASEMAP, {
+    style: function (f) { return BASEMAP_STYLES[f.properties.layer]; },
+    interactive: false
+  }).addTo(map);
+
+  var PANES = { mask: 402, lines: 420, genesis: 425, points: 430 };
+  Object.keys(PANES).forEach(function (n) { map.createPane('hc-' + n).style.zIndex = PANES[n]; });
+
+  // letterbox masks over land outside the active frame, like the app
+  var maskGroup = L.layerGroup().addTo(map);
+  function buildMasks() {
+    maskGroup.clearLayers();
+    var f = FRAMES[state.basin], s = f[0][0], w = f[0][1], n = f[1][0], e = f[1][1];
+    var style = { stroke: false, fillColor: '#04101a', fillOpacity: 1, interactive: false, pane: 'hc-mask' };
+    [[[-85, -540], [85, w]], [[-85, e], [85, 540]], [[n, w], [85, e]], [[-85, w], [s, e]]]
+      .forEach(function (b) { maskGroup.addLayer(L.rectangle(b, style)); });
+  }
+
+  // feature layer groups, per pane
+  var linePane = L.layerGroup().addTo(map);
+  var genesisPane = L.layerGroup().addTo(map);
+  var pointPane = L.layerGroup().addTo(map);
+
+  map.on('click', function () {
+    // background tap clears the selection (unless we JUST selected via a feature
+    // tap — Leaflet can surface both in the same gesture)
+    if (Date.now() - lastSelectTs < 60) return;
+    if (state.selected) { state.selected = null; render(); }
+  });
+
+  // --- helpers ---------------------------------------------------------------
+  function fmtStamp(s) {
+    if (!s || s.length < 12) return String(s || '');
+    return s.slice(0, 4) + '-' + s.slice(4, 6) + '-' + s.slice(6, 8) + ' ' +
+      s.slice(8, 10) + ':' + s.slice(10, 12) + 'Z';
+  }
+  function fmtChance(c) { return c ? (c.cat + ' ' + c.pct + '%') : '—'; }
+  function axisMid(s) {
+    var a = s.axis;
+    if (a && a.length) {
+      var f = a[0], l = a[a.length - 1];
+      return [(f.lat + l.lat) / 2, (f.lon + l.lon) / 2];
+    }
+    if (s.meanLon != null) return [12, s.meanLon]; // meanLon at a nominal mid-lat
+    return null;
+  }
+  // mappable position of a sighting; null for a null-position invest sighting
+  function sPos(kind, s) {
+    if (kind === 'waves') return axisMid(s);
+    if (s.lat == null || s.lon == null) return null;
+    return [s.lat, s.lon];
+  }
+  function isSolidLink(link) { return link === 'tag' || link === 'name' || link === 'axis'; }
+
+  function basinData() { return (DATA && DATA.basins && DATA.basins[state.basin]) || { waves: [], invests: [], cyclones: [], genesis: [] }; }
+
+  // sightings visible under the current scrub + confidence filter
+  function visibleSightings(chain) {
+    return chain.sightings.filter(function (s) {
+      if (s.stamp > state.scrub) return false;
+      if (state.conf === 'hideInferred' && s.inferred) return false;
+      return true;
+    });
+  }
+  function confMix(chain) {
+    var m = {};
+    chain.sightings.forEach(function (s) { if (s.link) m[s.link] = (m[s.link] || 0) + 1; });
+    var parts = Object.keys(m).map(function (k) { return m[k] + ' ' + k; });
+    return parts.length ? parts.join(' · ') : 'opener only';
+  }
+  function findChainById(id) {
+    var b = basinData(), kinds = ['waves', 'invests', 'cyclones'];
+    for (var i = 0; i < kinds.length; i++) {
+      var arr = b[kinds[i]] || [];
+      for (var j = 0; j < arr.length; j++) if (arr[j].id === id) return { chain: arr[j], kind: kinds[i] };
+    }
+    return null;
+  }
+
+  // --- popups ----------------------------------------------------------------
+  function sightingPopup(chain, kind, s) {
+    var h = '<div class="pop"><b>' + chain.id + '</b><br>' + fmtStamp(s.stamp) +
+      '<br><span class="dim">' + (s.file || '—') + '</span>' +
+      '<br>join: ' + (s.link || 'chain start');
+    if (kind === 'invests') {
+      h += '<br>tag: ' + (chain.tag || '—') + (s.tagged ? ' (tagged)' : ' (untagged)');
+      h += '<br>48h: ' + fmtChance(s.chance48) + ' · 7d: ' + fmtChance(s.chance7);
+      if (s.lat == null || s.lon == null) h += '<br><i>no mappable position</i>';
+    } else if (kind === 'cyclones') {
+      h += '<br>' + (chain.name || '—') + ' — ' + s.classification + ' · ' + s.windKt + ' kt';
+    } else {
+      h += '<br>mean lon: ' + s.meanLon + (s.inferred ? ' · <i>inferred</i>' : '');
+    }
+    return h + '</div>';
+  }
+  function genesisPopup(link) {
+    return '<div class="pop"><b>genesis · ' + link.kind + '</b>' +
+      '<br>' + link.from + '<br>→ ' + link.to +
+      '<br>at ' + fmtStamp(link.atStamp) +
+      '<br>confidence: <i>' + (link.confidence != null ? link.confidence : '—') + '</i></div>';
+  }
+
+  // --- endpoints (○ start / × end) ------------------------------------------
+  function endpointIcon(glyph, color, op) {
+    return L.divIcon({ className: 'ep', iconSize: [14, 14], iconAnchor: [7, 7],
+      html: '<span style="color:' + color + ';opacity:' + op + '">' + glyph + '</span>' });
+  }
+  function addEndpoints(a, z, color, op) {
+    if (a) L.marker(a, { pane: 'hc-points', interactive: false, keyboard: false, icon: endpointIcon('○', color, op) }).addTo(pointPane);
+    if (z) L.marker(z, { pane: 'hc-points', interactive: false, keyboard: false, icon: endpointIcon('×', color, op) }).addTo(pointPane);
+  }
+
+  function attach(layer, chain, kind, s) {
+    layer.bindPopup(sightingPopup(chain, kind, s));
+    layer.on('click', function () { selectChain(chain.id); });
+  }
+
+  // --- drawing ---------------------------------------------------------------
+  function drawWaveChain(chain) {
+    var vis = visibleSightings(chain);
+    if (!vis.length) return;
+    var dimmed = state.selected && state.selected !== chain.id;
+    var base = dimmed ? 0.13 : 1;
+    var color = COL.waves;
+    var pts = [];
+    vis.forEach(function (s, i) {
+      var recency = vis.length > 1 ? i / (vis.length - 1) : 1;   // 0 oldest .. 1 newest
+      var op = (0.35 + 0.65 * recency) * base;
+      if (!s.axis || !s.axis.length) { pts.push({ mid: axisMid(s), s: s }); return; }
+      var latlngs = s.axis.map(function (p) { return [p.lat, p.lon]; });
+      var pl = L.polyline(latlngs, { pane: 'hc-lines', color: color,
+        weight: s.inferred ? 2 : 2.6, opacity: op,
+        dashArray: s.inferred ? '4 4' : null });   // inferred axis -> dashed (honesty)
+      attach(pl, chain, 'waves', s);
+      pl.addTo(linePane);
+      pts.push({ mid: axisMid(s), s: s });
+    });
+    // chain trail connecting consecutive axis midpoints
+    for (var i = 1; i < pts.length; i++) {
+      var s = pts[i].s;
+      if (state.conf === 'hideProx' && s.link === 'proximity') continue;
+      L.polyline([pts[i - 1].mid, pts[i].mid], { pane: 'hc-lines', color: color,
+        weight: 1.4, opacity: 0.5 * base, interactive: false,
+        dashArray: isSolidLink(s.link) ? null : '5 6' }).addTo(linePane);
+    }
+    addEndpoints(pts[0].mid, pts[pts.length - 1].mid, color, dimmed ? 0.2 : 1);
+  }
+
+  function classRadius(cls) {
+    var c = (cls || '').toLowerCase();
+    if (c.indexOf('hurricane') !== -1) return 8;
+    if (c.indexOf('storm') !== -1) return 6;
+    if (c.indexOf('depression') !== -1) return 4;
+    return 5;
+  }
+  function drawDotChain(chain, kind) {
+    var vis = visibleSightings(chain);
+    var dimmed = state.selected && state.selected !== chain.id;
+    var base = dimmed ? 0.15 : 1;
+    var color = kind === 'invests' ? COL.invests : COL.cyclones;
+    var mapped = [];
+    vis.forEach(function (s) {
+      var pos = sPos(kind, s);
+      if (pos) mapped.push({ pos: pos, s: s });   // null-position sightings never invented on the map
+    });
+    for (var i = 1; i < mapped.length; i++) {
+      var s = mapped[i].s;
+      if (state.conf === 'hideProx' && s.link === 'proximity') continue;
+      L.polyline([mapped[i - 1].pos, mapped[i].pos], { pane: 'hc-lines', color: color,
+        weight: 1.5, opacity: 0.55 * base, interactive: false,
+        dashArray: isSolidLink(s.link) ? null : '5 6' }).addTo(linePane);
+    }
+    mapped.forEach(function (m) {
+      var r = kind === 'cyclones' ? classRadius(m.s.classification) : 5;
+      var mk = L.circleMarker(m.pos, { pane: 'hc-points', radius: r, color: color,
+        weight: 1.5, opacity: base, fillColor: color, fillOpacity: 0.35 * base });
+      attach(mk, chain, kind, m.s);
+      mk.addTo(pointPane);
+    });
+    if (mapped.length) addEndpoints(mapped[0].pos, mapped[mapped.length - 1].pos, color, dimmed ? 0.22 : 1);
+  }
+
+  function chainAnchor(entry, atStamp, which) {
+    // nearest MAPPABLE sighting position to atStamp; 'from' prefers the last at
+    // or before, 'to' prefers the first at or after
+    var vis = visibleSightings(entry.chain).map(function (s) {
+      return { s: s, pos: sPos(entry.kind, s) };
+    }).filter(function (x) { return x.pos; });
+    if (!vis.length) return null;
+    var pick = null;
+    if (which === 'from') {
+      for (var i = 0; i < vis.length; i++) if (vis[i].s.stamp <= atStamp) pick = vis[i];
+      if (!pick) pick = vis[0];
+    } else {
+      for (var j = 0; j < vis.length; j++) if (vis[j].s.stamp >= atStamp) { pick = vis[j]; break; }
+      if (!pick) pick = vis[vis.length - 1];
+    }
+    return pick.pos;
+  }
+  function drawGenesis(link) {
+    if (link.atStamp > state.scrub) return;
+    var from = findChainById(link.from), to = findChainById(link.to);
+    if (!from || !to) return;
+    var pFrom = chainAnchor(from, link.atStamp, 'from');
+    var pTo = chainAnchor(to, link.atStamp, 'to');
+    if (!pFrom || !pTo) return;
+    var involved = state.selected && (state.selected === link.from || state.selected === link.to);
+    var dimmed = state.selected && !involved;
+    var op = dimmed ? 0.18 : 0.95;
+    var line = L.polyline([pFrom, pTo], { pane: 'hc-genesis', color: COL.genesis,
+      weight: 2, opacity: op, dashArray: '2 6' });
+    line.bindTooltip('genesis · ' + link.kind + ' · ' + fmtStamp(link.atStamp),
+      { sticky: true, direction: 'top', className: 'gen-tip' });
+    line.bindPopup(genesisPopup(link));
+    line.addTo(genesisPane);
+    L.marker(pTo, { pane: 'hc-genesis', interactive: false, keyboard: false,
+      icon: L.divIcon({ className: 'gen-head', iconSize: [12, 12], iconAnchor: [6, 6],
+        html: '<span style="color:' + COL.genesis + ';opacity:' + op + '">▶</span>' })
+    }).addTo(genesisPane);
+  }
+
+  // --- chain bounds / zoom ---------------------------------------------------
+  function chainBounds(entry) {
+    var pts = [];
+    entry.chain.sightings.forEach(function (s) {
+      if (entry.kind === 'waves' && s.axis) s.axis.forEach(function (p) { pts.push([p.lat, p.lon]); });
+      else { var p = sPos(entry.kind, s); if (p) pts.push(p); }
+    });
+    return pts.length ? L.latLngBounds(pts) : null;
+  }
+  function selectChain(id) {
+    lastSelectTs = Date.now();
+    state.selected = id;
+    render();
+    var entry = findChainById(id);
+    if (entry) { var b = chainBounds(entry); if (b) map.fitBounds(b, { padding: [50, 50], maxZoom: 7 }); }
+    var row = document.getElementById('row-' + cssId(id));
+    if (row && row.scrollIntoView) row.scrollIntoView({ block: 'nearest' });
+  }
+  function cssId(id) { return id.replace(/[^A-Za-z0-9_-]/g, '_'); }
+
+  // --- side panel ------------------------------------------------------------
+  var KIND_META = [
+    { k: 'waves', label: 'waves', glyph: 'W', color: COL.waves },
+    { k: 'invests', label: 'invests', glyph: 'I', color: COL.invests },
+    { k: 'cyclones', label: 'cyclones', glyph: 'C', color: COL.cyclones }
+  ];
+  function nameOf(kind, chain) {
+    if (kind === 'invests') return chain.tag || '(untagged)';
+    if (kind === 'cyclones') return chain.name || '(unnamed)';
+    return 'wave';
+  }
+  function buildChainList() {
+    var host = document.getElementById('chains');
+    host.innerHTML = '';
+    var b = basinData(), any = false;
+    KIND_META.forEach(function (km) {
+      if (!state.kinds[km.k]) return;
+      (b[km.k] || []).forEach(function (chain) {
+        any = true;
+        var row = document.createElement('div');
+        row.className = 'row' + (state.selected === chain.id ? ' on' : '');
+        row.id = 'row-' + cssId(chain.id);
+        var nulls = 0;
+        if (km.k === 'invests') chain.sightings.forEach(function (s) { if (s.lat == null || s.lon == null) nulls++; });
+        var nullNote = nulls ? '<div class="nulls">' + nulls + ' null-position sighting' + (nulls > 1 ? 's' : '') + ' (list-only, not mapped)</div>' : '';
+        row.innerHTML =
+          '<div class="hd"><span class="dot" style="background:' + km.color + '"></span>' +
+          '<span class="nm">' + km.glyph + ' · ' + nameOf(km.k, chain) + '</span>' +
+          '<span class="ct">' + chain.sightings.length + ' sightings</span></div>' +
+          '<div class="meta">' + chain.id + '<br>' + confMix(chain) + '</div>' + nullNote;
+        row.onclick = function () { selectChain(chain.id); };
+        host.appendChild(row);
+      });
+    });
+    if (!any) host.innerHTML = '<div class="hint">No chains for the current filters.</div>';
+  }
+  function buildSummary() {
+    var b = basinData();
+    var w = (b.waves || []).length, iv = (b.invests || []).length, c = (b.cyclones || []).length, g = (b.genesis || []).length;
+    var total = 0;
+    ['waves', 'invests', 'cyclones'].forEach(function (k) {
+      (b[k] || []).forEach(function (ch) { total += ch.sightings.length; });
+    });
+    document.getElementById('summary').innerHTML =
+      '<span>waves</span><b>' + w + '</b>' +
+      '<span>invests</span><b>' + iv + '</b>' +
+      '<span>cyclones</span><b>' + c + '</b>' +
+      '<span>genesis links</span><b>' + g + '</b>' +
+      '<span>total sightings</span><b>' + total + '</b>' +
+      '<span>loaded from</span><b>' + (isSample ? 'SAMPLE' : 'REAL') + '</b>';
+  }
+
+  // --- render ----------------------------------------------------------------
+  function render() {
+    linePane.clearLayers();
+    genesisPane.clearLayers();
+    pointPane.clearLayers();
+    var b = basinData();
+    if (state.kinds.waves) (b.waves || []).forEach(drawWaveChain);
+    if (state.kinds.invests) (b.invests || []).forEach(function (c) { drawDotChain(c, 'invests'); });
+    if (state.kinds.cyclones) (b.cyclones || []).forEach(function (c) { drawDotChain(c, 'cyclones'); });
+    if (state.kinds.genesis) (b.genesis || []).forEach(drawGenesis);
+    buildChainList();
+    buildSummary();
+  }
+
+  // --- scrubber --------------------------------------------------------------
+  function rebuildStamps() {
+    var b = basinData(), set = {};
+    ['waves', 'invests', 'cyclones'].forEach(function (k) {
+      (b[k] || []).forEach(function (ch) { ch.sightings.forEach(function (s) { set[s.stamp] = 1; }); });
+    });
+    (b.genesis || []).forEach(function (l) { set[l.atStamp] = 1; });
+    state.stamps = Object.keys(set).sort();
+    var sc = document.getElementById('scrub');
+    var n = state.stamps.length;
+    sc.min = 0; sc.max = Math.max(0, n - 1); sc.value = Math.max(0, n - 1);
+    state.scrub = n ? state.stamps[n - 1] : '999999999999';
+    updateScrubOut();
+  }
+  function updateScrubOut() {
+    var n = state.stamps.length, sc = document.getElementById('scrub');
+    var idx = parseInt(sc.value, 10) || 0;
+    var atEnd = idx >= n - 1;
+    document.getElementById('scrubOut').textContent =
+      n ? (fmtStamp(state.stamps[idx]) + (atEnd ? ' (all)' : '')) : '—';
+  }
+
+  // --- controls --------------------------------------------------------------
+  function mkBtn(host, label, on, fn, swColor) {
+    var btn = document.createElement('button');
+    btn.innerHTML = (swColor ? '<span class="sw" style="background:' + swColor + '"></span>' : '') + label;
+    if (on) btn.classList.add('on');
+    btn.onclick = fn;
+    host.appendChild(btn);
+    return btn;
+  }
+  function buildControls() {
+    var basins = document.getElementById('basins');
+    basins.innerHTML = '';
+    Object.keys(FRAMES).forEach(function (k) {
+      mkBtn(basins, k === 'AT' ? 'ATLANTIC' : 'E PACIFIC', state.basin === k, function () {
+        state.basin = k;
+        state.selected = null;
+        map.setMaxBounds(FRAMES[k]);
+        map.fitBounds(FRAMES[k]);
+        buildMasks();
+        rebuildStamps();
+        buildControls();
+        render();
+      });
+    });
+
+    var kinds = document.getElementById('kinds');
+    kinds.innerHTML = '';
+    [['waves', 'waves', COL.waves], ['invests', 'invests', COL.invests],
+     ['cyclones', 'cyclones', COL.cyclones], ['genesis', 'genesis', COL.genesis]].forEach(function (p) {
+      mkBtn(kinds, p[1], state.kinds[p[0]], function () {
+        state.kinds[p[0]] = !state.kinds[p[0]];
+        buildControls();
+        render();
+      }, p[2]);
+    });
+
+    var confs = document.getElementById('confs');
+    confs.innerHTML = '';
+    [['all', 'show all'], ['hideProx', 'hide proximity-linked'], ['hideInferred', 'hide inferred']].forEach(function (p) {
+      mkBtn(confs, p[1], state.conf === p[0], function () {
+        state.conf = p[0];
+        buildControls();
+        render();
+      });
+    });
+  }
+
+  // --- boot ------------------------------------------------------------------
+  function boot() {
+    map.setMaxBounds(FRAMES[state.basin]);
+    map.fitBounds(FRAMES[state.basin]);
+    buildMasks();
+
+    var badge = document.getElementById('badge');
+    badge.className = isSample ? 'sample' : 'real';
+    badge.textContent = isSample ? 'SAMPLE' : 'REAL';
+    badge.title = loadedFrom;
+
+    document.getElementById('scrub').oninput = function () {
+      var idx = parseInt(this.value, 10) || 0;
+      state.scrub = state.stamps.length ? state.stamps[idx] : '999999999999';
+      updateScrubOut();
+      render();
+    };
+
+    buildControls();
+    rebuildStamps();
+    render();
+
+    // dev hook for Playwright: source of truth + a redraw poke
+    window.__lineageLab = { map: map, state: state, data: function () { return DATA; },
+      isSample: function () { return isSample; }, render: render, select: selectChain };
+  }
+
+  fetch('../archive/derived/lineage-2026.json')
+    .then(function (r) { if (!r.ok) throw new Error('http ' + r.status); return r.json(); })
+    .then(function (j) {
+      DATA = j; isSample = false;
+      loadedFrom = 'REAL · ../archive/derived/lineage-2026.json';
+      boot();
+    })
+    .catch(function () {
+      DATA = SAMPLE; isSample = true;
+      loadedFrom = 'SAMPLE (inline demo — lineage-2026.json not reachable)';
+      boot();
+    });
+})();
+</script>
+</body>
+</html>
