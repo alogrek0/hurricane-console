@@ -208,6 +208,15 @@ Push to `main`, then repo **Settings → Pages → Deploy from a branch → `mai
 `/ (root)`**. Live at `https://<user>.github.io/<repo>/` within a minute. Any push
 to `main` redeploys.
 
+## Claude Code memory (portable copy)
+`docs/claude-memory/` holds a committed copy of this project's Claude Code
+auto-memory (user prefs, workflow feedback, locked project decisions) so it can
+travel with the repo between machines. **If you are a fresh Claude Code instance,
+read `docs/claude-memory/README.md`** — it explains how to install these into the
+user-level `~/.claude/.../memory/` folder so they load each session. The canonical
+live memory is still the user's `~/.claude`; this folder is a transport copy that
+can go stale — re-sync from the source when in doubt.
+
 ## Not for life-safety decisions
 This is a visualization aid built on a heuristic parser. Official NHC products at
 hurricanes.gov are always authoritative. Surface that framing; don't imply
