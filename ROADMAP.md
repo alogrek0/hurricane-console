@@ -185,10 +185,26 @@ prefer broken chains over invented links.
   ambiguity is now symmetric (one wave claims at most one invest, one invest
   at most one cyclone; comparable candidates → no link), killing the June 21
   double-link to a same-anchor forecast area.*
-- [ ] **M3 — Lineage UI**: "history" affordance on cyclone/wave/invest popups
+- [x] **M3 — Lineage UI**: "history" affordance on cyclone/wave/invest popups
   → lazy-fetch (countries.js pattern) → time-faded trail + genesis segments;
   trail treatment judged in a lab first; broken chains render as separate
   segments, never silently bridged.
+  *Done 2026-07-17: stage A picked the treatment in `tools/lineage-lab.html`
+  (three treatments — comet / breadcrumbs / ghost — over real chains; locked
+  `HC_TRAIL = { mode:'breadcrumbs', n:'all', fade:'linear', w:3, dotR:4 }`).
+  Stage B shipped the app affordance: a subtle "history" link on cyclone, wave,
+  and TAGGED-disturbance popups (untagged disturbances get NO link — an untagged
+  area has no invest id to match, so offering it would risk a wrong lineage);
+  first click lazy-fetches `archive/derived/lineage-2026.json` (session-cached,
+  no SW entry) and draws ONE chain's breadcrumb trail in a dedicated `hc-trail`
+  pane (415, under the live lines/points, non-interactive). Matching is
+  conservative (name / exact tag / wave within 6° mean-lon + 30h, best-two-within-
+  2° = ambiguous = "no tracked lineage"); honesty invariants hold — null-position
+  sightings skipped without bridging, proximity/inferred dashed, genesis
+  dotted-gold, stacked anchors collapse to a point, a fetch miss reads "season
+  archive unavailable" and draws nothing. Trail clears on hide / basin switch /
+  refresh / paste / scrubber step (one hook in clearCats). Provenance caption
+  "N archived sightings · computed lineage — breaks are honest".*
 - [ ] **M4 — Genesis truth ledger**: per-invest genesis timeline, TWO
   chance-trend sparklines (absorbs the Track A sparkline item), season
   calibration table (stated 48h/7d odds vs outcomes) — all over

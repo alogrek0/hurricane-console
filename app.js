@@ -267,7 +267,10 @@
   // a tap over the area fill it crosses — that is the whole point.
   // (overlayPane, which holds the basemap + graticule, is 400; .grat-labels is
   // 450 and the legend/scrub chips 500, so these all stay clear.)
-  var PANES = { mask: 402, areas: 410, lines: 420, points: 430, diff: 405 };
+  // 'trail' (415) sits between areas and lines: the history-trail overlay (Track
+  // C M3) underlays the live lines/points and is non-interactive, so it annotates
+  // the archive under the current features and never steals a tap.
+  var PANES = { mask: 402, areas: 410, lines: 420, points: 430, diff: 405, trail: 415 };
   Object.keys(PANES).forEach(function (name) {
     map.createPane('hc-' + name).style.zIndex = PANES[name];
   });
@@ -390,6 +393,10 @@
   // the highlighted path out from under an open popup.
   function clearCats(keys) {
     selClear();
+    // Any product redraw (refresh, paste, scrubber step, basin switch, error)
+    // invalidates the shown chain's history trail — clear it here so the one hook
+    // covers every path (the history-scrubber/basin/refresh clears the spec asks for).
+    clearTrail();
     keys.forEach(function (k) { cat[k].clearLayers(); });
   }
 
@@ -748,6 +755,270 @@
   map.on('popupopen', function (e) { selClear(); selHighlight(e.popup._source); });
   map.on('popupclose', selClear);
 
+  // --- history trail (Track C M3): one lineage chain's breadcrumb trail -------
+  // A popup "history" link (cyclones, waves, tagged disturbances only) draws the
+  // tapped feature's archived sighting chain UNDER the live features, styled to
+  // the stage-A pick locked in tools/lineage-lab.html:
+  //   HC_TRAIL = { mode:'breadcrumbs', n:'all', fade:'linear', w:3, dotR:4 }
+  // Breadcrumbs = per-sighting dots fading linearly with age (newest full), a
+  // thin constant connector, dashed where the join is weak (proximity/inferred).
+  // Honesty invariants (not options): null-position sightings are skipped WITHOUT
+  // bridging, broken chains stay separate (they are separate chain objects),
+  // proximity/inferred joins stay dashed, genesis links stay dotted-gold, and a
+  // stacked anchor collapses to a point (no invented spread). Untagged
+  // disturbances get NO link — matching one to a chain risks a wrong lineage, the
+  // worst lie this map can tell. w is unused by breadcrumbs (the connector is a
+  // fixed thin line, as in the lab); dotR sizes the dots.
+  var HC_TRAIL = { mode: 'breadcrumbs', n: 'all', fade: 'linear', w: 3, dotR: 4 };
+  // Identity colors from app.js's own feature palette so a trail reads as the same
+  // family: waves amber (the wave-axis color), cyclones red (the strong-cyclone
+  // color), invests yellow (the TWO base / diff-ghost color), genesis gold (the
+  // lab's cross-family link tone).
+  var TRAIL_COL = { waves: '#ffa23a', invests: '#ffd23a', cyclones: '#ff6b5a', genesis: '#e8c34f' };
+
+  var trailGroup = L.layerGroup().addTo(map); // all trail layers live in hc-trail
+  var trailKey = null;   // specKey of the feature whose trail is drawn, or null
+  var lineage = null;    // parsed lineage-2026.json, cached for the session
+
+  function clearTrail() { if (trailGroup) trailGroup.clearLayers(); trailKey = null; }
+
+  // Lazy, session-cached fetch of the season lineage. Relative URL so it resolves
+  // on Pages (project subpath) and localhost alike; no SW cache entry is added.
+  // On ANY failure cb(null) — the caller shows a quiet note, never a fake trail.
+  function loadLineage(cb) {
+    if (lineage) { cb(lineage); return; }
+    fetchTimed('archive/derived/lineage-2026.json').then(function (r) {
+      if (!r.ok) throw new Error('http ' + r.status);
+      return r.json();
+    }).then(function (j) { lineage = j; cb(j); })
+      .catch(function (e) { console.warn('lineage fetch failed', e); cb(null); });
+  }
+
+  function lineageBasin(j) { return (j && j.basins && j.basins[basin.id]) || null; }
+  function stampMs(s) {
+    if (!s || s.length < 12) return NaN;
+    return Date.UTC(+s.slice(0, 4), +s.slice(4, 6) - 1, +s.slice(6, 8), +s.slice(8, 10), +s.slice(10, 12));
+  }
+  // Reference "now" for the wave time window: the displayed product's issuance
+  // when known (so a matched chain is recent relative to what's on screen), else
+  // the wall clock.
+  function trailRefMs() { var d = issuedDate(); return d ? d.getTime() : Date.now(); }
+
+  // mappable position of a sighting; null for a null-position invest sighting
+  function trailAxisMid(s) {
+    var a = s.axis;
+    if (a && a.length) { var f = a[0], l = a[a.length - 1]; return [(f.lat + l.lat) / 2, (f.lon + l.lon) / 2]; }
+    if (s.meanLon != null) return [12, s.meanLon];
+    return null;
+  }
+  function trailPos(kind, s) {
+    if (kind === 'waves') return trailAxisMid(s);
+    if (s.lat == null || s.lon == null) return null;
+    return [s.lat, s.lon];
+  }
+  function isSolidLink(link) { return link === 'tag' || link === 'name' || link === 'axis'; }
+  // solid only for a strong link on a non-inferred sighting; proximity + inferred
+  // stay dashed (the same weak-join honesty as the lab's baseline render)
+  function segSolid(s) { return isSolidLink(s.link) && !s.inferred; }
+  function waveMeanLon(w) {
+    var a = w.axis || [], sum = 0, i; if (!a.length) return null;
+    for (i = 0; i < a.length; i++) sum += a[i].lon;
+    return sum / a.length;
+  }
+
+  // Feature -> chain matching. Conservative: no confident match returns null and
+  // the caller says "no tracked lineage" rather than guessing at a wrong chain.
+  function matchCyclone(b, name) {
+    var nm = String(name || '').toLowerCase(), best = null;
+    (b.cyclones || []).forEach(function (ch) {
+      if (String(ch.name || '').toLowerCase() !== nm) return;
+      var last = ch.sightings[ch.sightings.length - 1].stamp; // several same-name -> newest last-sighting
+      if (!best || last > best.last) best = { chain: ch, last: last };
+    });
+    return best ? { chain: best.chain, kind: 'cyclones' } : null;
+  }
+  function matchInvest(b, tag) {
+    if (!tag) return null;
+    var best = null;
+    (b.invests || []).forEach(function (ch) {
+      if (ch.tag !== tag) return;                  // exact invest-tag match only
+      var last = ch.sightings[ch.sightings.length - 1].stamp;
+      if (!best || last > best.last) best = { chain: ch, last: last };
+    });
+    return best ? { chain: best.chain, kind: 'invests' } : null;
+  }
+  function matchWave(b, meanLon) {
+    if (meanLon == null) return null;
+    var ref = trailRefMs(), cands = [];
+    (b.waves || []).forEach(function (ch) {
+      var last = ch.sightings[ch.sightings.length - 1];
+      if (last.meanLon == null) return;
+      var dlon = Math.abs(last.meanLon - meanLon);
+      if (dlon > 6) return;                         // 6deg mean-lon gate
+      var t = stampMs(last.stamp);
+      if (isNaN(t) || Math.abs(ref - t) > 30 * 3600000) return; // 30h recency gate
+      cands.push({ chain: ch, dlon: dlon, meanLon: last.meanLon });
+    });
+    if (!cands.length) return null;
+    cands.sort(function (a, z) { return a.dlon - z.dlon; });
+    // two best candidates too close to tell apart -> ambiguous, refuse to guess
+    if (cands.length >= 2 && Math.abs(cands[0].meanLon - cands[1].meanLon) <= 2) return { ambiguous: true };
+    return { chain: cands[0].chain, kind: 'waves' };
+  }
+  function matchFor(spec, b) {
+    if (spec.kind === 'cyclone') return matchCyclone(b, spec.name);
+    if (spec.kind === 'invest') return matchInvest(b, spec.tag);
+    if (spec.kind === 'wave') return matchWave(b, spec.meanLon);
+    return null;
+  }
+  function countMappable(chain, kind) {
+    var n = 0;
+    chain.sightings.forEach(function (s) { if (trailPos(kind, s)) n++; });
+    return n;
+  }
+
+  // --- trail drawing (breadcrumbs, ported from the lab at the locked dials) ---
+  function trailEndpoint(pos, glyph, color) {
+    L.marker(pos, { pane: 'hc-trail', interactive: false, keyboard: false,
+      icon: L.divIcon({ className: 'hc-trail-ep', iconSize: [14, 14], iconAnchor: [7, 7],
+        html: '<span style="color:' + color + '">' + glyph + '</span>' }) }).addTo(trailGroup);
+  }
+  function drawTrail(chain, kind, b) {
+    var color = TRAIL_COL[kind] || TRAIL_COL.waves;
+    var pts = [], i; // mappable sightings, oldest->newest (n:'all'); nulls skipped, no bridge
+    chain.sightings.forEach(function (s) { var p = trailPos(kind, s); if (p) pts.push({ pos: p, s: s }); });
+    if (!pts.length) return;
+    var last = pts.length - 1;
+    var degenerate = true; // stacked anchor (every sighting one point) -> no fake spread
+    for (i = 1; i <= last; i++) {
+      if (pts[i].pos[0] !== pts[0].pos[0] || pts[i].pos[1] !== pts[0].pos[1]) { degenerate = false; break; }
+    }
+    if (!degenerate) {
+      for (i = 1; i <= last; i++) {                 // thin constant connector, dashed on weak joins
+        var cs = pts[i].s;
+        L.polyline([pts[i - 1].pos, pts[i].pos], { pane: 'hc-trail', color: color, weight: 1.2,
+          opacity: 0.5, interactive: false, dashArray: segSolid(cs) ? null : '5 6' }).addTo(trailGroup);
+      }
+    }
+    var r = HC_TRAIL.dotR;
+    for (i = 0; i <= last; i++) {                    // dots, fill + stroke fading with age
+      var fade = last > 0 ? i / last : 1;           // linear: 0 oldest .. 1 newest (newest full)
+      L.circleMarker(pts[i].pos, { pane: 'hc-trail', radius: r, color: color, weight: 1.4,
+        opacity: 0.35 + 0.65 * fade, fillColor: color, fillOpacity: 0.12 + 0.68 * fade,
+        interactive: false }).addTo(trailGroup);
+    }
+    trailEndpoint(pts[0].pos, '○', color);      // ring: chain start
+    trailEndpoint(pts[last].pos, '×', color);   // cross: chain end
+    drawTrailGenesis(chain, kind, b);
+  }
+  function findChainInBasin(b, id) {
+    var kinds = ['waves', 'invests', 'cyclones'], i, j;
+    for (i = 0; i < kinds.length; i++) {
+      var arr = b[kinds[i]] || [];
+      for (j = 0; j < arr.length; j++) if (arr[j].id === id) return { chain: arr[j], kind: kinds[i] };
+    }
+    return null;
+  }
+  function chainAnchor(entry, atStamp, which) {
+    // nearest MAPPABLE sighting to atStamp: 'from' last at/before, 'to' first at/after
+    var vis = [], i;
+    entry.chain.sightings.forEach(function (s) { var p = trailPos(entry.kind, s); if (p) vis.push({ s: s, pos: p }); });
+    if (!vis.length) return null;
+    var pick = null;
+    if (which === 'from') { for (i = 0; i < vis.length; i++) if (vis[i].s.stamp <= atStamp) pick = vis[i]; if (!pick) pick = vis[0]; }
+    else { for (i = 0; i < vis.length; i++) if (vis[i].s.stamp >= atStamp) { pick = vis[i]; break; } if (!pick) pick = vis[vis.length - 1]; }
+    return pick.pos;
+  }
+  // Genesis links touching the drawn chain: a dotted-gold segment to the adjacent
+  // endpoint of the linked chain (which is itself NOT drawn — only the segment + a
+  // small marker), visually distinct from the breadcrumb connector.
+  function drawTrailGenesis(chain, kind, b) {
+    (b.genesis || []).forEach(function (link) {
+      if (link.from !== chain.id && link.to !== chain.id) return;
+      var from = findChainInBasin(b, link.from), to = findChainInBasin(b, link.to);
+      if (!from || !to) return;
+      var pFrom = chainAnchor(from, link.atStamp, 'from'), pTo = chainAnchor(to, link.atStamp, 'to');
+      if (!pFrom || !pTo) return;
+      L.polyline([pFrom, pTo], { pane: 'hc-trail', color: TRAIL_COL.genesis, weight: 2,
+        opacity: 0.95, dashArray: '2 6', interactive: false }).addTo(trailGroup);
+      var other = link.from === chain.id ? pTo : pFrom; // the linked chain's endpoint
+      L.circleMarker(other, { pane: 'hc-trail', radius: 3, color: TRAIL_COL.genesis, weight: 1.5,
+        opacity: 0.95, fillColor: TRAIL_COL.genesis, fillOpacity: 0.6, interactive: false }).addTo(trailGroup);
+    });
+  }
+
+  // --- history-link popup affordance -----------------------------------------
+  function specKey(spec) {
+    if (spec.kind === 'cyclone') return 'cyclone:' + String(spec.name).toLowerCase();
+    if (spec.kind === 'invest') return 'invest:' + spec.tag;
+    if (spec.kind === 'wave') return 'wave:' + Number(spec.meanLon).toFixed(1);
+    return '';
+  }
+  // Tag-like link + a note slot, carrying the match spec as escaped JSON. Wired on
+  // popupopen (Leaflet rebuilds the popup DOM per open), so the label reflects
+  // whether THIS feature's trail is the currently shown one.
+  function histLink(spec) {
+    return '<div class="hc-hist" data-spec="' + escapeHtml(JSON.stringify(spec)) +
+      '"><span class="hc-hist-link" role="button" tabindex="0">history</span>' +
+      '<div class="hc-hist-note" hidden></div></div>';
+  }
+  // Reflow the popup after we mutate its DOM, WITHOUT Leaflet's _updateContent
+  // (which re-sets innerHTML from the bound string and would drop our live edits +
+  // the click handler). Same private-API idiom as the selection sheen above.
+  function reflowPopup(pop) {
+    var c = pop._container;
+    if (c) c.style.visibility = 'hidden';
+    if (pop._updateLayout) pop._updateLayout();
+    if (pop._updatePosition) pop._updatePosition();
+    if (c) c.style.visibility = '';
+    if (pop._adjustPan) pop._adjustPan();
+  }
+  function wireHistLink(pop) {
+    var el = pop.getElement && pop.getElement();
+    if (!el) return;
+    var host = el.querySelector('.hc-hist');
+    if (!host) return;
+    var link = host.querySelector('.hc-hist-link');
+    var note = host.querySelector('.hc-hist-note');
+    var spec;
+    try { spec = JSON.parse(host.getAttribute('data-spec')); } catch (e) { return; }
+    var key = specKey(spec);
+    function showNote(msg) { note.textContent = msg; note.hidden = false; }
+    function caption(chain, kind) {
+      var n = countMappable(chain, kind);
+      return n + ' archived sighting' + (n === 1 ? '' : 's') + ' · computed lineage — breaks are honest';
+    }
+    function paint() {
+      var active = trailKey === key;
+      link.textContent = active ? 'hide history' : 'history';
+      // reopening the active feature's popup restores its provenance caption
+      if (active && lineage) {
+        var b = lineageBasin(lineage), m = b ? matchFor(spec, b) : null;
+        if (m && m.chain) showNote(caption(m.chain, m.kind));
+      }
+    }
+    function activate() {
+      if (trailKey === key) { clearTrail(); note.hidden = true; note.textContent = ''; paint(); reflowPopup(pop); return; }
+      loadLineage(function (j) {
+        if (!j) { showNote('season archive unavailable'); reflowPopup(pop); return; } // honest: no data, no trail
+        var b = lineageBasin(j), m = b ? matchFor(spec, b) : null;
+        clearTrail(); // one trail at a time; replace whatever was shown
+        if (!m || m.ambiguous || !m.chain) { showNote('no tracked lineage'); paint(); reflowPopup(pop); return; }
+        drawTrail(m.chain, m.kind, b);
+        trailKey = key;
+        showNote(caption(m.chain, m.kind));
+        paint(); // label -> "hide history"
+        reflowPopup(pop);
+      });
+    }
+    paint();
+    link.onclick = function (ev) { ev.preventDefault(); activate(); };
+    link.onkeydown = function (ev) {
+      if (ev.key === 'Enter' || ev.key === ' ' || ev.key === 'Spacebar') { ev.preventDefault(); activate(); }
+    };
+  }
+  map.on('popupopen', function (e) { wireHistLink(e.popup); });
+
   function render(parsed) {
     curParsed = parsed;
     clearCats(TWD_CATS);
@@ -774,8 +1045,10 @@
     });
 
     parsed.waves.forEach(function (w) {
+      var wLon = waveMeanLon(w); // history matches on the wave's mean axis lon
       tapline(w.axis.map(ll), { color: '#ffa23a', weight: 3 },
-        popup('WAVE ' + w.id, w.source, false, w.context, w.srcSection))
+        popup('WAVE ' + w.id, w.source, false, w.context, w.srcSection) +
+          (wLon != null ? histLink({ kind: 'wave', meanLon: wLon }) : ''))
         .addTo(cat.wave);
       // small motion arrowhead label at the axis head
       L.circleMarker(ll(w.axis[0]), { radius: 3, color: '#ffa23a', fillOpacity: 1,
@@ -803,7 +1076,8 @@
       L.circleMarker(ll(c), style)
         .bindTooltip(c.name, { permanent: true, direction: 'top', className: 'cyc-label' })
         .bindPopup(popup(c.classification.toUpperCase() + ' ' + withPhonetic(c.name, basin.id),
-          c.source, false, c.context, c.srcSection, stats), POPUP_OPTS)
+          c.source, false, c.context, c.srcSection, stats) +
+          histLink({ kind: 'cyclone', name: c.name }), POPUP_OPTS)
         .addTo(cat.cyclone);
     });
 
@@ -870,7 +1144,10 @@
       L.circle(ll(d), {
         radius: 300000, color: color, weight: 2, dashArray: '6 5',
         fillColor: color, fillOpacity: 0.08, pane: 'hc-areas'
-      }).bindPopup(popup(label, d.source, true, d.context), POPUP_OPTS).addTo(cat.two);
+        // history only for a TAGGED disturbance — an untagged area has no invest
+        // id to match a chain on, so offering the link would risk a wrong lineage.
+      }).bindPopup(popup(label, d.source, true, d.context) +
+        (d.invest ? histLink({ kind: 'invest', tag: d.invest }) : ''), POPUP_OPTS).addTo(cat.two);
     });
     var n = parsed.disturbances.length;
     featureLine = plural(n, 'outlook area') +

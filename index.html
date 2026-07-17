@@ -109,6 +109,20 @@
   .pop-ctx{color:var(--dim);font-size:.72rem;line-height:1.5;margin-top:.35rem}
   mark.pop-key{background:rgba(196,122,38,.18);color:var(--ink);
     border-bottom:1px solid var(--amber-dim);padding:0 .1em}
+  /* history-trail affordance (Track C M3): a subtle tag-like link in cyclone,
+     wave, and tagged-disturbance popups. Clicking draws ONE chain's breadcrumb
+     trail (lab pick: breadcrumbs all/linear/3/4) under the live features; the
+     note beneath carries the honest provenance caption (or a quiet miss note). */
+  .hc-hist{margin-top:.4rem}
+  .hc-hist-link{font-size:.62rem;letter-spacing:.08em;color:var(--cyan);cursor:pointer;
+    border-bottom:1px dotted var(--cyan)}
+  .hc-hist-link:hover{color:var(--ink)}
+  .hc-hist-link:focus-visible{outline:2px solid var(--amber);outline-offset:2px;border-radius:2px}
+  .hc-hist-note{color:var(--dim);font-size:.62rem;line-height:1.4;margin-top:.25rem}
+  .hc-hist-note[hidden]{display:none}
+  /* trail ○ start / × end glyphs (divIcon); halo so they read over any feature */
+  .hc-trail-ep span{display:block;width:14px;height:14px;line-height:14px;text-align:center;
+    font-weight:700;text-shadow:0 0 2px #04101a,0 0 2px #04101a}
   /* Selected feature (app.js adds .hc-sel on popupopen and thickens the stroke).
      Crisp, not glowing: a white bloom made the thing look beatified rather than
      picked. Full opacity + a hairline dark shadow reads as "this trace is lifted
