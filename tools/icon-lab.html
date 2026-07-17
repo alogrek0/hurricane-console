@@ -5,23 +5,21 @@
   IS reachable on a phone because Pages serves the repo root:
     https://<user>.github.io/hurricane-console/tools/icon-lab.html
 
-  Why it exists: the user wants the icon to keep the *graticule* look from their
-  home-screen screenshot (a lat/lon crosshair grid behind the amber swirl), but
-  a graticule that reads at 180px turns to mud at a 16px browser tab. So the two
-  ship differently and must be judged separately:
+  Built fresh from the user's home-screen screenshot (IMG_8070): the classic
+  tropical-cyclone symbol — a central eye (ring + dot) with two bold round-capped
+  spiral hooks in 180° rotational symmetry — over a faint steel chart graticule
+  on the navy tile. NOTHING is carried over from the old thin swirl.
 
-    LARGE icons (icon-192/512, maskable, apple-touch-180) always ship the FULL
-    graticule — that's the screenshot look, shown at top.
+  LARGE icons (icon-192/512, maskable, apple-touch-180) ship the full graticule —
+  the screenshot look, shown at top. The FAVICON simplifies; three candidates,
+  most-detail to least, judged at true 16px:
+    A  full graticule + hooks   (screenshot-faithful)
+    B  center crosshair + hooks (reticle hint, survives small)
+    C  hooks + eye only         (grid dropped, bolder for legibility)
 
-    The FAVICON simplifies. Three candidates, most-graticule to none:
-      A  full thirds-grid      — screenshot-faithful; honest look at 16px
-      B  single center crosshair — a reticle hint that survives small
-      C  glyph only            — graticule dropped, swirl enlarged for legibility
-
-  Everything is drawn from ONE parameterized SVG (iconSVG), so what you judge is
-  exactly what would ship. Each favicon card prints its exact favicon.svg source;
-  the LARGE card prints the graticule/glyph constants for make-icons.html.
-  Pick A/B/C by eye at 16px, tell me, and I regenerate the PNG set + favicon.
+  One parameterized iconSVG() so what you judge is what ships. Each favicon card
+  prints its exact favicon.svg source; the LARGE card prints the make-icons.html
+  constants. Pick A/B/C at 16px, tell me, and I regenerate the PNG set + favicon.
 -->
 <html lang="en">
 <head>
@@ -45,7 +43,6 @@
   section>b{display:block;color:var(--dim);font-size:.62rem;letter-spacing:.1em;margin-bottom:.55rem}
   section.hero{border-color:#2b5a72}
 
-  /* fake browser tab strips — the 16px judgment context */
   .tabstrip{display:flex;align-items:flex-end;gap:0;padding:6px 8px 0;border-radius:8px 8px 0 0;margin-bottom:2px}
   .tabstrip.light{background:#dee1e6}
   .tabstrip.dark{background:#202124}
@@ -56,7 +53,6 @@
   .tab img{width:16px;height:16px;flex:none}
   .tab span{overflow:hidden;text-overflow:ellipsis}
 
-  /* size ramps + grounds */
   .ramp{display:flex;gap:1.4rem;flex-wrap:wrap;align-items:flex-end}
   .cell{text-align:center}
   .cell i{display:block;font-style:normal;color:var(--dim);font-size:.62rem;margin-top:.3rem}
@@ -75,23 +71,20 @@
 </head>
 <body>
 <header class="top">
-  <h1>Icon lab <small>dev only — LARGE icons keep the full graticule (top); pick how the FAVICON simplifies (A/B/C) by eye at 16px</small></h1>
+  <h1>Icon lab <small>dev only — cyclone + graticule traced from your screenshot; LARGE keeps the full grid, pick the FAVICON reduction (A/B/C) at 16px</small></h1>
 </header>
 <div class="wrap" id="wrap"></div>
 <script>
   'use strict';
-  var BG = '#071620', AMBER = '#ffa23a', GRAT = '#4d7488';
+  var BG = '#071620', AMBER = '#ffa23a', GRAT = '#6f9bb3';
   var uid = 0;
 
-  // ONE parameterized source of truth. o:
-  //   rx        tile corner radius (ignored when bleed:true)
-  //   bleed     full-bleed background (apple-touch / maskable) vs rounded tile
-  //   grid      thirds graticule (lines at 8 & 16 on both axes)
-  //   cross     single center crosshair (lines at 12)
-  //   ring      range ring (r 9)
-  //   gw,gop    graticule stroke width + opacity
-  //   scale     glyph scale about center (1 = current app glyph span)
-  //   eye,arm   glyph stroke widths (pre-scale)
+  // One arm of the cyclone (upper-right open crescent); the other is this rotated
+  // 180° about the eye at (12,12). Round caps. An open spiral arm — starts above
+  // the eye with a gap, bulges up-right, tail curls back down. Tuned to IMG_8070.
+  var ARM = 'M11.4 9.6 C13.6 8.0 16.4 8.4 17.2 10.8 C17.7 12.3 17.0 13.4 15.8 13.6';
+
+  // o: rx, bleed, grat('grid'|'cross'|'none'), gw, gop, hookW, eyeR, eyeW, dotR
   function iconSVG(o) {
     var id = 'c' + (++uid);
     var L = [];
@@ -99,25 +92,28 @@
     L.push(o.bleed
       ? '  <rect width="24" height="24" fill="' + BG + '"/>'
       : '  <rect width="24" height="24" rx="' + o.rx + '" fill="' + BG + '"/>');
-    if (o.grid || o.cross || o.ring) {
+    if (o.grat && o.grat !== 'none') {
       var shape = o.bleed ? '<rect width="24" height="24"/>'
                           : '<rect width="24" height="24" rx="' + o.rx + '"/>';
       L.push('  <clipPath id="' + id + '">' + shape + '</clipPath>');
       L.push('  <g clip-path="url(#' + id + ')" stroke="' + GRAT +
              '" stroke-width="' + o.gw + '" stroke-opacity="' + o.gop + '">');
-      if (o.grid)  L.push('    <path d="M8 0V24M16 0V24M0 8H24M0 16H24"/>');
-      if (o.cross) L.push('    <path d="M12 0V24M0 12H24"/>');
-      if (o.ring)  L.push('    <circle cx="12" cy="12" r="9" fill="none"/>');
+      // centered crosshair (always present when grat on)
+      L.push('    <path d="M12 2.5V21.5M2.5 12H21.5"/>');
+      if (o.grat === 'grid') {
+        // two offset parallels each side of the crosshair -> chart grid cells
+        L.push('    <path d="M7 4V20M17 4V20M4 7H20M4 17H20"/>');
+      }
       L.push('  </g>');
     }
-    var open = (o.scale && o.scale !== 1)
-      ? '  <g transform="translate(12 12) scale(' + o.scale + ') translate(-12 -12)" fill="none" stroke="' + AMBER + '" stroke-linecap="round">'
-      : '  <g fill="none" stroke="' + AMBER + '" stroke-linecap="round">';
-    L.push(open);
-    L.push('    <circle cx="12" cy="12" r="2.4" stroke-width="' + o.eye + '"/>');
-    L.push('    <path d="M12 9.6 C7 8 5.5 12 7.2 15" stroke-width="' + o.arm + '"/>');
-    L.push('    <path d="M12 14.4 C17 16 18.5 12 16.8 9" stroke-width="' + o.arm + '"/>');
+    // hooks (amber, bold, round-capped) — arm + 180° rotation
+    L.push('  <g fill="none" stroke="' + AMBER + '" stroke-width="' + o.hookW + '" stroke-linecap="round">');
+    L.push('    <path d="' + ARM + '"/>');
+    L.push('    <path d="' + ARM + '" transform="rotate(180 12 12)"/>');
     L.push('  </g>');
+    // eye: ring + center dot
+    L.push('  <circle cx="12" cy="12" r="' + o.eyeR + '" fill="none" stroke="' + AMBER + '" stroke-width="' + o.eyeW + '"/>');
+    L.push('  <circle cx="12" cy="12" r="' + o.dotR + '" fill="' + AMBER + '"/>');
     L.push('</svg>');
     return L.join('\n');
   }
@@ -125,44 +121,44 @@
   function el(html){ var d = document.createElement('div'); d.innerHTML = html.trim(); return d.firstChild; }
   var wrap = document.getElementById('wrap');
 
-  // ---- LARGE icons: the screenshot-faithful full graticule (always ships) ----
-  var LARGE = { grid:true, gw:0.5, gop:0.75, scale:1.15, eye:1.4, arm:1.6 };
-  var anyTile = iconSVG(Object.assign({ rx:4.5 }, LARGE));            // icon-192/512 (any)
-  var appleBleed = iconSVG(Object.assign({ bleed:true }, LARGE));     // apple-touch-180 / maskable
+  var GLYPH = { hookW:2.4, eyeR:1.5, eyeW:1.1, dotR:0.6 };
+
+  // ---- LARGE icons: full graticule (always ships) ----
+  var anyTile   = iconSVG(Object.assign({ rx:4.5, grat:'grid', gw:0.5, gop:0.6 }, GLYPH));
+  var appleBleed= iconSVG(Object.assign({ bleed:true, grat:'grid', gw:0.5, gop:0.6 }, GLYPH));
   var hero = el('<section class="hero"><b>LARGE ICONS — full graticule (matches your home-screen screenshot; ships to icon-192/512, maskable, apple-touch-180)</b></section>');
   var heroRow = el('<div class="ramp"></div>');
   [['icon-192/512 (rounded tile)', anyTile, 4.5],
-   ['apple-touch / maskable (full-bleed, iOS masks it)', appleBleed, 0]].forEach(function(pair){
+   ['apple-touch / maskable (full-bleed)', appleBleed, 0]].forEach(function(pair){
     var box = el('<div class="home"></div>');
     var img = new Image(); img.src = uri(pair[1]); img.width = 128; img.height = 128;
     if (pair[2]) img.style.borderRadius = (128 * pair[2] / 24) + 'px';
-    box.appendChild(img);
-    box.appendChild(el('<i>' + pair[0] + '</i>'));
+    box.appendChild(img); box.appendChild(el('<i>' + pair[0] + '</i>'));
     heroRow.appendChild(box);
   });
   hero.appendChild(heroRow);
-  hero.appendChild(el('<p class="note">Confirm this matches the icon you want on the home screen. Graticule is steel ' + GRAT + ' at 0.5w/0.75 opacity, glyph scaled 1.15. Tell me if the grid should be denser/fainter or the swirl bigger.</p>'));
-  var d1 = el('<details><summary>make-icons.html glyph + graticule constants</summary><pre></pre></details>');
+  hero.appendChild(el('<p class="note">Confirm this reads like your screenshot. Graticule steel ' + GRAT + '; hooks/eye amber. Tell me to adjust hook curl/weight, eye size, or grid density/opacity.</p>'));
+  var d1 = el('<details><summary>make-icons.html art + constants</summary><pre></pre></details>');
   d1.querySelector('pre').textContent =
-    'BG   ' + BG + '\nAMBER ' + AMBER + '\nGRAT ' + GRAT + '  (grid lines at 8 & 16 on both axes, 0.5w, 0.75 opacity)\n' +
-    'glyph scale 1.15, eye stroke 1.4, arm stroke 1.6\n\n// full "any" tile source:\n' + anyTile;
+    'BG ' + BG + '  AMBER ' + AMBER + '  GRAT ' + GRAT + '\n' +
+    'hookW ' + GLYPH.hookW + '  eyeR ' + GLYPH.eyeR + '  eyeW ' + GLYPH.eyeW + '  dotR ' + GLYPH.dotR + '\n' +
+    'ARM ' + ARM + '  (+ rotate(180 12 12) for the mirror)\n\n// full "any" tile source:\n' + anyTile;
   hero.appendChild(d1);
   wrap.appendChild(hero);
 
-  // ---- FAVICON candidates: most graticule -> none ----
+  // ---- FAVICON candidates ----
   var CANDIDATES = [
-    { id:'A', label:'A — full thirds-grid (screenshot-faithful)',
-      cfg:{ rx:5.4, grid:true, gw:0.6, gop:0.8, scale:1.15, eye:1.4, arm:1.6 } },
-    { id:'B', label:'B — single center crosshair (reticle hint, survives small)',
-      cfg:{ rx:5.4, cross:true, gw:0.8, gop:0.7, scale:1.2, eye:1.5, arm:1.7 } },
-    { id:'C', label:'C — glyph only (graticule dropped, swirl enlarged for legibility)',
-      cfg:{ rx:5.4, scale:1.2, eye:1.5, arm:1.7 } }
+    { id:'A', label:'A — full graticule + hooks (screenshot-faithful)',
+      cfg:Object.assign({ rx:5.4, grat:'grid', gw:0.6, gop:0.7 }, GLYPH) },
+    { id:'B', label:'B — center crosshair + hooks (reticle hint)',
+      cfg:Object.assign({ rx:5.4, grat:'cross', gw:0.8, gop:0.7, hookW:2.5 }, GLYPH) },
+    { id:'C', label:'C — hooks + eye only (grid dropped, bolder for 16px)',
+      cfg:Object.assign({}, GLYPH, { rx:5.4, grat:'none', hookW:2.6, eyeR:1.8, dotR:0.75 }) }
   ];
   var SIZES = [16, 32, 64, 128];
 
   CANDIDATES.forEach(function(c){
-    var src = iconSVG(c.cfg);
-    var u = uri(src);
+    var src = iconSVG(c.cfg), u = uri(src);
     var sec = el('<section><b>' + c.label + '</b></section>');
     ['light','dark'].forEach(function(theme){
       sec.appendChild(el('<div class="tabstrip ' + theme + '"><div class="tab">' +
