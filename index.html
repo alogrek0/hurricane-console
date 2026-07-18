@@ -22,7 +22,12 @@
   *{box-sizing:border-box}
   html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);
     font:14px/1.45 var(--mono);-webkit-text-size-adjust:100%}
-  #app{display:flex;flex-direction:column;height:100%}
+  /* height:100% resolves to iOS's LAYOUT viewport, which can run shorter than
+     the real screen (seen on-device as a dead page-background band under the
+     toolbar). 100dvh tracks the actual dynamic viewport; the % form stays as
+     the fallback for engines without dvh. The page never scrolls, so dvh
+     can't cause reflow jumps here. */
+  #app{display:flex;flex-direction:column;height:100%;height:100dvh}
 
   header{display:flex;align-items:center;gap:.65rem;padding:.55rem .8rem;
     padding-top:calc(.55rem + env(safe-area-inset-top));
