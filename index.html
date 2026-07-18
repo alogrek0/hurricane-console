@@ -61,6 +61,14 @@
   button:hover{border-color:var(--amber-dim)}
   button:focus-visible{outline:2px solid var(--amber);outline-offset:1px}
   button.primary{background:var(--amber);color:#231400;border-color:var(--amber);font-weight:600}
+  /* TWD/TWO segmented control: the pressed side is the product ON the map —
+     same amber=active language as .primary. Replaces the old "TWD / TWO"
+     toggle, whose static label never said which product was showing. */
+  .seg{display:inline-flex}
+  .seg button{border-radius:0;color:var(--dim)}
+  .seg button:first-child{border-radius:4px 0 0 4px}
+  .seg button:last-child{border-radius:0 4px 4px 0;border-left:none}
+  .seg button[aria-pressed="true"]{background:var(--amber);color:#231400;border-color:var(--amber);font-weight:600}
   .meta{margin-left:auto;color:var(--dim);font-size:.72rem;text-align:right;line-height:1.3}
   .meta .ver{font-size:.6rem;opacity:.85;letter-spacing:.08em} /* .85 clears 4.5:1 on --panel */
   /* readout last line: next-update hint pinned left, version pinned right */
@@ -286,7 +294,10 @@
   <div class="toolbar">
     <button id="refresh" class="primary">Refresh</button>
     <button id="paste">Paste<span class="wide"> product</span></button>
-    <button id="which">TWD / TWO</button>
+    <div class="seg" role="group" aria-label="Product shown on the map">
+      <button id="segTWD" aria-pressed="true" title="Tropical Weather Discussion — waves, cyclones, convection">TWD</button>
+      <button id="segTWO" aria-pressed="false" title="Tropical Weather Outlook — formation areas + 48h/7-day chances">TWO</button>
+    </div>
     <button id="about" title="What this is — and what it is not">About</button>
     <div class="meta" id="meta">—</div>
   </div>
