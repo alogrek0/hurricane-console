@@ -10,6 +10,11 @@
   favicon.svg is a hand-traced crisp vector of that same design. This generator
   still draws the older geometric mark below and is retained only for reverting
   to it / future geometric regeneration. It is not the source of the live icons.
+  UPDATE (2026-07-18): the pack's maskable-512 and apple-touch-180 violated the
+  variant rules below (art to the edges / transparent corners), so the shipped
+  ones are now composites derived from the pack art: maskable = icon-512.png at
+  80% over full-bleed #071620; apple-touch = the pack's 180 flattened onto
+  opaque #071620. Re-derive the same way if the pack art ever changes.
 
   Regeneration procedure (one-time, whenever the art changes):
     1. npx -y http-server -p 8000 -s          (repo root, background)
