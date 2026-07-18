@@ -18081,6 +18081,79 @@
           }
         }
       ]
+    },
+    {
+      "file": "TWOAT.202607181717.txt",
+      "kind": "TWO",
+      "stamp": "202607181717",
+      "issuedISO": "2026-07-18T18:00:00.000Z",
+      "disturbances": [
+        {
+          "invest": "AL91",
+          "lat": 27.8,
+          "lon": -81.5,
+          "chance48": {
+            "cat": "low",
+            "pct": 30
+          },
+          "chance7": {
+            "cat": "medium",
+            "pct": 40
+          }
+        }
+      ]
+    },
+    {
+      "file": "TWDAT.202607181745.txt",
+      "kind": "TWD",
+      "stamp": "202607181745",
+      "issuedISO": "2026-07-18T18:15:00.000Z",
+      "cyclones": [],
+      "waves": [
+        {
+          "id": "W1",
+          "axis": [
+            {
+              "lat": 19,
+              "lon": -30
+            },
+            {
+              "lat": 7,
+              "lon": -30
+            }
+          ],
+          "inferred": false,
+          "motion": {
+            "bearing": 270,
+            "slowKt": 15,
+            "fastKt": 15
+          }
+        },
+        {
+          "id": "W2",
+          "axis": [
+            {
+              "lat": 17,
+              "lon": -53
+            },
+            {
+              "lat": 5,
+              "lon": -53
+            }
+          ],
+          "inferred": false,
+          "motion": {
+            "bearing": 270,
+            "slowKt": 20,
+            "fastKt": 20
+          }
+        }
+      ],
+      "convection": 1,
+      "troughs": 2,
+      "fixes": 1,
+      "inferred": 0,
+      "projections": 2
     }
   ]
 }

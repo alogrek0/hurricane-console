@@ -1,0 +1,28 @@
+
+000
+ABNT20 KNHC 181717
+TWOAT 
+
+Tropical Weather Outlook
+NWS National Hurricane Center Miami FL
+200 PM EDT Sat Jul 18 2026
+
+For the North Atlantic...Caribbean Sea and the Gulf of America:
+
+Northern Gulf of America and near Florida (AL91):
+Satellite images and surface observations indicate that a broad 
+surface low is forming over the eastern Gulf of America.  However, 
+the associated winds remain light, and the showers and thunderstorms 
+are still disorganized.  Gradual development of this system is 
+possible, and it could become a tropical depression while it moves 
+slowly northward or north-northwestward during the next few days.  
+Interests along the Florida Gulf coast, southern Alabama, and 
+southwestern Georgia should monitor the progress of this system as 
+it is expected to bring heavy rain to portions of that region during 
+the next several days.  An Air Force Reserve reconnaissance aircraft 
+is scheduled to investigate the system on Sunday, if needed.
+* Formation chance through 48 hours...low...30 percent.
+* Formation chance through 7 days...medium...40 percent.
+
+$$
+Forecaster Cangialosi/Katz

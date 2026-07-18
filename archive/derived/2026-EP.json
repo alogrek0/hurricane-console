@@ -16913,6 +16913,77 @@
           }
         }
       ]
+    },
+    {
+      "file": "TWDEP.202607181607.txt",
+      "kind": "TWD",
+      "stamp": "202607181607",
+      "issuedISO": "2026-07-18T16:05:00.000Z",
+      "cyclones": [
+        {
+          "name": "Elida",
+          "classification": "Tropical Storm",
+          "lat": 18.9,
+          "lon": -123.3,
+          "windKt": 60
+        }
+      ],
+      "waves": [
+        {
+          "id": "W1",
+          "axis": [
+            {
+              "lat": 18,
+              "lon": -107
+            },
+            {
+              "lat": 2,
+              "lon": -107
+            }
+          ],
+          "inferred": false,
+          "motion": null
+        }
+      ],
+      "convection": 3,
+      "troughs": 1,
+      "fixes": 7,
+      "inferred": 1,
+      "projections": 1
+    },
+    {
+      "file": "TWOEP.202607181718.txt",
+      "kind": "TWO",
+      "stamp": "202607181718",
+      "issuedISO": "2026-07-18T18:00:00.000Z",
+      "disturbances": [
+        {
+          "invest": "EP97",
+          "lat": 17,
+          "lon": -102,
+          "chance48": {
+            "cat": "high",
+            "pct": 90
+          },
+          "chance7": {
+            "cat": "high",
+            "pct": 90
+          }
+        },
+        {
+          "invest": null,
+          "lat": null,
+          "lon": null,
+          "chance48": {
+            "cat": "low",
+            "pct": 0
+          },
+          "chance7": {
+            "cat": "low",
+            "pct": 30
+          }
+        }
+      ]
     }
   ]
 }
