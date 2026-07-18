@@ -12759,6 +12759,22 @@
               },
               "tagged": false,
               "link": "proximity"
+            },
+            {
+              "stamp": "202607180543",
+              "file": "TWOAT.202607180543.txt",
+              "lat": 27.8,
+              "lon": -81.5,
+              "chance48": {
+                "cat": "low",
+                "pct": 10
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 30
+              },
+              "tagged": false,
+              "link": "proximity"
             }
           ]
         }
@@ -19766,6 +19782,23 @@
               ],
               "inferred": false,
               "link": null
+            },
+            {
+              "stamp": "202607180837",
+              "file": "TWDEP.202607180837.txt",
+              "meanLon": -105.5,
+              "axis": [
+                {
+                  "lat": 17,
+                  "lon": -105.5
+                },
+                {
+                  "lat": 2,
+                  "lon": -105.5
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
             }
           ]
         }
@@ -24870,6 +24903,22 @@
               },
               "tagged": true,
               "link": "tag"
+            },
+            {
+              "stamp": "202607180546",
+              "file": "TWOEP.202607180546.txt",
+              "lat": 17,
+              "lon": -102,
+              "chance48": {
+                "cat": "high",
+                "pct": 90
+              },
+              "chance7": {
+                "cat": "high",
+                "pct": 90
+              },
+              "tagged": true,
+              "link": "tag"
             }
           ]
         },
@@ -24924,6 +24973,28 @@
             {
               "stamp": "202607172312",
               "file": "TWOEP.202607172312.txt",
+              "lat": null,
+              "lon": null,
+              "chance48": {
+                "cat": "low",
+                "pct": 0
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 30
+              },
+              "tagged": false,
+              "link": null
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202607180546-1",
+          "tag": null,
+          "sightings": [
+            {
+              "stamp": "202607180546",
+              "file": "TWOEP.202607180546.txt",
               "lat": null,
               "lon": null,
               "chance48": {
@@ -25735,6 +25806,15 @@
               "lon": -122.5,
               "classification": "Tropical Storm",
               "windKt": 55,
+              "link": "name"
+            },
+            {
+              "stamp": "202607180837",
+              "file": "TWDEP.202607180837.txt",
+              "lat": 18,
+              "lon": -122.8,
+              "classification": "Tropical Storm",
+              "windKt": 60,
               "link": "name"
             }
           ]

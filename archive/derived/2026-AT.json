@@ -17987,6 +17987,27 @@
       "fixes": 1,
       "inferred": 0,
       "projections": 2
+    },
+    {
+      "file": "TWOAT.202607180543.txt",
+      "kind": "TWO",
+      "stamp": "202607180543",
+      "issuedISO": "2026-07-18T06:00:00.000Z",
+      "disturbances": [
+        {
+          "invest": null,
+          "lat": 27.8,
+          "lon": -81.5,
+          "chance48": {
+            "cat": "low",
+            "pct": 10
+          },
+          "chance7": {
+            "cat": "low",
+            "pct": 30
+          }
+        }
+      ]
     }
   ]
 }
