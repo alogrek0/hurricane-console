@@ -79,6 +79,11 @@
   // focus is a one-shot opening gesture: consumed once applied, and cancelled
   // the instant the user pans/zooms — so a later refresh never yanks the view.
   var wantOpeningFocus = false; // armed just before the live boot load, so the placeholder sample render never consumes it
+  // App LAUNCH is context-free, so the opening focus may also switch the
+  // product (quiet TWD + active invest -> show the TWO it framed). A basin
+  // flip mid-session re-arms the focus but must NOT override a manual product
+  // choice (decided 2026-07-18): it only frames, never switches.
+  var openingIsLaunch = true;
   var userMoved = false;
   var programmaticMove = false; // true while WE move the map, so it isn't read as a user pan
   map.on('movestart zoomstart', function () { if (!programmaticMove) userMoved = true; });
@@ -158,7 +163,23 @@
         if (gen !== loadGen || userMoved || !portrait()) return; // superseded — let the newer load decide
         if (wantOpeningFocus && res && res.text) {
           var inv = activePoints(window.BasinParser.parseTWO(res.text, { basin: basin.id }), 'TWO');
-          if (inv.length) focusPoints(inv);
+          if (inv.length) {
+            // At LAUNCH the peek doesn't just steal the invest's coordinates —
+            // it switches the map to the product it framed, so the opening view
+            // never shows an empty patch of sea where the (undrawn) invest sits.
+            // The already-fetched text renders directly: no second fetch. A
+            // basin flip re-runs this peek but only frames (openingIsLaunch is
+            // false) — it must not override a manual product choice.
+            if (openingIsLaunch) {
+              loadGen++; // invalidate the TWD load's trailing TCM fetch
+              setMode('TWO');
+              try {
+                adoptTWO(res, false); // renderTWO -> focusOpening frames the invest
+              } catch (e) { clearToError('TWO render (opening peek)', e); }
+            } else {
+              focusPoints(inv);
+            }
+          }
         }
         wantOpeningFocus = false; // decision made: system or MDR default
       }).catch(function (e) { console.warn('outlook peek failed', e); wantOpeningFocus = false; }); // no network → keep the MDR default
@@ -1577,6 +1598,20 @@
     });
   }
 
+  // The full "got TWO text -> render + badge + cache" tail, shared by loadTWO
+  // and the launch-time outlook peek (which already holds a fetched product and
+  // must not pay for a second fetch). Parse-before-render: never mutate layers
+  // on a throw. Throws propagate to the caller's clearToError.
+  function adoptTWO(res, fromUser) {
+    var parsed = window.BasinParser.parseTWO(res.text, { basin: basin.id });
+    renderTWO(parsed);
+    setBadge(res.cached ? 'CACHED' : 'LIVE');
+    var key = basin.id + 'TWO';
+    if (fromUser && !res.cached && res.text === lastFetched[key]) noNewProductToast();
+    if (!res.cached) lastFetched[key] = res.text;
+    try { localStorage.setItem('hc-last-' + basin.id + '-TWO', res.text); } catch (e) { }
+  }
+
   function loadTWO(fromUser) {
     resetHistory();
     var gen = ++loadGen;
@@ -1585,14 +1620,7 @@
       if (gen !== loadGen) return;
       if (!res.text) throw new Error('empty');
       try {
-        // Parse-before-render, as in loadTWD: never mutate layers on a throw.
-        var parsed = window.BasinParser.parseTWO(res.text, { basin: basin.id });
-        renderTWO(parsed);
-        setBadge(res.cached ? 'CACHED' : 'LIVE');
-        var key = basin.id + 'TWO';
-        if (fromUser && !res.cached && res.text === lastFetched[key]) noNewProductToast();
-        if (!res.cached) lastFetched[key] = res.text;
-        try { localStorage.setItem('hc-last-' + basin.id + '-TWO', res.text); } catch (e) { }
+        adoptTWO(res, fromUser);
       } catch (e) {
         clearToError('TWO render', e);
       }
@@ -1827,7 +1855,8 @@
     loadGen++; // kill any in-flight fetch that would resolve into the old basin
     // A basin switch is a fresh opening gesture: re-arm the invest-or-higher
     // focus (and its one-shot outlook peek) for the incoming basin's first load.
-    wantOpeningFocus = true; userMoved = false; openingPeeked = false;
+    // NOT a launch though — the peek may frame an invest but won't switch product.
+    wantOpeningFocus = true; userMoved = false; openingPeeked = false; openingIsLaunch = false;
     // Clear ALL feature paths BEFORE rebuilding masks (z-order invariant above).
     clearCats(TWD_CATS.concat(TCM_CATS).concat(['two', 'diff']));
     tcmNote = '';
