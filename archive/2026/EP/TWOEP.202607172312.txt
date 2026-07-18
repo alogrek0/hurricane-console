@@ -1,0 +1,38 @@
+
+000
+ABPZ20 KNHC 172312
+TWOEP 
+
+Tropical Weather Outlook
+NWS National Hurricane Center Miami FL
+500 PM PDT Fri Jul 17 2026
+
+For the eastern and central North Pacific east of 180 longitude:
+
+Active Systems:
+The National Hurricane Center is issuing advisories on Tropical 
+Storm Elida, located well west-southwest of the southern tip of the 
+Baja California Peninsula.
+
+Central and Western East Pacific (EP97):
+A tropical wave located several hundred miles south-southwest of the 
+coast of southwestern Mexico continues to produce a large area of 
+disorganized showers and thunderstorms. Environmental conditions 
+appear conducive for development of this system, and a tropical 
+depression is expected to form over the weekend while it moves 
+west-northwestward to northwestward at 10 to 15 mph over the central 
+portion of the eastern Pacific.
+* Formation chance through 48 hours...high...80 percent.
+* Formation chance through 7 days...high...90 percent.
+
+Eastern and Central East Pacific:
+A broad area of low pressure is forecast to develop well to the 
+south of Mexico during the middle to latter part of next week. Some 
+gradual development of this system is possible thereafter while it 
+moves westward to west-northwestward across the eastern and central 
+portions of the eastern Pacific.
+* Formation chance through 48 hours...low...near 0 percent. 
+* Formation chance through 7 days...low...30 percent.
+
+$$
+Forecaster Reinhart

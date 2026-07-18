@@ -1,0 +1,36 @@
+
+836 
+ABNT20 KNHC 172317
+TWOAT 
+
+Tropical Weather Outlook
+NWS National Hurricane Center Miami FL
+800 PM EDT Fri Jul 17 2026
+
+For the North Atlantic...Caribbean Sea and the Gulf of America:
+
+Northern Gulf of America and near Florida:
+Showers and thunderstorms over the eastern Gulf of America and 
+portions of the Florida Peninsula are associated with an upper-level 
+low and a surface trough. Surface observations indicate that 
+pressures are high in the area and that currently there are no signs 
+of a surface circulation. However, some gradual development of this 
+system is possible while it meanders northward, bringing heavy rain 
+to portions of the Florida west coast during the next several days. 
+* Formation chance through 48 hours...low...10 percent.
+* Formation chance through 7 days...low...30 percent.
+
+Eastern Tropical Atlantic:
+A broad area of low pressure, associated with a tropical wave, is 
+located near the western Cabo Verde Islands.  The low is producing 
+limited and disorganized showers and thunderstorms while it moves 
+west-northwestward at 10 to 15 mph.  Environmental conditions are 
+becoming less conducive, and development of this system is no longer 
+anticipated. However, this system will likely produce some gusty 
+winds and locally heavy rain over the Cabo Verde Islands tonight.   
+* Formation chance through 48 hours...low...near 0 percent.
+* Formation chance through 7 days...low...near 0 percent.
+
+$$
+Forecaster Beven
+

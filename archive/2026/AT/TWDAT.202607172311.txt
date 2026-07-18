@@ -1,0 +1,128 @@
+
+980 
+AXNT20 KNHC 172311
+TWDAT 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+0015 UTC Sat Jul 18 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 1800 UTC surface analysis and satellite imagery through
+2300 UTC.
+
+...SPECIAL FEATURE...
+
+Caribbean Gale Warning: A tight pressure gradient between the 
+Atlantic high pressure north of the basin and the Colombian low 
+will continue to support NE to E winds pulsing to gale-force 
+across the waters N of Colombia tonight and Sat night. Otherwise,
+strong to near-gale force trade winds and rough seas will prevail
+across the much of the central Caribbean into early Mon before 
+contracting to south of 15N. Rough to very rough seas in the 12 
+to 14 ft range will develop during the times of peak winds.
+
+Please read the latest HIGH SEAS FORECAST 
+issued by the National Hurricane Center at website - 
+https://www.nhc.noaa.gov/text/MIAHSFAT2.shtml for more details.
+
+...TROPICAL WAVES...
+
+A well defined tropical wave is moving across the Cabo Verde Islands.
+Its axis is along 23.5W, south of 18N, moving westward at 5 to 10 kt.
+A broad area of low pressure, associated with this tropical wave,
+is located near the southern Cabo Verde Islands. The low continues
+to produce a limited and disorganized area of showers and thunderstorms
+while it moves west-northwestward at 10 to 15 mph. Significant development
+of this system is not expected before environmental conditions become
+even less favorable for development over the weekend. Regardless of
+development, this system will likely produce some gusty winds and
+locally heavy rain over the southern Cabo Verde Islands over the next
+several hours. 
+
+Another tropical wave is along 46.5W, south of 18N, moving westward
+at 15 to 20 kt. Convection is limited near the wave axis. 
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough enters the Atlantic near 20N16W and continues
+southwestward to a 1011 mb low pressure located near the southern
+Cabo Verde Islands to 09N42W. The ITCZ extends from 09N48W to 
+09N59W. Scattered moderate convection is observed N of the ITCZ 
+to about 11N. 
+
+...GULF OF AMERICA...
+
+A large area of showers and thunderstorms is affecting most of
+the Florida Peninsula and the eastern Gulf. This convective
+activity is associated with an upper-level low and a surface 
+trough. A ridge dominates the Gulf waters, anchored by a 1022 mb
+high pressure located over the north-central Gulf near 28N91W.
+Under this weather patter, gentle to moderate winds are noted 
+per scatterometer data over much of the basin, with the exception
+of light to gentle winds across the north-central Gulf near the 
+high pressure center. Seas are generally 3 to 5 ft, except 1 to 3
+ft N of 25 E of 93W, and over the SE Gulf. 
+
+For the forecast, low pressure across the NE Gulf will remain nearly
+stationary into the start of next week. Some gradual development
+of this system is possible while it meanders northward, bringing
+heavy rain to portions of the Florida west coast during the next
+several days. Elsewhere, weak high pressure will dominate, bringing
+gentle to moderate winds and slight to moderate seas through the
+period. 
+
+...CARIBBEAN SEA...
+
+A Gale Warning remains in effect for the south-central Caribbean
+near the coast of Colombia. Please refer to the Special Features
+section for more details.
+
+The most recent satellite derived wind data provide observations
+of fresh to strong winds over the central Caribbean while an 
+altimeter pass indicates seas up to 12 ft with these winds, that
+are the result of the pressure gradient between the Atlantic 
+ridge and the Colombian low. Moderate to fresh trade winds and 
+moderate seas are seen over the eastern Caribbean. Moderate or 
+weaker winds are and slight to moderate seas prevail elsewhere. 
+The Saharan Air Layer (SAL) from CIMSS shows African dust over 
+most of the Caribbean Sea resulting in hazy conditions and 
+reduced air quality.
+
+For the forecast, the pressure gradient between the Atlantic 
+ridge oriented along 27N and the Colombian low will support NE 
+winds pulsing to gale-force across the waters N of Colombia 
+tonight and Sat night. Otherwise, strong to near-gale force 
+trade winds and rough seas will prevail across the much of the 
+central Caribbean into early Mon before contracting to south of 
+15N. East winds will pulse fresh to locally strong each evening 
+this weekend in the Windward Passage. 
+
+...ATLANTIC OCEAN...
+
+High pressure dominates the Atlantic forecast waters, with a 1025
+mb center located SE of Bermuda near 28N64W. Moderate to fresh
+winds are observed S of 24N while light to gentle winds are seen
+elsewhere. Seas are generally moderate based on altimeter data 
+and Sofar buoy observations. African dust is also affecting most
+of the Atlantic forecast region, particularly E of 70W and over 
+the SE Bahamas, suppressing the development of showers and 
+thunderstorms. A few showers are occurring E of the Bahamas and W
+of 70W.
+
+For the forecast west of 55W, the western Atlantic subtropical 
+ridge will gradually weaken and drift northward this weekend, as 
+a broad surface trough forms between 50W and 60W. This trough 
+will then drift westward next week. Moderate to fresh trades will
+prevail S of 24N, with gentle winds to the N. Pulsing strong 
+winds are expected during the evenings this weekend N of Hispaniola
+and in the Windward Passage. 
+
+$$
+GR
+

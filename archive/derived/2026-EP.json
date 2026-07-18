@@ -16716,6 +16716,98 @@
           }
         }
       ]
+    },
+    {
+      "file": "TWDEP.202607172133.txt",
+      "kind": "TWD",
+      "stamp": "202607172133",
+      "issuedISO": "2026-07-17T22:05:00.000Z",
+      "cyclones": [
+        {
+          "name": "Elida",
+          "classification": "Tropical Storm",
+          "lat": 17.1,
+          "lon": -121.9,
+          "windKt": 55
+        }
+      ],
+      "waves": [],
+      "convection": 6,
+      "troughs": 0,
+      "fixes": 4,
+      "inferred": 1,
+      "projections": 1
+    },
+    {
+      "file": "TWOEP.202607172312.txt",
+      "kind": "TWO",
+      "stamp": "202607172312",
+      "issuedISO": "2026-07-18T00:00:00.000Z",
+      "disturbances": [
+        {
+          "invest": "EP97",
+          "lat": 17,
+          "lon": -102,
+          "chance48": {
+            "cat": "high",
+            "pct": 80
+          },
+          "chance7": {
+            "cat": "high",
+            "pct": 90
+          }
+        },
+        {
+          "invest": null,
+          "lat": null,
+          "lon": null,
+          "chance48": {
+            "cat": "low",
+            "pct": 0
+          },
+          "chance7": {
+            "cat": "low",
+            "pct": 30
+          }
+        }
+      ]
+    },
+    {
+      "file": "TWDEP.202607180235.txt",
+      "kind": "TWD",
+      "stamp": "202607180235",
+      "issuedISO": "2026-07-18T04:05:00.000Z",
+      "cyclones": [
+        {
+          "name": "Elida",
+          "classification": "Tropical Storm",
+          "lat": 17.4,
+          "lon": -122.5,
+          "windKt": 55
+        }
+      ],
+      "waves": [
+        {
+          "id": "W1",
+          "axis": [
+            {
+              "lat": 18,
+              "lon": -105
+            },
+            {
+              "lat": 1,
+              "lon": -105
+            }
+          ],
+          "inferred": false,
+          "motion": null
+        }
+      ],
+      "convection": 1,
+      "troughs": 1,
+      "fixes": 5,
+      "inferred": 1,
+      "projections": 1
     }
   ]
 }

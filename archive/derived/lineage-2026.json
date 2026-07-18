@@ -11144,6 +11144,40 @@
               ],
               "inferred": false,
               "link": "axis"
+            },
+            {
+              "stamp": "202607172311",
+              "file": "TWDAT.202607172311.txt",
+              "meanLon": -46.5,
+              "axis": [
+                {
+                  "lat": 18,
+                  "lon": -46.5
+                },
+                {
+                  "lat": 6,
+                  "lon": -46.5
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
+            },
+            {
+              "stamp": "202607180353",
+              "file": "TWDAT.202607180353.txt",
+              "meanLon": -49,
+              "axis": [
+                {
+                  "lat": 17,
+                  "lon": -49
+                },
+                {
+                  "lat": 5,
+                  "lon": -49
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
             }
           ]
         },
@@ -11349,6 +11383,40 @@
                 {
                   "lat": 6,
                   "lon": -22.5
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
+            },
+            {
+              "stamp": "202607172311",
+              "file": "TWDAT.202607172311.txt",
+              "meanLon": -23.5,
+              "axis": [
+                {
+                  "lat": 18,
+                  "lon": -23.5
+                },
+                {
+                  "lat": 6,
+                  "lon": -23.5
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
+            },
+            {
+              "stamp": "202607180353",
+              "file": "TWDAT.202607180353.txt",
+              "meanLon": -27,
+              "axis": [
+                {
+                  "lat": 18,
+                  "lon": -27
+                },
+                {
+                  "lat": 6,
+                  "lon": -27
                 }
               ],
               "inferred": false,
@@ -12637,6 +12705,22 @@
               },
               "tagged": false,
               "link": "proximity"
+            },
+            {
+              "stamp": "202607172317",
+              "file": "TWOAT.202607172317.txt",
+              "lat": 12,
+              "lon": -28,
+              "chance48": {
+                "cat": "low",
+                "pct": 0
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 0
+              },
+              "tagged": false,
+              "link": "proximity"
             }
           ]
         },
@@ -12659,6 +12743,22 @@
               },
               "tagged": false,
               "link": null
+            },
+            {
+              "stamp": "202607172317",
+              "file": "TWOAT.202607172317.txt",
+              "lat": 27.8,
+              "lon": -81.5,
+              "chance48": {
+                "cat": "low",
+                "pct": 10
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 30
+              },
+              "tagged": false,
+              "link": "proximity"
             }
           ]
         }
@@ -19646,6 +19746,28 @@
               "link": "axis"
             }
           ]
+        },
+        {
+          "id": "EP-W-202607180235-1",
+          "sightings": [
+            {
+              "stamp": "202607180235",
+              "file": "TWDEP.202607180235.txt",
+              "meanLon": -105,
+              "axis": [
+                {
+                  "lat": 18,
+                  "lon": -105
+                },
+                {
+                  "lat": 1,
+                  "lon": -105
+                }
+              ],
+              "inferred": false,
+              "link": null
+            }
+          ]
         }
       ],
       "invests": [
@@ -24732,6 +24854,22 @@
               },
               "tagged": true,
               "link": "proximity"
+            },
+            {
+              "stamp": "202607172312",
+              "file": "TWOEP.202607172312.txt",
+              "lat": 17,
+              "lon": -102,
+              "chance48": {
+                "cat": "high",
+                "pct": 80
+              },
+              "chance7": {
+                "cat": "high",
+                "pct": 90
+              },
+              "tagged": true,
+              "link": "tag"
             }
           ]
         },
@@ -24773,6 +24911,28 @@
               "chance7": {
                 "cat": "low",
                 "pct": 20
+              },
+              "tagged": false,
+              "link": null
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202607172312-1",
+          "tag": null,
+          "sightings": [
+            {
+              "stamp": "202607172312",
+              "file": "TWOEP.202607172312.txt",
+              "lat": null,
+              "lon": null,
+              "chance48": {
+                "cat": "low",
+                "pct": 0
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 30
               },
               "tagged": false,
               "link": null
@@ -25555,6 +25715,24 @@
               "file": "TWDEP.202607171558.txt",
               "lat": 16.8,
               "lon": -120.8,
+              "classification": "Tropical Storm",
+              "windKt": 55,
+              "link": "name"
+            },
+            {
+              "stamp": "202607172133",
+              "file": "TWDEP.202607172133.txt",
+              "lat": 17.1,
+              "lon": -121.9,
+              "classification": "Tropical Storm",
+              "windKt": 55,
+              "link": "name"
+            },
+            {
+              "stamp": "202607180235",
+              "file": "TWDEP.202607180235.txt",
+              "lat": 17.4,
+              "lon": -122.5,
               "classification": "Tropical Storm",
               "windKt": 55,
               "link": "name"
