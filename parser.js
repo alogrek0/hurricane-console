@@ -836,7 +836,12 @@
           chance48: twoChance(flat, '48 hours'),
           chance7: twoChance(flat, '7 days'),
           source: flat.slice(0, 300),
-          context: capContext(flat, 0, Math.min(flat.length, 300)),
+          // UNCAPPED on purpose: a TWO entry is the COMPLETE, self-contained
+          // paragraph NHC wrote about this system (~400-1000 chars) — cutting
+          // it truncates a finished thought mid-sentence ("expected to bring…").
+          // The popup scrolls; TWD features keep capContext (their paragraphs
+          // are long and shared across many features).
+          context: flat,
         });
       }
       prev = chunk;
