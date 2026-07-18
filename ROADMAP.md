@@ -209,6 +209,15 @@ prefer broken chains over invented links.
   chance-trend sparklines (absorbs the Track A sparkline item), season
   calibration table (stated 48h/7d odds vs outcomes) — all over
   `lineage-2026.json`.
+  *Stage A shipped 2026-07-18: `tools/build-genesis-ledger.js` derives
+  `archive/derived/genesis-2026.json` (rebuilt by the 6-hourly cron) — four
+  per-statement verdicts extending the honesty rule to outcomes: `formed`
+  requires a lineage genesis link; an unattributed cyclone nearby makes the
+  window `unresolved` (AL90's 60/60 vs unlinked One/Arthur — refuses to invent
+  formed OR not-formed); open windows `pending`. Calibration lives in
+  `tools/genesis-lab.html` (dev-side while the season's sample is small),
+  which also holds 3 timeline + 3 sparkline candidate treatments. Stage B
+  (in-app invest-popup UI) waits on treatment constants picked in the lab.*
 
 ## Maintenance calendar
 
