@@ -25,6 +25,16 @@ planned tracks — lived friction beats speculation.
   but took `version.js` — the actual update signal — from the HTTP cache
   (GitHub Pages `max-age=600`). Fixed same day: register with
   `updateViaCache:'none'`.
+- [x] **Opening focus framed an invest the map wasn't showing** (2026-07-18,
+  user recommendation) — with a quiet TWD and an active invest, the launch
+  peek zoomed to the invest's spot while still displaying the TWD: a framed
+  patch of empty sea. Now the LAUNCH peek also switches the product — it
+  adopts the TWO it already fetched (zero extra network, real badge/cache
+  handling via the shared adoptTWO tail) so the framed invest is on screen,
+  with the segmented control lighting TWO. App-open only, by explicit
+  decision: launch is context-free, but a basin flip mid-session re-runs the
+  peek frame-only — it must never override a manual product choice. The
+  cyclone path is unchanged (an active TWD cyclone wins and stays TWD).
 - [x] **Tall invest popup clipped at the frame top on mobile; swipes panned the
   map instead of scrolling it** (2026-07-18, reported from the phone on AL91) —
   two stacked causes. (1) A popup anchored high in the basin opens upward past
