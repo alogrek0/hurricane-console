@@ -1783,19 +1783,26 @@
     mode === 'TWD' ? loadTWD(true) : loadTWO(true);
   });
 
-  var whichBtn = document.getElementById('which');
+  // Segmented product control: the pressed side IS the product on the map
+  // (the old single "TWD / TWO" toggle never said which one was showing).
+  // Clicking the already-active side is a no-op — Refresh owns reloading.
+  var segTWD = document.getElementById('segTWD');
+  var segTWO = document.getElementById('segTWO');
   function setMode(m) {
     resetHistory(); // covers the paste path too — every paste branch calls setMode first
     mode = m;
-    whichBtn.textContent = mode === 'TWD' ? 'TWD / TWO' : 'TWO / TWD';
+    segTWD.setAttribute('aria-pressed', String(m === 'TWD'));
+    segTWO.setAttribute('aria-pressed', String(m === 'TWO'));
     updateSubtitle(); // prodTag follows the product (TWDAT/TWOAT/TWDEP/TWOEP)
     // One badge, one product: never show both products at once.
     if (mode === 'TWD') cat.two.clearLayers();
     else { clearCats(TWD_CATS.concat(TCM_CATS)); tcmNote = ''; }
   }
-  whichBtn.addEventListener('click', function () {
-    setMode(mode === 'TWD' ? 'TWO' : 'TWD');
-    mode === 'TWD' ? loadTWD() : loadTWO();
+  segTWD.addEventListener('click', function () {
+    if (mode !== 'TWD') { setMode('TWD'); loadTWD(); }
+  });
+  segTWO.addEventListener('click', function () {
+    if (mode !== 'TWO') { setMode('TWO'); loadTWO(); }
   });
 
   // --- basin switcher (header subtitle toggle) -------------------------------
