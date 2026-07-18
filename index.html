@@ -124,7 +124,14 @@
      horizontal scroller (time-true spacing — long chains scroll, never squash),
      the ruler timeline scaled to the popup width, caption reuses hc-hist-note. */
   .hc-gen{margin-top:.45rem}
-  .hc-gen-scroll{overflow-x:auto;overflow-y:hidden;max-width:100%}
+  /* Touch scrolling inside popups: the Leaflet container declares
+     touch-action:none (it owns pan/zoom gestures), which on iOS also kills
+     native scrolling of the popup's overflow box — swipes "lock" and fall
+     through to the map. Re-enable vertical pans on the scrolling content (and
+     horizontal for the sparkline strip); Leaflet already stops these touches
+     from starting a map drag. */
+  .leaflet-popup-content{touch-action:pan-y;-webkit-overflow-scrolling:touch}
+  .hc-gen-scroll{overflow-x:auto;overflow-y:hidden;max-width:100%;touch-action:pan-x pan-y}
   .hc-gen-scroll svg{display:block}
   .hc-gen-ruler{display:block;margin-top:.3rem}
   /* trail ○ start / × end glyphs (divIcon); halo so they read over any feature */

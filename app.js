@@ -505,8 +505,44 @@
     return head + '<div class="pop-src">' + escapeHtml(ctx || src || '') + '</div>';
   }
   // popups keep ~20px per side on narrow viewports instead of going edge-to-edge
-  // (maxWidth constrains the CONTENT; Leaflet's wrapper adds ~50px of chrome)
-  var POPUP_OPTS = { maxWidth: Math.min(340, window.innerWidth - 90), maxHeight: 280 };
+  // (maxWidth constrains the CONTENT; Leaflet's wrapper adds ~50px of chrome).
+  // maxHeight also respects SHORT viewports (landscape phones) so the scrolling
+  // content box can always fit inside the map frame.
+  var POPUP_OPTS = { maxWidth: Math.min(340, window.innerWidth - 90),
+    maxHeight: Math.min(280, Math.max(140, window.innerHeight - 220)) };
+
+  // A popup anchored high in the basin opens upward past the map frame's top,
+  // and autopan CANNOT rescue it — maxBoundsViscosity pins the map at the frame
+  // (chart-fit leaves zero pan slack). When the settled popup is clipped above
+  // the frame, slide it down over its anchor instead (bounded by the frame
+  // bottom). Delayed so Leaflet's ~0.25s autopan animation finishes first —
+  // where autopan CAN fix it, the measured clip is 0 and nothing moves.
+  // Three settle passes: the popup grows asynchronously (charts arrive after
+  // open) and Leaflet's autopan animates ~0.25s, so a single early measurement
+  // can capture a stale height/position. Each pass is idempotent — reset,
+  // re-measure, re-apply — so once things settle the margin stops changing.
+  function fitPopupInView(pop) {
+    var tries = 0;
+    function settle() {
+      var c = pop._container;
+      if (!c || !pop.isOpen || !pop.isOpen()) return;
+      // Leaflet anchors the popup by its BOTTOM edge (container.style.bottom),
+      // so vertical shifts must go through margin-bottom: the stylesheet's 20px
+      // is the tip gap; subtracting from it slides the popup DOWN over its
+      // anchor. margin-top has no effect on a bottom-positioned box.
+      c.style.marginBottom = ''; // re-measure from the natural anchored position
+      var mapR = map.getContainer().getBoundingClientRect();
+      var r = c.getBoundingClientRect();
+      var clip = (mapR.top + 8) - r.top;
+      if (clip > 0) {
+        var room = (mapR.bottom - 8) - r.bottom;
+        var base = parseFloat(getComputedStyle(c).marginBottom) || 0;
+        c.style.marginBottom = (base - Math.min(clip, Math.max(0, room))) + 'px';
+      }
+      if (++tries < 3) setTimeout(settle, 450);
+    }
+    setTimeout(settle, 300);
+  }
   function escapeHtml(s) {
     return String(s).replace(/[&<>"]/g, function (c) {
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
@@ -972,6 +1008,7 @@
     if (pop._updatePosition) pop._updatePosition();
     if (c) c.style.visibility = '';
     if (pop._adjustPan) pop._adjustPan();
+    fitPopupInView(pop); // grown content may re-clip at the frame top
   }
   function wireHistLink(pop) {
     var el = pop.getElement && pop.getElement();
@@ -1017,7 +1054,7 @@
       if (ev.key === 'Enter' || ev.key === ' ' || ev.key === 'Spacebar') { ev.preventDefault(); activate(); }
     };
   }
-  map.on('popupopen', function (e) { wireHistLink(e.popup); wireGenesis(e.popup); });
+  map.on('popupopen', function (e) { wireHistLink(e.popup); wireGenesis(e.popup); fitPopupInView(e.popup); });
 
   // --- genesis ledger popup (Track C M4 stage B) ------------------------------
   // A tagged-invest popup renders that invest's genesis ledger record: the

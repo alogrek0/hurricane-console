@@ -25,6 +25,20 @@ planned tracks — lived friction beats speculation.
   but took `version.js` — the actual update signal — from the HTTP cache
   (GitHub Pages `max-age=600`). Fixed same day: register with
   `updateViaCache:'none'`.
+- [x] **Tall invest popup clipped at the frame top on mobile; swipes panned the
+  map instead of scrolling it** (2026-07-18, reported from the phone on AL91) —
+  two stacked causes. (1) A popup anchored high in the basin opens upward past
+  the map frame, and autopan can't rescue it: `maxBoundsViscosity: 1.0` pins
+  the chart-fit view with zero pan slack, so the popup top (title included)
+  clipped off-screen — latent for any long-text invest, guaranteed once the M4
+  genesis charts landed. Fixed: `fitPopupInView` slides a clipped popup down
+  over its anchor via margin-bottom (Leaflet anchors popups by their BOTTOM
+  edge — margin-top is a no-op), settling over three idempotent passes because
+  the charts arrive async and autopan animates. (2) Leaflet's container
+  declares `touch-action:none`, which on iOS also kills native scrolling of
+  the popup's overflow box — swipes "locked" and fell through to the map.
+  Fixed: `touch-action:pan-y` on the popup content (`pan-x pan-y` on the
+  sparkline strip); Leaflet already stops those touches from starting a drag.
 - [x] **The app was always one launch behind** (2026-07-14) — reported three
   times in a day as "I don't see <the thing you just shipped>". Each time the
   deploy was fine and the SW had already downloaded the new shell; the running
