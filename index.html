@@ -120,6 +120,13 @@
   .hc-hist-link:focus-visible{outline:2px solid var(--amber);outline-offset:2px;border-radius:2px}
   .hc-hist-note{color:var(--dim);font-size:.62rem;line-height:1.4;margin-top:.25rem}
   .hc-hist-note[hidden]{display:none}
+  /* genesis ledger popup charts (Track C M4 stage B): step-dual sparkline over a
+     horizontal scroller (time-true spacing — long chains scroll, never squash),
+     the ruler timeline scaled to the popup width, caption reuses hc-hist-note. */
+  .hc-gen{margin-top:.45rem}
+  .hc-gen-scroll{overflow-x:auto;overflow-y:hidden;max-width:100%}
+  .hc-gen-scroll svg{display:block}
+  .hc-gen-ruler{display:block;margin-top:.3rem}
   /* trail ○ start / × end glyphs (divIcon); halo so they read over any feature */
   .hc-trail-ep span{display:block;width:14px;height:14px;line-height:14px;text-align:center;
     font-weight:700;text-shadow:0 0 2px #04101a,0 0 2px #04101a}
