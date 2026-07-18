@@ -1,0 +1,26 @@
+
+000
+ABNT20 KNHC 181110
+TWOAT 
+
+Tropical Weather Outlook
+NWS National Hurricane Center Miami FL
+800 AM EDT Sat Jul 18 2026
+
+For the North Atlantic...Caribbean Sea and the Gulf of America:
+
+Northern Gulf of America and near Florida:
+Showers and thunderstorms over the eastern Gulf of America are 
+associated with an upper-level low and a surface trough.  Surface 
+observations indicate that pressures remain high in the area, and 
+winds are generally light. However, some gradual development of this 
+system is possible while it moves slowly northward or 
+north-northwestward during the next few days.  Interests along the 
+Florida west coast and Florida Panhandle should monitor the progress 
+of this system as it is expected to bring heavy rain to portions of 
+that region during the next several days. 
+* Formation chance through 48 hours...low...20 percent.
+* Formation chance through 7 days...low...30 percent.
+
+$$
+Forecaster Cangialosi/Katz
