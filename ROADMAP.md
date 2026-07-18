@@ -25,6 +25,17 @@ planned tracks — lived friction beats speculation.
   but took `version.js` — the actual update signal — from the HTTP cache
   (GitHub Pages `max-age=600`). Fixed same day: register with
   `updateViaCache:'none'`.
+- [x] **TWO popup text ended mid-sentence with "…"** (2026-07-18, phone
+  report) — the 600-char CONTEXT_MAX cap cut AL91's entry exactly at the
+  impact sentence + recon-flight line. A TWO entry is the complete,
+  self-contained paragraph NHC wrote about that system, so the disturbance
+  extractor now passes it uncapped (popups scroll since .3); TWD features
+  keep the cap (long paragraphs shared across many features).
+- [x] **Formation-chance star lines read as run-on paragraph text**
+  (2026-07-18, phone report) — the raw product writes them as separate "*"
+  bullets; chunk-flattening ran them into the prose. renderTWO now splits
+  them back onto their own lines in a `.pop-chances` block under a dashed
+  separator — verbatim NHC words, NHC's own layout restored.
 - [x] **Opening focus framed an invest the map wasn't showing** (2026-07-18,
   user recommendation) — with a quiet TWD and an active invest, the launch
   peek zoomed to the invest's spot while still displaying the TWD: a framed

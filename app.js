@@ -1436,12 +1436,26 @@
       var label = 'TWO ' + d.id +
         ' · 48h ' + (d.chance48 ? d.chance48.pct + '%' : 'n/a') +
         ' / 7d ' + (d.chance7 ? d.chance7.pct + '%' : 'n/a');
+      // The raw product writes the formation chances as separate "*" bullet
+      // lines; chunk-flattening ran them into the paragraph. Split them back
+      // out and render each on its own line (verbatim words, NHC's layout).
+      // The source span is trimmed to the prose so the highlight still lands.
+      var starAt = d.context ? d.context.indexOf('* Formation chance') : -1;
+      var prose = starAt > 0 ? d.context.slice(0, starAt).replace(/\s+$/, '') : d.context;
+      var src = starAt > 0 && d.source && d.source.length > starAt
+        ? d.source.slice(0, starAt).replace(/\s+$/, '') : d.source;
+      var chances = starAt > 0
+        ? '<div class="pop-chances">' +
+          d.context.slice(starAt).split(/\s+(?=\*\s*Formation chance)/).map(function (line) {
+            return '<div>' + escapeHtml(line.trim()) + '</div>';
+          }).join('') + '</div>'
+        : '';
       L.circle(ll(d), {
         radius: 300000, color: color, weight: 2, dashArray: '6 5',
         fillColor: color, fillOpacity: 0.08, pane: 'hc-areas'
         // history only for a TAGGED disturbance — an untagged area has no invest
         // id to match a chain on, so offering the link would risk a wrong lineage.
-      }).bindPopup(popup(label, d.source, true, d.context) +
+      }).bindPopup(popup(label, src, true, prose) + chances +
         (d.invest ? histLink({ kind: 'invest', tag: d.invest }) +
           '<div class="hc-gen" data-tag="' + escapeHtml(d.invest) + '"></div>' : ''),
         POPUP_OPTS).addTo(cat.two);
