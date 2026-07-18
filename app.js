@@ -1017,7 +1017,237 @@
       if (ev.key === 'Enter' || ev.key === ' ' || ev.key === 'Spacebar') { ev.preventDefault(); activate(); }
     };
   }
-  map.on('popupopen', function (e) { wireHistLink(e.popup); });
+  map.on('popupopen', function (e) { wireHistLink(e.popup); wireGenesis(e.popup); });
+
+  // --- genesis ledger popup (Track C M4 stage B) ------------------------------
+  // A tagged-invest popup renders that invest's genesis ledger record: the
+  // step-dual chance sparkline + the ruler timeline, styled to the stage-B pick
+  // locked in tools/genesis-lab.html. Verdicts are READ from genesis-2026.json,
+  // never recomputed in the browser. Honesty invariants (not options): null
+  // chances gap — never interpolated; the pending window is hatched, never
+  // guessed; unresolved is cross-hatched gold naming the nearby cyclone(s); the
+  // genesis ★ appears ONLY on a formed lineage link. Untagged areas get nothing
+  // (no tag, no record match — same rule as the history affordance).
+  var HC_GENESIS = { timeline: 'ruler', tlRow: 15, tlGlyph: 10, tlChips: true, tlHatch: 5,
+    spark: 'step-dual', sparkW: 10, sparkH: 36, spark48: true,
+    spacing: 'time', bandOp: 0.23, dotR: 2, sparkStroke: 1.5 };
+  // the TWO 7d-pct threshold colors (same values as renderTWO's inline pick)
+  function genPctCol(pct) { return pct >= 60 ? '#ff4d3d' : pct >= 40 ? '#ff9d3a' : '#ffd23a'; }
+  var GEN_GOLD = '#e8c34f', GEN_AMBER = '#ffa23a', GEN_DIM = '#6f8ea0', GEN_SLATE = '#4a6474';
+
+  var genesisData = null; // parsed genesis-2026.json, cached for the session
+  function loadGenesis(cb) {
+    if (genesisData) { cb(genesisData); return; }
+    fetchTimed('archive/derived/genesis-2026.json').then(function (r) {
+      if (!r.ok) throw new Error('http ' + r.status);
+      return r.json();
+    }).then(function (j) { genesisData = j; cb(j); })
+      .catch(function (e) { console.warn('genesis ledger fetch failed', e); cb(null); });
+  }
+
+  // exact tag match; several same-tag chains (a broken then re-used tag) ->
+  // newest last-sighting, the record the on-screen area belongs to
+  function genesisRecordFor(j, tag) {
+    var b = (j && j.basins && j.basins[basin.id]) || null;
+    if (!b || !tag) return null;
+    var best = null;
+    (b.invests || []).forEach(function (r) {
+      if (r.tag !== tag) return;
+      if (!best || r.lastStamp > best.lastStamp) best = r;
+    });
+    return best;
+  }
+
+  var GEN_SVGNS = 'http://www.w3.org/2000/svg';
+  var genPatSeq = 0;
+  function genSv(tag, attrs) {
+    var e = document.createElementNS(GEN_SVGNS, tag);
+    if (attrs) for (var k in attrs) if (attrs[k] != null) e.setAttribute(k, attrs[k]);
+    return e;
+  }
+  function genText(x, y, s, attrs) {
+    var e = genSv('text', attrs); e.setAttribute('x', x); e.setAttribute('y', y); e.textContent = s; return e;
+  }
+  function genHatch(defs, color, cross) {
+    var id = 'hcgx' + (genPatSeq++), gap = 4 + (10 - HC_GENESIS.tlHatch);
+    var p = genSv('pattern', { id: id, width: gap, height: gap, patternUnits: 'userSpaceOnUse',
+      patternTransform: 'rotate(45)' });
+    p.appendChild(genSv('line', { x1: 0, y1: 0, x2: 0, y2: gap, stroke: color, 'stroke-width': 1, opacity: 0.7 }));
+    if (cross) p.appendChild(genSv('line', { x1: 0, y1: 0, x2: gap, y2: 0, stroke: color, 'stroke-width': 1, opacity: 0.7 }));
+    defs.appendChild(p);
+    return 'url(#' + id + ')';
+  }
+  var GEN_MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  function genFmt(s) {
+    if (!s || s.length < 12) return String(s || '');
+    var d = new Date(stampMs(s));
+    function p2(n) { return (n < 10 ? '0' : '') + n; }
+    return GEN_MON[d.getUTCMonth()] + ' ' + d.getUTCDate() + ' ' + p2(d.getUTCHours()) + ':' + p2(d.getUTCMinutes()) + 'Z';
+  }
+  var GEN_DAY = 86400000;
+
+  // ruler timeline (lab tlRuler at the locked dials, popup-sized viewBox)
+  function genesisRuler(rec, nowStamp) {
+    var glyph = HC_GENESIS.tlGlyph;
+    var W = 270, PADX = 40, H = 108, axisY = 62;
+    var svg = genSv('svg', { viewBox: '0 0 ' + W + ' ' + H, width: '100%', height: H,
+      class: 'hc-gen-ruler', preserveAspectRatio: 'xMinYMid meet' });
+    var defs = genSv('defs'); svg.appendChild(defs);
+    var startMs = stampMs(rec.firstStamp), lastMs = stampMs(rec.lastStamp), nowMs = stampMs(nowStamp);
+    var winEnd = lastMs + 7 * GEN_DAY;
+    var endMs = Math.max(winEnd, lastMs, nowMs > lastMs ? Math.min(nowMs, winEnd) : lastMs);
+    if (endMs <= startMs) endMs = startMs + GEN_DAY;
+    var x0 = PADX, x1 = W - 26;
+    function X(ms) { return x0 + (ms - startMs) / (endMs - startMs) * (x1 - x0); }
+
+    if (winEnd > nowMs && nowMs >= startMs && rec.outcome.kind !== 'formed') {
+      var pStart = Math.max(nowMs, lastMs);
+      svg.appendChild(genSv('rect', { x: X(pStart), y: axisY - 14, width: Math.max(2, X(winEnd) - X(pStart)),
+        height: 28, fill: genHatch(defs, GEN_AMBER, false), stroke: GEN_AMBER,
+        'stroke-opacity': 0.5, 'stroke-dasharray': '3 3' }));
+      svg.appendChild(genText((X(pStart) + X(winEnd)) / 2, axisY + 30, 'pending window',
+        { fill: GEN_AMBER, 'font-size': 9, 'text-anchor': 'middle' }));
+    }
+    if (rec.outcome.kind === 'unresolved-nearby-cyclone') {
+      var firstUn = null;
+      rec.statements.forEach(function (s) {
+        if (firstUn == null && (s.verdict7 === 'unresolved' || s.verdict48 === 'unresolved')) firstUn = s.stamp;
+      });
+      var uStart = firstUn ? stampMs(firstUn) : startMs, earliest = null;
+      rec.outcome.nearby.forEach(function (n) {
+        var m = stampMs(n.firstStamp); if (earliest == null || m < earliest) earliest = m;
+      });
+      var uEnd = earliest != null ? Math.min(Math.max(earliest, lastMs), endMs) : lastMs;
+      svg.appendChild(genSv('rect', { x: X(uStart), y: axisY - 16, width: Math.max(3, X(uEnd) - X(uStart)),
+        height: 32, fill: genHatch(defs, GEN_GOLD, true), stroke: GEN_GOLD, 'stroke-opacity': 0.6 }));
+      var names = rec.outcome.nearby.map(function (n) { return n.name; }).join(' · ');
+      svg.appendChild(genText((X(uStart) + X(uEnd)) / 2, axisY + 30, 'unresolved — ' + names,
+        { fill: GEN_GOLD, 'font-size': 9, 'text-anchor': 'middle', 'font-weight': 700 }));
+    }
+    if (nowMs >= startMs && nowMs <= endMs) {
+      svg.appendChild(genSv('line', { x1: X(nowMs), y1: axisY - 24, x2: X(nowMs), y2: axisY + 18,
+        stroke: GEN_DIM, 'stroke-width': 1, 'stroke-dasharray': '2 3' }));
+      svg.appendChild(genText(X(nowMs), axisY - 27, 'now', { fill: GEN_DIM, 'font-size': 8, 'text-anchor': 'middle' }));
+    }
+    svg.appendChild(genSv('line', { x1: x0, y1: axisY, x2: x1, y2: axisY, stroke: '#2c5870', 'stroke-width': 1.4 }));
+    svg.appendChild(genText(x0 - 6, axisY + 4, '○', { fill: GEN_DIM, 'font-size': glyph + 3, 'text-anchor': 'end' }));
+    svg.appendChild(genText(x0 - 6, axisY + 16, genFmt(rec.firstStamp).slice(0, 6),
+      { fill: GEN_DIM, 'font-size': 7, 'text-anchor': 'end' }));
+    var tagDone = false;
+    rec.statements.forEach(function (s) {
+      var xx = X(stampMs(s.stamp)), has7 = s.chance7 != null;
+      var col = has7 ? genPctCol(s.chance7.pct) : GEN_SLATE;
+      svg.appendChild(genSv('line', { x1: xx, y1: axisY - glyph, x2: xx, y2: axisY + glyph,
+        stroke: col, 'stroke-width': has7 ? 2.2 : 1.2, 'stroke-dasharray': has7 ? null : '2 2',
+        'stroke-linecap': 'round' }));
+      if (!has7) svg.appendChild(genText(xx, axisY - glyph - 3, 'null', { fill: GEN_DIM, 'font-size': 6, 'text-anchor': 'middle' }));
+      if (!tagDone && s.tagged && rec.tag) {
+        tagDone = true;
+        svg.appendChild(genText(xx, axisY - glyph - 6, rec.tag,
+          { fill: GEN_AMBER, 'font-size': 9, 'font-weight': 700, 'text-anchor': 'middle' }));
+      }
+    });
+    if (rec.outcome.kind === 'formed' && rec.outcome.genesisStamp) {
+      var gx = X(stampMs(rec.outcome.genesisStamp));
+      svg.appendChild(genText(gx, axisY - glyph - 7, '★', { fill: GEN_GOLD, 'font-size': glyph + 7, 'text-anchor': 'middle' }));
+      svg.appendChild(genSv('line', { x1: gx, y1: axisY - glyph, x2: gx, y2: axisY + glyph, stroke: GEN_GOLD, 'stroke-width': 2 }));
+      svg.appendChild(genText(gx, axisY + 30, rec.outcome.cycloneName || 'genesis',
+        { fill: GEN_GOLD, 'font-size': 9, 'text-anchor': 'middle', 'font-weight': 700 }));
+    }
+    svg.appendChild(genText(X(lastMs), axisY + 4, '×', { fill: GEN_DIM, 'font-size': glyph + 5, 'text-anchor': 'middle' }));
+    svg.appendChild(genText(x1, axisY + 16, genFmt(rec.lastStamp), { fill: GEN_DIM, 'font-size': 7, 'text-anchor': 'end' }));
+    return svg;
+  }
+
+  // step-dual sparkline (lab drawSpark/sparkStep at the locked dials, scale 1)
+  function genesisSpark(rec) {
+    var w = HC_GENESIS.sparkW, h = HC_GENESIS.sparkH, padL = 4, padR = 4, padY = 3;
+    var sts = rec.statements, n = sts.length;
+    var xs; // time-true x spacing: honest issuance gaps (the locked pick)
+    if (HC_GENESIS.spacing === 'time' && n > 1) {
+      var t0 = stampMs(sts[0].stamp), span = (stampMs(sts[n - 1].stamp) - t0) || 1;
+      var totalW = (n - 1) * w;
+      xs = sts.map(function (s) { return (stampMs(s.stamp) - t0) / span * totalW; });
+    } else {
+      xs = sts.map(function (_, i) { return i * w; });
+    }
+    var W = (xs.length ? xs[xs.length - 1] : 0) + padL + padR;
+    var plotH = h - padY * 2;
+    function Y(pct) { return padY + (100 - pct) / 100 * plotH; }
+    function X(i) { return padL + xs[i]; }
+    var svg = genSv('svg', { width: W, height: h, viewBox: '0 0 ' + W + ' ' + h, class: 'hc-gen-spark' });
+    var op = HC_GENESIS.bandOp;
+    svg.appendChild(genSv('rect', { x: 0, y: Y(100), width: W, height: Y(60) - Y(100), fill: '#ff4d3d', opacity: op }));
+    svg.appendChild(genSv('rect', { x: 0, y: Y(60), width: W, height: Y(40) - Y(60), fill: '#ff9d3a', opacity: op }));
+    svg.appendChild(genSv('rect', { x: 0, y: Y(40), width: W, height: Y(0) - Y(40), fill: '#ffd23a', opacity: op * 0.7 }));
+    function stepPath(key) { // step, never smoothed; null -> gap, path breaks
+      var d = '', have = false, py = null;
+      for (var i = 0; i < n; i++) {
+        var c = sts[i][key];
+        if (!c) { have = false; py = null; continue; }
+        var x = X(i), y = Y(c.pct);
+        if (!have) { d += 'M' + x + ',' + y; have = true; }
+        else { d += 'L' + x + ',' + py + 'L' + x + ',' + y; }
+        py = y;
+      }
+      return d;
+    }
+    if (HC_GENESIS.spark48) {
+      svg.appendChild(genSv('path', { d: stepPath('chance48'), fill: 'none', stroke: '#ff9d3a',
+        'stroke-width': Math.max(0.6, (HC_GENESIS.sparkStroke - 1) * 0.7), opacity: 0.6, 'stroke-linejoin': 'round' }));
+    }
+    svg.appendChild(genSv('path', { d: stepPath('chance7'), fill: 'none', stroke: '#dce8ef',
+      'stroke-width': HC_GENESIS.sparkStroke, 'stroke-linejoin': 'round' }));
+    sts.forEach(function (s, i) {
+      if (s.chance7) svg.appendChild(genSv('circle', { cx: X(i), cy: Y(s.chance7.pct), r: HC_GENESIS.dotR, fill: genPctCol(s.chance7.pct) }));
+      if (HC_GENESIS.spark48 && s.chance48) svg.appendChild(genSv('circle', { cx: X(i), cy: Y(s.chance48.pct),
+        r: HC_GENESIS.dotR * 0.7, fill: 'none', stroke: '#ff9d3a', 'stroke-width': 0.8 }));
+    });
+    if (rec.outcome.kind === 'formed' && rec.outcome.genesisStamp) { // ★ formed only
+      var gm = stampMs(rec.outcome.genesisStamp), gi = n - 1;
+      for (var i = 0; i < n; i++) if (stampMs(sts[i].stamp) >= gm) { gi = i; break; }
+      svg.appendChild(genText(X(gi), h - 1, '★', { fill: GEN_GOLD, 'font-size': 8, 'text-anchor': 'middle' }));
+    }
+    return svg;
+  }
+
+  function genesisOutcomeLine(rec) {
+    var o = rec.outcome;
+    if (o.kind === 'formed') return 'formed → ' + (o.cycloneName || o.cycloneId) + ' @ ' + genFmt(o.genesisStamp);
+    if (o.kind === 'open') return 'open — pending';
+    if (o.kind === 'unresolved-nearby-cyclone') {
+      return 'unresolved — nearby ' + o.nearby.map(function (n) { return n.name; }).join(' · ');
+    }
+    return 'no cyclone';
+  }
+
+  // Fill the popup's .hc-gen host: sparkline + ruler + provenance caption. On any
+  // miss the note is quiet and honest — no data, no chart.
+  function wireGenesis(pop) {
+    var el = pop.getElement && pop.getElement();
+    if (!el) return;
+    var host = el.querySelector('.hc-gen');
+    if (!host || host.getAttribute('data-done')) return;
+    var tag = host.getAttribute('data-tag');
+    if (!tag) return;
+    host.setAttribute('data-done', '1');
+    loadGenesis(function (j) {
+      var note = document.createElement('div');
+      note.className = 'hc-hist-note';
+      if (!j) { note.textContent = 'season ledger unavailable'; host.appendChild(note); reflowPopup(pop); return; }
+      var rec = genesisRecordFor(j, tag);
+      if (!rec) { note.textContent = 'no season ledger entry'; host.appendChild(note); reflowPopup(pop); return; }
+      var wrap = document.createElement('div');
+      wrap.className = 'hc-gen-scroll';
+      wrap.appendChild(genesisSpark(rec));
+      host.appendChild(wrap);
+      host.appendChild(genesisRuler(rec, j.nowStamp));
+      note.textContent = rec.statements.length + ' stated outlook' + (rec.statements.length === 1 ? '' : 's') +
+        ' · ' + genesisOutcomeLine(rec) + ' · ★ only on a genesis link';
+      host.appendChild(note);
+      reflowPopup(pop);
+    });
+  }
 
   function render(parsed) {
     curParsed = parsed;
@@ -1147,7 +1377,9 @@
         // history only for a TAGGED disturbance — an untagged area has no invest
         // id to match a chain on, so offering the link would risk a wrong lineage.
       }).bindPopup(popup(label, d.source, true, d.context) +
-        (d.invest ? histLink({ kind: 'invest', tag: d.invest }) : ''), POPUP_OPTS).addTo(cat.two);
+        (d.invest ? histLink({ kind: 'invest', tag: d.invest }) +
+          '<div class="hc-gen" data-tag="' + escapeHtml(d.invest) + '"></div>' : ''),
+        POPUP_OPTS).addTo(cat.two);
     });
     var n = parsed.disturbances.length;
     featureLine = plural(n, 'outlook area') +

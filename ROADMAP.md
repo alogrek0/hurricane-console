@@ -205,7 +205,7 @@ prefer broken chains over invented links.
   archive unavailable" and draws nothing. Trail clears on hide / basin switch /
   refresh / paste / scrubber step (one hook in clearCats). Provenance caption
   "N archived sightings · computed lineage — breaks are honest".*
-- [ ] **M4 — Genesis truth ledger**: per-invest genesis timeline, TWO
+- [x] **M4 — Genesis truth ledger**: per-invest genesis timeline, TWO
   chance-trend sparklines (absorbs the Track A sparkline item), season
   calibration table (stated 48h/7d odds vs outcomes) — all over
   `lineage-2026.json`.
@@ -216,8 +216,13 @@ prefer broken chains over invented links.
   window `unresolved` (AL90's 60/60 vs unlinked One/Arthur — refuses to invent
   formed OR not-formed); open windows `pending`. Calibration lives in
   `tools/genesis-lab.html` (dev-side while the season's sample is small),
-  which also holds 3 timeline + 3 sparkline candidate treatments. Stage B
-  (in-app invest-popup UI) waits on treatment constants picked in the lab.*
+  which also holds 3 timeline + 3 sparkline candidate treatments.
+  Stage B shipped same day: tagged-invest TWO popups render the record at the
+  lab-locked pick — step-dual chance sparkline (time-true spacing, null = gap)
+  over the ruler timeline (chance-colored ticks, hatched pending window, gold
+  cross-hatched unresolved span naming nearby cyclones, ★ only on a formed
+  link) — verdicts read from `genesis-2026.json`, never recomputed in the
+  browser. Untagged areas get nothing (no tag, no match — the M3 rule).*
 
 ## Maintenance calendar
 
