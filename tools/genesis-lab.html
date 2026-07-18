@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<!--
+  tools/genesis-lab.html — dev-only Track C M4 "treatment lab" (STAGE A). Never
+  shipped as part of the app (not in the SW SHELL list, not referenced by
+  index.html), but reachable once pushed because Pages serves the repo root:
+    https://<user>.github.io/hurricane-console/tools/genesis-lab.html
+
+  Why it exists: M4 is the GENESIS TRUTH LEDGER — per-invest formation-chance
+  STATEMENT verdicts + season calibration (archive/derived/genesis-2026.json,
+  built deterministically by tools/build-genesis-ledger.js). Stage B will render
+  these in the invest popup near the history affordance in app.js. Before any of
+  that ships, the user judges CANDIDATE VISUAL TREATMENTS here, by eye, on real
+  season data. This page renders three timeline treatments and three sparkline
+  treatments over the same record and lets the user tune dials, then emits a
+  select-to-copy STAGE-B CONSTANTS block reflecting the live picks.
+
+  Honesty conventions that BIND here (mirroring the ledger + app provenance):
+    * REAL / SAMPLE badge — if genesis-2026.json can't be fetched (file:// or not
+      yet built) the page falls back to a small inline SAMPLE and says SAMPLE
+      loudly. Never claim a source we don't have. ?sample=1 forces SAMPLE.
+    * Verdicts are READ, never recomputed — every "formed / not-formed / pending /
+      unresolved" comes straight from the ledger. The browser only styles them.
+    * Null chances GAP — a statement with chance48 or chance7 null leaves a hole;
+      the treatment never interpolates across it.
+    * Genesis star ONLY on a genesis link — the gold ★ appears at
+      outcome.genesisStamp only when outcome.kind === 'formed'. Nearby but
+      unattributed cyclones make the window UNRESOLVED (gold cross-hatch, named),
+      never formed and never not-formed.
+    * Pending is future — windows past nowStamp are hatched "pending", never
+      guessed one way or the other.
+    * Colors reuse the app's TWO thresholds on the 7d pct (app.js ~L1140):
+      pct >= 60 -> #ff4d3d, >= 40 -> #ff9d3a, else #ffd23a. Nothing new invented.
+
+  Schema consumed (build-genesis-ledger.js output — code against this exactly):
+    { _readme, season, nowStamp:'YYYYMMDDhhmm',
+      basins: { AT: { invests:[record], calibration }, EP:{...} },
+      calibrationTotal }
+    record: { id, tag:'AL90'|null, firstStamp, lastStamp,
+      waveOrigin:{waveId,atStamp}|null,
+      outcome:{ kind:'formed'|'open'|'unresolved-nearby-cyclone'|'no-cyclone',
+        cycloneId, cycloneName, genesisStamp, nearby:[{cycloneId,name,firstStamp,dist}] },
+      siblingChains:[ids],
+      statements:[{ stamp, file, tagged, chance48:{cat,pct}|null,
+        chance7:{cat,pct}|null, verdict48, verdict7 }] }
+    verdicts: 'formed'|'not-formed'|'pending'|'unresolved'|null.
+    calibration: { h48:{ low|medium|high:{statements,formed,notFormed,unresolved,
+      pending,observedRate:number|null} }, d7:{...} }.
+  Pure DOM + inline SVG. No Leaflet, no basemap, no external libs — works offline
+  except the single JSON fetch.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Genesis lab — Hurricane Console (dev)</title>
+<style>
+  :root{
+    --bg:#071620; --panel:#0c2233; --panel2:#0a1c2a; --line:#173347; --ink:#dce8ef;
+    --dim:#7ea3b8; --amber:#ffa23a; --cyan:#4fc3d6;
+    --genesis:#e8c34f; --gold:#e8c34f; --green:#5fd6a0; --slate:#4b6a7e;
+    --hi:#ff4d3d; --mid:#ff9d3a; --lo:#ffd23a;
+    --mono:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 var(--mono)}
+  header{padding:.6rem .8rem;border-bottom:1px solid var(--line);
+    background:linear-gradient(180deg,#0a1e2c,#071620);
+    display:flex;align-items:center;gap:.7rem;flex-wrap:wrap}
+  h1{margin:0;font-size:.95rem;letter-spacing:.02em}
+  h1 small{display:block;color:var(--dim);font-weight:400;font-size:.7rem;letter-spacing:.06em}
+  #now{font-size:.68rem;color:var(--dim);letter-spacing:.06em}
+  #now b{color:var(--ink);font-weight:700}
+  /* provenance badge — SAMPLE must read loudly, like the app's badge contract */
+  #badge{margin-left:auto;font:700 .68rem/1 var(--mono);letter-spacing:.1em;
+    padding:.4rem .6rem;border-radius:4px;border:1px solid var(--line);
+    background:#123246;color:var(--dim)}
+  #badge.sample{background:#3a2a08;color:var(--genesis);border-color:var(--genesis);
+    animation:pulse 1.3s ease-in-out infinite}
+  #badge.real{background:#0d2f22;color:#5fd6a0;border-color:#2c7a5a}
+  @keyframes pulse{50%{opacity:.55}}
+  .basintog{display:flex;gap:.35rem}
+  .basintog button{font:inherit;font-size:.72rem;color:var(--ink);background:#123246;
+    border:1px solid var(--line);border-radius:4px;padding:.4rem .7rem;cursor:pointer;min-height:36px}
+  .basintog button.on{background:var(--amber);color:#231400;border-color:var(--amber);font-weight:700}
+  .wrap{padding:1rem;display:flex;flex-direction:column;gap:.9rem;max-width:1180px;margin:0 auto}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:.75rem}
+  .card>b.hd{display:block;color:var(--dim);font-size:.62rem;letter-spacing:.1em;margin-bottom:.55rem}
+  .card>b.hd .rt{float:right;color:var(--dim);font-weight:400;letter-spacing:.04em}
+  /* invest chip strip */
+  #invests{display:flex;flex-wrap:wrap;gap:.35rem}
+  .chip{display:inline-flex;align-items:center;gap:.4rem;font:inherit;font-size:.72rem;
+    color:var(--ink);background:var(--panel2);border:1px solid var(--line);border-radius:4px;
+    padding:.4rem .55rem;cursor:pointer;min-height:36px}
+  .chip:hover{border-color:var(--dim)}
+  .chip.on{border-color:var(--amber);background:#12283a}
+  .chip .g{font-size:.9rem;line-height:1}
+  .chip .ct{color:var(--dim);font-size:.64rem}
+  .chip.tagged .tg{color:var(--amber);font-weight:700}
+  .chip .sib{color:var(--genesis)}
+  /* treatment radio picker */
+  .picker{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:.5rem}
+  .picker button{font:inherit;font-size:.72rem;color:var(--ink);background:#123246;
+    border:1px solid var(--line);border-radius:4px;padding:.4rem .6rem;cursor:pointer;min-height:34px}
+  .picker button.on{background:var(--amber);color:#231400;border-color:var(--amber);font-weight:700}
+  /* dial rows — label · slider · readout (lineage-lab idiom) */
+  .dials{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.15rem .9rem;
+    margin-top:.55rem}
+  .dial{display:grid;grid-template-columns:6.8rem 1fr 3.6rem;align-items:center;gap:.5rem;
+    font-size:.72rem;color:var(--dim);min-height:30px}
+  .dial input[type=range]{width:100%}
+  .dial output{color:var(--ink);text-align:right;font-variant-numeric:tabular-nums}
+  .dial.off{opacity:.34}
+  .dial .seg{display:flex;gap:.3rem}
+  .dial .seg button{font:inherit;font-size:.66rem;color:var(--ink);background:#123246;
+    border:1px solid var(--line);border-radius:4px;padding:.22rem .45rem;cursor:pointer}
+  .dial .seg button.on{background:var(--amber);color:#231400;border-color:var(--amber);font-weight:700}
+  .render{overflow-x:auto;background:#04101a;border:1px solid var(--line);border-radius:5px;
+    padding:.6rem;margin-top:.2rem}
+  .render svg{display:block}
+  .hint{color:var(--dim);font-size:.66rem;margin-top:.5rem;line-height:1.5}
+  .honesty{color:var(--genesis);font-size:.63rem;margin-top:.5rem;line-height:1.5;
+    border-left:2px solid var(--genesis);padding-left:.5rem}
+  .legend{display:flex;flex-wrap:wrap;gap:.35rem .8rem;font-size:.64rem;color:var(--dim);margin-top:.5rem}
+  .legend i{font-style:normal;display:inline-flex;align-items:center;gap:.3rem}
+  .legend .sw{width:.75rem;height:.75rem;border-radius:2px;display:inline-block}
+  /* ledger rows */
+  .ledger{display:flex;flex-direction:column;gap:2px;font-size:.72rem}
+  .lrow{display:grid;grid-template-columns:9.5rem auto auto 1fr;align-items:center;gap:.5rem;
+    padding:.15rem .4rem;border:1px solid var(--line);border-radius:3px;background:var(--panel2)}
+  .lrow .st{color:var(--dim);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .lrow .st .tag{color:var(--amber);font-weight:700}
+  .pill{display:inline-flex;align-items:center;gap:.25rem;border-radius:3px;padding:.1rem .35rem;
+    font-size:.66rem;font-weight:700;color:#0a1620;white-space:nowrap}
+  .pill.null{background:none;color:var(--dim);font-weight:400;border:1px dashed var(--line)}
+  .pill .h{opacity:.7;font-weight:400}
+  .vchips{display:flex;gap:.3rem;justify-self:end}
+  .vc{font-size:.62rem;padding:.1rem .4rem;border-radius:3px;font-weight:700;white-space:nowrap}
+  .vc.formed{background:var(--green);color:#062018}
+  .vc.notformed{background:none;border:1px solid var(--slate);color:var(--dim);font-weight:400}
+  .vc.pending{color:var(--amber);border:1px solid var(--amber);
+    background:repeating-linear-gradient(45deg,transparent,transparent 3px,rgba(255,162,58,.22) 3px,rgba(255,162,58,.22) 6px)}
+  .vc.unresolved{background:none;border:1px solid var(--gold);color:var(--gold)}
+  .vc.nullv{color:var(--dim);border:1px dashed var(--line)}
+  .ldiv{display:flex;align-items:center;gap:.5rem;padding:.25rem .4rem;border-radius:3px;
+    background:linear-gradient(90deg,rgba(232,195,79,.18),rgba(232,195,79,.03));
+    border:1px solid var(--gold);color:var(--gold);font-size:.7rem;font-weight:700}
+  /* calibration table */
+  table.cal{border-collapse:collapse;width:100%;font-size:.7rem;font-variant-numeric:tabular-nums}
+  table.cal th,table.cal td{border:1px solid var(--line);padding:.3rem .45rem;text-align:right}
+  table.cal th{color:var(--dim);font-weight:400;letter-spacing:.04em}
+  table.cal td.lbl,table.cal th.lbl{text-align:left;color:var(--ink)}
+  table.cal tr.hz td.lbl{color:var(--amber);font-weight:700;letter-spacing:.06em}
+  table.cal td.rate{color:var(--ink);font-weight:700}
+  table.cal td.rate.none{color:var(--dim);font-weight:400}
+  table.cal td.formed{color:var(--green)}
+  .caltables{display:flex;flex-wrap:wrap;gap:1rem}
+  .caltables .ct{flex:1 1 440px;min-width:320px}
+  .caltables .ct h4{margin:.1rem 0 .4rem;font-size:.66rem;color:var(--dim);letter-spacing:.08em;font-weight:400}
+  .foot{color:var(--dim);font-size:.63rem;margin-top:.5rem;line-height:1.5}
+  /* stage-b constants */
+  pre#out{margin:.1rem 0 0;white-space:pre-wrap;word-break:break-word;color:var(--dim);
+    font-size:.72rem;line-height:1.55;background:var(--panel2);border:1px solid var(--line);
+    border-radius:5px;padding:.6rem;user-select:all}
+  pre#out em{color:var(--amber);font-style:normal}
+  .zoomwrap{display:flex;flex-wrap:wrap;gap:1.1rem;align-items:flex-start}
+  .zoomwrap .z{display:flex;flex-direction:column;gap:.3rem}
+  .zoomwrap .z span{font-size:.62rem;color:var(--dim);letter-spacing:.06em}
+  .spk{background:#04101a;border:1px solid var(--line);border-radius:4px}
+  .titlerow{display:flex;align-items:baseline;gap:.6rem;flex-wrap:wrap;margin-bottom:.4rem}
+  .titlerow .id{font-size:.66rem;color:var(--dim)}
+  .titlerow .oc{font-size:.68rem}
+</style>
+</head>
+<body>
+<header>
+  <h1>genesis lab<small>DEV ONLY · Track C M4 stage A · judge formation-ledger treatments by eye before Stage B ships</small></h1>
+  <span id="now">now <b>—</b></span>
+  <div class="basintog" id="basins"></div>
+  <span id="badge">LOADING</span>
+</header>
+
+<div class="wrap">
+  <div class="card">
+    <b class="hd">INVEST CHAINS <span class="rt">tagged first · click to inspect · ★ formed ● open ? unresolved ○ no-cyclone</span></b>
+    <div id="invests"></div>
+  </div>
+
+  <div class="card">
+    <b class="hd">TIMELINE TREATMENT <span class="rt" id="tlTitle"></span></b>
+    <div class="picker" id="tlPick"></div>
+    <div class="render" id="tlRender"></div>
+    <div class="legend" id="tlLegend"></div>
+    <div class="dials" id="tlDials"></div>
+    <div class="honesty">Invariants (not options): verdicts read from the ledger, never recomputed · null chances gap, never bridged · ★ genesis only on a formed link · pending hatched (future, unguessed) · unresolved = gold cross-hatch, named nearby cyclone(s), never scored.</div>
+  </div>
+
+  <div class="card">
+    <b class="hd">SPARKLINE TREATMENT <span class="rt">popup-sized + 3&times; zoom</span></b>
+    <div class="picker" id="spPick"></div>
+    <div class="zoomwrap" id="spRender"></div>
+    <div class="dials" id="spDials"></div>
+    <div class="honesty">Honesty invariants: odds change discretely per issuance — NEVER smoothed/interpolated · null chances gap · genesis marker only on formed · pending/unresolved visually distinct from scored · time spacing shows issuance gaps honestly.</div>
+  </div>
+
+  <div class="card">
+    <b class="hd">SEASON CALIBRATION <span class="rt">rates from resolved statements only</span></b>
+    <div class="caltables" id="cal"></div>
+    <div class="foot">rates from resolved statements only — season to date, small sample; unresolved = unattributed nearby cyclone, honestly unscored. observed rate = formed / (formed + not-formed); a horizon/cat with no resolved statements shows &mdash;, never 0%.</div>
+  </div>
+
+  <div class="card">
+    <b class="hd">STAGE-B CONSTANTS <span class="rt">select to copy — send me this</span></b>
+    <pre id="out"></pre>
+  </div>
+</div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs id="gdefs"></defs></svg>
+
+<script>
+(function () {
+  'use strict';
+
+  // ---------------------------------------------------------------------------
+  // App-parity color thresholds on the 7d formation pct (app.js ~L1140):
+  //   pct >= 60 -> red, >= 40 -> orange, else yellow. Reused everywhere so the
+  //   lab never invents a palette the app doesn't already use.
+  // ---------------------------------------------------------------------------
+  var COL_HI = '#ff4d3d', COL_MID = '#ff9d3a', COL_LO = '#ffd23a';
+  function pctCol(pct) { return pct >= 60 ? COL_HI : pct >= 40 ? COL_MID : COL_LO; }
+  var GOLD = '#e8c34f', GREEN = '#5fd6a0', SLATE = '#4b6a7e', AMBER = '#ffa23a', DIM = '#7ea3b8';
+
+  // ---------------------------------------------------------------------------
+  // SAMPLE fallback — inline, used ONLY when genesis-2026.json can't be fetched
+  // (file://, not yet built) or ?sample=1 is set. Badge flips to SAMPLE, loud.
+  // Deliberately exercises EVERY render path:
+  //   AT: a FORMED record (tag AL90) whose EARLY statements are 48h not-formed
+  //       then 48h formed near genesis (formed-late) + a mid-series null-chance
+  //       GAP; an UNRESOLVED record with TWO nearby cyclones; a clean NOT-FORMED
+  //       record; an OPEN record with a pending tail; an UNTAGGED record.
+  //   EP: a small formed record, so the basin toggle has content both sides.
+  //   Calibration includes a null observedRate cell (AT h48 medium).
+  // ---------------------------------------------------------------------------
+  function st(stamp, tagged, c48, p48, c7, p7, v48, v7) {
+    return { stamp: stamp, file: 'TWOAT.' + stamp + '.txt', tagged: tagged,
+      chance48: c48 ? { cat: c48, pct: p48 } : null,
+      chance7: c7 ? { cat: c7, pct: p7 } : null, verdict48: v48, verdict7: v7 };
+  }
+  var SAMPLE = {
+    _readme: 'INLINE SAMPLE — not the real season ledger. See archive/derived/genesis-2026.json.',
+    season: 2026,
+    nowStamp: '202606181200',
+    basins: {
+      AT: {
+        invests: [
+          { id: 'AT-I-SAMPLE-formed', tag: 'AL90', firstStamp: '202606120000', lastStamp: '202606150600',
+            waveOrigin: { waveId: 'AT-W-SAMPLE-1', atStamp: '202606120000' },
+            outcome: { kind: 'formed', cycloneId: 'AT-C-SAMPLE-1', cycloneName: 'Barry',
+              genesisStamp: '202606151800', nearby: [] },
+            siblingChains: ['AT-I-SAMPLE-sib'],
+            statements: [
+              st('202606120000', false, 'low', 10, 'low', 30, 'not-formed', 'formed'),
+              st('202606120600', false, 'low', 20, 'medium', 50, 'not-formed', 'formed'),
+              st('202606121200', true, 'medium', 40, 'high', 70, 'not-formed', 'formed'),
+              st('202606130000', true, null, 0, 'high', 80, 'not-formed', 'formed'),   // 48h GAP
+              st('202606131200', true, 'medium', 50, 'high', 80, 'not-formed', 'formed'),
+              st('202606140000', true, 'high', 60, 'high', 90, 'formed', 'formed'),      // 48h flips formed
+              st('202606150600', true, 'high', 80, 'high', 90, 'formed', 'formed')
+            ] },
+          { id: 'AT-I-SAMPLE-unres', tag: null, firstStamp: '202606130000', lastStamp: '202606160000',
+            waveOrigin: null,
+            outcome: { kind: 'unresolved-nearby-cyclone', cycloneId: null, cycloneName: null, genesisStamp: null,
+              nearby: [ { cycloneId: 'AT-C-SAMPLE-2', name: 'One', firstStamp: '202606161200', dist: 7.1 },
+                        { cycloneId: 'AT-C-SAMPLE-3', name: 'Chantal', firstStamp: '202606170000', dist: 5.4 } ] },
+            siblingChains: [],
+            statements: [
+              st('202606130000', false, 'low', 10, 'low', 20, 'not-formed', 'unresolved'),
+              st('202606140000', false, 'low', 20, 'low', 30, 'unresolved', 'unresolved'),
+              st('202606150000', false, 'medium', 40, 'medium', 50, 'unresolved', 'unresolved'),
+              st('202606160000', true, 'high', 70, 'high', 70, 'unresolved', 'unresolved')
+            ] },
+          { id: 'AT-I-SAMPLE-notformed', tag: null, firstStamp: '202606100000', lastStamp: '202606110600',
+            waveOrigin: null,
+            outcome: { kind: 'no-cyclone', cycloneId: null, cycloneName: null, genesisStamp: null, nearby: [] },
+            siblingChains: [],
+            statements: [
+              st('202606100000', false, 'low', 0, 'low', 10, 'not-formed', 'not-formed'),
+              st('202606100600', false, 'low', 10, 'low', 10, 'not-formed', 'not-formed'),
+              st('202606110600', false, 'low', 10, 'low', 20, 'not-formed', 'not-formed')
+            ] },
+          { id: 'AT-I-SAMPLE-open', tag: null, firstStamp: '202606171200', lastStamp: '202606181000',
+            waveOrigin: null,
+            outcome: { kind: 'open', cycloneId: null, cycloneName: null, genesisStamp: null, nearby: [] },
+            siblingChains: [],
+            statements: [
+              st('202606171200', false, 'low', 10, 'low', 30, 'pending', 'pending'),
+              st('202606180000', false, 'low', 20, 'medium', 40, 'pending', 'pending'),
+              st('202606181000', false, 'medium', 40, 'medium', 50, 'pending', 'pending')
+            ] }
+        ],
+        calibration: {
+          h48: { low: { statements: 8, formed: 0, notFormed: 5, unresolved: 2, pending: 1, observedRate: 0 },
+                 medium: { statements: 3, formed: 0, notFormed: 0, unresolved: 2, pending: 1, observedRate: null },
+                 high: { statements: 3, formed: 2, notFormed: 0, unresolved: 1, pending: 0, observedRate: 1 } },
+          d7: { low: { statements: 6, formed: 0, notFormed: 4, unresolved: 1, pending: 1, observedRate: 0 },
+                medium: { statements: 4, formed: 1, notFormed: 1, unresolved: 1, pending: 1, observedRate: 0.5 },
+                high: { statements: 5, formed: 4, notFormed: 0, unresolved: 1, pending: 0, observedRate: 1 } }
+        }
+      },
+      EP: {
+        invests: [
+          { id: 'EP-I-SAMPLE-formed', tag: 'EP91', firstStamp: '202606120000', lastStamp: '202606140600',
+            waveOrigin: null,
+            outcome: { kind: 'formed', cycloneId: 'EP-C-SAMPLE-1', cycloneName: 'Two-E',
+              genesisStamp: '202606141200', nearby: [] },
+            siblingChains: [],
+            statements: [
+              st('202606120000', false, 'low', 20, 'medium', 50, 'not-formed', 'formed'),
+              st('202606130000', true, 'medium', 50, 'high', 70, 'not-formed', 'formed'),
+              st('202606140600', true, 'high', 70, 'high', 90, 'formed', 'formed')
+            ] }
+        ],
+        calibration: {
+          h48: { low: { statements: 1, formed: 0, notFormed: 1, unresolved: 0, pending: 0, observedRate: 0 },
+                 medium: { statements: 1, formed: 0, notFormed: 0, unresolved: 0, pending: 0, observedRate: null },
+                 high: { statements: 1, formed: 1, notFormed: 0, unresolved: 0, pending: 0, observedRate: 1 } },
+          d7: { low: { statements: 0, formed: 0, notFormed: 0, unresolved: 0, pending: 0, observedRate: null },
+                medium: { statements: 1, formed: 1, notFormed: 0, unresolved: 0, pending: 0, observedRate: 1 },
+                high: { statements: 2, formed: 2, notFormed: 0, unresolved: 0, pending: 0, observedRate: 1 } }
+        }
+      }
+    },
+    calibrationTotal: {
+      h48: { low: { statements: 9, formed: 0, notFormed: 6, unresolved: 2, pending: 1, observedRate: 0 },
+             medium: { statements: 4, formed: 0, notFormed: 0, unresolved: 2, pending: 1, observedRate: null },
+             high: { statements: 4, formed: 3, notFormed: 0, unresolved: 1, pending: 0, observedRate: 1 } },
+      d7: { low: { statements: 6, formed: 0, notFormed: 4, unresolved: 1, pending: 1, observedRate: 0 },
+            medium: { statements: 5, formed: 2, notFormed: 1, unresolved: 1, pending: 1, observedRate: 0.667 },
+            high: { statements: 7, formed: 6, notFormed: 0, unresolved: 1, pending: 0, observedRate: 1 } }
+    }
+  };
+
+  var DATA = null, isSample = false, loadedFrom = '';
+  var state = {
+    basin: 'AT',
+    selected: null,
+    tl: 'ruler',
+    sp: 'step-dual',
+    d: {
+      tlRow: 18, tlGlyph: 10, tlChips: true, tlHatch: 5,
+      sparkW: 7, sparkH: 36, spark48: true, spacing: 'index', bandOp: 0.15,
+      dotR: 2.5, sparkStroke: 2
+    }
+  };
+
+  // --- time / format helpers -------------------------------------------------
+  var MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  function toDate(s) {
+    return new Date(Date.UTC(+s.slice(0,4), +s.slice(4,6)-1, +s.slice(6,8), +s.slice(8,10), +s.slice(10,12)));
+  }
+  function toMs(s) { return toDate(s).getTime(); }
+  function fmtShort(s) {
+    if (!s || s.length < 12) return String(s || '');
+    var d = toDate(s);
+    return MON[d.getUTCMonth()] + ' ' + d.getUTCDate() + ' ' + pad(d.getUTCHours()) + ':' + pad(d.getUTCMinutes()) + 'Z';
+  }
+  var DAY = 86400000;
+
+  // --- SVG builders ----------------------------------------------------------
+  var SVGNS = 'http://www.w3.org/2000/svg';
+  function sv(tag, attrs) {
+    var e = document.createElementNS(SVGNS, tag);
+    if (attrs) for (var k in attrs) if (attrs[k] != null) e.setAttribute(k, attrs[k]);
+    return e;
+  }
+  function text(x, y, s, attrs) {
+    var e = sv('text', attrs); e.setAttribute('x', x); e.setAttribute('y', y); e.textContent = s; return e;
+  }
+  var patSeq = 0;
+  // hatch pattern factory — returns a pattern id, appended to a given <defs>.
+  // 'diag' single-direction (pending); 'cross' two-direction (unresolved).
+  function hatch(defs, color, gap, cross) {
+    var id = 'hx' + (patSeq++);
+    var p = sv('pattern', { id: id, width: gap, height: gap, patternUnits: 'userSpaceOnUse',
+      patternTransform: 'rotate(45)' });
+    p.appendChild(sv('rect', { width: gap, height: gap, fill: 'none' }));
+    p.appendChild(sv('line', { x1: 0, y1: 0, x2: 0, y2: gap, stroke: color, 'stroke-width': 1, opacity: 0.7 }));
+    if (cross) p.appendChild(sv('line', { x1: 0, y1: 0, x2: gap, y2: 0, stroke: color, 'stroke-width': 1, opacity: 0.7 }));
+    defs.appendChild(p);
+    return 'url(#' + id + ')';
+  }
+
+  // --- data access -----------------------------------------------------------
+  function basin() { return (DATA.basins && DATA.basins[state.basin]) || { invests: [], calibration: null }; }
+  function records() { return (basin().invests || []).slice(); }
+  function selectedRecord() {
+    var r = records();
+    for (var i = 0; i < r.length; i++) if (r[i].id === state.selected) return r[i];
+    return r[0] || null;
+  }
+  // tagged records first, then untagged; within a group, most statements first.
+  function orderedRecords() {
+    return records().sort(function (a, b) {
+      var ta = a.tag ? 0 : 1, tb = b.tag ? 0 : 1;
+      if (ta !== tb) return ta - tb;
+      return b.statements.length - a.statements.length;
+    });
+  }
+  function defaultSelection() {
+    var ord = orderedRecords();
+    for (var i = 0; i < ord.length; i++) if (ord[i].tag) return ord[i].id; // richest tagged
+    return ord.length ? ord[0].id : null;
+  }
+  function outcomeGlyph(kind) {
+    return kind === 'formed' ? '★' : kind === 'open' ? '●'
+      : kind === 'unresolved-nearby-cyclone' ? '?' : '○';
+  }
+  function outcomeColor(kind) {
+    return kind === 'formed' ? GOLD : kind === 'open' ? AMBER
+      : kind === 'unresolved-nearby-cyclone' ? GOLD : DIM;
+  }
+  function outcomeLabel(rec) {
+    var o = rec.outcome;
+    if (o.kind === 'formed') return 'formed → ' + (o.cycloneName || o.cycloneId || '?') + ' @ ' + fmtShort(o.genesisStamp);
+    if (o.kind === 'open') return 'open (pending)';
+    if (o.kind === 'no-cyclone') return 'no cyclone';
+    if (o.kind === 'unresolved-nearby-cyclone') {
+      return 'unresolved — nearby ' + o.nearby.map(function (n) { return n.name; }).join(' · ');
+    }
+    return o.kind;
+  }
+
+  // ===========================================================================
+  // INVEST CHIP STRIP
+  // ===========================================================================
+  function renderInvests() {
+    var host = document.getElementById('invests');
+    host.innerHTML = '';
+    orderedRecords().forEach(function (rec) {
+      var chip = document.createElement('button');
+      chip.className = 'chip' + (rec.tag ? ' tagged' : '') + (rec.id === state.selected ? ' on' : '');
+      var k = rec.outcome.kind;
+      var sib = rec.siblingChains && rec.siblingChains.length
+        ? ' · siblings: ' + rec.siblingChains.join(', ') : '';
+      chip.title = rec.id + '\n' + outcomeLabel(rec) + sib;
+      chip.innerHTML =
+        '<span class="g" style="color:' + outcomeColor(k) + '">' + outcomeGlyph(k) + '</span>' +
+        '<span class="' + (rec.tag ? 'tg' : '') + '">' + (rec.tag || '(untagged)') + '</span>' +
+        (rec.siblingChains && rec.siblingChains.length ? '<span class="sib" title="has sibling chains">≈</span>' : '') +
+        '<span class="ct">' + rec.statements.length + '</span>';
+      chip.onclick = function () { state.selected = rec.id; renderAll(); };
+      host.appendChild(chip);
+    });
+  }
+
+  // ===========================================================================
+  // TIMELINE TREATMENTS
+  // ===========================================================================
+  var TL_W = 940;      // viewBox width; svg scales to container
+  var TL_PADX = 90;
+
+  function tlTitle(rec) {
+    document.getElementById('tlTitle').textContent =
+      rec ? (rec.tag || '(untagged)') + ' · ' + rec.statements.length + ' statements · ' + outcomeLabel(rec) : '';
+  }
+
+  function renderTimeline() {
+    var rec = selectedRecord();
+    var host = document.getElementById('tlRender');
+    host.innerHTML = '';
+    tlTitle(rec);
+    if (!rec) { host.textContent = 'no record'; return; }
+    var svg;
+    if (state.tl === 'ruler') svg = tlRuler(rec);
+    else if (state.tl === 'ledger-rows') { host.appendChild(tlLedger(rec)); tlLegendFor(); return; }
+    else svg = tlBraided(rec);
+    host.appendChild(svg);
+    tlLegendFor();
+  }
+
+  function tlLegendFor() {
+    var host = document.getElementById('tlLegend');
+    host.innerHTML =
+      '<i><span class="sw" style="background:' + COL_HI + '"></span>7d &ge;60</i>' +
+      '<i><span class="sw" style="background:' + COL_MID + '"></span>&ge;40</i>' +
+      '<i><span class="sw" style="background:' + COL_LO + '"></span>&lt;40</i>' +
+      '<i>○ start</i><i>× end</i>' +
+      '<i style="color:' + GOLD + '">★ genesis (formed only)</i>' +
+      '<i style="color:' + AMBER + '">▤ pending (future)</i>' +
+      '<i style="color:' + GOLD + '">☒ unresolved (named)</i>';
+  }
+
+  // --- ruler: single time axis, one tick per statement -----------------------
+  function tlRuler(rec) {
+    var glyph = state.d.tlGlyph;
+    var H = 132;
+    var axisY = 78;
+    var svg = sv('svg', { viewBox: '0 0 ' + TL_W + ' ' + H, width: '100%', height: H,
+      preserveAspectRatio: 'xMinYMid meet', 'font-family': 'var(--mono)' });
+    var defs = sv('defs'); svg.appendChild(defs);
+
+    var startMs = toMs(rec.firstStamp);
+    var lastMs = toMs(rec.lastStamp);
+    var nowMs = toMs(DATA.nowStamp);
+    // extend right for windows: the 7d window off the last statement
+    var winEnd = lastMs + 7 * DAY;
+    var endMs = Math.max(winEnd, lastMs, nowMs > lastMs ? Math.min(nowMs, winEnd) : lastMs);
+    if (endMs <= startMs) endMs = startMs + DAY;
+    var x0 = TL_PADX, x1 = TL_W - 30;
+    function X(ms) { return x0 + (ms - startMs) / (endMs - startMs) * (x1 - x0); }
+
+    // pending hatch band — window time past nowStamp
+    if (winEnd > nowMs && nowMs >= startMs && rec.outcome.kind !== 'formed') {
+      var pStart = Math.max(nowMs, lastMs), pEnd = winEnd;
+      var pat = hatch(defs, AMBER, 4 + (10 - state.d.tlHatch), false);
+      svg.appendChild(sv('rect', { x: X(pStart), y: axisY - 16, width: Math.max(2, X(pEnd) - X(pStart)),
+        height: 32, fill: pat, stroke: AMBER, 'stroke-opacity': 0.5, 'stroke-dasharray': '3 3' }));
+      svg.appendChild(text((X(pStart) + X(pEnd)) / 2, axisY + 34, 'pending window',
+        { fill: AMBER, 'font-size': 10, 'text-anchor': 'middle' }));
+    }
+
+    // unresolved gold cross-hatch span — named nearby cyclone(s)
+    if (rec.outcome.kind === 'unresolved-nearby-cyclone') {
+      var firstUn = null;
+      rec.statements.forEach(function (s) { if (firstUn == null && (s.verdict7 === 'unresolved' || s.verdict48 === 'unresolved')) firstUn = s.stamp; });
+      var uStart = firstUn ? toMs(firstUn) : startMs;
+      var earliest = null;
+      rec.outcome.nearby.forEach(function (n) { var m = toMs(n.firstStamp); if (earliest == null || m < earliest) earliest = m; });
+      var uEnd = earliest != null ? Math.min(Math.max(earliest, lastMs), endMs) : lastMs;
+      var cross = hatch(defs, GOLD, 4 + (10 - state.d.tlHatch), true);
+      svg.appendChild(sv('rect', { x: X(uStart), y: axisY - 18, width: Math.max(3, X(uEnd) - X(uStart)),
+        height: 36, fill: cross, stroke: GOLD, 'stroke-opacity': 0.6 }));
+      var names = rec.outcome.nearby.map(function (n) { return n.name; }).join(' · ');
+      svg.appendChild(text((X(uStart) + X(uEnd)) / 2, axisY + 34, 'unresolved — ' + names,
+        { fill: GOLD, 'font-size': 10, 'text-anchor': 'middle', 'font-weight': 700 }));
+    }
+
+    // now marker
+    if (nowMs >= startMs && nowMs <= endMs) {
+      svg.appendChild(sv('line', { x1: X(nowMs), y1: axisY - 26, x2: X(nowMs), y2: axisY + 20,
+        stroke: DIM, 'stroke-width': 1, 'stroke-dasharray': '2 3' }));
+      svg.appendChild(text(X(nowMs), axisY - 30, 'now', { fill: DIM, 'font-size': 9, 'text-anchor': 'middle' }));
+    }
+
+    // baseline axis
+    svg.appendChild(sv('line', { x1: x0, y1: axisY, x2: x1, y2: axisY, stroke: '#2c5870', 'stroke-width': 1.4 }));
+
+    // ○ start
+    svg.appendChild(text(x0 - 6, axisY + 4, '○', { fill: DIM, 'font-size': glyph + 4, 'text-anchor': 'end' }));
+    svg.appendChild(text(x0 - 6, axisY + 18, fmtShort(rec.firstStamp).slice(0, 6), { fill: DIM, 'font-size': 8, 'text-anchor': 'end' }));
+
+    // ticks — one per statement, colored by 7d pct thresholds
+    var tagLabelDone = false;
+    rec.statements.forEach(function (s) {
+      var xx = X(toMs(s.stamp));
+      var has7 = s.chance7 != null;
+      var col = has7 ? pctCol(s.chance7.pct) : SLATE;
+      svg.appendChild(sv('line', { x1: xx, y1: axisY - glyph, x2: xx, y2: axisY + glyph,
+        stroke: col, 'stroke-width': has7 ? 2.4 : 1.2, 'stroke-dasharray': has7 ? null : '2 2',
+        'stroke-linecap': 'round' }));
+      if (!has7) svg.appendChild(text(xx, axisY - glyph - 3, 'null', { fill: DIM, 'font-size': 7, 'text-anchor': 'middle' }));
+      // tag label at first tagged:true statement
+      if (!tagLabelDone && s.tagged && rec.tag) {
+        tagLabelDone = true;
+        svg.appendChild(text(xx, axisY - glyph - 6, rec.tag, { fill: AMBER, 'font-size': 10, 'font-weight': 700, 'text-anchor': 'middle' }));
+        svg.appendChild(sv('line', { x1: xx, y1: axisY - glyph - 4, x2: xx, y2: axisY - glyph, stroke: AMBER, 'stroke-width': 1 }));
+      }
+    });
+
+    // ★ genesis — formed only
+    if (rec.outcome.kind === 'formed' && rec.outcome.genesisStamp) {
+      var gx = X(toMs(rec.outcome.genesisStamp));
+      svg.appendChild(text(gx, axisY - glyph - 8, '★', { fill: GOLD, 'font-size': glyph + 8, 'text-anchor': 'middle' }));
+      svg.appendChild(sv('line', { x1: gx, y1: axisY - glyph, x2: gx, y2: axisY + glyph, stroke: GOLD, 'stroke-width': 2 }));
+      svg.appendChild(text(gx, axisY + 30, (rec.outcome.cycloneName || 'genesis'), { fill: GOLD, 'font-size': 9, 'text-anchor': 'middle', 'font-weight': 700 }));
+    }
+
+    // × end
+    var ex = X(lastMs);
+    svg.appendChild(text(ex, axisY + 4, '×', { fill: DIM, 'font-size': glyph + 6, 'text-anchor': 'middle' }));
+
+    // axis end date labels
+    svg.appendChild(text(x1, axisY + 18, fmtShort(rec.lastStamp), { fill: DIM, 'font-size': 8, 'text-anchor': 'end' }));
+    return svg;
+  }
+
+  // --- ledger-rows: one row per statement, a literal ledger -----------------
+  function vChip(v) {
+    var cls = v === 'formed' ? 'formed' : v === 'not-formed' ? 'notformed'
+      : v === 'pending' ? 'pending' : v === 'unresolved' ? 'unresolved' : 'nullv';
+    var lbl = v === 'formed' ? 'formed' : v === 'not-formed' ? 'not-formed'
+      : v === 'pending' ? 'pending' : v === 'unresolved' ? '? unres' : '—';
+    return '<span class="vc ' + cls + '">' + lbl + '</span>';
+  }
+  function chancePill(h, c) {
+    if (!c) return '<span class="pill null"><span class="h">' + h + '</span>&mdash;</span>';
+    return '<span class="pill" style="background:' + pctCol(c.pct) + '"><span class="h">' + h + '</span>' + c.pct + '%</span>';
+  }
+  function tlLedger(rec) {
+    var wrap = document.createElement('div');
+    wrap.className = 'ledger';
+    var rowH = state.d.tlRow;
+    var chips = state.d.tlChips;
+    var genMs = rec.outcome.kind === 'formed' && rec.outcome.genesisStamp ? toMs(rec.outcome.genesisStamp) : null;
+    var genPlaced = false;
+    rec.statements.forEach(function (s, i) {
+      // genesis divider inserted at its time position (before first statement past it)
+      if (genMs != null && !genPlaced && toMs(s.stamp) >= genMs) {
+        genPlaced = true; wrap.appendChild(genDivider(rec));
+      }
+      var row = document.createElement('div');
+      row.className = 'lrow';
+      row.style.minHeight = rowH + 'px';
+      row.innerHTML =
+        '<span class="st">' + fmtShort(s.stamp) + (s.tagged ? ' <span class="tag">' + (rec.tag || 'TAG') + '</span>' : '') + '</span>' +
+        chancePill('48h', s.chance48) +
+        chancePill('7d', s.chance7) +
+        (chips ? '<span class="vchips">' + vChip(s.verdict48) + vChip(s.verdict7) + '</span>' : '<span></span>');
+      wrap.appendChild(row);
+    });
+    if (genMs != null && !genPlaced) wrap.appendChild(genDivider(rec)); // genesis after last statement
+    return wrap;
+  }
+  function genDivider(rec) {
+    var d = document.createElement('div');
+    d.className = 'ldiv';
+    d.innerHTML = '★ GENESIS — ' + (rec.outcome.cycloneName || rec.outcome.cycloneId) +
+      ' @ ' + fmtShort(rec.outcome.genesisStamp);
+    return d;
+  }
+
+  // --- braided: two lanes (48h above, 7d below), shared verdict strip -------
+  function tlBraided(rec) {
+    var laneH = Math.max(14, state.d.tlRow);
+    var glyph = state.d.tlGlyph;
+    var n = rec.statements.length;
+    var cellW = Math.max(26, Math.min(80, (TL_W - TL_PADX - 30) / Math.max(1, n)));
+    var x0 = TL_PADX;
+    var topLane = 26, gap = 8, vstrip = 16;
+    var H = topLane + laneH + gap + laneH + 6 + vstrip + 40;
+    var svg = sv('svg', { viewBox: '0 0 ' + TL_W + ' ' + H, width: '100%', height: H, 'font-family': 'var(--mono)' });
+    var defs = sv('defs'); svg.appendChild(defs);
+
+    // lane labels
+    svg.appendChild(text(6, topLane + laneH / 2 + 4, '48h', { fill: DIM, 'font-size': 10 }));
+    svg.appendChild(text(6, topLane + laneH + gap + laneH / 2 + 4, '7d', { fill: DIM, 'font-size': 10 }));
+    svg.appendChild(text(6, topLane + laneH + gap + laneH + 6 + vstrip - 4, 'verdict', { fill: DIM, 'font-size': 8 }));
+
+    function band(laneY, c, xx) {
+      if (!c) { // GAP — null chance, never interpolated
+        svg.appendChild(sv('rect', { x: xx + 1, y: laneY, width: cellW - 2, height: laneH,
+          fill: 'none', stroke: '#173347', 'stroke-dasharray': '2 3' }));
+        svg.appendChild(text(xx + cellW / 2, laneY + laneH / 2 + 3, 'gap', { fill: DIM, 'font-size': 8, 'text-anchor': 'middle' }));
+        return;
+      }
+      svg.appendChild(sv('rect', { x: xx + 1, y: laneY, width: cellW - 2, height: laneH,
+        fill: pctCol(c.pct), 'fill-opacity': 0.85, rx: 2 }));
+      svg.appendChild(text(xx + cellW / 2, laneY + laneH / 2 + 3.5, c.pct, { fill: '#0a1620', 'font-size': 9, 'font-weight': 700, 'text-anchor': 'middle' }));
+    }
+    function vseg(y, v, xx) {
+      var map = { formed: GREEN, 'not-formed': SLATE, pending: AMBER, unresolved: GOLD };
+      var col = map[v] || '#26424f';
+      if (v === 'pending') {
+        var pat = hatch(defs, AMBER, 4 + (10 - state.d.tlHatch), false);
+        svg.appendChild(sv('rect', { x: xx + 1, y: y, width: cellW - 2, height: vstrip, fill: pat, stroke: AMBER, 'stroke-opacity': 0.4 }));
+      } else {
+        svg.appendChild(sv('rect', { x: xx + 1, y: y, width: cellW - 2, height: vstrip, fill: col, 'fill-opacity': v === 'not-formed' ? 0.5 : 0.85 }));
+      }
+    }
+
+    var lane48 = topLane, lane7 = topLane + laneH + gap, vy = topLane + laneH + gap + laneH + 6;
+    var tagDone = false;
+    rec.statements.forEach(function (s, i) {
+      var xx = x0 + i * cellW;
+      if (state.d.spark48 !== false) band(lane48, s.chance48, xx);
+      band(lane7, s.chance7, xx);
+      // shared verdict strip — use 7d verdict as the primary
+      vseg(vy, s.verdict7, xx);
+      // tick label
+      svg.appendChild(text(xx + cellW / 2, vy + vstrip + 12, fmtShort(s.stamp).slice(0, 6), { fill: DIM, 'font-size': 7, 'text-anchor': 'middle' }));
+      if (s.tagged && !tagDone && rec.tag) { tagDone = true;
+        svg.appendChild(text(xx + cellW / 2, topLane - 6, rec.tag, { fill: AMBER, 'font-size': 9, 'font-weight': 700, 'text-anchor': 'middle' }));
+      }
+    });
+    // ★ genesis marker over the cell nearest genesisStamp (formed only)
+    if (rec.outcome.kind === 'formed' && rec.outcome.genesisStamp) {
+      var gm = toMs(rec.outcome.genesisStamp), idx = rec.statements.length - 1;
+      for (var i = 0; i < rec.statements.length; i++) if (toMs(rec.statements[i].stamp) >= gm) { idx = i; break; }
+      var gx = x0 + idx * cellW + cellW / 2;
+      svg.appendChild(text(gx, topLane - 6, '★', { fill: GOLD, 'font-size': glyph + 6, 'text-anchor': 'middle' }));
+    }
+    return svg;
+  }
+
+  // ===========================================================================
+  // SPARKLINE TREATMENTS — popup-sized + 3x zoom
+  // ===========================================================================
+  function xsForSpacing(sts, w) {
+    // returns array of x positions per statement. index mode: equal w. time mode:
+    // proportional to real elapsed time (honest issuance gaps). null stays a gap
+    // in the SERIES (position kept, value skipped) — spacing is about x only.
+    var n = sts.length;
+    if (state.d.spacing === 'time' && n > 1) {
+      var t0 = toMs(sts[0].stamp), t1 = toMs(sts[n - 1].stamp);
+      var span = (t1 - t0) || 1;
+      var totalW = (n - 1) * w;
+      return sts.map(function (s) { return (toMs(s.stamp) - t0) / span * totalW; });
+    }
+    return sts.map(function (_, i) { return i * w; });
+  }
+
+  function drawSpark(rec, scale) {
+    var w = state.d.sparkW * scale;
+    var h = state.d.sparkH * scale;
+    var padL = 4 * scale, padR = 4 * scale, padY = 3 * scale;
+    var sts = rec.statements;
+    var xs = xsForSpacing(sts, w);
+    var innerW = (xs.length ? xs[xs.length - 1] : 0);
+    var W = innerW + padL + padR;
+    var plotH = h - padY * 2;
+    function Y(pct) { return padY + (100 - pct) / 100 * plotH; }
+    function X(i) { return padL + xs[i]; }
+
+    var svg = sv('svg', { class: 'spk', width: W, height: h, viewBox: '0 0 ' + W + ' ' + h });
+    var defs = sv('defs'); svg.appendChild(defs);
+
+    // threshold guide bands at 40 / 60 (app colors), opacity dial
+    var op = state.d.bandOp;
+    if (op > 0) {
+      svg.appendChild(sv('rect', { x: 0, y: Y(100), width: W, height: Y(60) - Y(100), fill: COL_HI, opacity: op }));
+      svg.appendChild(sv('rect', { x: 0, y: Y(60), width: W, height: Y(40) - Y(60), fill: COL_MID, opacity: op }));
+      svg.appendChild(sv('rect', { x: 0, y: Y(40), width: W, height: Y(0) - Y(40), fill: COL_LO, opacity: op * 0.7 }));
+    }
+
+    if (state.sp === 'step-dual') sparkStep(svg, rec, X, Y, scale);
+    else if (state.sp === 'bar-pairs') sparkBars(svg, rec, X, Y, w, scale);
+    else sparkDots(svg, rec, X, Y, scale);
+
+    // ★ genesis tick at bottom (formed only)
+    if (rec.outcome.kind === 'formed' && rec.outcome.genesisStamp) {
+      var gm = toMs(rec.outcome.genesisStamp), gi = sts.length - 1;
+      for (var i = 0; i < sts.length; i++) if (toMs(sts[i].stamp) >= gm) { gi = i; break; }
+      svg.appendChild(text(X(gi), h - 1, '★', { fill: GOLD, 'font-size': 8 * scale, 'text-anchor': 'middle' }));
+    }
+    return svg;
+  }
+
+  // step-dual — step lines, never interpolated; gaps break the path
+  function sparkStep(svg, rec, X, Y, scale) {
+    var sts = rec.statements;
+    // step: hold previous value to current x, then step to current. null -> GAP.
+    function stepPath2(key) {
+      var d = '', have = false, py = null;
+      for (var i = 0; i < sts.length; i++) {
+        var c = sts[i][key];
+        if (!c) { have = false; py = null; continue; }
+        var x = X(i), y = Y(c.pct);
+        if (!have) { d += 'M' + x + ',' + y; have = true; }
+        else { d += 'L' + x + ',' + py + 'L' + x + ',' + y; }
+        py = y;
+      }
+      return d;
+    }
+    if (state.d.spark48 !== false) {
+      svg.appendChild(sv('path', { d: stepPath2('chance48'), fill: 'none', stroke: COL_MID,
+        'stroke-width': Math.max(0.6, (state.d.sparkStroke - 1) * scale * 0.7), opacity: 0.6, 'stroke-linejoin': 'round' }));
+    }
+    svg.appendChild(sv('path', { d: stepPath2('chance7'), fill: 'none', stroke: '#dce8ef',
+      'stroke-width': state.d.sparkStroke * scale, 'stroke-linejoin': 'round' }));
+    // dots at issuances
+    sts.forEach(function (s, i) {
+      if (s.chance7) svg.appendChild(sv('circle', { cx: X(i), cy: Y(s.chance7.pct), r: state.d.dotR * scale, fill: pctCol(s.chance7.pct) }));
+      if (state.d.spark48 !== false && s.chance48) svg.appendChild(sv('circle', { cx: X(i), cy: Y(s.chance48.pct), r: state.d.dotR * scale * 0.7, fill: 'none', stroke: COL_MID, 'stroke-width': 0.8 * scale }));
+    });
+  }
+
+  // bar-pairs — per issuance a paired mini-bar (48h | 7d), each own-cat colored
+  function sparkBars(svg, rec, X, Y, w, scale) {
+    var sts = rec.statements;
+    var base = Y(0);
+    var bw = Math.max(1.4 * scale, (state.d.spark48 !== false ? w * 0.32 : w * 0.5));
+    sts.forEach(function (s, i) {
+      var cx = X(i);
+      if (state.d.spark48 !== false) {
+        if (s.chance48) svg.appendChild(sv('rect', { x: cx - bw - 0.5 * scale, y: Y(s.chance48.pct), width: bw, height: base - Y(s.chance48.pct), fill: pctCol(s.chance48.pct), opacity: 0.65 }));
+        else gapMark(svg, cx - bw / 2 - 0.5 * scale, base, scale);
+      }
+      if (s.chance7) svg.appendChild(sv('rect', { x: cx + 0.5 * scale, y: Y(s.chance7.pct), width: bw, height: base - Y(s.chance7.pct), fill: pctCol(s.chance7.pct) }));
+      else gapMark(svg, cx + bw / 2 + 0.5 * scale, base, scale);
+    });
+  }
+  function gapMark(svg, x, base, scale) {
+    svg.appendChild(sv('line', { x1: x, y1: base, x2: x, y2: base - 2 * scale, stroke: DIM, 'stroke-width': 1, 'stroke-dasharray': '1 2' }));
+  }
+
+  // dot-strip — fixed-height strip; 7d filled dot / 48h hollow ring; y = pct
+  function sparkDots(svg, rec, X, Y, scale) {
+    var sts = rec.statements;
+    sts.forEach(function (s, i) {
+      if (state.d.spark48 !== false && s.chance48) svg.appendChild(sv('circle', { cx: X(i), cy: Y(s.chance48.pct), r: (state.d.dotR + 0.5) * scale, fill: 'none', stroke: COL_MID, 'stroke-width': state.d.sparkStroke * scale * 0.6 }));
+      if (s.chance7) svg.appendChild(sv('circle', { cx: X(i), cy: Y(s.chance7.pct), r: state.d.dotR * scale, fill: pctCol(s.chance7.pct) }));
+      if (!s.chance7 && !s.chance48) svg.appendChild(text(X(i), Y(50), '·', { fill: DIM, 'font-size': 6 * scale, 'text-anchor': 'middle' }));
+    });
+  }
+
+  function renderSpark() {
+    var rec = selectedRecord();
+    var host = document.getElementById('spRender');
+    host.innerHTML = '';
+    if (!rec) { host.textContent = 'no record'; return; }
+    [['popup 1×', 1], ['zoom 3×', 3]].forEach(function (z) {
+      var box = document.createElement('div'); box.className = 'z';
+      var lbl = document.createElement('span'); lbl.textContent = z[0];
+      box.appendChild(lbl);
+      box.appendChild(drawSpark(rec, z[1]));
+      host.appendChild(box);
+    });
+  }
+
+  // ===========================================================================
+  // CALIBRATION
+  // ===========================================================================
+  function ratePct(r) { return r == null ? '—' : (Math.round(r * 1000) / 10) + '%'; }
+  function calTable(title, cal) {
+    var box = document.createElement('div'); box.className = 'ct';
+    var h = document.createElement('h4'); h.textContent = title; box.appendChild(h);
+    var t = document.createElement('table'); t.className = 'cal';
+    t.innerHTML =
+      '<tr><th class="lbl">horizon / cat</th><th>stmts</th><th>formed</th><th>not-formed</th><th>unresolved</th><th>pending</th><th>observed rate</th></tr>';
+    [['h48', '48h'], ['d7', '7d']].forEach(function (hz) {
+      var block = cal[hz[0]];
+      ['low', 'medium', 'high'].forEach(function (cat, ci) {
+        var c = block[cat] || {};
+        var tr = document.createElement('tr');
+        if (ci === 0) tr.className = 'hz';
+        var rateNull = c.observedRate == null;
+        tr.innerHTML =
+          '<td class="lbl">' + (ci === 0 ? hz[1] + ' · ' : '· ') + cat + '</td>' +
+          '<td>' + (c.statements || 0) + '</td>' +
+          '<td class="formed">' + (c.formed || 0) + '</td>' +
+          '<td>' + (c.notFormed || 0) + '</td>' +
+          '<td>' + (c.unresolved || 0) + '</td>' +
+          '<td>' + (c.pending || 0) + '</td>' +
+          '<td class="rate' + (rateNull ? ' none' : '') + '">' + ratePct(c.observedRate) + '</td>';
+        t.appendChild(tr);
+      });
+    });
+    box.appendChild(t);
+    return box;
+  }
+  function renderCal() {
+    var host = document.getElementById('cal');
+    host.innerHTML = '';
+    var b = basin();
+    if (b.calibration) host.appendChild(calTable(state.basin + ' basin — season to date', b.calibration));
+    if (DATA.calibrationTotal) host.appendChild(calTable('both basins (calibrationTotal)', DATA.calibrationTotal));
+  }
+
+  // ===========================================================================
+  // STAGE-B CONSTANTS
+  // ===========================================================================
+  function renderOut() {
+    var d = state.d;
+    document.getElementById('out').innerHTML =
+      "HC_GENESIS = { timeline: <em>'" + state.tl + "'</em>, tlRow: <em>" + d.tlRow + "</em>, tlGlyph: <em>" + d.tlGlyph +
+        "</em>, tlChips: <em>" + d.tlChips + "</em>, tlHatch: <em>" + d.tlHatch + "</em>,\n" +
+      "  spark: <em>'" + state.sp + "'</em>, sparkW: <em>" + d.sparkW + "</em>, sparkH: <em>" + d.sparkH +
+        "</em>, spark48: <em>" + d.spark48 + "</em>,\n" +
+      "  spacing: <em>'" + d.spacing + "'</em>, bandOp: <em>" + d.bandOp + "</em>, dotR: <em>" + d.dotR +
+        "</em>, sparkStroke: <em>" + d.sparkStroke + "</em> }\n" +
+      "// Stage B: render in the invest popup near the history affordance (app.js);\n" +
+      "// reuse the TWO 7d-pct thresholds (app.js ~L1140): >=60 #ff4d3d / >=40 #ff9d3a / else #ffd23a;\n" +
+      "// verdicts read from genesis-2026.json, NEVER recomputed in the browser;\n" +
+      "// null chances gap; pending hatched; formed ★ ONLY on a genesis link.";
+  }
+
+  // ===========================================================================
+  // CONTROLS
+  // ===========================================================================
+  function mkPicker(host, opts, cur, set) {
+    host.innerHTML = '';
+    opts.forEach(function (o) {
+      var b = document.createElement('button');
+      b.textContent = o[1];
+      if (cur === o[0]) b.classList.add('on');
+      b.onclick = function () { set(o[0]); };
+      host.appendChild(b);
+    });
+  }
+  function rangeDial(host, label, min, max, step, val, fmt, onset, disabled) {
+    var row = document.createElement('label');
+    row.className = 'dial' + (disabled ? ' off' : '');
+    row.innerHTML = '<span>' + label + '</span><input type="range" min="' + min + '" max="' + max +
+      '" step="' + step + '"' + (disabled ? ' disabled' : '') + '><output></output>';
+    var input = row.querySelector('input'), out = row.querySelector('output');
+    input.value = val; out.textContent = fmt(val);
+    input.oninput = function () {
+      var v = parseFloat(input.value); out.textContent = fmt(v); onset(v);
+    };
+    host.appendChild(row);
+  }
+  function toggleDial(host, label, val, onset) {
+    var row = document.createElement('div');
+    row.className = 'dial';
+    row.innerHTML = '<span>' + label + '</span>';
+    var seg = document.createElement('div'); seg.className = 'seg';
+    [['on', true], ['off', false]].forEach(function (p) {
+      var b = document.createElement('button'); b.textContent = p[0];
+      if (val === p[1]) b.classList.add('on');
+      b.onclick = function () { onset(p[1]); };
+      seg.appendChild(b);
+    });
+    row.appendChild(seg); row.appendChild(document.createElement('output'));
+    host.appendChild(row);
+  }
+  function segDial(host, label, opts, val, onset, note) {
+    var row = document.createElement('div');
+    row.className = 'dial';
+    row.innerHTML = '<span>' + label + '</span>';
+    var seg = document.createElement('div'); seg.className = 'seg';
+    opts.forEach(function (o) {
+      var b = document.createElement('button'); b.textContent = o[1];
+      if (val === o[0]) b.classList.add('on');
+      b.onclick = function () { onset(o[0]); };
+      seg.appendChild(b);
+    });
+    row.appendChild(seg);
+    var o = document.createElement('output'); o.textContent = note || ''; o.style.fontSize = '.6rem';
+    row.appendChild(o);
+    host.appendChild(row);
+  }
+
+  function buildTlControls() {
+    mkPicker(document.getElementById('tlPick'), [
+      ['ruler', 'ruler'], ['ledger-rows', 'ledger-rows'], ['braided', 'braided']
+    ], state.tl, function (v) { state.tl = v; renderTimeline(); buildTlControls(); renderOut(); });
+
+    var host = document.getElementById('tlDials'); host.innerHTML = '';
+    rangeDial(host, 'row/lane px', 12, 34, 1, state.d.tlRow, function (v) { return v + 'px'; },
+      function (v) { state.d.tlRow = v; renderTimeline(); renderOut(); }, false);
+    rangeDial(host, 'glyph px', 6, 18, 1, state.d.tlGlyph, function (v) { return v + 'px'; },
+      function (v) { state.d.tlGlyph = v; renderTimeline(); renderOut(); }, state.tl === 'ledger-rows');
+    toggleDial(host, 'verdict chips', state.d.tlChips, function (v) { state.d.tlChips = v; renderTimeline(); buildTlControls(); renderOut(); });
+    rangeDial(host, 'pending hatch', 1, 9, 1, state.d.tlHatch, function (v) { return 'd' + v; },
+      function (v) { state.d.tlHatch = v; renderTimeline(); renderOut(); }, false);
+  }
+
+  function buildSpControls() {
+    mkPicker(document.getElementById('spPick'), [
+      ['step-dual', 'step-dual'], ['bar-pairs', 'bar-pairs'], ['dot-strip', 'dot-strip']
+    ], state.sp, function (v) { state.sp = v; renderSpark(); buildSpControls(); renderOut(); });
+
+    var host = document.getElementById('spDials'); host.innerHTML = '';
+    rangeDial(host, 'px/issuance', 3, 20, 1, state.d.sparkW, function (v) { return v + 'px'; },
+      function (v) { state.d.sparkW = v; renderSpark(); renderOut(); }, false);
+    rangeDial(host, 'height px', 20, 80, 1, state.d.sparkH, function (v) { return v + 'px'; },
+      function (v) { state.d.sparkH = v; renderSpark(); renderOut(); }, false);
+    toggleDial(host, '48h series', state.d.spark48, function (v) { state.d.spark48 = v; renderSpark(); renderTimeline(); buildSpControls(); renderOut(); });
+    rangeDial(host, 'band opacity', 0, 0.5, 0.01, state.d.bandOp, function (v) { return v.toFixed(2); },
+      function (v) { state.d.bandOp = v; renderSpark(); renderOut(); }, false);
+    rangeDial(host, 'dot radius', 1, 6, 0.5, state.d.dotR, function (v) { return v + 'px'; },
+      function (v) { state.d.dotR = v; renderSpark(); renderOut(); }, false);
+    rangeDial(host, 'stroke px', 1, 5, 0.5, state.d.sparkStroke, function (v) { return v + 'px'; },
+      function (v) { state.d.sparkStroke = v; renderSpark(); renderOut(); }, state.sp === 'bar-pairs');
+    segDial(host, 'spacing', [['index', 'index'], ['time', 'time']], state.d.spacing,
+      function (v) { state.d.spacing = v; renderSpark(); renderOut(); },
+      'time = honest gaps');
+  }
+
+  function buildBasins() {
+    var host = document.getElementById('basins'); host.innerHTML = '';
+    Object.keys(DATA.basins).forEach(function (k) {
+      var b = document.createElement('button');
+      b.textContent = k === 'AT' ? 'AT' : 'EP';
+      if (state.basin === k) b.classList.add('on');
+      b.onclick = function () {
+        state.basin = k; state.selected = defaultSelection(); renderAll();
+      };
+      host.appendChild(b);
+    });
+  }
+
+  // ===========================================================================
+  // BOOT
+  // ===========================================================================
+  function renderAll() {
+    buildBasins();
+    renderInvests();
+    buildTlControls();
+    renderTimeline();
+    buildSpControls();
+    renderSpark();
+    renderCal();
+    renderOut();
+  }
+
+  function boot() {
+    var badge = document.getElementById('badge');
+    badge.className = isSample ? 'sample' : 'real';
+    badge.textContent = isSample ? 'SAMPLE' : 'REAL';
+    badge.title = loadedFrom;
+    document.getElementById('now').innerHTML = 'now <b>' + fmtShort(DATA.nowStamp) + '</b>';
+    if (!DATA.basins[state.basin]) state.basin = Object.keys(DATA.basins)[0];
+    state.selected = defaultSelection();
+    renderAll();
+    // dev hook for Playwright
+    window.__genesisLab = { state: state, data: function () { return DATA; },
+      isSample: function () { return isSample; }, render: renderAll,
+      select: function (id) { state.selected = id; renderAll(); },
+      setBasin: function (b) { state.basin = b; state.selected = defaultSelection(); renderAll(); } };
+  }
+
+  var forceSample = /[?&]sample=1/.test(location.search);
+  if (forceSample) {
+    DATA = SAMPLE; isSample = true; loadedFrom = 'SAMPLE (forced via ?sample=1)';
+    boot();
+  } else {
+    fetch('../archive/derived/genesis-2026.json')
+      .then(function (r) { if (!r.ok) throw new Error('http ' + r.status); return r.json(); })
+      .then(function (j) { DATA = j; isSample = false; loadedFrom = 'REAL · ../archive/derived/genesis-2026.json'; boot(); })
+      .catch(function () { DATA = SAMPLE; isSample = true; loadedFrom = 'SAMPLE (inline demo — genesis-2026.json not reachable)'; boot(); });
+  }
+})();
+</script>
+</body>
+</html>

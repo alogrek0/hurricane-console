@@ -35,6 +35,11 @@ jobs:
         # composes the chains + genesis links into archive/derived/lineage-2026.json
         # — under archive/, so the commit step below already stages it
         run: node tools/build-lineage.js
+      - name: rebuild genesis truth ledger (Track C M4)
+        # per-statement 48h/7d verdicts + season calibration over lineage-2026.json
+        # -> archive/derived/genesis-2026.json — deterministic ("now" is the max
+        # archive stamp, never wall-clock), staged by the same commit step
+        run: node tools/build-genesis-ledger.js
       - name: commit new archive data
         run: |
           if [ -z "$(git status --porcelain archive/)" ]; then

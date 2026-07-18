@@ -1478,6 +1478,228 @@ const cycF = (name, lat, lon) => ({ name, classification: 'Tropical Storm', lat,
   }
 }
 
+// --- genesis truth ledger (Track C M4) ------------------------------------------
+// tools/build-genesis-ledger.js turns lineage chains into per-statement 48h/7d
+// verdicts + season calibration. The honesty rule extends to outcomes: formed
+// REQUIRES a lineage genesis link; an unattributed cyclone nearby makes the
+// window unresolved (never a claimed not-formed); open windows are pending,
+// never guessed. Synthetic units drive the pure exports on lineage-shaped
+// objects; the corpus block is guarded on genesis-2026.json existing and
+// asserts growth-proof invariants plus two immutable-history pins.
+
+const GL = require('./tools/build-genesis-ledger.js');
+
+// lineage-shaped builders (mirror the real JSON, not the parser shapes)
+const gSight = (stamp, c48, c7, lat, lon, tagged) => ({
+  stamp, file: 'TWOAT.' + stamp + '.txt',
+  lat: lat === undefined ? 15 : lat, lon: lon === undefined ? -45 : lon,
+  chance48: c48 || null, chance7: c7 || null, tagged: !!tagged, link: null,
+});
+const gInv = (id, tag, sightings) => ({ id, tag, sightings });
+const gCyc = (id, name, stamp, lat, lon) => ({
+  id, name,
+  sightings: [{ stamp, file: 'TWDAT.' + stamp + '.txt', lat, lon, classification: 'Tropical Depression', windKt: 30, link: null }],
+});
+const gLin = (invests, cyclones, genesis) =>
+  ({ season: 2026, basins: { AT: { waves: [], invests, cyclones: cyclones || [], genesis: genesis || [] } } });
+const gColl = (lin) => lin.basins.AT;
+const LO = { cat: 'low', pct: 20 }, MED = { cat: 'medium', pct: 50 };
+const FUTURE = '202609010000'; // "now" far past every synthetic window
+
+// rule: formed requires a genesis link inside the window — and gets it.
+{
+  const inv = gInv('AT-I-A-1', 'AL95', [gSight('202606010000', LO, LO)]);
+  const lin = gLin([inv], [gCyc('AT-C-B-1', 'One', '202606020000', 15, -45)],
+    [{ kind: 'invest-cyclone', from: 'AT-I-A-1', to: 'AT-C-B-1', atStamp: '202606020000', confidence: 'inferred-genesis' }]);
+  const r = GL.ledgerRecord(inv, gColl(lin), FUTURE);
+  ok('ledger verdict: genesis link within 48h → formed on both horizons',
+    r.outcome.kind === 'formed' && r.statements[0].verdict48 === 'formed' && r.statements[0].verdict7 === 'formed');
+}
+
+// rule: formed-late is honest verification — 48h missed, 7d verified.
+{
+  const inv = gInv('AT-I-A-1', 'AL95', [gSight('202606010000', LO, MED)]);
+  const lin = gLin([inv], [gCyc('AT-C-B-1', 'One', '202606031200', 15, -45)], // +60h
+    [{ kind: 'invest-cyclone', from: 'AT-I-A-1', to: 'AT-C-B-1', atStamp: '202606031200', confidence: 'inferred-genesis' }]);
+  const r = GL.ledgerRecord(inv, gColl(lin), FUTURE);
+  ok('ledger verdict: genesis at ~60h → 48h not-formed, 7d formed (formed-late is honest)',
+    r.statements[0].verdict48 === 'not-formed' && r.statements[0].verdict7 === 'formed');
+}
+
+// rule: a window past nowStamp is pending — never guessed.
+{
+  const inv = gInv('AT-I-A-1', null, [gSight('202606010000', LO, LO)]);
+  const r = GL.ledgerRecord(inv, gColl(gLin([inv])), '202606010600'); // now = T+6h
+  ok('ledger verdict: window past nowStamp → pending, never guessed',
+    r.statements[0].verdict48 === 'pending' && r.statements[0].verdict7 === 'pending' && r.outcome.kind === 'open');
+}
+
+// rule: window closed, no link, clear air → not-formed.
+{
+  const inv = gInv('AT-I-A-1', 'AL95', [gSight('202606010000', LO, LO)]);
+  const r = GL.ledgerRecord(inv, gColl(gLin([inv])), FUTURE);
+  ok('ledger verdict: chain ended, window closed, clear air → not-formed',
+    r.outcome.kind === 'no-cyclone' && r.statements[0].verdict48 === 'not-formed' && r.statements[0].verdict7 === 'not-formed');
+}
+
+// rule: an UNATTRIBUTED cyclone opening nearby in-window shadows the verdict —
+// unresolved, and never formed without a link (both directions refused).
+{
+  const inv = gInv('AT-I-A-1', 'AL95', [gSight('202606010000', LO, LO)]);
+  const lin = gLin([inv], [gCyc('AT-C-B-1', 'One', '202606020000', 18, -48)]); // 24h later, ~5.8° — no link
+  const r = GL.ledgerRecord(inv, gColl(lin), FUTURE);
+  ok('ledger verdict: unattributed cyclone nearby in-window → unresolved (nothing invented)',
+    r.outcome.kind === 'unresolved-nearby-cyclone' &&
+    r.statements[0].verdict48 === 'unresolved' && r.statements[0].verdict7 === 'unresolved');
+  ok('ledger verdict: formed NEVER without an invest→cyclone genesis link',
+    r.statements.every((s) => s.verdict48 !== 'formed' && s.verdict7 !== 'formed'));
+}
+
+// rule: a cyclone attributed to ANOTHER invest does not shadow this one.
+{
+  const a = gInv('AT-I-A-1', 'AL95', [gSight('202606010000', LO, LO)]);
+  const b = gInv('AT-I-B-1', 'AL96', [gSight('202606010000', LO, LO, 18, -48)]);
+  const lin = gLin([a, b], [gCyc('AT-C-C-1', 'One', '202606020000', 18, -48)],
+    [{ kind: 'invest-cyclone', from: 'AT-I-B-1', to: 'AT-C-C-1', atStamp: '202606020000', confidence: 'inferred-genesis' }]);
+  const r = GL.ledgerRecord(a, gColl(lin), FUTURE);
+  ok('ledger verdict: cyclone attributed to another invest → this one\'s not-formed stands',
+    r.outcome.kind === 'no-cyclone' && r.statements[0].verdict48 === 'not-formed');
+}
+
+// rule: beyond the 10° shadow radius is clear air; an unmeasurable distance is not.
+{
+  const inv = gInv('AT-I-A-1', 'AL95', [gSight('202606010000', LO, LO)]);
+  const far = GL.ledgerRecord(inv, gColl(gLin([inv], [gCyc('AT-C-B-1', 'One', '202606020000', 15, -60)])), FUTURE);
+  ok('ledger verdict: cyclone beyond NEAR_CYC_DEG → clear air, not-formed', far.statements[0].verdict48 === 'not-formed');
+  const blind = gInv('AT-I-A-1', 'AL95', [gSight('202606010000', LO, LO, null, null)]);
+  const r = GL.ledgerRecord(blind, gColl(gLin([blind], [gCyc('AT-C-B-1', 'One', '202606020000', 15, -60)])), FUTURE);
+  ok('ledger verdict: no mappable sighting → cannot rule out → unresolved (never invent clear air)',
+    r.statements[0].verdict48 === 'unresolved');
+}
+
+// rule: chance-less horizons carry null verdicts; chance-less sightings are not
+// statements; a chain that never states a chance gets no record at all.
+{
+  const inv = gInv('AT-I-A-1', null, [
+    gSight('202606010000', null, LO),
+    gSight('202606010600', null, null),
+  ]);
+  const r = GL.ledgerRecord(inv, gColl(gLin([inv])), FUTURE);
+  ok('ledger: chance-null horizon → null verdict; chance-null sighting → no statement',
+    r.statements.length === 1 && r.statements[0].verdict48 === null && r.statements[0].verdict7 === 'not-formed');
+  const none = gInv('AT-I-B-1', null, [gSight('202606010000', null, null)]);
+  ok('ledger: untagged chain with chances gets a record; chance-less chain gets none',
+    r.id === 'AT-I-A-1' && GL.ledgerRecord(none, gColl(gLin([none])), FUTURE) === null);
+}
+
+// rule: waveOrigin carried from the wave-invest genesis link.
+{
+  const inv = gInv('AT-I-A-1', 'AL95', [gSight('202606010000', LO, LO)]);
+  const lin = gLin([inv], [],
+    [{ kind: 'wave-invest', from: 'AT-W-X-1', to: 'AT-I-A-1', atStamp: '202606010000', confidence: 'inferred-genesis' }]);
+  const r = GL.ledgerRecord(inv, gColl(lin), FUTURE);
+  ok('ledger: waveOrigin carried from the wave-invest genesis link',
+    r.waveOrigin && r.waveOrigin.waveId === 'AT-W-X-1' && r.waveOrigin.atStamp === '202606010000');
+}
+
+// rule: same-tag chains stay separate records, cross-referenced only.
+{
+  const a = gInv('AT-I-A-1', 'AL90', [gSight('202606010000', LO, LO)]);
+  const b = gInv('AT-I-B-1', 'AL90', [gSight('202606050000', LO, LO)]);
+  const led = GL.buildLedger(gLin([a, b]), { nowStamp: FUTURE });
+  const recs = led.basins.AT.invests;
+  ok('ledger: same-tag chains stay separate records, cross-referenced in siblingChains',
+    recs.length === 2 && recs[0].siblingChains[0] === 'AT-I-B-1' && recs[1].siblingChains[0] === 'AT-I-A-1');
+}
+
+// rule: calibration buckets by STATED category per horizon; counts sum; a cell
+// with nothing resolved reads null, never 0.
+{
+  const a = gInv('AT-I-A-1', null, [gSight('202606010000', LO, MED)]);      // closed, clear air
+  const b = gInv('AT-I-B-1', null, [gSight('202608310000', LO, LO)]);      // windows straddle FUTURE
+  const led = GL.buildLedger(gLin([a, b]), { nowStamp: FUTURE });
+  const cal = led.basins.AT.calibration;
+  ok('ledger calibration: buckets by stated category per horizon',
+    cal.h48.low.statements === 2 && cal.d7.medium.statements === 1 && cal.d7.low.statements === 1);
+  const sums = ['h48', 'd7'].every((h) => ['low', 'medium', 'high'].every((c) => {
+    const cell = cal[h][c];
+    return cell.statements === cell.formed + cell.notFormed + cell.unresolved + cell.pending;
+  }));
+  ok('ledger calibration: cell counts sum to statements', sums);
+  ok('ledger calibration: observedRate null when nothing resolved (never 0/0 as 0)',
+    cal.d7.low.observedRate === null && cal.d7.medium.observedRate === 0 &&
+    led.calibrationTotal.h48.low.statements === 2);
+}
+
+// rule: nowStamp defaults to the max stamp across all basins; determinism.
+{
+  const a = gInv('AT-I-A-1', null, [gSight('202606010000', LO, LO), gSight('202607011200', LO, LO)]);
+  const lin = gLin([a], [gCyc('AT-C-B-1', 'One', '202607021800', 15, -45)]);
+  ok('ledger: nowStamp = max stamp across the lineage (maxStamp)',
+    GL.maxStamp(lin) === '202607021800' && GL.buildLedger(lin).nowStamp === '202607021800');
+  ok('ledger determinism: rebuilding the same lineage is byte-identical',
+    JSON.stringify(GL.buildLedger(lin, { nowStamp: FUTURE })) === JSON.stringify(GL.buildLedger(lin, { nowStamp: FUTURE })));
+}
+
+// Real-corpus INVARIANTS over the committed ledger JSON — guarded on existence
+// (built after build-lineage, in the same PR / cron run). Growth-proof:
+// invariants + two immutable pins (both chains closed in June — no future
+// archive growth can change them), never counts.
+{
+  const gf = __dirname + '/archive/derived/genesis-' + GL.SEASON + '.json';
+  const lf = __dirname + '/archive/derived/lineage-' + GL.SEASON + '.json';
+  if (fs.existsSync(gf) && fs.existsSync(lf)) {
+    let led = null, lin = null;
+    try {
+      led = JSON.parse(fs.readFileSync(gf, 'utf8'));
+      lin = JSON.parse(fs.readFileSync(lf, 'utf8'));
+    } catch (e) { /* asserted below */ }
+    ok('ledger corpus: JSON parses', !!led && !!lin);
+    if (led && lin) {
+      ok('ledger corpus: season + nowStamp + AT/EP present',
+        led.season === GL.SEASON && typeof led.nowStamp === 'string' && led.basins.AT && led.basins.EP);
+      ok('ledger corpus: nowStamp equals maxStamp(lineage)', led.nowStamp === GL.maxStamp(lin));
+      let idsOk = true, stmtsOk = true, formedOk = true, sumsOk = true;
+      for (const basin of ['AT', 'EP']) {
+        const chains = {};
+        (lin.basins[basin].invests || []).forEach((c) => { chains[c.id] = c; });
+        const links = {};
+        (lin.basins[basin].genesis || []).forEach((g) => { if (g.kind === 'invest-cyclone') links[g.from] = 1; });
+        for (const r of led.basins[basin].invests) {
+          const chain = chains[r.id];
+          if (!chain) { idsOk = false; continue; }
+          const bearing = chain.sightings.filter((s) => s.chance48 || s.chance7);
+          if (r.statements.length !== bearing.length) stmtsOk = false;
+          for (const st of r.statements) {
+            if ((st.verdict48 === 'formed' || st.verdict7 === 'formed') && !links[r.id]) formedOk = false;
+          }
+        }
+        const cal = led.basins[basin].calibration;
+        for (const h of ['h48', 'd7']) {
+          for (const c of ['low', 'medium', 'high']) {
+            const cell = cal[h][c];
+            if (cell.statements !== cell.formed + cell.notFormed + cell.unresolved + cell.pending) sumsOk = false;
+          }
+        }
+      }
+      ok('ledger corpus: every record id references a real lineage invest chain', idsOk);
+      ok('ledger corpus: statements equal the chain\'s chance-bearing sightings', stmtsOk);
+      ok('ledger corpus: no formed verdict without an invest-cyclone genesis link', formedOk);
+      ok('ledger corpus: calibration cell counts sum to statements', sumsOk);
+      // immutable pins — closed June chains; One/Arthur can never gain links
+      const al90 = led.basins.AT.invests.find((r) => r.id === 'AT-I-202606131720-1');
+      const al90last = al90 && al90.statements[al90.statements.length - 1];
+      ok('ledger corpus: AL90 pin — final statement (202606161142) unresolved on both horizons',
+        !!al90last && al90last.stamp === '202606161142' &&
+        al90last.verdict48 === 'unresolved' && al90last.verdict7 === 'unresolved');
+      const ep91 = led.basins.EP.invests.find((r) => r.id === 'EP-I-202606031143-2');
+      ok('ledger corpus: EP91 pin — formed into EP-C-202606071546-1 at 202606071546',
+        !!ep91 && ep91.outcome.kind === 'formed' &&
+        ep91.outcome.cycloneId === 'EP-C-202606071546-1' && ep91.outcome.genesisStamp === '202606071546');
+    }
+  }
+}
+
 // --- app version (single source, CalVer) ---------------------------------------
 
 const VER = require('./version.js');
