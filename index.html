@@ -83,6 +83,10 @@
   /* history scrubber: chip under the zoom control (zoom bottoms out ~75px,
      ~92px on coarse pointers — 96px clears both). Lat labels may pass under
      it, same accepted behavior as the zoom control. */
+  /* zoom + scrubber yield while a popup is open (they stack above the popup
+     pane and would cover text on small screens; see app.js hc-popup-open) */
+  .scrub,.leaflet-control-zoom{transition:opacity .15s}
+  .hc-popup-open .scrub,.hc-popup-open .leaflet-control-zoom{opacity:0;pointer-events:none}
   .scrub{position:absolute;left:.6rem;top:96px;z-index:500;display:flex;
     align-items:center;gap:.1rem;background:rgba(9,26,38,.9);
     border:1px solid var(--line);border-radius:6px;padding:.1rem .2rem;

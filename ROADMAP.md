@@ -39,6 +39,10 @@ planned tracks — lived friction beats speculation.
   the popup's overflow box — swipes "locked" and fell through to the map.
   Fixed: `touch-action:pan-y` on the popup content (`pan-x pan-y` on the
   sparkline strip); Leaflet already stops those touches from starting a drag.
+  Follow-up same day: the slid-down popup landed UNDER the zoom control and
+  scrubber (both stack above the popup pane) — while any popup is open the
+  body carries `hc-popup-open` and those two overlays fade out
+  (pointer-events off), returning on close. Map-nav isn't needed mid-read.
 - [x] **The app was always one launch behind** (2026-07-14) — reported three
   times in a day as "I don't see <the thing you just shipped>". Each time the
   deploy was fine and the SW had already downloaded the new shell; the running

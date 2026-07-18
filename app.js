@@ -791,6 +791,13 @@
   map.on('popupopen', function (e) { selClear(); selHighlight(e.popup._source); });
   map.on('popupclose', selClear);
 
+  // While a popup is open, the zoom control and the scrubber fade out — they
+  // stack above the popup pane and a popup slid down from the frame top (see
+  // fitPopupInView) can land right under them, hiding the first lines of text.
+  // Map-nav tools aren't needed mid-read; they return on close.
+  map.on('popupopen', function () { document.body.classList.add('hc-popup-open'); });
+  map.on('popupclose', function () { document.body.classList.remove('hc-popup-open'); });
+
   // --- history trail (Track C M3): one lineage chain's breadcrumb trail -------
   // A popup "history" link (cyclones, waves, tagged disturbances only) draws the
   // tapped feature's archived sighting chain UNDER the live features, styled to
