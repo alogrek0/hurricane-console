@@ -17240,6 +17240,34 @@
       "fixes": 9,
       "inferred": 1,
       "projections": 1
+    },
+    {
+      "file": "TWDEP.202607190258.txt",
+      "kind": "TWD",
+      "stamp": "202607190258",
+      "issuedISO": "2026-07-18T04:05:00.000Z",
+      "cyclones": [
+        {
+          "name": "Six-E",
+          "classification": "Tropical Depression",
+          "lat": 11.3,
+          "lon": -109.1,
+          "windKt": 30
+        },
+        {
+          "name": "Elida",
+          "classification": "Tropical Storm",
+          "lat": 20.6,
+          "lon": -124.8,
+          "windKt": 55
+        }
+      ],
+      "waves": [],
+      "convection": 5,
+      "troughs": 1,
+      "fixes": 9,
+      "inferred": 2,
+      "projections": 2
     }
   ]
 }

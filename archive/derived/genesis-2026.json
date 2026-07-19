@@ -1,7 +1,7 @@
 {
   "_readme": "Genesis truth ledger (Track C M4): per-invest statement verdicts + season calibration derived from archive/derived/lineage-2026.json by `node tools/build-genesis-ledger.js` — NEVER hand-edit. Deterministic (\"now\" is the max archive stamp, never wall-clock). Verdicts: formed REQUIRES a lineage invest-cyclone genesis link; an unattributed cyclone opening nearby makes the window unresolved — this ledger refuses to invent formed AND refuses to invent not-formed; windows past nowStamp are pending, never guessed.",
   "season": 2026,
-  "nowStamp": "202607190017",
+  "nowStamp": "202607190258",
   "basins": {
     "AT": {
       "invests": [
@@ -6939,6 +6939,12 @@
                 "name": "Elida",
                 "firstStamp": "202607150839",
                 "dist": null
+              },
+              {
+                "cycloneId": "EP-C-202607190258-1",
+                "name": "Six-E",
+                "firstStamp": "202607190258",
+                "dist": null
               }
             ]
           },
@@ -7626,11 +7632,18 @@
           "lastStamp": "202607170535",
           "waveOrigin": null,
           "outcome": {
-            "kind": "no-cyclone",
+            "kind": "unresolved-nearby-cyclone",
             "cycloneId": null,
             "cycloneName": null,
             "genesisStamp": null,
-            "nearby": []
+            "nearby": [
+              {
+                "cycloneId": "EP-C-202607190258-1",
+                "name": "Six-E",
+                "firstStamp": "202607190258",
+                "dist": null
+              }
+            ]
           },
           "siblingChains": [],
           "statements": [
@@ -7658,11 +7671,18 @@
           "lastStamp": "202607170535",
           "waveOrigin": null,
           "outcome": {
-            "kind": "no-cyclone",
+            "kind": "unresolved-nearby-cyclone",
             "cycloneId": null,
             "cycloneName": null,
             "genesisStamp": null,
-            "nearby": []
+            "nearby": [
+              {
+                "cycloneId": "EP-C-202607190258-1",
+                "name": "Six-E",
+                "firstStamp": "202607190258",
+                "dist": null
+              }
+            ]
           },
           "siblingChains": [],
           "statements": [
@@ -7690,11 +7710,18 @@
           "lastStamp": "202607171152",
           "waveOrigin": null,
           "outcome": {
-            "kind": "no-cyclone",
+            "kind": "unresolved-nearby-cyclone",
             "cycloneId": null,
             "cycloneName": null,
             "genesisStamp": null,
-            "nearby": []
+            "nearby": [
+              {
+                "cycloneId": "EP-C-202607190258-1",
+                "name": "Six-E",
+                "firstStamp": "202607190258",
+                "dist": null
+              }
+            ]
           },
           "siblingChains": [],
           "statements": [
@@ -7726,7 +7753,14 @@
             "cycloneId": null,
             "cycloneName": null,
             "genesisStamp": null,
-            "nearby": []
+            "nearby": [
+              {
+                "cycloneId": "EP-C-202607190258-1",
+                "name": "Six-E",
+                "firstStamp": "202607190258",
+                "dist": 4.809
+              }
+            ]
           },
           "siblingChains": [],
           "statements": [
@@ -7859,11 +7893,18 @@
           "lastStamp": "202607171722",
           "waveOrigin": null,
           "outcome": {
-            "kind": "no-cyclone",
+            "kind": "unresolved-nearby-cyclone",
             "cycloneId": null,
             "cycloneName": null,
             "genesisStamp": null,
-            "nearby": []
+            "nearby": [
+              {
+                "cycloneId": "EP-C-202607190258-1",
+                "name": "Six-E",
+                "firstStamp": "202607190258",
+                "dist": null
+              }
+            ]
           },
           "siblingChains": [],
           "statements": [
@@ -7891,11 +7932,18 @@
           "lastStamp": "202607171749",
           "waveOrigin": null,
           "outcome": {
-            "kind": "no-cyclone",
+            "kind": "unresolved-nearby-cyclone",
             "cycloneId": null,
             "cycloneName": null,
             "genesisStamp": null,
-            "nearby": []
+            "nearby": [
+              {
+                "cycloneId": "EP-C-202607190258-1",
+                "name": "Six-E",
+                "firstStamp": "202607190258",
+                "dist": null
+              }
+            ]
           },
           "siblingChains": [],
           "statements": [
@@ -7923,11 +7971,18 @@
           "lastStamp": "202607172312",
           "waveOrigin": null,
           "outcome": {
-            "kind": "no-cyclone",
+            "kind": "unresolved-nearby-cyclone",
             "cycloneId": null,
             "cycloneName": null,
             "genesisStamp": null,
-            "nearby": []
+            "nearby": [
+              {
+                "cycloneId": "EP-C-202607190258-1",
+                "name": "Six-E",
+                "firstStamp": "202607190258",
+                "dist": null
+              }
+            ]
           },
           "siblingChains": [],
           "statements": [
@@ -7955,11 +8010,18 @@
           "lastStamp": "202607180546",
           "waveOrigin": null,
           "outcome": {
-            "kind": "no-cyclone",
+            "kind": "unresolved-nearby-cyclone",
             "cycloneId": null,
             "cycloneName": null,
             "genesisStamp": null,
-            "nearby": []
+            "nearby": [
+              {
+                "cycloneId": "EP-C-202607190258-1",
+                "name": "Six-E",
+                "firstStamp": "202607190258",
+                "dist": null
+              }
+            ]
           },
           "siblingChains": [],
           "statements": [
@@ -7991,7 +8053,14 @@
             "cycloneId": null,
             "cycloneName": null,
             "genesisStamp": null,
-            "nearby": []
+            "nearby": [
+              {
+                "cycloneId": "EP-C-202607190258-1",
+                "name": "Six-E",
+                "firstStamp": "202607190258",
+                "dist": null
+              }
+            ]
           },
           "siblingChains": [],
           "statements": [
@@ -8023,7 +8092,14 @@
             "cycloneId": null,
             "cycloneName": null,
             "genesisStamp": null,
-            "nearby": []
+            "nearby": [
+              {
+                "cycloneId": "EP-C-202607190258-1",
+                "name": "Six-E",
+                "firstStamp": "202607190258",
+                "dist": null
+              }
+            ]
           },
           "siblingChains": [],
           "statements": [
@@ -8055,7 +8131,14 @@
             "cycloneId": null,
             "cycloneName": null,
             "genesisStamp": null,
-            "nearby": []
+            "nearby": [
+              {
+                "cycloneId": "EP-C-202607190258-1",
+                "name": "Six-E",
+                "firstStamp": "202607190258",
+                "dist": null
+              }
+            ]
           },
           "siblingChains": [],
           "statements": [

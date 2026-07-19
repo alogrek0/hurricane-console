@@ -26338,6 +26338,30 @@
               "classification": "Tropical Storm",
               "windKt": 60,
               "link": "name"
+            },
+            {
+              "stamp": "202607190258",
+              "file": "TWDEP.202607190258.txt",
+              "lat": 20.6,
+              "lon": -124.8,
+              "classification": "Tropical Storm",
+              "windKt": 55,
+              "link": "name"
+            }
+          ]
+        },
+        {
+          "id": "EP-C-202607190258-1",
+          "name": "Six-E",
+          "sightings": [
+            {
+              "stamp": "202607190258",
+              "file": "TWDEP.202607190258.txt",
+              "lat": 11.3,
+              "lon": -109.1,
+              "classification": "Tropical Depression",
+              "windKt": 30,
+              "link": null
             }
           ]
         }
