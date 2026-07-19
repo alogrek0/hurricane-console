@@ -320,13 +320,28 @@ prefer broken chains over invented links.
   old invest's snapshots persist. bal/bep only (Central Pacific out of
   scope, matching the app and the alerter). Archiving ONLY — no derive,
   no app involvement; pure helpers offline-tested in test.js.*
-- [ ] **M6 — B-deck truth validation**: read the captured b-decks as ground
+- [x] **M6 — B-deck truth validation**: read the captured b-decks as ground
   truth against the parser-derived record — did a `formed` verdict's cyclone
   really originate from that invest tag (b-decks carry the tag→name handoff
   explicitly), do lineage chain positions track the best-track fixes, do
   stated-chance windows line up with actual genesis times. Per the Track C
   honesty rule, validation FLAGS discrepancies (like the M2 chain audit) —
   it never retro-fits links or rewrites verdicts to match.
+  *Shipped 2026-07-18: `tools/bdeck-truth.js` → `archive/derived/
+  bdeck-truth-2026.json`, rebuilt by the cron after each b-deck sync.
+  Explicit evidence only (shared `genesis-num` / handoff tags naming ATCF
+  ids) — bare track overlap never links; no evidence = `no-data`, not wrong.
+  First run earned its keep immediately: b-deck truth RESOLVES the ledger's
+  honest AL90 and EP96 `unresolved` verdicts (formed into One/Arthur and
+  Five/Elida), and REFUTES one — the ledger called EP95 clear-air not-formed,
+  but the b-deck says EP95 became Four/Douglas; the paired position-outlier
+  flag (mean 17.6° sighting-to-track) shows WHY the prose anchors put the
+  chain outside the 10° nearby-cyclone gate. The ledger stays as derived —
+  flags are the deliverable. Plus per-statement truth verdicts feeding a
+  truth calibration table, and position stats for every truthed chain.
+  Un-truthable forever: invests whose tags recycled before M5 capture began
+  (EP91-EP94 era) — their `formed`/`not-formed` ledger verdicts stand
+  unvalidated, honestly marked `no-data`.*
 
 ## Maintenance calendar
 
