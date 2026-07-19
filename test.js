@@ -988,6 +988,90 @@ ok('TWOEP: CP91 tag captured but location honestly unmapped',
   (() => { const d = eptwo.disturbances[1];
     return d.invest === 'CP91' && d.lat === null && d.lon === null && d.chance48.pct === 60; })());
 
+// --- directional offsets ("several hundred miles south-southwest of X") --------
+// The gazetteer must not park a feature ON the landmark when the text places it
+// hundreds of miles away — EP94 lurched 17 deg in 6 h that way. Vague hundreds
+// use nominal midpoints (couple 200 / few 300 / several 400), statute unless
+// "nautical" is written; a phrase with NO stated scale ("well southwest of")
+// stays at the anchor — offsetting it would invent magnitude. Expected values
+// are offsetNm math (0.1-deg rounded), computed outside the parser.
+const offDot = (body) => {
+  const r = P.parse(EP_HEAD + body);
+  return r.inferred.length === 1 ? r.inferred[0] : null;
+};
+ok('offset: "several hundred miles south of the southern tip of the Baja California Peninsula" lands off Cabo, not mid-peninsula',
+  (() => { const d = offDot('An area of low pressure has formed along the tropical wave located several hundred miles south of the southern tip of the Baja California Peninsula.');
+    return d && d.lat === 17.1 && d.lon === -109.9 && d.inferred === true; })());
+ok('offset: 16-point compound bearing ("a few hundred miles south-southwest of the coast of southwestern Mexico")',
+  (() => { const d = offDot('A tropical wave located a few hundred miles south-southwest of the coast of southwestern Mexico continues to produce disorganized showers.');
+    return d && d.lat === 13 && d.lon === -103.7; })());
+ok('offset: numeric nautical miles taken as-is ("about 500 nautical miles south of the southern tip of Baja California")',
+  (() => { const d = offDot('A broad low pressure area is centered about 500 nautical miles south of the southern tip of Baja California.');
+    return d && d.lat === 14.6 && d.lon === -109.9; })());
+ok('offset: numeric statute miles converted to nm (Atlantic, "about 175 miles southeast of the Cabo Verde Islands")',
+  (() => { const r = P.parse('TWDAT \n\nTropical Weather Discussion\n\n...TROPICAL WAVES...\n\n' +
+    'A tropical wave is located about 175 miles southeast of the Cabo Verde Islands.');
+    return r.inferred.length === 1 && r.inferred[0].lat === 14.2 && r.inferred[0].lon === -22.1; })());
+ok('offset: "to the" infix form resolves the same bearing',
+  (() => { const d = offDot('A tropical wave is located several hundred miles to the south-southwest of the coast of southwestern Mexico.');
+    return d && d.lat === 11.6 && d.lon === -104.3; })());
+ok('offset: teletype line-wrap inside the phrase still offsets',
+  (() => { const d = offDot('An area of low pressure is located several hundred\nmiles south of the southern tip of the Baja California Peninsula.');
+    return d && d.lat === 17.1 && d.lon === -109.9; })());
+ok('offset: "well southwest of X" states no distance -> stays at the anchor (nothing invented)',
+  (() => { const d = offDot('A broad area of low pressure is located well southwest of the Baja California Peninsula.');
+    return d && d.lat === 29.0 && d.lon === -114.0; })());
+ok('offset: "within N miles ... of" is a radius, not a position -> anchor unchanged',
+  (() => { const d = offDot('A surface trough is within 200 miles south of the Baja California Peninsula.');
+    return d && d.lat === 29.0 && d.lon === -114.0; })());
+ok('offset TWO: CP landmarks stay honestly unmapped (conjoined Hawaiian/Johnston offsets -> null)',
+  (() => { const t = P.parseTWO(TWOEP_SYNTH.replace(
+    'Shower and thunderstorm activity has decreased south of the\nHawaiian Islands.',
+    'A broad area of low pressure located several hundred miles southwest of the Hawaiian Islands and around 400 miles southeast of Johnston Atoll is producing disorganized showers.'));
+    const d = t.disturbances[1];
+    return d.invest === 'CP91' && d.lat === null && d.lon === null; })());
+ok('offset TWO: EP94 evidence prose resolves to the offset point, tag + chances intact',
+  (() => { const t = P.parseTWO(`
+000
+ABPZ20 KNHC 231151
+TWOEP
+
+Tropical Weather Outlook
+NWS National Hurricane Center Miami FL
+500 AM PDT Tue Jun 23 2026
+
+For the eastern North Pacific east of 140 degrees west longitude:
+
+Central and Western Portion of the East Pacific (EP94):
+An area of low pressure has formed along the tropical wave located
+several hundred miles south of the southern tip of the Baja
+California Peninsula.
+* Formation chance through 48 hours...medium...50 percent.
+* Formation chance through 7 days...high...80 percent.
+`);
+    const d = t.disturbances[0];
+    return d && d.invest === 'EP94' && d.lat === 17.1 && d.lon === -109.9 && d.chance48.pct === 50; })());
+ok('offset TWO: future "expected to form ... offshore of" keeps pre-existing anchor behavior (offshore has no bearing)',
+  (() => { const t = P.parseTWO(`
+000
+ABPZ20 KNHC 231151
+TWOEP
+
+Tropical Weather Outlook
+NWS National Hurricane Center Miami FL
+500 AM PDT Tue Jun 23 2026
+
+For the eastern North Pacific east of 140 degrees west longitude:
+
+Central East Pacific:
+An area of low pressure is expected to form late this week several
+hundred miles offshore of the coast of southwestern Mexico.
+* Formation chance through 48 hours...low...10 percent.
+* Formation chance through 7 days...medium...50 percent.
+`);
+    const d = t.disturbances[0];
+    return d && d.invest === null && d.lat === 17.0 && d.lon === -102.0; })());
+
 // --- invest alerter, East Pacific (both-basin support) -------------------------
 // The alerter now polls TWOAT + TWOEP and keeps per-basin state. Reuse the EP
 // fixture above: EP96 fires a headline new-invest stamped basin 'EP' with

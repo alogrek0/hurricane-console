@@ -213,6 +213,12 @@
   const GAZ_EP = {
     'gulf of tehuantepec': { lat: 16.0, lon: -95.0 },
     'gulf of california': { lat: 28.0, lon: -112.0 },
+    // "the southern tip of (the) Baja California (Peninsula)" is NHC's stock
+    // offset origin — anchor it at Cabo San Lucas, not the mid-peninsula
+    // 'baja california' centroid. Both articled and bare spellings, since
+    // anchor()'s substring match can't bridge the optional "the".
+    'southern tip of the baja california': { lat: 22.9, lon: -109.9 },
+    'southern tip of baja california': { lat: 22.9, lon: -109.9 },
     'baja california sur': { lat: 25.6, lon: -111.9 },
     'baja california': { lat: 29.0, lon: -114.0 },
     'revillagigedo islands': { lat: 18.8, lon: -112.8 },
@@ -255,6 +261,34 @@
 
   const GAZ = { AT: GAZ_AT, EP: GAZ_EP };
 
+  // "several hundred miles south-southwest of X" / "about 539 nautical miles
+  // southwest of X" -> { nm, bearing, tail } or null. Vague hundreds map to
+  // nominal midpoints (couple 200 / few 300 / several 400) in the stated unit —
+  // any value in the stated range beats the zero offset of anchoring at the
+  // landmark itself, the one place the text says the feature is NOT. A phrase
+  // with no stated scale ("well southwest of X") is NOT an offset: a nominal
+  // there would invent magnitude the text never stated, so it stays at the
+  // anchor. Distances are statute miles unless "nautical" is written.
+  const RE_OFFSET =
+    /\b(?:about\s+|around\s+|approximately\s+)?(?:(?:a\s+)?(couple|few|several)(?:\s+of)?\s+hundred|(\d{2,4}))\s+(nautical\s+)?miles\s+(?:to\s+the\s+)?([a-z][a-z-]{1,20})\s+of\s+([\s\S]+)$/;
+  const OFFSET_HUNDREDS = { couple: 200, few: 300, several: 400 };
+  const STATUTE_TO_NM = 0.868976; // same ratio parseMotion uses for mph->kt
+
+  function parseOffsetPhrase(p) {
+    const q = p.replace(/\s+/g, ' '); // teletype wraps split the phrase
+    const m = q.match(RE_OFFSET);
+    if (!m) return null;
+    if (/\bwithin$/.test(q.slice(0, m.index).trim())) return null; // radius, not a position
+    const key = dirKey(m[4]);
+    if (key === null) return null; // "offshore of", "vicinity of" — no bearing
+    const d = m[1] ? OFFSET_HUNDREDS[m[1]] : parseInt(m[2], 10);
+    const nm = m[3] ? d : d * STATUTE_TO_NM;
+    if (nm > 1500) return null; // beyond any real product; regex ate something odd
+    // one sentence can chain two offsets ("...of A and around 400 miles
+    // southeast of B") — resolve from the first landmark only
+    return { nm: nm, bearing: DIR[key], tail: m[5].split(/\s+and\s+/)[0] };
+  }
+
   function gazResolve(phrase, gaz) {
     const p = phrase.toLowerCase();
     // "between A and B" -> midpoint of the two anchors
@@ -263,6 +297,16 @@
       const a = anchor(btw[1], gaz);
       const b = anchor(btw[2], gaz);
       if (a && b) return { lat: (a.lat + b.lat) / 2, lon: (a.lon + b.lon) / 2 };
+    }
+    // "<distance> <compass> of X" -> anchor X, then move by the stated offset.
+    // Rounded to 0.1 deg — the gazetteer's own coarseness; still inferred.
+    const off = parseOffsetPhrase(p);
+    if (off) {
+      const base = anchor(off.tail, gaz);
+      if (base) {
+        const pt = offsetNm(base, off.bearing, off.nm);
+        return { lat: Math.round(pt.lat * 10) / 10, lon: Math.round(pt.lon * 10) / 10 };
+      }
     }
     return anchor(p, gaz);
   }
