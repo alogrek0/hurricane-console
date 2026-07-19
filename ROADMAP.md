@@ -286,6 +286,28 @@ prefer broken chains over invented links.
   cross-hatched unresolved span naming nearby cyclones, ★ only on a formed
   link) — verdicts read from `genesis-2026.json`, never recomputed in the
   browser. Untagged areas get nothing (no tag, no match — the M3 rule).*
+- [x] **M5 — ATCF b-deck capture (data slice)**: snapshot NHC's working
+  best-track ("b-deck") files each cron cycle — they MUTATE in place, and
+  invest tags 90-99 recycle within a season, so an invest's in-season
+  evolution is not archived anywhere public; every uncaptured cycle is
+  ground truth gone forever.
+  *Shipped 2026-07-18 (PR #74): `tools/bdeck-sync.js` on the 6-hourly
+  `archive.yml` cron fetches `ftp.nhc.noaa.gov/atcf/btk/` and writes
+  content-stamped snapshots to `archive/{year}/atcf/`
+  (`bal912026.202607180000.dat` — stamp = the file's max DTG, no wall
+  clock, so a no-news re-fetch is a zero diff). Per file: absent → write,
+  byte-identical → skip, revised in place → overwrite with git history
+  keeping each prior state; a recycled tag starts a new DTG era and the
+  old invest's snapshots persist. bal/bep only (Central Pacific out of
+  scope, matching the app and the alerter). Archiving ONLY — no derive,
+  no app involvement; pure helpers offline-tested in test.js.*
+- [ ] **M6 — B-deck truth validation**: read the captured b-decks as ground
+  truth against the parser-derived record — did a `formed` verdict's cyclone
+  really originate from that invest tag (b-decks carry the tag→name handoff
+  explicitly), do lineage chain positions track the best-track fixes, do
+  stated-chance windows line up with actual genesis times. Per the Track C
+  honesty rule, validation FLAGS discrepancies (like the M2 chain audit) —
+  it never retro-fits links or rewrites verdicts to match.
 
 ## Maintenance calendar
 
