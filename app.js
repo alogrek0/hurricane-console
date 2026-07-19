@@ -655,7 +655,10 @@
 
   // The readout (bottom-right). Three lines:
   //   1  features · waves · cyclones · forecast tracks
-  //   2  issued <age> · <stated time[ · date]> · local <viewer time>[ · ahead of clock]
+  //   2  issued <age> · <stated time[ · date]>[ · local <viewer time>][ · early]
+  //      (local only when the viewer's clock disagrees with the stated time —
+  //       for a viewer in the product's own timezone it was the same instant
+  //       twice in two formats)
   //   3  next ~HHMMZ in ...            (live cycle only)      <version, right>
   function updateMeta() {
     // Line 1: features, with the forecast-track count folded in from tcmNote.
@@ -673,17 +676,23 @@
       var now = new Date();
       var age = relAge(d); // '' only when the product reads ahead of the clock
       var stated = statedTime(issuedStr);
+      var local = d.toLocaleString([], { hour: 'numeric', minute: '2-digit', timeZoneName: 'short' });
+      // Show the local conversion only when it actually converts something:
+      // NHC's colon-less "800 PM EDT" and the locale's "8:00 PM EDT" are the
+      // same instant in the same zone — normalize both before comparing.
+      function normTime(s) { return String(s).toUpperCase().replace(/[^0-9A-Z]/g, ''); }
+      var localDiffers = normTime(local) !== normTime(stated);
       // Add the calendar date when the product isn't from today — otherwise a
-      // touch user (no hover title) can't tell which day an older product is from.
-      var sameDay = d.getUTCFullYear() === now.getUTCFullYear() &&
-        d.getUTCMonth() === now.getUTCMonth() && d.getUTCDate() === now.getUTCDate();
+      // touch user (no hover title) can't tell which day an older product is
+      // from. "Today" by the VIEWER's calendar: the UTC day flips at 0000Z
+      // (= 8 PM EDT), which used to stamp every evening product with a date.
+      var sameDay = d.getFullYear() === now.getFullYear() &&
+        d.getMonth() === now.getMonth() && d.getDate() === now.getDate();
       var sd = sameDay ? '' : statedDate(issuedStr);
       line2 = 'issued ' + (age ? age + ' · ' : '') + escapeHtml(stated) +
         (sd ? ' · ' + escapeHtml(sd) : '') +
-        ' · local ' + escapeHtml(d.toLocaleString([], {
-          hour: 'numeric', minute: '2-digit', timeZoneName: 'short'
-        })) +
-        (age ? '' : ' · ahead of clock'); // skew signal, since age was suppressed
+        (localDiffers ? ' · local ' + escapeHtml(local) : '') +
+        (age ? '' : ' · early'); // skew signal, since age was suppressed
     } else {
       titleAttr = ' title="' + escapeHtml(issuedStr) + '"';
       line2 = 'issued ' + escapeHtml(issuedStr); // unparseable: raw header, no age
