@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<!--
+  tools/antilles-lab.html — dev-only Lesser Antilles island-label lab. Never
+  shipped as part of the app (not in the SW SHELL list, not referenced by
+  index.html), but it IS reachable once pushed because Pages serves the repo
+  root:
+    https://<user>.github.io/hurricane-console/tools/antilles-lab.html
+
+  Why it exists: the 10m basemap inset makes the arc's islands real shapes, and
+  the ROADMAP wants them LABELED "enough to name a passing storm's position" —
+  which labels, at which zoom they appear, and how loud they are is a judgment
+  call that can only be made by looking, on the phone, with a storm in frame.
+  This page loads the real Leaflet + the real generated basemap.js (with the
+  inset), draws a fake hurricane crossing Dominica in the real feature panes,
+  and offers the candidate label treatments with live dials. Pick, tune, and
+  the page prints the exact app.js/index.html constants to apply (PR2).
+
+  Treatments (mechanism under judgment):
+    A  overlay spans — one absolutely-positioned div, <span> per label,
+       repositioned via latLngToContainerPoint on move/zoom (the shipped
+       grat-labels mechanism; cheapest, pointer-events:none)
+    B  divIcon markers — non-interactive L.marker per label in a dedicated
+       pane (Leaflet-native reprojection, per-label DOM)
+  Tier gating: tier-1 islands (the NHC-prose staples) reveal at a lower zoom
+  than tier-2 (smaller Leewards + Tobago/St. Croix); "tier 1 only" hides
+  tier 2 entirely for comparison. Labels anchor just offshore and extend over
+  water (side E/W per label; C = centered, Trinidad is big enough).
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Antilles label lab — Hurricane Console (dev)</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"
+  integrity="sha512-h9FcoyWjHcOcmEVkxOfTLnmZFWIH0iZhZT1H2TbOq55xssQGEJHEaIm+PgoUaZbRvQTNTluNOEfb1ZRy6D3BOw=="
+  crossorigin="anonymous">
+<style>
+  :root{
+    --bg:#071620; --panel:#0c2233; --line:#173347; --ink:#dce8ef;
+    --dim:#7ea3b8; --amber:#ffa23a;
+    --mono:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+    --lbl-fs:.60rem; --lbl-color:#8fb0c2; --lbl-alpha:1; --lbl-halo:#04101a;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 var(--mono)}
+  header{padding:.6rem .8rem;border-bottom:1px solid var(--line);
+    background:linear-gradient(180deg,#0a1e2c,#071620)}
+  h1{margin:0;font-size:.95rem;letter-spacing:.02em}
+  h1 small{display:block;color:var(--dim);font-weight:400;font-size:.7rem;letter-spacing:.06em}
+  .wrap{display:flex;flex-wrap:wrap;gap:1rem;padding:1rem;align-items:flex-start}
+  #map{background:#04101a;border:1px solid var(--line);border-radius:6px;
+    flex:1 1 560px;min-width:340px;height:70vh;min-height:380px;position:relative}
+  .leaflet-container{background:#04101a;font:inherit}
+  .side{flex:1 1 320px;min-width:280px;display:flex;flex-direction:column;gap:.9rem}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:.7rem}
+  .card b{display:block;color:var(--dim);font-size:.62rem;letter-spacing:.1em;margin-bottom:.5rem}
+  .presets{display:flex;flex-wrap:wrap;gap:.35rem}
+  .presets button{font:inherit;font-size:.72rem;color:var(--ink);background:#123246;
+    border:1px solid var(--line);border-radius:4px;padding:.45rem .6rem;cursor:pointer;
+    min-height:38px}
+  .presets button.on{background:var(--amber);color:#231400;border-color:var(--amber);font-weight:600}
+  .dial{display:grid;grid-template-columns:8.5rem 1fr 3rem;align-items:center;gap:.5rem;
+    margin-bottom:.45rem;font-size:.72rem;color:var(--dim)}
+  .dial input{width:100%}
+  .dial output{color:var(--ink);text-align:right;font-variant-numeric:tabular-nums}
+  pre{margin:0;white-space:pre-wrap;word-break:break-word;color:var(--dim);
+    font-size:.7rem;line-height:1.5}
+  pre em{color:var(--amber);font-style:normal}
+  .hint{color:var(--dim);font-size:.68rem;margin-top:.4rem}
+  #zoomChip{position:absolute;right:10px;top:10px;z-index:800;pointer-events:none;
+    background:rgba(9,26,38,.85);border:1px solid var(--line);border-radius:4px;
+    color:var(--dim);font:600 .66rem/1.2 var(--mono);padding:.15rem .35rem}
+
+  /* --- the candidate label layer (treatment A: overlay spans) ---------------- */
+  .island-labels{position:absolute;inset:0;z-index:460;pointer-events:none;overflow:hidden}
+  .island-labels span{position:absolute;white-space:nowrap;
+    font:600 var(--lbl-fs)/1 var(--mono);letter-spacing:.05em;
+    color:var(--lbl-color);opacity:var(--lbl-alpha);
+    text-shadow:0 0 3px var(--lbl-halo),0 0 3px var(--lbl-halo),0 0 4px var(--lbl-halo)}
+  .island-labels span.w{transform:translate(-100%,-50%)}
+  .island-labels span.e{transform:translate(0,-50%)}
+  .island-labels span.c{transform:translate(-50%,-50%)}
+  /* treatment B: divIcon variant reuses the same look */
+  .isl-div{white-space:nowrap;font:600 var(--lbl-fs)/1 var(--mono);letter-spacing:.05em;
+    color:var(--lbl-color);opacity:var(--lbl-alpha);
+    text-shadow:0 0 3px var(--lbl-halo),0 0 3px var(--lbl-halo),0 0 4px var(--lbl-halo)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Antilles island-label lab<small>DEV ONLY · pinch through z4.5–7 with the storm in frame · pick a treatment, tune the dials, send me the numbers</small></h1>
+</header>
+
+<div class="wrap">
+  <div id="map"><div id="zoomChip">z --</div></div>
+  <div class="side">
+    <div class="card">
+      <b>TREATMENT</b>
+      <div class="presets" id="presets"></div>
+      <div class="hint">A is the shipped graticule-label mechanism (one overlay div,
+        spans). B is Leaflet divIcon markers. They should look identical — B exists to
+        judge whether Leaflet's own reprojection feels steadier while zooming.</div>
+    </div>
+    <div class="card">
+      <b>TIERS</b>
+      <div class="presets" id="tiers"></div>
+      <div class="hint">Tier 1 = the NHC-prose staples (Virgin Is. → Trinidad).
+        Tier 2 = the smaller Leewards + Tobago/St. Croix. Each tier reveals at its
+        own zoom; "tier 1 only" drops tier 2 entirely.</div>
+      <b style="margin-top:.6rem">OPTIONAL ISLANDS</b>
+      <div class="presets" id="optional"></div>
+    </div>
+    <div class="card">
+      <b>DIALS</b>
+      <div id="dials"></div>
+    </div>
+    <div class="card">
+      <b>COLOR</b>
+      <div class="presets" id="colors"></div>
+      <div class="hint">Graticule labels are #9dbfd3 — island names should read a
+        notch quieter than the grid, never louder than a storm.</div>
+    </div>
+    <div class="card">
+      <b>CONSTANTS TO APPLY (PR2)</b>
+      <pre id="out"></pre>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"
+  integrity="sha512-puJW3E/qXDqYp9IfhAI54BJEaWIfloJ7JWs7OeD5i6ruC9JZL1gERT1wjtwXFlh7CjE7ZJ+/vcRZRkIYIb6p4g=="
+  crossorigin="anonymous"></script>
+<script src="../basemap.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  // Atlantic frame straight from app.js BASINS (the Antilles live in AT only)
+  var FRAME = [[-5, -110], [45, 4]];
+
+  var map = L.map('map', {
+    center: [14.6, -61.3], zoom: 6, minZoom: 3, maxZoom: 7,
+    zoomControl: true, attributionControl: false, worldCopyJump: false,
+    maxBoundsViscosity: 1.0,
+    zoomSnap: 0.125, zoomDelta: 0.25, wheelPxPerZoomLevel: 400
+  });
+  map.setMaxBounds(FRAME);
+
+  var BASEMAP_STYLES = {
+    land: { stroke: false, fillColor: '#10202b', fillOpacity: 1 },
+    usStates: { color: '#1b3a4a', weight: 1, dashArray: '3 3', fill: false },
+    countries: { color: '#24485c', weight: 1.2, fill: false },
+    coast: { color: '#2c5870', weight: 1, fill: false }
+  };
+  L.geoJSON(window.BASIN_BASEMAP, {
+    style: function (f) { return BASEMAP_STYLES[f.properties.layer]; },
+    interactive: false
+  }).addTo(map);
+
+  // panes as in app.js; labels get their own (over lines, under points)
+  var PANES = { mask: 402, areas: 410, lines: 420, labels: 425, points: 430 };
+  Object.keys(PANES).forEach(function (n) {
+    map.createPane('hc-' + n).style.zIndex = PANES[n];
+  });
+
+  // letterbox masks for the AT frame, as in app.js
+  var s = FRAME[0][0], w = FRAME[0][1], n = FRAME[1][0], e = FRAME[1][1];
+  var maskStyle = { stroke: false, fillColor: '#04101a', fillOpacity: 1, interactive: false, pane: 'hc-mask' };
+  [[[-85, -540], [85, w]], [[-85, e], [85, 540]], [[n, w], [85, e]], [[-85, w], [s, e]]]
+    .forEach(function (b) { L.rectangle(b, maskStyle).addTo(map); });
+
+  // --- fake storm crossing Dominica, real panes + app-ish styles ---------------
+  // Labels are judged WITH a storm in frame: naming a passing storm's position
+  // is the whole point, so the labels must survive track/cone clutter.
+  var TRACK = [[14.1, -57.4], [14.8, -59.3], [15.4, -61.3], [16.1, -63.2], [16.9, -65.0]];
+  L.polygon( // crude computed-cone stand-in
+    [[14.1, -57.4], [15.0, -61.2], [15.4, -63.4], [16.9, -65.6], [18.0, -64.6], [16.4, -61.5], [14.7, -57.2]],
+    { pane: 'hc-areas', color: '#c8b06a', weight: 1, dashArray: '5 4',
+      fillColor: '#c8b06a', fillOpacity: 0.06, interactive: false }).addTo(map);
+  L.polyline(TRACK, { pane: 'hc-lines', color: '#ffb98a', weight: 2, interactive: false }).addTo(map);
+  TRACK.forEach(function (p, i) {
+    L.circleMarker(p, { pane: 'hc-points', radius: i === 2 ? 7 : 3.5,
+      color: i === 2 ? '#ff6b4a' : '#ffb98a', weight: 2,
+      fillColor: '#ff6b4a', fillOpacity: i === 2 ? 0.9 : 0.4, interactive: false }).addTo(map);
+  });
+
+  // --- draft ISLAND_LABELS table (the PR2 payload under judgment) --------------
+  // [name, lat, lon, tier, side] — anchor sits just offshore; side E extends the
+  // text east over water, W west, C centers it (Trinidad is big enough).
+  var ISLAND_LABELS = [
+    ['Virgin Is.', 18.45, -64.35, 1, 'E'],
+    ['Antigua', 17.07, -61.62, 1, 'E'],
+    ['Guadeloupe', 16.20, -61.00, 1, 'E'],
+    ['Dominica', 15.42, -61.18, 1, 'E'],
+    ['Martinique', 14.64, -60.75, 1, 'E'],
+    ['St. Lucia', 13.90, -60.82, 1, 'E'],
+    ['St. Vincent', 13.25, -61.05, 1, 'E'],
+    ['Barbados', 13.17, -59.37, 1, 'E'],
+    ['Grenada', 12.11, -61.52, 1, 'E'],
+    ['Trinidad', 10.42, -61.25, 1, 'C'],
+    ['Anguilla', 18.24, -62.90, 2, 'E'],
+    ['St. Martin', 18.06, -63.20, 2, 'W'],
+    ['St. Kitts', 17.32, -62.85, 2, 'W'],
+    ['Barbuda', 17.63, -61.68, 2, 'E'],
+    ['Montserrat', 16.74, -62.10, 2, 'W'],
+    ['Tobago', 11.25, -60.48, 2, 'E'],
+    ['St. Croix', 17.74, -64.50, 2, 'E']
+  ];
+  var OPTIONAL = {
+    Nevis: ['Nevis', 17.13, -62.50, 2, 'E'],
+    Margarita: ['Margarita', 11.03, -64.00, 2, 'C']
+  };
+
+  var state = { treatment: 'A', tiers: 'both', fs: 0.60, alpha: 1,
+    z1: 5.5, z2: 6.25, off: 6, color: '#8fb0c2',
+    nevis: false, margarita: false };
+
+  function activeLabels() {
+    var rows = ISLAND_LABELS.slice();
+    if (state.nevis) rows.push(OPTIONAL.Nevis);
+    if (state.margarita) rows.push(OPTIONAL.Margarita);
+    return rows.filter(function (r) {
+      if (r[3] === 2 && state.tiers === 't1') return false;
+      var reveal = r[3] === 1 ? state.z1 : state.z2;
+      return map.getZoom() >= reveal;
+    });
+  }
+
+  // treatment A: one overlay div of spans (the shipped grat-labels mechanism)
+  var overlay = document.createElement('div');
+  overlay.className = 'island-labels';
+  map.getContainer().appendChild(overlay);
+  // treatment B: divIcon markers in the hc-labels pane
+  var markerGroup = L.layerGroup().addTo(map);
+
+  function draw() {
+    overlay.innerHTML = '';
+    markerGroup.clearLayers();
+    var rows = activeLabels();
+    var size = map.getSize();
+    rows.forEach(function (r) {
+      var name = r[0], side = r[4].toLowerCase();
+      var dx = side === 'e' ? state.off : side === 'w' ? -state.off : 0;
+      if (state.treatment === 'A') {
+        var pt = map.latLngToContainerPoint([r[1], r[2]]);
+        if (pt.x < -80 || pt.x > size.x + 80 || pt.y < -20 || pt.y > size.y + 20) return;
+        var sp = document.createElement('span');
+        sp.textContent = name;
+        sp.className = side;
+        sp.style.left = (pt.x + dx) + 'px';
+        sp.style.top = pt.y + 'px';
+        overlay.appendChild(sp);
+      } else {
+        var icon = L.divIcon({ className: '', html:
+          '<div class="isl-div" style="transform:translate(' +
+          (side === 'e' ? state.off + 'px' : side === 'w' ? 'calc(-100% - ' + state.off + 'px)' : '-50%') +
+          ',-50%)">' + name + '</div>', iconSize: [0, 0] });
+        markerGroup.addLayer(L.marker([r[1], r[2]], {
+          icon: icon, pane: 'hc-labels', interactive: false, keyboard: false
+        }));
+      }
+    });
+    document.getElementById('zoomChip').textContent = 'z ' + map.getZoom().toFixed(2);
+  }
+  map.on('move zoom viewreset resize zoomend', draw);
+
+  // --- menus + dials -----------------------------------------------------------
+  var TREATMENTS = { A: 'A · overlay spans (grat-labels style)', B: 'B · divIcon markers' };
+  var TIERS = { both: 'tier 1 + tier 2', t1: 'tier 1 only' };
+  var COLORS = { '#9dbfd3': 'graticule #9dbfd3', '#8fb0c2': 'quiet #8fb0c2', '#7ea3b8': 'quieter #7ea3b8' };
+  var DIALS = [
+    { key: 'fs', label: 'font size (rem)', min: 0.5, max: 0.75, step: 0.01 },
+    { key: 'alpha', label: 'label opacity', min: 0.4, max: 1, step: 0.05 },
+    { key: 'z1', label: 'tier-1 reveal zoom', min: 4.5, max: 7, step: 0.25 },
+    { key: 'z2', label: 'tier-2 reveal zoom', min: 5, max: 7, step: 0.25 },
+    { key: 'off', label: 'offshore offset (px)', min: 0, max: 20, step: 1 }
+  ];
+
+  function menu(id, entries, get, set) {
+    var el = document.getElementById(id);
+    Object.keys(entries).forEach(function (k) {
+      var b = document.createElement('button');
+      b.textContent = entries[k];
+      b.dataset.k = k;
+      b.onclick = function () { set(k); apply(); };
+      el.appendChild(b);
+    });
+    return function () {
+      el.querySelectorAll('button').forEach(function (b) {
+        b.classList.toggle('on', b.dataset.k === get());
+      });
+    };
+  }
+  var syncT = menu('presets', TREATMENTS,
+    function () { return state.treatment; }, function (k) { state.treatment = k; });
+  var syncTier = menu('tiers', TIERS,
+    function () { return state.tiers; }, function (k) { state.tiers = k; });
+  var syncC = menu('colors', COLORS,
+    function () { return state.color; }, function (k) { state.color = k; });
+
+  var optEl = document.getElementById('optional');
+  [['nevis', '+ Nevis'], ['margarita', '+ Margarita']].forEach(function (p) {
+    var b = document.createElement('button');
+    b.textContent = p[1];
+    b.onclick = function () { state[p[0]] = !state[p[0]]; b.classList.toggle('on', state[p[0]]); apply(); };
+    optEl.appendChild(b);
+  });
+
+  var dials = document.getElementById('dials');
+  DIALS.forEach(function (d) {
+    var row = document.createElement('div');
+    row.className = 'dial';
+    var lab = document.createElement('span'); lab.textContent = d.label;
+    var inp = document.createElement('input');
+    inp.type = 'range'; inp.min = d.min; inp.max = d.max; inp.step = d.step; inp.value = state[d.key];
+    var val = document.createElement('output'); val.textContent = state[d.key];
+    inp.oninput = function () { state[d.key] = parseFloat(inp.value); val.textContent = inp.value; apply(); };
+    row.appendChild(lab); row.appendChild(inp); row.appendChild(val);
+    dials.appendChild(row);
+  });
+
+  function apply() {
+    document.documentElement.style.setProperty('--lbl-fs', state.fs + 'rem');
+    document.documentElement.style.setProperty('--lbl-color', state.color);
+    document.documentElement.style.setProperty('--lbl-alpha', state.alpha);
+    syncT(); syncTier(); syncC();
+    draw();
+    var rows = ISLAND_LABELS.slice();
+    if (state.nevis) rows.push(OPTIONAL.Nevis);
+    if (state.margarita) rows.push(OPTIONAL.Margarita);
+    if (state.tiers === 't1') rows = rows.filter(function (r) { return r[3] === 1; });
+    var out = 'mechanism: <em>' + state.treatment + '</em>' +
+      (state.treatment === 'A' ? ' (grat-labels overlay)' : ' (divIcon markers)') + '\n\n' +
+      'app.js:\n' +
+      '  HC_ISLANDS = { z1: <em>' + state.z1 + '</em>, z2: <em>' + state.z2 + '</em>, offsetPx: <em>' + state.off + '</em> }\n' +
+      '  ISLAND_LABELS = (' + rows.length + ' entries)\n' +
+      '  ' + JSON.stringify(rows).replace(/\],\[/g, '],\n   [') + '\n\n' +
+      'index.html .island-labels span:\n' +
+      '  font:600 <em>' + state.fs + 'rem</em>/1 var(--mono)\n' +
+      '  color:<em>' + state.color + '</em>' +
+      (state.alpha < 1 ? ';opacity:<em>' + state.alpha + '</em>' : '') + '\n' +
+      '  text-shadow: triple #04101a halo (as graticule)\n';
+    document.getElementById('out').innerHTML = out;
+  }
+
+  apply();
+
+  // dev hook for scripted checks
+  window.__antillesLab = { map: map, state: state, apply: apply, count: function () {
+    return state.treatment === 'A' ? overlay.children.length : markerGroup.getLayers().length;
+  } };
+})();
+</script>
+</body>
+</html>
