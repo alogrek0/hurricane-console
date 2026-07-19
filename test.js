@@ -1257,6 +1257,89 @@ if (fs.existsSync(archiveDir)) {
   }
 }
 
+// --- ATCF b-deck snapshots (Track C M5, data-capture slice) -----------------------
+// tools/bdeck-sync.js captures NHC's working best-track files, which MUTATE in
+// place (rows append each 6h; past rows get revised), so the text archive's
+// skip-if-filename-exists idempotency does not apply. Instead each capture is a
+// content-stamped snapshot: stamp = max DTG in the file, so re-fetching
+// unchanged data is a zero diff and a recycled invest tag (90-99 reuse) starts
+// new snapshot names while the old invest's snapshots persist. Pure units
+// always run; the committed-data block is GUARDED on archive/{season}/atcf/
+// existing, so the suite stays green on the tool-only commit before the first
+// cron capture lands.
+
+const BTK = require('./tools/bdeck-sync.js');
+
+// btkListingNames: the Apache index repeats each name (href + link text) and
+// carries a-decks, bcp* (Central Pacific, out of scope) and stray years; only
+// current-season bal/bep b-decks survive, deduped and sorted.
+{
+  const html = '<a href="bep962026.dat">bep962026.dat</a> ' +
+    '<a href="bal912026.dat">bal912026.dat</a> ' +
+    '<a href="bal012026.dat">bal012026.dat</a> ' +
+    '<a href="bcp012026.dat">bcp012026.dat</a> ' +
+    '<a href="bal902025.dat">bal902025.dat</a> ' +
+    '<a href="aal012026.dat">aal012026.dat</a>';
+  const names = BTK.btkListingNames(html);
+  ok('btk listing: unique + sorted, bal/bep current season only',
+    JSON.stringify(names) === JSON.stringify(['bal012026.dat', 'bal912026.dat', 'bep962026.dat']));
+  ok('btk listing: drops bcp (out of scope), a-decks, and other years',
+    !names.some((n) => /bcp|aal|2025/.test(n)));
+}
+
+// maxDtg: field 3 of comma-separated ATCF rows, space padding tolerated,
+// out-of-order rows, blank lines, and a 12-digit minute-bearing special row.
+{
+  const text = 'AL, 91, 2026071800,   , BEST,   0, 111N,  455W,  25, 1009, DB\n' +
+    '\n' +
+    'AL, 91, 2026071812,   , BEST,   0, 115N,  470W,  30, 1007, DB\n' +
+    'AL, 91, 2026071806,   , BEST,   0, 113N,  462W,  30, 1008, DB\n';
+  ok('btk maxDtg: max of out-of-order 10-digit DTGs, padded to 12',
+    BTK.maxDtg(text) === '202607181200');
+  ok('btk maxDtg: a minute-bearing 12-digit special row can be the max',
+    BTK.maxDtg(text + 'AL, 91, 202607181430,   , BEST,   0, 116N,  472W,  35, 1005, DB\n') === '202607181430');
+  ok('btk maxDtg: null on empty / DTG-less text (never an invented stamp)',
+    BTK.maxDtg('') === null && BTK.maxDtg('no commas here\nstill none\n') === null);
+}
+
+ok('btk snapshotName: stamp inserted before .dat',
+  BTK.snapshotName('bal912026.dat', '202607180000') === 'bal912026.202607180000.dat');
+
+// writeAction: the three-way snapshot decision — absent -> write, identical ->
+// skip (zero diff on re-fetch), different bytes at the same stamp -> overwrite
+// (in-place revision; git history keeps the prior state).
+ok('btk writeAction: absent -> write', BTK.writeAction(null, 'abc') === 'write');
+ok('btk writeAction: identical -> skip', BTK.writeAction('abc', 'abc') === 'skip');
+ok('btk writeAction: revised -> overwrite', BTK.writeAction('abc', 'abd') === 'overwrite');
+
+// invest recycling: the same source filename in two DTG eras (June invest,
+// tag recycled in September) yields distinct snapshot names — the old
+// invest's capture is preserved by construction, never overwritten.
+{
+  const june = 'AL, 91, 2026061512,   , BEST,   0, 100N,  400W,  25, 1009, DB\n';
+  const sept = 'AL, 91, 2026090300,   , BEST,   0, 120N,  300W,  20, 1010, DB\n';
+  ok('btk recycling: two DTG eras of one tag -> two distinct snapshots',
+    BTK.snapshotName('bal912026.dat', BTK.maxDtg(june)) !== BTK.snapshotName('bal912026.dat', BTK.maxDtg(sept)));
+}
+
+// When captures have landed, validate every committed snapshot offline.
+{
+  const atcfDir = __dirname + '/archive/' + BTK.SEASON + '/atcf';
+  if (fs.existsSync(atcfDir)) {
+    const snaps = fs.readdirSync(atcfDir);
+    const SNAP_RE = new RegExp('^b(al|ep)\\d{2}' + BTK.SEASON + '\\.\\d{12}\\.dat$');
+    ok('btk archive: every snapshot name matches b(al|ep)NN' + BTK.SEASON + '.STAMP.dat',
+      snaps.every((f) => SNAP_RE.test(f)));
+    ok('btk archive: snapshots are LF-only and non-empty, and each filename ' +
+      'stamp equals the content max DTG (the writer invariant)',
+      snaps.every((f) => {
+        const text = fs.readFileSync(atcfDir + '/' + f, 'utf8');
+        return text.length > 0 && !/\r/.test(text) &&
+          f === BTK.snapshotName(f.replace(/\.\d{12}\.dat$/, '.dat'), BTK.maxDtg(text));
+      }));
+  }
+}
+
 // --- lineage engine (Track C M2) ------------------------------------------------
 // tools/build-lineage.js composes diff.js's adjacent-issuance pairing across the
 // whole season archive into wave/invest/cyclone chains + genesis links. The
