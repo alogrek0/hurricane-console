@@ -574,8 +574,9 @@ ok('basemap: FeatureCollection with 4 layer features',
 ok('basemap: geometry types per layer',
   layers.land.type === 'MultiPolygon' && layers.coast.type === 'MultiLineString' &&
   layers.countries.type === 'MultiLineString' && layers.usStates.type === 'MultiLineString');
-ok('basemap: layer volumes sane', layers.land.coordinates.length >= 120 &&
-  layers.coast.coordinates.length >= 150 && layers.countries.coordinates.length >= 50 &&
+// re-baselined after the 10m Lesser Antilles inset (land 208 / coast 210)
+ok('basemap: layer volumes sane', layers.land.coordinates.length >= 190 &&
+  layers.coast.coordinates.length >= 195 && layers.countries.coordinates.length >= 50 &&
   layers.usStates.coordinates.length >= 80);
 // clip box is the union of both basin frames (lon -145..5 / lat -5..45).
 // Lines keep one continuity vertex past each edge, so allow 1 deg margin.
@@ -590,6 +591,32 @@ ok('basemap: land rings clipped hard to the box (no margin)',
 // (Mexican/Brazilian internals would violate this)
 ok('basemap: admin-1 confined to the US (border policy)',
   layers.usStates.coordinates.every(line => line.every(([, y]) => y >= 24)));
+// 10m Lesser Antilles inset: real islands must resolve as exactly ONE ring
+// (exactly-1 doubles as the no-50m-leftover / no-doubling check) with 10m-class
+// vertex counts (at 50m: Dominica ~14 verts, Barbados 9, so the floors below
+// separate the scales cleanly).
+function landRingsAt(lon, lat) {
+  return layers.land.coordinates.filter(poly => {
+    const ring = poly[0];
+    let inside = false;
+    for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+      const [xi, yi] = ring[i], [xj, yj] = ring[j];
+      if ((yi > lat) !== (yj > lat) && lon < (xj - xi) * (lat - yi) / (yj - yi) + xi)
+        inside = !inside;
+    }
+    return inside;
+  });
+}
+ok('basemap: Dominica resolved by the 10m inset (one ring, 10m-class detail)',
+  (() => { const r = landRingsAt(-61.34, 15.42); return r.length === 1 && r[0][0].length >= 40; })());
+ok('basemap: Barbados resolved by the 10m inset',
+  (() => { const r = landRingsAt(-59.55, 13.17); return r.length === 1 && r[0][0].length >= 20; })());
+ok('basemap: Trinidad whole and resolved (inset south edge did not truncate it)',
+  (() => { const r = landRingsAt(-61.3, 10.3); return r.length === 1 && r[0][0].length >= 60; })());
+// the embedded basemap is a shell payload; a bad regeneration (wrong box, a
+// forgotten islet guard) must not silently balloon it (currently ~305 KB)
+ok('basemap: payload under 340 KB',
+  fs.statSync(__dirname + '/basemap.js').size <= 340 * 1024);
 
 // --- countries.js integrity (generated hover hit-targets) ----------------------
 

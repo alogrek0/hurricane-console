@@ -3,11 +3,13 @@
  *
  * Usage:  node tools/build-basemap.js
  *
- * Downloads five public-domain Natural Earth 1:50m datasets
- * (github.com/nvkelso/natural-earth-vector), clips them to the basin box
- * (lon -145..5, lat -5..45 — the UNION of the Atlantic and East Pacific frames,
- * so one embedded basemap serves both views), rounds to 2 decimals, and
- * rewrites basemap.js AND countries.js. Border policy: country borders (admin-0)
+ * Downloads five public-domain Natural Earth 1:50m datasets plus two 1:10m
+ * datasets (github.com/nvkelso/natural-earth-vector), clips the 50m data to
+ * the basin box (lon -145..5, lat -5..45 — the UNION of the Atlantic and East
+ * Pacific frames, so one embedded basemap serves both views), swaps in 10m
+ * land/coast for the Lesser Antilles INSET (the arc reads as 6-30-vertex dots
+ * at 50m), rounds to 2 decimals, and rewrites basemap.js AND countries.js.
+ * Border policy: country borders (admin-0)
  * everywhere; state/province lines (admin-1) ONLY for ADM0_A3 === 'USA'.
  * countries.js carries per-country NAMED polygons (invisible hover hit-targets
  * for the country-name tooltip) — same NE snapshot as the drawn admin-0 border
@@ -26,6 +28,10 @@ const SRC = {
   adm0: 'ne_50m_admin_0_boundary_lines_land.geojson',
   adm1: 'ne_50m_admin_1_states_provinces_lines.geojson',
   countries: 'ne_50m_admin_0_countries.geojson',
+  // 10m sources feed ONLY the Lesser Antilles inset below. NOTE: the fetch
+  // destructure is positional — new keys go at the END.
+  land10: 'ne_10m_land.geojson',
+  coast10: 'ne_10m_coastline.geojson',
 };
 // The box is the UNION of both basin frames: w -145 reaches the EP frame's
 // western edge (140W coverage + label margin), e 5 keeps the Atlantic's African
@@ -39,9 +45,40 @@ const OUT_COUNTRIES = path.join(__dirname, '..', 'countries.js');
 // 0.03 deg ~= 2.7 px at the app's maxZoom 7 — hover flips visually AT the
 // drawn border. Hit polygons are never drawn, so fidelity beyond that is waste.
 const HIT_EPS = 0.03;
+// NE 10m inset: the Lesser Antilles arc, where 50m turns real islands into
+// 6-30-vertex dots. Whole rings/lines only — a 50m feature is dropped and a
+// 10m feature appended ONLY when EVERY vertex lies inside the inset, so
+// nothing is ever clipped at the inset edge: no seam, no doubling, no gap.
+// Bounds chosen so no big landmass straddles them (Trinidad whole at s 9.8;
+// the Virgin Islands in at w -65.7; Puerto Rico straddles and stays 50m).
+const INSET = { w: -65.7, e: -59.0, s: 9.8, n: 19.0 };
+// ~6 km^2 at 15N: keeps real small islands (Saba ~13 km^2), drops the rocks
+// and islets 10m data is full of. Applied to appended 10m rings only.
+const MIN_RING_AREA = 0.0005; // deg^2
 
 const inBox = (p) => p[0] >= BOX.w && p[0] <= BOX.e && p[1] >= BOX.s && p[1] <= BOX.n;
 const r2 = (v) => Math.round(v * 100) / 100;
+const inInset = (p) => p[0] >= INSET.w && p[0] <= INSET.e && p[1] >= INSET.s && p[1] <= INSET.n;
+const allInInset = (pts) => pts.every(inInset);
+// shoelace |area| in deg^2 (planar — fine for an islet threshold at 10-19N)
+function ringAreaDeg2(pts) {
+  let a = 0;
+  for (let i = 0; i < pts.length; i++) {
+    const p = pts[i], q = pts[(i + 1) % pts.length];
+    a += p[0] * q[1] - q[0] * p[1];
+  }
+  return Math.abs(a / 2);
+}
+// 10m vertex spacing is often finer than the 0.01-deg rounding, leaving runs
+// of identical points — collapse them (keeps the closing duplicate).
+function dedupe(pts) {
+  const out = [pts[0]];
+  for (let i = 1; i < pts.length; i++) {
+    const p = pts[i], l = out[out.length - 1];
+    if (p[0] !== l[0] || p[1] !== l[1]) out.push(p);
+  }
+  return out;
+}
 
 // Keep runs of in-box points; retain one out-of-box point at each entry/exit
 // so lines meet the frame edge instead of stopping short of it.
@@ -134,8 +171,9 @@ function fetchJson(url) {
   });
 }
 
-Promise.all(Object.values(SRC).map((f) => fetchJson(BASE + f))).then(([coastJ, landJ, adm0J, adm1J, countriesJ]) => {
-  const coast = clipLines(coastJ.features);
+Promise.all(Object.values(SRC).map((f) => fetchJson(BASE + f))).then(([coastJ, landJ, adm0J, adm1J, countriesJ, land10J, coast10J]) => {
+  // 50m coast, minus lines wholly inside the inset (replaced by 10m below)
+  const coast = clipLines(coastJ.features).filter((line) => !allInInset(line));
   const countries = clipLines(adm0J.features);
   const usStates = clipLines(adm1J.features.filter((f) => f.properties.ADM0_A3 === 'USA'));
   const land = [];
@@ -143,8 +181,39 @@ Promise.all(Object.values(SRC).map((f) => fetchJson(BASE + f))).then(([coastJ, l
     const polys = f.geometry.type === 'Polygon' ? [f.geometry.coordinates] : f.geometry.coordinates;
     for (const poly of polys) {
       // outer rings only: NE 50m land has no lake holes inside this clip box
+      if (allInInset(poly[0])) continue; // replaced by the 10m inset
       const c = clipRing(poly[0]);
       if (c && c.length >= 3) land.push([c]); // each ring -> its own single-ring polygon
+    }
+  }
+
+  // Lesser Antilles inset: append 10m land rings and coast lines wholly inside
+  // INSET. Rings stay closed (the 50m convention); each is its own single-ring
+  // polygon, so this is pure concatenation — no union, no winding work.
+  let insetLand = 0, insetCoast = 0;
+  for (const f of land10J.features) {
+    const polys = f.geometry.type === 'Polygon' ? [f.geometry.coordinates] : f.geometry.coordinates;
+    for (const poly of polys) {
+      const ring = poly[0]; // outer only — no lake holes among the islands
+      if (!allInInset(ring)) continue;
+      if (ringAreaDeg2(ring) < MIN_RING_AREA) continue;
+      const r = dedupe(ring.map((p) => [r2(p[0]), r2(p[1])]));
+      if (r.length < 4) continue;
+      if (r[0][0] !== r[r.length - 1][0] || r[0][1] !== r[r.length - 1][1]) r.push([r[0][0], r[0][1]]);
+      land.push([r]);
+      insetLand++;
+    }
+  }
+  for (const f of coast10J.features) {
+    const lines = f.geometry.type === 'LineString' ? [f.geometry.coordinates]
+      : f.geometry.type === 'MultiLineString' ? f.geometry.coordinates : [];
+    for (const line of lines) {
+      if (!allInInset(line)) continue;
+      // a closed islet loop below the land threshold must not outlive its ring
+      const closed = line[0][0] === line[line.length - 1][0] && line[0][1] === line[line.length - 1][1];
+      if (closed && ringAreaDeg2(line) < MIN_RING_AREA) continue;
+      const r = dedupe(line.map((p) => [r2(p[0]), r2(p[1])]));
+      if (r.length >= 2) { coast.push(r); insetCoast++; }
     }
   }
 
@@ -209,9 +278,11 @@ ${cjs};
  * basemap.js — Hurricane Console
  * GENERATED by tools/build-basemap.js — do not hand-edit.
  * Natural Earth 1:50m (public domain), clipped to lon -145..5 / lat -5..45,
- * rounded to 0.01 deg. Layers: land fill, coastline, country borders (admin-0
+ * rounded to 0.01 deg, with a 1:10m Lesser Antilles inset (lon ${INSET.w}..${INSET.e} /
+ * lat ${INSET.s}..${INSET.n} — whole-feature swap, no clip seam). Layers: land fill,
+ * coastline, country borders (admin-0
  * everywhere), state lines (admin-1, USA only — deliberate border policy).
- * ${land.length} land rings, ${coast.length} coast lines, ${countries.length} country lines, ${usStates.length} US state lines; ~${Math.round(js.length / 1024)} KB.
+ * ${land.length} land rings (${insetLand} inset), ${coast.length} coast lines (${insetCoast} inset), ${countries.length} country lines, ${usStates.length} US state lines; ~${Math.round(js.length / 1024)} KB.
  * This embedded layer IS the basemap — fully offline, no tile server.
  */
 (function (root) {
@@ -223,7 +294,8 @@ ${js};
 `;
   fs.writeFileSync(OUT, file);
   console.log('wrote', OUT, '—', Math.round(file.length / 1024), 'KB',
-    '| land', land.length, '| coast', coast.length, '| countries', countries.length, '| usStates', usStates.length);
+    '| land', land.length, '(inset', insetLand + ')', '| coast', coast.length, '(inset', insetCoast + ')',
+    '| countries', countries.length, '| usStates', usStates.length);
   fs.writeFileSync(OUT_COUNTRIES, cfile);
   console.log('wrote', OUT_COUNTRIES, '—', Math.round(cfile.length / 1024), 'KB',
     '| named countries', hitFeatures.length, '| eps', HIT_EPS);

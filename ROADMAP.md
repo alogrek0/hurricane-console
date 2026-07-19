@@ -156,6 +156,14 @@ planned tracks — lived friction beats speculation.
   generated + embedded; don't hand-edit `basemap.js`). Keep the border policy
   (country borders; US-only admin-1) and label the key islands enough to name a
   passing storm's position.
+  *Stage A shipped 2026-07-18: the generator gained a 10m INSET
+  (9.8–19N / 65.7–59W, whole-feature swap so there is no clip seam — 45 10m
+  rings replace 26 coarse 50m ones; Barbados 9→34 verts, Dominica →63,
+  Guadeloupe's butterfly splits into its two wings; ~6 km² islet floor;
+  basemap.js 274→305 KB, capped by test at 340). Labels await judgment in
+  `tools/antilles-lab.html` (overlay-span vs divIcon mechanisms, two reveal
+  tiers, dials, fake storm crossing Dominica) — pick on the phone, then
+  Stage B locks the constants into app.js/index.html and checks this off.*
 - [ ] **Tide-gauge overlay (Charleston/Lowcountry)** — NOAA CO-OPS
   (`tidesandcurrents.noaa.gov`, CORS-open) water levels for local surge
   context. Build it *before* something aims at the SE coast.
