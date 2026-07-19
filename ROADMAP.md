@@ -25,6 +25,15 @@ planned tracks — lived friction beats speculation.
   but took `version.js` — the actual update signal — from the HTTP cache
   (GitHub Pages `max-age=600`). Fixed same day: register with
   `updateViaCache:'none'`.
+- [x] **Reclaim the home-indicator sliver** (2026-07-18, user request) — the
+  toolbar fully padded past the safe-area inset, leaving ~34pt visually dead.
+  The readout's last line is non-interactive and hugs the screen edges while
+  the indicator pill is centered — the sides of that band are clear. Toolbar
+  padding-bottom is now `max(.5rem, env(safe-area-inset-bottom) - 12px)`:
+  ~19pt reclaimed for the map on notched iPhones, 12px reserved so the corner
+  curve never clips a descender, zero-inset devices unchanged. A fuller
+  edge-to-edge pass (map bleeding under a translucent blurred toolbar) is a
+  candidate Track A item — needs a treatment lab if pursued.
 - [x] **Dead page-background band under the toolbar in the installed PWA**
   (2026-07-18, phone screenshots) — `height:100%` sizes against iOS's LAYOUT
   viewport, which runs shorter than the real screen in standalone mode. Fixed:
