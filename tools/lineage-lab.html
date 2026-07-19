@@ -179,6 +179,31 @@
       <pre id="trailOut"></pre>
     </div>
     <div class="card">
+      <b>BEST-TRACK OVERLAY (Track C M7)</b>
+      <div class="hint" id="btkSrc">loading…</div>
+      <div class="presets" id="btkModes" style="margin-top:.4rem"></div>
+      <div class="presets" id="btkColors" style="margin-top:.4rem"></div>
+      <div id="btkDials" style="margin-top:.6rem"></div>
+      <div class="dial" style="margin-top:.4rem"><span>storm</span>
+        <select id="btkStorm" style="grid-column:2/4;font:inherit;font-size:.72rem;
+          background:#123246;color:var(--ink);border:1px solid var(--line);border-radius:4px;
+          padding:.3rem"></select></div>
+      <div class="hint">The official ATCF working best track for the SELECTED
+        chain (matched by the exact rules the app will ship: cyclone by
+        normalized name, invest by tag with the cyclone file preferred — its
+        retroactive rows include the invest phase). The storm picker overrides
+        the match so unmatched storms (a b-deck the prose never named) are
+        still judgeable.</div>
+      <div class="warn">Honesty invariants: the best track draws SOLID because
+        it IS official data — the one solid trail on this map; everything
+        computed stays dashed. Null-position fixes are skipped, never bridged.
+        The caption must say <em>working</em> best track — provisional,
+        revised in season, not the post-season final.</div>
+      <div class="hint" id="btkBadge"></div>
+      <b style="margin-top:.6rem">STAGE-B CONSTANTS (select to copy, send me this)</b>
+      <pre id="btkOut"></pre>
+    </div>
+    <div class="card">
       <b>REPLAY (draw chains up to)</b>
       <div class="scrub">
         <input type="range" id="scrub" min="0" max="0" step="1" value="0">
@@ -300,6 +325,35 @@
   var COL = { waves: '#ffa23a', invests: '#4fc3d6', cyclones: '#ff8c6b', genesis: '#e8c34f' };
 
   var DATA = null, loadedFrom = '', isSample = false;
+  var BTK = null, btkIsSample = false;
+
+  // M7 stage-A SAMPLE: exercises every honesty path — a cyclone with its
+  // retroactive invest phase (DB/LO -> TD -> TS), a null-position fix mid-track
+  // (must break the line, never bridge), and a live invest-only track.
+  var BTK_SAMPLE = { season: 2026, btkNow: '202607190600', basins: {
+    AT: { storms: [
+      { id: 'al012026', bdeck: 'bal012026', kind: 'cyclone', names: ['ONE', 'ARTHUR'],
+        investTags: ['AL90'], firstTdDtg: '202606171200',
+        era: { min: '202606150000', max: '202606180000' },
+        fixes: [
+          { t: '202606150000', lat: 23.5, lon: -100.3, kt: 15, status: 'DB' },
+          { t: '202606151200', lat: 25.0, lon: -100.8, kt: 15, status: 'DB' },
+          { t: '202606160000', lat: 26.3, lon: -100.0, kt: 15, status: 'DB' },
+          { t: '202606161200', lat: null, lon: null, kt: 20, status: 'LO' },
+          { t: '202606170000', lat: 27.4, lon: -97.4, kt: 25, status: 'LO' },
+          { t: '202606171200', lat: 28.4, lon: -96.1, kt: 35, status: 'TS' },
+          { t: '202606180000', lat: 29.4, lon: -94.8, kt: 35, status: 'TS' }] },
+      { id: 'al912026', bdeck: 'bal912026', kind: 'invest', names: [],
+        investTags: ['AL91'], firstTdDtg: null,
+        era: { min: '202607171200', max: '202607190000' },
+        fixes: [
+          { t: '202607171200', lat: 25.6, lon: -83.5, kt: 15, status: 'DB' },
+          { t: '202607180000', lat: 26.1, lon: -84.0, kt: 15, status: 'DB' },
+          { t: '202607190000', lat: 27.1, lon: -84.7, kt: 20, status: 'LO' }] }],
+      truth: {
+        AL90: { agreement: 'resolves', kind: 'formed', intoNames: ['ONE', 'ARTHUR'], bdeck: 'bal012026' },
+        AL91: { agreement: 'open', kind: 'open', intoNames: [], bdeck: null } } },
+    EP: { storms: [], truth: {} } } };
 
   var state = {
     basin: 'AT',
@@ -310,7 +364,10 @@
     selected: null,        // chain id, or null
     // trail treatment for the SELECTED chain (stage-A lab feature). mode 'off'
     // = today's rendering. n 'all' or a last-N window. fade 'linear'|'quadratic'.
-    trail: { mode: 'off', n: 'all', fade: 'linear', w: 3, dotR: 4 }
+    trail: { mode: 'off', n: 'all', fade: 'linear', w: 3, dotR: 4 },
+    // best-track overlay (M7 stage-A). storm '' = follow the selected chain's
+    // match; a storm id pins the picker override.
+    btk: { mode: 'off', color: '#9db8c9', w: 2, dotR: 3, op: 90, storm: '' }
   };
   var lastSelectTs = 0;
 
@@ -331,7 +388,7 @@
     interactive: false
   }).addTo(map);
 
-  var PANES = { mask: 402, lines: 420, genesis: 425, points: 430 };
+  var PANES = { mask: 402, btk: 418, lines: 420, genesis: 425, points: 430 };
   Object.keys(PANES).forEach(function (n) { map.createPane('hc-' + n).style.zIndex = PANES[n]; });
 
   // letterbox masks over land outside the active frame, like the app
@@ -348,6 +405,7 @@
   var linePane = L.layerGroup().addTo(map);
   var genesisPane = L.layerGroup().addTo(map);
   var pointPane = L.layerGroup().addTo(map);
+  var btkPane = L.layerGroup().addTo(map);
 
   map.on('click', function () {
     // background tap clears the selection (unless we JUST selected via a feature
@@ -409,6 +467,92 @@
       for (var j = 0; j < arr.length; j++) if (arr[j].id === id) return { chain: arr[j], kind: kinds[i] };
     }
     return null;
+  }
+
+  // --- best-track overlay (M7 stage A) ---------------------------------------
+  // These matching rules ARE the stage-B app rules — the lab judges what ships.
+  function btkBasin() { return (BTK && BTK.basins && BTK.basins[state.basin]) || { storms: [], truth: {} }; }
+  // lineage names carry NHC's basin suffix ("Six-E"); b-deck names do not
+  function normStormName(n) { return String(n || '').toUpperCase().replace(/-[EC]$/, ''); }
+  function matchBtkStorm(spec) {
+    var storms = btkBasin().storms, hits;
+    if (!spec) return null;
+    if (spec.name != null) {
+      var norm = normStormName(spec.name);
+      hits = storms.filter(function (s) { return s.names.indexOf(norm) >= 0; });
+    } else if (spec.tag != null) {
+      hits = storms.filter(function (s) { return s.investTags.indexOf(spec.tag) >= 0; });
+      // prefer the cyclone file: its retroactive rows include the invest phase
+      var cyc = hits.filter(function (s) { return s.kind === 'cyclone'; });
+      if (cyc.length) hits = cyc;
+    } else return null;
+    if (!hits.length) return null;
+    hits.sort(function (a, b) { return a.era.max > b.era.max ? -1 : 1; }); // newest era wins
+    return hits[0];
+  }
+  // the storm to draw: picker override, else the selected chain's match
+  function activeBtkStorm() {
+    if (state.btk.storm) {
+      var all = btkBasin().storms;
+      for (var i = 0; i < all.length; i++) if (all[i].id === state.btk.storm) return all[i];
+      return null;
+    }
+    if (!state.selected) return null;
+    var entry = findChainById(state.selected);
+    if (!entry) return null;
+    if (entry.kind === 'cyclones') return matchBtkStorm({ name: entry.chain.name });
+    if (entry.kind === 'invests' && entry.chain.tag) return matchBtkStorm({ tag: entry.chain.tag });
+    return null; // waves and untagged areas have no ATCF identity
+  }
+  var TDPLUS = { TD: 1, TS: 1, HU: 1, TY: 1, ST: 1, SD: 1, SS: 1 };
+  function drawBtkTrack(storm) {
+    var t = state.btk, op = t.op / 100;
+    // split into runs at null-position fixes — skipped, never bridged
+    var runs = [], run = [];
+    storm.fixes.forEach(function (f) {
+      if (f.lat == null || f.lon == null) { if (run.length) runs.push(run); run = []; return; }
+      run.push(f);
+    });
+    if (run.length) runs.push(run);
+    runs.forEach(function (r) {
+      if (r.length >= 2) {
+        var latlngs = r.map(function (f) { return [f.lat, f.lon]; });
+        if (t.mode === 'comet') {
+          for (var i = 1; i < r.length; i++) {
+            var rec = (r.length > 1) ? i / (r.length - 1) : 1;
+            btkPane.addLayer(L.polyline([latlngs[i - 1], latlngs[i]], { pane: 'hc-btk',
+              color: t.color, weight: Math.max(1, t.w * (0.4 + 0.6 * rec)),
+              opacity: op * (0.35 + 0.65 * rec), lineCap: 'round', interactive: false }));
+          }
+        } else {
+          btkPane.addLayer(L.polyline(latlngs, { pane: 'hc-btk', color: t.color,
+            weight: t.w, opacity: op * 0.8, lineCap: 'round', interactive: false }));
+        }
+      }
+      if (t.mode !== 'comet') r.forEach(function (f) {
+        var formed = !!TDPLUS[f.status];
+        var big = formed && f.kt >= 34;
+        var graded = t.mode === 'graded';
+        btkPane.addLayer(L.circleMarker([f.lat, f.lon], { pane: 'hc-btk',
+          radius: graded && big ? t.dotR + 1 : t.dotR, color: t.color, weight: 1.4,
+          opacity: op, fillColor: t.color,
+          fillOpacity: graded ? (formed ? op * 0.85 : 0) : op * 0.6, interactive: false }));
+      });
+    });
+  }
+  // the planned stage-B popup badge copy, previewed live for the selection
+  function btkBadgeText() {
+    if (!state.selected) return '';
+    var entry = findChainById(state.selected);
+    if (!entry || entry.kind !== 'invests' || !entry.chain.tag) return '';
+    var tr = btkBasin().truth[entry.chain.tag];
+    if (!tr) return 'badge: "b-deck: no data for this tag"';
+    var into = tr.intoNames.map(function (n) { return n.charAt(0) + n.slice(1).toLowerCase(); }).join('/');
+    var m = { confirms: 'b-deck ✓ confirms — ' + (tr.kind === 'formed' ? 'formed into ' + into : 'no cyclone formed'),
+      resolves: 'b-deck resolves — ' + (tr.kind === 'formed' ? 'formed into ' + into : 'did not form'),
+      refutes: 'b-deck disagrees — formed into ' + into + ' (ledger flagged, not rewritten)',
+      open: 'b-deck open — still tracked' };
+    return 'badge: "' + (m[tr.agreement] || 'b-deck: no data for this tag') + '"';
   }
 
   // --- popups ----------------------------------------------------------------
@@ -738,6 +882,7 @@
     linePane.clearLayers();
     genesisPane.clearLayers();
     pointPane.clearLayers();
+    btkPane.clearLayers();
     var b = basinData();
     if (state.kinds.waves) (b.waves || []).forEach(drawWaveChain);
     if (state.kinds.invests) (b.invests || []).forEach(function (c) { drawDotChain(c, 'invests'); });
@@ -748,6 +893,13 @@
       var entry = findChainById(state.selected);
       if (entry && state.kinds[entry.kind]) drawTrailTreatment(entry.chain, entry.kind);
     }
+    // best-track overlay under the chain lines (pane 418): official vs computed
+    if (state.btk.mode !== 'off') {
+      var storm = activeBtkStorm();
+      if (storm) drawBtkTrack(storm);
+    }
+    var badge = document.getElementById('btkBadge');
+    if (badge) badge.textContent = btkBadgeText();
     buildChainList();
     buildSummary();
   }
@@ -821,6 +973,72 @@
     });
 
     buildTrailControls();
+    buildBtkControls();
+  }
+
+  // --- best-track controls (menu + dials + storm picker + constants) ----------
+  var BTK_COLORS = ['#9db8c9', '#6fa8c0', '#7a93a5'];
+  function buildBtkControls() {
+    var modes = document.getElementById('btkModes');
+    modes.innerHTML = '';
+    [['off', 'off'], ['solid', 'solid'], ['graded', 'status-graded'], ['comet', 'comet']]
+      .forEach(function (p) {
+        mkBtn(modes, p[1], state.btk.mode === p[0], function () {
+          state.btk.mode = p[0];
+          buildBtkControls();
+          render();
+        });
+      });
+
+    var colors = document.getElementById('btkColors');
+    colors.innerHTML = '';
+    BTK_COLORS.forEach(function (c) {
+      mkBtn(colors, c, state.btk.color === c, function () {
+        state.btk.color = c;
+        buildBtkControls();
+        render();
+      }, c);
+    });
+
+    var host = document.getElementById('btkDials');
+    host.innerHTML = '';
+    var off = state.btk.mode === 'off';
+    host.appendChild(rangeDial('line width', 1, 4, 1, state.btk.w,
+      function (v) { state.btk.w = v; updateBtkOut(); }, function (v) { return v + 'px'; }, off));
+    host.appendChild(rangeDial('dot radius', 2, 6, 1, state.btk.dotR,
+      function (v) { state.btk.dotR = v; updateBtkOut(); }, function (v) { return v + 'px'; },
+      off || state.btk.mode === 'comet'));
+    host.appendChild(rangeDial('opacity', 40, 100, 5, state.btk.op,
+      function (v) { state.btk.op = v; updateBtkOut(); }, function (v) { return v + '%'; }, off));
+
+    var sel = document.getElementById('btkStorm');
+    sel.innerHTML = '';
+    var opt = document.createElement('option');
+    opt.value = ''; opt.textContent = 'match the selected chain';
+    sel.appendChild(opt);
+    btkBasin().storms.forEach(function (s) {
+      var o = document.createElement('option');
+      o.value = s.id;
+      o.textContent = s.id + (s.names.length ? ' · ' + s.names.join('/') : '') +
+        (s.investTags.length ? ' · ' + s.investTags.join(',') : '') + ' · ' + s.fixes.length + ' fixes';
+      if (state.btk.storm === s.id) o.selected = true;
+      sel.appendChild(o);
+    });
+    sel.onchange = function () { state.btk.storm = sel.value; render(); };
+
+    updateBtkOut();
+  }
+  function updateBtkOut() {
+    var t = state.btk;
+    document.getElementById('btkOut').innerHTML =
+      'HC_BTK = { mode: <em>\'' + t.mode + '\'</em>, color: <em>\'' + t.color +
+        '\'</em>, w: <em>' + t.w + '</em>, dotR: <em>' + t.dotR +
+        '</em>, op: <em>' + (t.op / 100) + '</em> }\n' +
+      'caption: \'M b-deck fixes · official working best track — provisional, not the final track\'\n' +
+      '// app.js — drawn with the history trail (trailGroup, hc-trail pane), under the breadcrumbs;\n' +
+      '// SOLID because official; null-position fixes skipped, never bridged; matching:\n' +
+      '// cyclone by normalized name (-E stripped), invest by tag, cyclone file preferred' +
+      (t.mode === 'off' ? '\n// mode \'off\' = no overlay (today)' : '');
   }
 
   // --- trail-treatment controls (menu + dials + constants readout) -----------
@@ -927,27 +1145,37 @@
       render();
     };
 
+    document.getElementById('btkSrc').textContent = btkIsSample
+      ? 'SAMPLE tracks (inline demo — bdeck-tracks-2026.json not reachable)'
+      : 'REAL · ../archive/derived/bdeck-tracks-2026.json · btkNow ' + BTK.btkNow;
+
     buildControls();
     rebuildStamps();
     render();
 
     // dev hook for Playwright: source of truth + a redraw poke
     window.__lineageLab = { map: map, state: state, data: function () { return DATA; },
+      btk: function () { return BTK; }, btkIsSample: function () { return btkIsSample; },
+      btkLayerCount: function () { return btkPane.getLayers().length; },
+      matchBtkStorm: matchBtkStorm,
       isSample: function () { return isSample; }, render: render, select: selectChain };
   }
 
-  fetch('../archive/derived/lineage-2026.json')
+  var lineageP = fetch('../archive/derived/lineage-2026.json')
     .then(function (r) { if (!r.ok) throw new Error('http ' + r.status); return r.json(); })
     .then(function (j) {
       DATA = j; isSample = false;
       loadedFrom = 'REAL · ../archive/derived/lineage-2026.json';
-      boot();
     })
     .catch(function () {
       DATA = SAMPLE; isSample = true;
       loadedFrom = 'SAMPLE (inline demo — lineage-2026.json not reachable)';
-      boot();
     });
+  var btkP = fetch('../archive/derived/bdeck-tracks-2026.json')
+    .then(function (r) { if (!r.ok) throw new Error('http ' + r.status); return r.json(); })
+    .then(function (j) { BTK = j; btkIsSample = false; })
+    .catch(function () { BTK = BTK_SAMPLE; btkIsSample = true; });
+  Promise.all([lineageP, btkP]).then(boot);
 })();
 </script>
 </body>
