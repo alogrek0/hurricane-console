@@ -52,6 +52,11 @@ jobs:
         # best tracks -> archive/derived/bdeck-truth-2026.json; flags
         # disagreements, never rewrites the ledger — staged by the same commit
         run: node tools/bdeck-truth.js
+      - name: derive app-loadable best tracks (Track C M7)
+        # compact tracks + per-tag truth badges for the app's history overlay
+        # -> archive/derived/bdeck-tracks-2026.json (embeds the M6 agreements,
+        # so it runs after bdeck-truth) — staged by the same commit
+        run: node tools/derive-bdeck-tracks.js
       - name: commit new archive data
         run: |
           if [ -z "$(git status --porcelain archive/)" ]; then

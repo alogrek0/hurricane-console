@@ -120,16 +120,26 @@ function snapshotParts(fname) {
 
 // Recycled tags leave multiple snapshots per base in distinct DTG eras; growth
 // of a live file leaves superseded ones. Keep a snapshot unless a LATER-stamped
-// sibling's DTG range contains it (pure growth); disjoint eras both survive.
+// sibling OF THE SAME BASE contains its DTG range (pure growth); disjoint eras
+// both survive. Grouping by base is load-bearing: a cyclone's retroactive
+// track CONTAINS its invest's era (bep05 spans bep96), and cross-base
+// comparison would silently drop the invest's own snapshot.
 function liveEras(snaps) {
   const out = [];
   for (const s of snaps) {
-    const superseded = snaps.some((t) => t !== s && t.stamp > s.stamp &&
+    const superseded = snaps.some((t) => t !== s &&
+      (t.base || '') === (s.base || '') && t.stamp > s.stamp &&
       t.minDtg <= s.minDtg && t.maxDtg >= s.maxDtg);
     if (!superseded) out.push(s);
   }
   return out;
 }
+
+// lineage basin key -> ATCF basin field ('AT' chains live in 'AL' files)
+const ATCF_BASIN = { AT: 'AL', EP: 'EP' };
+
+// lineage names carry NHC's basin suffix ("Six-E"); b-deck STORMNAME does not
+const normName = (name) => String(name || '').toUpperCase().replace(/-[EC]$/, '');
 
 const flatDeg = (aLat, aLon, bLat, bLon) =>
   Math.sqrt(Math.pow(aLat - bLat, 2) + Math.pow(aLon - bLon, 2));
@@ -263,7 +273,7 @@ function buildTruth(ledger, lineage, files, btkNow) {
       let agreement = agreementOf(rec.outcome.kind, truth);
       if (agreement === 'confirms' && rec.outcome.kind === 'formed' && truth &&
           rec.outcome.cycloneName &&
-          truth.cycloneNames.indexOf(String(rec.outcome.cycloneName).toUpperCase()) < 0) {
+          truth.cycloneNames.indexOf(normName(rec.outcome.cycloneName)) < 0) {
         agreement = 'refutes'; // formed, but into a different storm than truth says
       }
       const stats = truth && chain
@@ -300,8 +310,8 @@ function buildTruth(ledger, lineage, files, btkNow) {
     const cyclones = [];
     const byBdeck = {};
     for (const chain of lineage.basins[basin].cyclones || []) {
-      const cyc = files.find((f) => parseInt(f.num, 10) < 90 && f.basin === basin.slice(0, 2) &&
-        f.names.indexOf(String(chain.name).toUpperCase()) >= 0 &&
+      const cyc = files.find((f) => parseInt(f.num, 10) < 90 && f.basin === ATCF_BASIN[basin] &&
+        f.names.indexOf(normName(chain.name)) >= 0 &&
         overlapsWindow(f.minDtg, f.maxDtg, chain.sightings[0].stamp,
           chain.sightings[chain.sightings.length - 1].stamp, ERA_PAD_H, ERA_PAD_H));
       const stats = cyc ? posStats(chain.sightings, [cyc]) : null;
@@ -369,6 +379,7 @@ function build() {
 
 module.exports = {
   SEASON, CYCLONE_STATUS, ERA_PAD_H, CYC_TRAIL_H, POS_MATCH_H, POS_OUTLIER_DEG,
+  ATCF_BASIN, normName,
   parseTenths, parseBdeck, snapshotParts, liveEras, flatDeg, overlapsWindow,
   investTruth, agreementOf, statementTruth, posStats, truthCalibrate, buildTruth,
 };

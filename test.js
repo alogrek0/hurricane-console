@@ -1942,6 +1942,17 @@ ok('truth liveEras: pure growth superseded, disjoint recycled eras both kept',
     const live = BT.liveEras([june, grow1, grow2]);
     return live.length === 2 && live.indexOf(june) >= 0 && live.indexOf(grow2) >= 0;
   })());
+ok('truth liveEras: supersession is PER BASE — a cyclone\'s retroactive era must not swallow its invest\'s snapshot',
+  (() => {
+    const inv = { base: 'bep962026', stamp: '202607141800', minDtg: '202607121200', maxDtg: '202607141800' };
+    const cyc = { base: 'bep052026', stamp: '202607190000', minDtg: '202607121200', maxDtg: '202607190000' };
+    const live = BT.liveEras([inv, cyc]);
+    return live.length === 2 && live.indexOf(inv) >= 0;
+  })());
+ok('truth normName: NHC basin suffix stripped ("Six-E" matches b-deck SIX), plain names untouched',
+  BT.normName('Six-E') === 'SIX' && BT.normName('Elida') === 'ELIDA' && BT.normName('One-C') === 'ONE');
+ok('truth ATCF_BASIN: lineage AT lives in ATCF AL files',
+  BT.ATCF_BASIN.AT === 'AL' && BT.ATCF_BASIN.EP === 'EP');
 
 // investTruth: explicit evidence only — refs or shared genesis-num, never bare
 // track overlap
@@ -2041,6 +2052,86 @@ ok('truth truthCalibrate: observedRate null when nothing resolved (never 0/0 as 
       ok('truth corpus: EP95 pin — truth REFUTES the ledger\'s not-formed (EP95 became bep042026), flagged not rewritten',
         !!ep95 && ep95.agreement === 'refutes' && ep95.truth.cycloneBdeck === 'bep042026' &&
         bt.flags.some((f) => f.subject === 'EP-I-202606280508-1' && f.kind === 'truth-refutes-no-cyclone'));
+      ok('truth corpus: AT cyclone chains match their b-deck (the AL-vs-AT basin fix)',
+        bt.basins.AT.cyclones.filter((c) => c.bdeck === 'bal012026').length === 2 &&
+        bt.flags.some((f) => f.subject === 'bal012026' && f.kind === 'same-storm-split'));
+    }
+  }
+}
+
+// --- app-loadable best tracks (Track C M7, data layer) --------------------------
+// tools/derive-bdeck-tracks.js distills the snapshots + M6 agreements into the
+// compact JSON the app's history overlay lazy-loads. investTags is explicit
+// evidence only (own 9x id / handoff refs / shared genesis-num) — never bare
+// track overlap. Null-position fixes are kept for renderers to SKIP.
+
+const DBT = require('./tools/derive-bdeck-tracks.js');
+
+ok('tracks tagOfId: 9x season ids only — genesis areas, waves, CP, other seasons all rejected',
+  DBT.tagOfId('ep962026') === 'EP96' && DBT.tagOfId('al902026') === 'AL90' &&
+  DBT.tagOfId('ep712026') === null && DBT.tagOfId('alA02026') === null &&
+  DBT.tagOfId('cp902026') === null && DBT.tagOfId('al912027') === null);
+ok('tracks basinKeyOf: al -> AT, ep -> EP, cp unmapped',
+  DBT.basinKeyOf('al012026') === 'AT' && DBT.basinKeyOf('ep962026') === 'EP' &&
+  DBT.basinKeyOf('cp902026') === null);
+{
+  const inv = { base: 'bep962026', id: 'ep962026', basin: 'EP', num: '96', genesisNum: '008',
+    refs: [], names: [], firstTdDtg: null, minDtg: '202607121200', maxDtg: '202607141800',
+    rows: [{ dtg: '202607121200', lat: 11.6, lon: -95.4, vmax: 25, status: 'DB', name: '' },
+           { dtg: '202607130000', lat: null, lon: null, vmax: 25, status: 'DB', name: '' }] };
+  const cyc = { base: 'bep052026', id: 'ep052026', basin: 'EP', num: '05', genesisNum: '008',
+    refs: ['ep782026', 'epa62026'], names: ['FIVE', 'ELIDA'], firstTdDtg: '202607141800',
+    minDtg: '202607121200', maxDtg: '202607190000',
+    rows: [{ dtg: '202607141800', lat: 14.7, lon: -108.6, vmax: 30, status: 'TD', name: 'FIVE' }] };
+  const sInv = DBT.stormFromFile(inv, [inv, cyc]);
+  const sCyc = DBT.stormFromFile(cyc, [inv, cyc]);
+  ok('tracks stormFromFile: invest keeps its own tag, kind invest, era from DTG range',
+    sInv.kind === 'invest' && sInv.investTags.join() === 'EP96' &&
+    sInv.era.min === '202607121200' && sInv.era.max === '202607141800');
+  ok('tracks stormFromFile: cyclone inherits the invest tag via shared genesis-num (never via ep78/epA6 refs)',
+    sCyc.kind === 'cyclone' && sCyc.investTags.join() === 'EP96' && sCyc.names.join('/') === 'FIVE/ELIDA');
+  ok('tracks stormFromFile: null-position fix preserved in the JSON (renderers skip, never bridge)',
+    sInv.fixes.length === 2 && sInv.fixes[1].lat === null && sInv.fixes[1].lon === null);
+  const truth = DBT.truthByTag({ invests: [
+    { tag: 'EP96', agreement: 'open', truth: null },
+    { tag: 'EP96', agreement: 'resolves', truth: { kind: 'formed', cycloneNames: ['FIVE', 'ELIDA'], cycloneBdeck: 'bep052026' } },
+  ] });
+  ok('tracks truthByTag: last record per tag wins (newest), null truth is null-safe',
+    truth.EP96.agreement === 'resolves' && truth.EP96.kind === 'formed' &&
+    truth.EP96.bdeck === 'bep052026');
+  const lin = { basins: { AT: { invests: [] }, EP: { invests: [] } } };
+  const once = JSON.stringify(DBT.deriveTracks([inv, cyc], lin));
+  ok('tracks determinism: deriving the same files twice is byte-identical',
+    once === JSON.stringify(DBT.deriveTracks([inv, cyc], lin)));
+}
+
+// corpus block: guarded on the committed tracks JSON (cron-rebuilt); invariants
+// + immutable pins, never counts
+{
+  const tf = __dirname + '/archive/derived/bdeck-tracks-' + DBT.SEASON + '.json';
+  if (fs.existsSync(tf)) {
+    let tj = null;
+    try { tj = JSON.parse(fs.readFileSync(tf, 'utf8')); } catch (e) { /* fall through */ }
+    ok('tracks corpus: JSON parses', !!tj);
+    if (tj) {
+      const storms = tj.basins.AT.storms.concat(tj.basins.EP.storms);
+      ok('tracks corpus: season + 12-digit btkNow', tj.season === DBT.SEASON && /^\d{12}$/.test(tj.btkNow));
+      ok('tracks corpus: every storm has closed vocab kind, sorted ascending fixes, sane era',
+        storms.every((s) => (s.kind === 'invest' || s.kind === 'cyclone') &&
+          s.era.min <= s.era.max &&
+          s.fixes.every((f, i) => /^\d{12}$/.test(f.t) && (i === 0 || s.fixes[i - 1].t <= f.t))));
+      ok('tracks corpus: every truth key is a basin-true invest tag',
+        ['AT', 'EP'].every((b) => Object.keys(tj.basins[b].truth).every((k) => /^(AL|EP|CP)\d{2}$/.test(k))));
+      const al01 = tj.basins.AT.storms.find((s) => s.id === 'al012026');
+      ok('tracks corpus: al012026 pin — ONE/ARTHUR, tagged AL90, TD onset 202606171200',
+        !!al01 && al01.names.join('/') === 'ONE/ARTHUR' && al01.investTags.indexOf('AL90') >= 0 &&
+        al01.firstTdDtg === '202606171200');
+      const ep05 = tj.basins.EP.storms.find((s) => s.id === 'ep052026');
+      ok('tracks corpus: ep052026 pin — carries EP96 via explicit evidence',
+        !!ep05 && ep05.investTags.indexOf('EP96') >= 0);
+      ok('tracks corpus: AL90 truth pin — resolves, formed into bal012026',
+        tj.basins.AT.truth.AL90 && tj.basins.AT.truth.AL90.agreement === 'resolves' &&
+        tj.basins.AT.truth.AL90.bdeck === 'bal012026');
     }
   }
 }

@@ -342,6 +342,30 @@ prefer broken chains over invented links.
   Un-truthable forever: invests whose tags recycled before M5 capture began
   (EP91-EP94 era) — their `formed`/`not-formed` ledger verdicts stand
   unvalidated, honestly marked `no-data`.*
+- [ ] **M7 — Best-track overlay (b-decks on the map)**: the official ATCF
+  working best track drawn alongside the M3 history-trail breadcrumbs (prose
+  vs truth, visible on the map), plus a truth badge (M6 agreements) in
+  tagged-invest/cyclone popups. The b-deck is the one genuinely official
+  trail this map can draw — it renders SOLID; everything computed stays
+  dashed. Captioned as the WORKING best track — provisional, revised in
+  season, never the post-season final.
+  *Stage A shipped 2026-07-19: `tools/derive-bdeck-tracks.js` distills the
+  snapshots + M6 agreements into app-loadable
+  `archive/derived/bdeck-tracks-2026.json` (~34 KB; per-storm fixes +
+  explicit-evidence investTags + per-tag truth badges; cron rebuilds it
+  after bdeck-truth). Two M6 fixes rode along, each regression-tested:
+  `liveEras` now groups by base (a cyclone's retroactive era was swallowing
+  its invest's snapshot cross-base), and cyclone matching maps lineage `AT`
+  → ATCF `AL` + strips the `-E` name suffix (One/Arthur and every EP
+  depression now find their b-deck; positions agree within 0.5°).
+  `tools/lineage-lab.html` gained the best-track card: solid /
+  status-graded / comet treatments, color + width + opacity dials, a storm
+  picker for prose-unnamed storms, the stage-B badge copy previewed live,
+  matching by THE exact rules the app will ship (normalized name; tag with
+  cyclone file preferred). Judge on desktop alongside the Antilles lab,
+  send the HC_BTK constants; Stage B locks them into app.js/index.html
+  (overlay drawn with the trail, badge via the wireGenesis idiom) and
+  checks this off.*
 
 ## Maintenance calendar
 

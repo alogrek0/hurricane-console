@@ -1,0 +1,152 @@
+/*
+ * tools/derive-bdeck-tracks.js — app-loadable best tracks (Track C M7, data
+ * layer): distill the captured ATCF b-deck snapshots (archive/{year}/atcf/,
+ * M5) + the truth overlay's agreements (bdeck-truth-{year}.json, M6) into a
+ * compact archive/derived/bdeck-tracks-{year}.json the app can lazy-load —
+ * the official working best track drawn alongside the M3 history trail, and
+ * the truth badge shown in tagged-invest/cyclone popups.
+ *
+ * Shape: { _readme, season, btkNow, basins: { AT: { storms, truth }, EP: … } }
+ *   storm: { id, bdeck, kind ('invest' iff ATCF num 90-99), names[]
+ *            (GENESIS###/INVEST filtered), investTags[], firstTdDtg,
+ *            era: {min,max}, fixes: [{t, lat, lon, kt, status}] }
+ *   truth: { 'AL90': { agreement, kind, intoNames, bdeck }, … } per invest tag
+ *
+ * investTags is EXPLICIT evidence only (the M6 rule): the storm's own tag when
+ * it IS an invest file, any 9x ATCF id named by its handoff tags, and any
+ * same-basin invest file sharing its genesis-num. Bare track overlap never
+ * links. Null-position fixes are KEPT (lat/lon null) — renderers skip them and
+ * never bridge across (the M3 rule). Truth per tag = the LAST matching ledger
+ * record (ids are stamp-ordered, so newest wins — mirrors the app's
+ * genesisRecordFor). ATCF file prefix -> app basin key via {al:AT, ep:EP}.
+ *
+ * These are NHC's WORKING best tracks — provisional, revised in season, not
+ * the post-season final. The app's caption must say so.
+ *
+ * Deterministic: btkNow = max DTG across snapshots, never wall clock; storms
+ * sorted by id then era.min; byte-identical rebuild over an unchanged archive.
+ *
+ * Usage:  node tools/derive-bdeck-tracks.js   (offline; cron runs it after
+ *         bdeck-truth.js each cycle — it embeds that file's agreements)
+ *
+ * Pure logic exported for test.js; only the CLI body (require.main) touches
+ * the filesystem. Zero dependencies; never runs in the browser.
+ */
+'use strict';
+const fs = require('fs');
+const path = require('path');
+const { SEASON } = require('./archive-sync.js');
+const BT = require('./bdeck-truth.js');
+
+const ARCHIVE = path.join(__dirname, '..', 'archive');
+const OUT = path.join(ARCHIVE, 'derived', 'bdeck-tracks-' + SEASON + '.json');
+const BASIN_KEY = { al: 'AT', ep: 'EP' };
+
+// 'ep962026' -> 'EP96'; null for cyclone numbers, genesis areas (epA0...),
+// other seasons, and Central Pacific ids (out of scope, as everywhere)
+function tagOfId(id) {
+  const m = new RegExp('^(al|ep)(9\\d)' + SEASON + '$').exec(String(id || '').toLowerCase());
+  return m ? m[1].toUpperCase() + m[2] : null;
+}
+
+const basinKeyOf = (id) => BASIN_KEY[String(id || '').slice(0, 2).toLowerCase()] || null;
+
+// One live-era snapshot -> a storm entry. `files` = all live eras (for the
+// shared-genesis-num invest lookup).
+function stormFromFile(f, files) {
+  const tags = {};
+  const own = tagOfId(f.id);
+  if (own) tags[own] = true;
+  for (const ref of f.refs) {
+    const t = tagOfId(ref);
+    if (t && basinKeyOf(ref) === basinKeyOf(f.id)) tags[t] = true;
+  }
+  if (f.genesisNum) {
+    for (const o of files) {
+      const t = tagOfId(o.id);
+      if (t && o.genesisNum === f.genesisNum && basinKeyOf(o.id) === basinKeyOf(f.id)) tags[t] = true;
+    }
+  }
+  return {
+    id: f.id,
+    bdeck: f.base,
+    kind: own ? 'invest' : 'cyclone',
+    names: f.names,
+    investTags: Object.keys(tags).sort(),
+    firstTdDtg: f.firstTdDtg,
+    era: { min: f.minDtg, max: f.maxDtg },
+    fixes: f.rows.map((r) => ({ t: r.dtg, lat: r.lat, lon: r.lon, kt: r.vmax, status: r.status })),
+  };
+}
+
+// truth overlay records -> per-tag badge map (last record per tag wins —
+// ledger order is stamp-ordered, so newest; mirrors the app's newest-wins)
+function truthByTag(truthBasin) {
+  const out = {};
+  for (const rec of (truthBasin || { invests: [] }).invests) {
+    if (!rec.tag) continue;
+    out[rec.tag] = {
+      agreement: rec.agreement,
+      kind: rec.truth ? rec.truth.kind : null,
+      intoNames: rec.truth ? rec.truth.cycloneNames : [],
+      bdeck: rec.truth ? rec.truth.cycloneBdeck : null,
+    };
+  }
+  const sorted = {};
+  Object.keys(out).sort().forEach((k) => { sorted[k] = out[k]; });
+  return sorted;
+}
+
+function deriveTracks(files, truthJson) {
+  const btkNow = files.reduce((m, f) => (f.maxDtg > m ? f.maxDtg : m), '');
+  const basins = {};
+  for (const b of ['AT', 'EP']) {
+    const storms = files
+      .filter((f) => basinKeyOf(f.id) === b)
+      .map((f) => stormFromFile(f, files))
+      .sort((x, y) => (x.id < y.id ? -1 : x.id > y.id ? 1 : x.era.min < y.era.min ? -1 : 1));
+    basins[b] = { storms: storms, truth: truthByTag(truthJson.basins[b]) };
+  }
+  return {
+    _readme: 'App-loadable ATCF working best tracks + per-tag truth badges (Track C M7), ' +
+      'distilled from archive/' + SEASON + '/atcf/ snapshots and the M6 truth overlay. ' +
+      'Regenerated by `node tools/derive-bdeck-tracks.js` — NEVER hand-edit. These are ' +
+      'NHC\'s WORKING best tracks: provisional, revised in season, not the post-season ' +
+      'final — anything rendering them must say so. Null-position fixes are kept and ' +
+      'skipped at draw, never bridged.',
+    season: SEASON,
+    btkNow: btkNow,
+    basins: basins,
+  };
+}
+
+// --- CLI ------------------------------------------------------------------------
+
+function build() {
+  const atcfDir = path.join(ARCHIVE, String(SEASON), 'atcf');
+  const truthFile = path.join(ARCHIVE, 'derived', 'bdeck-truth-' + SEASON + '.json');
+  if (!fs.existsSync(atcfDir) || !fs.existsSync(truthFile)) {
+    console.error('derive-bdeck-tracks: missing inputs (atcf snapshots + bdeck-truth overlay) — nothing written');
+    process.exit(1);
+  }
+  const snaps = [];
+  for (const fname of fs.readdirSync(atcfDir).sort()) {
+    const parts = BT.snapshotParts(fname);
+    if (!parts) continue;
+    const parsed = BT.parseBdeck(fs.readFileSync(path.join(atcfDir, fname), 'utf8'));
+    if (!parsed) continue;
+    snaps.push(Object.assign({ base: parts.base, id: parts.id, stamp: parts.stamp }, parsed));
+  }
+  const files = BT.liveEras(snaps);
+  const truthJson = JSON.parse(fs.readFileSync(truthFile, 'utf8'));
+  const out = deriveTracks(files, truthJson);
+  fs.writeFileSync(OUT, JSON.stringify(out, null, 2) + '\n');
+  const n = out.basins.AT.storms.length + out.basins.EP.storms.length;
+  const fx = [].concat(out.basins.AT.storms, out.basins.EP.storms)
+    .reduce((a, s) => a + s.fixes.length, 0);
+  console.log('wrote', OUT, '—', n, 'storms,', fx, 'fixes, btkNow', out.btkNow);
+}
+
+module.exports = { SEASON, BASIN_KEY, tagOfId, basinKeyOf, stormFromFile, truthByTag, deriveTracks };
+
+if (require.main === module) build();

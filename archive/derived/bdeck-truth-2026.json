@@ -9,7 +9,7 @@
     "refutes": 1,
     "open": 1,
     "noData": 124,
-    "flags": 7
+    "flags": 12
   },
   "flags": [
     {
@@ -23,6 +23,12 @@
       "subject": "AT-I-202606131720-1",
       "kind": "position-outlier",
       "detail": "AL90: max sighting-to-track distance 10.5 deg (mean 10, n 7)"
+    },
+    {
+      "basin": "AT",
+      "subject": "bal012026",
+      "kind": "same-storm-split",
+      "detail": "One (AT-C-202606161802-1) + Arthur (AT-C-202606171713-1) are one best-track storm — the name-identity rule splits reclassifications by design"
     },
     {
       "basin": "EP",
@@ -53,6 +59,30 @@
       "subject": "EP-I-202607171152-2",
       "kind": "truth-resolves-open",
       "detail": "EP97: ledger open, b-deck says formed into bep062026 (SIX)"
+    },
+    {
+      "basin": "EP",
+      "subject": "bep012026",
+      "kind": "same-storm-split",
+      "detail": "One-E (EP-C-202606022105-1) + Amanda (EP-C-202606031508-1) are one best-track storm — the name-identity rule splits reclassifications by design"
+    },
+    {
+      "basin": "EP",
+      "subject": "bep022026",
+      "kind": "same-storm-split",
+      "detail": "Two-E (EP-C-202606071546-1) + Boris (EP-C-202606080859-1) are one best-track storm — the name-identity rule splits reclassifications by design"
+    },
+    {
+      "basin": "EP",
+      "subject": "bep042026",
+      "kind": "same-storm-split",
+      "detail": "Four-E (EP-C-202607011530-1) + Douglas (EP-C-202607012105-1) are one best-track storm — the name-identity rule splits reclassifications by design"
+    },
+    {
+      "basin": "EP",
+      "subject": "bep052026",
+      "kind": "same-storm-split",
+      "detail": "Five-E (EP-C-202607150258-1) + Elida (EP-C-202607150839-1) are one best-track storm — the name-identity rule splits reclassifications by design"
     }
   ],
   "basins": {
@@ -1690,14 +1720,22 @@
         {
           "id": "AT-C-202606161802-1",
           "name": "One",
-          "bdeck": null,
-          "posStats": null
+          "bdeck": "bal012026",
+          "posStats": {
+            "n": 4,
+            "meanDeg": 0.2,
+            "maxDeg": 0.5
+          }
         },
         {
           "id": "AT-C-202606171713-1",
           "name": "Arthur",
-          "bdeck": null,
-          "posStats": null
+          "bdeck": "bal012026",
+          "posStats": {
+            "n": 3,
+            "meanDeg": 0.3,
+            "maxDeg": 0.4
+          }
         }
       ]
     },
@@ -4518,7 +4556,7 @@
           },
           "truth": {
             "kind": "formed",
-            "investBdeck": null,
+            "investBdeck": "bep962026",
             "cycloneBdeck": "bep052026",
             "cycloneNames": [
               "FIVE",
@@ -7443,7 +7481,7 @@
           },
           "truth": {
             "kind": "formed",
-            "investBdeck": null,
+            "investBdeck": "bep972026",
             "cycloneBdeck": "bep062026",
             "cycloneNames": [
               "SIX"
@@ -7896,8 +7934,12 @@
         {
           "id": "EP-C-202606022105-1",
           "name": "One-E",
-          "bdeck": null,
-          "posStats": null
+          "bdeck": "bep012026",
+          "posStats": {
+            "n": 4,
+            "meanDeg": 0.3,
+            "maxDeg": 0.4
+          }
         },
         {
           "id": "EP-C-202606031508-1",
@@ -7912,8 +7954,12 @@
         {
           "id": "EP-C-202606071546-1",
           "name": "Two-E",
-          "bdeck": null,
-          "posStats": null
+          "bdeck": "bep022026",
+          "posStats": {
+            "n": 5,
+            "meanDeg": 0.4,
+            "maxDeg": 0.6
+          }
         },
         {
           "id": "EP-C-202606080859-1",
@@ -7944,8 +7990,12 @@
         {
           "id": "EP-C-202607011530-1",
           "name": "Four-E",
-          "bdeck": null,
-          "posStats": null
+          "bdeck": "bep042026",
+          "posStats": {
+            "n": 1,
+            "meanDeg": 0.2,
+            "maxDeg": 0.2
+          }
         },
         {
           "id": "EP-C-202607012105-1",
@@ -7960,8 +8010,12 @@
         {
           "id": "EP-C-202607150258-1",
           "name": "Five-E",
-          "bdeck": null,
-          "posStats": null
+          "bdeck": "bep052026",
+          "posStats": {
+            "n": 1,
+            "meanDeg": 0.8,
+            "maxDeg": 0.8
+          }
         },
         {
           "id": "EP-C-202607150839-1",
@@ -7976,8 +8030,12 @@
         {
           "id": "EP-C-202607190258-1",
           "name": "Six-E",
-          "bdeck": null,
-          "posStats": null
+          "bdeck": "bep062026",
+          "posStats": {
+            "n": 3,
+            "meanDeg": 0.5,
+            "maxDeg": 0.6
+          }
         }
       ]
     }
