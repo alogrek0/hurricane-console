@@ -59,7 +59,14 @@
   .leaflet-container{background:#04101a;font:inherit}
 
   .toolbar{display:flex;gap:.4rem;flex-wrap:wrap;align-items:center;
-    padding:.5rem .8rem;padding-bottom:calc(.5rem + env(safe-area-inset-bottom));
+    padding:.5rem .8rem;
+    /* Reclaim most of the home-indicator inset: the readout's last line is
+       non-interactive and hugs the left/right edges, while the indicator pill
+       is centered and ~134pt wide — the sides of that band are visually clear.
+       12px stays reserved so the display's corner curve never clips a
+       descender; zero-inset devices keep the plain .5rem. The BUTTON row sits
+       far above either way — no gesture-zone collision. */
+    padding-bottom:max(.5rem, calc(env(safe-area-inset-bottom) - 12px));
     background:var(--panel);border-top:1px solid var(--line)}
   button{font:inherit;color:var(--ink);background:#123246;border:1px solid var(--line);
     border-radius:4px;padding:.4rem .7rem;cursor:pointer}
