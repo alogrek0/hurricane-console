@@ -121,16 +121,27 @@ planned tracks — lived friction beats speculation.
   ever carried one (none has this season; position falls back to sentence
   scanning and is honestly null). Low urgency; revisit if a real product ever
   pairs a period-bearing title with an invest tag.
-- [ ] **Directional-offset phrases anchor at the landmark** (2026-07-17, found
-  by the automated chain audit) — "several hundred miles south-southwest of
-  the southern tip of the Baja California peninsula" resolves to the Baja
-  anchor itself (29N 114W, mid-peninsula) instead of a point offset south of
-  it; evidence `TWOEP.202606230501.txt` → `...231147.txt`, where EP94's
-  position lurches 17° in 6 h while its tag (correctly) holds the chain
-  together. Same coarseness stacks distinct same-product areas on one anchor
-  (the June 21 collision that motivated the genesis-symmetry rule). Fix is
-  delicate gazetteer/offset work — its own fixtured PR; positions and
-  lineage both improve when it lands.
+- [x] **Directional-offset phrases anchor at the landmark** (2026-07-17, found
+  by the automated chain audit; fixed 2026-07-18) — "several hundred miles
+  south-southwest of the southern tip of the Baja California peninsula"
+  resolved to the Baja anchor itself (29N 114W, mid-peninsula) instead of a
+  point offset south of it; evidence `TWOEP.202606230501.txt` →
+  `...231147.txt`, where EP94's position lurched 17° in 6 h while its tag
+  (correctly) held the chain together. *Fixed: `gazResolve` gains an offset
+  branch (parallel to the `between` midpoint) — parse "<distance> <compass>
+  of X", anchor X, move by `offsetNm`. Distances: statute unless "nautical"
+  is written; vague hundreds map to nominal midpoints (couple 200 / few 300 /
+  several 400 — any value in the stated range beats the zero offset of
+  sitting ON the landmark, the one place the text says the feature is NOT).
+  GAZ.EP gains "southern tip of (the) Baja California" at Cabo San Lucas.
+  "within N miles ... of" (radii) rejected; CP landmarks stay unmapped.
+  EP94's lurch collapsed to a coherent ~7° step; EP lineage re-derived
+  (tagged chains steady, some untagged proximity bridges honestly split).
+  Two warts stay by design, awaiting real-product evidence: "well [dir] of
+  X" has NO stated distance, so it stays AT the anchor (a nominal offset
+  would invent magnitude); parseTWO's sentence scan still has no future
+  gate ("expected to form ... offshore of X" anchors at X — pre-existing,
+  pinned by test, its own PR if it ever misleads).*
 
 ## Track A — Features
 

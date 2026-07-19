@@ -20174,54 +20174,6 @@
               },
               "tagged": false,
               "link": "proximity"
-            },
-            {
-              "stamp": "202606020501",
-              "file": "TWOEP.202606020501.txt",
-              "lat": 29,
-              "lon": -114,
-              "chance48": {
-                "cat": "high",
-                "pct": 70
-              },
-              "chance7": {
-                "cat": "high",
-                "pct": 90
-              },
-              "tagged": false,
-              "link": "proximity"
-            },
-            {
-              "stamp": "202606021137",
-              "file": "TWOEP.202606021137.txt",
-              "lat": 29,
-              "lon": -114,
-              "chance48": {
-                "cat": "high",
-                "pct": 80
-              },
-              "chance7": {
-                "cat": "high",
-                "pct": 90
-              },
-              "tagged": false,
-              "link": "proximity"
-            },
-            {
-              "stamp": "202606021733",
-              "file": "TWOEP.202606021733.txt",
-              "lat": 29,
-              "lon": -114,
-              "chance48": {
-                "cat": "high",
-                "pct": 90
-              },
-              "chance7": {
-                "cat": "high",
-                "pct": 90
-              },
-              "tagged": false,
-              "link": "proximity"
             }
           ]
         },
@@ -20315,6 +20267,60 @@
         },
         {
           "id": "EP-I-202606020501-1",
+          "tag": null,
+          "sightings": [
+            {
+              "stamp": "202606020501",
+              "file": "TWOEP.202606020501.txt",
+              "lat": 22.9,
+              "lon": -109.9,
+              "chance48": {
+                "cat": "high",
+                "pct": 70
+              },
+              "chance7": {
+                "cat": "high",
+                "pct": 90
+              },
+              "tagged": false,
+              "link": null
+            },
+            {
+              "stamp": "202606021137",
+              "file": "TWOEP.202606021137.txt",
+              "lat": 22.9,
+              "lon": -109.9,
+              "chance48": {
+                "cat": "high",
+                "pct": 80
+              },
+              "chance7": {
+                "cat": "high",
+                "pct": 90
+              },
+              "tagged": false,
+              "link": "proximity"
+            },
+            {
+              "stamp": "202606021733",
+              "file": "TWOEP.202606021733.txt",
+              "lat": 22.9,
+              "lon": -109.9,
+              "chance48": {
+                "cat": "high",
+                "pct": 90
+              },
+              "chance7": {
+                "cat": "high",
+                "pct": 90
+              },
+              "tagged": false,
+              "link": "proximity"
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606020501-2",
           "tag": null,
           "sightings": [
             {
@@ -21486,7 +21492,7 @@
               },
               "chance7": {
                 "cat": "low",
-                "pct": 30
+                "pct": 20
               },
               "tagged": false,
               "link": "proximity"
@@ -21575,7 +21581,7 @@
         },
         {
           "id": "EP-I-202606212308-2",
-          "tag": "EP94",
+          "tag": null,
           "sightings": [
             {
               "stamp": "202606212308",
@@ -21604,16 +21610,22 @@
               },
               "chance7": {
                 "cat": "low",
-                "pct": 20
+                "pct": 30
               },
               "tagged": false,
               "link": "proximity"
-            },
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606221152-1",
+          "tag": "EP94",
+          "sightings": [
             {
               "stamp": "202606221152",
               "file": "TWOEP.202606221152.txt",
-              "lat": 17,
-              "lon": -102,
+              "lat": 13,
+              "lon": -103.7,
               "chance48": {
                 "cat": "low",
                 "pct": 10
@@ -21623,13 +21635,13 @@
                 "pct": 20
               },
               "tagged": false,
-              "link": "proximity"
+              "link": null
             },
             {
               "stamp": "202606221745",
               "file": "TWOEP.202606221745.txt",
-              "lat": 17,
-              "lon": -102,
+              "lat": 13,
+              "lon": -103.7,
               "chance48": {
                 "cat": "low",
                 "pct": 30
@@ -21644,8 +21656,8 @@
             {
               "stamp": "202606222319",
               "file": "TWOEP.202606222319.txt",
-              "lat": 17,
-              "lon": -102,
+              "lat": 13,
+              "lon": -103.7,
               "chance48": {
                 "cat": "low",
                 "pct": 30
@@ -21660,8 +21672,8 @@
             {
               "stamp": "202606230501",
               "file": "TWOEP.202606230501.txt",
-              "lat": 17,
-              "lon": -102,
+              "lat": 13,
+              "lon": -103.7,
               "chance48": {
                 "cat": "low",
                 "pct": 30
@@ -21676,8 +21688,8 @@
             {
               "stamp": "202606231147",
               "file": "TWOEP.202606231147.txt",
-              "lat": 29,
-              "lon": -114,
+              "lat": 17.1,
+              "lon": -109.9,
               "chance48": {
                 "cat": "medium",
                 "pct": 40
@@ -21692,8 +21704,8 @@
             {
               "stamp": "202606231754",
               "file": "TWOEP.202606231754.txt",
-              "lat": 29,
-              "lon": -114,
+              "lat": 17.1,
+              "lon": -109.9,
               "chance48": {
                 "cat": "medium",
                 "pct": 50
@@ -21708,8 +21720,8 @@
             {
               "stamp": "202606232329",
               "file": "TWOEP.202606232329.txt",
-              "lat": 29,
-              "lon": -114,
+              "lat": 17.5,
+              "lon": -112.3,
               "chance48": {
                 "cat": "medium",
                 "pct": 50
@@ -21724,8 +21736,8 @@
             {
               "stamp": "202606240544",
               "file": "TWOEP.202606240544.txt",
-              "lat": 29,
-              "lon": -114,
+              "lat": 17.5,
+              "lon": -112.3,
               "chance48": {
                 "cat": "medium",
                 "pct": 50
@@ -21740,8 +21752,8 @@
             {
               "stamp": "202606241132",
               "file": "TWOEP.202606241132.txt",
-              "lat": 29,
-              "lon": -114,
+              "lat": 22.9,
+              "lon": -109.9,
               "chance48": {
                 "cat": "medium",
                 "pct": 50
@@ -21756,8 +21768,8 @@
             {
               "stamp": "202606241730",
               "file": "TWOEP.202606241730.txt",
-              "lat": 29,
-              "lon": -114,
+              "lat": 18.8,
+              "lon": -114.3,
               "chance48": {
                 "cat": "medium",
                 "pct": 40
@@ -21772,8 +21784,8 @@
             {
               "stamp": "202606242314",
               "file": "TWOEP.202606242314.txt",
-              "lat": 29,
-              "lon": -114,
+              "lat": 18.8,
+              "lon": -114.3,
               "chance48": {
                 "cat": "low",
                 "pct": 20
@@ -21788,8 +21800,8 @@
             {
               "stamp": "202606250519",
               "file": "TWOEP.202606250519.txt",
-              "lat": 29,
-              "lon": -114,
+              "lat": 20.7,
+              "lon": -115.7,
               "chance48": {
                 "cat": "low",
                 "pct": 10
@@ -21986,7 +21998,7 @@
             {
               "stamp": "202606251725",
               "file": "TWOEP.202606251725.txt",
-              "lat": 17,
+              "lat": 11.2,
               "lon": -102,
               "chance48": {
                 "cat": "low",
@@ -22002,7 +22014,7 @@
             {
               "stamp": "202606252313",
               "file": "TWOEP.202606252313.txt",
-              "lat": 17,
+              "lat": 11.2,
               "lon": -102,
               "chance48": {
                 "cat": "low",
@@ -22018,7 +22030,7 @@
             {
               "stamp": "202606260504",
               "file": "TWOEP.202606260504.txt",
-              "lat": 17,
+              "lat": 11.2,
               "lon": -102,
               "chance48": {
                 "cat": "low",
@@ -22034,7 +22046,7 @@
             {
               "stamp": "202606261136",
               "file": "TWOEP.202606261136.txt",
-              "lat": 17,
+              "lat": 11.2,
               "lon": -102,
               "chance48": {
                 "cat": "low",
@@ -22051,12 +22063,12 @@
         },
         {
           "id": "EP-I-202606261725-1",
-          "tag": "EP95",
+          "tag": null,
           "sightings": [
             {
               "stamp": "202606261725",
               "file": "TWOEP.202606261725.txt",
-              "lat": 29,
+              "lat": 23.2,
               "lon": -114,
               "chance48": {
                 "cat": "low",
@@ -22068,12 +22080,18 @@
               },
               "tagged": false,
               "link": null
-            },
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606262309-1",
+          "tag": null,
+          "sightings": [
             {
               "stamp": "202606262309",
               "file": "TWOEP.202606262309.txt",
-              "lat": 29,
-              "lon": -114,
+              "lat": 17.5,
+              "lon": -112.3,
               "chance48": {
                 "cat": "low",
                 "pct": 0
@@ -22083,13 +22101,13 @@
                 "pct": 50
               },
               "tagged": false,
-              "link": "proximity"
+              "link": null
             },
             {
               "stamp": "202606270522",
               "file": "TWOEP.202606270522.txt",
-              "lat": 29,
-              "lon": -114,
+              "lat": 17.5,
+              "lon": -112.3,
               "chance48": {
                 "cat": "low",
                 "pct": 0
@@ -22104,8 +22122,8 @@
             {
               "stamp": "202606271143",
               "file": "TWOEP.202606271143.txt",
-              "lat": 29,
-              "lon": -114,
+              "lat": 17.5,
+              "lon": -112.3,
               "chance48": {
                 "cat": "low",
                 "pct": 10
@@ -22120,8 +22138,8 @@
             {
               "stamp": "202606271711",
               "file": "TWOEP.202606271711.txt",
-              "lat": 29,
-              "lon": -114,
+              "lat": 17.5,
+              "lon": -112.3,
               "chance48": {
                 "cat": "low",
                 "pct": 10
@@ -22136,8 +22154,8 @@
             {
               "stamp": "202606272306",
               "file": "TWOEP.202606272306.txt",
-              "lat": 29,
-              "lon": -114,
+              "lat": 18.8,
+              "lon": -114.3,
               "chance48": {
                 "cat": "low",
                 "pct": 10
@@ -22148,12 +22166,18 @@
               },
               "tagged": false,
               "link": "proximity"
-            },
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606280508-1",
+          "tag": "EP95",
+          "sightings": [
             {
               "stamp": "202606280508",
               "file": "TWOEP.202606280508.txt",
-              "lat": 29,
-              "lon": -114,
+              "lat": 22.9,
+              "lon": -109.9,
               "chance48": {
                 "cat": "low",
                 "pct": 20
@@ -22163,13 +22187,13 @@
                 "pct": 50
               },
               "tagged": false,
-              "link": "proximity"
+              "link": null
             },
             {
               "stamp": "202606281135",
               "file": "TWOEP.202606281135.txt",
-              "lat": 29,
-              "lon": -114,
+              "lat": 22.9,
+              "lon": -109.9,
               "chance48": {
                 "cat": "low",
                 "pct": 20
@@ -22184,8 +22208,8 @@
             {
               "stamp": "202606281734",
               "file": "TWOEP.202606281734.txt",
-              "lat": 29,
-              "lon": -114,
+              "lat": 22.9,
+              "lon": -109.9,
               "chance48": {
                 "cat": "low",
                 "pct": 20
@@ -22200,8 +22224,8 @@
             {
               "stamp": "202606282317",
               "file": "TWOEP.202606282317.txt",
-              "lat": 29,
-              "lon": -114,
+              "lat": 22.9,
+              "lon": -109.9,
               "chance48": {
                 "cat": "low",
                 "pct": 30
@@ -22216,8 +22240,8 @@
             {
               "stamp": "202606290503",
               "file": "TWOEP.202606290503.txt",
-              "lat": 29,
-              "lon": -114,
+              "lat": 22.9,
+              "lon": -109.9,
               "chance48": {
                 "cat": "medium",
                 "pct": 40
@@ -22232,8 +22256,8 @@
             {
               "stamp": "202606291148",
               "file": "TWOEP.202606291148.txt",
-              "lat": 29,
-              "lon": -114,
+              "lat": 22.9,
+              "lon": -109.9,
               "chance48": {
                 "cat": "medium",
                 "pct": 50
@@ -22248,8 +22272,8 @@
             {
               "stamp": "202606291729",
               "file": "TWOEP.202606291729.txt",
-              "lat": 29,
-              "lon": -114,
+              "lat": 22.9,
+              "lon": -109.9,
               "chance48": {
                 "cat": "medium",
                 "pct": 60
@@ -22264,8 +22288,8 @@
             {
               "stamp": "202606292318",
               "file": "TWOEP.202606292318.txt",
-              "lat": 29,
-              "lon": -114,
+              "lat": 22.9,
+              "lon": -109.9,
               "chance48": {
                 "cat": "high",
                 "pct": 70
@@ -22280,8 +22304,8 @@
             {
               "stamp": "202606300508",
               "file": "TWOEP.202606300508.txt",
-              "lat": 29,
-              "lon": -114,
+              "lat": 22.9,
+              "lon": -109.9,
               "chance48": {
                 "cat": "high",
                 "pct": 70
@@ -22296,8 +22320,8 @@
             {
               "stamp": "202606301139",
               "file": "TWOEP.202606301139.txt",
-              "lat": 29,
-              "lon": -114,
+              "lat": 22.9,
+              "lon": -109.9,
               "chance48": {
                 "cat": "high",
                 "pct": 80
@@ -22312,8 +22336,8 @@
             {
               "stamp": "202606301737",
               "file": "TWOEP.202606301737.txt",
-              "lat": 29,
-              "lon": -114,
+              "lat": 22.9,
+              "lon": -109.9,
               "chance48": {
                 "cat": "high",
                 "pct": 90
@@ -22328,8 +22352,8 @@
             {
               "stamp": "202606302304",
               "file": "TWOEP.202606302304.txt",
-              "lat": 29,
-              "lon": -114,
+              "lat": 22.9,
+              "lon": -109.9,
               "chance48": {
                 "cat": "high",
                 "pct": 90
@@ -22344,8 +22368,8 @@
             {
               "stamp": "202607010548",
               "file": "TWOEP.202607010548.txt",
-              "lat": 29,
-              "lon": -114,
+              "lat": 22.9,
+              "lon": -109.9,
               "chance48": {
                 "cat": "high",
                 "pct": 100
@@ -22476,8 +22500,8 @@
             {
               "stamp": "202607041130",
               "file": "TWOEP.202607041130.txt",
-              "lat": 17,
-              "lon": -102,
+              "lat": 12.9,
+              "lon": -106.3,
               "chance48": {
                 "cat": "low",
                 "pct": 0
@@ -22492,8 +22516,8 @@
             {
               "stamp": "202607041719",
               "file": "TWOEP.202607041719.txt",
-              "lat": 17,
-              "lon": -102,
+              "lat": 12.9,
+              "lon": -106.3,
               "chance48": {
                 "cat": "low",
                 "pct": 0
@@ -22508,8 +22532,8 @@
             {
               "stamp": "202607042308",
               "file": "TWOEP.202607042308.txt",
-              "lat": 17,
-              "lon": -102,
+              "lat": 12.9,
+              "lon": -106.3,
               "chance48": {
                 "cat": "low",
                 "pct": 0
@@ -22524,8 +22548,8 @@
             {
               "stamp": "202607050501",
               "file": "TWOEP.202607050501.txt",
-              "lat": 17,
-              "lon": -102,
+              "lat": 12.9,
+              "lon": -106.3,
               "chance48": {
                 "cat": "low",
                 "pct": 0
@@ -23696,134 +23720,6 @@
               },
               "tagged": false,
               "link": "proximity"
-            },
-            {
-              "stamp": "202607112308",
-              "file": "TWOEP.202607112308.txt",
-              "lat": 29,
-              "lon": -114,
-              "chance48": {
-                "cat": "low",
-                "pct": 20
-              },
-              "chance7": {
-                "cat": "low",
-                "pct": 20
-              },
-              "tagged": false,
-              "link": "proximity"
-            },
-            {
-              "stamp": "202607120511",
-              "file": "TWOEP.202607120511.txt",
-              "lat": 29,
-              "lon": -114,
-              "chance48": {
-                "cat": "low",
-                "pct": 20
-              },
-              "chance7": {
-                "cat": "low",
-                "pct": 20
-              },
-              "tagged": false,
-              "link": "proximity"
-            },
-            {
-              "stamp": "202607121148",
-              "file": "TWOEP.202607121148.txt",
-              "lat": 29,
-              "lon": -114,
-              "chance48": {
-                "cat": "low",
-                "pct": 20
-              },
-              "chance7": {
-                "cat": "low",
-                "pct": 20
-              },
-              "tagged": false,
-              "link": "proximity"
-            },
-            {
-              "stamp": "202607121732",
-              "file": "TWOEP.202607121732.txt",
-              "lat": 29,
-              "lon": -114,
-              "chance48": {
-                "cat": "low",
-                "pct": 20
-              },
-              "chance7": {
-                "cat": "low",
-                "pct": 20
-              },
-              "tagged": false,
-              "link": "proximity"
-            },
-            {
-              "stamp": "202607122309",
-              "file": "TWOEP.202607122309.txt",
-              "lat": 29,
-              "lon": -114,
-              "chance48": {
-                "cat": "low",
-                "pct": 10
-              },
-              "chance7": {
-                "cat": "low",
-                "pct": 10
-              },
-              "tagged": false,
-              "link": "proximity"
-            },
-            {
-              "stamp": "202607130501",
-              "file": "TWOEP.202607130501.txt",
-              "lat": 29,
-              "lon": -114,
-              "chance48": {
-                "cat": "low",
-                "pct": 10
-              },
-              "chance7": {
-                "cat": "low",
-                "pct": 10
-              },
-              "tagged": false,
-              "link": "proximity"
-            },
-            {
-              "stamp": "202607131145",
-              "file": "TWOEP.202607131145.txt",
-              "lat": 29,
-              "lon": -114,
-              "chance48": {
-                "cat": "low",
-                "pct": 10
-              },
-              "chance7": {
-                "cat": "low",
-                "pct": 10
-              },
-              "tagged": false,
-              "link": "proximity"
-            },
-            {
-              "stamp": "202607131736",
-              "file": "TWOEP.202607131736.txt",
-              "lat": 29,
-              "lon": -114,
-              "chance48": {
-                "cat": "low",
-                "pct": 0
-              },
-              "chance7": {
-                "cat": "low",
-                "pct": 0
-              },
-              "tagged": false,
-              "link": "proximity"
             }
           ]
         },
@@ -24005,6 +23901,28 @@
         },
         {
           "id": "EP-I-202607112308-1",
+          "tag": null,
+          "sightings": [
+            {
+              "stamp": "202607112308",
+              "file": "TWOEP.202607112308.txt",
+              "lat": 13.6,
+              "lon": -131.6,
+              "chance48": {
+                "cat": "low",
+                "pct": 20
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 20
+              },
+              "tagged": false,
+              "link": null
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202607112308-2",
           "tag": null,
           "sightings": [
             {
@@ -24353,6 +24271,108 @@
         },
         {
           "id": "EP-I-202607120511-2",
+          "tag": null,
+          "sightings": [
+            {
+              "stamp": "202607120511",
+              "file": "TWOEP.202607120511.txt",
+              "lat": 29,
+              "lon": -114,
+              "chance48": {
+                "cat": "low",
+                "pct": 20
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 20
+              },
+              "tagged": false,
+              "link": null
+            },
+            {
+              "stamp": "202607121148",
+              "file": "TWOEP.202607121148.txt",
+              "lat": 29,
+              "lon": -114,
+              "chance48": {
+                "cat": "low",
+                "pct": 20
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 20
+              },
+              "tagged": false,
+              "link": "proximity"
+            },
+            {
+              "stamp": "202607121732",
+              "file": "TWOEP.202607121732.txt",
+              "lat": 29,
+              "lon": -114,
+              "chance48": {
+                "cat": "low",
+                "pct": 20
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 20
+              },
+              "tagged": false,
+              "link": "proximity"
+            },
+            {
+              "stamp": "202607122309",
+              "file": "TWOEP.202607122309.txt",
+              "lat": 29,
+              "lon": -114,
+              "chance48": {
+                "cat": "low",
+                "pct": 10
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 10
+              },
+              "tagged": false,
+              "link": "proximity"
+            },
+            {
+              "stamp": "202607130501",
+              "file": "TWOEP.202607130501.txt",
+              "lat": 29,
+              "lon": -114,
+              "chance48": {
+                "cat": "low",
+                "pct": 10
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 10
+              },
+              "tagged": false,
+              "link": "proximity"
+            },
+            {
+              "stamp": "202607131145",
+              "file": "TWOEP.202607131145.txt",
+              "lat": 29,
+              "lon": -114,
+              "chance48": {
+                "cat": "low",
+                "pct": 10
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 10
+              },
+              "tagged": false,
+              "link": "proximity"
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202607120511-3",
           "tag": null,
           "sightings": [
             {
@@ -24871,6 +24891,28 @@
         },
         {
           "id": "EP-I-202607131736-1",
+          "tag": null,
+          "sightings": [
+            {
+              "stamp": "202607131736",
+              "file": "TWOEP.202607131736.txt",
+              "lat": 22.9,
+              "lon": -109.9,
+              "chance48": {
+                "cat": "low",
+                "pct": 0
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 0
+              },
+              "tagged": false,
+              "link": null
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202607131736-2",
           "tag": "CP91",
           "sightings": [
             {
@@ -25146,8 +25188,8 @@
             {
               "stamp": "202607171152",
               "file": "TWOEP.202607171152.txt",
-              "lat": 17,
-              "lon": -102,
+              "lat": 11.6,
+              "lon": -104.3,
               "chance48": {
                 "cat": "high",
                 "pct": 70
@@ -25162,8 +25204,8 @@
             {
               "stamp": "202607171722",
               "file": "TWOEP.202607171722.txt",
-              "lat": 17,
-              "lon": -102,
+              "lat": 11.6,
+              "lon": -104.3,
               "chance48": {
                 "cat": "high",
                 "pct": 70
@@ -25178,8 +25220,8 @@
             {
               "stamp": "202607171749",
               "file": "TWOEP.202607171749.txt",
-              "lat": 17,
-              "lon": -102,
+              "lat": 11.6,
+              "lon": -104.3,
               "chance48": {
                 "cat": "high",
                 "pct": 70
@@ -25194,8 +25236,8 @@
             {
               "stamp": "202607172312",
               "file": "TWOEP.202607172312.txt",
-              "lat": 17,
-              "lon": -102,
+              "lat": 11.6,
+              "lon": -104.3,
               "chance48": {
                 "cat": "high",
                 "pct": 80
@@ -25210,8 +25252,8 @@
             {
               "stamp": "202607180546",
               "file": "TWOEP.202607180546.txt",
-              "lat": 17,
-              "lon": -102,
+              "lat": 11.6,
+              "lon": -104.3,
               "chance48": {
                 "cat": "high",
                 "pct": 90
@@ -25226,8 +25268,8 @@
             {
               "stamp": "202607181146",
               "file": "TWOEP.202607181146.txt",
-              "lat": 17,
-              "lon": -102,
+              "lat": 11.6,
+              "lon": -104.3,
               "chance48": {
                 "cat": "high",
                 "pct": 90
@@ -25242,8 +25284,8 @@
             {
               "stamp": "202607181718",
               "file": "TWOEP.202607181718.txt",
-              "lat": 17,
-              "lon": -102,
+              "lat": 11.6,
+              "lon": -104.3,
               "chance48": {
                 "cat": "high",
                 "pct": 90
@@ -25258,8 +25300,8 @@
             {
               "stamp": "202607182328",
               "file": "TWOEP.202607182328.txt",
-              "lat": 17,
-              "lon": -102,
+              "lat": 11.6,
+              "lon": -104.3,
               "chance48": {
                 "cat": "high",
                 "pct": 90
@@ -26317,6 +26359,13 @@
         },
         {
           "kind": "wave-invest",
+          "from": "EP-W-202606202053-1",
+          "to": "EP-I-202606262309-1",
+          "atStamp": "202606262309",
+          "confidence": "inferred-genesis"
+        },
+        {
+          "kind": "wave-invest",
           "from": "EP-W-202607021536-2",
           "to": "EP-I-202607041130-1",
           "atStamp": "202607041130",
@@ -26324,16 +26373,16 @@
         },
         {
           "kind": "wave-invest",
-          "from": "EP-W-202607110407-2",
-          "to": "EP-I-202607120511-1",
-          "atStamp": "202607120511",
+          "from": "EP-W-202607080834-1",
+          "to": "EP-I-202607112308-1",
+          "atStamp": "202607112308",
           "confidence": "inferred-genesis"
         },
         {
           "kind": "wave-invest",
-          "from": "EP-W-202607131528-1",
-          "to": "EP-I-202607171152-2",
-          "atStamp": "202607171152",
+          "from": "EP-W-202607110407-2",
+          "to": "EP-I-202607120511-1",
+          "atStamp": "202607120511",
           "confidence": "inferred-genesis"
         }
       ]
