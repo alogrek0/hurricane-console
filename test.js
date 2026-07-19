@@ -1894,6 +1894,157 @@ const FUTURE = '202609010000'; // "now" far past every synthetic window
   }
 }
 
+// --- b-deck truth overlay (Track C M6) ------------------------------------------
+// tools/bdeck-truth.js cross-checks the derived record against the captured ATCF
+// best tracks. The honesty rule extends one more layer: truth FLAGS, it never
+// retro-fits — and "no explicit handoff evidence" means no-data, never an
+// overlap-inferred link (that inference is the linker's job; truth must stay
+// an independent witness). Pure units on synthetic rows; corpus block guarded.
+
+const BT = require('./tools/bdeck-truth.js');
+
+ok('truth parseTenths: hemisphere tenths ("235N" 23.5, "1003W" -100.3, "034S" -3.4)',
+  BT.parseTenths('235N') === 23.5 && BT.parseTenths('1003W') === -100.3 &&
+  BT.parseTenths('034S') === -3.4 && BT.parseTenths('') === null && BT.parseTenths('23.5') === null);
+
+// synthetic b-deck: dual radii rows at one DTG, GENESIS/INVEST name phases, a
+// truncated short row, explicit handoff tags, TD onset
+const BT_SYN =
+  'EP, 05, 2026071300,   , BEST,   0, 120N,  981W,  25,    0, DB,   0,    ,    0,    0,    0,    0,    0,    0,   0,   0,   0,   E,   0,    ,   0,   0,\n' +
+  'EP, 05, 2026071312,   , BEST,   0, 128N, 1010W,  30, 1009, DB,   0,    ,    0,    0,    0,    0, 1010,  180, 120,   0,   0,   E,   0,    ,   0,   0, GENESIS008,  ,  0,    ,    0,    0,    0,    0, genesis-num, 008, SPAWNINVEST, ep782026 to ep962026,\n' +
+  'EP, 05, 2026071418,   , BEST,   0, 147N, 1086W,  30, 1006, TD,   0,    ,    0,    0,    0,    0, 1009,  170, 130,   0,   0,   E,   0,    ,   0,   0,       FIVE, S,  0,    ,    0,    0,    0,    0, genesis-num, 008, TRANSITIONED, epA62026 to ep052026,\n' +
+  'EP, 05, 2026071506,   , BEST,   0, 152N, 1109W,  35,  999, TS,  34, NEQ,   60,   60,    0,    0, 1008,  200,  40,  50,   0,   E,   0,    ,   0,   0,      ELIDA, M,  0,    ,    0,    0,    0,    0, genesis-num, 008,\n' +
+  'EP, 05, 2026071506,   , BEST,   0, 152N, 1109W,  35,  999, TS,  50, NEQ,   20,   10,    0,    0, 1008,  200,  40,  50,   0,   E,   0,    ,   0,   0,      ELIDA, M,  0,    ,    0,    0,    0,    0, genesis-num, 008,\n';
+{
+  const p = BT.parseBdeck(BT_SYN);
+  ok('truth parseBdeck: per-DTG dedupe (dual radii rows collapse), 12-digit DTGs',
+    !!p && p.rows.length === 4 && p.minDtg === '202607130000' && p.maxDtg === '202607150600');
+  ok('truth parseBdeck: name phases skip GENESIS###/INVEST/blank',
+    p.names.length === 2 && p.names[0] === 'FIVE' && p.names[1] === 'ELIDA');
+  ok('truth parseBdeck: genesis-num + handoff refs extracted (both sides of "A to B")',
+    p.genesisNum === '008' && p.refs.indexOf('ep962026') >= 0 &&
+    p.refs.indexOf('ep782026') >= 0 && p.refs.indexOf('ep052026') >= 0);
+  ok('truth parseBdeck: first TD-or-stronger DTG is the genesis truth',
+    p.firstTdDtg === '202607141800');
+  ok('truth parseBdeck: truncated short row still yields a fix (no name required)',
+    p.rows[0].lat === 12 && p.rows[0].lon === -98.1 && p.rows[0].name === '');
+  ok('truth parseBdeck: garbage yields null', BT.parseBdeck('not atcf\n') === null);
+}
+ok('truth snapshotParts: base/id/stamp round-trip, malformed rejected',
+  (() => { const s = BT.snapshotParts('bal012026.202606180000.dat');
+    return s && s.base === 'bal012026' && s.id === 'al012026' && s.num === '01' &&
+      s.stamp === '202606180000' && BT.snapshotParts('bal012026.dat') === null; })());
+ok('truth liveEras: pure growth superseded, disjoint recycled eras both kept',
+  (() => {
+    const june = { stamp: '202606100000', minDtg: '202606010000', maxDtg: '202606100000' };
+    const grow1 = { stamp: '202607010000', minDtg: '202606200000', maxDtg: '202607010000' };
+    const grow2 = { stamp: '202607020000', minDtg: '202606200000', maxDtg: '202607020000' };
+    const live = BT.liveEras([june, grow1, grow2]);
+    return live.length === 2 && live.indexOf(june) >= 0 && live.indexOf(grow2) >= 0;
+  })());
+
+// investTruth: explicit evidence only — refs or shared genesis-num, never bare
+// track overlap
+{
+  const rec = (tag) => ({ tag, firstStamp: '202607070500', lastStamp: '202607141152' });
+  const inv = { id: 'ep962026', base: 'bep962026', basin: 'EP', num: '96', genesisNum: '008',
+    refs: ['ep052026'], firstTdDtg: null, minDtg: '202607121200', maxDtg: '202607141800',
+    rows: [{ dtg: '202607121200', lat: 11.6, lon: -95.4, status: 'DB', name: '' }] };
+  const cyc = { id: 'ep052026', base: 'bep052026', basin: 'EP', num: '05', genesisNum: '008',
+    refs: [], firstTdDtg: '202607141800', names: ['FIVE', 'ELIDA'],
+    minDtg: '202607121200', maxDtg: '202607190000',
+    rows: [{ dtg: '202607141800', lat: 14.7, lon: -108.6, status: 'TD', name: 'FIVE' }] };
+  const t = BT.investTruth(rec('EP96'), [inv, cyc], '202607190000');
+  ok('truth investTruth: shared genesis-num links invest to cyclone -> formed',
+    !!t && t.kind === 'formed' && t.cycloneBdeck === 'bep052026' && t.firstTdDtg === '202607141800');
+  const stripped = Object.assign({}, cyc, { genesisNum: null, refs: [] });
+  const invStripped = Object.assign({}, inv, { genesisNum: null, refs: [] });
+  const t2 = BT.investTruth(rec('EP96'), [invStripped, stripped], '202607190000');
+  ok('truth investTruth: track overlap alone is NOT evidence — invest-only truth, no cyclone link',
+    !!t2 && t2.cycloneBdeck === null && t2.kind === 'not-formed');
+  const ended = Object.assign({}, invStripped, { maxDtg: '202607010000', minDtg: '202606200000' });
+  const t3 = BT.investTruth({ tag: 'EP96', firstStamp: '202606210000', lastStamp: '202606280000' },
+    [ended], '202607190000');
+  ok('truth investTruth: invest file ended long before btkNow -> not-formed',
+    !!t3 && t3.kind === 'not-formed');
+  ok('truth investTruth: era mismatch (recycled tag) -> no match -> null',
+    BT.investTruth({ tag: 'EP96', firstStamp: '202609010000', lastStamp: '202609050000' },
+      [inv, cyc], '202609060000') === null);
+  ok('truth investTruth: untagged record is un-truthable',
+    BT.investTruth({ tag: null, firstStamp: '202607070500', lastStamp: '202607141152' },
+      [inv, cyc], '202607190000') === null);
+}
+ok('truth agreementOf: the matrix honors the honesty rule',
+  BT.agreementOf('unresolved-nearby-cyclone', { kind: 'formed' }) === 'resolves' &&
+  BT.agreementOf('no-cyclone', { kind: 'formed' }) === 'refutes' &&
+  BT.agreementOf('no-cyclone', { kind: 'not-formed' }) === 'confirms' &&
+  BT.agreementOf('formed', { kind: 'formed' }) === 'confirms' &&
+  BT.agreementOf('formed', { kind: 'not-formed' }) === 'refutes' &&
+  BT.agreementOf('formed', null) === 'no-data' &&
+  BT.agreementOf('open', { kind: 'open' }) === 'open');
+{
+  const formed = { kind: 'formed', firstTdDtg: '202607141800' };
+  const open = { kind: 'open', firstTdDtg: null };
+  ok('truth statementTruth: formed inside the window',
+    BT.statementTruth('202607130500', 48, formed, '202607190000') === 'formed');
+  ok('truth statementTruth: formed late — not-formed at 48h, formed at 7d',
+    BT.statementTruth('202607120500', 48, formed, '202607190000') === 'not-formed' &&
+    BT.statementTruth('202607120500', 168, formed, '202607190000') === 'formed');
+  ok('truth statementTruth: window past btkNow -> pending, never guessed',
+    BT.statementTruth('202607180500', 168, open, '202607190000') === 'pending');
+  ok('truth statementTruth: live invest, closed window, no TD -> not-formed (the track would show one)',
+    BT.statementTruth('202607150500', 48, open, '202607190000') === 'not-formed');
+  ok('truth statementTruth: no truth -> null', BT.statementTruth('202607150500', 48, null, '202607190000') === null);
+}
+ok('truth truthCalibrate: observedRate null when nothing resolved (never 0/0 as 0)',
+  (() => {
+    const recs = [{ statements: [
+      { chance48: { cat: 'high', pct: 70 }, chance7: { cat: 'high', pct: 90 }, truth48: 'formed', truth7: 'pending' },
+      { chance48: { cat: 'low', pct: 10 }, chance7: null, truth48: 'not-formed', truth7: null },
+    ] }];
+    const cal = BT.truthCalibrate(recs);
+    return cal.h48.high.observedRate === 1 && cal.h48.low.observedRate === 0 &&
+      cal.d7.high.statements === 1 && cal.d7.high.observedRate === null;
+  })());
+
+// corpus block: guarded on the overlay + its inputs existing (the cron rebuilds
+// the overlay every cycle; invariants + immutable-history pins only, no counts)
+{
+  const btFile = __dirname + '/archive/derived/bdeck-truth-' + BT.SEASON + '.json';
+  const gFile = __dirname + '/archive/derived/genesis-' + BT.SEASON + '.json';
+  if (fs.existsSync(btFile) && fs.existsSync(gFile)) {
+    let bt = null;
+    try { bt = JSON.parse(fs.readFileSync(btFile, 'utf8')); } catch (e) { /* fall through */ }
+    ok('truth corpus: JSON parses', !!bt);
+    if (bt) {
+      const led = JSON.parse(fs.readFileSync(gFile, 'utf8'));
+      const all = bt.basins.AT.invests.concat(bt.basins.EP.invests);
+      ok('truth corpus: season + 12-digit btkNow + summary counts add up',
+        bt.season === BT.SEASON && /^\d{12}$/.test(bt.btkNow) &&
+        bt.summary.invests === all.length &&
+        bt.summary.confirms + bt.summary.resolves + bt.summary.refutes +
+          bt.summary.open + bt.summary.noData === all.length);
+      ok('truth corpus: every record id references a real ledger record',
+        ['AT', 'EP'].every((b) => bt.basins[b].invests.every((r) =>
+          led.basins[b].invests.some((lr) => lr.id === r.id))));
+      ok('truth corpus: agreement vocabulary is closed, and never a judgment without truth',
+        all.every((r) => ['confirms', 'resolves', 'refutes', 'open', 'no-data'].indexOf(r.agreement) >= 0 &&
+          (r.truth !== null || r.agreement === 'no-data')));
+      ok('truth corpus: a formed truth always names its b-deck storm and TD onset',
+        all.every((r) => !r.truth || r.truth.kind !== 'formed' ||
+          (r.truth.cycloneBdeck && r.truth.firstTdDtg)));
+      const al90 = bt.basins.AT.invests.find((r) => r.tag === 'AL90');
+      ok('truth corpus: AL90 pin — b-deck truth RESOLVES the ledger\'s honest unresolved to formed into bal012026',
+        !!al90 && al90.agreement === 'resolves' && al90.truth.kind === 'formed' &&
+        al90.truth.cycloneBdeck === 'bal012026');
+      const ep95 = bt.basins.EP.invests.find((r) => r.id === 'EP-I-202606280508-1');
+      ok('truth corpus: EP95 pin — truth REFUTES the ledger\'s not-formed (EP95 became bep042026), flagged not rewritten',
+        !!ep95 && ep95.agreement === 'refutes' && ep95.truth.cycloneBdeck === 'bep042026' &&
+        bt.flags.some((f) => f.subject === 'EP-I-202606280508-1' && f.kind === 'truth-refutes-no-cyclone'));
+    }
+  }
+}
+
 // --- app version (single source, CalVer) ---------------------------------------
 
 const VER = require('./version.js');

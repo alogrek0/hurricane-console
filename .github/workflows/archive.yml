@@ -47,6 +47,11 @@ jobs:
         # stamped snapshots under archive/{year}/atcf/ — staged by the same
         # commit step below
         run: node tools/bdeck-sync.js
+      - name: rebuild b-deck truth overlay (Track C M6)
+        # cross-checks ledger verdicts + lineage chains against the captured
+        # best tracks -> archive/derived/bdeck-truth-2026.json; flags
+        # disagreements, never rewrites the ledger — staged by the same commit
+        run: node tools/bdeck-truth.js
       - name: commit new archive data
         run: |
           if [ -z "$(git status --porcelain archive/)" ]; then
