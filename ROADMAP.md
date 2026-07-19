@@ -25,6 +25,18 @@ planned tracks — lived friction beats speculation.
   but took `version.js` — the actual update signal — from the HTTP cache
   (GitHub Pages `max-age=600`). Fixed same day: register with
   `updateViaCache:'none'`.
+- [x] **Dead page-background band under the toolbar in the installed PWA**
+  (2026-07-18, phone screenshots) — `height:100%` sizes against iOS's LAYOUT
+  viewport, which runs shorter than the real screen in standalone mode. Fixed:
+  `#app` uses `height:100dvh` (dynamic viewport; `%` kept as fallback). The
+  page never scrolls, so dvh can't cause reflow jumps. Confirmed on-device.
+- [x] **Issuance readout: redundant + wrapping** (2026-07-18, review) — three
+  cleanups: (1) the `local` clause now renders only when it actually converts
+  (for a viewer in the product's own timezone, "200 PM EDT · local 2:00 PM
+  EDT" was the same instant twice in two formats); (2) the "not from today"
+  date check compares the VIEWER's calendar day, not UTC — the UTC day flips
+  at 0000Z (8 PM EDT), stamping every evening product with a spurious date;
+  (3) "ahead of clock" → "early" (same skew signal, never wraps mid-phrase).
 - [x] **TWO popup text ended mid-sentence with "…"** (2026-07-18, phone
   report) — the 600-char CONTEXT_MAX cap cut AL91's entry exactly at the
   impact sentence + recon-flight line. A TWO entry is the complete,
