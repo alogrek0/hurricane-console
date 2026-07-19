@@ -13,3 +13,6 @@ tools/hooks/pre-push   text eol=lf
 # strips \r); derived JSON is pinned LF so re-derives diff cleanly across OSes.
 archive/**/*.txt       text eol=lf
 archive/derived/*.json text eol=lf
+# ATCF b-deck snapshots arrive CRLF from ftp.nhc.noaa.gov; bdeck-sync.js
+# LF-normalizes on write — this pins Windows checkouts to the same bytes.
+archive/**/*.dat       text eol=lf
