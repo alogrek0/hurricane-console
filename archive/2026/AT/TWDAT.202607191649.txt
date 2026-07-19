@@ -1,0 +1,131 @@
+
+000
+AXNT20 KNHC 191649
+TWDAT 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+1815 UTC Sun Jul 19 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 1200 UTC surface analysis and satellite imagery through 
+1630 UTC.
+
+...SPECIAL FEATURE...
+
+NE Gulf of America (Invest AL91/T.D. Two): Recent satellite 
+scatterometer wind data and nearby surface observations indicate 
+that an area of low pressure located over the northeastern Gulf of
+America is becoming better defined. Therefore, AL91 has been 
+upgraded to Tropical Depression Two. T.D. Two is centered near 
+28.0N 85.3W at 19/1500 UTC or 130 nm S of Panama City Florida, 
+moving NNW at 2 kt. Estimated minimum central pressure is 1011 mb.
+Maximum sustained wind speed is 25 kt with gusts to 35 kt. 
+Scattered moderate to strong convection prevails from 23N to 29N 
+between 81W and 90W. Estimated seas to 5 ft are expected across
+the NE Gulf. On the forecast track, the depression will move near
+or along the northern Gulf coast during the next several days.
+
+Please read the latest HIGH SEAS FORECAST issued by the National 
+Hurricane Center at website - 
+https://www.nhc.noaa.gov/text/MIAHSFAT2.shtml and the latest Two 
+NHC Forecast/Advisory and Public Advisory at www.hurricanes.gov 
+for more details. 
+
+...TROPICAL WAVES...
+
+A tropical wave in the eastern Atlantic is now along 35W, south 
+of 19N, moving westward at 10 to 15 kt. No significant convection
+is noted near this wave due to dry Saharan air.
+
+An Atlantic tropical wave is along 62W, south of 18N, moving 
+westward at 15 to 20 kt. Scattered moderate convection is noted
+along the wave axis.
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough enters the Atlantic through the coast of
+Africa near 20N17W and continues southwestward to 09N41W. The 
+ITCZ extends from 09N41W to 06N57W. Aside from the convection
+related to the tropical wave described above, no convection is
+noted at this time.
+
+...GULF OF AMERICA...
+
+Please refer to the Special Features section for information on 
+the recently upgraded T.D. Two.
+
+Elsewhere, dry air dominates the remainder of the basin
+suppressing the development of showers and thunderstorms. A 1017
+mb high pressure over the NW Gulf waters supports moderate to 
+fresh NE winds and seas of 2-4 ft in the eastern Bay of Campeche, 
+while light to gentle winds and slight seas prevail elsewhere.
+
+For the forecast, T.D. Two will move to 28.2N 85.4W this evening,
+then strengthen to a tropical storm near 28.5N 85.7W Mon morning.
+Tropical Storm Two will be near 28.8N 86.0W Mon evening, 29.1N 
+86.4W Tue morning, 29.4N 87.3W Tue evening, and 29.7N 88.4W Wed 
+morning. T.D. Two will change little in intensity as it moves 
+near the Louisiana coast early Thu. Away from this system, weak 
+high pressure will dominate, producing gentle to moderate winds 
+and slight to moderate seas through the period.
+
+...CARIBBEAN SEA...
+
+The subtropical ridge centered near 29N61W in the central 
+Atlantic and extends westward to the coast of Florida. The 
+pressure gradient to the south of the ridge is forcing strong to 
+near-gale easterly trade winds across the central Caribbean, with 
+the strongest winds occurring off Colombia. Rough seas are found 
+in these waters. Moderate to fresh NE-E winds and moderate seas 
+are present in the eastern Caribbean and Windward Passage. 
+Elsewhere, light to gentle winds and slight to moderate seas are 
+prevalent. Scattered showers and isolated thunderstorms that 
+developed over Panama and Costa Rica have shifted inland, while 
+scattered moderate convection associated with a tropical wave is 
+moving into the southern Windward Islands. Generally dry weather 
+conditions are noted elsewhere.
+
+For the forecast, the pressure gradient between the western Atlantic
+high pressure ridge oriented along 28N, and the Colombian low
+will support NE winds pulsing to near gale-force across the 
+waters N of Colombia tonight. Otherwise, strong winds and rough 
+seas will prevail across the much of the central Caribbean into 
+Mon, before contracting to south of 15N through Thu. East winds 
+will pulse fresh to strong each evening through Tue in the 
+Windward Passage. 
+
+...ATLANTIC OCEAN...
+
+A surface trough and an upper level low in the north-central 
+tropical Atlantic combine to generate isolated showers north of 
+27N and between 37W and 44W. Meanwhile, a broad subtropical ridge
+centered over the central Atlantic forces fresh to strong 
+easterly trade winds off northern Hispaniola as shown in a recent 
+satellite scatterometer data. Elsewhere in the central and western
+Atlantic, moderate to fresh easterly winds and seas of 4-8 ft are
+occurring south of 24N and west of 45W, with highest seas to 8 ft
+E of the Windward Islands. 
+
+In the far eastern Atlantic, fresh to strong N to NE winds and 
+seas of 4-8 ft are present north of the monsoon trough and east of
+25W. Over the remainder of the basin, moderate or weaker winds 
+and moderate seas prevail within the ridge axis.
+
+For the forecast west of 55W, the western Atlantic subtropical ridge
+will weaken and drift northward early this week as a broad 
+surface trough forms E of 50W. This trough will shift westward and
+reach 65W by Wed, then move W of 70W and weaken quickly Thu. 
+Moderate to fresh trades will prevail S of 24N through Tue, with 
+gentle winds to the N. Pulsing strong winds are expected during 
+the evenings through Tue N of Hispaniola and in the Windward 
+Passage. Expect increasing winds and seas N of 22N and E of 70W 
+Tue through Wed night as the trough approaches.
+
+$$
+ERA

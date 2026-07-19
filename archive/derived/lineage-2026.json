@@ -11280,6 +11280,23 @@
               ],
               "inferred": false,
               "link": "axis"
+            },
+            {
+              "stamp": "202607191649",
+              "file": "TWDAT.202607191649.txt",
+              "meanLon": -62,
+              "axis": [
+                {
+                  "lat": 18,
+                  "lon": -62
+                },
+                {
+                  "lat": 6,
+                  "lon": -62
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
             }
           ]
         },
@@ -11621,6 +11638,23 @@
                 {
                   "lat": 7,
                   "lon": -34
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
+            },
+            {
+              "stamp": "202607191649",
+              "file": "TWDAT.202607191649.txt",
+              "meanLon": -35,
+              "axis": [
+                {
+                  "lat": 19,
+                  "lon": -35
+                },
+                {
+                  "lat": 7,
+                  "lon": -35
                 }
               ],
               "inferred": false,
@@ -13136,6 +13170,21 @@
               "classification": "Post-Tropical Cyclone",
               "windKt": 30,
               "link": "name"
+            }
+          ]
+        },
+        {
+          "id": "AT-C-202607191649-1",
+          "name": "Two",
+          "sightings": [
+            {
+              "stamp": "202607191649",
+              "file": "TWDAT.202607191649.txt",
+              "lat": 28,
+              "lon": -85.3,
+              "classification": "Tropical Depression",
+              "windKt": 25,
+              "link": null
             }
           ]
         }
@@ -25634,6 +25683,50 @@
               "link": null
             }
           ]
+        },
+        {
+          "id": "EP-I-202607191724-1",
+          "tag": null,
+          "sightings": [
+            {
+              "stamp": "202607191724",
+              "file": "TWOEP.202607191724.txt",
+              "lat": null,
+              "lon": null,
+              "chance48": {
+                "cat": "low",
+                "pct": 0
+              },
+              "chance7": {
+                "cat": "medium",
+                "pct": 40
+              },
+              "tagged": false,
+              "link": null
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202607191724-2",
+          "tag": null,
+          "sightings": [
+            {
+              "stamp": "202607191724",
+              "file": "TWOEP.202607191724.txt",
+              "lat": null,
+              "lon": null,
+              "chance48": {
+                "cat": "low",
+                "pct": 0
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 20
+              },
+              "tagged": false,
+              "link": null
+            }
+          ]
         }
       ],
       "cyclones": [
@@ -26531,6 +26624,15 @@
               "classification": "Tropical Storm",
               "windKt": 50,
               "link": "name"
+            },
+            {
+              "stamp": "202607191604",
+              "file": "TWDEP.202607191604.txt",
+              "lat": 22.2,
+              "lon": -125.3,
+              "classification": "Tropical Storm",
+              "windKt": 50,
+              "link": "name"
             }
           ]
         },
@@ -26561,6 +26663,15 @@
               "file": "TWDEP.202607190838.txt",
               "lat": 12.1,
               "lon": -110.6,
+              "classification": "Tropical Depression",
+              "windKt": 30,
+              "link": "name"
+            },
+            {
+              "stamp": "202607191604",
+              "file": "TWDEP.202607191604.txt",
+              "lat": 12.4,
+              "lon": -111.7,
               "classification": "Tropical Depression",
               "windKt": 30,
               "link": "name"

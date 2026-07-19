@@ -1,0 +1,46 @@
+
+000
+ABPZ20 KNHC 191724
+TWOEP 
+
+Tropical Weather Outlook
+NWS National Hurricane Center Miami FL
+1100 AM PDT Sun Jul 19 2026
+
+For the eastern and central North Pacific east of 180 longitude:
+
+Active Systems:
+The National Hurricane Center is issuing advisories on Tropical 
+Storm Elida, located well west of the southern tip of the Baja 
+California Peninsula, and on Tropical Depression Six-E, located 
+several hundred miles southwest of southwestern Mexico.
+
+Eastern and Central East Pacific:
+A broad area of low pressure is forecast to develop well south of 
+Mexico during the latter part of the week. Environmental 
+conditions appear conducive for development of the system 
+thereafter, and a tropical depression could form while it moves 
+westward to west-northwestward across the eastern and central 
+portions of the eastern Pacific.
+* Formation chance through 48 hours...low...near 0 percent. 
+* Formation chance through 7 days...medium...40 percent.
+
+South-Southwest of Hawaii:
+Disorganized showers and thunderstorms located several hundred miles 
+south-southwest of the Hawaiian Islands are associated with 
+a trough of low pressure.  Environmental conditions appear 
+conducive for some gradual development of this system as it moves 
+westward and away from the Hawaiian islands during the next 
+several days.   
+* Formation chance through 48 hours...low...near 0 percent. 
+* Formation chance through 7 days...low...20 percent.
+
+&&
+
+Public Advisories on Tropical Depression Six-E are issued under 
+WMO header WTPZ31 KNHC and under AWIPS header MIATCPEP1. 
+Forecast/Advisories on Tropical Depression Six-E are issued under 
+WMO header WTPZ21 KNHC and under AWIPS header MIATCMEP1.
+
+$$
+Forecaster Katz/Pasch
