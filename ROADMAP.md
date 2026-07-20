@@ -366,6 +366,34 @@ prefer broken chains over invented links.
   send the HC_BTK constants; Stage B locks them into app.js/index.html
   (overlay drawn with the trail, badge via the wireGenesis idiom) and
   checks this off.*
+- [ ] **M8 — TCM capture (forecast truth)**: archive the Tropical Cyclone
+  Forecast/Advisory alongside the TWD/TWO text and the b-decks. The TCM is
+  already fetched live (`app.js` TCM_URL, `parseTCM` in parser.js) and drawn as
+  cone + wind field — then discarded. Every advisory NHC issues is thrown away
+  after one page load, and the corpus that would let us score them never
+  accumulates. M6 validates prose against ANALYSIS truth (what the b-deck says
+  happened); an archived TCM corpus adds FORECAST truth — what NHC predicted at
+  each advisory versus what the b-deck later recorded. Season-long forecast
+  verification from self-captured data. Every app shows the current cone; almost
+  none show how the last twelve scored. Second payoff: `tools/archive-audit.js`
+  notes that the TCM path "only gets exercised when a storm is active, so a live
+  audit during a quiet spell measures nothing" — a corpus makes parseTCM testable
+  year-round, and that tool already builds TCM archive URLs and unwraps the
+  `.shtml`, so the fetch shape is solved.
+  *Follow the M5 staging exactly: capture only — no derive, no ledger
+  integration, no app involvement. M5 cost ~157 lines of tool, ~83 of test, 11
+  workflow lines, one `.gitattributes` line; archive.yml's commit step already
+  does `git add archive/`, so nothing there changes. DECIDE BEFORE FIRST CAPTURE
+  (one-way): flat vs per-storm subdirectory. `archive/2026/AT/` is flat today and
+  `deriveBasin()`'s filter regex assumes it; TCM-only is roughly 500-1500
+  files/season against a 954-file, 7.7 MB archive.*
+  *TCP is a deliberate NON-GOAL, not an omission. The public advisory is where
+  watch/warning headlines and individual island names live, which is exactly what
+  makes it tempting and exactly why it stays out: coastal breakpoints collide with
+  the standing guard that this is not for life-safety decisions and NHC is always
+  authoritative, and parser.js already treats `watch|warnings?` as stopwords. A
+  parser bug in a wave position is an embarrassment; a parser bug in a warning
+  area is the worst lie this map could tell.*
 
 ## Maintenance calendar
 
