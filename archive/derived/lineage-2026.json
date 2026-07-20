@@ -11348,6 +11348,23 @@
               ],
               "inferred": false,
               "link": "axis"
+            },
+            {
+              "stamp": "202607201045",
+              "file": "TWDAT.202607201045.txt",
+              "meanLon": -68,
+              "axis": [
+                {
+                  "lat": 18,
+                  "lon": -68
+                },
+                {
+                  "lat": 6,
+                  "lon": -68
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
             }
           ]
         },
@@ -11761,6 +11778,23 @@
               ],
               "inferred": false,
               "link": "axis"
+            },
+            {
+              "stamp": "202607201045",
+              "file": "TWDAT.202607201045.txt",
+              "meanLon": -40,
+              "axis": [
+                {
+                  "lat": 18,
+                  "lon": -40
+                },
+                {
+                  "lat": 6,
+                  "lon": -40
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
             }
           ]
         },
@@ -11779,6 +11813,28 @@
                 {
                   "lat": 4,
                   "lon": -20
+                }
+              ],
+              "inferred": false,
+              "link": null
+            }
+          ]
+        },
+        {
+          "id": "AT-W-202607201045-1",
+          "sightings": [
+            {
+              "stamp": "202607201045",
+              "file": "TWDAT.202607201045.txt",
+              "meanLon": -18,
+              "axis": [
+                {
+                  "lat": 18,
+                  "lon": -18
+                },
+                {
+                  "lat": 3,
+                  "lon": -18
                 }
               ],
               "inferred": false,
@@ -13313,6 +13369,15 @@
               "lon": -85.3,
               "classification": "Tropical Depression",
               "windKt": 25,
+              "link": "name"
+            },
+            {
+              "stamp": "202607201045",
+              "file": "TWDAT.202607201045.txt",
+              "lat": 28.5,
+              "lon": -85.4,
+              "classification": "Tropical Depression",
+              "windKt": 30,
               "link": "name"
             }
           ]
@@ -25930,6 +25995,50 @@
             {
               "stamp": "202607200508",
               "file": "TWOEP.202607200508.txt",
+              "lat": null,
+              "lon": null,
+              "chance48": {
+                "cat": "low",
+                "pct": 0
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 20
+              },
+              "tagged": false,
+              "link": null
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202607201140-1",
+          "tag": null,
+          "sightings": [
+            {
+              "stamp": "202607201140",
+              "file": "TWOEP.202607201140.txt",
+              "lat": null,
+              "lon": null,
+              "chance48": {
+                "cat": "low",
+                "pct": 0
+              },
+              "chance7": {
+                "cat": "medium",
+                "pct": 60
+              },
+              "tagged": false,
+              "link": null
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202607201140-2",
+          "tag": null,
+          "sightings": [
+            {
+              "stamp": "202607201140",
+              "file": "TWOEP.202607201140.txt",
               "lat": null,
               "lon": null,
               "chance48": {

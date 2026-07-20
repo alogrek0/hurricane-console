@@ -1,0 +1,134 @@
+
+000
+AXNT20 KNHC 201045
+TWDAT
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+1215 UTC Mon Jul 20 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 0600 UTC surface analysis and satellite imagery through 
+1030 UTC.
+
+...SPECIAL FEATURE...
+
+Tropical Depression Two is centered near 28.5N 85.4W at 20/0900
+UTC or 100 nm S of Panama City Florida, moving NW at 3 kt.
+Estimated minimum central pressure is 1006 mb. Maximum sustained
+wind speed is 30 kt with gusts to 40 kt. Peak seas are 8 ft in 
+the NE quadrant, where fresh to near gale force winds are 
+present. Scattered moderate to strong convection is occurring 
+north of 24N and east of 92W. On the forecast track, the 
+depression will move near or along the northern Gulf coast during 
+the next several days. Gradual strengthening is forecast, and the
+depression is expected to become a tropical storm later today. The
+combination of storm surge and the tide will cause normally dry 
+areas near the immediate coast to be flooded by rising waters 
+moving inland from the shoreline. The water could reach the 
+following heights above ground somewhere in the indicated areas if
+the peak surge occurs at the time of high tide. Swells generated 
+by the depression are affecting portions of the Gulf coast of 
+Florida and are likely to spread westward during the week. These 
+swells are likely to cause life-threatening surf and rip current 
+conditions. Please consult products from your local weather 
+office.
+
+Please read the latest HIGH SEAS FORECAST issued by the National 
+Hurricane Center at website - 
+https://www.nhc.noaa.gov/text/MIAHSFAT2.shtml and the latest Two 
+NHC Forecast/Advisory and Public Advisory at www.hurricanes.gov 
+for more details. 
+
+...TROPICAL WAVES...
+
+A tropical wave is offshore W Africa with axis along 18W, extending
+from 03N to 18N, and moving at 5-10 kt. Scattered moderate
+convection is from 06N to 13N between 12W and 24W. 
+
+A well-defined tropical wave in the central Atlantic is along 
+40W, south of 18N. The wave is moving westward at 15 kt. No 
+significant convection is observed near this wave due to dry 
+Saharan air.
+
+A tropical wave is in the Caribbean along 68W, south of 18N, 
+moving westward at 15-20 kt. No significant convection is noted 
+over the nearby Caribbean waters.
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough enters the Atlantic through the coast of
+Senegal near 14N17W and continues southwestward to 10N35W and 
+then to 07N45W. The ITCZ extends from 07N45W to 07N58W. Scattered
+moderate convection is from 06N to 11N between 24W and 32W, and
+within 60 nm either side of the monsoon/ITCZ W of 37W.
+
+...GULF OF AMERICA...
+
+Please refer to the Special Features section for details on Tropical 
+Depression Two that is currently over the eastern Gulf.
+
+Tropical Depression Two is near 28.5N 85.4W at 5 AM EDT, and is
+moving northwest at 3 kt. Maximum sustained winds are 30 kt with
+gusts to 35 kt, and the minimum central pressure is 1007 mb. 
+Elsewhere, a 1016 mb high center is analyzed over the western 
+Gulf at 25N92W. 
+
+For the forecast, Two will strengthen to a tropical storm near 
+28.7N 85.8W this afternoon, move to 29.0N 86.3W Tue morning, 29.3N
+86.9W Tue afternoon, 29.6N 87.8W Wed morning, 29.8N 89.1W Wed 
+afternoon, and inland to 29.7N 90.9W Thu morning. Two will change 
+little in intensity as it moves near 29.6N 93.0W early Fri. 
+
+...CARIBBEAN SEA...
+
+The pressure gradient between western Atlantic high pressure and 
+relatively lower pressure to its south is resulting in fresh to 
+strong easterly trade winds over most of the central Caribbean, 
+including the Windward Passage, with the strongest winds in the SW
+Caribbean. Seas of 8 to 10 ft are noted in these waters. Moderate
+to fresh easterly winds and moderate seas are found in the 
+eastern Caribbean. Elsewhere, light to gentle winds and slight 
+seas are prevalent.
+
+For the forecast, the western Atlantic subtropical ridge will 
+weaken some through Thu, allowing the pressure gradient over the 
+Caribbean to relax somewhat. This will diminish tradewinds to 
+moderate to fresh speeds over most of the basin, with still strong
+winds pulsing in the south-central Caribbean and likely in the 
+Windward Passage. 
+
+...ATLANTIC OCEAN...
+
+A couple of weak surface troughs and an upper level low in the 
+north-central tropical Atlantic combine to generate isolated 
+showers and thunderstorms north of 20N and between 40W and 60W.
+The gradient between these troughs and higher pressure to the
+north sustain moderate to locally fresh NE winds and moderate seas
+north of 25N and between 40W and 60W. Meanwhile, a broad 
+subtropical ridge centered over the central Atlantic forces 
+moderate to locally fresh easterly trade winds south of 25N and 
+between 55W and 75W, along with moderate seas.
+
+In the far eastern Atlantic, fresh to locally near gale-force 
+N-NE winds and seas of 5-9 ft are present north of 22N and east 
+of 26W. The strongest winds and highest seas are found in the
+water passages between the Canary Islands. In the rest of the 
+basin, moderate or weaker winds and moderate seas prevail.
+
+For the forecast west of 55W, a surface trough will move west 
+from about 52W to 70W for the first half of this week, carrying 
+fresh to locally strong winds to the offshore waters E of the 
+Bahamas tonight trough Thu morning. Fresh trades will prevail S of
+24N through the perdiod, except for locally strong winds pulsing 
+each evening N of Hispaniola and likely in the approaches of the 
+Windward Passage. Moderate or weaker winds are forecast elsewhere 
+and from late Thu through Fri night. 
+
+$$
+Ramos
