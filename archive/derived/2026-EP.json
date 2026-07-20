@@ -17615,6 +17615,68 @@
       "fixes": 7,
       "inferred": 0,
       "projections": 2
+    },
+    {
+      "file": "TWOEP.202607200508.txt",
+      "kind": "TWO",
+      "stamp": "202607200508",
+      "issuedISO": "2026-07-20T06:00:00.000Z",
+      "disturbances": [
+        {
+          "invest": null,
+          "lat": null,
+          "lon": null,
+          "chance48": {
+            "cat": "low",
+            "pct": 0
+          },
+          "chance7": {
+            "cat": "medium",
+            "pct": 60
+          }
+        },
+        {
+          "invest": null,
+          "lat": null,
+          "lon": null,
+          "chance48": {
+            "cat": "low",
+            "pct": 0
+          },
+          "chance7": {
+            "cat": "low",
+            "pct": 20
+          }
+        }
+      ]
+    },
+    {
+      "file": "TWDEP.202607200851.txt",
+      "kind": "TWD",
+      "stamp": "202607200851",
+      "issuedISO": "2026-07-20T10:05:00.000Z",
+      "cyclones": [
+        {
+          "name": "Fausto",
+          "classification": "Tropical Storm",
+          "lat": 12.9,
+          "lon": -115.6,
+          "windKt": 50
+        },
+        {
+          "name": "Elida",
+          "classification": "Tropical Storm",
+          "lat": 25.3,
+          "lon": -127.1,
+          "windKt": 45
+        }
+      ],
+      "waves": [],
+      "convection": 3,
+      "troughs": 3,
+      "fixes": 5,
+      "inferred": 0,
+      "projections": 2
     }
   ]
 }
