@@ -18768,6 +18768,73 @@
       "stamp": "202607201143",
       "issuedISO": "2026-07-20T12:00:00.000Z",
       "disturbances": []
+    },
+    {
+      "file": "TWDAT.202607201708.txt",
+      "kind": "TWD",
+      "stamp": "202607201708",
+      "issuedISO": "2026-07-20T18:15:00.000Z",
+      "cyclones": [
+        {
+          "name": "Two",
+          "classification": "Tropical Depression",
+          "lat": 28.5,
+          "lon": -85.6,
+          "windKt": 30
+        }
+      ],
+      "waves": [
+        {
+          "id": "W1",
+          "axis": [
+            {
+              "lat": 18,
+              "lon": -21
+            },
+            {
+              "lat": 4,
+              "lon": -21
+            }
+          ],
+          "inferred": false,
+          "motion": {
+            "bearing": 270,
+            "slowKt": 10,
+            "fastKt": 10
+          }
+        },
+        {
+          "id": "W2",
+          "axis": [
+            {
+              "lat": 19,
+              "lon": -41
+            },
+            {
+              "lat": 7,
+              "lon": -41
+            }
+          ],
+          "inferred": false,
+          "motion": {
+            "bearing": 270,
+            "slowKt": 10,
+            "fastKt": 10
+          }
+        }
+      ],
+      "convection": 1,
+      "troughs": 3,
+      "fixes": 5,
+      "inferred": 0,
+      "projections": 3
+    },
+    {
+      "file": "TWOAT.202607201727.txt",
+      "kind": "TWO",
+      "stamp": "202607201727",
+      "issuedISO": "2026-07-20T18:00:00.000Z",
+      "disturbances": []
     }
   ]
 }
