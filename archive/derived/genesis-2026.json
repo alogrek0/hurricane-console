@@ -1,7 +1,7 @@
 {
   "_readme": "Genesis truth ledger (Track C M4): per-invest statement verdicts + season calibration derived from archive/derived/lineage-2026.json by `node tools/build-genesis-ledger.js` — NEVER hand-edit. Deterministic (\"now\" is the max archive stamp, never wall-clock). Verdicts: formed REQUIRES a lineage invest-cyclone genesis link; an unattributed cyclone opening nearby makes the window unresolved — this ledger refuses to invent formed AND refuses to invent not-formed; windows past nowStamp are pending, never guessed.",
   "season": 2026,
-  "nowStamp": "202607191724",
+  "nowStamp": "202607200248",
   "basins": {
     "AT": {
       "invests": [
@@ -1542,7 +1542,7 @@
                 "cat": "low",
                 "pct": 0
               },
-              "verdict48": "pending",
+              "verdict48": "not-formed",
               "verdict7": "pending"
             }
           ]
@@ -1596,7 +1596,7 @@
                 "cat": "low",
                 "pct": 30
               },
-              "verdict48": "pending",
+              "verdict48": "unresolved",
               "verdict7": "pending"
             },
             {
@@ -1697,9 +1697,9 @@
           "low": {
             "statements": 67,
             "formed": 0,
-            "notFormed": 58,
-            "unresolved": 4,
-            "pending": 5,
+            "notFormed": 59,
+            "unresolved": 5,
+            "pending": 3,
             "observedRate": 0
           },
           "medium": {
@@ -5092,7 +5092,7 @@
                 "pct": 90
               },
               "verdict48": "not-formed",
-              "verdict7": "pending"
+              "verdict7": "unresolved"
             },
             {
               "stamp": "202607122309",
@@ -5107,7 +5107,7 @@
                 "pct": 90
               },
               "verdict48": "not-formed",
-              "verdict7": "pending"
+              "verdict7": "unresolved"
             },
             {
               "stamp": "202607130501",
@@ -6395,7 +6395,7 @@
                 "pct": 40
               },
               "verdict48": "not-formed",
-              "verdict7": "pending"
+              "verdict7": "unresolved"
             },
             {
               "stamp": "202607122309",
@@ -6410,7 +6410,7 @@
                 "pct": 50
               },
               "verdict48": "not-formed",
-              "verdict7": "pending"
+              "verdict7": "unresolved"
             },
             {
               "stamp": "202607130501",
@@ -6712,7 +6712,7 @@
                 "pct": 20
               },
               "verdict48": "not-formed",
-              "verdict7": "pending"
+              "verdict7": "not-formed"
             },
             {
               "stamp": "202607122309",
@@ -6727,7 +6727,7 @@
                 "pct": 10
               },
               "verdict48": "not-formed",
-              "verdict7": "pending"
+              "verdict7": "not-formed"
             },
             {
               "stamp": "202607130501",
@@ -6885,7 +6885,7 @@
                 "pct": 30
               },
               "verdict48": "not-formed",
-              "verdict7": "pending"
+              "verdict7": "not-formed"
             }
           ]
         },
@@ -6917,7 +6917,7 @@
                 "pct": 30
               },
               "verdict48": "not-formed",
-              "verdict7": "pending"
+              "verdict7": "not-formed"
             }
           ]
         },
@@ -6949,7 +6949,7 @@
                 "pct": 30
               },
               "verdict48": "not-formed",
-              "verdict7": "pending"
+              "verdict7": "not-formed"
             }
           ]
         },
@@ -7002,7 +7002,7 @@
                 "pct": 30
               },
               "verdict48": "not-formed",
-              "verdict7": "pending"
+              "verdict7": "unresolved"
             },
             {
               "stamp": "202607130501",
@@ -7301,7 +7301,7 @@
                 "cat": "low",
                 "pct": 0
               },
-              "verdict48": "pending",
+              "verdict48": "unresolved",
               "verdict7": "pending"
             }
           ]
@@ -7786,7 +7786,7 @@
           "lastStamp": "202607182328",
           "waveOrigin": null,
           "outcome": {
-            "kind": "open",
+            "kind": "unresolved-nearby-cyclone",
             "cycloneId": null,
             "cycloneName": null,
             "genesisStamp": null,
@@ -7796,6 +7796,12 @@
                 "name": "Six-E",
                 "firstStamp": "202607190258",
                 "dist": 4.809
+              },
+              {
+                "cycloneId": "EP-C-202607192218-1",
+                "name": "Fausto",
+                "firstStamp": "202607192218",
+                "dist": 8.438
               }
             ]
           },
@@ -7843,7 +7849,7 @@
                 "cat": "high",
                 "pct": 90
               },
-              "verdict48": "pending",
+              "verdict48": "unresolved",
               "verdict7": "pending"
             },
             {
@@ -7858,7 +7864,7 @@
                 "cat": "high",
                 "pct": 90
               },
-              "verdict48": "pending",
+              "verdict48": "unresolved",
               "verdict7": "pending"
             },
             {
@@ -7996,7 +8002,7 @@
                 "cat": "low",
                 "pct": 20
               },
-              "verdict48": "pending",
+              "verdict48": "unresolved",
               "verdict7": "pending"
             }
           ]
@@ -8018,6 +8024,12 @@
                 "name": "Six-E",
                 "firstStamp": "202607190258",
                 "dist": null
+              },
+              {
+                "cycloneId": "EP-C-202607192218-1",
+                "name": "Fausto",
+                "firstStamp": "202607192218",
+                "dist": null
               }
             ]
           },
@@ -8035,7 +8047,7 @@
                 "cat": "low",
                 "pct": 30
               },
-              "verdict48": "pending",
+              "verdict48": "unresolved",
               "verdict7": "pending"
             }
           ]
@@ -8056,6 +8068,12 @@
                 "cycloneId": "EP-C-202607190258-1",
                 "name": "Six-E",
                 "firstStamp": "202607190258",
+                "dist": null
+              },
+              {
+                "cycloneId": "EP-C-202607192218-1",
+                "name": "Fausto",
+                "firstStamp": "202607192218",
                 "dist": null
               }
             ]
@@ -8096,6 +8114,12 @@
                 "name": "Six-E",
                 "firstStamp": "202607190258",
                 "dist": null
+              },
+              {
+                "cycloneId": "EP-C-202607192218-1",
+                "name": "Fausto",
+                "firstStamp": "202607192218",
+                "dist": null
               }
             ]
           },
@@ -8135,6 +8159,12 @@
                 "name": "Six-E",
                 "firstStamp": "202607190258",
                 "dist": null
+              },
+              {
+                "cycloneId": "EP-C-202607192218-1",
+                "name": "Fausto",
+                "firstStamp": "202607192218",
+                "dist": null
               }
             ]
           },
@@ -8164,7 +8194,7 @@
           "lastStamp": "202607182328",
           "waveOrigin": null,
           "outcome": {
-            "kind": "open",
+            "kind": "unresolved-nearby-cyclone",
             "cycloneId": null,
             "cycloneName": null,
             "genesisStamp": null,
@@ -8173,6 +8203,12 @@
                 "cycloneId": "EP-C-202607190258-1",
                 "name": "Six-E",
                 "firstStamp": "202607190258",
+                "dist": null
+              },
+              {
+                "cycloneId": "EP-C-202607192218-1",
+                "name": "Fausto",
+                "firstStamp": "202607192218",
                 "dist": null
               }
             ]
@@ -8203,11 +8239,18 @@
           "lastStamp": "202607190513",
           "waveOrigin": null,
           "outcome": {
-            "kind": "open",
+            "kind": "unresolved-nearby-cyclone",
             "cycloneId": null,
             "cycloneName": null,
             "genesisStamp": null,
-            "nearby": []
+            "nearby": [
+              {
+                "cycloneId": "EP-C-202607192218-1",
+                "name": "Fausto",
+                "firstStamp": "202607192218",
+                "dist": null
+              }
+            ]
           },
           "siblingChains": [],
           "statements": [
@@ -8239,7 +8282,14 @@
             "cycloneId": null,
             "cycloneName": null,
             "genesisStamp": null,
-            "nearby": []
+            "nearby": [
+              {
+                "cycloneId": "EP-C-202607192218-1",
+                "name": "Fausto",
+                "firstStamp": "202607192218",
+                "dist": null
+              }
+            ]
           },
           "siblingChains": [],
           "statements": [
@@ -8271,7 +8321,14 @@
             "cycloneId": null,
             "cycloneName": null,
             "genesisStamp": null,
-            "nearby": []
+            "nearby": [
+              {
+                "cycloneId": "EP-C-202607192218-1",
+                "name": "Fausto",
+                "firstStamp": "202607192218",
+                "dist": null
+              }
+            ]
           },
           "siblingChains": [],
           "statements": [
@@ -8303,7 +8360,14 @@
             "cycloneId": null,
             "cycloneName": null,
             "genesisStamp": null,
-            "nearby": []
+            "nearby": [
+              {
+                "cycloneId": "EP-C-202607192218-1",
+                "name": "Fausto",
+                "firstStamp": "202607192218",
+                "dist": null
+              }
+            ]
           },
           "siblingChains": [],
           "statements": [
@@ -8335,7 +8399,14 @@
             "cycloneId": null,
             "cycloneName": null,
             "genesisStamp": null,
-            "nearby": []
+            "nearby": [
+              {
+                "cycloneId": "EP-C-202607192218-1",
+                "name": "Fausto",
+                "firstStamp": "202607192218",
+                "dist": null
+              }
+            ]
           },
           "siblingChains": [],
           "statements": [
@@ -8355,16 +8426,80 @@
               "verdict7": "pending"
             }
           ]
+        },
+        {
+          "id": "EP-I-202607192311-1",
+          "tag": null,
+          "firstStamp": "202607192311",
+          "lastStamp": "202607192311",
+          "waveOrigin": null,
+          "outcome": {
+            "kind": "open",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null,
+            "nearby": []
+          },
+          "siblingChains": [],
+          "statements": [
+            {
+              "stamp": "202607192311",
+              "file": "TWOEP.202607192311.txt",
+              "tagged": false,
+              "chance48": {
+                "cat": "low",
+                "pct": 0
+              },
+              "chance7": {
+                "cat": "medium",
+                "pct": 50
+              },
+              "verdict48": "pending",
+              "verdict7": "pending"
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202607192311-2",
+          "tag": null,
+          "firstStamp": "202607192311",
+          "lastStamp": "202607192311",
+          "waveOrigin": null,
+          "outcome": {
+            "kind": "open",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null,
+            "nearby": []
+          },
+          "siblingChains": [],
+          "statements": [
+            {
+              "stamp": "202607192311",
+              "file": "TWOEP.202607192311.txt",
+              "tagged": false,
+              "chance48": {
+                "cat": "low",
+                "pct": 0
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 20
+              },
+              "verdict48": "pending",
+              "verdict7": "pending"
+            }
+          ]
         }
       ],
       "calibration": {
         "h48": {
           "low": {
-            "statements": 221,
+            "statements": 223,
             "formed": 0,
             "notFormed": 159,
-            "unresolved": 50,
-            "pending": 12,
+            "unresolved": 53,
+            "pending": 11,
             "observedRate": 0
           },
           "medium": {
@@ -8379,34 +8514,34 @@
             "statements": 40,
             "formed": 7,
             "notFormed": 9,
-            "unresolved": 18,
-            "pending": 6,
+            "unresolved": 20,
+            "pending": 4,
             "observedRate": 0.438
           }
         },
         "d7": {
           "low": {
-            "statements": 111,
+            "statements": 112,
             "formed": 2,
-            "notFormed": 71,
-            "unresolved": 5,
-            "pending": 33,
-            "observedRate": 0.027
+            "notFormed": 76,
+            "unresolved": 6,
+            "pending": 28,
+            "observedRate": 0.026
           },
           "medium": {
-            "statements": 103,
+            "statements": 104,
             "formed": 2,
             "notFormed": 53,
-            "unresolved": 19,
-            "pending": 29,
+            "unresolved": 21,
+            "pending": 28,
             "observedRate": 0.036
           },
           "high": {
             "statements": 89,
             "formed": 14,
             "notFormed": 23,
-            "unresolved": 21,
-            "pending": 31,
+            "unresolved": 23,
+            "pending": 29,
             "observedRate": 0.378
           }
         }
@@ -8416,11 +8551,11 @@
   "calibrationTotal": {
     "h48": {
       "low": {
-        "statements": 288,
+        "statements": 290,
         "formed": 0,
-        "notFormed": 217,
-        "unresolved": 54,
-        "pending": 17,
+        "notFormed": 218,
+        "unresolved": 58,
+        "pending": 14,
         "observedRate": 0
       },
       "medium": {
@@ -8435,34 +8570,34 @@
         "statements": 43,
         "formed": 7,
         "notFormed": 9,
-        "unresolved": 20,
-        "pending": 7,
+        "unresolved": 22,
+        "pending": 5,
         "observedRate": 0.438
       }
     },
     "d7": {
       "low": {
-        "statements": 177,
+        "statements": 178,
         "formed": 2,
-        "notFormed": 102,
-        "unresolved": 13,
-        "pending": 60,
-        "observedRate": 0.019
+        "notFormed": 107,
+        "unresolved": 14,
+        "pending": 55,
+        "observedRate": 0.018
       },
       "medium": {
-        "statements": 112,
+        "statements": 113,
         "formed": 2,
         "notFormed": 53,
-        "unresolved": 25,
-        "pending": 32,
+        "unresolved": 27,
+        "pending": 31,
         "observedRate": 0.036
       },
       "high": {
         "statements": 92,
         "formed": 14,
         "notFormed": 23,
-        "unresolved": 23,
-        "pending": 32,
+        "unresolved": 25,
+        "pending": 30,
         "observedRate": 0.378
       }
     }

@@ -17441,6 +17441,180 @@
           }
         }
       ]
+    },
+    {
+      "file": "TWDEP.202607192205.txt",
+      "kind": "TWD",
+      "stamp": "202607192205",
+      "issuedISO": "2026-07-19T16:05:00.000Z",
+      "cyclones": [
+        {
+          "name": "Six-E",
+          "classification": "Tropical Depression",
+          "lat": 12.4,
+          "lon": -111.7,
+          "windKt": 30
+        },
+        {
+          "name": "Elida",
+          "classification": "Tropical Storm",
+          "lat": 22.2,
+          "lon": -125.3,
+          "windKt": 50
+        }
+      ],
+      "waves": [],
+      "convection": 1,
+      "troughs": 1,
+      "fixes": 11,
+      "inferred": 1,
+      "projections": 2
+    },
+    {
+      "file": "TWDEP.202607192218.txt",
+      "kind": "TWD",
+      "stamp": "202607192218",
+      "issuedISO": "2026-07-19T22:05:00.000Z",
+      "cyclones": [
+        {
+          "name": "Fausto",
+          "classification": "Tropical Storm",
+          "lat": 12.4,
+          "lon": -112.7,
+          "windKt": 35
+        },
+        {
+          "name": "Elida",
+          "classification": "Tropical Storm",
+          "lat": 23.2,
+          "lon": -125.9,
+          "windKt": 50
+        }
+      ],
+      "waves": [],
+      "convection": 3,
+      "troughs": 1,
+      "fixes": 17,
+      "inferred": 0,
+      "projections": 2
+    },
+    {
+      "file": "TWOEP.202607192311.txt",
+      "kind": "TWO",
+      "stamp": "202607192311",
+      "issuedISO": "2026-07-20T00:00:00.000Z",
+      "disturbances": [
+        {
+          "invest": null,
+          "lat": null,
+          "lon": null,
+          "chance48": {
+            "cat": "low",
+            "pct": 0
+          },
+          "chance7": {
+            "cat": "medium",
+            "pct": 50
+          }
+        },
+        {
+          "invest": null,
+          "lat": null,
+          "lon": null,
+          "chance48": {
+            "cat": "low",
+            "pct": 0
+          },
+          "chance7": {
+            "cat": "low",
+            "pct": 20
+          }
+        }
+      ]
+    },
+    {
+      "file": "TWDEP.202607200001.txt",
+      "kind": "TWD",
+      "stamp": "202607200001",
+      "issuedISO": "2026-07-19T22:05:00.000Z",
+      "cyclones": [
+        {
+          "name": "Fausto",
+          "classification": "Tropical Storm",
+          "lat": 12.4,
+          "lon": -112.7,
+          "windKt": 35
+        },
+        {
+          "name": "Elida",
+          "classification": "Tropical Storm",
+          "lat": 23.2,
+          "lon": -125.9,
+          "windKt": 50
+        }
+      ],
+      "waves": [],
+      "convection": 3,
+      "troughs": 1,
+      "fixes": 17,
+      "inferred": 0,
+      "projections": 2
+    },
+    {
+      "file": "TWDEP.202607200002.txt",
+      "kind": "TWD",
+      "stamp": "202607200002",
+      "issuedISO": "2026-07-19T22:05:00.000Z",
+      "cyclones": [
+        {
+          "name": "Fausto",
+          "classification": "Tropical Storm",
+          "lat": 12.4,
+          "lon": -112.7,
+          "windKt": 35
+        },
+        {
+          "name": "Elida",
+          "classification": "Tropical Storm",
+          "lat": 23.2,
+          "lon": -125.9,
+          "windKt": 50
+        }
+      ],
+      "waves": [],
+      "convection": 3,
+      "troughs": 1,
+      "fixes": 17,
+      "inferred": 0,
+      "projections": 2
+    },
+    {
+      "file": "TWDEP.202607200248.txt",
+      "kind": "TWD",
+      "stamp": "202607200248",
+      "issuedISO": "2026-07-20T04:05:00.000Z",
+      "cyclones": [
+        {
+          "name": "Fausto",
+          "classification": "Tropical Storm",
+          "lat": 12.6,
+          "lon": -114.7,
+          "windKt": 40
+        },
+        {
+          "name": "Elida",
+          "classification": "Tropical Storm",
+          "lat": 24.1,
+          "lon": -126.8,
+          "windKt": 45
+        }
+      ],
+      "waves": [],
+      "convection": 3,
+      "troughs": 1,
+      "fixes": 7,
+      "inferred": 0,
+      "projections": 2
     }
   ]
 }
