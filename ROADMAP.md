@@ -148,7 +148,7 @@ planned tracks — lived friction beats speculation.
 - [x] **Product-history scrubber** — fetch the last ~8 TWDAT/TWO issuances and
   step through time; watch waves march and formation odds evolve. Pairs
   naturally with an invest alert ("what changed since yesterday?").
-- [ ] **Better Lesser Antilles detail** — the islands are used as location
+- [x] **Better Lesser Antilles detail** — the islands are used as location
   references when a storm passes through that area, but the embedded Natural
   Earth **50m** basemap under-resolves the small Antilles (many read as dots or
   vanish). Add higher-resolution coastline for that region — NE **10m** clipped
@@ -160,10 +160,16 @@ planned tracks — lived friction beats speculation.
   (9.8–19N / 65.7–59W, whole-feature swap so there is no clip seam — 45 10m
   rings replace 26 coarse 50m ones; Barbados 9→34 verts, Dominica →63,
   Guadeloupe's butterfly splits into its two wings; ~6 km² islet floor;
-  basemap.js 274→305 KB, capped by test at 340). Labels await judgment in
-  `tools/antilles-lab.html` (overlay-span vs divIcon mechanisms, two reveal
-  tiers, dials, fake storm crossing Dominica) — pick on the phone, then
-  Stage B locks the constants into app.js/index.html and checks this off.*
+  basemap.js 274→305 KB, capped by test at 340).*
+  *Stage B shipped 2026-07-20: labels judged in `tools/antilles-lab.html` and
+  locked as `HC_ISLANDS = { z1: 6.25, z2: 7, offsetPx: 9 }` — **divIcon markers**
+  (mechanism B) in a new `hc-labels` pane (425: above the lines so a name is never
+  buried under a trough, below the points so a fix always wins), all 17 islands
+  across both tiers, quiet chart-furniture styling (`.isl-div`, .7rem/#8fb0c2/.95,
+  graticule halo) that dims with the graticule when a popup opens. Atlantic-only —
+  the EP frame has no Antilles. One table fix from the lab draft: **St. Vincent
+  flipped side E→W**, since Barbados sits 0.08° south (the same screen row at
+  these zooms) and also extends east, so both labels collided at one anchor.*
 - [ ] **Tide-gauge overlay (Charleston/Lowcountry)** — NOAA CO-OPS
   (`tidesandcurrents.noaa.gov`, CORS-open) water levels for local surge
   context. Build it *before* something aims at the SE coast.
