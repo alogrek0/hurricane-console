@@ -17773,6 +17773,124 @@
           }
         }
       ]
+    },
+    {
+      "file": "TWDEP.202607202141.txt",
+      "kind": "TWD",
+      "stamp": "202607202141",
+      "issuedISO": "2026-07-20T22:05:00.000Z",
+      "cyclones": [
+        {
+          "name": "Fausto",
+          "classification": "Tropical Storm",
+          "lat": 14.2,
+          "lon": -116.7,
+          "windKt": 60
+        },
+        {
+          "name": "Elida",
+          "classification": "Post-Tropical Cyclone",
+          "lat": 27,
+          "lon": -127,
+          "windKt": null
+        }
+      ],
+      "waves": [],
+      "convection": 0,
+      "troughs": 1,
+      "fixes": 2,
+      "inferred": 0,
+      "projections": 1
+    },
+    {
+      "file": "TWOEP.202607202316.txt",
+      "kind": "TWO",
+      "stamp": "202607202316",
+      "issuedISO": "2026-07-21T00:00:00.000Z",
+      "disturbances": [
+        {
+          "invest": null,
+          "lat": null,
+          "lon": null,
+          "chance48": {
+            "cat": "low",
+            "pct": 0
+          },
+          "chance7": {
+            "cat": "high",
+            "pct": 70
+          }
+        },
+        {
+          "invest": null,
+          "lat": null,
+          "lon": null,
+          "chance48": {
+            "cat": "low",
+            "pct": 0
+          },
+          "chance7": {
+            "cat": "low",
+            "pct": 20
+          }
+        }
+      ]
+    },
+    {
+      "file": "TWDEP.202607210328.txt",
+      "kind": "TWD",
+      "stamp": "202607210328",
+      "issuedISO": "2026-07-21T04:05:00.000Z",
+      "cyclones": [
+        {
+          "name": "Fausto",
+          "classification": "Tropical Storm",
+          "lat": 14.7,
+          "lon": -117.3,
+          "windKt": 65
+        },
+        {
+          "name": "Elida",
+          "classification": "Post-Tropical Cyclone",
+          "lat": 29.5,
+          "lon": -127.5,
+          "windKt": null
+        }
+      ],
+      "waves": [],
+      "convection": 3,
+      "troughs": 1,
+      "fixes": 3,
+      "inferred": 0,
+      "projections": 1
+    },
+    {
+      "file": "TWDEP.202607210329.txt",
+      "kind": "TWD",
+      "stamp": "202607210329",
+      "issuedISO": "2026-07-21T04:05:00.000Z",
+      "cyclones": [
+        {
+          "name": "Fausto",
+          "classification": "Tropical Storm",
+          "lat": 14.7,
+          "lon": -117.3,
+          "windKt": 65
+        },
+        {
+          "name": "Elida",
+          "classification": "Post-Tropical Cyclone",
+          "lat": 29.5,
+          "lon": -127.5,
+          "windKt": null
+        }
+      ],
+      "waves": [],
+      "convection": 3,
+      "troughs": 1,
+      "fixes": 3,
+      "inferred": 0,
+      "projections": 1
     }
   ]
 }
