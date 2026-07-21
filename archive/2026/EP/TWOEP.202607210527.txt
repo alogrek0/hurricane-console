@@ -1,0 +1,37 @@
+
+000
+ABPZ20 KNHC 210527
+TWOEP 
+
+Tropical Weather Outlook
+NWS National Hurricane Center Miami FL
+1100 PM PDT Mon Jul 20 2026
+
+For the eastern and central North Pacific east of 180 longitude:
+
+Active Systems:
+The National Hurricane Center is issuing advisories on recently 
+upgraded Hurricane Fausto, located several hundred miles southwest 
+of the southern tip of Baja California. 
+
+Eastern and Central East Pacific:
+A broad area of low pressure is forecast to develop well south of 
+Mexico over the next couple of days. Environmental conditions 
+appear conducive for development of the system thereafter, and a 
+tropical depression is likely to form while it moves westward to 
+west-northwestward across the eastern and central portions of the 
+eastern Pacific.
+* Formation chance through 48 hours...low...near 0 percent. 
+* Formation chance through 7 days...high...70 percent.
+
+Southwest of Hawaii:
+Showers and thunderstorms associated with a trough of low pressure 
+located well southwest of the Hawaiian Islands remain disorganized. 
+Environmental conditions appear conducive for some gradual 
+development of this system as it moves generally westward during the 
+next several days.   
+* Formation chance through 48 hours...low...near 0 percent. 
+* Formation chance through 7 days...low...20 percent.
+
+$$
+Forecaster Gibbs
