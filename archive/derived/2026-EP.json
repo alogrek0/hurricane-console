@@ -18233,6 +18233,40 @@
       "fixes": 2,
       "inferred": 1,
       "projections": 2
+    },
+    {
+      "file": "TWOEP.202607220517.txt",
+      "kind": "TWO",
+      "stamp": "202607220517",
+      "issuedISO": "2026-07-22T06:00:00.000Z",
+      "disturbances": [
+        {
+          "invest": null,
+          "lat": null,
+          "lon": null,
+          "chance48": {
+            "cat": "low",
+            "pct": 20
+          },
+          "chance7": {
+            "cat": "high",
+            "pct": 90
+          }
+        },
+        {
+          "invest": null,
+          "lat": null,
+          "lon": null,
+          "chance48": {
+            "cat": "low",
+            "pct": 0
+          },
+          "chance7": {
+            "cat": "medium",
+            "pct": 50
+          }
+        }
+      ]
     }
   ]
 }

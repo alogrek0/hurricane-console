@@ -19320,6 +19320,54 @@
       "stamp": "202607212311",
       "issuedISO": "2026-07-22T00:00:00.000Z",
       "disturbances": []
+    },
+    {
+      "file": "TWOAT.202607220517.txt",
+      "kind": "TWO",
+      "stamp": "202607220517",
+      "issuedISO": "2026-07-22T06:00:00.000Z",
+      "disturbances": []
+    },
+    {
+      "file": "TWDAT.202607220602.txt",
+      "kind": "TWD",
+      "stamp": "202607220602",
+      "issuedISO": "2026-07-22T06:15:00.000Z",
+      "cyclones": [
+        {
+          "name": "Bertha",
+          "classification": "Tropical Storm",
+          "lat": 29.4,
+          "lon": -87.7,
+          "windKt": 50
+        }
+      ],
+      "waves": [
+        {
+          "id": "W2",
+          "axis": [
+            {
+              "lat": 22,
+              "lon": -50
+            },
+            {
+              "lat": 8,
+              "lon": -50
+            }
+          ],
+          "inferred": false,
+          "motion": {
+            "bearing": 270,
+            "slowKt": 10,
+            "fastKt": 15
+          }
+        }
+      ],
+      "convection": 4,
+      "troughs": 2,
+      "fixes": 7,
+      "inferred": 1,
+      "projections": 2
     }
   ]
 }

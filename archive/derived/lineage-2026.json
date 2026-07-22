@@ -11931,6 +11931,23 @@
               ],
               "inferred": false,
               "link": "axis"
+            },
+            {
+              "stamp": "202607220602",
+              "file": "TWDAT.202607220602.txt",
+              "meanLon": -50,
+              "axis": [
+                {
+                  "lat": 22,
+                  "lon": -50
+                },
+                {
+                  "lat": 8,
+                  "lon": -50
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
             }
           ]
         },
@@ -13765,6 +13782,15 @@
               "file": "TWDAT.202607212250.txt",
               "lat": 29.4,
               "lon": -87.2,
+              "classification": "Tropical Storm",
+              "windKt": 50,
+              "link": "name"
+            },
+            {
+              "stamp": "202607220602",
+              "file": "TWDAT.202607220602.txt",
+              "lat": 29.4,
+              "lon": -87.7,
               "classification": "Tropical Storm",
               "windKt": 50,
               "link": "name"
@@ -26757,6 +26783,50 @@
               "chance7": {
                 "cat": "medium",
                 "pct": 40
+              },
+              "tagged": false,
+              "link": null
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202607220517-1",
+          "tag": null,
+          "sightings": [
+            {
+              "stamp": "202607220517",
+              "file": "TWOEP.202607220517.txt",
+              "lat": null,
+              "lon": null,
+              "chance48": {
+                "cat": "low",
+                "pct": 20
+              },
+              "chance7": {
+                "cat": "high",
+                "pct": 90
+              },
+              "tagged": false,
+              "link": null
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202607220517-2",
+          "tag": null,
+          "sightings": [
+            {
+              "stamp": "202607220517",
+              "file": "TWOEP.202607220517.txt",
+              "lat": null,
+              "lon": null,
+              "chance48": {
+                "cat": "low",
+                "pct": 0
+              },
+              "chance7": {
+                "cat": "medium",
+                "pct": 50
               },
               "tagged": false,
               "link": null
