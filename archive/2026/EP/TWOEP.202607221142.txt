@@ -1,0 +1,47 @@
+
+000
+ABPZ20 KNHC 221142
+TWOEP 
+
+Tropical Weather Outlook
+NWS National Hurricane Center Miami FL
+500 AM PDT Wed Jul 22 2026
+
+For the eastern and central North Pacific east of 180 longitude:
+
+Active Systems:
+The National Hurricane Center is issuing advisories on Hurricane 
+Fausto, located well west-southwest of the southern tip of the Baja 
+California Peninsula.
+
+Eastern and Central East Pacific:
+A tropical wave located a few hundred miles off the coast of Central 
+America is producing a large area of disorganized showers and 
+thunderstorms. Gradual development of this system is expected, and a 
+tropical depression is likely to form over the weekend while it 
+moves generally west-northwestward at 10 to 15 mph, remaining well 
+offshore of Mexico.
+* Formation chance through 48 hours...low...30 percent. 
+* Formation chance through 7 days...high...90 percent.
+
+Well Southwest of Hawaii:
+A trough of low pressure located well southwest of the Hawaiian 
+Islands is producing disorganized showers and thunderstorms. 
+Environmental conditions appear conducive for some gradual 
+development of this system, and a tropical depression could form 
+over the weekend or early next week while the system moves slowly 
+westward to west-northwestward. The system is forecast to move into 
+the western Pacific basin on Sunday.
+* Formation chance through 48 hours...low...near 0 percent. 
+* Formation chance through 7 days...medium...60 percent.
+
+&&
+Products issued by the U.S. Joint Typhoon Warning Center can be 
+found at: www.metoc.navy.mil/jtwc/jtwc.html
+
+Official tropical cyclone forecast information issued by the Japan 
+Meteorological Agency for the western Pacific basin can be found at:
+www.jma.go.jp/jma/jma-eng/jma-center/rsmc-hp-pub-eg/RSMC_HP.htm
+
+$$
+Forecaster Reinhart

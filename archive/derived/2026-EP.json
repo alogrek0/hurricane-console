@@ -18267,6 +18267,81 @@
           }
         }
       ]
+    },
+    {
+      "file": "TWDEP.202607221009.txt",
+      "kind": "TWD",
+      "stamp": "202607221009",
+      "issuedISO": "2026-07-22T10:05:00.000Z",
+      "cyclones": [
+        {
+          "name": "Fausto",
+          "classification": "Hurricane",
+          "lat": 16.7,
+          "lon": -120.7,
+          "windKt": 75
+        }
+      ],
+      "waves": [
+        {
+          "id": "W1",
+          "axis": [
+            {
+              "lat": 17,
+              "lon": -90
+            },
+            {
+              "lat": 5,
+              "lon": -90
+            }
+          ],
+          "inferred": false,
+          "motion": {
+            "bearing": 270,
+            "slowKt": 10,
+            "fastKt": 10
+          }
+        }
+      ],
+      "convection": 6,
+      "troughs": 1,
+      "fixes": 2,
+      "inferred": 1,
+      "projections": 2
+    },
+    {
+      "file": "TWOEP.202607221142.txt",
+      "kind": "TWO",
+      "stamp": "202607221142",
+      "issuedISO": "2026-07-22T12:00:00.000Z",
+      "disturbances": [
+        {
+          "invest": null,
+          "lat": null,
+          "lon": null,
+          "chance48": {
+            "cat": "low",
+            "pct": 30
+          },
+          "chance7": {
+            "cat": "high",
+            "pct": 90
+          }
+        },
+        {
+          "invest": null,
+          "lat": null,
+          "lon": null,
+          "chance48": {
+            "cat": "low",
+            "pct": 0
+          },
+          "chance7": {
+            "cat": "medium",
+            "pct": 60
+          }
+        }
+      ]
     }
   ]
 }
