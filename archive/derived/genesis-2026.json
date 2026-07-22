@@ -1,7 +1,7 @@
 {
   "_readme": "Genesis truth ledger (Track C M4): per-invest statement verdicts + season calibration derived from archive/derived/lineage-2026.json by `node tools/build-genesis-ledger.js` — NEVER hand-edit. Deterministic (\"now\" is the max archive stamp, never wall-clock). Verdicts: formed REQUIRES a lineage invest-cyclone genesis link; an unattributed cyclone opening nearby makes the window unresolved — this ledger refuses to invent formed AND refuses to invent not-formed; windows past nowStamp are pending, never guessed.",
   "season": 2026,
-  "nowStamp": "202607221142",
+  "nowStamp": "202607221735",
   "basins": {
     "AT": {
       "invests": [
@@ -1193,7 +1193,7 @@
                 "pct": 20
               },
               "verdict48": "not-formed",
-              "verdict7": "pending"
+              "verdict7": "not-formed"
             },
             {
               "stamp": "202607151720",
@@ -1208,7 +1208,7 @@
                 "pct": 20
               },
               "verdict48": "not-formed",
-              "verdict7": "pending"
+              "verdict7": "not-formed"
             },
             {
               "stamp": "202607151728",
@@ -1223,7 +1223,7 @@
                 "pct": 20
               },
               "verdict48": "not-formed",
-              "verdict7": "pending"
+              "verdict7": "not-formed"
             },
             {
               "stamp": "202607152326",
@@ -1378,7 +1378,7 @@
                 "pct": 10
               },
               "verdict48": "not-formed",
-              "verdict7": "pending"
+              "verdict7": "not-formed"
             },
             {
               "stamp": "202607151728",
@@ -1393,7 +1393,7 @@
                 "pct": 10
               },
               "verdict48": "not-formed",
-              "verdict7": "pending"
+              "verdict7": "not-formed"
             },
             {
               "stamp": "202607152326",
@@ -1729,9 +1729,9 @@
           "low": {
             "statements": 66,
             "formed": 0,
-            "notFormed": 31,
+            "notFormed": 36,
             "unresolved": 8,
-            "pending": 27,
+            "pending": 22,
             "observedRate": 0
           },
           "medium": {
@@ -6566,7 +6566,7 @@
                 "pct": 80
               },
               "verdict48": "unresolved",
-              "verdict7": "pending"
+              "verdict7": "unresolved"
             },
             {
               "stamp": "202607151732",
@@ -6581,7 +6581,7 @@
                 "pct": 80
               },
               "verdict48": "unresolved",
-              "verdict7": "pending"
+              "verdict7": "unresolved"
             },
             {
               "stamp": "202607152327",
@@ -7158,7 +7158,7 @@
                 "pct": 60
               },
               "verdict48": "unresolved",
-              "verdict7": "pending"
+              "verdict7": "unresolved"
             },
             {
               "stamp": "202607151732",
@@ -7173,7 +7173,7 @@
                 "pct": 50
               },
               "verdict48": "unresolved",
-              "verdict7": "pending"
+              "verdict7": "unresolved"
             },
             {
               "stamp": "202607152327",
@@ -7587,7 +7587,7 @@
                 "pct": 20
               },
               "verdict48": "unresolved",
-              "verdict7": "pending"
+              "verdict7": "unresolved"
             },
             {
               "stamp": "202607151732",
@@ -7602,7 +7602,7 @@
                 "pct": 10
               },
               "verdict48": "unresolved",
-              "verdict7": "pending"
+              "verdict7": "unresolved"
             },
             {
               "stamp": "202607152327",
@@ -8652,7 +8652,7 @@
                 "cat": "medium",
                 "pct": 60
               },
-              "verdict48": "pending",
+              "verdict48": "not-formed",
               "verdict7": "pending"
             }
           ]
@@ -8684,7 +8684,7 @@
                 "cat": "low",
                 "pct": 20
               },
-              "verdict48": "pending",
+              "verdict48": "not-formed",
               "verdict7": "pending"
             }
           ]
@@ -8952,7 +8952,7 @@
           "lastStamp": "202607212308",
           "waveOrigin": null,
           "outcome": {
-            "kind": "open",
+            "kind": "no-cyclone",
             "cycloneId": null,
             "cycloneName": null,
             "genesisStamp": null,
@@ -8984,7 +8984,7 @@
           "lastStamp": "202607212308",
           "waveOrigin": null,
           "outcome": {
-            "kind": "open",
+            "kind": "no-cyclone",
             "cycloneId": null,
             "cycloneName": null,
             "genesisStamp": null,
@@ -9136,24 +9136,88 @@
               "verdict7": "pending"
             }
           ]
+        },
+        {
+          "id": "EP-I-202607221727-1",
+          "tag": null,
+          "firstStamp": "202607221727",
+          "lastStamp": "202607221727",
+          "waveOrigin": null,
+          "outcome": {
+            "kind": "open",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null,
+            "nearby": []
+          },
+          "siblingChains": [],
+          "statements": [
+            {
+              "stamp": "202607221727",
+              "file": "TWOEP.202607221727.txt",
+              "tagged": false,
+              "chance48": {
+                "cat": "medium",
+                "pct": 40
+              },
+              "chance7": {
+                "cat": "high",
+                "pct": 90
+              },
+              "verdict48": "pending",
+              "verdict7": "pending"
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202607221727-2",
+          "tag": null,
+          "firstStamp": "202607221727",
+          "lastStamp": "202607221727",
+          "waveOrigin": null,
+          "outcome": {
+            "kind": "open",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null,
+            "nearby": []
+          },
+          "siblingChains": [],
+          "statements": [
+            {
+              "stamp": "202607221727",
+              "file": "TWOEP.202607221727.txt",
+              "tagged": false,
+              "chance48": {
+                "cat": "low",
+                "pct": 0
+              },
+              "chance7": {
+                "cat": "medium",
+                "pct": 60
+              },
+              "verdict48": "pending",
+              "verdict7": "pending"
+            }
+          ]
         }
       ],
       "calibration": {
         "h48": {
           "low": {
-            "statements": 243,
+            "statements": 244,
             "formed": 0,
-            "notFormed": 165,
+            "notFormed": 167,
             "unresolved": 62,
-            "pending": 16,
+            "pending": 15,
             "observedRate": 0
           },
           "medium": {
-            "statements": 42,
+            "statements": 43,
             "formed": 2,
             "notFormed": 26,
             "unresolved": 14,
-            "pending": 0,
+            "pending": 1,
             "observedRate": 0.071
           },
           "high": {
@@ -9170,24 +9234,24 @@
             "statements": 119,
             "formed": 2,
             "notFormed": 78,
-            "unresolved": 9,
-            "pending": 30,
+            "unresolved": 11,
+            "pending": 28,
             "observedRate": 0.025
           },
           "medium": {
-            "statements": 110,
+            "statements": 111,
             "formed": 2,
             "notFormed": 53,
-            "unresolved": 40,
-            "pending": 15,
+            "unresolved": 42,
+            "pending": 14,
             "observedRate": 0.036
           },
           "high": {
-            "statements": 96,
+            "statements": 97,
             "formed": 14,
             "notFormed": 23,
-            "unresolved": 36,
-            "pending": 23,
+            "unresolved": 38,
+            "pending": 22,
             "observedRate": 0.378
           }
         }
@@ -9197,19 +9261,19 @@
   "calibrationTotal": {
     "h48": {
       "low": {
-        "statements": 310,
+        "statements": 311,
         "formed": 0,
-        "notFormed": 224,
+        "notFormed": 226,
         "unresolved": 70,
-        "pending": 16,
+        "pending": 15,
         "observedRate": 0
       },
       "medium": {
-        "statements": 50,
+        "statements": 51,
         "formed": 2,
         "notFormed": 26,
         "unresolved": 22,
-        "pending": 0,
+        "pending": 1,
         "observedRate": 0.071
       },
       "high": {
@@ -9225,25 +9289,25 @@
       "low": {
         "statements": 185,
         "formed": 2,
-        "notFormed": 109,
-        "unresolved": 17,
-        "pending": 57,
-        "observedRate": 0.018
+        "notFormed": 114,
+        "unresolved": 19,
+        "pending": 50,
+        "observedRate": 0.017
       },
       "medium": {
-        "statements": 119,
+        "statements": 120,
         "formed": 2,
         "notFormed": 53,
-        "unresolved": 46,
-        "pending": 18,
+        "unresolved": 48,
+        "pending": 17,
         "observedRate": 0.036
       },
       "high": {
-        "statements": 99,
+        "statements": 100,
         "formed": 14,
         "notFormed": 23,
-        "unresolved": 38,
-        "pending": 24,
+        "unresolved": 40,
+        "pending": 23,
         "observedRate": 0.378
       }
     }
