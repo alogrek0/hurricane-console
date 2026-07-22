@@ -18084,6 +18084,155 @@
           }
         }
       ]
+    },
+    {
+      "file": "TWDEP.202607212124.txt",
+      "kind": "TWD",
+      "stamp": "202607212124",
+      "issuedISO": "2026-07-21T22:05:00.000Z",
+      "cyclones": [
+        {
+          "name": "Fausto",
+          "classification": "Hurricane",
+          "lat": 16.6,
+          "lon": -119.9,
+          "windKt": 65
+        }
+      ],
+      "waves": [
+        {
+          "id": "W1",
+          "axis": [
+            {
+              "lat": 18,
+              "lon": -90
+            },
+            {
+              "lat": 6,
+              "lon": -90
+            }
+          ],
+          "inferred": false,
+          "motion": null
+        }
+      ],
+      "convection": 4,
+      "troughs": 1,
+      "fixes": 1,
+      "inferred": 0,
+      "projections": 1
+    },
+    {
+      "file": "TWDEP.202607212125.txt",
+      "kind": "TWD",
+      "stamp": "202607212125",
+      "issuedISO": "2026-07-21T22:05:00.000Z",
+      "cyclones": [
+        {
+          "name": "Fausto",
+          "classification": "Hurricane",
+          "lat": 16.6,
+          "lon": -119.9,
+          "windKt": 65
+        }
+      ],
+      "waves": [
+        {
+          "id": "W1",
+          "axis": [
+            {
+              "lat": 18,
+              "lon": -90
+            },
+            {
+              "lat": 6,
+              "lon": -90
+            }
+          ],
+          "inferred": false,
+          "motion": null
+        }
+      ],
+      "convection": 4,
+      "troughs": 1,
+      "fixes": 1,
+      "inferred": 0,
+      "projections": 1
+    },
+    {
+      "file": "TWOEP.202607212308.txt",
+      "kind": "TWO",
+      "stamp": "202607212308",
+      "issuedISO": "2026-07-22T00:00:00.000Z",
+      "disturbances": [
+        {
+          "invest": null,
+          "lat": null,
+          "lon": null,
+          "chance48": {
+            "cat": "low",
+            "pct": 10
+          },
+          "chance7": {
+            "cat": "high",
+            "pct": 80
+          }
+        },
+        {
+          "invest": null,
+          "lat": null,
+          "lon": null,
+          "chance48": {
+            "cat": "low",
+            "pct": 0
+          },
+          "chance7": {
+            "cat": "medium",
+            "pct": 40
+          }
+        }
+      ]
+    },
+    {
+      "file": "TWDEP.202607220332.txt",
+      "kind": "TWD",
+      "stamp": "202607220332",
+      "issuedISO": "2026-07-22T04:05:00.000Z",
+      "cyclones": [
+        {
+          "name": "Fausto",
+          "classification": "Hurricane",
+          "lat": 16.6,
+          "lon": -120.3,
+          "windKt": 70
+        }
+      ],
+      "waves": [
+        {
+          "id": "W1",
+          "axis": [
+            {
+              "lat": 17,
+              "lon": -89.5
+            },
+            {
+              "lat": 5,
+              "lon": -89.5
+            }
+          ],
+          "inferred": false,
+          "motion": {
+            "bearing": 270,
+            "slowKt": 10,
+            "fastKt": 10
+          }
+        }
+      ],
+      "convection": 5,
+      "troughs": 1,
+      "fixes": 2,
+      "inferred": 1,
+      "projections": 2
     }
   ]
 }
