@@ -1,7 +1,7 @@
 {
   "_readme": "Genesis truth ledger (Track C M4): per-invest statement verdicts + season calibration derived from archive/derived/lineage-2026.json by `node tools/build-genesis-ledger.js` — NEVER hand-edit. Deterministic (\"now\" is the max archive stamp, never wall-clock). Verdicts: formed REQUIRES a lineage invest-cyclone genesis link; an unattributed cyclone opening nearby makes the window unresolved — this ledger refuses to invent formed AND refuses to invent not-formed; windows past nowStamp are pending, never guessed.",
   "season": 2026,
-  "nowStamp": "202607231118",
+  "nowStamp": "202607231719",
   "basins": {
     "AT": {
       "invests": [
@@ -8844,7 +8844,7 @@
                 "cat": "high",
                 "pct": 70
               },
-              "verdict48": "pending",
+              "verdict48": "not-formed",
               "verdict7": "pending"
             }
           ]
@@ -8876,7 +8876,7 @@
                 "cat": "low",
                 "pct": 20
               },
-              "verdict48": "pending",
+              "verdict48": "not-formed",
               "verdict7": "pending"
             }
           ]
@@ -9144,7 +9144,7 @@
           "lastStamp": "202607221727",
           "waveOrigin": null,
           "outcome": {
-            "kind": "open",
+            "kind": "no-cyclone",
             "cycloneId": null,
             "cycloneName": null,
             "genesisStamp": null,
@@ -9176,7 +9176,7 @@
           "lastStamp": "202607221727",
           "waveOrigin": null,
           "outcome": {
-            "kind": "open",
+            "kind": "no-cyclone",
             "cycloneId": null,
             "cycloneName": null,
             "genesisStamp": null,
@@ -9211,7 +9211,7 @@
             "atStamp": "202607222304"
           },
           "outcome": {
-            "kind": "open",
+            "kind": "no-cyclone",
             "cycloneId": null,
             "cycloneName": null,
             "genesisStamp": null,
@@ -9243,7 +9243,7 @@
           "lastStamp": "202607222304",
           "waveOrigin": null,
           "outcome": {
-            "kind": "open",
+            "kind": "no-cyclone",
             "cycloneId": null,
             "cycloneName": null,
             "genesisStamp": null,
@@ -9368,7 +9368,7 @@
           "id": "EP-I-202607231118-2",
           "tag": "EP98",
           "firstStamp": "202607231118",
-          "lastStamp": "202607231118",
+          "lastStamp": "202607231719",
           "waveOrigin": null,
           "outcome": {
             "kind": "open",
@@ -9393,6 +9393,53 @@
               },
               "verdict48": "pending",
               "verdict7": "pending"
+            },
+            {
+              "stamp": "202607231719",
+              "file": "TWOEP.202607231719.txt",
+              "tagged": true,
+              "chance48": {
+                "cat": "high",
+                "pct": 70
+              },
+              "chance7": {
+                "cat": "high",
+                "pct": 90
+              },
+              "verdict48": "pending",
+              "verdict7": "pending"
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202607231719-1",
+          "tag": null,
+          "firstStamp": "202607231719",
+          "lastStamp": "202607231719",
+          "waveOrigin": null,
+          "outcome": {
+            "kind": "open",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null,
+            "nearby": []
+          },
+          "siblingChains": [],
+          "statements": [
+            {
+              "stamp": "202607231719",
+              "file": "TWOEP.202607231719.txt",
+              "tagged": false,
+              "chance48": {
+                "cat": "low",
+                "pct": 20
+              },
+              "chance7": {
+                "cat": "high",
+                "pct": 70
+              },
+              "verdict48": "pending",
+              "verdict7": "pending"
             }
           ]
         }
@@ -9400,11 +9447,11 @@
       "calibration": {
         "h48": {
           "low": {
-            "statements": 247,
+            "statements": 248,
             "formed": 0,
-            "notFormed": 171,
+            "notFormed": 173,
             "unresolved": 62,
-            "pending": 14,
+            "pending": 13,
             "observedRate": 0
           },
           "medium": {
@@ -9416,11 +9463,11 @@
             "observedRate": 0.071
           },
           "high": {
-            "statements": 40,
+            "statements": 41,
             "formed": 7,
             "notFormed": 9,
             "unresolved": 24,
-            "pending": 0,
+            "pending": 1,
             "observedRate": 0.438
           }
         },
@@ -9442,11 +9489,11 @@
             "observedRate": 0.036
           },
           "high": {
-            "statements": 103,
+            "statements": 105,
             "formed": 14,
             "notFormed": 23,
             "unresolved": 41,
-            "pending": 25,
+            "pending": 27,
             "observedRate": 0.378
           }
         }
@@ -9456,11 +9503,11 @@
   "calibrationTotal": {
     "h48": {
       "low": {
-        "statements": 314,
+        "statements": 315,
         "formed": 0,
-        "notFormed": 230,
+        "notFormed": 232,
         "unresolved": 70,
-        "pending": 14,
+        "pending": 13,
         "observedRate": 0
       },
       "medium": {
@@ -9472,11 +9519,11 @@
         "observedRate": 0.071
       },
       "high": {
-        "statements": 43,
+        "statements": 44,
         "formed": 7,
         "notFormed": 9,
         "unresolved": 27,
-        "pending": 0,
+        "pending": 1,
         "observedRate": 0.438
       }
     },
@@ -9498,11 +9545,11 @@
         "observedRate": 0.036
       },
       "high": {
-        "statements": 106,
+        "statements": 108,
         "formed": 14,
         "notFormed": 23,
         "unresolved": 43,
-        "pending": 26,
+        "pending": 28,
         "observedRate": 0.378
       }
     }
