@@ -12206,6 +12206,23 @@
               ],
               "inferred": false,
               "link": null
+            },
+            {
+              "stamp": "202607230614",
+              "file": "TWDAT.202607230614.txt",
+              "meanLon": -41,
+              "axis": [
+                {
+                  "lat": 21,
+                  "lon": -41
+                },
+                {
+                  "lat": 7,
+                  "lon": -41
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
             }
           ]
         },
@@ -12228,6 +12245,23 @@
               ],
               "inferred": false,
               "link": null
+            },
+            {
+              "stamp": "202607230614",
+              "file": "TWDAT.202607230614.txt",
+              "meanLon": -53,
+              "axis": [
+                {
+                  "lat": 21,
+                  "lon": -53
+                },
+                {
+                  "lat": 8,
+                  "lon": -53
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
             }
           ]
         }
@@ -13888,6 +13922,15 @@
               "file": "TWDAT.202607222319.txt",
               "lat": 29.8,
               "lon": -89.8,
+              "classification": "Tropical Storm",
+              "windKt": 40,
+              "link": "name"
+            },
+            {
+              "stamp": "202607230614",
+              "file": "TWDAT.202607230614.txt",
+              "lat": 29.4,
+              "lon": -91.1,
               "classification": "Tropical Storm",
               "windKt": 40,
               "link": "name"
@@ -27120,6 +27163,50 @@
               "chance48": {
                 "cat": "low",
                 "pct": 10
+              },
+              "chance7": {
+                "cat": "high",
+                "pct": 70
+              },
+              "tagged": false,
+              "link": null
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202607230524-1",
+          "tag": null,
+          "sightings": [
+            {
+              "stamp": "202607230524",
+              "file": "TWOEP.202607230524.txt",
+              "lat": null,
+              "lon": null,
+              "chance48": {
+                "cat": "medium",
+                "pct": 60
+              },
+              "chance7": {
+                "cat": "high",
+                "pct": 90
+              },
+              "tagged": false,
+              "link": null
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202607230524-2",
+          "tag": null,
+          "sightings": [
+            {
+              "stamp": "202607230524",
+              "file": "TWOEP.202607230524.txt",
+              "lat": null,
+              "lon": null,
+              "chance48": {
+                "cat": "low",
+                "pct": 20
               },
               "chance7": {
                 "cat": "high",
