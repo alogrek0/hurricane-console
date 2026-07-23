@@ -12223,6 +12223,23 @@
               ],
               "inferred": false,
               "link": "axis"
+            },
+            {
+              "stamp": "202607231028",
+              "file": "TWDAT.202607231028.txt",
+              "meanLon": -45,
+              "axis": [
+                {
+                  "lat": 22,
+                  "lon": -45
+                },
+                {
+                  "lat": 0,
+                  "lon": -45
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
             }
           ]
         },
@@ -12258,6 +12275,23 @@
                 {
                   "lat": 8,
                   "lon": -53
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
+            },
+            {
+              "stamp": "202607231028",
+              "file": "TWDAT.202607231028.txt",
+              "meanLon": -55,
+              "axis": [
+                {
+                  "lat": 23,
+                  "lon": -55
+                },
+                {
+                  "lat": 8,
+                  "lon": -55
                 }
               ],
               "inferred": false,
@@ -13931,6 +13965,15 @@
               "file": "TWDAT.202607230614.txt",
               "lat": 29.4,
               "lon": -91.1,
+              "classification": "Tropical Storm",
+              "windKt": 40,
+              "link": "name"
+            },
+            {
+              "stamp": "202607231028",
+              "file": "TWDAT.202607231028.txt",
+              "lat": 29,
+              "lon": -92.2,
               "classification": "Tropical Storm",
               "windKt": 40,
               "link": "name"
@@ -21124,6 +21167,23 @@
               ],
               "inferred": false,
               "link": "axis"
+            },
+            {
+              "stamp": "202607230953",
+              "file": "TWDEP.202607230953.txt",
+              "meanLon": -94,
+              "axis": [
+                {
+                  "lat": 16,
+                  "lon": -94
+                },
+                {
+                  "lat": 4,
+                  "lon": -94
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
             }
           ]
         }
@@ -27216,6 +27276,50 @@
               "link": null
             }
           ]
+        },
+        {
+          "id": "EP-I-202607231118-1",
+          "tag": null,
+          "sightings": [
+            {
+              "stamp": "202607231118",
+              "file": "TWOEP.202607231118.txt",
+              "lat": null,
+              "lon": null,
+              "chance48": {
+                "cat": "low",
+                "pct": 20
+              },
+              "chance7": {
+                "cat": "high",
+                "pct": 70
+              },
+              "tagged": false,
+              "link": null
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202607231118-2",
+          "tag": "EP98",
+          "sightings": [
+            {
+              "stamp": "202607231118",
+              "file": "TWOEP.202607231118.txt",
+              "lat": null,
+              "lon": null,
+              "chance48": {
+                "cat": "medium",
+                "pct": 60
+              },
+              "chance7": {
+                "cat": "high",
+                "pct": 90
+              },
+              "tagged": true,
+              "link": null
+            }
+          ]
         }
       ],
       "cyclones": [
@@ -28455,6 +28559,15 @@
               "file": "TWDEP.202607230315.txt",
               "lat": 17.5,
               "lon": -123,
+              "classification": "Hurricane",
+              "windKt": 70,
+              "link": "name"
+            },
+            {
+              "stamp": "202607230953",
+              "file": "TWDEP.202607230953.txt",
+              "lat": 17.8,
+              "lon": -124,
               "classification": "Hurricane",
               "windKt": 70,
               "link": "name"
