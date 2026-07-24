@@ -19752,6 +19752,55 @@
       "stamp": "202607231742",
       "issuedISO": "2026-07-23T18:00:00.000Z",
       "disturbances": []
+    },
+    {
+      "file": "TWDAT.202607232317.txt",
+      "kind": "TWD",
+      "stamp": "202607232317",
+      "issuedISO": "2026-07-24T00:15:00.000Z",
+      "cyclones": [
+        {
+          "name": "Bertha",
+          "classification": "Tropical Storm",
+          "lat": 29.8,
+          "lon": -94.7,
+          "windKt": 35
+        }
+      ],
+      "waves": [],
+      "convection": 2,
+      "troughs": 0,
+      "fixes": 2,
+      "inferred": 1,
+      "projections": 1
+    },
+    {
+      "file": "TWDAT.202607232318.txt",
+      "kind": "TWD",
+      "stamp": "202607232318",
+      "issuedISO": "2026-07-24T00:15:00.000Z",
+      "cyclones": [
+        {
+          "name": "Bertha",
+          "classification": "Tropical Storm",
+          "lat": 29.8,
+          "lon": -94.7,
+          "windKt": 35
+        }
+      ],
+      "waves": [],
+      "convection": 2,
+      "troughs": 0,
+      "fixes": 2,
+      "inferred": 1,
+      "projections": 1
+    },
+    {
+      "file": "TWOAT.202607232341.txt",
+      "kind": "TWO",
+      "stamp": "202607232341",
+      "issuedISO": "2026-07-24T00:00:00.000Z",
+      "disturbances": []
     }
   ]
 }
