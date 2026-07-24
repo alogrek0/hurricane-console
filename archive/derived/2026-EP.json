@@ -18993,6 +18993,123 @@
           }
         }
       ]
+    },
+    {
+      "file": "TWDEP.202607241559.txt",
+      "kind": "TWD",
+      "stamp": "202607241559",
+      "issuedISO": "2026-07-24T16:05:00.000Z",
+      "cyclones": [
+        {
+          "name": "Fausto",
+          "classification": "Hurricane",
+          "lat": 18.6,
+          "lon": -131.2,
+          "windKt": 90
+        },
+        {
+          "name": "Seven-E",
+          "classification": "Tropical Depression",
+          "lat": 9,
+          "lon": -100.5,
+          "windKt": 30
+        }
+      ],
+      "waves": [
+        {
+          "id": "W1",
+          "axis": [
+            {
+              "lat": 18,
+              "lon": -83
+            },
+            {
+              "lat": 6,
+              "lon": -83
+            }
+          ],
+          "inferred": false,
+          "motion": {
+            "bearing": 270,
+            "slowKt": 10,
+            "fastKt": 15
+          }
+        }
+      ],
+      "convection": 3,
+      "troughs": 2,
+      "fixes": 4,
+      "inferred": 2,
+      "projections": 3
+    },
+    {
+      "file": "TWDEP.202607241600.txt",
+      "kind": "TWD",
+      "stamp": "202607241600",
+      "issuedISO": "2026-07-24T16:05:00.000Z",
+      "cyclones": [
+        {
+          "name": "Fausto",
+          "classification": "Hurricane",
+          "lat": 18.6,
+          "lon": -131.2,
+          "windKt": 90
+        },
+        {
+          "name": "Seven-E",
+          "classification": "Tropical Depression",
+          "lat": 9,
+          "lon": -100.5,
+          "windKt": 30
+        }
+      ],
+      "waves": [
+        {
+          "id": "W1",
+          "axis": [
+            {
+              "lat": 18,
+              "lon": -83
+            },
+            {
+              "lat": 6,
+              "lon": -83
+            }
+          ],
+          "inferred": false,
+          "motion": {
+            "bearing": 270,
+            "slowKt": 10,
+            "fastKt": 15
+          }
+        }
+      ],
+      "convection": 3,
+      "troughs": 2,
+      "fixes": 4,
+      "inferred": 2,
+      "projections": 3
+    },
+    {
+      "file": "TWOEP.202607241725.txt",
+      "kind": "TWO",
+      "stamp": "202607241725",
+      "issuedISO": "2026-07-24T18:00:00.000Z",
+      "disturbances": [
+        {
+          "invest": null,
+          "lat": null,
+          "lon": null,
+          "chance48": {
+            "cat": "low",
+            "pct": 30
+          },
+          "chance7": {
+            "cat": "high",
+            "pct": 70
+          }
+        }
+      ]
     }
   ]
 }

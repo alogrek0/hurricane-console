@@ -1,0 +1,100 @@
+
+000
+AXNT20 KNHC 241635
+TWDAT 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+1815 UTC Fri Jul 24 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 1200 UTC surface analysis and satellite imagery through 
+1500 UTC.
+
+...TROPICAL WAVES...
+
+An eastern Atlantic tropical wave has its axis near 29W from
+05N-20N, moving westward around 15 kt. Scattered moderate 
+convection is from 05N-11N between 25W-38W.
+
+A central Atlantic tropical wave has its axis near 51W from
+07N-18N, moving westward at 10 to 15 kt. Isolated moderate
+convection is occurring from 10N-14N between 49W-54W.
+
+A Caribbean tropical wave has its axis near 64W from 17N
+southward, moving westward around 15 kt. No significant deep
+convection is occurring in association with the wave today.
+
+A new tropical wave has formed in the W Caribbean at 84W from 18N
+southward, moving westward at 10 to 15 kt. Scattered moderate and
+isolated strong convection is occurring from 10N-17N west of 76W.
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough enters the Atlantic through the coast of
+Mauritania near 18N16W southwest to 06N29W. The ITCZ extends from
+06N30W to 09N49W, where it breaks for a tropical wave. The ITCZ
+resumes at 09N53W then to 08N60W along coastal Venezuela. Scattered
+moderate convection is from 05N-11N between 25W-38W. Isolated 
+moderate convection is occurring from 10N-14N between 49W-54W.
+
+...GULF OF AMERICA...
+
+A 1020 mb high pressure is centered over the N Gulf near 29N88W.
+Winds across the Gulf are generally light to moderate except for
+isolated strong E winds over the Bay of Campeche. Seas are 2-4 ft.
+Isolated moderate convection is occurring over the Straits of
+Florida this afternoon.
+
+For the forecast, the high pressure over the NE Gulf will shift to
+the central Gulf. The high pressure will provide for a light to 
+gentle wind flow across the basin into the early part of next 
+week, except for pulsing moderate to fresh winds off the Yucatan 
+Peninsula through the weekend. 
+
+...CARIBBEAN SEA...
+
+A moderate pressure gradient between low pressure over northern
+South America and high pressure north of the area is forcing fresh
+to strong trades over the central Caribbean with seas 6-9 ft.
+Elsewhere winds are gentle to moderate with seas 3-5 ft. Scattered
+moderate and isolated strong convection is occurring from 10N-17N
+west of 76W associated with a tropical wave. Additionally, an
+upper-level low is causing isolated moderate convection north of
+19N west of 85W.
+
+For the forecast, the pressure gradient between the Atlantic 
+ridge and the Colombian low will support fresh to strong winds 
+with moderate to locally rough seas across the south-central 
+Caribbean through the forecast period. Fresh to locally strong 
+winds will pulse across the Gulf of Honduras Sat night and 
+possibly Sun night. Moderate or weaker winds with slight to 
+moderate seas will prevail elsewhere. 
+
+...ATLANTIC OCEAN...
+
+The Bermuda-Azores High well north of the area along with lower
+pressure over the ITCZ and the monsoon trough is forcing only
+moderate to isolated fresh trades west of 30W with seas of 4-7 ft.
+A larger pressure gradient farther east is forcing fresh to 
+locally strong NE winds with seas 7-9 ft north of 20N east of 
+30W. An upper-level low is causing isolated moderate convection
+north of 24N between 61W-78W.
+
+For the forecast west of 55W, a trough off the east coast of 
+Florida will drift west into the peninsula today. Scattered 
+thunderstorms will accompany the trough across the Bahamas. Fresh 
+trade winds are expected offshore Hispaniola, including approaches
+to the Windward Passage through the weekend. Moderate or weaker 
+winds along with moderate seas are forecast elsewhere. A cold 
+front may approach the waters east of northern Florida late this 
+weekend and stall, preceded by fresh southwest winds north of 
+about 28N and east of 75W through mid week.
+
+$$ 
+Landsea
