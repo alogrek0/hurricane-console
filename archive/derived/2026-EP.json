@@ -18846,6 +18846,40 @@
       "fixes": 6,
       "inferred": 1,
       "projections": 1
+    },
+    {
+      "file": "TWOEP.202607240503.txt",
+      "kind": "TWO",
+      "stamp": "202607240503",
+      "issuedISO": "2026-07-24T06:00:00.000Z",
+      "disturbances": [
+        {
+          "invest": "EP98",
+          "lat": null,
+          "lon": null,
+          "chance48": {
+            "cat": "high",
+            "pct": 90
+          },
+          "chance7": {
+            "cat": "high",
+            "pct": 90
+          }
+        },
+        {
+          "invest": null,
+          "lat": null,
+          "lon": null,
+          "chance48": {
+            "cat": "low",
+            "pct": 20
+          },
+          "chance7": {
+            "cat": "high",
+            "pct": 70
+          }
+        }
+      ]
     }
   ]
 }

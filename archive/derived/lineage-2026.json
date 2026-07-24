@@ -12354,6 +12354,62 @@
               "link": null
             }
           ]
+        },
+        {
+          "id": "AT-W-202607240613-1",
+          "sightings": [
+            {
+              "stamp": "202607240613",
+              "file": "TWDAT.202607240613.txt",
+              "meanLon": -47,
+              "axis": [
+                {
+                  "lat": 19,
+                  "lon": -47
+                },
+                {
+                  "lat": 9,
+                  "lon": -47
+                }
+              ],
+              "inferred": false,
+              "link": null
+            },
+            {
+              "stamp": "202607240614",
+              "file": "TWDAT.202607240614.txt",
+              "meanLon": -47,
+              "axis": [
+                {
+                  "lat": 19,
+                  "lon": -47
+                },
+                {
+                  "lat": 9,
+                  "lon": -47
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
+            },
+            {
+              "stamp": "202607240938",
+              "file": "TWDAT.202607240938.txt",
+              "meanLon": -49,
+              "axis": [
+                {
+                  "lat": 19,
+                  "lon": -49
+                },
+                {
+                  "lat": 9,
+                  "lon": -49
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
+            }
+          ]
         }
       ],
       "invests": [
@@ -14059,6 +14115,24 @@
               "lon": -94.7,
               "classification": "Tropical Storm",
               "windKt": 35,
+              "link": "name"
+            },
+            {
+              "stamp": "202607240613",
+              "file": "TWDAT.202607240613.txt",
+              "lat": 30,
+              "lon": -96,
+              "classification": "Remnants Of",
+              "windKt": 30,
+              "link": "name"
+            },
+            {
+              "stamp": "202607240614",
+              "file": "TWDAT.202607240614.txt",
+              "lat": 30,
+              "lon": -96,
+              "classification": "Remnants Of",
+              "windKt": 30,
               "link": "name"
             }
           ]
@@ -27489,6 +27563,22 @@
               },
               "tagged": true,
               "link": "tag"
+            },
+            {
+              "stamp": "202607240503",
+              "file": "TWOEP.202607240503.txt",
+              "lat": null,
+              "lon": null,
+              "chance48": {
+                "cat": "high",
+                "pct": 90
+              },
+              "chance7": {
+                "cat": "high",
+                "pct": 90
+              },
+              "tagged": true,
+              "link": "tag"
             }
           ]
         },
@@ -27521,6 +27611,28 @@
             {
               "stamp": "202607232306",
               "file": "TWOEP.202607232306.txt",
+              "lat": null,
+              "lon": null,
+              "chance48": {
+                "cat": "low",
+                "pct": 20
+              },
+              "chance7": {
+                "cat": "high",
+                "pct": 70
+              },
+              "tagged": false,
+              "link": null
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202607240503-1",
+          "tag": null,
+          "sightings": [
+            {
+              "stamp": "202607240503",
+              "file": "TWOEP.202607240503.txt",
               "lat": null,
               "lon": null,
               "chance48": {

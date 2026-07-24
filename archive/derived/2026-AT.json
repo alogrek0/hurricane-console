@@ -19801,6 +19801,128 @@
       "stamp": "202607232341",
       "issuedISO": "2026-07-24T00:00:00.000Z",
       "disturbances": []
+    },
+    {
+      "file": "TWOAT.202607240504.txt",
+      "kind": "TWO",
+      "stamp": "202607240504",
+      "issuedISO": "2026-07-24T06:00:00.000Z",
+      "disturbances": []
+    },
+    {
+      "file": "TWDAT.202607240613.txt",
+      "kind": "TWD",
+      "stamp": "202607240613",
+      "issuedISO": "2026-07-24T06:15:00.000Z",
+      "cyclones": [
+        {
+          "name": "Bertha",
+          "classification": "Remnants Of",
+          "lat": 30,
+          "lon": -96,
+          "windKt": 30
+        }
+      ],
+      "waves": [
+        {
+          "id": "W2",
+          "axis": [
+            {
+              "lat": 19,
+              "lon": -47
+            },
+            {
+              "lat": 9,
+              "lon": -47
+            }
+          ],
+          "inferred": false,
+          "motion": {
+            "bearing": 270,
+            "slowKt": 10,
+            "fastKt": 15
+          }
+        }
+      ],
+      "convection": 3,
+      "troughs": 2,
+      "fixes": 2,
+      "inferred": 1,
+      "projections": 2
+    },
+    {
+      "file": "TWDAT.202607240614.txt",
+      "kind": "TWD",
+      "stamp": "202607240614",
+      "issuedISO": "2026-07-24T06:15:00.000Z",
+      "cyclones": [
+        {
+          "name": "Bertha",
+          "classification": "Remnants Of",
+          "lat": 30,
+          "lon": -96,
+          "windKt": 30
+        }
+      ],
+      "waves": [
+        {
+          "id": "W2",
+          "axis": [
+            {
+              "lat": 19,
+              "lon": -47
+            },
+            {
+              "lat": 9,
+              "lon": -47
+            }
+          ],
+          "inferred": false,
+          "motion": {
+            "bearing": 270,
+            "slowKt": 10,
+            "fastKt": 15
+          }
+        }
+      ],
+      "convection": 3,
+      "troughs": 2,
+      "fixes": 2,
+      "inferred": 1,
+      "projections": 2
+    },
+    {
+      "file": "TWDAT.202607240938.txt",
+      "kind": "TWD",
+      "stamp": "202607240938",
+      "issuedISO": "2026-07-24T12:15:00.000Z",
+      "cyclones": [],
+      "waves": [
+        {
+          "id": "W2",
+          "axis": [
+            {
+              "lat": 19,
+              "lon": -49
+            },
+            {
+              "lat": 9,
+              "lon": -49
+            }
+          ],
+          "inferred": false,
+          "motion": {
+            "bearing": 270,
+            "slowKt": 10,
+            "fastKt": 15
+          }
+        }
+      ],
+      "convection": 4,
+      "troughs": 2,
+      "fixes": 1,
+      "inferred": 0,
+      "projections": 1
     }
   ]
 }
