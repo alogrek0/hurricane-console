@@ -18880,6 +18880,119 @@
           }
         }
       ]
+    },
+    {
+      "file": "TWDEP.202607240952.txt",
+      "kind": "TWD",
+      "stamp": "202607240952",
+      "issuedISO": "2026-07-24T04:05:00.000Z",
+      "cyclones": [
+        {
+          "name": "Fausto",
+          "classification": "Hurricane",
+          "lat": 18.3,
+          "lon": -128.4,
+          "windKt": 80
+        }
+      ],
+      "waves": [
+        {
+          "id": "W1",
+          "axis": [
+            {
+              "lat": 14,
+              "lon": -97
+            },
+            {
+              "lat": 3,
+              "lon": -97
+            }
+          ],
+          "inferred": false,
+          "motion": null
+        }
+      ],
+      "convection": 3,
+      "troughs": 1,
+      "fixes": 6,
+      "inferred": 1,
+      "projections": 1
+    },
+    {
+      "file": "TWDEP.202607241005.txt",
+      "kind": "TWD",
+      "stamp": "202607241005",
+      "issuedISO": "2026-07-24T10:05:00.000Z",
+      "cyclones": [
+        {
+          "name": "Fausto",
+          "classification": "Hurricane",
+          "lat": 18.5,
+          "lon": -129.9,
+          "windKt": 85
+        }
+      ],
+      "waves": [],
+      "convection": 2,
+      "troughs": 1,
+      "fixes": 5,
+      "inferred": 1,
+      "projections": 1
+    },
+    {
+      "file": "TWDEP.202607241022.txt",
+      "kind": "TWD",
+      "stamp": "202607241022",
+      "issuedISO": "2026-07-24T10:05:00.000Z",
+      "cyclones": [
+        {
+          "name": "Fausto",
+          "classification": "Hurricane",
+          "lat": 18.5,
+          "lon": -129.9,
+          "windKt": 85
+        }
+      ],
+      "waves": [],
+      "convection": 2,
+      "troughs": 1,
+      "fixes": 6,
+      "inferred": 2,
+      "projections": 1
+    },
+    {
+      "file": "TWOEP.202607241137.txt",
+      "kind": "TWO",
+      "stamp": "202607241137",
+      "issuedISO": "2026-07-24T12:00:00.000Z",
+      "disturbances": [
+        {
+          "invest": "EP98",
+          "lat": null,
+          "lon": null,
+          "chance48": {
+            "cat": "high",
+            "pct": 100
+          },
+          "chance7": {
+            "cat": "high",
+            "pct": 100
+          }
+        },
+        {
+          "invest": null,
+          "lat": null,
+          "lon": null,
+          "chance48": {
+            "cat": "low",
+            "pct": 20
+          },
+          "chance7": {
+            "cat": "high",
+            "pct": 70
+          }
+        }
+      ]
     }
   ]
 }
