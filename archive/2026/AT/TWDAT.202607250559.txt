@@ -1,0 +1,98 @@
+
+000
+AXNT20 KNHC 250559
+TWDAT
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+0615 UTC Sat Jul 25 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 0000 UTC surface analysis and satellite imagery through 
+0550 UTC.
+
+...TROPICAL WAVES...
+
+A tropical wave is in the eastern Atlantic. Its axis is near 
+34W, extends from 06N to 21N and is moving westward around 10 to 
+15 kt. Scattered moderate convection extends from 03N to 12N
+between 26W and 43W.
+
+A tropical wave is in the central Atlantic. Its axis is near 57W,
+extends from 06N to 19N and is moving westward at 10 to 15 kt. 
+Scattered moderate convection is occurring from 10N to 18N between
+46W and 58W.
+
+A tropical wave is in the central Caribbean. Its axis is near 
+69W, extends from 18N southward and is moving westward around 10 
+to 15 kt. No significant deep convection is occurring in 
+association with the wave.
+
+A tropical wave is in the far W Caribbean. Its axis is near 86W,
+extends from 20N southward and is moving westward at 10 to 15 kt.
+Scattered moderate convection is occurring in the W Caribbean between
+79W and 86W.
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough enters the Atlantic near 17N16W and continues
+SW to 07N36W. The ITCZ extends from 07N36W to 06N53W. Aside from
+the convection associated with the tropical waves, scattered 
+moderate convection is from 07N to 11N between 13W and 20W.
+
+...GULF OF AMERICA...
+
+A 1019 mb high pressure is centered over the N Gulf near 29N88W. 
+A surface trough along western Florida is generating scattered
+moderate convection in the NE Gulf N of 26N E of 85W. In the SW
+Gulf, scatterometer data show fresh to locally strong winds 
+associated with a surface trough in the Bay of Campeche along 92W,
+which is generating scattered showers offshore the Yucatan 
+Peninsula. Moderate or weaker E to SE winds are elsewhere W of
+88W. East of 88W, winds are light to gentle. Slight seas are
+basin-wide. 
+
+For the forecast, the high pressure centered over the Gulf will 
+bring gentle to moderate winds and slight seas to the basin into 
+early next week. Fresh winds will pulse offshore the Yucatan 
+Peninsula each evening this weekend. 
+
+...CARIBBEAN SEA...
+
+A moderate pressure gradient between low pressure over NW Colombia 
+and high pressure north of the area is forcing fresh to strong 
+trades over the central Caribbean with seas 6-9 ft. In the E
+basin, E winds are moderate to fresh and seas moderate while in
+the NW Caribbean winds are moderate or weaker and seas are slight. 
+
+For the forecast, the pressure gradient between the Atlantic 
+ridge and the Colombian low will support fresh to strong winds 
+with moderate to locally rough seas across the south-central 
+Caribbean through the forecast period. Fresh to locally strong 
+winds will pulse across the Gulf of Honduras Sat night. Moderate 
+or weaker winds with slight to moderate seas will prevail 
+elsewhere. Meanwhile, scattered showers and thunderstorms will 
+persist over much of the western Caribbean into Sun. 
+
+...ATLANTIC OCEAN...
+
+The Azores High well north of the area along with lower pressure 
+over the ITCZ and the monsoon trough is forcing only moderate to 
+isolated fresh trades west of 30W with seas of 4-6 ft. A larger 
+pressure gradient farther east is forcing fresh to strong NE 
+winds with seas 7-10 ft north of 20N east of 30W, including the
+Canary Islands.
+
+For the forecast west of 55W, the Atlantic ridge will shift 
+southward this weekend, allowing a cold front to move into the 
+northern waters between Bermuda and Florida Mon, before stalling 
+and dissipating through the middle of next week. Fresh SW winds 
+will develop E of this front, mainly N of 28N.
+
+$$
+Ramos
