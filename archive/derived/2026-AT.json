@@ -20185,6 +20185,117 @@
       "stamp": "202607251116",
       "issuedISO": "2026-07-25T12:00:00.000Z",
       "disturbances": []
+    },
+    {
+      "file": "TWDAT.202607251701.txt",
+      "kind": "TWD",
+      "stamp": "202607251701",
+      "issuedISO": "2026-07-25T18:15:00.000Z",
+      "cyclones": [],
+      "waves": [
+        {
+          "id": "W1",
+          "axis": [
+            {
+              "lat": 20,
+              "lon": -39
+            },
+            {
+              "lat": 8,
+              "lon": -39
+            }
+          ],
+          "inferred": false,
+          "motion": {
+            "bearing": 270,
+            "slowKt": 15,
+            "fastKt": 15
+          }
+        },
+        {
+          "id": "W4",
+          "axis": [
+            {
+              "lat": 20,
+              "lon": -88
+            },
+            {
+              "lat": 8,
+              "lon": -88
+            }
+          ],
+          "inferred": false,
+          "motion": {
+            "bearing": 270,
+            "slowKt": 10,
+            "fastKt": 10
+          }
+        }
+      ],
+      "convection": 1,
+      "troughs": 2,
+      "fixes": 1,
+      "inferred": 2,
+      "projections": 2
+    },
+    {
+      "file": "TWDAT.202607251702.txt",
+      "kind": "TWD",
+      "stamp": "202607251702",
+      "issuedISO": "2026-07-25T18:15:00.000Z",
+      "cyclones": [],
+      "waves": [
+        {
+          "id": "W1",
+          "axis": [
+            {
+              "lat": 20,
+              "lon": -39
+            },
+            {
+              "lat": 8,
+              "lon": -39
+            }
+          ],
+          "inferred": false,
+          "motion": {
+            "bearing": 270,
+            "slowKt": 15,
+            "fastKt": 15
+          }
+        },
+        {
+          "id": "W4",
+          "axis": [
+            {
+              "lat": 20,
+              "lon": -88
+            },
+            {
+              "lat": 8,
+              "lon": -88
+            }
+          ],
+          "inferred": false,
+          "motion": {
+            "bearing": 270,
+            "slowKt": 10,
+            "fastKt": 10
+          }
+        }
+      ],
+      "convection": 1,
+      "troughs": 2,
+      "fixes": 1,
+      "inferred": 2,
+      "projections": 2
+    },
+    {
+      "file": "TWOAT.202607251709.txt",
+      "kind": "TWO",
+      "stamp": "202607251709",
+      "issuedISO": "2026-07-25T18:00:00.000Z",
+      "disturbances": []
     }
   ]
 }
