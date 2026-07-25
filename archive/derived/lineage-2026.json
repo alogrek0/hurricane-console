@@ -12503,6 +12503,23 @@
               ],
               "inferred": false,
               "link": "axis"
+            },
+            {
+              "stamp": "202607251004",
+              "file": "TWDAT.202607251004.txt",
+              "meanLon": -38,
+              "axis": [
+                {
+                  "lat": 21,
+                  "lon": -38
+                },
+                {
+                  "lat": 8,
+                  "lon": -38
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
             }
           ]
         },
@@ -21660,6 +21677,57 @@
               ],
               "inferred": false,
               "link": "axis"
+            },
+            {
+              "stamp": "202607251004",
+              "file": "TWDEP.202607251004.txt",
+              "meanLon": -88,
+              "axis": [
+                {
+                  "lat": 15,
+                  "lon": -88
+                },
+                {
+                  "lat": 3,
+                  "lon": -88
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
+            },
+            {
+              "stamp": "202607251005",
+              "file": "TWDEP.202607251005.txt",
+              "meanLon": -88,
+              "axis": [
+                {
+                  "lat": 15,
+                  "lon": -88
+                },
+                {
+                  "lat": 3,
+                  "lon": -88
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
+            },
+            {
+              "stamp": "202607251006",
+              "file": "TWDEP.202607251006.txt",
+              "meanLon": -88,
+              "axis": [
+                {
+                  "lat": 15,
+                  "lon": -88
+                },
+                {
+                  "lat": 3,
+                  "lon": -88
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
             }
           ]
         }
@@ -28014,6 +28082,28 @@
               "link": null
             }
           ]
+        },
+        {
+          "id": "EP-I-202607251122-1",
+          "tag": null,
+          "sightings": [
+            {
+              "stamp": "202607251122",
+              "file": "TWOEP.202607251122.txt",
+              "lat": null,
+              "lon": null,
+              "chance48": {
+                "cat": "medium",
+                "pct": 40
+              },
+              "chance7": {
+                "cat": "high",
+                "pct": 70
+              },
+              "tagged": false,
+              "link": null
+            }
+          ]
         }
       ],
       "cyclones": [
@@ -29373,6 +29463,33 @@
               "classification": "Hurricane",
               "windKt": 90,
               "link": "name"
+            },
+            {
+              "stamp": "202607251004",
+              "file": "TWDEP.202607251004.txt",
+              "lat": 18.8,
+              "lon": -135.1,
+              "classification": "Hurricane",
+              "windKt": 85,
+              "link": "name"
+            },
+            {
+              "stamp": "202607251005",
+              "file": "TWDEP.202607251005.txt",
+              "lat": 18.8,
+              "lon": -135.1,
+              "classification": "Hurricane",
+              "windKt": 85,
+              "link": "name"
+            },
+            {
+              "stamp": "202607251006",
+              "file": "TWDEP.202607251006.txt",
+              "lat": 18.8,
+              "lon": -135.1,
+              "classification": "Hurricane",
+              "windKt": 85,
+              "link": "name"
             }
           ]
         },
@@ -29430,6 +29547,33 @@
               "classification": "Tropical Storm",
               "windKt": 45,
               "link": null
+            },
+            {
+              "stamp": "202607251004",
+              "file": "TWDEP.202607251004.txt",
+              "lat": 10,
+              "lon": -103.6,
+              "classification": "Tropical Storm",
+              "windKt": 45,
+              "link": "name"
+            },
+            {
+              "stamp": "202607251005",
+              "file": "TWDEP.202607251005.txt",
+              "lat": 10,
+              "lon": -103.6,
+              "classification": "Tropical Storm",
+              "windKt": 45,
+              "link": "name"
+            },
+            {
+              "stamp": "202607251006",
+              "file": "TWDEP.202607251006.txt",
+              "lat": 10,
+              "lon": -103.6,
+              "classification": "Tropical Storm",
+              "windKt": 45,
+              "link": "name"
             }
           ]
         }
