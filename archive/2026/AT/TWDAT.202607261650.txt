@@ -1,0 +1,109 @@
+
+431 
+AXNT20 KNHC 261650
+TWDAT 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+1815 UTC Sun Jul 26 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 1200 UTC surface analysis and satellite imagery through 
+1700 UTC.
+
+...TROPICAL WAVES...
+
+A tropical wave has an axis along 19W from 08N to 17N, moving W 
+at 10-15 kt. Scattered moderate convection is noticed from 08N to
+18N and E of 22W. 
+
+A central Atlantic tropical wave has an axis along 49W, from 06N
+to 22N, moving W at around 15-20 kt. Scattered showers are seen
+near the wave axis.
+
+An eastern Caribbean tropical wave has an axis along 65W, from 
+the 17N65W southward into Venezuela, moving W at around 15 kt. 
+Scattered showers and isolated thunderstorms are seen near the
+wave axis. 
+
+A central Caribbean tropical wave has an axis along 75W, moving W
+at around 15 kt. No convection is currently associated with this
+wave. 
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough enters the Atlantic near 21N16W and continues 
+to 11N42W. The ITCZ extends from 11N42W to 08N47W where it is
+broken by a tropical wave, and then resumes from 07N49W to 
+06N55W. Scattered moderate convection is seen from 06N to 14N
+between 22W and 45W.
+
+...GULF OF AMERICA...
+
+A 1018 mb high pressure is centered over the Gulf near 26N87W. A
+surface trough extending off the SW FL coast near Naples is
+generating scattered moderate convection over the nearshore
+waters. A surface trough over the Bay of Campeche is generating 
+scattered showers and isolated thunderstorms over the SW basin. 
+Gentle to moderate anticyclonic winds dominate much of the basin.
+Seas are 1-3 ft basin-wide.
+
+For the forecast, high pressure centered over the Gulf will bring
+gentle to moderate winds and slight to moderate seas to the basin
+into mid-week. Pulsing fresh NE to E winds are likely each 
+afternoon and evening along and just north of the Yucatan 
+Peninsula beginning on Mon as a trough develops daily and drifts 
+westward.
+
+...CARIBBEAN SEA...
+
+The pressure gradient between low pressure over NW Colombia and 
+the Atlantic ridge is forcing fresh to locally strong trades over
+the central to SW Caribbean, generally S of 15N, where seas are 6-8
+ft. Moderate to locally fresh easterly trade winds and 3-6 ft 
+seas prevail in the eastern Caribbean as well as the Gulf of
+Honduras. Across the NW Caribbean, NE to E winds are moderate or 
+weaker, with slight seas. In the SW Caribbean, scattered moderate
+convection is occurring along the coasts of Panama, Costa Rica,
+and Nicaragua, enhanced by the East Pacific monsoon trough.
+
+For the forecast, the pressure gradient between the Atlantic 
+ridge and the Colombian low will support fresh to strong winds 
+with moderate to locally rough seas across the south-central 
+Caribbean today, with fresh winds in the Gulf of Honduras. The 
+ridge will weaken and shift east tonight, allowing winds and seas 
+to diminish over the central Caribbean into mid week. Looking 
+ahead, winds and seas will increase again across the central 
+Caribbean starting Wed as the ridge builds north of the area. 
+
+...ATLANTIC OCEAN...
+
+A pair of surface troughs in the western Atlantic are facilitating
+the development of scattered moderate convection N of 27N and W of
+65W, with more widely scattered showers and thunderstorms
+impacting the Bahamas. Moderate to fresh SW winds are seen in this
+region as well. In the central Atlantic, an upper- level trough 
+is aiding in the development of scattered moderate convection NE 
+of the Lesser Antilles from 16N to 22N between 54W and 60W. 
+Another area of scattered showers and thunderstorms are seen along
+and near a surface trough in the central Atlantic analyzed from 
+31N44W to 26N54W. Surface ridging prevails across much of the 
+remaining Atlantic, supporting moderate to fresh trades and 
+moderate seas across much of the basin. Scatterometer data from 
+this morning indicate fresh to strong NE winds in the vicinity of 
+the Canary Islands. Gentle to moderate or weaker winds and slight
+to moderate seas prevail elsewhere.
+
+For the forecast west of 55W, a cold front will move offshore the
+SE U.S. today, then stall. SW winds will increase and seas will 
+build N of 25N through the middle of the week between this front 
+and the Atlantic ridge to the east. 
+
+$$
+Adams
+
