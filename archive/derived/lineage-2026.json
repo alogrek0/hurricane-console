@@ -28394,6 +28394,22 @@
               },
               "tagged": true,
               "link": null
+            },
+            {
+              "stamp": "202607260513",
+              "file": "TWOEP.202607260513.txt",
+              "lat": null,
+              "lon": null,
+              "chance48": {
+                "cat": "high",
+                "pct": 70
+              },
+              "chance7": {
+                "cat": "high",
+                "pct": 90
+              },
+              "tagged": true,
+              "link": "tag"
             }
           ]
         }
