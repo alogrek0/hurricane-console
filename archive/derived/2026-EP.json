@@ -19530,6 +19530,171 @@
           }
         }
       ]
+    },
+    {
+      "file": "TWDEP.202607252126.txt",
+      "kind": "TWD",
+      "stamp": "202607252126",
+      "issuedISO": "2026-07-25T22:05:00.000Z",
+      "cyclones": [
+        {
+          "name": "Fausto",
+          "classification": "Hurricane",
+          "lat": 19.3,
+          "lon": -137.6,
+          "windKt": 85
+        },
+        {
+          "name": "Genevieve",
+          "classification": "Tropical Storm",
+          "lat": 11.5,
+          "lon": -105.7,
+          "windKt": 60
+        }
+      ],
+      "waves": [
+        {
+          "id": "W1",
+          "axis": [
+            {
+              "lat": 15,
+              "lon": -88
+            },
+            {
+              "lat": 3,
+              "lon": -88
+            }
+          ],
+          "inferred": false,
+          "motion": {
+            "bearing": 270,
+            "slowKt": 10,
+            "fastKt": 15
+          }
+        }
+      ],
+      "convection": 4,
+      "troughs": 2,
+      "fixes": 4,
+      "inferred": 0,
+      "projections": 3
+    },
+    {
+      "file": "TWDEP.202607252127.txt",
+      "kind": "TWD",
+      "stamp": "202607252127",
+      "issuedISO": "2026-07-25T22:05:00.000Z",
+      "cyclones": [
+        {
+          "name": "Fausto",
+          "classification": "Hurricane",
+          "lat": 19.3,
+          "lon": -137.6,
+          "windKt": 85
+        },
+        {
+          "name": "Genevieve",
+          "classification": "Tropical Storm",
+          "lat": 11.5,
+          "lon": -105.7,
+          "windKt": 60
+        }
+      ],
+      "waves": [
+        {
+          "id": "W1",
+          "axis": [
+            {
+              "lat": 15,
+              "lon": -88
+            },
+            {
+              "lat": 3,
+              "lon": -88
+            }
+          ],
+          "inferred": false,
+          "motion": {
+            "bearing": 270,
+            "slowKt": 10,
+            "fastKt": 15
+          }
+        }
+      ],
+      "convection": 4,
+      "troughs": 2,
+      "fixes": 4,
+      "inferred": 0,
+      "projections": 3
+    },
+    {
+      "file": "TWOEP.202607252327.txt",
+      "kind": "TWO",
+      "stamp": "202607252327",
+      "issuedISO": "2026-07-26T00:00:00.000Z",
+      "disturbances": [
+        {
+          "invest": "CP92",
+          "lat": null,
+          "lon": null,
+          "chance48": {
+            "cat": "medium",
+            "pct": 50
+          },
+          "chance7": {
+            "cat": "high",
+            "pct": 80
+          }
+        }
+      ]
+    },
+    {
+      "file": "TWDEP.202607260403.txt",
+      "kind": "TWD",
+      "stamp": "202607260403",
+      "issuedISO": "2026-07-26T04:05:00.000Z",
+      "cyclones": [
+        {
+          "name": "Fausto",
+          "classification": "Hurricane",
+          "lat": 19.5,
+          "lon": -138.8,
+          "windKt": 85
+        },
+        {
+          "name": "Genevieve",
+          "classification": "Hurricane",
+          "lat": 12.1,
+          "lon": -106.7,
+          "windKt": null
+        }
+      ],
+      "waves": [
+        {
+          "id": "W1",
+          "axis": [
+            {
+              "lat": 15,
+              "lon": -90
+            },
+            {
+              "lat": 3,
+              "lon": -90
+            }
+          ],
+          "inferred": false,
+          "motion": {
+            "bearing": 270,
+            "slowKt": 10,
+            "fastKt": 15
+          }
+        }
+      ],
+      "convection": 1,
+      "troughs": 2,
+      "fixes": 16,
+      "inferred": 0,
+      "projections": 3
     }
   ]
 }
