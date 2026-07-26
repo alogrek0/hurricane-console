@@ -1,0 +1,39 @@
+
+000
+ABPZ20 KNHC 261124
+TWOEP 
+
+Tropical Weather Outlook
+NWS National Hurricane Center Miami FL
+500 AM PDT Sun Jul 26 2026
+
+For the eastern and central North Pacific east of 180 longitude:
+
+Active Systems:
+The National Hurricane Center is issuing advisories on Hurricane 
+Fausto, crossing into the Central Pacific but still located well 
+east of the Hawaiian Islands, and on Hurricane Genevieve, located 
+well southwest of the southwestern coast of Mexico.
+
+Well Southwest of Hawaii (CP92):
+Showers and thunderstorms associated with a broad area of low 
+pressure located well west-southwest of the Hawaiian Islands 
+continue to gradually become better organized. Environmental 
+conditions appear conducive for additional development of this 
+system while it moves generally westward at 10-15 mph. A tropical 
+depression is expected to form over the next day or so as the system 
+crosses the International Date Line, entering the western Pacific 
+basin. 
+* Formation chance through 48 hours...high...90 percent. 
+* Formation chance through 7 days...high...90 percent.
+
+&&
+Products issued by the U.S. Joint Typhoon Warning Center can be 
+found at: www.metoc.navy.mil/jtwc/jtwc.html
+
+Official tropical cyclone forecast information issued by the Japan 
+Meteorological Agency for the western Pacific basin can be found at:
+www.jma.go.jp/jma/jma-eng/jma-center/rsmc-hp-pub-eg/RSMC_HP.html
+
+$$
+Forecaster Papin

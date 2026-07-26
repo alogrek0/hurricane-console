@@ -12763,6 +12763,28 @@
               "link": "axis"
             }
           ]
+        },
+        {
+          "id": "AT-W-202607261008-1",
+          "sightings": [
+            {
+              "stamp": "202607261008",
+              "file": "TWDAT.202607261008.txt",
+              "meanLon": -19,
+              "axis": [
+                {
+                  "lat": 17,
+                  "lon": -19
+                },
+                {
+                  "lat": 10,
+                  "lon": -19
+                }
+              ],
+              "inferred": false,
+              "link": null
+            }
+          ]
         }
       ],
       "invests": [
@@ -21976,6 +21998,40 @@
               ],
               "inferred": false,
               "link": "axis"
+            },
+            {
+              "stamp": "202607261004",
+              "file": "TWDEP.202607261004.txt",
+              "meanLon": -92,
+              "axis": [
+                {
+                  "lat": 15,
+                  "lon": -92
+                },
+                {
+                  "lat": 3,
+                  "lon": -92
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
+            },
+            {
+              "stamp": "202607261034",
+              "file": "TWDEP.202607261034.txt",
+              "meanLon": -92,
+              "axis": [
+                {
+                  "lat": 15,
+                  "lon": -92
+                },
+                {
+                  "lat": 3,
+                  "lon": -92
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
             }
           ]
         }
@@ -28410,6 +28466,22 @@
               },
               "tagged": true,
               "link": "tag"
+            },
+            {
+              "stamp": "202607261124",
+              "file": "TWOEP.202607261124.txt",
+              "lat": null,
+              "lon": null,
+              "chance48": {
+                "cat": "high",
+                "pct": 90
+              },
+              "chance7": {
+                "cat": "high",
+                "pct": 90
+              },
+              "tagged": true,
+              "link": "tag"
             }
           ]
         }
@@ -29834,6 +29906,24 @@
               "classification": "Hurricane",
               "windKt": 85,
               "link": "name"
+            },
+            {
+              "stamp": "202607261004",
+              "file": "TWDEP.202607261004.txt",
+              "lat": 19.7,
+              "lon": -139.8,
+              "classification": "Hurricane",
+              "windKt": 80,
+              "link": "name"
+            },
+            {
+              "stamp": "202607261034",
+              "file": "TWDEP.202607261034.txt",
+              "lat": 19.7,
+              "lon": -139.8,
+              "classification": "Hurricane",
+              "windKt": 80,
+              "link": "name"
             }
           ]
         },
@@ -29953,6 +30043,24 @@
               "lon": -106.7,
               "classification": "Hurricane",
               "windKt": null,
+              "link": "name"
+            },
+            {
+              "stamp": "202607261004",
+              "file": "TWDEP.202607261004.txt",
+              "lat": 12.9,
+              "lon": -108.3,
+              "classification": "Hurricane",
+              "windKt": 80,
+              "link": "name"
+            },
+            {
+              "stamp": "202607261034",
+              "file": "TWDEP.202607261034.txt",
+              "lat": 12.9,
+              "lon": -108.3,
+              "classification": "Hurricane",
+              "windKt": 80,
               "link": "name"
             }
           ]
