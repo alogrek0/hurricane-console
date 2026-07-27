@@ -1,0 +1,106 @@
+
+098 
+AXNT20 KNHC 262305
+TWDAT
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+0015 UTC Sun Jul 26 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 1800 UTC surface analysis and satellite imagery through 
+2305 UTC.
+
+...TROPICAL WAVES...
+
+An eastern Atlantic tropical wave has an axis along 20W from 08N 
+to 17N, moving W at 10-15 kt. No significant convection is noted 
+near the wave. 
+
+A central Atlantic tropical wave has an axis along 50W, from 06N 
+to 22N, moving W at 15 kt. No significant convection is seen near
+this wave.
+
+An eastern Caribbean tropical wave has an axis along 66W, from 
+the 17N66W southward into Venezuela, moving W at 15 kt. No
+significant convection is observed near the wave over the ocean.
+
+A central Caribbean tropical wave has an axis along 75W, moving W
+at 15 kt. No convection is currently associated with this wave. 
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough enters the Atlantic near 20N16W and continues 
+to 10N44W. The ITCZ extends from 10N44W to 07N49W, and then 
+resumes from 07N50W to 06N55W. Scattered moderate to isolated
+strong convection is present from 06N to 13N and between 25W and 
+35W.
+
+...GULF OF AMERICA...
+
+Scattered showers and isolated thunderstorms are noted in the Bay
+of Campeche, especially off western Yucatan. Similar storms are
+found in the eastern Gulf, mainly near Florida. High pressure
+dominates the rest of the basin, supporting moderate or weaker
+winds and slight seas. However, stronger winds and higher seas are
+likely near the mentioned storms.
+
+For the forecast, a ridge will remain in control of the weather pattern
+across the Gulf region through at least mid-week, bringing gentle
+to moderate winds and slight to moderate seas. Pulsing fresh NE 
+to E winds are likely each afternoon and evening along and just 
+north of the Yucatan Peninsula beginning on Mon as a trough develops
+daily and drifts westward.
+
+...CARIBBEAN SEA...
+
+High pressure north of the islands supports fresh to strong
+easterly trade winds and seas of 5-8 ft across the south-central
+Caribbean. Moderate to fresh easterly breezes and moderate seas
+are found in the north-central Caribbean and Gulf of Honduras.
+Elsewhere, moderate or weaker winds and slight to moderate seas
+prevail. Afternoon convection has developed over Cuba, Hispaniola,
+Jamaica, from Costa Rica to Venezuela, with some of the storms
+affecting the nearby waters.
+
+For the forecast, the pressure gradient between the Atlantic ridge
+and the Colombian low will support fresh to strong winds with 
+moderate to locally rough seas across the south-central Caribbean 
+tonight, with fresh winds in the Gulf of Honduras. The ridge will 
+weaken and shift east tonight, allowing winds and seas to diminish
+over the central Caribbean into mid-week. Looking ahead, winds 
+and seas will increase again across the central Caribbean starting
+Wed as the ridge builds again north of the area. 
+
+...ATLANTIC OCEAN...
+
+A couple of surface troughs and divergence aloft support scattered
+showers and isolated thunderstorms north of 25N and west of 68W.
+Moderate to fresh SW winds and moderate seas are present north of
+27N and between 63W and 77W. Moderate to fresh easterly trade
+winds and moderate seas are occurring south of 23N and between 60W
+and 75W. In the central Atlantic, an upper level trough is aiding
+in the development of scattered moderate convection NE of the 
+Lesser Antilles from 15N to 22N and between 53W and 63W. 
+
+The tropical Atlantic is dominated by a broad subtropical ridge 
+anchored by a 1028 mb high pressure system near the Azores.
+Moderate to locally fresh easterly trade winds and seas of 4-8 ft
+cover much of the central and eastern Pacific, with the highest
+seas evident to the NW of the Cabo Verde Islands. Elsewhere,
+moderate or lighter winds and moderate seas prevail.
+
+For the forecast west of 55W, expect fresh to strong SW winds and
+moderate to rough seas across the north waters, mainly N of 29N, 
+most of the week as frontal boundaries remain to the north of 
+area. A ridge will dominate the remainder of the forecast region 
+producing mainly gentle to moderate winds and moderate seas. 
+
+$$
+Delgado
+
