@@ -1,0 +1,102 @@
+
+966 
+AXNT20 KNHC 270613
+TWDAT 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+0615 UTC Mon Jul 27 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 0000 UTC surface analysis and satellite imagery through 
+0550 UTC.
+
+...TROPICAL WAVES...
+
+A tropical wave is in the E Atlantic with axis just E of the Cape
+Verde Islands near 22W, extending from 08N to 18N, and moving W 
+at 10-15 kt. No significant convection is noted near the wave. 
+
+A tropical wave is in the central Atlantic with axis near 52W,
+extending from 09N to 21N, and moving W at 15 kt. Scattered
+moderate convection is E of the wave axis from 08N to 14N between
+44W and 48W.
+
+A tropical wave is in the central Caribbean with axis near 68W
+southward from 18N into Venezuela, and moving W at 15 kt. No 
+significant convection is observed near the wave over the ocean.
+
+A tropical wave is in the SW Caribbean with axis near 78W from 18N
+southward to E Panama, and moving W at 15 kt. Only isolated
+showers are associated with this wave. 
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough enters the Atlantic near 20N16W and continues 
+to 10N44W. The ITCZ extends from 10N44W to 07N49W, and then 
+resumes from 07N50W to 06N55W. Scattered moderate to isolated
+strong convection is present from 06N to 13N and between 25W and 
+35W.
+
+...GULF OF AMERICA...
+
+High pressure of 1018 mb is centered near 26N90W and is supporting
+light to gentle variable winds, except along the northern Gulf
+coastal and immediate offshore waters where moderate winds are
+present. Moderate to locally fresh E winds are also ongoing in the
+Bay of Campeche associated with a surface trough that is coming
+off the Yucatan peninsula. Aside from the winds, the surface
+trough is generating scattered moderate convection where recent
+scatterometer data show a pocket of strong E winds.  
+
+For the forecast, high pressure will meander about the central 
+Gulf and weaken through Wed, leading to gentle to moderate winds 
+and slight to moderate seas. Pulsing fresh NE to E winds are 
+likely each afternoon and evening along and just north of the 
+Yucatan Peninsula beginning on Mon as a trough develops daily and 
+drifts westward. Looking ahead, showers and thunderstorms are 
+expected to become active across the NE Gulf Wed afternoon through
+Thu as a frontal boundary sinks to just N of the area.
+
+...CARIBBEAN SEA...
+
+High pressure north of the islands supports fresh trade winds and
+seas of 5-8 ft across the central Caribbean. Moderate or weaker 
+winds and slight to moderate seas prevail elsewhere. Otherwise,
+scattered heavy showers are ongoing in the Windward Passage.
+
+For the forecast, the pressure gradient between the western 
+Atlantic ridge along 25N-26N and the Colombian low will support 
+fresh to strong winds with moderate to locally rough seas across 
+the south-central Caribbean S of 15N tonight, with fresh winds in
+the Gulf of Honduras. The ridge will weaken and shift eastward 
+Mon through Wed, allowing winds and seas to diminish over the 
+central Caribbean into midweek. Looking ahead, winds and seas 
+will increase again across the central Caribbean starting Wed as 
+the ridge builds again north of the area. 
+
+...ATLANTIC OCEAN...
+
+A surface ridge extending from a 1025 mb center of high pressure
+near 32N41W extends across the Bahamas offshore waters. To the N
+of 27N and west of 73W, scattered moderate convection and tstms 
+are occuring ahead of a cold front. Winds ahead of the front are
+moderate to fresh from the SW extending to 63W and N of 27N. 
+Elsewhere, moderate or lighter winds and moderate seas prevail.
+
+For the forecast west of 55W, the high pressure and associated
+ridge in the Western Atlantic will drift eastward and weaken 
+slightly Mon through Wed. Expect fresh to strong SW winds and 
+moderate to rough seas across the northern waters, mainly N of 
+29N, most of the week as sinking frontal boundaries remain just to
+the north of area. The Atlantic ridge will building modestly 
+westward and into the central Bahamas Wed through Fri.
+
+$$
+Ramos
+
