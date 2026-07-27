@@ -22520,6 +22520,23 @@
               ],
               "inferred": false,
               "link": "axis"
+            },
+            {
+              "stamp": "202607271542",
+              "file": "TWDEP.202607271542.txt",
+              "meanLon": -97,
+              "axis": [
+                {
+                  "lat": 15,
+                  "lon": -97
+                },
+                {
+                  "lat": 3,
+                  "lon": -97
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
             }
           ]
         }
@@ -30682,6 +30699,15 @@
               "lon": -112.2,
               "classification": "Hurricane",
               "windKt": 140,
+              "link": "name"
+            },
+            {
+              "stamp": "202607271542",
+              "file": "TWDEP.202607271542.txt",
+              "lat": 16,
+              "lon": -113.1,
+              "classification": "Hurricane",
+              "windKt": 135,
               "link": "name"
             }
           ]
