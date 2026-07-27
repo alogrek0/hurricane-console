@@ -1,0 +1,113 @@
+
+833 
+AXNT20 KNHC 271657
+TWDAT 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+1815 UTC Mon Jul 27 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 1200 UTC surface analysis and satellite imagery through 
+1657 UTC.
+
+...TROPICAL WAVES...
+
+A tropical wave is in the E Atlantic with axis near 26W, 
+extending from 09N to 18N, and moving W at 10-15 kt. Isolated 
+clusters of moderate convection are noted near the wave.
+
+An Atlantic tropical wave is along 56W, extending from 09N to 
+21N, and moving W at 15-20 kt. No significant convection is
+depicted at this time in association with this wave. 
+
+A tropical wave is in the central Caribbean with axis along 71.5W
+southward from 18N into Venezuela, and moving W at 10 to 15 kt. No
+significant convection is depicted at this time in association 
+with this wave. 
+
+A tropical wave is in the SW Caribbean with axis near 80W, from 
+18N southward to central Panama, and moving W at 15 to 20 kt. 
+Scattered moderate convection is noted S of 11N between 76W and 
+83W. Scattered convection is also noted from 16N to 18N along the
+wave axis. 
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough enters the Atlantic near 17N16.5W and 
+continues to 10N49.5W. Scattered moderate isolated strong 
+convection is along the coast of Africa from 06N to 13N E of 22W.
+Scattered moderate convection is depicted from 06N to 13N between
+31W and 41W and between 49W and 53W.  
+
+...GULF OF AMERICA...
+
+An upper level trough along the eastern seaboard of the U.S. 
+extends southwestward to northern Florida, and scattered showers 
+and thunderstorms from 27N to 29N and east of 86W. Scattered 
+moderate convection is found across the Straits of Florida. 
+Scattered moderate convection is noted across the western Bay of 
+Campeche. A high pressure of 1017 mb is centered near 26.5N90W and
+is supporting light to gentle variable winds, except gentle to 
+moderate NW winds along the northeastern Gulf coastal and 
+immediate offshore waters. Gentle to moderate SE winds are also 
+ongoing in the Bay of Campeche. Seas are 2 to 4 ft across the 
+basin. 
+
+For the forecast, high pressure remaining over the central
+Gulf will lead toward generally quiescent conditions for the next
+several days. The exception is NE fresh winds just northwest of 
+the Yucatan peninsula nightly through the end of the week. 
+Scattered showers and thunderstorms will continue during the next 
+couple of days over the NE Gulf due to an approaching weak cold 
+front.
+
+...CARIBBEAN SEA...
+
+The Atlantic ridge extends westward along 16N-18N, and is 
+supporting fresh trade winds and seas of 5-8 ft across the 
+central Caribbean S of 16N. Moderate or weaker winds and slight 
+to moderate seas prevail elsewhere. An mid level trough is supporting
+scattered moderate convection north of 20N between 81W and 84W. 
+
+For the forecast, an increasing pressure gradient between the 
+Colombian Low and high pressure north of the Caribbean will boost 
+trades to strong over the S central Caribbean from Tue night 
+through the end of the week. Similarly, trades over the Gulf of 
+Honduras will increase to fresh starting Tuesday night. A tropical
+wave moving through the E Caribbean will enhance showers and 
+thunderstorms today and tomorrow over the SE Caribbean.
+
+...ATLANTIC OCEAN...
+
+A surface ridge extending from a 1025 mb center of high pressure 
+near 32N39W extends southwestward to near 24N71W. To the N of 23N
+and west of 67W, scattered to numerous moderate and isolated 
+strong convection is occurring ahead of a stalling cold front 
+along 31.5N and offshore of the Carolinas. Moderate to locally 
+fresh S to SW winds prevail ahead of the front, north of 29N and
+between 61W and 69W. Another area of scattered moderate convection
+is found from 21N to 25N between 56.5W and 63W in association to
+an upper level low. Elsewhere N of 22N and W of 40W, moderate or 
+lighter winds and moderate seas prevail. Across the tropical 
+Atlantic S of 22N moderate to locally fresh trade winds prevail, 
+with seas of 5-8 ft. A 1025 mb high pressure near the Azores is 
+promoting moderate to locally fresh NE to E winds from the Canary 
+Islands to 40W, where seas are 5 to 8 ft.
+
+For the forecast west of 55W, the ridge associated with the 
+Bermuda High will remain farther south than usual - near 25N - 
+through Fri. This in combination with a stationary front offshore 
+of the Carolinas is forcing fresh to strong SW winds and scattered
+showers and thunderstorms north of 28N west of 65W for the next 
+several days. Fresh to locally strong trades will develop just 
+north of Hispaniola from Wed through Fri.
+
+$$
+KRV
+
