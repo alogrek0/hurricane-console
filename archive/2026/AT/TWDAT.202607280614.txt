@@ -1,0 +1,105 @@
+
+000
+AXNT20 KNHC 280614
+TWDAT
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+0615 UTC Tue Jul 28 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 0000 UTC surface analysis and satellite imagery through 
+0550 UTC.
+
+...TROPICAL WAVES...
+
+A tropical wave is in the E Atlantic with axis near 33W, extending
+from 08N to 15N, and moving westward at around 15-20 kt. Only
+isolated showers are associated with this wave.
+
+A tropical wave is E of the Lesser Antilles with axis near 60W,
+extending from 09N to 19N, and moving westward at around 15 kt. 
+There is no convection associated with the wave at this time.
+
+A tropical wave is in the SW Caribbean with axis near 82W, from 
+10N to 18N, and moving westward at around 10-15 kt. Scattered 
+moderate isolated strong convection is noted from 09N to 14N 
+between 79W and 83W.
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough enters the Atlantic near 14N16W and continues 
+to 11N27W to 1015 mb low pressure near 09N36W to 09N39W. The ITCZ
+begins near 09N39W and continues to 09N51W to 08N61W. Scattered 
+moderate convection is present offshore Africa, from 05N to 12N 
+between Africa and 17W. Similar convection is from 06N to 10N
+between 36W and 45W. 
+
+...GULF OF AMERICA...
+
+Scattered moderate convection is ongoing over the from the coastal
+waters of Pensacola to the Tampa Bay area associated with a
+surface trough. Ahead of the trough the tail of a weak cold front
+moves across central Florida. The remainder Gulf is under the
+influence of a 1014 mb high centered near 26N91W, which is
+supporting light to gentle variable winds over the central and SE
+basin along with slight seas. Moderate to fresh NE to E winds
+prevail in the Bay of Campeche associated with a surface trough.
+Moderate to fresh SE to S winds are also W of 95W while moderate
+or weaker NW winds are over the NE Gulf N of 28N. 
+
+For the forecast, high pressure will remain over the central Gulf
+to promote generally quiescent marine conditions for the next 
+several days. The exception will be fresh NE winds off the 
+northwest coast of the Yucatan peninsula nightly through the 
+weekend. Scattered showers and thunderstorms will continue during 
+the next couple of days over the NE Gulf due to an approaching 
+weak cold front across the SE U.S. 
+
+...CARIBBEAN SEA...
+
+Please refer to the TROPICAL WAVES section above for information
+on any convection.
+
+Atlantic ridging dominates north of the basin with 1008 mb low 
+pressure analyzed just N of Panama near 10N79W. The pressure 
+gradient between the two supports moderate to fresh trades over the
+central Caribbean along with 5 to 7 ft seas. Winds are moderate 
+or weaker across the remainder of basin, with slight to moderate 
+seas.
+
+For the forecast, the increasing pressure gradient between the 
+Colombian Low and western Atlantic high pressure along 25N-26N 
+will boost trade winds to strong over the S central Caribbean 
+tonight through the end of the week. Trade winds over the Gulf of 
+Honduras will increase to fresh beginning Wednesday night. A 
+tropical wave entering the E Caribbean tonight will enhance 
+showers and thunderstorms across the E and NE Caribbean tonight 
+and tomorrow. 
+
+...ATLANTIC OCEAN...
+
+A weak cold front is moving across the SW N Atlantic waters from
+31N74W SW to central coastal Florida near 28N80W. Scattered heavy
+showers and tstms are ahead of this boundary, affecting the
+northern offshore waters N of 27N between 66W and 78W. The Azores
+High dominates the remainder subtropical Atlantic waters and
+provides moderate or weaker winds and moderate seas. The gradient
+of pressure between the ridge and the front over the SW waters
+supports moderate to fresh SSW winds W of 60W. 
+
+For the forecast west of 55W, the Bermuda High will maintain a 
+ridge farther south than usual - near 25N - through Fri. This in 
+combination with a stationary front offshore of the Carolinas will
+force fresh to strong SW winds with scattered showers and 
+thunderstorms north of 27N and west of 63W for the next several 
+days. Fresh to locally strong trades will develop just north of 
+Hispaniola and Puerto Rico from Wed through the weekend.
+
+$$
+Ramos

@@ -13060,6 +13060,57 @@
               ],
               "inferred": false,
               "link": "axis"
+            },
+            {
+              "stamp": "202607280614",
+              "file": "TWDAT.202607280614.txt",
+              "meanLon": -60,
+              "axis": [
+                {
+                  "lat": 19,
+                  "lon": -60
+                },
+                {
+                  "lat": 9,
+                  "lon": -60
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
+            },
+            {
+              "stamp": "202607280951",
+              "file": "TWDAT.202607280951.txt",
+              "meanLon": -61.5,
+              "axis": [
+                {
+                  "lat": 19,
+                  "lon": -61.5
+                },
+                {
+                  "lat": 8,
+                  "lon": -61.5
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
+            },
+            {
+              "stamp": "202607280952",
+              "file": "TWDAT.202607280952.txt",
+              "meanLon": -61.5,
+              "axis": [
+                {
+                  "lat": 19,
+                  "lon": -61.5
+                },
+                {
+                  "lat": 8,
+                  "lon": -61.5
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
             }
           ]
         },
@@ -13215,6 +13266,57 @@
               ],
               "inferred": false,
               "link": "axis"
+            },
+            {
+              "stamp": "202607280614",
+              "file": "TWDAT.202607280614.txt",
+              "meanLon": -82,
+              "axis": [
+                {
+                  "lat": 18,
+                  "lon": -82
+                },
+                {
+                  "lat": 10,
+                  "lon": -82
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
+            },
+            {
+              "stamp": "202607280951",
+              "file": "TWDAT.202607280951.txt",
+              "meanLon": -82,
+              "axis": [
+                {
+                  "lat": 18,
+                  "lon": -82
+                },
+                {
+                  "lat": 10,
+                  "lon": -82
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
+            },
+            {
+              "stamp": "202607280952",
+              "file": "TWDAT.202607280952.txt",
+              "meanLon": -82,
+              "axis": [
+                {
+                  "lat": 18,
+                  "lon": -82
+                },
+                {
+                  "lat": 10,
+                  "lon": -82
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
             }
           ]
         },
@@ -13250,6 +13352,62 @@
                 {
                   "lat": 2,
                   "lon": -71
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
+            }
+          ]
+        },
+        {
+          "id": "AT-W-202607280614-1",
+          "sightings": [
+            {
+              "stamp": "202607280614",
+              "file": "TWDAT.202607280614.txt",
+              "meanLon": -33,
+              "axis": [
+                {
+                  "lat": 15,
+                  "lon": -33
+                },
+                {
+                  "lat": 8,
+                  "lon": -33
+                }
+              ],
+              "inferred": false,
+              "link": null
+            },
+            {
+              "stamp": "202607280951",
+              "file": "TWDAT.202607280951.txt",
+              "meanLon": -35,
+              "axis": [
+                {
+                  "lat": 16,
+                  "lon": -35
+                },
+                {
+                  "lat": 7,
+                  "lon": -35
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
+            },
+            {
+              "stamp": "202607280952",
+              "file": "TWDAT.202607280952.txt",
+              "meanLon": -35,
+              "axis": [
+                {
+                  "lat": 16,
+                  "lon": -35
+                },
+                {
+                  "lat": 7,
+                  "lon": -35
                 }
               ],
               "inferred": false,
@@ -22690,6 +22848,23 @@
               ],
               "inferred": false,
               "link": "axis"
+            },
+            {
+              "stamp": "202607280931",
+              "file": "TWDEP.202607280931.txt",
+              "meanLon": -102,
+              "axis": [
+                {
+                  "lat": 15,
+                  "lon": -102
+                },
+                {
+                  "lat": 3,
+                  "lon": -102
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
             }
           ]
         }
@@ -30879,6 +31054,15 @@
               "lon": -114.7,
               "classification": "Hurricane",
               "windKt": 125,
+              "link": "name"
+            },
+            {
+              "stamp": "202607280931",
+              "file": "TWDEP.202607280931.txt",
+              "lat": 17.5,
+              "lon": -115.4,
+              "classification": "Hurricane",
+              "windKt": 120,
               "link": "name"
             }
           ]
