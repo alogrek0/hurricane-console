@@ -1,7 +1,7 @@
 {
   "_readme": "Genesis truth ledger (Track C M4): per-invest statement verdicts + season calibration derived from archive/derived/lineage-2026.json by `node tools/build-genesis-ledger.js` — NEVER hand-edit. Deterministic (\"now\" is the max archive stamp, never wall-clock). Verdicts: formed REQUIRES a lineage invest-cyclone genesis link; an unattributed cyclone opening nearby makes the window unresolved — this ledger refuses to invent formed AND refuses to invent not-formed; windows past nowStamp are pending, never guessed.",
   "season": 2026,
-  "nowStamp": "202607280952",
+  "nowStamp": "202607281528",
   "basins": {
     "AT": {
       "invests": [
@@ -8845,7 +8845,7 @@
                 "pct": 70
               },
               "verdict48": "not-formed",
-              "verdict7": "pending"
+              "verdict7": "not-formed"
             }
           ]
         },
@@ -8877,7 +8877,7 @@
                 "pct": 20
               },
               "verdict48": "not-formed",
-              "verdict7": "pending"
+              "verdict7": "not-formed"
             }
           ]
         },
@@ -9947,7 +9947,7 @@
                 "cat": "high",
                 "pct": 90
               },
-              "verdict48": "pending",
+              "verdict48": "not-formed",
               "verdict7": "pending"
             },
             {
@@ -9989,19 +9989,19 @@
           "high": {
             "statements": 47,
             "formed": 7,
-            "notFormed": 10,
+            "notFormed": 11,
             "unresolved": 28,
-            "pending": 2,
-            "observedRate": 0.412
+            "pending": 1,
+            "observedRate": 0.389
           }
         },
         "d7": {
           "low": {
             "statements": 119,
             "formed": 2,
-            "notFormed": 85,
+            "notFormed": 86,
             "unresolved": 30,
-            "pending": 2,
+            "pending": 1,
             "observedRate": 0.023
           },
           "medium": {
@@ -10015,10 +10015,10 @@
           "high": {
             "statements": 120,
             "formed": 14,
-            "notFormed": 25,
+            "notFormed": 26,
             "unresolved": 52,
-            "pending": 29,
-            "observedRate": 0.359
+            "pending": 28,
+            "observedRate": 0.35
           }
         }
       }
@@ -10045,19 +10045,19 @@
       "high": {
         "statements": 50,
         "formed": 7,
-        "notFormed": 10,
+        "notFormed": 11,
         "unresolved": 31,
-        "pending": 2,
-        "observedRate": 0.412
+        "pending": 1,
+        "observedRate": 0.389
       }
     },
     "d7": {
       "low": {
         "statements": 185,
         "formed": 2,
-        "notFormed": 139,
+        "notFormed": 140,
         "unresolved": 42,
-        "pending": 2,
+        "pending": 1,
         "observedRate": 0.014
       },
       "medium": {
@@ -10071,10 +10071,10 @@
       "high": {
         "statements": 123,
         "formed": 14,
-        "notFormed": 25,
+        "notFormed": 26,
         "unresolved": 55,
-        "pending": 29,
-        "observedRate": 0.359
+        "pending": 28,
+        "observedRate": 0.35
       }
     }
   }

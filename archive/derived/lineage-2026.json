@@ -22865,6 +22865,45 @@
               ],
               "inferred": false,
               "link": "axis"
+            },
+            {
+              "stamp": "202607281528",
+              "file": "TWDEP.202607281528.txt",
+              "meanLon": -104,
+              "axis": [
+                {
+                  "lat": 15,
+                  "lon": -104
+                },
+                {
+                  "lat": 4,
+                  "lon": -104
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
+            }
+          ]
+        },
+        {
+          "id": "EP-W-202607281528-1",
+          "sightings": [
+            {
+              "stamp": "202607281528",
+              "file": "TWDEP.202607281528.txt",
+              "meanLon": -82,
+              "axis": [
+                {
+                  "lat": 17,
+                  "lon": -82
+                },
+                {
+                  "lat": 5,
+                  "lon": -82
+                }
+              ],
+              "inferred": false,
+              "link": null
             }
           ]
         }
@@ -31063,6 +31102,15 @@
               "lon": -115.4,
               "classification": "Hurricane",
               "windKt": 120,
+              "link": "name"
+            },
+            {
+              "stamp": "202607281528",
+              "file": "TWDEP.202607281528.txt",
+              "lat": 17.9,
+              "lon": -116.1,
+              "classification": "Hurricane",
+              "windKt": 110,
               "link": "name"
             }
           ]
