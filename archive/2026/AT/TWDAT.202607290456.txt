@@ -1,0 +1,119 @@
+
+000
+AXNT20 KNHC 290456
+TWDAT 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+0615 UTC Wed Jul 29 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 0000 UTC surface analysis and satellite imagery through 
+0500 UTC.
+
+...TROPICAL WAVES...
+
+A tropical wave is analyzed in the far E Atlantic with axis near 
+19W, extending from 04N to 19N, and moving westward around 10 kt. 
+Scattered moderate convection is noted from 04N to 10N between 15W
+and 21W.
+
+A tropical wave is in the central Atlantic with axis near 39W, 
+extending from 06N to 15N, and moving westward at around 15-20 
+kt. Scattered showers are noted near the wave axis.
+
+A tropical wave is over the E Caribbean with axis near 65W, 
+extending from 10N to 19N or from northern Venezuela to near the
+Anegada Passage, and is moving westward at around 10-15 kt. No 
+significant convection is depicted at the moment in association 
+with this wave. 
+
+A tropical wave is in the WW Caribbean with axis along 85W, south
+of 20N and into the far eastern Tropical Pacific Ocean, and is
+moving westward at around 10 kt. Scattered moderate convection is
+seen S of 18N and W of 81W.
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough enters the Atlantic near the coast of
+Mauritania at 19N16W and continues to 07N45W. The ITCZ begins 
+near 07N45W and continues to 07.5N57W. Other than the convection 
+associated with the tropical waves as described above, a small 
+cluster of scattered moderate convection is noted from 06N to 09N
+between 42W and 48W.
+
+...GULF OF AMERICA...
+
+A surface trough is analyzed from north of Tampa Bay into the NE
+Gulf, with scattered showers near the trough axis. The remainder
+of the Gulf is under the influence of a weak 1013 mb high 
+centered near 26N92W, which is supporting light to gentle 
+anticyclonic winds from the Yucatan Channel to the high to near 
+Galveston Bay, Texas. Moderate anticyclonic winds are closer to 
+all coastal locations around the periphery of the high. Seas are 
+mainly 1 to 3 ft, except locally higher near NE Mexico and SE 
+Texas. 
+
+For the forecast, a surface ridge will remain in control of the 
+weather pattern across the Gulf region promoting gentle to 
+moderate winds for the next several days. The exception will be 
+fresh NE winds off the northwest coast of the Yucatan peninsula 
+nightly into the weekend. Scattered showers and thunderstorms will
+continue during the next couple of days over the NE Gulf due to 
+the presence of a frontal boundary over north-central Florida. 
+
+...CARIBBEAN SEA...
+
+Please refer to the TROPICAL WAVES section above for information
+on associated convection. Scattered thunderstorms are also occurring
+nearshore western Jamaica.
+
+The pressure gradient between relatively low pressure over South 
+America and the ridge is supporting fresh to locally strong 
+trades over the central to SW Caribbean along with 7 to 10 ft 
+seas. Winds are moderate to fresh across the eastern Caribbean and
+remainder of the SW Caribbean, where seas are moderate. Gentle to
+moderate or weaker winds prevail across the remainder of basin, 
+with slight to moderate seas.
+
+For the forecast, the aerial extent and strength of the trade 
+winds will increase from late Wed into Thu as the pressure 
+gradient between the Atlantic ridge and the Colombian Low 
+increases. By that time, expect fresh to strong winds and moderate
+to rough seas across most of the eastern and central Caribbean, 
+with the strongest winds and highest seas offshore Colombia. Fresh
+to strong winds are expected in the Gulf of Honduras nightly from
+Wed through Fri. 
+
+...ATLANTIC OCEAN...
+
+A frontal trough reaches from north of the discussion waters
+through 31N71W to near Cape Canaveral, Florida. Fresh to locally 
+strong SW winds are found north of 27N and east of the boundary to
+near 65W, along with 5-8 ft seas. Nearby scattered moderate 
+convection is found east of the trough to near 65W to the north of
+24N. A 1024 mb high pressure near 30N45W and an associated ridge 
+dominate the remainder of the subtropical Atlantic waters. 
+Moderate to fresh trades can be found north of the monsoon trough 
+and ITCZ to about 22N around the high, with moderate to locally 
+fresh return flow west of 55W and elsewhere southeast of the 
+frontal trough. Fresh to locally strong winds are near Africa to 
+the Canary Islands from 17N to 27N to the east of 20W. Moderate 
+or weaker winds and moderate seas dominate the remainder of the 
+waters.
+
+For the forecast west of 55W, the Bermuda High will maintain a 
+ridge farther south than usual, along 24N-25N, through Fri. This, 
+in combination with a stationary frontal boundary off NE Florida, 
+will force fresh to strong SW winds with scattered showers and 
+thunderstorms north of 27N and west of 65W for the next several 
+days. Fresh to strong trades will develop just north of Hispaniola
+and Puerto Rico from Wed through Sat.
+
+$$
+Adams
