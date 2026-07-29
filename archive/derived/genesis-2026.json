@@ -1,7 +1,7 @@
 {
   "_readme": "Genesis truth ledger (Track C M4): per-invest statement verdicts + season calibration derived from archive/derived/lineage-2026.json by `node tools/build-genesis-ledger.js` — NEVER hand-edit. Deterministic (\"now\" is the max archive stamp, never wall-clock). Verdicts: formed REQUIRES a lineage invest-cyclone genesis link; an unattributed cyclone opening nearby makes the window unresolved — this ledger refuses to invent formed AND refuses to invent not-formed; windows past nowStamp are pending, never guessed.",
   "season": 2026,
-  "nowStamp": "202607290859",
+  "nowStamp": "202607291515",
   "basins": {
     "AT": {
       "invests": [
@@ -9101,7 +9101,7 @@
                 "pct": 90
               },
               "verdict48": "not-formed",
-              "verdict7": "pending"
+              "verdict7": "not-formed"
             }
           ]
         },
@@ -9133,7 +9133,7 @@
                 "pct": 60
               },
               "verdict48": "not-formed",
-              "verdict7": "pending"
+              "verdict7": "not-formed"
             }
           ]
         },
@@ -10007,18 +10007,18 @@
           "medium": {
             "statements": 111,
             "formed": 2,
-            "notFormed": 59,
+            "notFormed": 60,
             "unresolved": 48,
-            "pending": 2,
-            "observedRate": 0.033
+            "pending": 1,
+            "observedRate": 0.032
           },
           "high": {
             "statements": 120,
             "formed": 14,
-            "notFormed": 29,
+            "notFormed": 30,
             "unresolved": 52,
-            "pending": 25,
-            "observedRate": 0.326
+            "pending": 24,
+            "observedRate": 0.318
           }
         }
       }
@@ -10063,18 +10063,18 @@
       "medium": {
         "statements": 120,
         "formed": 2,
-        "notFormed": 59,
+        "notFormed": 60,
         "unresolved": 57,
-        "pending": 2,
-        "observedRate": 0.033
+        "pending": 1,
+        "observedRate": 0.032
       },
       "high": {
         "statements": 123,
         "formed": 14,
-        "notFormed": 29,
+        "notFormed": 30,
         "unresolved": 55,
-        "pending": 25,
-        "observedRate": 0.326
+        "pending": 24,
+        "observedRate": 0.318
       }
     }
   }
