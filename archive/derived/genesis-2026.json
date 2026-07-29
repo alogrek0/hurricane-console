@@ -1,7 +1,7 @@
 {
   "_readme": "Genesis truth ledger (Track C M4): per-invest statement verdicts + season calibration derived from archive/derived/lineage-2026.json by `node tools/build-genesis-ledger.js` — NEVER hand-edit. Deterministic (\"now\" is the max archive stamp, never wall-clock). Verdicts: formed REQUIRES a lineage invest-cyclone genesis link; an unattributed cyclone opening nearby makes the window unresolved — this ledger refuses to invent formed AND refuses to invent not-formed; windows past nowStamp are pending, never guessed.",
   "season": 2026,
-  "nowStamp": "202607281646",
+  "nowStamp": "202607290320",
   "basins": {
     "AT": {
       "invests": [
@@ -8909,7 +8909,7 @@
                 "pct": 80
               },
               "verdict48": "not-formed",
-              "verdict7": "pending"
+              "verdict7": "not-formed"
             }
           ]
         },
@@ -8941,7 +8941,7 @@
                 "pct": 30
               },
               "verdict48": "not-formed",
-              "verdict7": "pending"
+              "verdict7": "not-formed"
             }
           ]
         },
@@ -8973,7 +8973,7 @@
                 "pct": 80
               },
               "verdict48": "not-formed",
-              "verdict7": "pending"
+              "verdict7": "not-formed"
             }
           ]
         },
@@ -9005,7 +9005,7 @@
                 "pct": 40
               },
               "verdict48": "not-formed",
-              "verdict7": "pending"
+              "verdict7": "not-formed"
             }
           ]
         },
@@ -9962,7 +9962,7 @@
                 "cat": "high",
                 "pct": 90
               },
-              "verdict48": "pending",
+              "verdict48": "not-formed",
               "verdict7": "pending"
             }
           ]
@@ -9989,36 +9989,36 @@
           "high": {
             "statements": 47,
             "formed": 7,
-            "notFormed": 11,
+            "notFormed": 12,
             "unresolved": 28,
-            "pending": 1,
-            "observedRate": 0.389
+            "pending": 0,
+            "observedRate": 0.368
           }
         },
         "d7": {
           "low": {
             "statements": 119,
             "formed": 2,
-            "notFormed": 86,
+            "notFormed": 87,
             "unresolved": 30,
-            "pending": 1,
-            "observedRate": 0.023
+            "pending": 0,
+            "observedRate": 0.022
           },
           "medium": {
             "statements": 111,
             "formed": 2,
-            "notFormed": 57,
+            "notFormed": 58,
             "unresolved": 48,
-            "pending": 4,
-            "observedRate": 0.034
+            "pending": 3,
+            "observedRate": 0.033
           },
           "high": {
             "statements": 120,
             "formed": 14,
-            "notFormed": 26,
+            "notFormed": 28,
             "unresolved": 52,
-            "pending": 28,
-            "observedRate": 0.35
+            "pending": 26,
+            "observedRate": 0.333
           }
         }
       }
@@ -10045,36 +10045,36 @@
       "high": {
         "statements": 50,
         "formed": 7,
-        "notFormed": 11,
+        "notFormed": 12,
         "unresolved": 31,
-        "pending": 1,
-        "observedRate": 0.389
+        "pending": 0,
+        "observedRate": 0.368
       }
     },
     "d7": {
       "low": {
         "statements": 185,
         "formed": 2,
-        "notFormed": 140,
+        "notFormed": 141,
         "unresolved": 42,
-        "pending": 1,
+        "pending": 0,
         "observedRate": 0.014
       },
       "medium": {
         "statements": 120,
         "formed": 2,
-        "notFormed": 57,
+        "notFormed": 58,
         "unresolved": 57,
-        "pending": 4,
-        "observedRate": 0.034
+        "pending": 3,
+        "observedRate": 0.033
       },
       "high": {
         "statements": 123,
         "formed": 14,
-        "notFormed": 26,
+        "notFormed": 28,
         "unresolved": 55,
-        "pending": 28,
-        "observedRate": 0.35
+        "pending": 26,
+        "observedRate": 0.333
       }
     }
   }
