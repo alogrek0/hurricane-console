@@ -1,0 +1,23 @@
+
+000
+ABPZ20 KNHC 291756
+TWOEP 
+
+Tropical Weather Outlook
+NWS National Hurricane Center Miami FL
+1100 AM PDT Wed Jul 29 2026
+
+For the eastern and central North Pacific east of 180 longitude:
+
+Active Systems:
+The National Hurricane Center is issuing advisories on Hurricane 
+Genevieve, located several hundred miles west-southwest of the 
+southern tip of the Baja California Peninsula. The National 
+Hurricane Center has issued the last advisory on Post-Tropical 
+Cyclone Fausto, located a few hundred miles northeast of the 
+Hawaiian Islands.
+
+Tropical cyclone formation is not expected during the next 7 days.
+
+$$
+Forecaster Beven
