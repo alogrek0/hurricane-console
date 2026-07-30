@@ -20684,6 +20684,91 @@
       "stamp": "202607291756",
       "issuedISO": "2026-07-29T18:00:00.000Z",
       "disturbances": []
+    },
+    {
+      "file": "TWDEP.202607292049.txt",
+      "kind": "TWD",
+      "stamp": "202607292049",
+      "issuedISO": "2026-07-29T22:05:00.000Z",
+      "cyclones": [
+        {
+          "name": "Genevieve",
+          "classification": "Hurricane",
+          "lat": 19.2,
+          "lon": -120.1,
+          "windKt": 85
+        }
+      ],
+      "waves": [
+        {
+          "id": "W2",
+          "axis": [
+            {
+              "lat": 19,
+              "lon": -107.5
+            },
+            {
+              "lat": 3,
+              "lon": -107.5
+            }
+          ],
+          "inferred": false,
+          "motion": null
+        }
+      ],
+      "convection": 3,
+      "troughs": 0,
+      "fixes": 3,
+      "inferred": 0,
+      "projections": 1
+    },
+    {
+      "file": "TWOEP.202607292316.txt",
+      "kind": "TWO",
+      "stamp": "202607292316",
+      "issuedISO": "2026-07-30T00:00:00.000Z",
+      "disturbances": []
+    },
+    {
+      "file": "TWDEP.202607300308.txt",
+      "kind": "TWD",
+      "stamp": "202607300308",
+      "issuedISO": "2026-07-30T04:05:00.000Z",
+      "cyclones": [
+        {
+          "name": "Genevieve",
+          "classification": "Hurricane",
+          "lat": 19.6,
+          "lon": -120.8,
+          "windKt": 85
+        }
+      ],
+      "waves": [
+        {
+          "id": "W2",
+          "axis": [
+            {
+              "lat": 18,
+              "lon": -109
+            },
+            {
+              "lat": 3,
+              "lon": -109
+            }
+          ],
+          "inferred": false,
+          "motion": {
+            "bearing": 270,
+            "slowKt": 5,
+            "fastKt": 5
+          }
+        }
+      ],
+      "convection": 2,
+      "troughs": 1,
+      "fixes": 2,
+      "inferred": 0,
+      "projections": 2
     }
   ]
 }
