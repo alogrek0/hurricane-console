@@ -1,0 +1,136 @@
+
+000
+AXNT20 KNHC 302141
+TWDAT 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+0015 UTC Fri Jul 31 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 1800 UTC surface analysis and satellite imagery through 
+2115 UTC.
+
+...SPECIAL FEATURES...
+
+Caribbean Gale Warning: A tight pressure gradient between the
+subtropical ridge north of the islands and lower pressures in NW
+South America will support strong to near gale-force winds and 
+rough seas in the central Caribbean during the next several days.
+Winds will increase to gale-force in the offshore waters of 
+Colombia and in the Gulf of Venezuela tonight. Seas are expected 
+to build to around 13 ft with these winds. Please read the 
+latest High Seas Forecast issued by the National Hurricane Center 
+at website - https://www.nhc.gov/text/MIAHFSAT2.shtml
+
+...TROPICAL WAVES...
+
+An eastern to central Atlantic tropical wave is along 36W, south 
+of 20N, moving quickly westward at 20 to 25 kt. Scattered 
+moderate to isolated strong convection is present from 04N to 07N
+between 25W and 30.5W.
+
+A tropical N Atlantic tropical wave is along 57W, south of 19N
+to near Barbados and Suriname, moving quickly westward at around 
+20 to 25 kt. Nearby convection which is present is described below
+with the ITCZ.
+
+An western Caribbean tropical wave is along 79W, south of 20N
+just to the west of Jamaica, moving quickly westward at around 25
+kt. Any nearby convection is currently observed in the far eastern
+Tropical Pacific.
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough reaches the Atlantic from the northern coast of 
+Mauritania at 20N16W to southeast of the Cabo Verde Islands to
+09N28W to 12N40W. The ITCZ extends from 12N40W to 10N56W, then 
+resumes west of a tropical wave from 10N58W to the far NE coast of
+Venezuela at 08N62W. Scattered moderate isolated strong convection
+is noted within 210 nm NNW of the ITCZ between 48W and 59W.
+
+...GULF OF AMERICA...
+
+High pressure of 1018 mb is remaining over the central Gulf near
+25N88W with a northwest to southeast ridge through the high. As a
+result, anticyclonic winds are light to gentle along and around
+the ridge axis, and moderate along the periphery closer to the
+Gulf coastlines. Seas are 1 to 2 ft near the weaker winds, and 2
+to 4 ft elsewhere. Some moderate convection is noted near the NW
+coast of Yucatan near a surface trough analyzed over the
+peninsula, with additional activity near the coast of Florida,
+Mississippi and Alabama.
+
+For the forecast, a surface ridge will remain in control of the 
+weather pattern across the Gulf region promoting gentle to 
+moderate winds for the next several days. The exception will be 
+fresh NE winds off the northwest coast of the Yucatan peninsula 
+nightly into the weekend. Unsettled weather in the form of 
+scattered showers and thunderstorms will continue over the NE Gulf
+through the weekend as a frontal boundary remains just N of the 
+area, and at the same a very moist and unstable airmass prevails 
+over region.
+
+...CARIBBEAN SEA...
+
+Please see the Special Features section above for details on the
+Gale Warning in effect for the south-central Caribbean.
+
+High pressure north of the islands forces fresh to near gale-
+force easterly trade winds and rough seas across the central 
+Caribbean, with the strongest winds and highest seas to 11 ft 
+occurring off NW Colombia. Moderate to fresh easterly breezes and
+moderate seas are found elsewhere from 11N to 18N. Across the 
+remainder of the basin, moderate or weaker winds and slight to 
+locally moderate seas prevail. Some convection is present near
+eastern Honduras and Nicaragua due to the proximity of a tropical
+wave and lower to mid level support.
+
+For the forecast, a Gale Warning is in effect tonight for the 
+offshore waters of Colombia and for the Gulf of Venezuela. Seas 
+are expected to build to around 14 ft with these winds. Elsewhere 
+across the central Caribbean, fresh to near gale trades will 
+continue to expand in coverage through early Fri as the pressure 
+gradient between the Atlantic high pressure and low pressure in 
+northern Colombian tightens. Mostly fresh trades will continue 
+elsewhere south S of about 18N through the rest of the forecast 
+period. Fresh to strong winds will pulse in the Gulf of Honduras 
+tonight and Fri night, then to fresh speeds for the remainder of 
+the period.
+
+...ATLANTIC OCEAN...
+
+A frontal boundary is just north of the discussion waters and SW N
+Atlantic offshore waters zones from northwest of Bermuda to 1011 
+mb low pressure near 32N79.5W to near Savannah, Georgia. 
+Associated scattered moderate isolated strong convection is north 
+of 27N and west of 69W. Fresh to strong SW winds and 5 to 9 ft 
+seas are there as well. Otherwise, a broad subtropical ridge 
+continues to dominate much of the tropical Atlantic waters
+anchored by a 1025 mb high pressure center near 31N51W. Moderate
+to locally fresh trades are noted north of the monsoon trough and
+ITCZ to 20N, except fresh to strong N to NE winds from offshore
+Africa to the Cabo Verde Islands. Seas are 6 to 9 ft across the
+area of fresh to strong winds, as well as in the Tropical N
+Atlantic offshore waters zones due to the proximity of a tropical
+wave. Moderate or weaker winds and moderate seas dominate the
+remainder of the tropical Atlantic waters.
+
+For the forecast west of 55W, a high pressure ridge extending 
+from near 25N65W to the Straits of Florida will change little 
+through Sat night before it shifts northward to near 28N into 
+early next week. The gradient between the ridge and a frontal 
+boundary just NW of the forecast waters will continue to generally
+support fresh to strong SW winds along with scattered showers and
+thunderstorms primarily north of 27N and west of 65W for the rest
+of the week and into the weekend. Fresh to strong trades will 
+pulse just north of Hispaniola at night and into the mornings 
+through the upcoming weekend. 
+
+$$
+Lewitsky
