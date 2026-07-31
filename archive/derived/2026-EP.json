@@ -21127,6 +21127,73 @@
       "fixes": 0,
       "inferred": 0,
       "projections": 3
+    },
+    {
+      "file": "TWOEP.202607310516.txt",
+      "kind": "TWO",
+      "stamp": "202607310516",
+      "issuedISO": "2026-07-31T06:00:00.000Z",
+      "disturbances": []
+    },
+    {
+      "file": "TWDEP.202607310847.txt",
+      "kind": "TWD",
+      "stamp": "202607310847",
+      "issuedISO": "2026-07-31T10:05:00.000Z",
+      "cyclones": [
+        {
+          "name": "Genevieve",
+          "classification": "Tropical Storm",
+          "lat": 21.7,
+          "lon": -127.2,
+          "windKt": 55
+        }
+      ],
+      "waves": [
+        {
+          "id": "W1",
+          "axis": [
+            {
+              "lat": 14,
+              "lon": -82
+            },
+            {
+              "lat": 2,
+              "lon": -82
+            }
+          ],
+          "inferred": false,
+          "motion": {
+            "bearing": 270,
+            "slowKt": 5,
+            "fastKt": 10
+          }
+        },
+        {
+          "id": "W2",
+          "axis": [
+            {
+              "lat": 19,
+              "lon": -113
+            },
+            {
+              "lat": 3,
+              "lon": -113
+            }
+          ],
+          "inferred": false,
+          "motion": {
+            "bearing": 270,
+            "slowKt": 10,
+            "fastKt": 10
+          }
+        }
+      ],
+      "convection": 4,
+      "troughs": 3,
+      "fixes": 1,
+      "inferred": 0,
+      "projections": 3
     }
   ]
 }
