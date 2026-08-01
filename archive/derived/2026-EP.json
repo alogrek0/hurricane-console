@@ -21268,6 +21268,215 @@
       "stamp": "202607311702",
       "issuedISO": "2026-07-31T18:00:00.000Z",
       "disturbances": []
+    },
+    {
+      "file": "TWDEP.202607312122.txt",
+      "kind": "TWD",
+      "stamp": "202607312122",
+      "issuedISO": "2026-07-31T22:05:00.000Z",
+      "cyclones": [
+        {
+          "name": "Genevieve",
+          "classification": "Tropical Storm",
+          "lat": 22.3,
+          "lon": -130.2,
+          "windKt": 50
+        }
+      ],
+      "waves": [
+        {
+          "id": "W1",
+          "axis": [
+            {
+              "lat": 14,
+              "lon": -87
+            },
+            {
+              "lat": 2,
+              "lon": -87
+            }
+          ],
+          "inferred": false,
+          "motion": {
+            "bearing": 270,
+            "slowKt": 5,
+            "fastKt": 10
+          }
+        },
+        {
+          "id": "W2",
+          "axis": [
+            {
+              "lat": 18,
+              "lon": -115.5
+            },
+            {
+              "lat": 2,
+              "lon": -115.5
+            }
+          ],
+          "inferred": false,
+          "motion": {
+            "bearing": 270,
+            "slowKt": 10,
+            "fastKt": 10
+          }
+        }
+      ],
+      "convection": 2,
+      "troughs": 3,
+      "fixes": 0,
+      "inferred": 0,
+      "projections": 3
+    },
+    {
+      "file": "TWDEP.202607312123.txt",
+      "kind": "TWD",
+      "stamp": "202607312123",
+      "issuedISO": "2026-07-31T22:05:00.000Z",
+      "cyclones": [
+        {
+          "name": "Genevieve",
+          "classification": "Tropical Storm",
+          "lat": 22.3,
+          "lon": -130.2,
+          "windKt": 50
+        }
+      ],
+      "waves": [
+        {
+          "id": "W1",
+          "axis": [
+            {
+              "lat": 14,
+              "lon": -87
+            },
+            {
+              "lat": 2,
+              "lon": -87
+            }
+          ],
+          "inferred": false,
+          "motion": {
+            "bearing": 270,
+            "slowKt": 5,
+            "fastKt": 10
+          }
+        },
+        {
+          "id": "W2",
+          "axis": [
+            {
+              "lat": 18,
+              "lon": -115.5
+            },
+            {
+              "lat": 2,
+              "lon": -115.5
+            }
+          ],
+          "inferred": false,
+          "motion": {
+            "bearing": 270,
+            "slowKt": 10,
+            "fastKt": 10
+          }
+        }
+      ],
+      "convection": 2,
+      "troughs": 3,
+      "fixes": 0,
+      "inferred": 0,
+      "projections": 3
+    },
+    {
+      "file": "TWOEP.202607312303.txt",
+      "kind": "TWO",
+      "stamp": "202607312303",
+      "issuedISO": "2026-08-01T00:00:00.000Z",
+      "disturbances": []
+    },
+    {
+      "file": "TWDEP.202608010246.txt",
+      "kind": "TWD",
+      "stamp": "202608010246",
+      "issuedISO": "2026-08-01T04:05:00.000Z",
+      "cyclones": [
+        {
+          "name": "Genevieve",
+          "classification": "Tropical Storm",
+          "lat": 22.6,
+          "lon": -131.4,
+          "windKt": 45
+        }
+      ],
+      "waves": [
+        {
+          "id": "W2",
+          "axis": [
+            {
+              "lat": 18,
+              "lon": -116
+            },
+            {
+              "lat": 2,
+              "lon": -116
+            }
+          ],
+          "inferred": false,
+          "motion": {
+            "bearing": 270,
+            "slowKt": 10,
+            "fastKt": 10
+          }
+        }
+      ],
+      "convection": 4,
+      "troughs": 2,
+      "fixes": 1,
+      "inferred": 0,
+      "projections": 2
+    },
+    {
+      "file": "TWDEP.202608010247.txt",
+      "kind": "TWD",
+      "stamp": "202608010247",
+      "issuedISO": "2026-08-01T04:05:00.000Z",
+      "cyclones": [
+        {
+          "name": "Genevieve",
+          "classification": "Tropical Storm",
+          "lat": 22.6,
+          "lon": -131.4,
+          "windKt": 45
+        }
+      ],
+      "waves": [
+        {
+          "id": "W2",
+          "axis": [
+            {
+              "lat": 18,
+              "lon": -116
+            },
+            {
+              "lat": 2,
+              "lon": -116
+            }
+          ],
+          "inferred": false,
+          "motion": {
+            "bearing": 270,
+            "slowKt": 10,
+            "fastKt": 10
+          }
+        }
+      ],
+      "convection": 4,
+      "troughs": 2,
+      "fixes": 1,
+      "inferred": 0,
+      "projections": 2
     }
   ]
 }

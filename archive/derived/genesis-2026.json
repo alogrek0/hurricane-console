@@ -1,7 +1,7 @@
 {
   "_readme": "Genesis truth ledger (Track C M4): per-invest statement verdicts + season calibration derived from archive/derived/lineage-2026.json by `node tools/build-genesis-ledger.js` — NEVER hand-edit. Deterministic (\"now\" is the max archive stamp, never wall-clock). Verdicts: formed REQUIRES a lineage invest-cyclone genesis link; an unattributed cyclone opening nearby makes the window unresolved — this ledger refuses to invent formed AND refuses to invent not-formed; windows past nowStamp are pending, never guessed.",
   "season": 2026,
-  "nowStamp": "202607311532",
+  "nowStamp": "202608010439",
   "basins": {
     "AT": {
       "invests": [
@@ -9751,7 +9751,7 @@
                 "pct": 70
               },
               "verdict48": "unresolved",
-              "verdict7": "pending"
+              "verdict7": "unresolved"
             }
           ]
         },
@@ -9790,7 +9790,7 @@
                 "pct": 70
               },
               "verdict48": "unresolved",
-              "verdict7": "pending"
+              "verdict7": "unresolved"
             }
           ]
         },
@@ -10016,8 +10016,8 @@
             "statements": 120,
             "formed": 14,
             "notFormed": 30,
-            "unresolved": 67,
-            "pending": 9,
+            "unresolved": 69,
+            "pending": 7,
             "observedRate": 0.318
           }
         }
@@ -10072,8 +10072,8 @@
         "statements": 123,
         "formed": 14,
         "notFormed": 30,
-        "unresolved": 70,
-        "pending": 9,
+        "unresolved": 72,
+        "pending": 7,
         "observedRate": 0.318
       }
     }
