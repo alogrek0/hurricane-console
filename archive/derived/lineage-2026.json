@@ -24323,6 +24323,23 @@
               ],
               "inferred": false,
               "link": "axis"
+            },
+            {
+              "stamp": "202608010855",
+              "file": "TWDEP.202608010855.txt",
+              "meanLon": -117,
+              "axis": [
+                {
+                  "lat": 18,
+                  "lon": -117
+                },
+                {
+                  "lat": 2,
+                  "lon": -117
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
             }
           ]
         },
@@ -24520,6 +24537,28 @@
               ],
               "inferred": false,
               "link": "axis"
+            }
+          ]
+        },
+        {
+          "id": "EP-W-202608010855-1",
+          "sightings": [
+            {
+              "stamp": "202608010855",
+              "file": "TWDEP.202608010855.txt",
+              "meanLon": -86,
+              "axis": [
+                {
+                  "lat": 14,
+                  "lon": -86
+                },
+                {
+                  "lat": 2,
+                  "lon": -86
+                }
+              ],
+              "inferred": false,
+              "link": null
             }
           ]
         }
@@ -32878,6 +32917,15 @@
               "file": "TWDEP.202608010247.txt",
               "lat": 22.6,
               "lon": -131.4,
+              "classification": "Tropical Storm",
+              "windKt": 45,
+              "link": "name"
+            },
+            {
+              "stamp": "202608010855",
+              "file": "TWDEP.202608010855.txt",
+              "lat": 22.6,
+              "lon": -132.5,
               "classification": "Tropical Storm",
               "windKt": 45,
               "link": "name"
