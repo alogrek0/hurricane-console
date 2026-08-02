@@ -21618,6 +21618,121 @@
       "stamp": "202608011710",
       "issuedISO": "2026-08-01T18:00:00.000Z",
       "disturbances": []
+    },
+    {
+      "file": "TWDEP.202608012101.txt",
+      "kind": "TWD",
+      "stamp": "202608012101",
+      "issuedISO": "2026-08-01T22:05:00.000Z",
+      "cyclones": [
+        {
+          "name": "Genevieve",
+          "classification": "Tropical Storm",
+          "lat": 23.3,
+          "lon": -135,
+          "windKt": 40
+        }
+      ],
+      "waves": [
+        {
+          "id": "W1",
+          "axis": [
+            {
+              "lat": 14,
+              "lon": -90
+            },
+            {
+              "lat": 2,
+              "lon": -90
+            }
+          ],
+          "inferred": false,
+          "motion": {
+            "bearing": 270,
+            "slowKt": 5,
+            "fastKt": 10
+          }
+        },
+        {
+          "id": "W2",
+          "axis": [
+            {
+              "lat": 18,
+              "lon": -119.5
+            },
+            {
+              "lat": 2,
+              "lon": -119.5
+            }
+          ],
+          "inferred": false,
+          "motion": {
+            "bearing": 270,
+            "slowKt": 10,
+            "fastKt": 10
+          }
+        }
+      ],
+      "convection": 2,
+      "troughs": 3,
+      "fixes": 0,
+      "inferred": 0,
+      "projections": 3
+    },
+    {
+      "file": "TWOEP.202608012355.txt",
+      "kind": "TWO",
+      "stamp": "202608012355",
+      "issuedISO": "2026-08-02T00:00:00.000Z",
+      "disturbances": []
+    },
+    {
+      "file": "TWOEP.202608020016.txt",
+      "kind": "TWO",
+      "stamp": "202608020016",
+      "issuedISO": "2026-08-02T00:00:00.000Z",
+      "disturbances": []
+    },
+    {
+      "file": "TWDEP.202608020245.txt",
+      "kind": "TWD",
+      "stamp": "202608020245",
+      "issuedISO": "2026-08-02T04:05:00.000Z",
+      "cyclones": [
+        {
+          "name": "Genevieve",
+          "classification": "Tropical Storm",
+          "lat": 23.5,
+          "lon": -136,
+          "windKt": 40
+        }
+      ],
+      "waves": [
+        {
+          "id": "W2",
+          "axis": [
+            {
+              "lat": 18,
+              "lon": -121
+            },
+            {
+              "lat": 2,
+              "lon": -121
+            }
+          ],
+          "inferred": false,
+          "motion": {
+            "bearing": 270,
+            "slowKt": 10,
+            "fastKt": 10
+          }
+        }
+      ],
+      "convection": 1,
+      "troughs": 2,
+      "fixes": 2,
+      "inferred": 0,
+      "projections": 2
     }
   ]
 }
