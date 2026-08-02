@@ -1,0 +1,111 @@
+
+890 
+AXNT20 KNHC 021605
+TWDAT
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+1815 UTC Sun Aug 2 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 1200 UTC surface analysis and satellite imagery through 
+1515 UTC.
+
+...TROPICAL WAVES...
+
+An eastern Atlantic tropical wave is along 30W, south of 20N, 
+moving westward at 10-15 kt. Scattered showers are present from
+07N to 12N and between 28W and 36W.
+
+A tropical wave has been repositioned along 61W, south of 17N,
+based on surface observations, satellite and wave guidance data.
+The wave is moving westward at 15-20 kt. Scattered showers are
+noted south of 14N and between 58W and 64W.
+
+A central Caribbean tropical wave is along 79W, south of 19N, 
+moving westward at 15 kt. A few showers are seen near the northern
+portion of the wave.
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough enters the Atlantic through the coast of
+Mauritania near 19N16W and dives southwestward to a 1012 mb low
+pres near 14N27W and then to 10N45W. The ITCZ extends from 10N45W
+to 09N58W. Scattered moderate convection is observed from 03N to 
+12N between east of 20W.
+
+...GULF OF AMERICA...
+
+The western portion of the subtropical ridge extends across
+the Florida Straits into the Gulf waters and along with a frontal
+boundary to the north, sustain moderate to fresh westerly winds
+and moderate seas north of 27N. Elsewhere, light to gentle winds
+and slight seas prevail. The aforementioned frontal boundary and
+an upper-level trough over the eastern United States maintain
+unstable conditions across the area, producing scattered showers 
+and isolated thunderstorms over the northern half of the Gulf. A
+recent scatterometer satellite pass indicate that stronger winds
+are occurring near the stronger convection.
+
+For the forecast, relatively weak high pressure will remain in
+control of the weather pattern across the Gulf, promoting gentle 
+to moderate winds into the upcoming week. The exceptions will be 
+fresh NE to E winds off the northwest coast of the Yucatan 
+peninsula nightly through the period, as well as the far northern 
+Gulf, where an inland cold front will induce moderate to fresh W 
+to SW winds through Mon. Scattered to numerous showers and 
+thunderstorms are expected over the eastern Gulf, and over the 
+central Gulf N of 25N between 87W and 90W into the upcoming week 
+as an upper-level trough and a cold front approach the Gulf coast.
+
+...CARIBBEAN SEA...
+
+Divergence aloft supports scattered showers and isolated
+thunderstorms over the northern Caribbean waters, especially
+near Puerto Rico, eastern Hispaniola and south of eastern Cuba. A
+few showers are also seen in the SW Caribbean. The westward-
+building subtropical high pressure system positioned over the 
+central Atlantic forces fresh to strong easterly trade winds and 
+rough seas over much of the central Caribbean. Moderate to locally
+fresh easterly winds and moderate seas are found in the eastern
+Caribbean. Elsewhere, moderate or weaker winds and slight to 
+moderate seas prevail.
+
+For the forecast, an enhanced pressure gradient across the Caribbean
+will favor fresh to strong trades over the central basin through
+much of the week ahead. Fresh to strong winds will pulse in the
+Gulf of Honduras at night Mon through Thu. A tropical wave, near 
+79W is accompanied by scattered showers and thunderstorms between 
+Jamaica and eastern Cuba and near the Windward Passage. The wave 
+will continue quickly moving westward across the remainder of the 
+basin through Mon night. 
+
+...ATLANTIC OCEAN...
+
+Favorable upper-level conditions and abundant tropical moisture
+combine to produce scattered showers and isolated thunderstorms
+across the SW North Atlantic, west of 60W. The tropical Atlantic
+is dominated by a 1028 mb high pressure system centered near
+33N55W, supporting fresh to locally strong southerly winds and
+seas of 4-7 ft north of 28N and west of 75W. Elsewhere, moderate
+or weaker winds and moderate seas prevail across much of the
+remaining tropical Atlantic.
+
+For the forecast west of 55W, a high pressure ridge extending from
+the central Atlantic to South Florida will change little through 
+Tue, then lift N to central Florida on Wed and N of 31N on Thu. 
+The pressure gradient between the ridge and a frontal boundary 
+just NW of the forecast waters will continue to support fresh to 
+strong SW winds ahead of the front, along with scattered to 
+numerous showers and thunderstorms over the majority of the area 
+into the upcoming week. Fresh to strong trades will pulse just 
+north of Hispaniola at night through the period. 
+
+$$
+Delgado
+
