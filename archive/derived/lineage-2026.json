@@ -14403,6 +14403,23 @@
               ],
               "inferred": false,
               "link": "axis"
+            },
+            {
+              "stamp": "202608020957",
+              "file": "TWDAT.202608020957.txt",
+              "meanLon": -54,
+              "axis": [
+                {
+                  "lat": 17,
+                  "lon": -54
+                },
+                {
+                  "lat": 5,
+                  "lon": -54
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
             }
           ]
         },
@@ -14690,6 +14707,23 @@
               ],
               "inferred": false,
               "link": "axis"
+            },
+            {
+              "stamp": "202608020957",
+              "file": "TWDAT.202608020957.txt",
+              "meanLon": -29,
+              "axis": [
+                {
+                  "lat": 21,
+                  "lon": -29
+                },
+                {
+                  "lat": 9,
+                  "lon": -29
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
             }
           ]
         },
@@ -14742,6 +14776,23 @@
                 {
                   "lat": 7,
                   "lon": -72
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
+            },
+            {
+              "stamp": "202608020957",
+              "file": "TWDAT.202608020957.txt",
+              "meanLon": -73.5,
+              "axis": [
+                {
+                  "lat": 19,
+                  "lon": -73.5
+                },
+                {
+                  "lat": 7,
+                  "lon": -73.5
                 }
               ],
               "inferred": false,
