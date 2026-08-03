@@ -24928,6 +24928,40 @@
               ],
               "inferred": false,
               "link": "axis"
+            },
+            {
+              "stamp": "202608031507",
+              "file": "TWDEP.202608031507.txt",
+              "meanLon": -127,
+              "axis": [
+                {
+                  "lat": 19,
+                  "lon": -127
+                },
+                {
+                  "lat": 2,
+                  "lon": -127
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
+            },
+            {
+              "stamp": "202608031508",
+              "file": "TWDEP.202608031508.txt",
+              "meanLon": -127,
+              "axis": [
+                {
+                  "lat": 19,
+                  "lon": -127
+                },
+                {
+                  "lat": 2,
+                  "lon": -127
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
             }
           ]
         },
@@ -25267,6 +25301,40 @@
                 {
                   "lat": 2,
                   "lon": -85
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
+            },
+            {
+              "stamp": "202608031507",
+              "file": "TWDEP.202608031507.txt",
+              "meanLon": -87,
+              "axis": [
+                {
+                  "lat": 14,
+                  "lon": -87
+                },
+                {
+                  "lat": 2,
+                  "lon": -87
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
+            },
+            {
+              "stamp": "202608031508",
+              "file": "TWDEP.202608031508.txt",
+              "meanLon": -87,
+              "axis": [
+                {
+                  "lat": 14,
+                  "lon": -87
+                },
+                {
+                  "lat": 2,
+                  "lon": -87
                 }
               ],
               "inferred": false,
