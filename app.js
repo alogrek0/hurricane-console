@@ -291,7 +291,10 @@
   // 'trail' (415) sits between areas and lines: the history-trail overlay (Track
   // C M3) underlays the live lines/points and is non-interactive, so it annotates
   // the archive under the current features and never steals a tap.
-  var PANES = { mask: 402, areas: 410, lines: 420, points: 430, diff: 405, trail: 415 };
+  // 'labels' (425) carries the Antilles island labels: ABOVE the lines so a name
+  // is never buried under a trough polyline, BELOW the points (430) so a cyclone
+  // fix always wins. Non-interactive, like the graticule labels it echoes.
+  var PANES = { mask: 402, areas: 410, lines: 420, points: 430, diff: 405, trail: 415, labels: 425 };
   Object.keys(PANES).forEach(function (name) {
     map.createPane('hc-' + name).style.zIndex = PANES[name];
   });
@@ -318,6 +321,66 @@
     maskGroup.addLayer(L.rectangle([[-85, w], [s, e]], style));     // south of frame
   }
   buildMasks();
+
+  // --- Antilles island labels -------------------------------------------------
+  // The Lesser Antilles are how NHC prose locates a storm approaching the basin,
+  // but at 50m the islands read as dots — a reader who does not already know the
+  // chain cannot tell Dominica from Martinique. These labels are ORIENTATION
+  // AIDS, not parsed data: they carry no confidence, are never inferred from a
+  // product, and so are styled as quiet chart furniture (the graticule's family),
+  // never as a feature.
+  //
+  // Treatment locked in tools/antilles-lab.html: mechanism B, divIcon markers in
+  // the hc-labels pane. Leaflet reprojects them itself, so unlike the overlay-span
+  // graticule labels there is nothing to reposition on 'move' — only a tier
+  // crossing its reveal zoom changes what is drawn, hence 'zoomend' alone.
+  var HC_ISLANDS = { z1: 6.25, z2: 7, offsetPx: 9 };
+  // [name, lat, lon, tier, side] — the anchor is the island; side extends the text
+  // offshore so it never covers the land it names (E east, W west, C centered).
+  var ISLAND_LABELS = [
+    ['Virgin Is.', 18.45, -64.35, 1, 'E'],
+    ['Antigua', 17.07, -61.62, 1, 'E'],
+    ['Guadeloupe', 16.20, -61.00, 1, 'E'],
+    ['Dominica', 15.42, -61.18, 1, 'E'],
+    ['Martinique', 14.64, -60.75, 1, 'E'],
+    ['St. Lucia', 13.90, -60.82, 1, 'E'],
+    // side W, not E: Barbados sits 0.08 deg south — the same screen row at these
+    // zooms — and also extends east, so an eastward St. Vincent label runs
+    // straight at Barbados' anchor. Flipping it west is the one-character fix
+    // that keeps both at tier 1 and leaves the Windward chain unbroken.
+    ['St. Vincent', 13.25, -61.05, 1, 'W'],
+    ['Barbados', 13.17, -59.37, 1, 'E'],
+    ['Grenada', 12.11, -61.52, 1, 'E'],
+    ['Trinidad', 10.42, -61.25, 1, 'C'],
+    ['Anguilla', 18.24, -62.90, 2, 'E'],
+    ['St. Martin', 18.06, -63.20, 2, 'W'],
+    ['St. Kitts', 17.32, -62.85, 2, 'W'],
+    ['Barbuda', 17.63, -61.68, 2, 'E'],
+    ['Montserrat', 16.74, -62.10, 2, 'W'],
+    ['Tobago', 11.25, -60.48, 2, 'E'],
+    ['St. Croix', 17.74, -64.50, 2, 'E']
+  ];
+  var islandGroup = L.layerGroup().addTo(map);
+  function drawIslandLabels() {
+    islandGroup.clearLayers();
+    // Atlantic only — the EP frame (145W..70W) does not contain the Antilles.
+    if (basin.id !== 'AT') return;
+    var z = map.getZoom(), off = HC_ISLANDS.offsetPx;
+    ISLAND_LABELS.forEach(function (r) {
+      if (z < (r[3] === 1 ? HC_ISLANDS.z1 : HC_ISLANDS.z2)) return;
+      var side = r[4].toLowerCase();
+      var shift = side === 'e' ? off + 'px'
+        : side === 'w' ? 'calc(-100% - ' + off + 'px)' : '-50%';
+      islandGroup.addLayer(L.marker([r[1], r[2]], {
+        icon: L.divIcon({ className: '', iconSize: [0, 0],
+          html: '<div class="isl-div" style="transform:translate(' + shift + ',-50%)">' +
+            escapeHtml(r[0]) + '</div>' }),
+        pane: 'hc-labels', interactive: false, keyboard: false
+      }));
+    });
+  }
+  map.on('zoomend', drawIslandLabels);
+  drawIslandLabels();
 
   // Country-name hover (desktop pointers only). countries.js carries invisible
   // per-country hit polygons (generated alongside basemap.js from the same NE
@@ -1894,6 +1957,7 @@
     buildGraticule();
     applyOpeningView();
     drawGratLabels();
+    drawIslandLabels(); // Atlantic-only; this clears them on the way into EP
     updateSubtitle();
     mode === 'TWD' ? loadTWD() : loadTWO();
   }

@@ -106,9 +106,13 @@
   /* zoom, scrubber + graticule labels yield while a popup is open (they stack
      above the popup pane and would cover text on small screens; see app.js
      hc-popup-open). grat-labels are already pointer-events:none. */
-  .scrub,.leaflet-control-zoom,.grat-labels{transition:opacity .15s}
+  .scrub,.leaflet-control-zoom,.grat-labels,.leaflet-hc-labels-pane{transition:opacity .15s}
   .hc-popup-open .scrub,.hc-popup-open .leaflet-control-zoom{opacity:0;pointer-events:none}
   .hc-popup-open .grat-labels{opacity:0}
+  /* island labels dim with the graticule — they are the same furniture layer.
+     Selector is the Leaflet PANE, not a DOM overlay: these are divIcon markers
+     (app.js hc-labels pane), already interactive:false. */
+  .hc-popup-open .leaflet-hc-labels-pane{opacity:0}
   .scrub{position:absolute;left:.6rem;top:96px;z-index:500;display:flex;
     align-items:center;gap:.1rem;background:rgba(9,26,38,.9);
     border:1px solid var(--line);border-radius:6px;padding:.1rem .2rem;
@@ -208,6 +212,18 @@
   @media (prefers-reduced-motion:reduce){.country-tip{animation:none}}
 
   /* graticule frame labels: quiet chart numerals, halo for legibility over the land fill */
+  /* Antilles island labels (divIcon markers in the hc-labels pane, app.js
+     ISLAND_LABELS): same quiet chart-furniture family as the graticule numerals
+     below — a place name is orientation, not parsed data, so it never borrows a
+     feature color. The halo matches the graticule's, for legibility over land. */
+  /* width:max-content is load-bearing, not cosmetic: Leaflet's divIcon container
+     is 0x0 (iconSize [0,0]), and a block child of a zero-width parent computes to
+     zero width too — which silently collapses the side-W transform's calc(-100%
+     - 9px) to a bare -9px, so west-side labels never move west and their text
+     runs back east over the island they name. Sizing to the text restores it. */
+  .isl-div{white-space:nowrap;width:max-content;font:600 .7rem/1 var(--mono);
+    color:#8fb0c2;opacity:.95;letter-spacing:.05em;
+    text-shadow:0 0 5px #04101a,0 0 3px #04101a,0 1px 2px #04101a}
   .grat-labels{position:absolute;inset:0;z-index:450;pointer-events:none}
   .grat-labels span{position:absolute;font:600 .68rem/1 var(--mono);color:#9dbfd3;
     letter-spacing:.06em;font-variant-numeric:tabular-nums;
