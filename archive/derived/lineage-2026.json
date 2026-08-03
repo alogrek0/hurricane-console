@@ -14792,6 +14792,40 @@
               ],
               "inferred": false,
               "link": "axis"
+            },
+            {
+              "stamp": "202608031645",
+              "file": "TWDAT.202608031645.txt",
+              "meanLon": -35,
+              "axis": [
+                {
+                  "lat": 20,
+                  "lon": -35
+                },
+                {
+                  "lat": 8,
+                  "lon": -35
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
+            },
+            {
+              "stamp": "202608031646",
+              "file": "TWDAT.202608031646.txt",
+              "meanLon": -35,
+              "axis": [
+                {
+                  "lat": 20,
+                  "lon": -35
+                },
+                {
+                  "lat": 8,
+                  "lon": -35
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
             }
           ]
         },
