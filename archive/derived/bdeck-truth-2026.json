@@ -9394,7 +9394,7 @@
                 "pct": 90
               },
               "verdict48": "not-formed",
-              "verdict7": "pending",
+              "verdict7": "not-formed",
               "truth48": null,
               "truth7": null
             }
@@ -9533,7 +9533,7 @@
           "name": "Genevieve",
           "bdeck": "bep072026",
           "posStats": {
-            "n": 46,
+            "n": 48,
             "meanDeg": 0.5,
             "maxDeg": 0.7
           }

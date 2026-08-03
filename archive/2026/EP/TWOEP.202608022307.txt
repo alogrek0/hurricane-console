@@ -1,0 +1,28 @@
+
+000
+ABPZ20 KNHC 022307
+TWOEP 
+
+Tropical Weather Outlook
+NWS National Hurricane Center Miami FL
+500 PM PDT Sun Aug 2 2026
+
+For the eastern and central North Pacific east of 180 longitude:
+
+Active Systems:
+The National Hurricane Center has issued the last advisory on 
+Post-Tropical Cyclone Genevieve, located well west of the 
+southern tip of the Baja California Peninsula.
+
+Tropical cyclone formation is not expected during the next 7 days.
+
+&&
+
+For additional information on Post-Tropical Cyclone Genevieve, 
+including Gale Warnings, please see High Seas Forecasts issued by 
+the National Weather Service, under AWIPS header NFDHSFEPI, WMO 
+header FZPN02 KWBC, and on the web at 
+ocean.weather.gov/shtml/NFDHSFEPI.php
+
+$$
+Forecaster Gibbs/Pierce

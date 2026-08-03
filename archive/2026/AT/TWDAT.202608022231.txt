@@ -1,0 +1,104 @@
+
+595 
+AXNT20 KNHC 022231
+TWDAT 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+0015 UTC Mon Aug 3 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 1800 UTC surface analysis and satellite imagery through 
+2230 UTC.
+
+...TROPICAL WAVES...
+
+An eastern Atlantic tropical wave is along 31W, south of 20N, 
+moving westward at 10-15 kt. Scattered showers and isolated
+thunderstorms are present from 06N to 10N and between 30W and 
+35W.
+
+An eastern Caribbean tropical wave is along 63W, south of 17N, 
+moving westward at 15-20 kt. Scattered showers and thunderstorms are
+active over northeastern Venezuela.
+
+A western Caribbean tropical wave is along 81W, south of 19N, 
+moving westward at 10-15 kt. Scattered showers and thunderstorms
+are active off Nicaragua and Costa Rica.
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough enters the Atlantic through the coast of
+Mauritania near 19N16W and dives southwestward to a 1011 mb low
+pressure near 16N30W and then to 10N45W. No significant convection
+is evident other than already described in the Tropical Wave
+section.
+
+...GULF OF AMERICA...
+
+A stationary front reaches from Mobile Bay, Alabama across the far
+northwest Gulf to Galveston Bay, Texas. Scattered showers and
+thunderstorms are active across the northern Gulf from Texas to
+the Big Bend area of Florida. The Atlantic ridge extends east to
+west along roughly 24N, from the Florida Straits to the coast of
+Tamaulipas in northeast Mexico. This pattern is supporting
+moderate to fresh SW to W winds north of 28N where seas are 3-5
+ft, and gentle to moderate breezes and 1-3 ft seas elsewhere. 
+
+For the forecast, relatively weak high pressure will remain in control
+of the weather pattern across the Gulf, promoting gentle to
+moderate winds into the upcoming week. The exceptions will be
+fresh NE to E winds off the northwest coast of the Yucatan
+peninsula nightly through the period, as well as the far
+northern Gulf, where a cold front approaching the coast will 
+help to induce moderate to fresh W to SW winds through Mon. 
+Scattered to numerous showers and thunderstorms are expected over 
+the eastern Gulf, and over the central Gulf N of 25N between 87W 
+and 92W into the upcoming week as a mid to upper-level trough and
+a cold front approach the Gulf coast. 
+
+...CARIBBEAN SEA...
+
+The westward- building subtropical high pressure system 
+positioned over the central Atlantic forces fresh to strong 
+easterly trade winds and rough seas over much of the central 
+Caribbean. Moderate to locally fresh easterly winds and moderate 
+seas are found in the eastern Caribbean. Elsewhere, moderate or 
+weaker winds and slight to moderate seas prevail.
+
+For the forecast, the pattern will continue to support fresh to 
+strong trades over the central basin through much of the week 
+ahead. Fresh to strong winds will pulse in the Gulf of Honduras at
+night Mon through Thu. A tropical wave, near 82W is helping to 
+enhance numerous showers and thunderstorms over the southwestern 
+Caribbean. The wave will move inland Central America late tonight 
+into early Mon. 
+
+...ATLANTIC OCEAN...
+
+Favorable upper-level conditions and abundant tropical moisture
+combine to produce scattered showers and isolated thunderstorms
+between the northern Bahamas and Bermuda. Elsewhere, the tropical
+Atlantic is dominated by a 1026 mb high pressure system centered 
+near 33N56W, supporting fresh to locally strong southerly winds 
+and seas of 4-6 ft north of 28N and west of 75W. Elsewhere, 
+moderate or weaker winds and moderate seas prevail across much of 
+the remaining tropical Atlantic.
+
+For the forecast west of 55W, the pattern will change little through Tue, 
+then lift north to central Florida on Wed and north of 31N on 
+Thu. The pressure gradient between the ridge and a cold front 
+moving through the southeastern U.S. will continue to support 
+fresh to strong SW winds ahead of the front, along with scattered 
+to numerous showers and thunderstorms over the majority of the 
+area well into the upcoming week. Fresh to strong trades will 
+pulse just north of Hispaniola at night through the period. 
+
+$$
+Christensen
+

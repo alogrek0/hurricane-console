@@ -1,0 +1,103 @@
+
+000
+AXPZ20 KNHC 022132
+TWDEP 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+2205 UTC Sun Aug 2 2026
+
+Tropical Weather Discussion for the eastern Pacific Ocean from
+03.4S to 30N, east of 120W including the Gulf of California, and
+from the Equator to 30N, between 120W and 140W. The following
+information is based on satellite imagery, weather observations,
+radar, and meteorological analysis.
+
+Based on 1800 UTC surface analysis and satellite imagery through
+2100 UTC.
+ 
+...SPECIAL FEATURES...
+
+Gale warning: Post-Tropical Cyclone Genevieve is centered near 24.8N 139.5W at
+02/2100 UTC, moving west-northwest at 11 kt. Estimated minimum central
+pressure is 1009 mb. Maximum sustained wind speed is 35 kt with 
+gusts to 45 kt. Peak seas are near 16 ft or 5 m. No significant 
+shower or thunderstorm activity is evident near the center of 
+this low pressure system. Genevieve will become a remnant low and
+move to 25.4N 141.0W Mon morning then gradually dissipate 
+through mid week as it continues to move west- northwest.
+
+Please read the latest HIGH SEAS FORECAST issued
+by the National Hurricane Center at website -
+https://www.nhc.noaa.gov/text/MIAHSFEP2.shtml and the latest
+Genevieve NHC Forecast/Advisory and Public Advisory at
+www.hurricanes.gov for more details.
+
+...TROPICAL WAVES...
+
+The axis of a tropical wave is along 82W, north of 02N, moving 
+westward at 10 to 15 kt. Nearby convection is discussed in the 
+ITCZ/Monsoon Trough section below.
+
+The axis of a tropical wave is near 106W, moving westward at 
+around 10 to 15 kt. Nearby convection is discussed in the 
+ITCZ/Monsoon Trough section below.
+
+The axis of a tropical wave is near 124W/125W, from 02N to 18N, 
+moving westward around 10 kt. Nearby convection is discussed in 
+the ITCZ/Monsoon trough section below. 
+
+...INTERTROPICAL CONVERGENCE ZONE/MONSOON TROUGH...
+
+The monsoon trough extends from 11N85W to 08N95W to 10N120W. The
+ITCZ extends from 09N125W to 07N135W to 07N140W. Scattered
+moderate convection is active from 04N to 10N between 80W and
+90W, and from 10N to 15N between 95W to 125W.
+
+...OFFSHORE WATERS WITHIN 250 NM OF MEXICO...
+
+Moderate to fresh winds are over the northern Gulf of 
+California. Gentle to moderate winds prevail elsewhere across 
+the region. Moderate seas dominate the open waters off Mexico, 
+with slight seas in the Gulf of California. 
+
+For the forecast, the pressure gradient between high pressure west of
+the area and lowering pressure over the Colorado River Valley
+will support fresh SW winds and building seas over the northern
+Gulf of California through the early part of next week.
+Elsewhere, a moderate pressure gradient will support mostly
+gentle to moderate NW winds across the offshore waters of
+Mexico. Long- period NW swell will move into the waters off Baja
+California Norte tonight then start to subside Tue. Looking
+ahead, expect fresh to strong gap winds and building seas across
+the Gulf of Tehuantepec Thu and Fri. 
+
+...OFFSHORE WATERS WITHIN 250 NM OF CENTRAL AMERICA, COLOMBIA, 
+AND WITHIN 750 NM OF ECUADOR...
+
+Fresh winds and moderate seas prevail over and downstream the 
+Gulf of Papagayo. Gentle to moderate winds are found between the 
+Galapagos Islands and Ecuador. Light to gentle winds and moderate
+seas are noted elsewhere. 
+
+For the forecast, moderate to fresh winds will pulse across the 
+Papagayo region tonight, and again by mid week with rough seas. 
+Moderate or weaker winds and moderate seas in SW swell are 
+expected across the remainder of the waters through the period. 
+
+...REMAINDER OF THE AREA...
+
+Please refer to the Special Features section for information on
+Post-Tropical Storm Genevieve.
+
+For waters not impacted by Genevieve, high pressure is centered 
+just northwest of the area. Gentle to moderate winds and 
+moderate seas prevail over the remainder of the discussion 
+waters. Large northerly swell off California is likely to push 
+southward into the waters off Baja California Norte north of 27N 
+and east of 130W into early next week. New large southerly swell 
+may build south of the Equator and west of 100W beginning Tue 
+night.
+
+$$
+Christensen
