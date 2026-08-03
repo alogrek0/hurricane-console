@@ -22034,6 +22034,65 @@
       "fixes": 0,
       "inferred": 0,
       "projections": 2
+    },
+    {
+      "file": "TWOEP.202608030504.txt",
+      "kind": "TWO",
+      "stamp": "202608030504",
+      "issuedISO": "2026-08-03T06:00:00.000Z",
+      "disturbances": []
+    },
+    {
+      "file": "TWDEP.202608030735.txt",
+      "kind": "TWD",
+      "stamp": "202608030735",
+      "issuedISO": "2026-08-03T10:05:00.000Z",
+      "cyclones": [],
+      "waves": [
+        {
+          "id": "W1",
+          "axis": [
+            {
+              "lat": 14,
+              "lon": -85
+            },
+            {
+              "lat": 2,
+              "lon": -85
+            }
+          ],
+          "inferred": false,
+          "motion": {
+            "bearing": 270,
+            "slowKt": 10,
+            "fastKt": 15
+          }
+        },
+        {
+          "id": "W3",
+          "axis": [
+            {
+              "lat": 18,
+              "lon": -126
+            },
+            {
+              "lat": 2,
+              "lon": -126
+            }
+          ],
+          "inferred": false,
+          "motion": {
+            "bearing": 270,
+            "slowKt": 10,
+            "fastKt": 10
+          }
+        }
+      ],
+      "convection": 1,
+      "troughs": 2,
+      "fixes": 0,
+      "inferred": 0,
+      "projections": 2
     }
   ]
 }
