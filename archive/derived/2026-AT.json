@@ -23794,6 +23794,91 @@
       "fixes": 1,
       "inferred": 1,
       "projections": 2
+    },
+    {
+      "file": "TWOAT.202608040501.txt",
+      "kind": "TWO",
+      "stamp": "202608040501",
+      "issuedISO": "2026-08-04T06:00:00.000Z",
+      "disturbances": []
+    },
+    {
+      "file": "TWDAT.202608040616.txt",
+      "kind": "TWD",
+      "stamp": "202608040616",
+      "issuedISO": "2026-08-04T06:15:00.000Z",
+      "cyclones": [],
+      "waves": [],
+      "convection": 2,
+      "troughs": 2,
+      "fixes": 3,
+      "inferred": 0,
+      "projections": 0
+    },
+    {
+      "file": "TWDAT.202608040624.txt",
+      "kind": "TWD",
+      "stamp": "202608040624",
+      "issuedISO": "2026-08-04T06:15:00.000Z",
+      "cyclones": [],
+      "waves": [],
+      "convection": 2,
+      "troughs": 2,
+      "fixes": 2,
+      "inferred": 1,
+      "projections": 0
+    },
+    {
+      "file": "TWDAT.202608040941.txt",
+      "kind": "TWD",
+      "stamp": "202608040941",
+      "issuedISO": "2026-08-04T12:15:00.000Z",
+      "cyclones": [],
+      "waves": [
+        {
+          "id": "W1",
+          "axis": [
+            {
+              "lat": 16,
+              "lon": -20
+            },
+            {
+              "lat": 5,
+              "lon": -20
+            }
+          ],
+          "inferred": false,
+          "motion": {
+            "bearing": 270,
+            "slowKt": 10,
+            "fastKt": 10
+          }
+        },
+        {
+          "id": "W2",
+          "axis": [
+            {
+              "lat": 19,
+              "lon": -39
+            },
+            {
+              "lat": 5,
+              "lon": -39
+            }
+          ],
+          "inferred": false,
+          "motion": {
+            "bearing": 270,
+            "slowKt": 10,
+            "fastKt": 10
+          }
+        }
+      ],
+      "convection": 3,
+      "troughs": 2,
+      "fixes": 2,
+      "inferred": 1,
+      "projections": 2
     }
   ]
 }

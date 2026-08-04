@@ -15047,6 +15047,50 @@
               "link": null
             }
           ]
+        },
+        {
+          "id": "AT-W-202608040941-1",
+          "sightings": [
+            {
+              "stamp": "202608040941",
+              "file": "TWDAT.202608040941.txt",
+              "meanLon": -20,
+              "axis": [
+                {
+                  "lat": 16,
+                  "lon": -20
+                },
+                {
+                  "lat": 5,
+                  "lon": -20
+                }
+              ],
+              "inferred": false,
+              "link": null
+            }
+          ]
+        },
+        {
+          "id": "AT-W-202608040941-2",
+          "sightings": [
+            {
+              "stamp": "202608040941",
+              "file": "TWDAT.202608040941.txt",
+              "meanLon": -39,
+              "axis": [
+                {
+                  "lat": 19,
+                  "lon": -39
+                },
+                {
+                  "lat": 5,
+                  "lon": -39
+                }
+              ],
+              "inferred": false,
+              "link": null
+            }
+          ]
         }
       ],
       "invests": [
@@ -25463,6 +25507,45 @@
               ],
               "inferred": false,
               "link": "axis"
+            },
+            {
+              "stamp": "202608040735",
+              "file": "TWDEP.202608040735.txt",
+              "meanLon": -94,
+              "axis": [
+                {
+                  "lat": 14,
+                  "lon": -94
+                },
+                {
+                  "lat": 2,
+                  "lon": -94
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
+            }
+          ]
+        },
+        {
+          "id": "EP-W-202608040735-1",
+          "sightings": [
+            {
+              "stamp": "202608040735",
+              "file": "TWDEP.202608040735.txt",
+              "meanLon": -129,
+              "axis": [
+                {
+                  "lat": 19,
+                  "lon": -129
+                },
+                {
+                  "lat": 2,
+                  "lon": -129
+                }
+              ],
+              "inferred": false,
+              "link": null
             }
           ]
         }

@@ -1,0 +1,103 @@
+
+000
+AXNT20 KNHC 040941
+TWDAT
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+1215 UTC Tue Aug 4 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 0600 UTC surface analysis and satellite imagery through 
+0830 UTC.
+
+...TROPICAL WAVES...
+
+An east Atlantic tropical wave is along 20W from 05N to 16N, 
+moving west at around 10 kt. Scattered moderate convection is 
+noted from 06N to 14N between 15W and 23W.
+
+A central Atlantic tropical wave is along 39W from 05N to 19N,
+moving west at around 10 kt. There is no convection in association
+with this wave at this time. 
+
+A central Caribbean tropical wave has an axis along 74W, from
+Haiti to Colombia, moving west at around 10 kt. Scattered moderate
+convection is noted in the vicinity of the Windward Passage. 
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough enters the Atlantic near 15N17W and continues 
+southwestward to 10N32W to 08N41W. The ITCZ extends from 08N41W 
+to 08N59W. Convection in the vicinity is primarily associated with
+the eastern Atlantic tropical wave and is described in the above
+section.
+
+...GULF OF AMERICA...
+
+A 1015 mb high pressure is centered near 24N87W, supporting light
+to gentle winds across most of the basin. Convection has
+dissipated in association with a surface trough in the Bay of 
+Campeche, but moderate E to SE winds continue E of the boundary in
+the eastern Bay. Seas are slight to 3 ft basin-wide. 
+ 
+For the forecast, high pressure will generally dominate, promoting
+gentle winds and slight seas into the upcoming weekend. Pulses
+of fresh winds will occur of the Yucatan Peninsula each night,
+locally strong Wed night, along with moderate seas.
+
+...CARIBBEAN SEA...
+
+The gradient between the Bermuda High, of 1025 mb, centered near 
+34N57W, and lower pressure over southern Caribbean due to the 
+passage of a tropical wave and a low center over NW Colombia is 
+supporting fresh to strong trades over the south-central basin. 
+Seas in this region are rough to 10 ft. Over the E and NW basin, 
+moderate to fresh trades prevail along with moderate seas. Broad
+lift associated with an upper level trough and deep tropical 
+moisture are aiding in the development of scattered moderate
+convection on the lee side of Cuba and adjacent waters and the 
+Gulf of Honduras.
+
+For the forecast, the pressure gradient between Atlantic high 
+pressure and relatively lower pressure in northern South America 
+will continue to support fresh to strong trades over the central 
+basin into the weekend, with rough seas there. Fresh to locally 
+strong winds will also pulse in the Gulf of Honduras and Windward 
+Passage. Otherwise, mainly moderate or weaker winds ands seas will
+prevail.
+
+...ATLANTIC OCEAN...
+
+Divergence aloft supports scattered moderate convection over the 
+SW N Atlantic, including the Florida seaboard, Great Bahama Bank, 
+and Bahamas offshore waters W of 73W. Scattered moderate
+convection has also developed farther east from 24N to 27N between
+50W and 60W. The remainder of the basin is dominated by a broad 
+subtropical ridge.
+
+Fresh SW winds are offshore northern Florida to the SE of a
+stalled front. Fresh trades are present offshore Hispaniola, and
+in a zone from 22N to 28N between 50W and 65W. In the far NE 
+Atlantic, strong N-NE winds and moderate to rough seas are 
+evident off Morocco and in the water passages of the Canary 
+Islands. Elsewhere, gentle to moderate winds and moderate seas are
+prevalent.
+
+For the forecast west of 55W, fresh SW winds offshore NE Florida
+will diminish today as high pressure builds west toward the 
+region. A mid- and upper-level trough along the SE U.S. coast will
+keep scattered thunderstorms ongoing offshore Florida and in the 
+vicinity of the Bahamas into Wed. Locally strong trades will 
+continue pulsing offshore Hispaniola. A westward moving trough 
+will pass north of Puerto Rico and Hispaniola into mid-week, then 
+approach the Bahamas by late week, bringing fresh to locally 
+strong winds and locally rough seas. 
+
+$$
+Konarik
