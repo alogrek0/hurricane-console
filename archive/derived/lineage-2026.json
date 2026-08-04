@@ -14826,6 +14826,23 @@
               ],
               "inferred": false,
               "link": "axis"
+            },
+            {
+              "stamp": "202608032333",
+              "file": "TWDAT.202608032333.txt",
+              "meanLon": -36,
+              "axis": [
+                {
+                  "lat": 20,
+                  "lon": -36
+                },
+                {
+                  "lat": 8,
+                  "lon": -36
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
             }
           ]
         },
@@ -15006,6 +15023,28 @@
               ],
               "inferred": false,
               "link": "axis"
+            }
+          ]
+        },
+        {
+          "id": "AT-W-202608032333-1",
+          "sightings": [
+            {
+              "stamp": "202608032333",
+              "file": "TWDAT.202608032333.txt",
+              "meanLon": -71,
+              "axis": [
+                {
+                  "lat": 19,
+                  "lon": -71
+                },
+                {
+                  "lat": 7,
+                  "lon": -71
+                }
+              ],
+              "inferred": false,
+              "link": null
             }
           ]
         }
@@ -24996,6 +25035,23 @@
               ],
               "inferred": false,
               "link": "axis"
+            },
+            {
+              "stamp": "202608032109",
+              "file": "TWDEP.202608032109.txt",
+              "meanLon": -127,
+              "axis": [
+                {
+                  "lat": 19,
+                  "lon": -127
+                },
+                {
+                  "lat": 2,
+                  "lon": -127
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
             }
           ]
         },
@@ -25369,6 +25425,40 @@
                 {
                   "lat": 2,
                   "lon": -87
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
+            },
+            {
+              "stamp": "202608032109",
+              "file": "TWDEP.202608032109.txt",
+              "meanLon": -88,
+              "axis": [
+                {
+                  "lat": 14,
+                  "lon": -88
+                },
+                {
+                  "lat": 2,
+                  "lon": -88
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
+            },
+            {
+              "stamp": "202608040138",
+              "file": "TWDEP.202608040138.txt",
+              "meanLon": -93,
+              "axis": [
+                {
+                  "lat": 14,
+                  "lon": -93
+                },
+                {
+                  "lat": 2,
+                  "lon": -93
                 }
               ],
               "inferred": false,

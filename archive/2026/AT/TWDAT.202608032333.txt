@@ -1,0 +1,108 @@
+
+000
+AXNT20 KNHC 032333
+TWDAT 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+0015 UTC Tue Aug 4 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 1800 UTC surface analysis and satellite imagery through
+2305 UTC.
+
+...TROPICAL WAVES...
+
+An eastern Atlantic tropical wave is along 36W, south of 20N, 
+moving westward at 15 to 20 kt. No significant convection is 
+depicted at this time in association with this wave. 
+
+An eastern Caribbean tropical wave is along 71W, south of 19N,
+moving westward at 15 kt. The wave is enhancing convection over
+Venezuela and Colombia.
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough enters the Atlantic through the coast of
+Mauritania near 21N16W and continues southwestward to 08N49W. 
+The ITCZ extends from 08N49W to 09N59W. Scattered moderate to
+isolated strong convection is noted from 05N to 11N E of 20W. 
+
+...GULF OF AMERICA...
+
+Divergence aloft associated with an upper-level trough north of
+the area continues to generate some convection over the northern
+and eastern waters. However, the most favorable environment for
+showers and thunderstorms has moved eastward into the western
+Atlantic. A weak pressure gradient dominates the Gulf waters,
+supporting moderate or weaker winds and slight to locally
+moderate seas.
+ 
+For the forecast, high pressure will generally dominate, promoting
+gentle winds and slight seas through the remainder of the week and
+into the upcoming weekend. Pulses of fresh winds will occur of 
+the Yucatan Peninsula each night, locally strong Wed night, along 
+with moderate seas. Thunderstorms will prevail into mid-week in 
+the northeast basin as a cold front settles over the Florida 
+Panhandle and a mid- and upper-level trough sets up over the 
+region. 
+ 
+...CARIBBEAN SEA...
+
+The subtropical ridge is centered just east of Bermuda forcing
+fresh to strong easterly trade winds and rough seas across much
+of the central Caribbean. An altimeter satellite pass from a few
+hours ago showed seas up to 10 ft off northern Colombia. Moderate
+to fresh easterly breezes and moderate seas are occurring in the
+eastern Caribbean. Elsewhere, moderate or lighter seas prevail. 
+
+An upper-level trough north of the area and diurnal heating
+support numerous showers and scattered thunderstorms across Cuba
+and nearby waters. A few showers are seen in Hispaniola and the
+SW Caribbean, while drier conditions persist in the rest of the 
+basin.
+
+For the forecast, the pressure gradient between Atlantic high
+pressure and relatively lower pressure in northern South America
+will continue to support fresh to strong trades over the central
+basin through the remainder of the week and into next weekend, 
+with rough seas there. Fresh to locally strong winds will also 
+pulse in the Gulf of Honduras. Fresh winds may pulse through the 
+Windward Passage at times. Otherwise, mainly moderate or weaker 
+winds ands seas will prevail. 
+
+...ATLANTIC OCEAN...
+
+Divergence aloft associated with an upper-level trough across the
+eastern United States supports scattered showers and isolated
+thunderstorms in the western Atlantic, especially west of 72W.
+Meanwhile, an upper-level low centered near 27N55W is producing a
+few showers north of 22N and between 43W and 70W. The remainder
+of the basin is dominated by a broad subtropical ridge.
+
+Fresh to locally strong easterly trade winds and moderate seas
+are found off northern Hispaniola. Moderate to locally fresh 
+anticyclonic winds and moderate seas are evident north of 20N and
+west of 30W. In the far NE Atlantic, fresh to strong N-NE winds 
+and moderate to locally rough seas are evident off Morocco and in
+the water passages of the Canary Islands. Elsewhere, gentle to 
+moderate winds and moderate seas are prevalent.
+
+For the forecast west of 55W, fresh SW winds offshore NE Florida
+will continue tonight before diminishing as high pressure builds
+west toward the region. An upper-level trough along the eastern 
+coast of the U.S. will prolong scattered thunderstorms offshore 
+Florida and in the vicinity of the Bahamas early this week. 
+Elsewhere, locally strong trades will continue to pulse each 
+night offshore Hispaniola. A low level trough may bring fresh to 
+locally strong winds and locally rough seas from east to west 
+across the central waters by mid-week, reaching the NW waters by 
+the end of the week.
+
+$$
+Delgado
