@@ -23886,6 +23886,65 @@
       "stamp": "202608041125",
       "issuedISO": "2026-08-04T12:00:00.000Z",
       "disturbances": []
+    },
+    {
+      "file": "TWDAT.202608041630.txt",
+      "kind": "TWD",
+      "stamp": "202608041630",
+      "issuedISO": "2026-08-04T18:15:00.000Z",
+      "cyclones": [],
+      "waves": [
+        {
+          "id": "W1",
+          "axis": [
+            {
+              "lat": 14.5,
+              "lon": -21
+            },
+            {
+              "lat": 5,
+              "lon": -21
+            }
+          ],
+          "inferred": false,
+          "motion": {
+            "bearing": 270,
+            "slowKt": 10,
+            "fastKt": 10
+          }
+        },
+        {
+          "id": "W2",
+          "axis": [
+            {
+              "lat": 19,
+              "lon": -39
+            },
+            {
+              "lat": 5,
+              "lon": -39
+            }
+          ],
+          "inferred": false,
+          "motion": {
+            "bearing": 270,
+            "slowKt": 5,
+            "fastKt": 10
+          }
+        }
+      ],
+      "convection": 5,
+      "troughs": 2,
+      "fixes": 2,
+      "inferred": 0,
+      "projections": 2
+    },
+    {
+      "file": "TWOAT.202608041742.txt",
+      "kind": "TWO",
+      "stamp": "202608041742",
+      "issuedISO": "2026-08-04T18:00:00.000Z",
+      "disturbances": []
     }
   ]
 }

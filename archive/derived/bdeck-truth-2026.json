@@ -3,12 +3,12 @@
   "season": 2026,
   "btkNow": "202608021800",
   "summary": {
-    "invests": 171,
+    "invests": 173,
     "confirms": 0,
     "resolves": 5,
     "refutes": 1,
     "open": 0,
-    "noData": 165,
+    "noData": 167,
     "flags": 17
   },
   "flags": [
@@ -9395,6 +9395,68 @@
               },
               "verdict48": "not-formed",
               "verdict7": "not-formed",
+              "truth48": null,
+              "truth7": null
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202608041736-1",
+          "tag": null,
+          "ledger": {
+            "kind": "open",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null
+          },
+          "truth": null,
+          "agreement": "no-data",
+          "genesisDeltaH": null,
+          "posStats": null,
+          "statements": [
+            {
+              "stamp": "202608041736",
+              "chance48": {
+                "cat": "low",
+                "pct": 0
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 20
+              },
+              "verdict48": "pending",
+              "verdict7": "pending",
+              "truth48": null,
+              "truth7": null
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202608041736-2",
+          "tag": null,
+          "ledger": {
+            "kind": "open",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null
+          },
+          "truth": null,
+          "agreement": "no-data",
+          "genesisDeltaH": null,
+          "posStats": null,
+          "statements": [
+            {
+              "stamp": "202608041736",
+              "chance48": {
+                "cat": "low",
+                "pct": 0
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 20
+              },
+              "verdict48": "pending",
+              "verdict7": "pending",
               "truth48": null,
               "truth7": null
             }

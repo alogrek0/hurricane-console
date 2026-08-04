@@ -1,0 +1,30 @@
+
+000
+ABPZ20 KNHC 041736
+TWOEP 
+
+Tropical Weather Outlook
+NWS National Hurricane Center Miami FL
+1100 AM PDT Tue Aug 4 2026
+
+For the eastern and central North Pacific east of 180 longitude:
+
+Central Pacific:
+A tropical wave located over the western portion of the east Pacific 
+is producing disorganized showers and thunderstorms. Environmental 
+conditions appear marginally conducive for slow development over the 
+next several days as it moves westward at 10 to 15 mph.
+* Formation chance through 48 hours...low...near 0 percent.
+* Formation chance through 7 days...low...20 percent.
+
+Western East Pacific:
+A tropical wave located over the central portion of the east Pacific 
+is producing disorganized showers and thunderstorms.  Environmental 
+conditions are currently unfavorable, but could become more 
+conducive for slow development over the weekend into early next week 
+as the system moves generally westward at 10 to 15 mph.
+*Formation chance through 48 hours...low...near 0 percent.
+*Formation chance through 7 days...low...20 percent.
+
+$$
+Forecaster Hagen/Blake

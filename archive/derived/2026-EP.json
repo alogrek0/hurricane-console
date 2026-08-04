@@ -22369,6 +22369,92 @@
       "stamp": "202608041139",
       "issuedISO": "2026-08-04T12:00:00.000Z",
       "disturbances": []
+    },
+    {
+      "file": "TWDEP.202608041540.txt",
+      "kind": "TWD",
+      "stamp": "202608041540",
+      "issuedISO": "2026-08-04T16:05:00.000Z",
+      "cyclones": [],
+      "waves": [
+        {
+          "id": "W1",
+          "axis": [
+            {
+              "lat": 14,
+              "lon": -95
+            },
+            {
+              "lat": 2,
+              "lon": -95
+            }
+          ],
+          "inferred": false,
+          "motion": {
+            "bearing": 270,
+            "slowKt": 10,
+            "fastKt": 15
+          }
+        },
+        {
+          "id": "W3",
+          "axis": [
+            {
+              "lat": 19,
+              "lon": -131
+            },
+            {
+              "lat": 2,
+              "lon": -131
+            }
+          ],
+          "inferred": false,
+          "motion": {
+            "bearing": 270,
+            "slowKt": 10,
+            "fastKt": 10
+          }
+        }
+      ],
+      "convection": 2,
+      "troughs": 2,
+      "fixes": 1,
+      "inferred": 0,
+      "projections": 2
+    },
+    {
+      "file": "TWOEP.202608041736.txt",
+      "kind": "TWO",
+      "stamp": "202608041736",
+      "issuedISO": "2026-08-04T18:00:00.000Z",
+      "disturbances": [
+        {
+          "invest": null,
+          "lat": null,
+          "lon": null,
+          "chance48": {
+            "cat": "low",
+            "pct": 0
+          },
+          "chance7": {
+            "cat": "low",
+            "pct": 20
+          }
+        },
+        {
+          "invest": null,
+          "lat": null,
+          "lon": null,
+          "chance48": {
+            "cat": "low",
+            "pct": 0
+          },
+          "chance7": {
+            "cat": "low",
+            "pct": 20
+          }
+        }
+      ]
     }
   ]
 }
