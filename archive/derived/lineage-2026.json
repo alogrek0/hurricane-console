@@ -32649,6 +32649,50 @@
               "link": null
             }
           ]
+        },
+        {
+          "id": "EP-I-202608051143-1",
+          "tag": null,
+          "sightings": [
+            {
+              "stamp": "202608051143",
+              "file": "TWOEP.202608051143.txt",
+              "lat": null,
+              "lon": null,
+              "chance48": {
+                "cat": "low",
+                "pct": 0
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 20
+              },
+              "tagged": false,
+              "link": null
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202608051143-2",
+          "tag": null,
+          "sightings": [
+            {
+              "stamp": "202608051143",
+              "file": "TWOEP.202608051143.txt",
+              "lat": null,
+              "lon": null,
+              "chance48": {
+                "cat": "low",
+                "pct": 0
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 20
+              },
+              "tagged": false,
+              "link": null
+            }
+          ]
         }
       ],
       "cyclones": [
