@@ -1045,9 +1045,108 @@ ok('offset: "to the" infix form resolves the same bearing',
 ok('offset: teletype line-wrap inside the phrase still offsets',
   (() => { const d = offDot('An area of low pressure is located several hundred\nmiles south of the southern tip of the Baja California Peninsula.');
     return d && d.lat === 17.1 && d.lon === -109.9; })());
-ok('offset: "well southwest of X" states no distance -> stays at the anchor (nothing invented)',
+// "well/far <dir> of X" states a direction but NO distance. Anchoring at X
+// asserts the one place the prose says the system is NOT — EP95 sat on the tip
+// of Baja for 13 issuances while the real low was 17.6 deg southwest, which put
+// the chain outside the ledger's nearby-cyclone gate and produced the season's
+// only refuted genesis verdict. A nominal distance would invent magnitude, so
+// the honest answer is no position. (Was: pinned at the anchor, 2026-08-05.)
+ok('offset: "well southwest of X" states no distance -> honestly unmappable (null)',
   (() => { const d = offDot('A broad area of low pressure is located well southwest of the Baja California Peninsula.');
+    return d === null || d === undefined; })());
+ok('offset: "far north of X" is the same vague idiom -> null',
+  (() => { const d = offDot('A broad area of low pressure is located far north of the Baja California Peninsula.');
+    return d === null || d === undefined; })());
+ok('offset: "just north of X" is ADJACENT, not distant -> keeps the anchor',
+  (() => { const d = offDot('A broad area of low pressure is located just north of the Baja California Peninsula.');
     return d && d.lat === 29.0 && d.lon === -114.0; })());
+ok('offset: a vague clause does not erase a position stated EARLIER in the sentence',
+  (() => { const r = P.parse('TWDAT \n\nTropical Weather Discussion\n\n...TROPICAL WAVES...\n\n' +
+    'A tropical wave is over the central Caribbean, well east of Honduras.');
+    return r.inferred.length === 1 && r.inferred[0].lat === 15.0 && r.inferred[0].lon === -75.0; })());
+ok('offset: "well to the west-southwest of X" — the "to the" infix form is also vague -> null',
+  (() => { const d = offDot('An area of low pressure is located well to the west-southwest of the southern tip of the Baja California Peninsula.');
+    return d === null || d === undefined; })());
+ok('offset: "well" followed by a non-compass word is not a bearing -> anchor unchanged',
+  (() => { const d = offDot('A broad area of low pressure is located well offshore of the Baja California Peninsula.');
+    return d && d.lat === 29.0 && d.lon === -114.0; })());
+ok('offset TWO: EP95 real prose ("well southwest of the southern tip") -> null, tag intact',
+  (() => { const t = P.parseTWO(`
+000
+ABPZ20 KNHC 300508
+TWOEP
+
+Tropical Weather Outlook
+NWS National Hurricane Center Miami FL
+1100 PM PDT Mon Jun 29 2026
+
+For the eastern and central North Pacific east of 180 longitude:
+
+Western East Pacific (EP95):
+A broad low pressure trough located well southwest of the southern
+tip of the Baja California Peninsula is producing an elongated area
+of disorganized showers and thunderstorms.
+* Formation chance through 48 hours...high...70 percent.
+* Formation chance through 7 days...high...80 percent.
+
+$$
+`);
+    const d = t.disturbances[0];
+    return d.invest === 'EP95' && d.lat === null && d.lon === null; })());
+
+// --- gazetteer: leftmost-longest anchor matching --------------------------
+// anchor() used to return the first key in TABLE order that appeared anywhere
+// in the phrase, so 'florida' (listed one line above 'gulf of america') won the
+// AL91 title and pinned an offshore system inland. Earliest occurrence now
+// wins, longest breaks a tie — NHC leads with the primary location.
+const AT_HEAD = '\n000\nAXNT20 KNHC 140801\nTWDAT \n\nTropical Weather Discussion\n\n...TROPICAL WAVES...\n\n';
+const gazDot = (s) => { const r = P.parse(AT_HEAD + s); return r.inferred.length === 1 ? r.inferred[0] : null; };
+ok('gaz: AL91 title picks the Gulf, not the Florida landmass listed after it',
+  (() => { const t = P.parseTWO(`
+000
+ABNT20 KNHC 190516
+TWOAT
+
+Tropical Weather Outlook
+NWS National Hurricane Center Miami FL
+200 AM EDT Sun Jul 19 2026
+
+For the North Atlantic...Caribbean Sea and the Gulf of America:
+
+Northern Gulf of America and near Florida (AL91):
+An area of low pressure located over the northeastern Gulf of
+America is slowly becoming better defined.
+* Formation chance through 48 hours...medium...60 percent.
+* Formation chance through 7 days...medium...60 percent.
+
+$$
+`);
+    const d = t.disturbances[0];
+    return d.invest === 'AL91' && d.lat === 28.0 && d.lon === -89.0; })());
+ok('gaz: specific beats generic regardless of table order ("gulf of honduras" over "honduras")',
+  (() => { const d = gazDot('A surface trough is over the Gulf of Honduras.');
+    return d && d.lat === 16.5 && d.lon === -87.5; })());
+ok('gaz: "central caribbean" beats the "caribbean" it contains',
+  (() => { const d = gazDot('A disturbed area is over the central Caribbean.');
+    return d && d.lat === 15.0 && d.lon === -75.0; })());
+ok('gaz: all seven attested Gulf sub-regions resolve to their own anchor',
+  (() => {
+    const want = {
+      'northeastern Gulf of America': [27.5, -85.5],
+      'northwestern Gulf of America': [27.0, -94.0],
+      'northern Gulf of America': [28.0, -89.0],
+      'eastern Gulf of America': [26.0, -84.5],
+      'south-central Gulf of America': [23.0, -90.0],
+      'southwestern Gulf of America': [21.5, -95.0],
+      'central Gulf of America': [25.0, -89.0],
+    };
+    return Object.keys(want).every((k) => {
+      const d = gazDot('A surface trough is over the ' + k + '.');
+      return d && d.lat === want[k][0] && d.lon === want[k][1];
+    }); })());
+ok('gaz: bare "Gulf of America" still resolves to the basin centroid',
+  (() => { const d = gazDot('A surface trough is over the Gulf of America.');
+    return d && d.lat === 25.0 && d.lon === -90.0; })());
 ok('offset: "within N miles ... of" is a radius, not a position -> anchor unchanged',
   (() => { const d = offDot('A surface trough is within 200 miles south of the Baja California Peninsula.');
     return d && d.lat === 29.0 && d.lon === -114.0; })());
@@ -1881,11 +1980,18 @@ const FUTURE = '202609010000'; // "now" far past every synthetic window
       ok('ledger corpus: no formed verdict without an invest-cyclone genesis link', formedOk);
       ok('ledger corpus: calibration cell counts sum to statements', sumsOk);
       // immutable pins — closed June chains; One/Arthur can never gain links
-      const al90 = led.basins.AT.invests.find((r) => r.id === 'AT-I-202606131720-1');
+      // AL90's chain id moved 2026-08-05 (202606131720 -> 202606141137): the
+      // gazetteer fix put the "Northwestern Gulf of America" issuances at 27,-94
+      // instead of the basin centroid, which honestly broke the earlier inland
+      // trough sightings off the front. The final statement now reads formed —
+      // the chain reaches Arthur through a real genesis link rather than sitting
+      // unresolved next to him.
+      const al90 = led.basins.AT.invests.find((r) => r.id === 'AT-I-202606141137-1');
       const al90last = al90 && al90.statements[al90.statements.length - 1];
-      ok('ledger corpus: AL90 pin — final statement (202606161142) unresolved on both horizons',
+      ok('ledger corpus: AL90 pin — final statement (202606161142) formed on both horizons via a genesis link',
         !!al90last && al90last.stamp === '202606161142' &&
-        al90last.verdict48 === 'unresolved' && al90last.verdict7 === 'unresolved');
+        al90last.verdict48 === 'formed' && al90last.verdict7 === 'formed' &&
+        al90.outcome.kind === 'formed' && al90.outcome.cycloneName === 'Arthur');
       const ep91 = led.basins.EP.invests.find((r) => r.id === 'EP-I-202606031143-2');
       ok('ledger corpus: EP91 pin — formed into EP-C-202606071546-1 at 202606071546',
         !!ep91 && ep91.outcome.kind === 'formed' &&
@@ -2044,14 +2150,22 @@ ok('truth truthCalibrate: observedRate null when nothing resolved (never 0/0 as 
       ok('truth corpus: a formed truth always names its b-deck storm and TD onset',
         all.every((r) => !r.truth || r.truth.kind !== 'formed' ||
           (r.truth.cycloneBdeck && r.truth.firstTdDtg)));
+      // Both pins moved on 2026-08-05 when the gazetteer stopped anchoring these
+      // two invests at wrong places (AL90 at the Gulf centroid instead of the
+      // northwestern Gulf its title names; EP95 ON the tip of Baja the prose
+      // says it is well southwest OF). The verdicts did not change because the
+      // ledger was rewritten — the positions feeding it stopped being wrong.
       const al90 = bt.basins.AT.invests.find((r) => r.tag === 'AL90');
-      ok('truth corpus: AL90 pin — b-deck truth RESOLVES the ledger\'s honest unresolved to formed into bal012026',
-        !!al90 && al90.agreement === 'resolves' && al90.truth.kind === 'formed' &&
-        al90.truth.cycloneBdeck === 'bal012026');
-      const ep95 = bt.basins.EP.invests.find((r) => r.id === 'EP-I-202606280508-1');
-      ok('truth corpus: EP95 pin — truth REFUTES the ledger\'s not-formed (EP95 became bep042026), flagged not rewritten',
-        !!ep95 && ep95.agreement === 'refutes' && ep95.truth.cycloneBdeck === 'bep042026' &&
-        bt.flags.some((f) => f.subject === 'EP-I-202606280508-1' && f.kind === 'truth-refutes-no-cyclone'));
+      ok('truth corpus: AL90 pin — ledger now derives formed on its own, b-deck CONFIRMS into bal012026',
+        !!al90 && al90.agreement === 'confirms' && al90.truth.kind === 'formed' &&
+        al90.ledger.kind === 'formed' && al90.truth.cycloneBdeck === 'bal012026');
+      const ep95 = bt.basins.EP.invests.find((r) => r.tag === 'EP95');
+      ok('truth corpus: EP95 pin — honest unresolved (no invented not-formed), truth RESOLVES it to bep042026',
+        !!ep95 && ep95.agreement === 'resolves' && ep95.truth.cycloneBdeck === 'bep042026' &&
+        ep95.ledger.kind === 'unresolved-nearby-cyclone');
+      ok('truth corpus: no refuted verdict survives the gazetteer fix (the season\'s only one was position-caused)',
+        bt.basins.AT.invests.concat(bt.basins.EP.invests)
+          .every((r) => r.agreement !== 'refutes'));
       ok('truth corpus: AT cyclone chains match their b-deck (the AL-vs-AT basin fix)',
         bt.basins.AT.cyclones.filter((c) => c.bdeck === 'bal012026').length === 2 &&
         bt.flags.some((f) => f.subject === 'bal012026' && f.kind === 'same-storm-split'));
@@ -2129,8 +2243,10 @@ ok('tracks basinKeyOf: al -> AT, ep -> EP, cp unmapped',
       const ep05 = tj.basins.EP.storms.find((s) => s.id === 'ep052026');
       ok('tracks corpus: ep052026 pin — carries EP96 via explicit evidence',
         !!ep05 && ep05.investTags.indexOf('EP96') >= 0);
-      ok('tracks corpus: AL90 truth pin — resolves, formed into bal012026',
-        tj.basins.AT.truth.AL90 && tj.basins.AT.truth.AL90.agreement === 'resolves' &&
+      // 'resolves' -> 'confirms' on 2026-08-05: the gazetteer fix let the ledger
+      // reach Arthur on its own, so truth confirms rather than resolving a gap.
+      ok('tracks corpus: AL90 truth pin — confirms, formed into bal012026',
+        tj.basins.AT.truth.AL90 && tj.basins.AT.truth.AL90.agreement === 'confirms' &&
         tj.basins.AT.truth.AL90.bdeck === 'bal012026');
     }
   }

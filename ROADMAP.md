@@ -143,6 +143,36 @@ planned tracks — lived friction beats speculation.
   gate ("expected to form ... offshore of X" anchors at X — pre-existing,
   pinned by test, its own PR if it ever misleads).*
 
+- [x] **Gazetteer anchored two invests where the text says they are NOT**
+  (2026-08-05, found while judging the M7 best-track treatments — AL91 rendered as
+  a single stacked point in the lineage lab). Two independent defects. *(1)*
+  `anchor()` returned the first key in **table order** found anywhere in the
+  phrase, so `'florida'` — listed one line above `'gulf of america'` — won the
+  title `Northern Gulf of America and near Florida (AL91)` and pinned an offshore
+  system inland, 149-202 nm from its b-deck track. The hand-maintained
+  specific-before-generic ordering was load-bearing and failed silently. *(2)*
+  `well/far <dir> of X` states a direction with no distance, so `parseOffsetPhrase`
+  declined and execution fell through to the bare anchor — parking EP95 **on** the
+  tip of Baja for 13 issuances while the real low was 17.6° southwest. That
+  position error put the chain outside the ledger's 10° nearby-cyclone gate and
+  produced the season's only **refuted** genesis verdict.
+  *Fixed: `anchor()` now resolves **leftmost-longest** (earliest occurrence in the
+  phrase wins, longest breaks a tie), making specific-beats-generic structural
+  rather than a table-ordering convention; seven **attested** Gulf sub-region
+  entries added (counts taken from the archive — `northeastern gulf of america`
+  alone appears 43×), matching the idiom the Caribbean and tropical-Atlantic
+  entries already use; and `well|far <dir> of X` (with the `to the` infix, mirroring
+  RE_OFFSET) now returns **null** — honestly unmappable. The standing "no nominal
+  offset" decision is upheld: a nominal would invent magnitude. `just|immediately
+  <dir> of X` is the opposite idiom (adjacent) and deliberately keeps its anchor.*
+  *Payoff, measured on re-derive: **the season's only `refutes` is gone** — EP95's
+  ledger verdict became an honest `unresolved` (no wrong not-formed to refute) and
+  b-deck truth `resolves` it to Four/Douglas; AL90 improved `resolves` → **`confirms`**,
+  reaching Arthur through a real genesis link instead of sitting unresolved beside
+  him (anchor error 9.11° → 5.41°); AL91 stopped being a single point entirely —
+  19 sightings across two Gulf positions. Truth tally 1 confirmed / 4 resolved /
+  1 refuted → 1 confirmed / 5 resolved / **0 refuted**, 17 flags → 16.*
+
 ## Track A — Features
 
 - [x] **Product-history scrubber** — fetch the last ~8 TWDAT/TWO issuances and

@@ -405,7 +405,7 @@
       ],
       "truth": {
         "AL90": {
-          "agreement": "resolves",
+          "agreement": "confirms",
           "kind": "formed",
           "intoNames": [
             "ONE",
@@ -2411,7 +2411,7 @@
           "bdeck": null
         },
         "EP95": {
-          "agreement": "refutes",
+          "agreement": "resolves",
           "kind": "formed",
           "intoNames": [
             "FOUR",

@@ -251,29 +251,16 @@
         },
         {
           "id": "AT-I-202606131720-1",
-          "tag": "AL90",
+          "tag": null,
           "firstStamp": "202606131720",
-          "lastStamp": "202606161142",
+          "lastStamp": "202606140531",
           "waveOrigin": null,
           "outcome": {
-            "kind": "unresolved-nearby-cyclone",
+            "kind": "no-cyclone",
             "cycloneId": null,
             "cycloneName": null,
             "genesisStamp": null,
-            "nearby": [
-              {
-                "cycloneId": "AT-C-202606161802-1",
-                "name": "One",
-                "firstStamp": "202606161802",
-                "dist": 8.078
-              },
-              {
-                "cycloneId": "AT-C-202606171713-1",
-                "name": "Arthur",
-                "firstStamp": "202606171713",
-                "dist": 6.826
-              }
-            ]
+            "nearby": []
           },
           "siblingChains": [],
           "statements": [
@@ -290,7 +277,7 @@
                 "pct": 20
               },
               "verdict48": "not-formed",
-              "verdict7": "unresolved"
+              "verdict7": "not-formed"
             },
             {
               "stamp": "202606132323",
@@ -305,7 +292,7 @@
                 "pct": 20
               },
               "verdict48": "not-formed",
-              "verdict7": "unresolved"
+              "verdict7": "not-formed"
             },
             {
               "stamp": "202606140531",
@@ -320,8 +307,25 @@
                 "pct": 20
               },
               "verdict48": "not-formed",
-              "verdict7": "unresolved"
-            },
+              "verdict7": "not-formed"
+            }
+          ]
+        },
+        {
+          "id": "AT-I-202606141137-1",
+          "tag": "AL90",
+          "firstStamp": "202606141137",
+          "lastStamp": "202606161142",
+          "waveOrigin": null,
+          "outcome": {
+            "kind": "formed",
+            "cycloneId": "AT-C-202606171713-1",
+            "cycloneName": "Arthur",
+            "genesisStamp": "202606171713",
+            "nearby": []
+          },
+          "siblingChains": [],
+          "statements": [
             {
               "stamp": "202606141137",
               "file": "TWOAT.202606141137.txt",
@@ -335,7 +339,7 @@
                 "pct": 20
               },
               "verdict48": "not-formed",
-              "verdict7": "unresolved"
+              "verdict7": "formed"
             },
             {
               "stamp": "202606141732",
@@ -350,7 +354,7 @@
                 "pct": 30
               },
               "verdict48": "not-formed",
-              "verdict7": "unresolved"
+              "verdict7": "formed"
             },
             {
               "stamp": "202606142321",
@@ -364,8 +368,8 @@
                 "cat": "low",
                 "pct": 30
               },
-              "verdict48": "unresolved",
-              "verdict7": "unresolved"
+              "verdict48": "not-formed",
+              "verdict7": "formed"
             },
             {
               "stamp": "202606150507",
@@ -379,8 +383,8 @@
                 "cat": "low",
                 "pct": 30
               },
-              "verdict48": "unresolved",
-              "verdict7": "unresolved"
+              "verdict48": "not-formed",
+              "verdict7": "formed"
             },
             {
               "stamp": "202606151151",
@@ -394,8 +398,8 @@
                 "cat": "low",
                 "pct": 30
               },
-              "verdict48": "unresolved",
-              "verdict7": "unresolved"
+              "verdict48": "not-formed",
+              "verdict7": "formed"
             },
             {
               "stamp": "202606151731",
@@ -409,8 +413,8 @@
                 "cat": "medium",
                 "pct": 50
               },
-              "verdict48": "unresolved",
-              "verdict7": "unresolved"
+              "verdict48": "formed",
+              "verdict7": "formed"
             },
             {
               "stamp": "202606152321",
@@ -424,8 +428,8 @@
                 "cat": "medium",
                 "pct": 50
               },
-              "verdict48": "unresolved",
-              "verdict7": "unresolved"
+              "verdict48": "formed",
+              "verdict7": "formed"
             },
             {
               "stamp": "202606160502",
@@ -439,8 +443,8 @@
                 "cat": "medium",
                 "pct": 60
               },
-              "verdict48": "unresolved",
-              "verdict7": "unresolved"
+              "verdict48": "formed",
+              "verdict7": "formed"
             },
             {
               "stamp": "202606161142",
@@ -454,8 +458,8 @@
                 "cat": "medium",
                 "pct": 60
               },
-              "verdict48": "unresolved",
-              "verdict7": "unresolved"
+              "verdict48": "formed",
+              "verdict7": "formed"
             }
           ]
         },
@@ -475,12 +479,6 @@
                 "cycloneId": "AT-C-202606161802-1",
                 "name": "One",
                 "firstStamp": "202606161802",
-                "dist": null
-              },
-              {
-                "cycloneId": "AT-C-202606171713-1",
-                "name": "Arthur",
-                "firstStamp": "202606171713",
                 "dist": null
               }
             ]
@@ -511,18 +509,11 @@
           "lastStamp": "202606162336",
           "waveOrigin": null,
           "outcome": {
-            "kind": "unresolved-nearby-cyclone",
+            "kind": "no-cyclone",
             "cycloneId": null,
             "cycloneName": null,
             "genesisStamp": null,
-            "nearby": [
-              {
-                "cycloneId": "AT-C-202606171713-1",
-                "name": "Arthur",
-                "firstStamp": "202606171713",
-                "dist": null
-              }
-            ]
+            "nearby": []
           },
           "siblingChains": [],
           "statements": [
@@ -538,8 +529,8 @@
                 "cat": "high",
                 "pct": 70
               },
-              "verdict48": "unresolved",
-              "verdict7": "unresolved"
+              "verdict48": "not-formed",
+              "verdict7": "not-formed"
             }
           ]
         },
@@ -550,18 +541,11 @@
           "lastStamp": "202606170544",
           "waveOrigin": null,
           "outcome": {
-            "kind": "unresolved-nearby-cyclone",
+            "kind": "no-cyclone",
             "cycloneId": null,
             "cycloneName": null,
             "genesisStamp": null,
-            "nearby": [
-              {
-                "cycloneId": "AT-C-202606171713-1",
-                "name": "Arthur",
-                "firstStamp": "202606171713",
-                "dist": null
-              }
-            ]
+            "nearby": []
           },
           "siblingChains": [],
           "statements": [
@@ -577,8 +561,8 @@
                 "cat": "medium",
                 "pct": 60
               },
-              "verdict48": "unresolved",
-              "verdict7": "unresolved"
+              "verdict48": "not-formed",
+              "verdict7": "not-formed"
             }
           ]
         },
@@ -589,18 +573,11 @@
           "lastStamp": "202606171144",
           "waveOrigin": null,
           "outcome": {
-            "kind": "unresolved-nearby-cyclone",
+            "kind": "no-cyclone",
             "cycloneId": null,
             "cycloneName": null,
             "genesisStamp": null,
-            "nearby": [
-              {
-                "cycloneId": "AT-C-202606171713-1",
-                "name": "Arthur",
-                "firstStamp": "202606171713",
-                "dist": null
-              }
-            ]
+            "nearby": []
           },
           "siblingChains": [],
           "statements": [
@@ -616,8 +593,8 @@
                 "cat": "medium",
                 "pct": 60
               },
-              "verdict48": "unresolved",
-              "verdict7": "unresolved"
+              "verdict48": "not-formed",
+              "verdict7": "not-formed"
             }
           ]
         },
@@ -1167,16 +1144,29 @@
         },
         {
           "id": "AT-I-202607151143-1",
-          "tag": null,
+          "tag": "AL91",
           "firstStamp": "202607151143",
-          "lastStamp": "202607171141",
+          "lastStamp": "202607191120",
           "waveOrigin": null,
           "outcome": {
-            "kind": "no-cyclone",
+            "kind": "unresolved-nearby-cyclone",
             "cycloneId": null,
             "cycloneName": null,
             "genesisStamp": null,
-            "nearby": []
+            "nearby": [
+              {
+                "cycloneId": "AT-C-202607191649-1",
+                "name": "Two",
+                "firstStamp": "202607191649",
+                "dist": 3.7
+              },
+              {
+                "cycloneId": "AT-C-202607210608-1",
+                "name": "Bertha",
+                "firstStamp": "202607210608",
+                "dist": 3.106
+              }
+            ]
           },
           "siblingChains": [],
           "statements": [
@@ -1193,7 +1183,7 @@
                 "pct": 20
               },
               "verdict48": "not-formed",
-              "verdict7": "not-formed"
+              "verdict7": "unresolved"
             },
             {
               "stamp": "202607151720",
@@ -1208,7 +1198,7 @@
                 "pct": 20
               },
               "verdict48": "not-formed",
-              "verdict7": "not-formed"
+              "verdict7": "unresolved"
             },
             {
               "stamp": "202607151728",
@@ -1223,7 +1213,7 @@
                 "pct": 20
               },
               "verdict48": "not-formed",
-              "verdict7": "not-formed"
+              "verdict7": "unresolved"
             },
             {
               "stamp": "202607152326",
@@ -1238,7 +1228,7 @@
                 "pct": 20
               },
               "verdict48": "not-formed",
-              "verdict7": "not-formed"
+              "verdict7": "unresolved"
             },
             {
               "stamp": "202607160515",
@@ -1253,7 +1243,7 @@
                 "pct": 20
               },
               "verdict48": "not-formed",
-              "verdict7": "not-formed"
+              "verdict7": "unresolved"
             },
             {
               "stamp": "202607161116",
@@ -1268,7 +1258,7 @@
                 "pct": 20
               },
               "verdict48": "not-formed",
-              "verdict7": "not-formed"
+              "verdict7": "unresolved"
             },
             {
               "stamp": "202607161724",
@@ -1283,7 +1273,7 @@
                 "pct": 20
               },
               "verdict48": "not-formed",
-              "verdict7": "not-formed"
+              "verdict7": "unresolved"
             },
             {
               "stamp": "202607162320",
@@ -1298,7 +1288,7 @@
                 "pct": 20
               },
               "verdict48": "not-formed",
-              "verdict7": "not-formed"
+              "verdict7": "unresolved"
             },
             {
               "stamp": "202607170529",
@@ -1313,7 +1303,7 @@
                 "pct": 20
               },
               "verdict48": "not-formed",
-              "verdict7": "not-formed"
+              "verdict7": "unresolved"
             },
             {
               "stamp": "202607170533",
@@ -1328,7 +1318,7 @@
                 "pct": 20
               },
               "verdict48": "not-formed",
-              "verdict7": "not-formed"
+              "verdict7": "unresolved"
             },
             {
               "stamp": "202607171141",
@@ -1343,7 +1333,127 @@
                 "pct": 20
               },
               "verdict48": "not-formed",
-              "verdict7": "not-formed"
+              "verdict7": "unresolved"
+            },
+            {
+              "stamp": "202607171721",
+              "file": "TWOAT.202607171721.txt",
+              "tagged": false,
+              "chance48": {
+                "cat": "low",
+                "pct": 10
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 30
+              },
+              "verdict48": "unresolved",
+              "verdict7": "unresolved"
+            },
+            {
+              "stamp": "202607172317",
+              "file": "TWOAT.202607172317.txt",
+              "tagged": false,
+              "chance48": {
+                "cat": "low",
+                "pct": 10
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 30
+              },
+              "verdict48": "unresolved",
+              "verdict7": "unresolved"
+            },
+            {
+              "stamp": "202607180543",
+              "file": "TWOAT.202607180543.txt",
+              "tagged": false,
+              "chance48": {
+                "cat": "low",
+                "pct": 10
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 30
+              },
+              "verdict48": "unresolved",
+              "verdict7": "unresolved"
+            },
+            {
+              "stamp": "202607181110",
+              "file": "TWOAT.202607181110.txt",
+              "tagged": false,
+              "chance48": {
+                "cat": "low",
+                "pct": 20
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 30
+              },
+              "verdict48": "unresolved",
+              "verdict7": "unresolved"
+            },
+            {
+              "stamp": "202607181717",
+              "file": "TWOAT.202607181717.txt",
+              "tagged": true,
+              "chance48": {
+                "cat": "low",
+                "pct": 30
+              },
+              "chance7": {
+                "cat": "medium",
+                "pct": 40
+              },
+              "verdict48": "unresolved",
+              "verdict7": "unresolved"
+            },
+            {
+              "stamp": "202607182329",
+              "file": "TWOAT.202607182329.txt",
+              "tagged": true,
+              "chance48": {
+                "cat": "medium",
+                "pct": 40
+              },
+              "chance7": {
+                "cat": "medium",
+                "pct": 50
+              },
+              "verdict48": "unresolved",
+              "verdict7": "unresolved"
+            },
+            {
+              "stamp": "202607190516",
+              "file": "TWOAT.202607190516.txt",
+              "tagged": true,
+              "chance48": {
+                "cat": "medium",
+                "pct": 60
+              },
+              "chance7": {
+                "cat": "medium",
+                "pct": 60
+              },
+              "verdict48": "unresolved",
+              "verdict7": "unresolved"
+            },
+            {
+              "stamp": "202607191120",
+              "file": "TWOAT.202607191120.txt",
+              "tagged": true,
+              "chance48": {
+                "cat": "high",
+                "pct": 80
+              },
+              "chance7": {
+                "cat": "high",
+                "pct": 80
+              },
+              "verdict48": "unresolved",
+              "verdict7": "unresolved"
             }
           ]
         },
@@ -1546,156 +1656,6 @@
               "verdict7": "not-formed"
             }
           ]
-        },
-        {
-          "id": "AT-I-202607171721-1",
-          "tag": "AL91",
-          "firstStamp": "202607171721",
-          "lastStamp": "202607191120",
-          "waveOrigin": null,
-          "outcome": {
-            "kind": "unresolved-nearby-cyclone",
-            "cycloneId": null,
-            "cycloneName": null,
-            "genesisStamp": null,
-            "nearby": [
-              {
-                "cycloneId": "AT-C-202607191649-1",
-                "name": "Two",
-                "firstStamp": "202607191649",
-                "dist": 3.805
-              },
-              {
-                "cycloneId": "AT-C-202607210608-1",
-                "name": "Bertha",
-                "firstStamp": "202607210608",
-                "dist": 4.418
-              }
-            ]
-          },
-          "siblingChains": [],
-          "statements": [
-            {
-              "stamp": "202607171721",
-              "file": "TWOAT.202607171721.txt",
-              "tagged": false,
-              "chance48": {
-                "cat": "low",
-                "pct": 10
-              },
-              "chance7": {
-                "cat": "low",
-                "pct": 30
-              },
-              "verdict48": "unresolved",
-              "verdict7": "unresolved"
-            },
-            {
-              "stamp": "202607172317",
-              "file": "TWOAT.202607172317.txt",
-              "tagged": false,
-              "chance48": {
-                "cat": "low",
-                "pct": 10
-              },
-              "chance7": {
-                "cat": "low",
-                "pct": 30
-              },
-              "verdict48": "unresolved",
-              "verdict7": "unresolved"
-            },
-            {
-              "stamp": "202607180543",
-              "file": "TWOAT.202607180543.txt",
-              "tagged": false,
-              "chance48": {
-                "cat": "low",
-                "pct": 10
-              },
-              "chance7": {
-                "cat": "low",
-                "pct": 30
-              },
-              "verdict48": "unresolved",
-              "verdict7": "unresolved"
-            },
-            {
-              "stamp": "202607181110",
-              "file": "TWOAT.202607181110.txt",
-              "tagged": false,
-              "chance48": {
-                "cat": "low",
-                "pct": 20
-              },
-              "chance7": {
-                "cat": "low",
-                "pct": 30
-              },
-              "verdict48": "unresolved",
-              "verdict7": "unresolved"
-            },
-            {
-              "stamp": "202607181717",
-              "file": "TWOAT.202607181717.txt",
-              "tagged": true,
-              "chance48": {
-                "cat": "low",
-                "pct": 30
-              },
-              "chance7": {
-                "cat": "medium",
-                "pct": 40
-              },
-              "verdict48": "unresolved",
-              "verdict7": "unresolved"
-            },
-            {
-              "stamp": "202607182329",
-              "file": "TWOAT.202607182329.txt",
-              "tagged": true,
-              "chance48": {
-                "cat": "medium",
-                "pct": 40
-              },
-              "chance7": {
-                "cat": "medium",
-                "pct": 50
-              },
-              "verdict48": "unresolved",
-              "verdict7": "unresolved"
-            },
-            {
-              "stamp": "202607190516",
-              "file": "TWOAT.202607190516.txt",
-              "tagged": true,
-              "chance48": {
-                "cat": "medium",
-                "pct": 60
-              },
-              "chance7": {
-                "cat": "medium",
-                "pct": 60
-              },
-              "verdict48": "unresolved",
-              "verdict7": "unresolved"
-            },
-            {
-              "stamp": "202607191120",
-              "file": "TWOAT.202607191120.txt",
-              "tagged": true,
-              "chance48": {
-                "cat": "high",
-                "pct": 80
-              },
-              "chance7": {
-                "cat": "high",
-                "pct": 80
-              },
-              "verdict48": "unresolved",
-              "verdict7": "unresolved"
-            }
-          ]
         }
       ],
       "calibration": {
@@ -1703,52 +1663,52 @@
           "low": {
             "statements": 67,
             "formed": 0,
-            "notFormed": 59,
-            "unresolved": 8,
+            "notFormed": 62,
+            "unresolved": 5,
             "pending": 0,
             "observedRate": 0
           },
           "medium": {
             "statements": 8,
-            "formed": 0,
-            "notFormed": 0,
-            "unresolved": 8,
+            "formed": 4,
+            "notFormed": 2,
+            "unresolved": 2,
             "pending": 0,
-            "observedRate": null
+            "observedRate": 0.667
           },
           "high": {
             "statements": 3,
             "formed": 0,
-            "notFormed": 0,
-            "unresolved": 3,
+            "notFormed": 1,
+            "unresolved": 2,
             "pending": 0,
-            "observedRate": null
+            "observedRate": 0
           }
         },
         "d7": {
           "low": {
             "statements": 66,
-            "formed": 0,
-            "notFormed": 54,
-            "unresolved": 12,
+            "formed": 5,
+            "notFormed": 46,
+            "unresolved": 15,
             "pending": 0,
-            "observedRate": 0
+            "observedRate": 0.098
           },
           "medium": {
             "statements": 9,
-            "formed": 0,
-            "notFormed": 0,
-            "unresolved": 9,
+            "formed": 4,
+            "notFormed": 2,
+            "unresolved": 3,
             "pending": 0,
-            "observedRate": null
+            "observedRate": 0.667
           },
           "high": {
             "statements": 3,
             "formed": 0,
-            "notFormed": 0,
-            "unresolved": 3,
+            "notFormed": 1,
+            "unresolved": 2,
             "pending": 0,
-            "observedRate": null
+            "observedRate": 0
           }
         }
       }
@@ -1759,14 +1719,21 @@
           "id": "EP-I-202606010503-1",
           "tag": null,
           "firstStamp": "202606010503",
-          "lastStamp": "202606012305",
+          "lastStamp": "202606010503",
           "waveOrigin": null,
           "outcome": {
-            "kind": "no-cyclone",
+            "kind": "unresolved-nearby-cyclone",
             "cycloneId": null,
             "cycloneName": null,
             "genesisStamp": null,
-            "nearby": []
+            "nearby": [
+              {
+                "cycloneId": "EP-C-202606022105-1",
+                "name": "One-E",
+                "firstStamp": "202606022105",
+                "dist": null
+              }
+            ]
           },
           "siblingChains": [],
           "statements": [
@@ -1782,53 +1749,8 @@
                 "cat": "high",
                 "pct": 90
               },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed"
-            },
-            {
-              "stamp": "202606011122",
-              "file": "TWOEP.202606011122.txt",
-              "tagged": false,
-              "chance48": {
-                "cat": "medium",
-                "pct": 40
-              },
-              "chance7": {
-                "cat": "high",
-                "pct": 90
-              },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed"
-            },
-            {
-              "stamp": "202606011726",
-              "file": "TWOEP.202606011726.txt",
-              "tagged": false,
-              "chance48": {
-                "cat": "medium",
-                "pct": 50
-              },
-              "chance7": {
-                "cat": "high",
-                "pct": 90
-              },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed"
-            },
-            {
-              "stamp": "202606012305",
-              "file": "TWOEP.202606012305.txt",
-              "tagged": false,
-              "chance48": {
-                "cat": "medium",
-                "pct": 60
-              },
-              "chance7": {
-                "cat": "high",
-                "pct": 90
-              },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed"
+              "verdict48": "unresolved",
+              "verdict7": "unresolved"
             }
           ]
         },
@@ -1898,6 +1820,45 @@
               "file": "TWOEP.202606011122.txt",
               "tagged": false,
               "chance48": {
+                "cat": "medium",
+                "pct": 40
+              },
+              "chance7": {
+                "cat": "high",
+                "pct": 90
+              },
+              "verdict48": "unresolved",
+              "verdict7": "unresolved"
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606011122-2",
+          "tag": null,
+          "firstStamp": "202606011122",
+          "lastStamp": "202606011122",
+          "waveOrigin": null,
+          "outcome": {
+            "kind": "unresolved-nearby-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null,
+            "nearby": [
+              {
+                "cycloneId": "EP-C-202606022105-1",
+                "name": "One-E",
+                "firstStamp": "202606022105",
+                "dist": null
+              }
+            ]
+          },
+          "siblingChains": [],
+          "statements": [
+            {
+              "stamp": "202606011122",
+              "file": "TWOEP.202606011122.txt",
+              "tagged": false,
+              "chance48": {
                 "cat": "low",
                 "pct": 0
               },
@@ -1912,6 +1873,51 @@
         },
         {
           "id": "EP-I-202606011726-1",
+          "tag": null,
+          "firstStamp": "202606011726",
+          "lastStamp": "202606011726",
+          "waveOrigin": null,
+          "outcome": {
+            "kind": "unresolved-nearby-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null,
+            "nearby": [
+              {
+                "cycloneId": "EP-C-202606022105-1",
+                "name": "One-E",
+                "firstStamp": "202606022105",
+                "dist": null
+              },
+              {
+                "cycloneId": "EP-C-202606031508-1",
+                "name": "Amanda",
+                "firstStamp": "202606031508",
+                "dist": null
+              }
+            ]
+          },
+          "siblingChains": [],
+          "statements": [
+            {
+              "stamp": "202606011726",
+              "file": "TWOEP.202606011726.txt",
+              "tagged": false,
+              "chance48": {
+                "cat": "medium",
+                "pct": 50
+              },
+              "chance7": {
+                "cat": "high",
+                "pct": 90
+              },
+              "verdict48": "unresolved",
+              "verdict7": "unresolved"
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606011726-2",
           "tag": null,
           "firstStamp": "202606011726",
           "lastStamp": "202606011726",
@@ -1988,6 +1994,51 @@
               "file": "TWOEP.202606012305.txt",
               "tagged": false,
               "chance48": {
+                "cat": "medium",
+                "pct": 60
+              },
+              "chance7": {
+                "cat": "high",
+                "pct": 90
+              },
+              "verdict48": "unresolved",
+              "verdict7": "unresolved"
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606012305-2",
+          "tag": null,
+          "firstStamp": "202606012305",
+          "lastStamp": "202606012305",
+          "waveOrigin": null,
+          "outcome": {
+            "kind": "unresolved-nearby-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null,
+            "nearby": [
+              {
+                "cycloneId": "EP-C-202606022105-1",
+                "name": "One-E",
+                "firstStamp": "202606022105",
+                "dist": null
+              },
+              {
+                "cycloneId": "EP-C-202606031508-1",
+                "name": "Amanda",
+                "firstStamp": "202606031508",
+                "dist": null
+              }
+            ]
+          },
+          "siblingChains": [],
+          "statements": [
+            {
+              "stamp": "202606012305",
+              "file": "TWOEP.202606012305.txt",
+              "tagged": false,
+              "chance48": {
                 "cat": "low",
                 "pct": 0
               },
@@ -2004,14 +2055,27 @@
           "id": "EP-I-202606020501-1",
           "tag": null,
           "firstStamp": "202606020501",
-          "lastStamp": "202606021733",
+          "lastStamp": "202606020501",
           "waveOrigin": null,
           "outcome": {
-            "kind": "no-cyclone",
+            "kind": "unresolved-nearby-cyclone",
             "cycloneId": null,
             "cycloneName": null,
             "genesisStamp": null,
-            "nearby": []
+            "nearby": [
+              {
+                "cycloneId": "EP-C-202606022105-1",
+                "name": "One-E",
+                "firstStamp": "202606022105",
+                "dist": null
+              },
+              {
+                "cycloneId": "EP-C-202606031508-1",
+                "name": "Amanda",
+                "firstStamp": "202606031508",
+                "dist": null
+              }
+            ]
           },
           "siblingChains": [],
           "statements": [
@@ -2027,38 +2091,8 @@
                 "cat": "high",
                 "pct": 90
               },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed"
-            },
-            {
-              "stamp": "202606021137",
-              "file": "TWOEP.202606021137.txt",
-              "tagged": false,
-              "chance48": {
-                "cat": "high",
-                "pct": 80
-              },
-              "chance7": {
-                "cat": "high",
-                "pct": 90
-              },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed"
-            },
-            {
-              "stamp": "202606021733",
-              "file": "TWOEP.202606021733.txt",
-              "tagged": false,
-              "chance48": {
-                "cat": "high",
-                "pct": 90
-              },
-              "chance7": {
-                "cat": "high",
-                "pct": 90
-              },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed"
+              "verdict48": "unresolved",
+              "verdict7": "unresolved"
             }
           ]
         },
@@ -2140,6 +2174,51 @@
               "file": "TWOEP.202606021137.txt",
               "tagged": false,
               "chance48": {
+                "cat": "high",
+                "pct": 80
+              },
+              "chance7": {
+                "cat": "high",
+                "pct": 90
+              },
+              "verdict48": "unresolved",
+              "verdict7": "unresolved"
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606021137-2",
+          "tag": null,
+          "firstStamp": "202606021137",
+          "lastStamp": "202606021137",
+          "waveOrigin": null,
+          "outcome": {
+            "kind": "unresolved-nearby-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null,
+            "nearby": [
+              {
+                "cycloneId": "EP-C-202606022105-1",
+                "name": "One-E",
+                "firstStamp": "202606022105",
+                "dist": null
+              },
+              {
+                "cycloneId": "EP-C-202606031508-1",
+                "name": "Amanda",
+                "firstStamp": "202606031508",
+                "dist": null
+              }
+            ]
+          },
+          "siblingChains": [],
+          "statements": [
+            {
+              "stamp": "202606021137",
+              "file": "TWOEP.202606021137.txt",
+              "tagged": false,
+              "chance48": {
                 "cat": "low",
                 "pct": 0
               },
@@ -2154,6 +2233,51 @@
         },
         {
           "id": "EP-I-202606021733-1",
+          "tag": null,
+          "firstStamp": "202606021733",
+          "lastStamp": "202606021733",
+          "waveOrigin": null,
+          "outcome": {
+            "kind": "unresolved-nearby-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null,
+            "nearby": [
+              {
+                "cycloneId": "EP-C-202606022105-1",
+                "name": "One-E",
+                "firstStamp": "202606022105",
+                "dist": null
+              },
+              {
+                "cycloneId": "EP-C-202606031508-1",
+                "name": "Amanda",
+                "firstStamp": "202606031508",
+                "dist": null
+              }
+            ]
+          },
+          "siblingChains": [],
+          "statements": [
+            {
+              "stamp": "202606021733",
+              "file": "TWOEP.202606021733.txt",
+              "tagged": false,
+              "chance48": {
+                "cat": "high",
+                "pct": 90
+              },
+              "chance7": {
+                "cat": "high",
+                "pct": 90
+              },
+              "verdict48": "unresolved",
+              "verdict7": "unresolved"
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606021733-2",
           "tag": null,
           "firstStamp": "202606021733",
           "lastStamp": "202606021733",
@@ -2830,10 +2954,7 @@
           "tag": "EP92",
           "firstStamp": "202606051135",
           "lastStamp": "202606081131",
-          "waveOrigin": {
-            "waveId": "EP-W-202606040915-1",
-            "atStamp": "202606051135"
-          },
+          "waveOrigin": null,
           "outcome": {
             "kind": "unresolved-nearby-cyclone",
             "cycloneId": null,
@@ -2841,22 +2962,16 @@
             "genesisStamp": null,
             "nearby": [
               {
-                "cycloneId": "EP-C-202606080859-1",
-                "name": "Boris",
-                "firstStamp": "202606080859",
-                "dist": 7.253
-              },
-              {
                 "cycloneId": "EP-C-202606081606-1",
                 "name": "Three-E",
                 "firstStamp": "202606081606",
-                "dist": 5.324
+                "dist": 3.023
               },
               {
                 "cycloneId": "EP-C-202606082133-1",
                 "name": "Cristina",
                 "firstStamp": "202606082133",
-                "dist": 4.793
+                "dist": 3.624
               }
             ]
           },
@@ -2934,7 +3049,7 @@
                 "cat": "medium",
                 "pct": 60
               },
-              "verdict48": "unresolved",
+              "verdict48": "not-formed",
               "verdict7": "unresolved"
             },
             {
@@ -3076,9 +3191,9 @@
         },
         {
           "id": "EP-I-202606131151-1",
-          "tag": "EP93",
+          "tag": null,
           "firstStamp": "202606131151",
-          "lastStamp": "202606162338",
+          "lastStamp": "202606131151",
           "waveOrigin": null,
           "outcome": {
             "kind": "no-cyclone",
@@ -3103,7 +3218,24 @@
               },
               "verdict48": "not-formed",
               "verdict7": "not-formed"
-            },
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606131712-1",
+          "tag": null,
+          "firstStamp": "202606131712",
+          "lastStamp": "202606131712",
+          "waveOrigin": null,
+          "outcome": {
+            "kind": "no-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null,
+            "nearby": []
+          },
+          "siblingChains": [],
+          "statements": [
             {
               "stamp": "202606131712",
               "file": "TWOEP.202606131712.txt",
@@ -3118,7 +3250,24 @@
               },
               "verdict48": "not-formed",
               "verdict7": "not-formed"
-            },
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606132319-1",
+          "tag": null,
+          "firstStamp": "202606132319",
+          "lastStamp": "202606132319",
+          "waveOrigin": null,
+          "outcome": {
+            "kind": "no-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null,
+            "nearby": []
+          },
+          "siblingChains": [],
+          "statements": [
             {
               "stamp": "202606132319",
               "file": "TWOEP.202606132319.txt",
@@ -3133,7 +3282,24 @@
               },
               "verdict48": "not-formed",
               "verdict7": "not-formed"
-            },
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606140537-1",
+          "tag": "EP93",
+          "firstStamp": "202606140537",
+          "lastStamp": "202606162338",
+          "waveOrigin": null,
+          "outcome": {
+            "kind": "no-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null,
+            "nearby": []
+          },
+          "siblingChains": [],
+          "statements": [
             {
               "stamp": "202606140537",
               "file": "TWOEP.202606140537.txt",
@@ -3320,7 +3486,7 @@
           "id": "EP-I-202606201737-1",
           "tag": null,
           "firstStamp": "202606201737",
-          "lastStamp": "202606211722",
+          "lastStamp": "202606201737",
           "waveOrigin": null,
           "outcome": {
             "kind": "no-cyclone",
@@ -3345,7 +3511,24 @@
               },
               "verdict48": "not-formed",
               "verdict7": "not-formed"
-            },
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606202324-1",
+          "tag": null,
+          "firstStamp": "202606202324",
+          "lastStamp": "202606202324",
+          "waveOrigin": null,
+          "outcome": {
+            "kind": "no-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null,
+            "nearby": []
+          },
+          "siblingChains": [],
+          "statements": [
             {
               "stamp": "202606202324",
               "file": "TWOEP.202606202324.txt",
@@ -3360,7 +3543,24 @@
               },
               "verdict48": "not-formed",
               "verdict7": "not-formed"
-            },
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606210503-1",
+          "tag": null,
+          "firstStamp": "202606210503",
+          "lastStamp": "202606210503",
+          "waveOrigin": null,
+          "outcome": {
+            "kind": "no-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null,
+            "nearby": []
+          },
+          "siblingChains": [],
+          "statements": [
             {
               "stamp": "202606210503",
               "file": "TWOEP.202606210503.txt",
@@ -3375,7 +3575,24 @@
               },
               "verdict48": "not-formed",
               "verdict7": "not-formed"
-            },
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606211140-1",
+          "tag": null,
+          "firstStamp": "202606211140",
+          "lastStamp": "202606211140",
+          "waveOrigin": null,
+          "outcome": {
+            "kind": "no-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null,
+            "nearby": []
+          },
+          "siblingChains": [],
+          "statements": [
             {
               "stamp": "202606211140",
               "file": "TWOEP.202606211140.txt",
@@ -3390,7 +3607,24 @@
               },
               "verdict48": "not-formed",
               "verdict7": "not-formed"
-            },
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606211722-1",
+          "tag": null,
+          "firstStamp": "202606211722",
+          "lastStamp": "202606211722",
+          "waveOrigin": null,
+          "outcome": {
+            "kind": "no-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null,
+            "nearby": []
+          },
+          "siblingChains": [],
+          "statements": [
             {
               "stamp": "202606211722",
               "file": "TWOEP.202606211722.txt",
@@ -4236,9 +4470,9 @@
         },
         {
           "id": "EP-I-202606280508-1",
-          "tag": "EP95",
+          "tag": null,
           "firstStamp": "202606280508",
-          "lastStamp": "202607010548",
+          "lastStamp": "202606280508",
           "waveOrigin": null,
           "outcome": {
             "kind": "no-cyclone",
@@ -4263,7 +4497,24 @@
               },
               "verdict48": "not-formed",
               "verdict7": "not-formed"
-            },
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606281135-1",
+          "tag": null,
+          "firstStamp": "202606281135",
+          "lastStamp": "202606281135",
+          "waveOrigin": null,
+          "outcome": {
+            "kind": "no-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null,
+            "nearby": []
+          },
+          "siblingChains": [],
+          "statements": [
             {
               "stamp": "202606281135",
               "file": "TWOEP.202606281135.txt",
@@ -4278,7 +4529,24 @@
               },
               "verdict48": "not-formed",
               "verdict7": "not-formed"
-            },
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606281734-1",
+          "tag": null,
+          "firstStamp": "202606281734",
+          "lastStamp": "202606281734",
+          "waveOrigin": null,
+          "outcome": {
+            "kind": "no-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null,
+            "nearby": []
+          },
+          "siblingChains": [],
+          "statements": [
             {
               "stamp": "202606281734",
               "file": "TWOEP.202606281734.txt",
@@ -4293,7 +4561,24 @@
               },
               "verdict48": "not-formed",
               "verdict7": "not-formed"
-            },
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606282317-1",
+          "tag": null,
+          "firstStamp": "202606282317",
+          "lastStamp": "202606282317",
+          "waveOrigin": null,
+          "outcome": {
+            "kind": "no-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null,
+            "nearby": []
+          },
+          "siblingChains": [],
+          "statements": [
             {
               "stamp": "202606282317",
               "file": "TWOEP.202606282317.txt",
@@ -4308,7 +4593,24 @@
               },
               "verdict48": "not-formed",
               "verdict7": "not-formed"
-            },
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606290503-1",
+          "tag": null,
+          "firstStamp": "202606290503",
+          "lastStamp": "202606290503",
+          "waveOrigin": null,
+          "outcome": {
+            "kind": "no-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null,
+            "nearby": []
+          },
+          "siblingChains": [],
+          "statements": [
             {
               "stamp": "202606290503",
               "file": "TWOEP.202606290503.txt",
@@ -4323,7 +4625,24 @@
               },
               "verdict48": "not-formed",
               "verdict7": "not-formed"
-            },
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606291148-1",
+          "tag": null,
+          "firstStamp": "202606291148",
+          "lastStamp": "202606291148",
+          "waveOrigin": null,
+          "outcome": {
+            "kind": "no-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null,
+            "nearby": []
+          },
+          "siblingChains": [],
+          "statements": [
             {
               "stamp": "202606291148",
               "file": "TWOEP.202606291148.txt",
@@ -4338,7 +4657,31 @@
               },
               "verdict48": "not-formed",
               "verdict7": "not-formed"
-            },
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606291729-1",
+          "tag": null,
+          "firstStamp": "202606291729",
+          "lastStamp": "202606291729",
+          "waveOrigin": null,
+          "outcome": {
+            "kind": "unresolved-nearby-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null,
+            "nearby": [
+              {
+                "cycloneId": "EP-C-202607011530-1",
+                "name": "Four-E",
+                "firstStamp": "202607011530",
+                "dist": null
+              }
+            ]
+          },
+          "siblingChains": [],
+          "statements": [
             {
               "stamp": "202606291729",
               "file": "TWOEP.202606291729.txt",
@@ -4351,9 +4694,39 @@
                 "cat": "high",
                 "pct": 70
               },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed"
-            },
+              "verdict48": "unresolved",
+              "verdict7": "unresolved"
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606292318-1",
+          "tag": "EP95",
+          "firstStamp": "202606292318",
+          "lastStamp": "202607010548",
+          "waveOrigin": null,
+          "outcome": {
+            "kind": "unresolved-nearby-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null,
+            "nearby": [
+              {
+                "cycloneId": "EP-C-202607011530-1",
+                "name": "Four-E",
+                "firstStamp": "202607011530",
+                "dist": null
+              },
+              {
+                "cycloneId": "EP-C-202607012105-1",
+                "name": "Douglas",
+                "firstStamp": "202607012105",
+                "dist": null
+              }
+            ]
+          },
+          "siblingChains": [],
+          "statements": [
             {
               "stamp": "202606292318",
               "file": "TWOEP.202606292318.txt",
@@ -4366,8 +4739,8 @@
                 "cat": "high",
                 "pct": 80
               },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed"
+              "verdict48": "unresolved",
+              "verdict7": "unresolved"
             },
             {
               "stamp": "202606300508",
@@ -4381,8 +4754,8 @@
                 "cat": "high",
                 "pct": 80
               },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed"
+              "verdict48": "unresolved",
+              "verdict7": "unresolved"
             },
             {
               "stamp": "202606301139",
@@ -4396,8 +4769,8 @@
                 "cat": "high",
                 "pct": 80
               },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed"
+              "verdict48": "unresolved",
+              "verdict7": "unresolved"
             },
             {
               "stamp": "202606301737",
@@ -4411,8 +4784,8 @@
                 "cat": "high",
                 "pct": 90
               },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed"
+              "verdict48": "unresolved",
+              "verdict7": "unresolved"
             },
             {
               "stamp": "202606302304",
@@ -4426,8 +4799,8 @@
                 "cat": "high",
                 "pct": 90
               },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed"
+              "verdict48": "unresolved",
+              "verdict7": "unresolved"
             },
             {
               "stamp": "202607010548",
@@ -4441,8 +4814,8 @@
                 "cat": "high",
                 "pct": 100
               },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed"
+              "verdict48": "unresolved",
+              "verdict7": "unresolved"
             }
           ]
         },
@@ -5684,7 +6057,7 @@
             "nearby": []
           },
           "siblingChains": [
-            "EP-I-202607122309-2"
+            "EP-I-202607122309-3"
           ],
           "statements": [
             {
@@ -5892,7 +6265,7 @@
           "id": "EP-I-202607101147-1",
           "tag": null,
           "firstStamp": "202607101147",
-          "lastStamp": "202607111743",
+          "lastStamp": "202607101147",
           "waveOrigin": null,
           "outcome": {
             "kind": "no-cyclone",
@@ -5912,98 +6285,8 @@
                 "pct": 0
               },
               "chance7": {
-                "cat": "low",
-                "pct": 20
-              },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed"
-            },
-            {
-              "stamp": "202607101731",
-              "file": "TWOEP.202607101731.txt",
-              "tagged": false,
-              "chance48": {
-                "cat": "low",
-                "pct": 0
-              },
-              "chance7": {
-                "cat": "low",
-                "pct": 20
-              },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed"
-            },
-            {
-              "stamp": "202607102327",
-              "file": "TWOEP.202607102327.txt",
-              "tagged": false,
-              "chance48": {
-                "cat": "low",
-                "pct": 10
-              },
-              "chance7": {
-                "cat": "low",
-                "pct": 20
-              },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed"
-            },
-            {
-              "stamp": "202607110502",
-              "file": "TWOEP.202607110502.txt",
-              "tagged": false,
-              "chance48": {
-                "cat": "low",
-                "pct": 10
-              },
-              "chance7": {
-                "cat": "low",
-                "pct": 20
-              },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed"
-            },
-            {
-              "stamp": "202607111139",
-              "file": "TWOEP.202607111139.txt",
-              "tagged": false,
-              "chance48": {
-                "cat": "low",
-                "pct": 10
-              },
-              "chance7": {
-                "cat": "low",
-                "pct": 20
-              },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed"
-            },
-            {
-              "stamp": "202607111144",
-              "file": "TWOEP.202607111144.txt",
-              "tagged": false,
-              "chance48": {
-                "cat": "low",
-                "pct": 10
-              },
-              "chance7": {
-                "cat": "low",
-                "pct": 20
-              },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed"
-            },
-            {
-              "stamp": "202607111743",
-              "file": "TWOEP.202607111743.txt",
-              "tagged": false,
-              "chance48": {
-                "cat": "low",
-                "pct": 20
-              },
-              "chance7": {
-                "cat": "low",
-                "pct": 20
+                "cat": "medium",
+                "pct": 40
               },
               "verdict48": "not-formed",
               "verdict7": "not-formed"
@@ -6034,8 +6317,8 @@
                 "pct": 0
               },
               "chance7": {
-                "cat": "medium",
-                "pct": 40
+                "cat": "low",
+                "pct": 20
               },
               "verdict48": "not-formed",
               "verdict7": "not-formed"
@@ -6075,6 +6358,38 @@
           ]
         },
         {
+          "id": "EP-I-202607101731-2",
+          "tag": null,
+          "firstStamp": "202607101731",
+          "lastStamp": "202607101731",
+          "waveOrigin": null,
+          "outcome": {
+            "kind": "no-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null,
+            "nearby": []
+          },
+          "siblingChains": [],
+          "statements": [
+            {
+              "stamp": "202607101731",
+              "file": "TWOEP.202607101731.txt",
+              "tagged": false,
+              "chance48": {
+                "cat": "low",
+                "pct": 0
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 20
+              },
+              "verdict48": "not-formed",
+              "verdict7": "not-formed"
+            }
+          ]
+        },
+        {
           "id": "EP-I-202607102327-1",
           "tag": null,
           "firstStamp": "202607102327",
@@ -6100,6 +6415,38 @@
               "chance7": {
                 "cat": "medium",
                 "pct": 50
+              },
+              "verdict48": "not-formed",
+              "verdict7": "not-formed"
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202607102327-2",
+          "tag": null,
+          "firstStamp": "202607102327",
+          "lastStamp": "202607102327",
+          "waveOrigin": null,
+          "outcome": {
+            "kind": "no-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null,
+            "nearby": []
+          },
+          "siblingChains": [],
+          "statements": [
+            {
+              "stamp": "202607102327",
+              "file": "TWOEP.202607102327.txt",
+              "tagged": false,
+              "chance48": {
+                "cat": "low",
+                "pct": 10
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 20
               },
               "verdict48": "not-formed",
               "verdict7": "not-formed"
@@ -6139,6 +6486,38 @@
           ]
         },
         {
+          "id": "EP-I-202607110502-2",
+          "tag": null,
+          "firstStamp": "202607110502",
+          "lastStamp": "202607110502",
+          "waveOrigin": null,
+          "outcome": {
+            "kind": "no-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null,
+            "nearby": []
+          },
+          "siblingChains": [],
+          "statements": [
+            {
+              "stamp": "202607110502",
+              "file": "TWOEP.202607110502.txt",
+              "tagged": false,
+              "chance48": {
+                "cat": "low",
+                "pct": 10
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 20
+              },
+              "verdict48": "not-formed",
+              "verdict7": "not-formed"
+            }
+          ]
+        },
+        {
           "id": "EP-I-202607111139-1",
           "tag": null,
           "firstStamp": "202607111139",
@@ -6164,6 +6543,38 @@
               "chance7": {
                 "cat": "medium",
                 "pct": 40
+              },
+              "verdict48": "not-formed",
+              "verdict7": "not-formed"
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202607111139-2",
+          "tag": null,
+          "firstStamp": "202607111139",
+          "lastStamp": "202607111139",
+          "waveOrigin": null,
+          "outcome": {
+            "kind": "no-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null,
+            "nearby": []
+          },
+          "siblingChains": [],
+          "statements": [
+            {
+              "stamp": "202607111139",
+              "file": "TWOEP.202607111139.txt",
+              "tagged": false,
+              "chance48": {
+                "cat": "low",
+                "pct": 10
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 20
               },
               "verdict48": "not-formed",
               "verdict7": "not-formed"
@@ -6203,7 +6614,71 @@
           ]
         },
         {
+          "id": "EP-I-202607111144-2",
+          "tag": null,
+          "firstStamp": "202607111144",
+          "lastStamp": "202607111144",
+          "waveOrigin": null,
+          "outcome": {
+            "kind": "no-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null,
+            "nearby": []
+          },
+          "siblingChains": [],
+          "statements": [
+            {
+              "stamp": "202607111144",
+              "file": "TWOEP.202607111144.txt",
+              "tagged": false,
+              "chance48": {
+                "cat": "low",
+                "pct": 10
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 20
+              },
+              "verdict48": "not-formed",
+              "verdict7": "not-formed"
+            }
+          ]
+        },
+        {
           "id": "EP-I-202607111743-1",
+          "tag": null,
+          "firstStamp": "202607111743",
+          "lastStamp": "202607111743",
+          "waveOrigin": null,
+          "outcome": {
+            "kind": "no-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null,
+            "nearby": []
+          },
+          "siblingChains": [],
+          "statements": [
+            {
+              "stamp": "202607111743",
+              "file": "TWOEP.202607111743.txt",
+              "tagged": false,
+              "chance48": {
+                "cat": "low",
+                "pct": 20
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 20
+              },
+              "verdict48": "not-formed",
+              "verdict7": "not-formed"
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202607111743-2",
           "tag": null,
           "firstStamp": "202607111743",
           "lastStamp": "202607111743",
@@ -6235,7 +6710,7 @@
           ]
         },
         {
-          "id": "EP-I-202607111743-2",
+          "id": "EP-I-202607111743-3",
           "tag": null,
           "firstStamp": "202607111743",
           "lastStamp": "202607111743",
@@ -6664,7 +7139,7 @@
           "id": "EP-I-202607120511-2",
           "tag": null,
           "firstStamp": "202607120511",
-          "lastStamp": "202607131145",
+          "lastStamp": "202607120511",
           "waveOrigin": null,
           "outcome": {
             "kind": "no-cyclone",
@@ -6686,81 +7161,6 @@
               "chance7": {
                 "cat": "low",
                 "pct": 20
-              },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed"
-            },
-            {
-              "stamp": "202607121148",
-              "file": "TWOEP.202607121148.txt",
-              "tagged": false,
-              "chance48": {
-                "cat": "low",
-                "pct": 20
-              },
-              "chance7": {
-                "cat": "low",
-                "pct": 20
-              },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed"
-            },
-            {
-              "stamp": "202607121732",
-              "file": "TWOEP.202607121732.txt",
-              "tagged": false,
-              "chance48": {
-                "cat": "low",
-                "pct": 20
-              },
-              "chance7": {
-                "cat": "low",
-                "pct": 20
-              },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed"
-            },
-            {
-              "stamp": "202607122309",
-              "file": "TWOEP.202607122309.txt",
-              "tagged": false,
-              "chance48": {
-                "cat": "low",
-                "pct": 10
-              },
-              "chance7": {
-                "cat": "low",
-                "pct": 10
-              },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed"
-            },
-            {
-              "stamp": "202607130501",
-              "file": "TWOEP.202607130501.txt",
-              "tagged": false,
-              "chance48": {
-                "cat": "low",
-                "pct": 10
-              },
-              "chance7": {
-                "cat": "low",
-                "pct": 10
-              },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed"
-            },
-            {
-              "stamp": "202607131145",
-              "file": "TWOEP.202607131145.txt",
-              "tagged": false,
-              "chance48": {
-                "cat": "low",
-                "pct": 10
-              },
-              "chance7": {
-                "cat": "low",
-                "pct": 10
               },
               "verdict48": "not-formed",
               "verdict7": "not-formed"
@@ -6820,6 +7220,38 @@
               "tagged": false,
               "chance48": {
                 "cat": "low",
+                "pct": 20
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 20
+              },
+              "verdict48": "not-formed",
+              "verdict7": "not-formed"
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202607121148-2",
+          "tag": null,
+          "firstStamp": "202607121148",
+          "lastStamp": "202607121148",
+          "waveOrigin": null,
+          "outcome": {
+            "kind": "no-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null,
+            "nearby": []
+          },
+          "siblingChains": [],
+          "statements": [
+            {
+              "stamp": "202607121148",
+              "file": "TWOEP.202607121148.txt",
+              "tagged": false,
+              "chance48": {
+                "cat": "low",
                 "pct": 10
               },
               "chance7": {
@@ -6832,7 +7264,7 @@
           ]
         },
         {
-          "id": "EP-I-202607121148-2",
+          "id": "EP-I-202607121148-3",
           "tag": null,
           "firstStamp": "202607121148",
           "lastStamp": "202607121148",
@@ -6884,6 +7316,38 @@
               "tagged": false,
               "chance48": {
                 "cat": "low",
+                "pct": 20
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 20
+              },
+              "verdict48": "not-formed",
+              "verdict7": "not-formed"
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202607121732-2",
+          "tag": null,
+          "firstStamp": "202607121732",
+          "lastStamp": "202607121732",
+          "waveOrigin": null,
+          "outcome": {
+            "kind": "no-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null,
+            "nearby": []
+          },
+          "siblingChains": [],
+          "statements": [
+            {
+              "stamp": "202607121732",
+              "file": "TWOEP.202607121732.txt",
+              "tagged": false,
+              "chance48": {
+                "cat": "low",
                 "pct": 10
               },
               "chance7": {
@@ -6896,7 +7360,7 @@
           ]
         },
         {
-          "id": "EP-I-202607121732-2",
+          "id": "EP-I-202607121732-3",
           "tag": null,
           "firstStamp": "202607121732",
           "lastStamp": "202607121732",
@@ -6952,7 +7416,7 @@
               },
               "chance7": {
                 "cat": "low",
-                "pct": 30
+                "pct": 10
               },
               "verdict48": "not-formed",
               "verdict7": "not-formed"
@@ -6961,6 +7425,38 @@
         },
         {
           "id": "EP-I-202607122309-2",
+          "tag": null,
+          "firstStamp": "202607122309",
+          "lastStamp": "202607122309",
+          "waveOrigin": null,
+          "outcome": {
+            "kind": "no-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null,
+            "nearby": []
+          },
+          "siblingChains": [],
+          "statements": [
+            {
+              "stamp": "202607122309",
+              "file": "TWOEP.202607122309.txt",
+              "tagged": false,
+              "chance48": {
+                "cat": "low",
+                "pct": 10
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 30
+              },
+              "verdict48": "not-formed",
+              "verdict7": "not-formed"
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202607122309-3",
           "tag": "CP90",
           "firstStamp": "202607122309",
           "lastStamp": "202607171749",
@@ -7344,6 +7840,45 @@
               },
               "chance7": {
                 "cat": "low",
+                "pct": 10
+              },
+              "verdict48": "unresolved",
+              "verdict7": "unresolved"
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202607130501-2",
+          "tag": null,
+          "firstStamp": "202607130501",
+          "lastStamp": "202607130501",
+          "waveOrigin": null,
+          "outcome": {
+            "kind": "unresolved-nearby-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null,
+            "nearby": [
+              {
+                "cycloneId": "EP-C-202607150258-1",
+                "name": "Five-E",
+                "firstStamp": "202607150258",
+                "dist": null
+              }
+            ]
+          },
+          "siblingChains": [],
+          "statements": [
+            {
+              "stamp": "202607130501",
+              "file": "TWOEP.202607130501.txt",
+              "tagged": false,
+              "chance48": {
+                "cat": "low",
+                "pct": 10
+              },
+              "chance7": {
+                "cat": "low",
                 "pct": 30
               },
               "verdict48": "unresolved",
@@ -7397,6 +7932,51 @@
           ]
         },
         {
+          "id": "EP-I-202607131145-2",
+          "tag": null,
+          "firstStamp": "202607131145",
+          "lastStamp": "202607131145",
+          "waveOrigin": null,
+          "outcome": {
+            "kind": "unresolved-nearby-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null,
+            "nearby": [
+              {
+                "cycloneId": "EP-C-202607150258-1",
+                "name": "Five-E",
+                "firstStamp": "202607150258",
+                "dist": null
+              },
+              {
+                "cycloneId": "EP-C-202607150839-1",
+                "name": "Elida",
+                "firstStamp": "202607150839",
+                "dist": null
+              }
+            ]
+          },
+          "siblingChains": [],
+          "statements": [
+            {
+              "stamp": "202607131145",
+              "file": "TWOEP.202607131145.txt",
+              "tagged": false,
+              "chance48": {
+                "cat": "low",
+                "pct": 10
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 10
+              },
+              "verdict48": "unresolved",
+              "verdict7": "unresolved"
+            }
+          ]
+        },
+        {
           "id": "EP-I-202607131736-1",
           "tag": null,
           "firstStamp": "202607131736",
@@ -7412,13 +7992,13 @@
                 "cycloneId": "EP-C-202607150258-1",
                 "name": "Five-E",
                 "firstStamp": "202607150258",
-                "dist": 8.222
+                "dist": null
               },
               {
                 "cycloneId": "EP-C-202607150839-1",
                 "name": "Elida",
                 "firstStamp": "202607150839",
-                "dist": 8.223
+                "dist": null
               }
             ]
           },
@@ -10165,36 +10745,36 @@
           "low": {
             "statements": 260,
             "formed": 0,
-            "notFormed": 182,
-            "unresolved": 72,
+            "notFormed": 180,
+            "unresolved": 74,
             "pending": 6,
             "observedRate": 0
           },
           "medium": {
             "statements": 49,
             "formed": 2,
-            "notFormed": 29,
-            "unresolved": 18,
+            "notFormed": 25,
+            "unresolved": 22,
             "pending": 0,
-            "observedRate": 0.065
+            "observedRate": 0.074
           },
           "high": {
             "statements": 47,
             "formed": 7,
-            "notFormed": 12,
-            "unresolved": 28,
+            "notFormed": 3,
+            "unresolved": 37,
             "pending": 0,
-            "observedRate": 0.368
+            "observedRate": 0.7
           }
         },
         "d7": {
           "low": {
             "statements": 125,
             "formed": 2,
-            "notFormed": 87,
-            "unresolved": 30,
+            "notFormed": 85,
+            "unresolved": 32,
             "pending": 6,
-            "observedRate": 0.022
+            "observedRate": 0.023
           },
           "medium": {
             "statements": 111,
@@ -10207,10 +10787,10 @@
           "high": {
             "statements": 120,
             "formed": 14,
-            "notFormed": 37,
-            "unresolved": 69,
+            "notFormed": 23,
+            "unresolved": 83,
             "pending": 0,
-            "observedRate": 0.275
+            "observedRate": 0.378
           }
         }
       }
@@ -10221,52 +10801,52 @@
       "low": {
         "statements": 327,
         "formed": 0,
-        "notFormed": 241,
-        "unresolved": 80,
+        "notFormed": 242,
+        "unresolved": 79,
         "pending": 6,
         "observedRate": 0
       },
       "medium": {
         "statements": 57,
-        "formed": 2,
-        "notFormed": 29,
-        "unresolved": 26,
+        "formed": 6,
+        "notFormed": 27,
+        "unresolved": 24,
         "pending": 0,
-        "observedRate": 0.065
+        "observedRate": 0.182
       },
       "high": {
         "statements": 50,
         "formed": 7,
-        "notFormed": 12,
-        "unresolved": 31,
+        "notFormed": 4,
+        "unresolved": 39,
         "pending": 0,
-        "observedRate": 0.368
+        "observedRate": 0.636
       }
     },
     "d7": {
       "low": {
         "statements": 191,
-        "formed": 2,
-        "notFormed": 141,
-        "unresolved": 42,
+        "formed": 7,
+        "notFormed": 131,
+        "unresolved": 47,
         "pending": 6,
-        "observedRate": 0.014
+        "observedRate": 0.051
       },
       "medium": {
         "statements": 120,
-        "formed": 2,
-        "notFormed": 60,
-        "unresolved": 58,
+        "formed": 6,
+        "notFormed": 62,
+        "unresolved": 52,
         "pending": 0,
-        "observedRate": 0.032
+        "observedRate": 0.088
       },
       "high": {
         "statements": 123,
         "formed": 14,
-        "notFormed": 37,
-        "unresolved": 72,
+        "notFormed": 24,
+        "unresolved": 85,
         "pending": 0,
-        "observedRate": 0.275
+        "observedRate": 0.368
       }
     }
   }

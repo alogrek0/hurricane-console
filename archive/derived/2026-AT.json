@@ -1701,7 +1701,7 @@
       "convection": 4,
       "troughs": 2,
       "fixes": 2,
-      "inferred": 1,
+      "inferred": 0,
       "projections": 2
     },
     {
@@ -5306,8 +5306,8 @@
       "disturbances": [
         {
           "invest": null,
-          "lat": 25,
-          "lon": -90,
+          "lat": 21.5,
+          "lon": -95,
           "chance48": {
             "cat": "low",
             "pct": 10
@@ -5469,8 +5469,8 @@
       "disturbances": [
         {
           "invest": null,
-          "lat": 25,
-          "lon": -90,
+          "lat": 21.5,
+          "lon": -95,
           "chance48": {
             "cat": "low",
             "pct": 10
@@ -5670,8 +5670,8 @@
       "disturbances": [
         {
           "invest": null,
-          "lat": 25,
-          "lon": -90,
+          "lat": 21.5,
+          "lon": -95,
           "chance48": {
             "cat": "low",
             "pct": 0
@@ -5781,8 +5781,8 @@
       "disturbances": [
         {
           "invest": null,
-          "lat": 25,
-          "lon": -90,
+          "lat": 27,
+          "lon": -94,
           "chance48": {
             "cat": "low",
             "pct": 0
@@ -5802,8 +5802,8 @@
       "disturbances": [
         {
           "invest": null,
-          "lat": 25,
-          "lon": -90,
+          "lat": 27,
+          "lon": -94,
           "chance48": {
             "cat": "low",
             "pct": 0
@@ -6145,8 +6145,8 @@
       "disturbances": [
         {
           "invest": null,
-          "lat": 25,
-          "lon": -90,
+          "lat": 27,
+          "lon": -94,
           "chance48": {
             "cat": "low",
             "pct": 0
@@ -6256,8 +6256,8 @@
       "disturbances": [
         {
           "invest": null,
-          "lat": 25,
-          "lon": -90,
+          "lat": 27,
+          "lon": -94,
           "chance48": {
             "cat": "low",
             "pct": 0
@@ -6367,8 +6367,8 @@
       "disturbances": [
         {
           "invest": null,
-          "lat": 25,
-          "lon": -90,
+          "lat": 27,
+          "lon": -94,
           "chance48": {
             "cat": "low",
             "pct": 20
@@ -6388,8 +6388,8 @@
       "disturbances": [
         {
           "invest": null,
-          "lat": 25,
-          "lon": -90,
+          "lat": 27,
+          "lon": -94,
           "chance48": {
             "cat": "medium",
             "pct": 40
@@ -6679,8 +6679,8 @@
       "disturbances": [
         {
           "invest": null,
-          "lat": 25,
-          "lon": -90,
+          "lat": 27,
+          "lon": -94,
           "chance48": {
             "cat": "medium",
             "pct": 50
@@ -6700,8 +6700,8 @@
       "disturbances": [
         {
           "invest": "AL90",
-          "lat": 25,
-          "lon": -90,
+          "lat": 27,
+          "lon": -94,
           "chance48": {
             "cat": "medium",
             "pct": 60
@@ -6991,8 +6991,8 @@
       "disturbances": [
         {
           "invest": "AL90",
-          "lat": 25,
-          "lon": -90,
+          "lat": 27,
+          "lon": -94,
           "chance48": {
             "cat": "medium",
             "pct": 60
@@ -15171,7 +15171,7 @@
       "convection": 5,
       "troughs": 1,
       "fixes": 6,
-      "inferred": 0,
+      "inferred": 1,
       "projections": 3
     },
     {
@@ -16828,8 +16828,8 @@
       "disturbances": [
         {
           "invest": null,
-          "lat": 25,
-          "lon": -90,
+          "lat": 27.5,
+          "lon": -85.5,
           "chance48": {
             "cat": "low",
             "pct": 0
@@ -16945,8 +16945,8 @@
       "disturbances": [
         {
           "invest": null,
-          "lat": 25,
-          "lon": -90,
+          "lat": 27.5,
+          "lon": -85.5,
           "chance48": {
             "cat": "low",
             "pct": 0
@@ -16979,8 +16979,8 @@
       "disturbances": [
         {
           "invest": null,
-          "lat": 25,
-          "lon": -90,
+          "lat": 27.5,
+          "lon": -85.5,
           "chance48": {
             "cat": "low",
             "pct": 0
@@ -17078,8 +17078,8 @@
         },
         {
           "invest": null,
-          "lat": 25,
-          "lon": -90,
+          "lat": 27.5,
+          "lon": -85.5,
           "chance48": {
             "cat": "low",
             "pct": 0
@@ -17112,8 +17112,8 @@
         },
         {
           "invest": null,
-          "lat": 25,
-          "lon": -90,
+          "lat": 27.5,
+          "lon": -85.5,
           "chance48": {
             "cat": "low",
             "pct": 0
@@ -17269,8 +17269,8 @@
         },
         {
           "invest": null,
-          "lat": 25,
-          "lon": -90,
+          "lat": 27.5,
+          "lon": -85.5,
           "chance48": {
             "cat": "low",
             "pct": 0
@@ -17407,8 +17407,8 @@
         },
         {
           "invest": null,
-          "lat": 25,
-          "lon": -90,
+          "lat": 27.5,
+          "lon": -85.5,
           "chance48": {
             "cat": "low",
             "pct": 0
@@ -17493,8 +17493,8 @@
         },
         {
           "invest": null,
-          "lat": 25,
-          "lon": -90,
+          "lat": 27.5,
+          "lon": -85.5,
           "chance48": {
             "cat": "low",
             "pct": 0
@@ -17527,8 +17527,8 @@
         },
         {
           "invest": null,
-          "lat": 25,
-          "lon": -90,
+          "lat": 27.5,
+          "lon": -85.5,
           "chance48": {
             "cat": "low",
             "pct": 0
@@ -17561,8 +17561,8 @@
         },
         {
           "invest": null,
-          "lat": 25,
-          "lon": -90,
+          "lat": 27.5,
+          "lon": -85.5,
           "chance48": {
             "cat": "low",
             "pct": 0
@@ -17751,8 +17751,8 @@
         },
         {
           "invest": null,
-          "lat": 25,
-          "lon": -90,
+          "lat": 27.5,
+          "lon": -85.5,
           "chance48": {
             "cat": "low",
             "pct": 0
@@ -17785,8 +17785,8 @@
         },
         {
           "invest": null,
-          "lat": 27.8,
-          "lon": -81.5,
+          "lat": 28,
+          "lon": -89,
           "chance48": {
             "cat": "low",
             "pct": 10
@@ -17910,8 +17910,8 @@
       "disturbances": [
         {
           "invest": null,
-          "lat": 27.8,
-          "lon": -81.5,
+          "lat": 28,
+          "lon": -89,
           "chance48": {
             "cat": "low",
             "pct": 10
@@ -17996,8 +17996,8 @@
       "disturbances": [
         {
           "invest": null,
-          "lat": 27.8,
-          "lon": -81.5,
+          "lat": 28,
+          "lon": -89,
           "chance48": {
             "cat": "low",
             "pct": 10
@@ -18069,8 +18069,8 @@
       "disturbances": [
         {
           "invest": null,
-          "lat": 27.8,
-          "lon": -81.5,
+          "lat": 28,
+          "lon": -89,
           "chance48": {
             "cat": "low",
             "pct": 20
@@ -18090,8 +18090,8 @@
       "disturbances": [
         {
           "invest": "AL91",
-          "lat": 27.8,
-          "lon": -81.5,
+          "lat": 28,
+          "lon": -89,
           "chance48": {
             "cat": "low",
             "pct": 30
@@ -18163,8 +18163,8 @@
       "disturbances": [
         {
           "invest": "AL91",
-          "lat": 27.8,
-          "lon": -81.5,
+          "lat": 28,
+          "lon": -89,
           "chance48": {
             "cat": "medium",
             "pct": 40
@@ -18288,8 +18288,8 @@
       "disturbances": [
         {
           "invest": "AL91",
-          "lat": 27.8,
-          "lon": -81.5,
+          "lat": 28,
+          "lon": -89,
           "chance48": {
             "cat": "medium",
             "pct": 60
@@ -18413,8 +18413,8 @@
       "disturbances": [
         {
           "invest": "AL91",
-          "lat": 27.8,
-          "lon": -81.5,
+          "lat": 28,
+          "lon": -89,
           "chance48": {
             "cat": "high",
             "pct": 80
@@ -22710,7 +22710,7 @@
       "convection": 3,
       "troughs": 3,
       "fixes": 1,
-      "inferred": 1,
+      "inferred": 2,
       "projections": 2
     },
     {
