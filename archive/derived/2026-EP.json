@@ -63,8 +63,8 @@
       "disturbances": [
         {
           "invest": null,
-          "lat": 29,
-          "lon": -114,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "medium",
             "pct": 40
@@ -201,8 +201,8 @@
       "disturbances": [
         {
           "invest": null,
-          "lat": 29,
-          "lon": -114,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "medium",
             "pct": 40
@@ -287,8 +287,8 @@
       "disturbances": [
         {
           "invest": null,
-          "lat": 29,
-          "lon": -114,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "medium",
             "pct": 50
@@ -373,8 +373,8 @@
       "disturbances": [
         {
           "invest": null,
-          "lat": 29,
-          "lon": -114,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "medium",
             "pct": 60
@@ -459,8 +459,8 @@
       "disturbances": [
         {
           "invest": null,
-          "lat": 22.9,
-          "lon": -109.9,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "high",
             "pct": 70
@@ -597,8 +597,8 @@
       "disturbances": [
         {
           "invest": null,
-          "lat": 22.9,
-          "lon": -109.9,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "high",
             "pct": 80
@@ -683,8 +683,8 @@
       "disturbances": [
         {
           "invest": null,
-          "lat": 22.9,
-          "lon": -109.9,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "high",
             "pct": 90
@@ -1468,8 +1468,8 @@
         },
         {
           "invest": null,
-          "lat": 14,
-          "lon": -92.2,
+          "lat": 12.9,
+          "lon": -85.1,
           "chance48": {
             "cat": "low",
             "pct": 30
@@ -1523,8 +1523,8 @@
         },
         {
           "invest": null,
-          "lat": 14,
-          "lon": -92.2,
+          "lat": 12.9,
+          "lon": -85.1,
           "chance48": {
             "cat": "low",
             "pct": 30
@@ -1578,8 +1578,8 @@
         },
         {
           "invest": null,
-          "lat": 14,
-          "lon": -92.2,
+          "lat": 9.8,
+          "lon": -85,
           "chance48": {
             "cat": "medium",
             "pct": 40
@@ -1633,8 +1633,8 @@
         },
         {
           "invest": null,
-          "lat": 14,
-          "lon": -92.2,
+          "lat": 9.8,
+          "lon": -85,
           "chance48": {
             "cat": "medium",
             "pct": 50
@@ -1688,8 +1688,8 @@
         },
         {
           "invest": null,
-          "lat": 14,
-          "lon": -92.2,
+          "lat": 9.8,
+          "lon": -85,
           "chance48": {
             "cat": "medium",
             "pct": 50
@@ -1743,8 +1743,8 @@
         },
         {
           "invest": "EP92",
-          "lat": 13.3,
-          "lon": -89.4,
+          "lat": 9.8,
+          "lon": -85,
           "chance48": {
             "cat": "high",
             "pct": 70
@@ -1798,8 +1798,8 @@
         },
         {
           "invest": "EP92",
-          "lat": 13.3,
-          "lon": -89.4,
+          "lat": 9.8,
+          "lon": -85,
           "chance48": {
             "cat": "high",
             "pct": 70
@@ -1832,8 +1832,8 @@
         },
         {
           "invest": "EP92",
-          "lat": 13.3,
-          "lon": -89.4,
+          "lat": 9.8,
+          "lon": -85,
           "chance48": {
             "cat": "high",
             "pct": 70
@@ -1887,8 +1887,8 @@
         },
         {
           "invest": "EP92",
-          "lat": 13.3,
-          "lon": -89.4,
+          "lat": 9.8,
+          "lon": -85,
           "chance48": {
             "cat": "high",
             "pct": 70
@@ -1942,8 +1942,8 @@
         },
         {
           "invest": "EP92",
-          "lat": 13.3,
-          "lon": -89.4,
+          "lat": 9.8,
+          "lon": -85,
           "chance48": {
             "cat": "high",
             "pct": 70
@@ -2047,8 +2047,8 @@
       "disturbances": [
         {
           "invest": "EP92",
-          "lat": 13.3,
-          "lon": -89.4,
+          "lat": 9.8,
+          "lon": -85,
           "chance48": {
             "cat": "high",
             "pct": 80
@@ -2096,8 +2096,8 @@
       "disturbances": [
         {
           "invest": "EP92",
-          "lat": 13.3,
-          "lon": -89.4,
+          "lat": 9.8,
+          "lon": -85,
           "chance48": {
             "cat": "high",
             "pct": 90
@@ -2145,8 +2145,8 @@
       "disturbances": [
         {
           "invest": "EP92",
-          "lat": 14,
-          "lon": -92.2,
+          "lat": 9.8,
+          "lon": -85,
           "chance48": {
             "cat": "high",
             "pct": 90
@@ -2207,8 +2207,8 @@
       "disturbances": [
         {
           "invest": "EP92",
-          "lat": 14,
-          "lon": -92.2,
+          "lat": 9.8,
+          "lon": -85,
           "chance48": {
             "cat": "high",
             "pct": 90
@@ -2877,8 +2877,8 @@
       "disturbances": [
         {
           "invest": null,
-          "lat": 29,
-          "lon": -114,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "low",
             "pct": 10
@@ -2924,8 +2924,8 @@
       "disturbances": [
         {
           "invest": null,
-          "lat": 29,
-          "lon": -114,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "low",
             "pct": 10
@@ -2971,8 +2971,8 @@
       "disturbances": [
         {
           "invest": null,
-          "lat": 29,
-          "lon": -114,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "low",
             "pct": 30
@@ -3005,8 +3005,8 @@
       "disturbances": [
         {
           "invest": "EP93",
-          "lat": 29,
-          "lon": -114,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "low",
             "pct": 30
@@ -3039,8 +3039,8 @@
       "disturbances": [
         {
           "invest": "EP93",
-          "lat": 29,
-          "lon": -114,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "low",
             "pct": 30
@@ -3073,8 +3073,8 @@
       "disturbances": [
         {
           "invest": "EP93",
-          "lat": 29,
-          "lon": -114,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "low",
             "pct": 30
@@ -3120,8 +3120,8 @@
       "disturbances": [
         {
           "invest": "EP93",
-          "lat": 29,
-          "lon": -114,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "low",
             "pct": 30
@@ -3154,8 +3154,8 @@
       "disturbances": [
         {
           "invest": "EP93",
-          "lat": 29,
-          "lon": -114,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "low",
             "pct": 30
@@ -3201,8 +3201,8 @@
       "disturbances": [
         {
           "invest": "EP93",
-          "lat": 29,
-          "lon": -114,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "low",
             "pct": 30
@@ -3235,8 +3235,8 @@
       "disturbances": [
         {
           "invest": "EP93",
-          "lat": 29,
-          "lon": -114,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "low",
             "pct": 30
@@ -3687,7 +3687,7 @@
       "convection": 5,
       "troughs": 2,
       "fixes": 0,
-      "inferred": 3,
+      "inferred": 2,
       "projections": 1
     },
     {
@@ -3742,7 +3742,7 @@
       "convection": 6,
       "troughs": 3,
       "fixes": 0,
-      "inferred": 2,
+      "inferred": 3,
       "projections": 1
     },
     {
@@ -4953,8 +4953,8 @@
       "disturbances": [
         {
           "invest": null,
-          "lat": 29,
-          "lon": -114,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "low",
             "pct": 0
@@ -5064,8 +5064,8 @@
       "disturbances": [
         {
           "invest": null,
-          "lat": 29,
-          "lon": -114,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "low",
             "pct": 0
@@ -5175,8 +5175,8 @@
       "disturbances": [
         {
           "invest": null,
-          "lat": 29,
-          "lon": -114,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "low",
             "pct": 0
@@ -5286,8 +5286,8 @@
       "disturbances": [
         {
           "invest": null,
-          "lat": 29,
-          "lon": -114,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "low",
             "pct": 0
@@ -5397,8 +5397,8 @@
       "disturbances": [
         {
           "invest": null,
-          "lat": 29,
-          "lon": -114,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "low",
             "pct": 0
@@ -8716,8 +8716,8 @@
       "disturbances": [
         {
           "invest": null,
-          "lat": 22.9,
-          "lon": -109.9,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "low",
             "pct": 20
@@ -8808,8 +8808,8 @@
       "disturbances": [
         {
           "invest": null,
-          "lat": 22.9,
-          "lon": -109.9,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "low",
             "pct": 20
@@ -8971,8 +8971,8 @@
       "disturbances": [
         {
           "invest": null,
-          "lat": 22.9,
-          "lon": -109.9,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "low",
             "pct": 20
@@ -9271,8 +9271,8 @@
       "disturbances": [
         {
           "invest": null,
-          "lat": 22.9,
-          "lon": -109.9,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "low",
             "pct": 30
@@ -9377,8 +9377,8 @@
       "disturbances": [
         {
           "invest": null,
-          "lat": 22.9,
-          "lon": -109.9,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "medium",
             "pct": 40
@@ -9431,8 +9431,8 @@
       "disturbances": [
         {
           "invest": null,
-          "lat": 22.9,
-          "lon": -109.9,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "medium",
             "pct": 50
@@ -9504,8 +9504,8 @@
       "disturbances": [
         {
           "invest": null,
-          "lat": 22.9,
-          "lon": -109.9,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "medium",
             "pct": 60
@@ -9558,8 +9558,8 @@
       "disturbances": [
         {
           "invest": "EP95",
-          "lat": 22.9,
-          "lon": -109.9,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "high",
             "pct": 70
@@ -9645,8 +9645,8 @@
       "disturbances": [
         {
           "invest": "EP95",
-          "lat": 22.9,
-          "lon": -109.9,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "high",
             "pct": 70
@@ -9732,8 +9732,8 @@
       "disturbances": [
         {
           "invest": "EP95",
-          "lat": 22.9,
-          "lon": -109.9,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "high",
             "pct": 80
@@ -9786,8 +9786,8 @@
       "disturbances": [
         {
           "invest": "EP95",
-          "lat": 22.9,
-          "lon": -109.9,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "high",
             "pct": 90
@@ -9873,8 +9873,8 @@
       "disturbances": [
         {
           "invest": "EP95",
-          "lat": 22.9,
-          "lon": -109.9,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "high",
             "pct": 90
@@ -9927,8 +9927,8 @@
       "disturbances": [
         {
           "invest": "EP95",
-          "lat": 22.9,
-          "lon": -109.9,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "high",
             "pct": 100
@@ -10414,8 +10414,8 @@
       "disturbances": [
         {
           "invest": null,
-          "lat": 29,
-          "lon": -114,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "low",
             "pct": 0
@@ -13239,8 +13239,8 @@
         },
         {
           "invest": null,
-          "lat": 29,
-          "lon": -114,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "low",
             "pct": 0
@@ -13332,8 +13332,8 @@
         },
         {
           "invest": null,
-          "lat": 29,
-          "lon": -114,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "low",
             "pct": 0
@@ -13375,7 +13375,7 @@
       "convection": 2,
       "troughs": 1,
       "fixes": 0,
-      "inferred": 3,
+      "inferred": 2,
       "projections": 1
     },
     {
@@ -13412,8 +13412,8 @@
         },
         {
           "invest": null,
-          "lat": 29,
-          "lon": -114,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "low",
             "pct": 10
@@ -13614,8 +13614,8 @@
         },
         {
           "invest": null,
-          "lat": 29,
-          "lon": -114,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "low",
             "pct": 10
@@ -13745,8 +13745,8 @@
         },
         {
           "invest": null,
-          "lat": 29,
-          "lon": -114,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "low",
             "pct": 10
@@ -13805,8 +13805,8 @@
         },
         {
           "invest": null,
-          "lat": 29,
-          "lon": -114,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "low",
             "pct": 10
@@ -13923,8 +13923,8 @@
         },
         {
           "invest": null,
-          "lat": 29,
-          "lon": -114,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "low",
             "pct": 20
@@ -13992,7 +13992,7 @@
       "convection": 3,
       "troughs": 2,
       "fixes": 0,
-      "inferred": 5,
+      "inferred": 4,
       "projections": 1
     },
     {
@@ -14129,8 +14129,8 @@
         },
         {
           "invest": null,
-          "lat": 29,
-          "lon": -114,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "low",
             "pct": 20
@@ -14222,8 +14222,8 @@
         },
         {
           "invest": null,
-          "lat": 29,
-          "lon": -114,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "low",
             "pct": 20
@@ -14304,7 +14304,7 @@
       "convection": 4,
       "troughs": 2,
       "fixes": 2,
-      "inferred": 2,
+      "inferred": 1,
       "projections": 1
     },
     {
@@ -14328,8 +14328,8 @@
         },
         {
           "invest": null,
-          "lat": 29,
-          "lon": -114,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "low",
             "pct": 20
@@ -14410,7 +14410,7 @@
       "convection": 4,
       "troughs": 2,
       "fixes": 2,
-      "inferred": 1,
+      "inferred": 0,
       "projections": 1
     },
     {
@@ -14434,8 +14434,8 @@
         },
         {
           "invest": null,
-          "lat": 29,
-          "lon": -114,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "low",
             "pct": 10
@@ -14546,7 +14546,7 @@
       "convection": 7,
       "troughs": 4,
       "fixes": 2,
-      "inferred": 1,
+      "inferred": 0,
       "projections": 1
     },
     {
@@ -14570,8 +14570,8 @@
         },
         {
           "invest": null,
-          "lat": 29,
-          "lon": -114,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "low",
             "pct": 10
@@ -14671,7 +14671,7 @@
       "convection": 3,
       "troughs": 5,
       "fixes": 1,
-      "inferred": 1,
+      "inferred": 0,
       "projections": 2
     },
     {
@@ -14721,8 +14721,8 @@
         },
         {
           "invest": null,
-          "lat": 29,
-          "lon": -114,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "low",
             "pct": 10
@@ -14815,7 +14815,7 @@
       "convection": 3,
       "troughs": 3,
       "fixes": 2,
-      "inferred": 2,
+      "inferred": 1,
       "projections": 3
     },
     {
@@ -14865,8 +14865,8 @@
         },
         {
           "invest": null,
-          "lat": 22.9,
-          "lon": -109.9,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "low",
             "pct": 0
@@ -15209,7 +15209,7 @@
       "convection": 4,
       "troughs": 5,
       "fixes": 0,
-      "inferred": 2,
+      "inferred": 1,
       "projections": 1
     },
     {

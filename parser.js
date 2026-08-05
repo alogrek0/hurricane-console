@@ -184,16 +184,30 @@
     'cuba': { lat: 21.7, lon: -79.5 },
     'the bahamas': { lat: 24.3, lon: -76.0 },
     'nicaragua': { lat: 12.8, lon: -84.0 },
-    // specific-before-generic: these contain "honduras"/"florida" below
     'gulf of honduras': { lat: 16.5, lon: -87.5 },
     'straits of florida': { lat: 24.0, lon: -81.0 },
     'honduras': { lat: 15.0, lon: -86.5 },
     'florida': { lat: 27.8, lon: -81.5 },
+    // Named Gulf sub-regions, same idiom as the Caribbean/tropical-Atlantic
+    // entries below. ONLY the seven forms that actually occur in the archive
+    // (counts from archive/2026/AT/), so no anchor is invented for phrasing
+    // NHC never writes; the generic centroid stays the fallback. All sit over
+    // water. Without these, "Northern Gulf of America and near Florida (AL91)"
+    // resolved to the Florida landmass while the system was offshore.
+    'northeastern gulf of america': { lat: 27.5, lon: -85.5 },   // 43x
+    'northwestern gulf of america': { lat: 27.0, lon: -94.0 },   // 28x
+    'northern gulf of america': { lat: 28.0, lon: -89.0 },       // 12x
+    'eastern gulf of america': { lat: 26.0, lon: -84.5 },        // 11x
+    'south-central gulf of america': { lat: 23.0, lon: -90.0 },  //  3x
+    'southwestern gulf of america': { lat: 21.5, lon: -95.0 },   //  3x
+    'central gulf of america': { lat: 25.0, lon: -89.0 },        //  4x
     'gulf of america': { lat: 25.0, lon: -90.0 },
     'gulf of mexico': { lat: 25.0, lon: -90.0 },
-    // NOTE anchor() is first-key-wins over insertion order, so specific
-    // multi-word entries must stay ABOVE the generic ones they contain
-    // ("central caribbean" before "caribbean").
+    // NOTE anchor() resolves LEFTMOST-LONGEST (earliest occurrence in the
+    // phrase wins; longer key breaks a tie), so specific entries beat the
+    // generic ones they contain structurally — "central caribbean" over
+    // "caribbean", "gulf of honduras" over "honduras" — regardless of the
+    // order they are listed here. Table order is for human reading only.
     'central tropical atlantic': { lat: 11.0, lon: -40.0 },
     'eastern tropical atlantic': { lat: 12.0, lon: -28.0 },
     'western tropical atlantic': { lat: 20.0, lon: -65.0 },
@@ -308,13 +322,55 @@
         return { lat: Math.round(pt.lat * 10) / 10, lon: Math.round(pt.lon * 10) / 10 };
       }
     }
-    return anchor(p, gaz);
+    // Plain anchor — unless the phrase places the feature FAR from it by an
+    // unstated amount, in which case there is nothing mappable to return.
+    const hit = anchorMatch(p, gaz);
+    if (!hit || isVagueOffsetObject(hit)) return null;
+    return hit.pt;
+  }
+
+  // "well southwest of X" / "far north of X" — a direction with NO stated
+  // distance. Unlike the "<distance> <compass> of X" case above there is
+  // nothing to offset BY, and unlike "just north of X" the text insists the
+  // feature is a long way off. Anchoring at X would assert the one place the
+  // prose says the system is NOT: EP95 sat on the tip of Baja for 13 straight
+  // issuances while the real low was 17.6 deg southwest, and that error put
+  // the chain outside the ledger's nearby-cyclone gate and produced the
+  // season's only refuted genesis verdict. A nominal distance would invent
+  // magnitude (see RE_OFFSET above — that decision stands), so the honest
+  // answer is no position at all. "just/immediately <dir> of X" is the
+  // opposite idiom — adjacent — and keeps the anchor.
+  // "to the" infix mirrors RE_OFFSET's own optional infix ("several hundred
+  // miles to the south-southwest of X") — NHC writes both forms freely.
+  const RE_VAGUE_OFFSET = /\b(?:well|far)\s+(?:to\s+the\s+)?([a-z-]{1,20})\s+of\s+(?:the\s+)?$/;
+  function isVagueOffsetObject(hit) {
+    const m = hit.hay.slice(0, hit.index).match(RE_VAGUE_OFFSET);
+    return !!m && dirKey(m[1]) !== null;   // real compass word, not any filler
+  }
+
+  // Leftmost-longest: the key appearing EARLIEST in the phrase wins, longest
+  // breaks a tie. NHC leads with the primary location ("Northern Gulf of
+  // America and near Florida"), and this makes specific-beats-generic
+  // structural instead of a hand-maintained table ordering that silently
+  // failed when 'florida' was listed above 'gulf of america'.
+  // Returns { key, index, hay, pt } — index/hay let callers inspect the words
+  // in front of the match; null when nothing matches.
+  function anchorMatch(name, gaz) {
+    const hay = name.trim().replace(/^the\s+/, '').replace(/[.,]$/, '');
+    if (gaz[hay]) return { key: hay, index: 0, hay: hay, pt: gaz[hay] };
+    let best = null;
+    for (const k of Object.keys(gaz)) {
+      const i = hay.indexOf(k);
+      if (i < 0) continue;
+      if (!best || i < best.index || (i === best.index && k.length > best.key.length)) {
+        best = { key: k, index: i, hay: hay, pt: gaz[k] };
+      }
+    }
+    return best;
   }
   function anchor(name, gaz) {
-    const key = name.trim().replace(/^the\s+/, '').replace(/[.,]$/, '');
-    if (gaz[key]) return gaz[key];
-    for (const k of Object.keys(gaz)) if (key.includes(k)) return gaz[k];
-    return null;
+    const m = anchorMatch(name, gaz);
+    return m ? m.pt : null;
   }
 
   // --- motion (pass 3) -------------------------------------------------------

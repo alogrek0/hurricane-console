@@ -715,8 +715,20 @@
     render();
     var entry = findChainById(id);
     if (entry) { var b = chainBounds(entry); if (b) map.fitBounds(b, { padding: [50, 50], maxZoom: 7 }); }
+    revealRow(id);
+  }
+  // Bring the selected chain's row into view WITHOUT scrolling the window.
+  // scrollIntoView() walks every scrollable ancestor, and the CHAINS card sits
+  // near the bottom of a ~2100px document — so selecting a feature ON THE MAP
+  // scrolled the page ~900px and took the map off-screen ("it disappears").
+  // Scroll only the #chains box; the map never moves.
+  function revealRow(id) {
+    var host = document.getElementById('chains');
     var row = document.getElementById('row-' + cssId(id));
-    if (row && row.scrollIntoView) row.scrollIntoView({ block: 'nearest' });
+    if (!host || !row) return;
+    var r = row.getBoundingClientRect(), h = host.getBoundingClientRect();
+    if (r.top < h.top) host.scrollTop -= (h.top - r.top);
+    else if (r.bottom > h.bottom) host.scrollTop += (r.bottom - h.bottom);
   }
   function cssId(id) { return id.replace(/[^A-Za-z0-9_-]/g, '_'); }
 

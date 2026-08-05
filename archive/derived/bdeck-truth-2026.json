@@ -3,32 +3,32 @@
   "season": 2026,
   "btkNow": "202608021800",
   "summary": {
-    "invests": 177,
-    "confirms": 0,
+    "invests": 207,
+    "confirms": 1,
     "resolves": 5,
-    "refutes": 1,
+    "refutes": 0,
     "open": 0,
-    "noData": 171,
-    "flags": 17
+    "noData": 201,
+    "flags": 16
   },
   "flags": [
     {
       "basin": "AT",
-      "subject": "AT-I-202606131720-1",
-      "kind": "truth-resolves-unresolved",
-      "detail": "AL90: ledger unresolved-nearby-cyclone, b-deck says formed into bal012026 (ONE/ARTHUR)"
-    },
-    {
-      "basin": "AT",
-      "subject": "AT-I-202606131720-1",
+      "subject": "AT-I-202606141137-1",
       "kind": "position-outlier",
-      "detail": "AL90: max sighting-to-track distance 10.5 deg (mean 10, n 7)"
+      "detail": "AL90: max sighting-to-track distance 7.2 deg (mean 6.2, n 7)"
     },
     {
       "basin": "AT",
-      "subject": "AT-I-202607171721-1",
+      "subject": "AT-I-202607151143-1",
       "kind": "truth-resolves-unresolved",
       "detail": "AL91: ledger unresolved-nearby-cyclone, b-deck says formed into bal022026 (TWO/BERTHA)"
+    },
+    {
+      "basin": "AT",
+      "subject": "AT-I-202607151143-1",
+      "kind": "position-outlier",
+      "detail": "AL91: max sighting-to-track distance 5.8 deg (mean 4.6, n 9)"
     },
     {
       "basin": "AT",
@@ -44,15 +44,9 @@
     },
     {
       "basin": "EP",
-      "subject": "EP-I-202606280508-1",
-      "kind": "truth-refutes-no-cyclone",
-      "detail": "EP95: ledger no-cyclone, b-deck says formed into bep042026 (FOUR/DOUGLAS)"
-    },
-    {
-      "basin": "EP",
-      "subject": "EP-I-202606280508-1",
-      "kind": "position-outlier",
-      "detail": "EP95: max sighting-to-track distance 19.1 deg (mean 17.6, n 11)"
+      "subject": "EP-I-202606292318-1",
+      "kind": "truth-resolves-unresolved",
+      "detail": "EP95: ledger unresolved-nearby-cyclone, b-deck says formed into bep042026 (FOUR/DOUGLAS)"
     },
     {
       "basin": "EP",
@@ -362,31 +356,17 @@
         },
         {
           "id": "AT-I-202606131720-1",
-          "tag": "AL90",
+          "tag": null,
           "ledger": {
-            "kind": "unresolved-nearby-cyclone",
+            "kind": "no-cyclone",
             "cycloneId": null,
             "cycloneName": null,
             "genesisStamp": null
           },
-          "truth": {
-            "kind": "formed",
-            "investBdeck": null,
-            "cycloneBdeck": "bal012026",
-            "cycloneNames": [
-              "ONE",
-              "ARTHUR"
-            ],
-            "genesisNum": "001",
-            "firstTdDtg": "202606171200"
-          },
-          "agreement": "resolves",
+          "truth": null,
+          "agreement": "no-data",
           "genesisDeltaH": null,
-          "posStats": {
-            "n": 7,
-            "meanDeg": 10,
-            "maxDeg": 10.5
-          },
+          "posStats": null,
           "statements": [
             {
               "stamp": "202606131720",
@@ -399,9 +379,9 @@
                 "pct": 20
               },
               "verdict48": "not-formed",
-              "verdict7": "unresolved",
-              "truth48": "not-formed",
-              "truth7": "formed"
+              "verdict7": "not-formed",
+              "truth48": null,
+              "truth7": null
             },
             {
               "stamp": "202606132323",
@@ -414,9 +394,9 @@
                 "pct": 20
               },
               "verdict48": "not-formed",
-              "verdict7": "unresolved",
-              "truth48": "not-formed",
-              "truth7": "formed"
+              "verdict7": "not-formed",
+              "truth48": null,
+              "truth7": null
             },
             {
               "stamp": "202606140531",
@@ -429,10 +409,40 @@
                 "pct": 20
               },
               "verdict48": "not-formed",
-              "verdict7": "unresolved",
-              "truth48": "not-formed",
-              "truth7": "formed"
-            },
+              "verdict7": "not-formed",
+              "truth48": null,
+              "truth7": null
+            }
+          ]
+        },
+        {
+          "id": "AT-I-202606141137-1",
+          "tag": "AL90",
+          "ledger": {
+            "kind": "formed",
+            "cycloneId": "AT-C-202606171713-1",
+            "cycloneName": "Arthur",
+            "genesisStamp": "202606171713"
+          },
+          "truth": {
+            "kind": "formed",
+            "investBdeck": null,
+            "cycloneBdeck": "bal012026",
+            "cycloneNames": [
+              "ONE",
+              "ARTHUR"
+            ],
+            "genesisNum": "001",
+            "firstTdDtg": "202606171200"
+          },
+          "agreement": "confirms",
+          "genesisDeltaH": 5,
+          "posStats": {
+            "n": 7,
+            "meanDeg": 6.2,
+            "maxDeg": 7.2
+          },
+          "statements": [
             {
               "stamp": "202606141137",
               "chance48": {
@@ -444,7 +454,7 @@
                 "pct": 20
               },
               "verdict48": "not-formed",
-              "verdict7": "unresolved",
+              "verdict7": "formed",
               "truth48": "not-formed",
               "truth7": "formed"
             },
@@ -459,7 +469,7 @@
                 "pct": 30
               },
               "verdict48": "not-formed",
-              "verdict7": "unresolved",
+              "verdict7": "formed",
               "truth48": "not-formed",
               "truth7": "formed"
             },
@@ -473,8 +483,8 @@
                 "cat": "low",
                 "pct": 30
               },
-              "verdict48": "unresolved",
-              "verdict7": "unresolved",
+              "verdict48": "not-formed",
+              "verdict7": "formed",
               "truth48": "not-formed",
               "truth7": "formed"
             },
@@ -488,8 +498,8 @@
                 "cat": "low",
                 "pct": 30
               },
-              "verdict48": "unresolved",
-              "verdict7": "unresolved",
+              "verdict48": "not-formed",
+              "verdict7": "formed",
               "truth48": "not-formed",
               "truth7": "formed"
             },
@@ -503,8 +513,8 @@
                 "cat": "low",
                 "pct": 30
               },
-              "verdict48": "unresolved",
-              "verdict7": "unresolved",
+              "verdict48": "not-formed",
+              "verdict7": "formed",
               "truth48": "not-formed",
               "truth7": "formed"
             },
@@ -518,8 +528,8 @@
                 "cat": "medium",
                 "pct": 50
               },
-              "verdict48": "unresolved",
-              "verdict7": "unresolved",
+              "verdict48": "formed",
+              "verdict7": "formed",
               "truth48": "formed",
               "truth7": "formed"
             },
@@ -533,8 +543,8 @@
                 "cat": "medium",
                 "pct": 50
               },
-              "verdict48": "unresolved",
-              "verdict7": "unresolved",
+              "verdict48": "formed",
+              "verdict7": "formed",
               "truth48": "formed",
               "truth7": "formed"
             },
@@ -548,8 +558,8 @@
                 "cat": "medium",
                 "pct": 60
               },
-              "verdict48": "unresolved",
-              "verdict7": "unresolved",
+              "verdict48": "formed",
+              "verdict7": "formed",
               "truth48": "formed",
               "truth7": "formed"
             },
@@ -563,8 +573,8 @@
                 "cat": "medium",
                 "pct": 60
               },
-              "verdict48": "unresolved",
-              "verdict7": "unresolved",
+              "verdict48": "formed",
+              "verdict7": "formed",
               "truth48": "formed",
               "truth7": "formed"
             }
@@ -605,7 +615,7 @@
           "id": "AT-I-202606162336-1",
           "tag": null,
           "ledger": {
-            "kind": "unresolved-nearby-cyclone",
+            "kind": "no-cyclone",
             "cycloneId": null,
             "cycloneName": null,
             "genesisStamp": null
@@ -625,8 +635,8 @@
                 "cat": "high",
                 "pct": 70
               },
-              "verdict48": "unresolved",
-              "verdict7": "unresolved",
+              "verdict48": "not-formed",
+              "verdict7": "not-formed",
               "truth48": null,
               "truth7": null
             }
@@ -636,7 +646,7 @@
           "id": "AT-I-202606170544-1",
           "tag": null,
           "ledger": {
-            "kind": "unresolved-nearby-cyclone",
+            "kind": "no-cyclone",
             "cycloneId": null,
             "cycloneName": null,
             "genesisStamp": null
@@ -656,8 +666,8 @@
                 "cat": "medium",
                 "pct": 60
               },
-              "verdict48": "unresolved",
-              "verdict7": "unresolved",
+              "verdict48": "not-formed",
+              "verdict7": "not-formed",
               "truth48": null,
               "truth7": null
             }
@@ -667,7 +677,7 @@
           "id": "AT-I-202606171144-1",
           "tag": null,
           "ledger": {
-            "kind": "unresolved-nearby-cyclone",
+            "kind": "no-cyclone",
             "cycloneId": null,
             "cycloneName": null,
             "genesisStamp": null
@@ -687,8 +697,8 @@
                 "cat": "medium",
                 "pct": 60
               },
-              "verdict48": "unresolved",
-              "verdict7": "unresolved",
+              "verdict48": "not-formed",
+              "verdict7": "not-formed",
               "truth48": null,
               "truth7": null
             }
@@ -1223,17 +1233,31 @@
         },
         {
           "id": "AT-I-202607151143-1",
-          "tag": null,
+          "tag": "AL91",
           "ledger": {
-            "kind": "no-cyclone",
+            "kind": "unresolved-nearby-cyclone",
             "cycloneId": null,
             "cycloneName": null,
             "genesisStamp": null
           },
-          "truth": null,
-          "agreement": "no-data",
+          "truth": {
+            "kind": "formed",
+            "investBdeck": "bal912026",
+            "cycloneBdeck": "bal022026",
+            "cycloneNames": [
+              "TWO",
+              "BERTHA"
+            ],
+            "genesisNum": "004",
+            "firstTdDtg": "202607191200"
+          },
+          "agreement": "resolves",
           "genesisDeltaH": null,
-          "posStats": null,
+          "posStats": {
+            "n": 9,
+            "meanDeg": 4.6,
+            "maxDeg": 5.8
+          },
           "statements": [
             {
               "stamp": "202607151143",
@@ -1246,9 +1270,9 @@
                 "pct": 20
               },
               "verdict48": "not-formed",
-              "verdict7": "not-formed",
-              "truth48": null,
-              "truth7": null
+              "verdict7": "unresolved",
+              "truth48": "not-formed",
+              "truth7": "formed"
             },
             {
               "stamp": "202607151720",
@@ -1261,9 +1285,9 @@
                 "pct": 20
               },
               "verdict48": "not-formed",
-              "verdict7": "not-formed",
-              "truth48": null,
-              "truth7": null
+              "verdict7": "unresolved",
+              "truth48": "not-formed",
+              "truth7": "formed"
             },
             {
               "stamp": "202607151728",
@@ -1276,9 +1300,9 @@
                 "pct": 20
               },
               "verdict48": "not-formed",
-              "verdict7": "not-formed",
-              "truth48": null,
-              "truth7": null
+              "verdict7": "unresolved",
+              "truth48": "not-formed",
+              "truth7": "formed"
             },
             {
               "stamp": "202607152326",
@@ -1291,9 +1315,9 @@
                 "pct": 20
               },
               "verdict48": "not-formed",
-              "verdict7": "not-formed",
-              "truth48": null,
-              "truth7": null
+              "verdict7": "unresolved",
+              "truth48": "not-formed",
+              "truth7": "formed"
             },
             {
               "stamp": "202607160515",
@@ -1306,9 +1330,9 @@
                 "pct": 20
               },
               "verdict48": "not-formed",
-              "verdict7": "not-formed",
-              "truth48": null,
-              "truth7": null
+              "verdict7": "unresolved",
+              "truth48": "not-formed",
+              "truth7": "formed"
             },
             {
               "stamp": "202607161116",
@@ -1321,9 +1345,9 @@
                 "pct": 20
               },
               "verdict48": "not-formed",
-              "verdict7": "not-formed",
-              "truth48": null,
-              "truth7": null
+              "verdict7": "unresolved",
+              "truth48": "not-formed",
+              "truth7": "formed"
             },
             {
               "stamp": "202607161724",
@@ -1336,9 +1360,9 @@
                 "pct": 20
               },
               "verdict48": "not-formed",
-              "verdict7": "not-formed",
-              "truth48": null,
-              "truth7": null
+              "verdict7": "unresolved",
+              "truth48": "not-formed",
+              "truth7": "formed"
             },
             {
               "stamp": "202607162320",
@@ -1351,9 +1375,9 @@
                 "pct": 20
               },
               "verdict48": "not-formed",
-              "verdict7": "not-formed",
-              "truth48": null,
-              "truth7": null
+              "verdict7": "unresolved",
+              "truth48": "not-formed",
+              "truth7": "formed"
             },
             {
               "stamp": "202607170529",
@@ -1366,9 +1390,9 @@
                 "pct": 20
               },
               "verdict48": "not-formed",
-              "verdict7": "not-formed",
-              "truth48": null,
-              "truth7": null
+              "verdict7": "unresolved",
+              "truth48": "not-formed",
+              "truth7": "formed"
             },
             {
               "stamp": "202607170533",
@@ -1381,9 +1405,9 @@
                 "pct": 20
               },
               "verdict48": "not-formed",
-              "verdict7": "not-formed",
-              "truth48": null,
-              "truth7": null
+              "verdict7": "unresolved",
+              "truth48": "not-formed",
+              "truth7": "formed"
             },
             {
               "stamp": "202607171141",
@@ -1396,9 +1420,129 @@
                 "pct": 20
               },
               "verdict48": "not-formed",
-              "verdict7": "not-formed",
-              "truth48": null,
-              "truth7": null
+              "verdict7": "unresolved",
+              "truth48": "not-formed",
+              "truth7": "formed"
+            },
+            {
+              "stamp": "202607171721",
+              "chance48": {
+                "cat": "low",
+                "pct": 10
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 30
+              },
+              "verdict48": "unresolved",
+              "verdict7": "unresolved",
+              "truth48": "formed",
+              "truth7": "formed"
+            },
+            {
+              "stamp": "202607172317",
+              "chance48": {
+                "cat": "low",
+                "pct": 10
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 30
+              },
+              "verdict48": "unresolved",
+              "verdict7": "unresolved",
+              "truth48": "formed",
+              "truth7": "formed"
+            },
+            {
+              "stamp": "202607180543",
+              "chance48": {
+                "cat": "low",
+                "pct": 10
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 30
+              },
+              "verdict48": "unresolved",
+              "verdict7": "unresolved",
+              "truth48": "formed",
+              "truth7": "formed"
+            },
+            {
+              "stamp": "202607181110",
+              "chance48": {
+                "cat": "low",
+                "pct": 20
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 30
+              },
+              "verdict48": "unresolved",
+              "verdict7": "unresolved",
+              "truth48": "formed",
+              "truth7": "formed"
+            },
+            {
+              "stamp": "202607181717",
+              "chance48": {
+                "cat": "low",
+                "pct": 30
+              },
+              "chance7": {
+                "cat": "medium",
+                "pct": 40
+              },
+              "verdict48": "unresolved",
+              "verdict7": "unresolved",
+              "truth48": "formed",
+              "truth7": "formed"
+            },
+            {
+              "stamp": "202607182329",
+              "chance48": {
+                "cat": "medium",
+                "pct": 40
+              },
+              "chance7": {
+                "cat": "medium",
+                "pct": 50
+              },
+              "verdict48": "unresolved",
+              "verdict7": "unresolved",
+              "truth48": "formed",
+              "truth7": "formed"
+            },
+            {
+              "stamp": "202607190516",
+              "chance48": {
+                "cat": "medium",
+                "pct": 60
+              },
+              "chance7": {
+                "cat": "medium",
+                "pct": 60
+              },
+              "verdict48": "unresolved",
+              "verdict7": "unresolved",
+              "truth48": "formed",
+              "truth7": "formed"
+            },
+            {
+              "stamp": "202607191120",
+              "chance48": {
+                "cat": "high",
+                "pct": 80
+              },
+              "chance7": {
+                "cat": "high",
+                "pct": 80
+              },
+              "verdict48": "unresolved",
+              "verdict7": "unresolved",
+              "truth48": "formed",
+              "truth7": "formed"
             }
           ]
         },
@@ -1597,156 +1741,6 @@
               "truth7": null
             }
           ]
-        },
-        {
-          "id": "AT-I-202607171721-1",
-          "tag": "AL91",
-          "ledger": {
-            "kind": "unresolved-nearby-cyclone",
-            "cycloneId": null,
-            "cycloneName": null,
-            "genesisStamp": null
-          },
-          "truth": {
-            "kind": "formed",
-            "investBdeck": "bal912026",
-            "cycloneBdeck": "bal022026",
-            "cycloneNames": [
-              "TWO",
-              "BERTHA"
-            ],
-            "genesisNum": "004",
-            "firstTdDtg": "202607191200"
-          },
-          "agreement": "resolves",
-          "genesisDeltaH": null,
-          "posStats": {
-            "n": 8,
-            "meanDeg": 2.9,
-            "maxDeg": 3.8
-          },
-          "statements": [
-            {
-              "stamp": "202607171721",
-              "chance48": {
-                "cat": "low",
-                "pct": 10
-              },
-              "chance7": {
-                "cat": "low",
-                "pct": 30
-              },
-              "verdict48": "unresolved",
-              "verdict7": "unresolved",
-              "truth48": "formed",
-              "truth7": "formed"
-            },
-            {
-              "stamp": "202607172317",
-              "chance48": {
-                "cat": "low",
-                "pct": 10
-              },
-              "chance7": {
-                "cat": "low",
-                "pct": 30
-              },
-              "verdict48": "unresolved",
-              "verdict7": "unresolved",
-              "truth48": "formed",
-              "truth7": "formed"
-            },
-            {
-              "stamp": "202607180543",
-              "chance48": {
-                "cat": "low",
-                "pct": 10
-              },
-              "chance7": {
-                "cat": "low",
-                "pct": 30
-              },
-              "verdict48": "unresolved",
-              "verdict7": "unresolved",
-              "truth48": "formed",
-              "truth7": "formed"
-            },
-            {
-              "stamp": "202607181110",
-              "chance48": {
-                "cat": "low",
-                "pct": 20
-              },
-              "chance7": {
-                "cat": "low",
-                "pct": 30
-              },
-              "verdict48": "unresolved",
-              "verdict7": "unresolved",
-              "truth48": "formed",
-              "truth7": "formed"
-            },
-            {
-              "stamp": "202607181717",
-              "chance48": {
-                "cat": "low",
-                "pct": 30
-              },
-              "chance7": {
-                "cat": "medium",
-                "pct": 40
-              },
-              "verdict48": "unresolved",
-              "verdict7": "unresolved",
-              "truth48": "formed",
-              "truth7": "formed"
-            },
-            {
-              "stamp": "202607182329",
-              "chance48": {
-                "cat": "medium",
-                "pct": 40
-              },
-              "chance7": {
-                "cat": "medium",
-                "pct": 50
-              },
-              "verdict48": "unresolved",
-              "verdict7": "unresolved",
-              "truth48": "formed",
-              "truth7": "formed"
-            },
-            {
-              "stamp": "202607190516",
-              "chance48": {
-                "cat": "medium",
-                "pct": 60
-              },
-              "chance7": {
-                "cat": "medium",
-                "pct": 60
-              },
-              "verdict48": "unresolved",
-              "verdict7": "unresolved",
-              "truth48": "formed",
-              "truth7": "formed"
-            },
-            {
-              "stamp": "202607191120",
-              "chance48": {
-                "cat": "high",
-                "pct": 80
-              },
-              "chance7": {
-                "cat": "high",
-                "pct": 80
-              },
-              "verdict48": "unresolved",
-              "verdict7": "unresolved",
-              "truth48": "formed",
-              "truth7": "formed"
-            }
-          ]
         }
       ],
       "cyclones": [
@@ -1798,7 +1792,7 @@
           "id": "EP-I-202606010503-1",
           "tag": null,
           "ledger": {
-            "kind": "no-cyclone",
+            "kind": "unresolved-nearby-cyclone",
             "cycloneId": null,
             "cycloneName": null,
             "genesisStamp": null
@@ -1818,53 +1812,8 @@
                 "cat": "high",
                 "pct": 90
               },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed",
-              "truth48": null,
-              "truth7": null
-            },
-            {
-              "stamp": "202606011122",
-              "chance48": {
-                "cat": "medium",
-                "pct": 40
-              },
-              "chance7": {
-                "cat": "high",
-                "pct": 90
-              },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed",
-              "truth48": null,
-              "truth7": null
-            },
-            {
-              "stamp": "202606011726",
-              "chance48": {
-                "cat": "medium",
-                "pct": 50
-              },
-              "chance7": {
-                "cat": "high",
-                "pct": 90
-              },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed",
-              "truth48": null,
-              "truth7": null
-            },
-            {
-              "stamp": "202606012305",
-              "chance48": {
-                "cat": "medium",
-                "pct": 60
-              },
-              "chance7": {
-                "cat": "high",
-                "pct": 90
-              },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed",
+              "verdict48": "unresolved",
+              "verdict7": "unresolved",
               "truth48": null,
               "truth7": null
             }
@@ -1918,6 +1867,37 @@
             {
               "stamp": "202606011122",
               "chance48": {
+                "cat": "medium",
+                "pct": 40
+              },
+              "chance7": {
+                "cat": "high",
+                "pct": 90
+              },
+              "verdict48": "unresolved",
+              "verdict7": "unresolved",
+              "truth48": null,
+              "truth7": null
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606011122-2",
+          "tag": null,
+          "ledger": {
+            "kind": "unresolved-nearby-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null
+          },
+          "truth": null,
+          "agreement": "no-data",
+          "genesisDeltaH": null,
+          "posStats": null,
+          "statements": [
+            {
+              "stamp": "202606011122",
+              "chance48": {
                 "cat": "low",
                 "pct": 0
               },
@@ -1934,6 +1914,37 @@
         },
         {
           "id": "EP-I-202606011726-1",
+          "tag": null,
+          "ledger": {
+            "kind": "unresolved-nearby-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null
+          },
+          "truth": null,
+          "agreement": "no-data",
+          "genesisDeltaH": null,
+          "posStats": null,
+          "statements": [
+            {
+              "stamp": "202606011726",
+              "chance48": {
+                "cat": "medium",
+                "pct": 50
+              },
+              "chance7": {
+                "cat": "high",
+                "pct": 90
+              },
+              "verdict48": "unresolved",
+              "verdict7": "unresolved",
+              "truth48": null,
+              "truth7": null
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606011726-2",
           "tag": null,
           "ledger": {
             "kind": "unresolved-nearby-cyclone",
@@ -1980,6 +1991,37 @@
             {
               "stamp": "202606012305",
               "chance48": {
+                "cat": "medium",
+                "pct": 60
+              },
+              "chance7": {
+                "cat": "high",
+                "pct": 90
+              },
+              "verdict48": "unresolved",
+              "verdict7": "unresolved",
+              "truth48": null,
+              "truth7": null
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606012305-2",
+          "tag": null,
+          "ledger": {
+            "kind": "unresolved-nearby-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null
+          },
+          "truth": null,
+          "agreement": "no-data",
+          "genesisDeltaH": null,
+          "posStats": null,
+          "statements": [
+            {
+              "stamp": "202606012305",
+              "chance48": {
                 "cat": "low",
                 "pct": 0
               },
@@ -1998,7 +2040,7 @@
           "id": "EP-I-202606020501-1",
           "tag": null,
           "ledger": {
-            "kind": "no-cyclone",
+            "kind": "unresolved-nearby-cyclone",
             "cycloneId": null,
             "cycloneName": null,
             "genesisStamp": null
@@ -2018,38 +2060,8 @@
                 "cat": "high",
                 "pct": 90
               },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed",
-              "truth48": null,
-              "truth7": null
-            },
-            {
-              "stamp": "202606021137",
-              "chance48": {
-                "cat": "high",
-                "pct": 80
-              },
-              "chance7": {
-                "cat": "high",
-                "pct": 90
-              },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed",
-              "truth48": null,
-              "truth7": null
-            },
-            {
-              "stamp": "202606021733",
-              "chance48": {
-                "cat": "high",
-                "pct": 90
-              },
-              "chance7": {
-                "cat": "high",
-                "pct": 90
-              },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed",
+              "verdict48": "unresolved",
+              "verdict7": "unresolved",
               "truth48": null,
               "truth7": null
             }
@@ -2103,6 +2115,37 @@
             {
               "stamp": "202606021137",
               "chance48": {
+                "cat": "high",
+                "pct": 80
+              },
+              "chance7": {
+                "cat": "high",
+                "pct": 90
+              },
+              "verdict48": "unresolved",
+              "verdict7": "unresolved",
+              "truth48": null,
+              "truth7": null
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606021137-2",
+          "tag": null,
+          "ledger": {
+            "kind": "unresolved-nearby-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null
+          },
+          "truth": null,
+          "agreement": "no-data",
+          "genesisDeltaH": null,
+          "posStats": null,
+          "statements": [
+            {
+              "stamp": "202606021137",
+              "chance48": {
                 "cat": "low",
                 "pct": 0
               },
@@ -2119,6 +2162,37 @@
         },
         {
           "id": "EP-I-202606021733-1",
+          "tag": null,
+          "ledger": {
+            "kind": "unresolved-nearby-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null
+          },
+          "truth": null,
+          "agreement": "no-data",
+          "genesisDeltaH": null,
+          "posStats": null,
+          "statements": [
+            {
+              "stamp": "202606021733",
+              "chance48": {
+                "cat": "high",
+                "pct": 90
+              },
+              "chance7": {
+                "cat": "high",
+                "pct": 90
+              },
+              "verdict48": "unresolved",
+              "verdict7": "unresolved",
+              "truth48": null,
+              "truth7": null
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606021733-2",
           "tag": null,
           "ledger": {
             "kind": "unresolved-nearby-cyclone",
@@ -2828,7 +2902,7 @@
                 "cat": "medium",
                 "pct": 60
               },
-              "verdict48": "unresolved",
+              "verdict48": "not-formed",
               "verdict7": "unresolved",
               "truth48": null,
               "truth7": null
@@ -2972,7 +3046,7 @@
         },
         {
           "id": "EP-I-202606131151-1",
-          "tag": "EP93",
+          "tag": null,
           "ledger": {
             "kind": "no-cyclone",
             "cycloneId": null,
@@ -2998,7 +3072,23 @@
               "verdict7": "not-formed",
               "truth48": null,
               "truth7": null
-            },
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606131712-1",
+          "tag": null,
+          "ledger": {
+            "kind": "no-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null
+          },
+          "truth": null,
+          "agreement": "no-data",
+          "genesisDeltaH": null,
+          "posStats": null,
+          "statements": [
             {
               "stamp": "202606131712",
               "chance48": {
@@ -3013,7 +3103,23 @@
               "verdict7": "not-formed",
               "truth48": null,
               "truth7": null
-            },
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606132319-1",
+          "tag": null,
+          "ledger": {
+            "kind": "no-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null
+          },
+          "truth": null,
+          "agreement": "no-data",
+          "genesisDeltaH": null,
+          "posStats": null,
+          "statements": [
             {
               "stamp": "202606132319",
               "chance48": {
@@ -3028,7 +3134,23 @@
               "verdict7": "not-formed",
               "truth48": null,
               "truth7": null
-            },
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606140537-1",
+          "tag": "EP93",
+          "ledger": {
+            "kind": "no-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null
+          },
+          "truth": null,
+          "agreement": "no-data",
+          "genesisDeltaH": null,
+          "posStats": null,
+          "statements": [
             {
               "stamp": "202606140537",
               "chance48": {
@@ -3239,7 +3361,23 @@
               "verdict7": "not-formed",
               "truth48": null,
               "truth7": null
-            },
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606202324-1",
+          "tag": null,
+          "ledger": {
+            "kind": "no-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null
+          },
+          "truth": null,
+          "agreement": "no-data",
+          "genesisDeltaH": null,
+          "posStats": null,
+          "statements": [
             {
               "stamp": "202606202324",
               "chance48": {
@@ -3254,7 +3392,23 @@
               "verdict7": "not-formed",
               "truth48": null,
               "truth7": null
-            },
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606210503-1",
+          "tag": null,
+          "ledger": {
+            "kind": "no-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null
+          },
+          "truth": null,
+          "agreement": "no-data",
+          "genesisDeltaH": null,
+          "posStats": null,
+          "statements": [
             {
               "stamp": "202606210503",
               "chance48": {
@@ -3269,7 +3423,23 @@
               "verdict7": "not-formed",
               "truth48": null,
               "truth7": null
-            },
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606211140-1",
+          "tag": null,
+          "ledger": {
+            "kind": "no-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null
+          },
+          "truth": null,
+          "agreement": "no-data",
+          "genesisDeltaH": null,
+          "posStats": null,
+          "statements": [
             {
               "stamp": "202606211140",
               "chance48": {
@@ -3284,7 +3454,23 @@
               "verdict7": "not-formed",
               "truth48": null,
               "truth7": null
-            },
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606211722-1",
+          "tag": null,
+          "ledger": {
+            "kind": "no-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null
+          },
+          "truth": null,
+          "agreement": "no-data",
+          "genesisDeltaH": null,
+          "posStats": null,
+          "statements": [
             {
               "stamp": "202606211722",
               "chance48": {
@@ -4113,9 +4299,226 @@
         },
         {
           "id": "EP-I-202606280508-1",
-          "tag": "EP95",
+          "tag": null,
           "ledger": {
             "kind": "no-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null
+          },
+          "truth": null,
+          "agreement": "no-data",
+          "genesisDeltaH": null,
+          "posStats": null,
+          "statements": [
+            {
+              "stamp": "202606280508",
+              "chance48": {
+                "cat": "low",
+                "pct": 20
+              },
+              "chance7": {
+                "cat": "medium",
+                "pct": 50
+              },
+              "verdict48": "not-formed",
+              "verdict7": "not-formed",
+              "truth48": null,
+              "truth7": null
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606281135-1",
+          "tag": null,
+          "ledger": {
+            "kind": "no-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null
+          },
+          "truth": null,
+          "agreement": "no-data",
+          "genesisDeltaH": null,
+          "posStats": null,
+          "statements": [
+            {
+              "stamp": "202606281135",
+              "chance48": {
+                "cat": "low",
+                "pct": 20
+              },
+              "chance7": {
+                "cat": "medium",
+                "pct": 50
+              },
+              "verdict48": "not-formed",
+              "verdict7": "not-formed",
+              "truth48": null,
+              "truth7": null
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606281734-1",
+          "tag": null,
+          "ledger": {
+            "kind": "no-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null
+          },
+          "truth": null,
+          "agreement": "no-data",
+          "genesisDeltaH": null,
+          "posStats": null,
+          "statements": [
+            {
+              "stamp": "202606281734",
+              "chance48": {
+                "cat": "low",
+                "pct": 20
+              },
+              "chance7": {
+                "cat": "medium",
+                "pct": 50
+              },
+              "verdict48": "not-formed",
+              "verdict7": "not-formed",
+              "truth48": null,
+              "truth7": null
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606282317-1",
+          "tag": null,
+          "ledger": {
+            "kind": "no-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null
+          },
+          "truth": null,
+          "agreement": "no-data",
+          "genesisDeltaH": null,
+          "posStats": null,
+          "statements": [
+            {
+              "stamp": "202606282317",
+              "chance48": {
+                "cat": "low",
+                "pct": 30
+              },
+              "chance7": {
+                "cat": "medium",
+                "pct": 50
+              },
+              "verdict48": "not-formed",
+              "verdict7": "not-formed",
+              "truth48": null,
+              "truth7": null
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606290503-1",
+          "tag": null,
+          "ledger": {
+            "kind": "no-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null
+          },
+          "truth": null,
+          "agreement": "no-data",
+          "genesisDeltaH": null,
+          "posStats": null,
+          "statements": [
+            {
+              "stamp": "202606290503",
+              "chance48": {
+                "cat": "medium",
+                "pct": 40
+              },
+              "chance7": {
+                "cat": "medium",
+                "pct": 50
+              },
+              "verdict48": "not-formed",
+              "verdict7": "not-formed",
+              "truth48": null,
+              "truth7": null
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606291148-1",
+          "tag": null,
+          "ledger": {
+            "kind": "no-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null
+          },
+          "truth": null,
+          "agreement": "no-data",
+          "genesisDeltaH": null,
+          "posStats": null,
+          "statements": [
+            {
+              "stamp": "202606291148",
+              "chance48": {
+                "cat": "medium",
+                "pct": 50
+              },
+              "chance7": {
+                "cat": "medium",
+                "pct": 60
+              },
+              "verdict48": "not-formed",
+              "verdict7": "not-formed",
+              "truth48": null,
+              "truth7": null
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606291729-1",
+          "tag": null,
+          "ledger": {
+            "kind": "unresolved-nearby-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null
+          },
+          "truth": null,
+          "agreement": "no-data",
+          "genesisDeltaH": null,
+          "posStats": null,
+          "statements": [
+            {
+              "stamp": "202606291729",
+              "chance48": {
+                "cat": "medium",
+                "pct": 60
+              },
+              "chance7": {
+                "cat": "high",
+                "pct": 70
+              },
+              "verdict48": "unresolved",
+              "verdict7": "unresolved",
+              "truth48": null,
+              "truth7": null
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606292318-1",
+          "tag": "EP95",
+          "ledger": {
+            "kind": "unresolved-nearby-cyclone",
             "cycloneId": null,
             "cycloneName": null,
             "genesisStamp": null
@@ -4131,119 +4534,10 @@
             "genesisNum": "006",
             "firstTdDtg": "202607010600"
           },
-          "agreement": "refutes",
+          "agreement": "resolves",
           "genesisDeltaH": null,
-          "posStats": {
-            "n": 11,
-            "meanDeg": 17.6,
-            "maxDeg": 19.1
-          },
+          "posStats": null,
           "statements": [
-            {
-              "stamp": "202606280508",
-              "chance48": {
-                "cat": "low",
-                "pct": 20
-              },
-              "chance7": {
-                "cat": "medium",
-                "pct": 50
-              },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed",
-              "truth48": "not-formed",
-              "truth7": "formed"
-            },
-            {
-              "stamp": "202606281135",
-              "chance48": {
-                "cat": "low",
-                "pct": 20
-              },
-              "chance7": {
-                "cat": "medium",
-                "pct": 50
-              },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed",
-              "truth48": "not-formed",
-              "truth7": "formed"
-            },
-            {
-              "stamp": "202606281734",
-              "chance48": {
-                "cat": "low",
-                "pct": 20
-              },
-              "chance7": {
-                "cat": "medium",
-                "pct": 50
-              },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed",
-              "truth48": "not-formed",
-              "truth7": "formed"
-            },
-            {
-              "stamp": "202606282317",
-              "chance48": {
-                "cat": "low",
-                "pct": 30
-              },
-              "chance7": {
-                "cat": "medium",
-                "pct": 50
-              },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed",
-              "truth48": "not-formed",
-              "truth7": "formed"
-            },
-            {
-              "stamp": "202606290503",
-              "chance48": {
-                "cat": "medium",
-                "pct": 40
-              },
-              "chance7": {
-                "cat": "medium",
-                "pct": 50
-              },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed",
-              "truth48": "not-formed",
-              "truth7": "formed"
-            },
-            {
-              "stamp": "202606291148",
-              "chance48": {
-                "cat": "medium",
-                "pct": 50
-              },
-              "chance7": {
-                "cat": "medium",
-                "pct": 60
-              },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed",
-              "truth48": "formed",
-              "truth7": "formed"
-            },
-            {
-              "stamp": "202606291729",
-              "chance48": {
-                "cat": "medium",
-                "pct": 60
-              },
-              "chance7": {
-                "cat": "high",
-                "pct": 70
-              },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed",
-              "truth48": "formed",
-              "truth7": "formed"
-            },
             {
               "stamp": "202606292318",
               "chance48": {
@@ -4254,8 +4548,8 @@
                 "cat": "high",
                 "pct": 80
               },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed",
+              "verdict48": "unresolved",
+              "verdict7": "unresolved",
               "truth48": "formed",
               "truth7": "formed"
             },
@@ -4269,8 +4563,8 @@
                 "cat": "high",
                 "pct": 80
               },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed",
+              "verdict48": "unresolved",
+              "verdict7": "unresolved",
               "truth48": "formed",
               "truth7": "formed"
             },
@@ -4284,8 +4578,8 @@
                 "cat": "high",
                 "pct": 80
               },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed",
+              "verdict48": "unresolved",
+              "verdict7": "unresolved",
               "truth48": "formed",
               "truth7": "formed"
             },
@@ -4299,8 +4593,8 @@
                 "cat": "high",
                 "pct": 90
               },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed",
+              "verdict48": "unresolved",
+              "verdict7": "unresolved",
               "truth48": "formed",
               "truth7": "formed"
             },
@@ -4314,8 +4608,8 @@
                 "cat": "high",
                 "pct": 90
               },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed",
+              "verdict48": "unresolved",
+              "verdict7": "unresolved",
               "truth48": "formed",
               "truth7": "formed"
             },
@@ -4329,8 +4623,8 @@
                 "cat": "high",
                 "pct": 100
               },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed",
+              "verdict48": "unresolved",
+              "verdict7": "unresolved",
               "truth48": "formed",
               "truth7": "formed"
             }
@@ -5776,98 +6070,8 @@
                 "pct": 0
               },
               "chance7": {
-                "cat": "low",
-                "pct": 20
-              },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed",
-              "truth48": null,
-              "truth7": null
-            },
-            {
-              "stamp": "202607101731",
-              "chance48": {
-                "cat": "low",
-                "pct": 0
-              },
-              "chance7": {
-                "cat": "low",
-                "pct": 20
-              },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed",
-              "truth48": null,
-              "truth7": null
-            },
-            {
-              "stamp": "202607102327",
-              "chance48": {
-                "cat": "low",
-                "pct": 10
-              },
-              "chance7": {
-                "cat": "low",
-                "pct": 20
-              },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed",
-              "truth48": null,
-              "truth7": null
-            },
-            {
-              "stamp": "202607110502",
-              "chance48": {
-                "cat": "low",
-                "pct": 10
-              },
-              "chance7": {
-                "cat": "low",
-                "pct": 20
-              },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed",
-              "truth48": null,
-              "truth7": null
-            },
-            {
-              "stamp": "202607111139",
-              "chance48": {
-                "cat": "low",
-                "pct": 10
-              },
-              "chance7": {
-                "cat": "low",
-                "pct": 20
-              },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed",
-              "truth48": null,
-              "truth7": null
-            },
-            {
-              "stamp": "202607111144",
-              "chance48": {
-                "cat": "low",
-                "pct": 10
-              },
-              "chance7": {
-                "cat": "low",
-                "pct": 20
-              },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed",
-              "truth48": null,
-              "truth7": null
-            },
-            {
-              "stamp": "202607111743",
-              "chance48": {
-                "cat": "low",
-                "pct": 20
-              },
-              "chance7": {
-                "cat": "low",
-                "pct": 20
+                "cat": "medium",
+                "pct": 40
               },
               "verdict48": "not-formed",
               "verdict7": "not-formed",
@@ -5897,8 +6101,8 @@
                 "pct": 0
               },
               "chance7": {
-                "cat": "medium",
-                "pct": 40
+                "cat": "low",
+                "pct": 20
               },
               "verdict48": "not-formed",
               "verdict7": "not-formed",
@@ -5939,6 +6143,37 @@
           ]
         },
         {
+          "id": "EP-I-202607101731-2",
+          "tag": null,
+          "ledger": {
+            "kind": "no-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null
+          },
+          "truth": null,
+          "agreement": "no-data",
+          "genesisDeltaH": null,
+          "posStats": null,
+          "statements": [
+            {
+              "stamp": "202607101731",
+              "chance48": {
+                "cat": "low",
+                "pct": 0
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 20
+              },
+              "verdict48": "not-formed",
+              "verdict7": "not-formed",
+              "truth48": null,
+              "truth7": null
+            }
+          ]
+        },
+        {
           "id": "EP-I-202607102327-1",
           "tag": null,
           "ledger": {
@@ -5961,6 +6196,37 @@
               "chance7": {
                 "cat": "medium",
                 "pct": 50
+              },
+              "verdict48": "not-formed",
+              "verdict7": "not-formed",
+              "truth48": null,
+              "truth7": null
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202607102327-2",
+          "tag": null,
+          "ledger": {
+            "kind": "no-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null
+          },
+          "truth": null,
+          "agreement": "no-data",
+          "genesisDeltaH": null,
+          "posStats": null,
+          "statements": [
+            {
+              "stamp": "202607102327",
+              "chance48": {
+                "cat": "low",
+                "pct": 10
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 20
               },
               "verdict48": "not-formed",
               "verdict7": "not-formed",
@@ -6001,6 +6267,37 @@
           ]
         },
         {
+          "id": "EP-I-202607110502-2",
+          "tag": null,
+          "ledger": {
+            "kind": "no-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null
+          },
+          "truth": null,
+          "agreement": "no-data",
+          "genesisDeltaH": null,
+          "posStats": null,
+          "statements": [
+            {
+              "stamp": "202607110502",
+              "chance48": {
+                "cat": "low",
+                "pct": 10
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 20
+              },
+              "verdict48": "not-formed",
+              "verdict7": "not-formed",
+              "truth48": null,
+              "truth7": null
+            }
+          ]
+        },
+        {
           "id": "EP-I-202607111139-1",
           "tag": null,
           "ledger": {
@@ -6023,6 +6320,37 @@
               "chance7": {
                 "cat": "medium",
                 "pct": 40
+              },
+              "verdict48": "not-formed",
+              "verdict7": "not-formed",
+              "truth48": null,
+              "truth7": null
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202607111139-2",
+          "tag": null,
+          "ledger": {
+            "kind": "no-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null
+          },
+          "truth": null,
+          "agreement": "no-data",
+          "genesisDeltaH": null,
+          "posStats": null,
+          "statements": [
+            {
+              "stamp": "202607111139",
+              "chance48": {
+                "cat": "low",
+                "pct": 10
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 20
               },
               "verdict48": "not-formed",
               "verdict7": "not-formed",
@@ -6063,7 +6391,69 @@
           ]
         },
         {
+          "id": "EP-I-202607111144-2",
+          "tag": null,
+          "ledger": {
+            "kind": "no-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null
+          },
+          "truth": null,
+          "agreement": "no-data",
+          "genesisDeltaH": null,
+          "posStats": null,
+          "statements": [
+            {
+              "stamp": "202607111144",
+              "chance48": {
+                "cat": "low",
+                "pct": 10
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 20
+              },
+              "verdict48": "not-formed",
+              "verdict7": "not-formed",
+              "truth48": null,
+              "truth7": null
+            }
+          ]
+        },
+        {
           "id": "EP-I-202607111743-1",
+          "tag": null,
+          "ledger": {
+            "kind": "no-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null
+          },
+          "truth": null,
+          "agreement": "no-data",
+          "genesisDeltaH": null,
+          "posStats": null,
+          "statements": [
+            {
+              "stamp": "202607111743",
+              "chance48": {
+                "cat": "low",
+                "pct": 20
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 20
+              },
+              "verdict48": "not-formed",
+              "verdict7": "not-formed",
+              "truth48": null,
+              "truth7": null
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202607111743-2",
           "tag": null,
           "ledger": {
             "kind": "no-cyclone",
@@ -6094,7 +6484,7 @@
           ]
         },
         {
-          "id": "EP-I-202607111743-2",
+          "id": "EP-I-202607111743-3",
           "tag": null,
           "ledger": {
             "kind": "no-cyclone",
@@ -6530,81 +6920,6 @@
               "verdict7": "not-formed",
               "truth48": null,
               "truth7": null
-            },
-            {
-              "stamp": "202607121148",
-              "chance48": {
-                "cat": "low",
-                "pct": 20
-              },
-              "chance7": {
-                "cat": "low",
-                "pct": 20
-              },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed",
-              "truth48": null,
-              "truth7": null
-            },
-            {
-              "stamp": "202607121732",
-              "chance48": {
-                "cat": "low",
-                "pct": 20
-              },
-              "chance7": {
-                "cat": "low",
-                "pct": 20
-              },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed",
-              "truth48": null,
-              "truth7": null
-            },
-            {
-              "stamp": "202607122309",
-              "chance48": {
-                "cat": "low",
-                "pct": 10
-              },
-              "chance7": {
-                "cat": "low",
-                "pct": 10
-              },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed",
-              "truth48": null,
-              "truth7": null
-            },
-            {
-              "stamp": "202607130501",
-              "chance48": {
-                "cat": "low",
-                "pct": 10
-              },
-              "chance7": {
-                "cat": "low",
-                "pct": 10
-              },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed",
-              "truth48": null,
-              "truth7": null
-            },
-            {
-              "stamp": "202607131145",
-              "chance48": {
-                "cat": "low",
-                "pct": 10
-              },
-              "chance7": {
-                "cat": "low",
-                "pct": 10
-              },
-              "verdict48": "not-formed",
-              "verdict7": "not-formed",
-              "truth48": null,
-              "truth7": null
             }
           ]
         },
@@ -6657,6 +6972,37 @@
               "stamp": "202607121148",
               "chance48": {
                 "cat": "low",
+                "pct": 20
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 20
+              },
+              "verdict48": "not-formed",
+              "verdict7": "not-formed",
+              "truth48": null,
+              "truth7": null
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202607121148-2",
+          "tag": null,
+          "ledger": {
+            "kind": "no-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null
+          },
+          "truth": null,
+          "agreement": "no-data",
+          "genesisDeltaH": null,
+          "posStats": null,
+          "statements": [
+            {
+              "stamp": "202607121148",
+              "chance48": {
+                "cat": "low",
                 "pct": 10
               },
               "chance7": {
@@ -6671,7 +7017,7 @@
           ]
         },
         {
-          "id": "EP-I-202607121148-2",
+          "id": "EP-I-202607121148-3",
           "tag": null,
           "ledger": {
             "kind": "no-cyclone",
@@ -6719,6 +7065,37 @@
               "stamp": "202607121732",
               "chance48": {
                 "cat": "low",
+                "pct": 20
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 20
+              },
+              "verdict48": "not-formed",
+              "verdict7": "not-formed",
+              "truth48": null,
+              "truth7": null
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202607121732-2",
+          "tag": null,
+          "ledger": {
+            "kind": "no-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null
+          },
+          "truth": null,
+          "agreement": "no-data",
+          "genesisDeltaH": null,
+          "posStats": null,
+          "statements": [
+            {
+              "stamp": "202607121732",
+              "chance48": {
+                "cat": "low",
                 "pct": 10
               },
               "chance7": {
@@ -6733,7 +7110,7 @@
           ]
         },
         {
-          "id": "EP-I-202607121732-2",
+          "id": "EP-I-202607121732-3",
           "tag": null,
           "ledger": {
             "kind": "no-cyclone",
@@ -6785,7 +7162,7 @@
               },
               "chance7": {
                 "cat": "low",
-                "pct": 30
+                "pct": 10
               },
               "verdict48": "not-formed",
               "verdict7": "not-formed",
@@ -6796,6 +7173,37 @@
         },
         {
           "id": "EP-I-202607122309-2",
+          "tag": null,
+          "ledger": {
+            "kind": "no-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null
+          },
+          "truth": null,
+          "agreement": "no-data",
+          "genesisDeltaH": null,
+          "posStats": null,
+          "statements": [
+            {
+              "stamp": "202607122309",
+              "chance48": {
+                "cat": "low",
+                "pct": 10
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 30
+              },
+              "verdict48": "not-formed",
+              "verdict7": "not-formed",
+              "truth48": null,
+              "truth7": null
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202607122309-3",
           "tag": "CP90",
           "ledger": {
             "kind": "unresolved-nearby-cyclone",
@@ -7147,6 +7555,37 @@
               },
               "chance7": {
                 "cat": "low",
+                "pct": 10
+              },
+              "verdict48": "unresolved",
+              "verdict7": "unresolved",
+              "truth48": null,
+              "truth7": null
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202607130501-2",
+          "tag": null,
+          "ledger": {
+            "kind": "unresolved-nearby-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null
+          },
+          "truth": null,
+          "agreement": "no-data",
+          "genesisDeltaH": null,
+          "posStats": null,
+          "statements": [
+            {
+              "stamp": "202607130501",
+              "chance48": {
+                "cat": "low",
+                "pct": 10
+              },
+              "chance7": {
+                "cat": "low",
                 "pct": 30
               },
               "verdict48": "unresolved",
@@ -7179,6 +7618,37 @@
               "chance7": {
                 "cat": "medium",
                 "pct": 40
+              },
+              "verdict48": "unresolved",
+              "verdict7": "unresolved",
+              "truth48": null,
+              "truth7": null
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202607131145-2",
+          "tag": null,
+          "ledger": {
+            "kind": "unresolved-nearby-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null
+          },
+          "truth": null,
+          "agreement": "no-data",
+          "genesisDeltaH": null,
+          "posStats": null,
+          "statements": [
+            {
+              "stamp": "202607131145",
+              "chance48": {
+                "cat": "low",
+                "pct": 10
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 10
               },
               "verdict48": "unresolved",
               "verdict7": "unresolved",
@@ -9730,16 +10200,16 @@
   "truthCalibration": {
     "h48": {
       "low": {
-        "statements": 37,
+        "statements": 41,
         "formed": 5,
-        "notFormed": 32,
+        "notFormed": 36,
         "pending": 0,
-        "observedRate": 0.14
+        "observedRate": 0.12
       },
       "medium": {
-        "statements": 17,
-        "formed": 12,
-        "notFormed": 5,
+        "statements": 14,
+        "formed": 10,
+        "notFormed": 4,
         "pending": 0,
         "observedRate": 0.71
       },
@@ -9753,22 +10223,22 @@
     },
     "d7": {
       "low": {
-        "statements": 16,
-        "formed": 13,
+        "statements": 24,
+        "formed": 21,
         "notFormed": 3,
         "pending": 0,
-        "observedRate": 0.81
+        "observedRate": 0.88
       },
       "medium": {
-        "statements": 20,
-        "formed": 20,
+        "statements": 14,
+        "formed": 14,
         "notFormed": 0,
         "pending": 0,
         "observedRate": 1
       },
       "high": {
-        "statements": 42,
-        "formed": 42,
+        "statements": 41,
+        "formed": 41,
         "notFormed": 0,
         "pending": 0,
         "observedRate": 1
