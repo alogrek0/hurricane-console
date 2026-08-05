@@ -2951,8 +2951,175 @@
         },
         {
           "id": "EP-I-202606051135-1",
-          "tag": "EP92",
+          "tag": null,
           "firstStamp": "202606051135",
+          "lastStamp": "202606051135",
+          "waveOrigin": null,
+          "outcome": {
+            "kind": "no-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null,
+            "nearby": []
+          },
+          "siblingChains": [],
+          "statements": [
+            {
+              "stamp": "202606051135",
+              "file": "TWOEP.202606051135.txt",
+              "tagged": false,
+              "chance48": {
+                "cat": "low",
+                "pct": 30
+              },
+              "chance7": {
+                "cat": "medium",
+                "pct": 60
+              },
+              "verdict48": "not-formed",
+              "verdict7": "not-formed"
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606051736-1",
+          "tag": null,
+          "firstStamp": "202606051736",
+          "lastStamp": "202606051736",
+          "waveOrigin": null,
+          "outcome": {
+            "kind": "no-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null,
+            "nearby": []
+          },
+          "siblingChains": [],
+          "statements": [
+            {
+              "stamp": "202606051736",
+              "file": "TWOEP.202606051736.txt",
+              "tagged": false,
+              "chance48": {
+                "cat": "low",
+                "pct": 30
+              },
+              "chance7": {
+                "cat": "medium",
+                "pct": 60
+              },
+              "verdict48": "not-formed",
+              "verdict7": "not-formed"
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606052316-1",
+          "tag": null,
+          "firstStamp": "202606052316",
+          "lastStamp": "202606052316",
+          "waveOrigin": null,
+          "outcome": {
+            "kind": "no-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null,
+            "nearby": []
+          },
+          "siblingChains": [],
+          "statements": [
+            {
+              "stamp": "202606052316",
+              "file": "TWOEP.202606052316.txt",
+              "tagged": false,
+              "chance48": {
+                "cat": "medium",
+                "pct": 40
+              },
+              "chance7": {
+                "cat": "medium",
+                "pct": 60
+              },
+              "verdict48": "not-formed",
+              "verdict7": "not-formed"
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606060507-1",
+          "tag": null,
+          "firstStamp": "202606060507",
+          "lastStamp": "202606060507",
+          "waveOrigin": null,
+          "outcome": {
+            "kind": "no-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null,
+            "nearby": []
+          },
+          "siblingChains": [],
+          "statements": [
+            {
+              "stamp": "202606060507",
+              "file": "TWOEP.202606060507.txt",
+              "tagged": false,
+              "chance48": {
+                "cat": "medium",
+                "pct": 50
+              },
+              "chance7": {
+                "cat": "medium",
+                "pct": 60
+              },
+              "verdict48": "not-formed",
+              "verdict7": "not-formed"
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606061115-1",
+          "tag": null,
+          "firstStamp": "202606061115",
+          "lastStamp": "202606061115",
+          "waveOrigin": null,
+          "outcome": {
+            "kind": "unresolved-nearby-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null,
+            "nearby": [
+              {
+                "cycloneId": "EP-C-202606080859-1",
+                "name": "Boris",
+                "firstStamp": "202606080859",
+                "dist": null
+              }
+            ]
+          },
+          "siblingChains": [],
+          "statements": [
+            {
+              "stamp": "202606061115",
+              "file": "TWOEP.202606061115.txt",
+              "tagged": false,
+              "chance48": {
+                "cat": "medium",
+                "pct": 50
+              },
+              "chance7": {
+                "cat": "medium",
+                "pct": 60
+              },
+              "verdict48": "unresolved",
+              "verdict7": "unresolved"
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606061721-1",
+          "tag": "EP92",
+          "firstStamp": "202606061721",
           "lastStamp": "202606081131",
           "waveOrigin": null,
           "outcome": {
@@ -2977,81 +3144,6 @@
           },
           "siblingChains": [],
           "statements": [
-            {
-              "stamp": "202606051135",
-              "file": "TWOEP.202606051135.txt",
-              "tagged": false,
-              "chance48": {
-                "cat": "low",
-                "pct": 30
-              },
-              "chance7": {
-                "cat": "medium",
-                "pct": 60
-              },
-              "verdict48": "not-formed",
-              "verdict7": "unresolved"
-            },
-            {
-              "stamp": "202606051736",
-              "file": "TWOEP.202606051736.txt",
-              "tagged": false,
-              "chance48": {
-                "cat": "low",
-                "pct": 30
-              },
-              "chance7": {
-                "cat": "medium",
-                "pct": 60
-              },
-              "verdict48": "not-formed",
-              "verdict7": "unresolved"
-            },
-            {
-              "stamp": "202606052316",
-              "file": "TWOEP.202606052316.txt",
-              "tagged": false,
-              "chance48": {
-                "cat": "medium",
-                "pct": 40
-              },
-              "chance7": {
-                "cat": "medium",
-                "pct": 60
-              },
-              "verdict48": "not-formed",
-              "verdict7": "unresolved"
-            },
-            {
-              "stamp": "202606060507",
-              "file": "TWOEP.202606060507.txt",
-              "tagged": false,
-              "chance48": {
-                "cat": "medium",
-                "pct": 50
-              },
-              "chance7": {
-                "cat": "medium",
-                "pct": 60
-              },
-              "verdict48": "not-formed",
-              "verdict7": "unresolved"
-            },
-            {
-              "stamp": "202606061115",
-              "file": "TWOEP.202606061115.txt",
-              "tagged": false,
-              "chance48": {
-                "cat": "medium",
-                "pct": 50
-              },
-              "chance7": {
-                "cat": "medium",
-                "pct": 60
-              },
-              "verdict48": "not-formed",
-              "verdict7": "unresolved"
-            },
             {
               "stamp": "202606061721",
               "file": "TWOEP.202606061721.txt",
@@ -10817,10 +10909,10 @@
           "medium": {
             "statements": 49,
             "formed": 2,
-            "notFormed": 25,
-            "unresolved": 22,
+            "notFormed": 24,
+            "unresolved": 23,
             "pending": 0,
-            "observedRate": 0.074
+            "observedRate": 0.077
           },
           "high": {
             "statements": 47,
@@ -10843,10 +10935,10 @@
           "medium": {
             "statements": 111,
             "formed": 2,
-            "notFormed": 60,
-            "unresolved": 49,
+            "notFormed": 64,
+            "unresolved": 45,
             "pending": 0,
-            "observedRate": 0.032
+            "observedRate": 0.03
           },
           "high": {
             "statements": 120,
@@ -10873,10 +10965,10 @@
       "medium": {
         "statements": 57,
         "formed": 6,
-        "notFormed": 27,
-        "unresolved": 24,
+        "notFormed": 26,
+        "unresolved": 25,
         "pending": 0,
-        "observedRate": 0.182
+        "observedRate": 0.188
       },
       "high": {
         "statements": 50,
@@ -10899,10 +10991,10 @@
       "medium": {
         "statements": 120,
         "formed": 6,
-        "notFormed": 62,
-        "unresolved": 52,
+        "notFormed": 66,
+        "unresolved": 48,
         "pending": 0,
-        "observedRate": 0.088
+        "observedRate": 0.083
       },
       "high": {
         "statements": 123,

@@ -143,6 +143,39 @@ planned tracks — lived friction beats speculation.
   gate ("expected to form ... offshore of X" anchors at X — pre-existing,
   pinned by test, its own PR if it ever misleads).*
 
+- [x] **parseTWO's sentence scan had no gates — narrative positioned the system**
+  (2026-08-05, found by the fixture review in the gazetteer PR below: one of its
+  three position changes was a *lateral* move between two equally wrong values, the
+  tell that neither came from a real position statement). `parseTWO`'s sentence
+  fallback called `gazResolve` on **every** sentence, so a place merely *named* in
+  narrative became the position. Five archived EP products positioned one trough
+  described only as "offshore of Central America" — which has no gazetteer entry —
+  on whichever country a rainfall-impact list happened to name first
+  ("locally heavy rainfall is possible across portions of Costa Rica, Nicaragua,
+  El Salvador, and Guatemala"). The TWD path, `extractInferred`, had guarded the
+  identical call with four gates for a long time; the TWO path never got them.
+  *Fixed: ported three of the four gates — feature-noun, climo (stripped **before**
+  the noun test, or the "low" inside "Colombian low" satisfies it on its own), and
+  cross-ref/left-basin. Measured blast radius across the whole archive: exactly
+  **5 of 434** TWO entries changed, all `positioned → null`, all the same system;
+  **zero moved, zero gained**. Truth tally held at **0 refuted**. EP invest chains
+  180 → 185 as the nulls honestly broke proximity links.*
+  *Two gates deliberately NOT ported, recorded in the code so nobody "completes the
+  parity" later: the **coordinate** gate (there is no regex pass for TWO
+  disturbances, so skipping a coordinate-bearing sentence would DISCARD a position
+  rather than de-duplicate a dot pass 1 already placed) and the **future** gate
+  (`expected to form offshore of X` still anchors at X — own PR, see below).*
+- [ ] **"Offshore of Central America" has no gazetteer entry** (2026-08-05, surfaced
+  by the gate above) — the five nulled EP entries describe a real system in a real
+  place; the parser simply has no anchor for that phrase, so it is now honestly
+  unmappable rather than wrongly placed. An offshore-Pacific-Central-America anchor
+  (GAZ.EP already uses offshore, not inland, anchors by policy) would give it a
+  coarse honest position. Low urgency, constructive follow-up.
+- [ ] **parseTWO has no future gate** (long-standing, pinned by test) —
+  "a tropical depression is expected to form offshore of X" anchors at X,
+  presenting a *forecast* position as the current one. Deliberately parked when the
+  offset work landed; the gate above stopped short of it because it reverses that
+  parked call and changes a pinned test. Its own PR.
 - [x] **Gazetteer anchored two invests where the text says they are NOT**
   (2026-08-05, found while judging the M7 best-track treatments — AL91 rendered as
   a single stacked point in the lineage lab). Two independent defects. *(1)*

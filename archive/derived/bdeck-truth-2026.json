@@ -3,12 +3,12 @@
   "season": 2026,
   "btkNow": "202608021800",
   "summary": {
-    "invests": 209,
+    "invests": 214,
     "confirms": 1,
     "resolves": 5,
     "refutes": 0,
     "open": 0,
-    "noData": 203,
+    "noData": 208,
     "flags": 16
   },
   "flags": [
@@ -2820,9 +2820,9 @@
         },
         {
           "id": "EP-I-202606051135-1",
-          "tag": "EP92",
+          "tag": null,
           "ledger": {
-            "kind": "unresolved-nearby-cyclone",
+            "kind": "no-cyclone",
             "cycloneId": null,
             "cycloneName": null,
             "genesisStamp": null
@@ -2843,10 +2843,26 @@
                 "pct": 60
               },
               "verdict48": "not-formed",
-              "verdict7": "unresolved",
+              "verdict7": "not-formed",
               "truth48": null,
               "truth7": null
-            },
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606051736-1",
+          "tag": null,
+          "ledger": {
+            "kind": "no-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null
+          },
+          "truth": null,
+          "agreement": "no-data",
+          "genesisDeltaH": null,
+          "posStats": null,
+          "statements": [
             {
               "stamp": "202606051736",
               "chance48": {
@@ -2858,10 +2874,26 @@
                 "pct": 60
               },
               "verdict48": "not-formed",
-              "verdict7": "unresolved",
+              "verdict7": "not-formed",
               "truth48": null,
               "truth7": null
-            },
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606052316-1",
+          "tag": null,
+          "ledger": {
+            "kind": "no-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null
+          },
+          "truth": null,
+          "agreement": "no-data",
+          "genesisDeltaH": null,
+          "posStats": null,
+          "statements": [
             {
               "stamp": "202606052316",
               "chance48": {
@@ -2873,10 +2905,26 @@
                 "pct": 60
               },
               "verdict48": "not-formed",
-              "verdict7": "unresolved",
+              "verdict7": "not-formed",
               "truth48": null,
               "truth7": null
-            },
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606060507-1",
+          "tag": null,
+          "ledger": {
+            "kind": "no-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null
+          },
+          "truth": null,
+          "agreement": "no-data",
+          "genesisDeltaH": null,
+          "posStats": null,
+          "statements": [
             {
               "stamp": "202606060507",
               "chance48": {
@@ -2888,10 +2936,26 @@
                 "pct": 60
               },
               "verdict48": "not-formed",
-              "verdict7": "unresolved",
+              "verdict7": "not-formed",
               "truth48": null,
               "truth7": null
-            },
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606061115-1",
+          "tag": null,
+          "ledger": {
+            "kind": "unresolved-nearby-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null
+          },
+          "truth": null,
+          "agreement": "no-data",
+          "genesisDeltaH": null,
+          "posStats": null,
+          "statements": [
             {
               "stamp": "202606061115",
               "chance48": {
@@ -2902,11 +2966,27 @@
                 "cat": "medium",
                 "pct": 60
               },
-              "verdict48": "not-formed",
+              "verdict48": "unresolved",
               "verdict7": "unresolved",
               "truth48": null,
               "truth7": null
-            },
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606061721-1",
+          "tag": "EP92",
+          "ledger": {
+            "kind": "unresolved-nearby-cyclone",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null
+          },
+          "truth": null,
+          "agreement": "no-data",
+          "genesisDeltaH": null,
+          "posStats": null,
+          "statements": [
             {
               "stamp": "202606061721",
               "chance48": {

@@ -26698,13 +26698,13 @@
         },
         {
           "id": "EP-I-202606051135-1",
-          "tag": "EP92",
+          "tag": null,
           "sightings": [
             {
               "stamp": "202606051135",
               "file": "TWOEP.202606051135.txt",
-              "lat": 12.9,
-              "lon": -85.1,
+              "lat": null,
+              "lon": null,
               "chance48": {
                 "cat": "low",
                 "pct": 30
@@ -26715,12 +26715,18 @@
               },
               "tagged": false,
               "link": null
-            },
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606051736-1",
+          "tag": null,
+          "sightings": [
             {
               "stamp": "202606051736",
               "file": "TWOEP.202606051736.txt",
-              "lat": 12.9,
-              "lon": -85.1,
+              "lat": null,
+              "lon": null,
               "chance48": {
                 "cat": "low",
                 "pct": 30
@@ -26730,13 +26736,19 @@
                 "pct": 60
               },
               "tagged": false,
-              "link": "proximity"
-            },
+              "link": null
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606052316-1",
+          "tag": null,
+          "sightings": [
             {
               "stamp": "202606052316",
               "file": "TWOEP.202606052316.txt",
-              "lat": 9.8,
-              "lon": -85,
+              "lat": null,
+              "lon": null,
               "chance48": {
                 "cat": "medium",
                 "pct": 40
@@ -26746,13 +26758,19 @@
                 "pct": 60
               },
               "tagged": false,
-              "link": "proximity"
-            },
+              "link": null
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606060507-1",
+          "tag": null,
+          "sightings": [
             {
               "stamp": "202606060507",
               "file": "TWOEP.202606060507.txt",
-              "lat": 9.8,
-              "lon": -85,
+              "lat": null,
+              "lon": null,
               "chance48": {
                 "cat": "medium",
                 "pct": 50
@@ -26762,13 +26780,19 @@
                 "pct": 60
               },
               "tagged": false,
-              "link": "proximity"
-            },
+              "link": null
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606061115-1",
+          "tag": null,
+          "sightings": [
             {
               "stamp": "202606061115",
               "file": "TWOEP.202606061115.txt",
-              "lat": 9.8,
-              "lon": -85,
+              "lat": null,
+              "lon": null,
               "chance48": {
                 "cat": "medium",
                 "pct": 50
@@ -26778,8 +26802,14 @@
                 "pct": 60
               },
               "tagged": false,
-              "link": "proximity"
-            },
+              "link": null
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202606061721-1",
+          "tag": "EP92",
+          "sightings": [
             {
               "stamp": "202606061721",
               "file": "TWOEP.202606061721.txt",
@@ -26794,7 +26824,7 @@
                 "pct": 70
               },
               "tagged": true,
-              "link": "proximity"
+              "link": null
             },
             {
               "stamp": "202606062344",

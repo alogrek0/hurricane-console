@@ -1468,8 +1468,8 @@
         },
         {
           "invest": null,
-          "lat": 12.9,
-          "lon": -85.1,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "low",
             "pct": 30
@@ -1523,8 +1523,8 @@
         },
         {
           "invest": null,
-          "lat": 12.9,
-          "lon": -85.1,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "low",
             "pct": 30
@@ -1578,8 +1578,8 @@
         },
         {
           "invest": null,
-          "lat": 9.8,
-          "lon": -85,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "medium",
             "pct": 40
@@ -1633,8 +1633,8 @@
         },
         {
           "invest": null,
-          "lat": 9.8,
-          "lon": -85,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "medium",
             "pct": 50
@@ -1688,8 +1688,8 @@
         },
         {
           "invest": null,
-          "lat": 9.8,
-          "lon": -85,
+          "lat": null,
+          "lon": null,
           "chance48": {
             "cat": "medium",
             "pct": 50

@@ -1147,6 +1147,57 @@ ok('gaz: all seven attested Gulf sub-regions resolve to their own anchor',
 ok('gaz: bare "Gulf of America" still resolves to the basin centroid',
   (() => { const d = gazDot('A surface trough is over the Gulf of America.');
     return d && d.lat === 25.0 && d.lon === -90.0; })());
+
+// --- parseTWO sentence-scan gates -----------------------------------------
+// The sentence fallback used to call gazResolve on EVERY sentence, so a place
+// merely named in narrative became the system's position. Five archived EP
+// products positioned one "offshore of Central America" trough (no gazetteer
+// entry) on whichever country a rainfall-impact list happened to name first.
+// Gates ported from extractInferred: feature-noun, climo, xref/left-basin.
+// Titles stay UNGATED — they are region labels with no feature noun by design.
+const twoEP = (entry) => P.parseTWO('\n000\nABPZ20 KNHC 052316\nTWOEP\n\n' +
+  'Tropical Weather Outlook\nNWS National Hurricane Center Miami FL\n\n' +
+  '700 PM PDT Fri Jun 5 2026\n\n' +
+  'For the eastern and central North Pacific east of 180 longitude:\n\n' +
+  entry + '\n* Formation chance through 48 hours...medium...40 percent.\n' +
+  '* Formation chance through 7 days...medium...60 percent.\n\n$$\n').disturbances[0];
+ok('TWO gate: a rainfall-impact country list no longer positions the system',
+  (() => { const d = twoEP('Offshore of Central America:\n' +
+    'Disorganized showers and thunderstorms located offshore of Central\n' +
+    'America are associated with a trough of low pressure. Regardless of\n' +
+    'development, locally heavy rainfall is possible across portions of Costa\n' +
+    'Rica, Nicaragua, El Salvador, and Guatemala through early next week.');
+    return d && d.lat === null && d.lon === null; })());
+ok('TWO gate: a climatological name does not position the system',
+  (() => { const d = twoEP('Offshore of Central America:\n' +
+    'Shower activity offshore of Central America has changed little. The\n' +
+    'pressure gradient between the Colombian low and the ridge is supporting\n' +
+    'fresh winds.');
+    return d && d.lat === null && d.lon === null; })());
+ok('TWO gate: a model-field sentence does not position the system',
+  (() => { const d = twoEP('Offshore of Central America:\n' +
+    'Shower activity offshore of Central America has changed little. The GFS\n' +
+    'shows a low developing near the Gulf of Tehuantepec later this week.');
+    return d && d.lat === null && d.lon === null; })());
+// "Offshore of Central America" is deliberately a title the gazetteer CANNOT
+// resolve, so the sentence loop actually runs — with a resolving title the
+// title path short-circuits and the gates are never reached.
+ok('TWO gate NEGATIVE: a real positioning sentence still wins, impact list after it',
+  (() => { const d = twoEP('Offshore of Central America:\n' +
+    'A broad area of low pressure is located over the Gulf of Tehuantepec.\n' +
+    'Regardless of development, locally heavy rainfall is possible across\n' +
+    'portions of Guatemala and El Salvador.');
+    return d && d.lat === 16.0 && d.lon === -95.0; })());
+ok('TWO gate NEGATIVE: the TITLE path stays ungated (region labels carry no feature noun)',
+  (() => { const d = twoEP('Gulf of Tehuantepec (EP93):\n' +
+    'Regardless of development, locally heavy rainfall is possible across\n' +
+    'portions of Guatemala and El Salvador.');
+    return d && d.invest === 'EP93' && d.lat === 16.0 && d.lon === -95.0; })());
+ok('TWO gate NEGATIVE: a normal feature sentence positions exactly as before',
+  (() => { const d = twoEP('Offshore of Southwestern Mexico (EP96):\n' +
+    'A tropical wave is producing disorganized showers a few hundred miles\n' +
+    'southwest of Zihuatanejo, Mexico.');
+    return d && d.invest === 'EP96' && d.lat !== null && d.lon !== null; })());
 ok('offset: "within N miles ... of" is a radius, not a position -> anchor unchanged',
   (() => { const d = offDot('A surface trough is within 200 miles south of the Baja California Peninsula.');
     return d && d.lat === 29.0 && d.lon === -114.0; })());
