@@ -1,0 +1,95 @@
+
+000
+AXNT20 KNHC 050949
+TWDAT 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+1215 UTC Wed Aug 5 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 0600 UTC surface analysis and satellite imagery through 
+0900 UTC.
+
+...TROPICAL WAVES...
+
+A tropical wave is along 26W from 07N to 17N, moving west at 
+around 5-10 kt. Convection previously associated with this wave
+has diminished early this morning.
+
+A tropical wave is along 43W from 08N to 18N, moving west at 5-10
+kt. No significant convection is associated with this wave at this
+time. 
+
+A tropical wave is in the W Caribbean with axis near 82W,
+extending southward from the Cayman Islands, and moving west at 
+10 kt. Scattered moderate to isolated strong convection is noted 
+from the lee of Cuba to the Gulf of Honduras. 
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough enters the Atlantic near 16N16W and continues 
+southwestward to 10N26W to 08N39W. The ITCZ extends from 07N43W 
+to 07N55W. Scattered moderate convection is from 05N to 10N 
+between 30W and 40W and from 06N to 10N between 44W and 51W. 
+
+...GULF OF AMERICA...
+
+A 1017 mb high pressure is centered near 26N86W, supporting light
+to gentle winds across most of the basin. A surface trough in the
+Bay of Campeche is producing moderate NE to E winds over the SW 
+basin. Seas basin-wide are 1-4 ft. A mid- and upper-level trough
+is leading to scattered moderate convection offshore western Cuba,
+and the aforementioned trough is causing scattered moderate
+convection within 90 nm of the coast of Veracruz. 
+ 
+For the forecast, high pressure will generally dominate, promoting
+gentle winds and slight seas through the weekend. Pulses of fresh
+winds will occur west of the Yucatan Peninsula each night, along 
+with moderate seas. 
+
+...CARIBBEAN SEA...
+
+See Tropical Waves section above for information on convection in
+the basin. 
+
+Fresh to strong E trade winds and 8 to 11 ft seas persist across 
+the south-central and portions of the SW Caribbean, between high 
+pressure north of area and lower pressure over northern South 
+America. Moderate E winds and 3-6 ft seas are noted in the E 
+Caribbean and NW basin.
+
+For the forecast, the pressure gradient between Atlantic high 
+pressure and relatively lower pressure in northern South America 
+will continue to support strong trades in the south-central basin,
+and as the gradient tightenings into the weekend, winds will 
+increase to near gale. Fresh winds will also pulse in the Gulf of 
+Honduras and Windward Passage. Otherwise, mainly moderate or 
+weaker winds and seas will prevail. 
+
+...ATLANTIC OCEAN...
+
+A surface trough extending from 27N63W to 21N64W is generating
+scattered moderate convection from 21N to 27N between 57W and 66W.
+Fresh E winds and seas to 8 ft area also occurring in this zone. 
+ In the far NE Atlantic, strong to near- gale N-NE winds and 
+moderate to rough seas are evident off Morocco and in the passages
+of the Canary Islands. Elsewhere, surface ridging prevails, with 
+gentle to moderate winds and moderate seas.
+
+For the forecast west of 55W, a mid- and upper-level trough along
+the SE U.S. coast will keep scattered thunderstorms ongoing 
+offshore Florida and in the vicinity of the Bahamas today. A 
+westward moving trough will pass north of Puerto Rico and 
+Hispaniola into tonight, then approach the Bahamas before shifting
+west of the area, bringing fresh to locally strong winds and 
+locally rough seas. Weak ridging settles across the northern and 
+central waters this weekend, bringing tranquil marine conditions. 
+
+$$
+Konarik

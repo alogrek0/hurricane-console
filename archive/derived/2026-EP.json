@@ -22612,6 +22612,111 @@
       "fixes": 0,
       "inferred": 0,
       "projections": 2
+    },
+    {
+      "file": "TWOEP.202608050519.txt",
+      "kind": "TWO",
+      "stamp": "202608050519",
+      "issuedISO": "2026-08-05T06:00:00.000Z",
+      "disturbances": [
+        {
+          "invest": null,
+          "lat": null,
+          "lon": null,
+          "chance48": {
+            "cat": "low",
+            "pct": 0
+          },
+          "chance7": {
+            "cat": "low",
+            "pct": 20
+          }
+        },
+        {
+          "invest": null,
+          "lat": null,
+          "lon": null,
+          "chance48": {
+            "cat": "low",
+            "pct": 0
+          },
+          "chance7": {
+            "cat": "low",
+            "pct": 20
+          }
+        }
+      ]
+    },
+    {
+      "file": "TWDEP.202608050744.txt",
+      "kind": "TWD",
+      "stamp": "202608050744",
+      "issuedISO": "2026-08-05T10:05:00.000Z",
+      "cyclones": [],
+      "waves": [
+        {
+          "id": "W1",
+          "axis": [
+            {
+              "lat": 15,
+              "lon": -81
+            },
+            {
+              "lat": 3,
+              "lon": -81
+            }
+          ],
+          "inferred": false,
+          "motion": {
+            "bearing": 270,
+            "slowKt": 10,
+            "fastKt": 15
+          }
+        },
+        {
+          "id": "W2",
+          "axis": [
+            {
+              "lat": 14,
+              "lon": -100
+            },
+            {
+              "lat": 2,
+              "lon": -100
+            }
+          ],
+          "inferred": false,
+          "motion": {
+            "bearing": 270,
+            "slowKt": 10,
+            "fastKt": 15
+          }
+        },
+        {
+          "id": "W4",
+          "axis": [
+            {
+              "lat": 19,
+              "lon": -134
+            },
+            {
+              "lat": 2,
+              "lon": -134
+            }
+          ],
+          "inferred": false,
+          "motion": {
+            "bearing": 270,
+            "slowKt": 10,
+            "fastKt": 10
+          }
+        }
+      ],
+      "convection": 1,
+      "troughs": 2,
+      "fixes": 0,
+      "inferred": 0,
+      "projections": 3
     }
   ]
 }
