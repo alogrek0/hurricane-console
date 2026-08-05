@@ -405,8 +405,8 @@
           },
           {
             "invest": null,
-            "lat": 12.9,
-            "lon": -85.1,
+            "lat": null,
+            "lon": null,
             "chance48": "low:30",
             "chance7": "medium:60"
           }

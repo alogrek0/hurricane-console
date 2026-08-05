@@ -916,8 +916,30 @@
         // colon from masquerading as a title.
         const title = prose.match(/^\s*(?:\d+\.\s*)?([^:.]{1,80}):/);
         if (title) pos = gazResolve(title[1], gaz);
+        // The sentence fallback needs the same gates extractInferred applies to
+        // TWD prose, or a place merely NAMED in narrative becomes the system's
+        // position: "Regardless of development, locally heavy rainfall is
+        // possible across portions of Nicaragua, El Salvador, and Guatemala"
+        // positioned an area that the product had already described, one
+        // paragraph up, as "offshore of Central America" (no gazetteer entry, so
+        // the scan walked on until some sentence named a place). The first
+        // country in an impact list won. TWO title lines stay UNGATED — they are
+        // region labels and "Central Tropical Atlantic (AL92)" carries no
+        // feature noun by design.
+        //
+        // Two of extractInferred's four gates are deliberately NOT ported:
+        //   * COORD — there is no regex pass for TWO disturbances, so skipping a
+        //     coordinate-bearing sentence would DISCARD the position rather than
+        //     de-duplicate a dot pass 1 already placed. Do not "complete the
+        //     parity" here; it would lose data.
+        //   * FUTURE — "expected to form offshore of X" still anchors at X. A
+        //     known wart with its own pinned test; its own PR.
         if (!pos) {
           for (const sent of prose.split(/(?<=[.])\s+/)) {
+            if (RE_LEFT_BASIN[basin].test(sent) || RE_XREF_OR_MODEL.test(sent)) continue;
+            // climo names stripped BEFORE the noun test — otherwise the "low"
+            // inside "the Colombian low" satisfies the gate on its own
+            if (!RE_FEATURE_NOUN.test(sent.replace(RE_CLIMO[basin], ' '))) continue;
             pos = gazResolve(sent, gaz);
             if (pos) break;
           }
