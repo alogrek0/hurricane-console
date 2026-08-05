@@ -3,12 +3,12 @@
   "season": 2026,
   "btkNow": "202608021800",
   "summary": {
-    "invests": 214,
+    "invests": 217,
     "confirms": 1,
     "resolves": 5,
     "refutes": 0,
     "open": 0,
-    "noData": 208,
+    "noData": 211,
     "flags": 16
   },
   "flags": [
@@ -10016,7 +10016,7 @@
           "id": "EP-I-202608042304-1",
           "tag": null,
           "ledger": {
-            "kind": "open",
+            "kind": "no-cyclone",
             "cycloneId": null,
             "cycloneName": null,
             "genesisStamp": null
@@ -10047,7 +10047,7 @@
           "id": "EP-I-202608042304-2",
           "tag": null,
           "ledger": {
-            "kind": "open",
+            "kind": "no-cyclone",
             "cycloneId": null,
             "cycloneName": null,
             "genesisStamp": null
@@ -10183,6 +10183,99 @@
           "statements": [
             {
               "stamp": "202608051143",
+              "chance48": {
+                "cat": "low",
+                "pct": 0
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 20
+              },
+              "verdict48": "pending",
+              "verdict7": "pending",
+              "truth48": null,
+              "truth7": null
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202608051745-1",
+          "tag": null,
+          "ledger": {
+            "kind": "open",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null
+          },
+          "truth": null,
+          "agreement": "no-data",
+          "genesisDeltaH": null,
+          "posStats": null,
+          "statements": [
+            {
+              "stamp": "202608051745",
+              "chance48": {
+                "cat": "low",
+                "pct": 0
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 10
+              },
+              "verdict48": "pending",
+              "verdict7": "pending",
+              "truth48": null,
+              "truth7": null
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202608051745-2",
+          "tag": null,
+          "ledger": {
+            "kind": "open",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null
+          },
+          "truth": null,
+          "agreement": "no-data",
+          "genesisDeltaH": null,
+          "posStats": null,
+          "statements": [
+            {
+              "stamp": "202608051745",
+              "chance48": {
+                "cat": "low",
+                "pct": 0
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 20
+              },
+              "verdict48": "pending",
+              "verdict7": "pending",
+              "truth48": null,
+              "truth7": null
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202608051745-3",
+          "tag": null,
+          "ledger": {
+            "kind": "open",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null
+          },
+          "truth": null,
+          "agreement": "no-data",
+          "genesisDeltaH": null,
+          "posStats": null,
+          "statements": [
+            {
+              "stamp": "202608051745",
               "chance48": {
                 "cat": "low",
                 "pct": 0
