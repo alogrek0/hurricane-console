@@ -15169,6 +15169,23 @@
               ],
               "inferred": false,
               "link": "axis"
+            },
+            {
+              "stamp": "202608060443",
+              "file": "TWDAT.202608060443.txt",
+              "meanLon": -31,
+              "axis": [
+                {
+                  "lat": 17,
+                  "lon": -31
+                },
+                {
+                  "lat": 6,
+                  "lon": -31
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
             }
           ]
         },
@@ -15293,6 +15310,23 @@
               ],
               "inferred": false,
               "link": "axis"
+            },
+            {
+              "stamp": "202608060443",
+              "file": "TWDAT.202608060443.txt",
+              "meanLon": -46,
+              "axis": [
+                {
+                  "lat": 18,
+                  "lon": -46
+                },
+                {
+                  "lat": 8,
+                  "lon": -46
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
             }
           ]
         },
@@ -15311,6 +15345,28 @@
                 {
                   "lat": 9,
                   "lon": -82.5
+                }
+              ],
+              "inferred": false,
+              "link": null
+            }
+          ]
+        },
+        {
+          "id": "AT-W-202608060443-1",
+          "sightings": [
+            {
+              "stamp": "202608060443",
+              "file": "TWDAT.202608060443.txt",
+              "meanLon": -86,
+              "axis": [
+                {
+                  "lat": 20,
+                  "lon": -86
+                },
+                {
+                  "lat": 8,
+                  "lon": -86
                 }
               ],
               "inferred": false,
@@ -26100,6 +26156,67 @@
               ],
               "inferred": false,
               "link": "axis"
+            },
+            {
+              "stamp": "202608060803",
+              "file": "TWDEP.202608060803.txt",
+              "meanLon": -122,
+              "axis": [
+                {
+                  "lat": 14,
+                  "lon": -122
+                },
+                {
+                  "lat": 2,
+                  "lon": -122
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
+            }
+          ]
+        },
+        {
+          "id": "EP-W-202608060803-1",
+          "sightings": [
+            {
+              "stamp": "202608060803",
+              "file": "TWDEP.202608060803.txt",
+              "meanLon": -138,
+              "axis": [
+                {
+                  "lat": 19,
+                  "lon": -138
+                },
+                {
+                  "lat": 2,
+                  "lon": -138
+                }
+              ],
+              "inferred": false,
+              "link": null
+            }
+          ]
+        },
+        {
+          "id": "EP-W-202608060803-2",
+          "sightings": [
+            {
+              "stamp": "202608060803",
+              "file": "TWDEP.202608060803.txt",
+              "meanLon": -86,
+              "axis": [
+                {
+                  "lat": 15,
+                  "lon": -86
+                },
+                {
+                  "lat": 3,
+                  "lon": -86
+                }
+              ],
+              "inferred": false,
+              "link": null
             }
           ]
         }
@@ -33081,6 +33198,72 @@
               "chance7": {
                 "cat": "low",
                 "pct": 20
+              },
+              "tagged": false,
+              "link": null
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202608060501-1",
+          "tag": null,
+          "sightings": [
+            {
+              "stamp": "202608060501",
+              "file": "TWOEP.202608060501.txt",
+              "lat": null,
+              "lon": null,
+              "chance48": {
+                "cat": "low",
+                "pct": 0
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 0
+              },
+              "tagged": false,
+              "link": null
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202608060501-2",
+          "tag": null,
+          "sightings": [
+            {
+              "stamp": "202608060501",
+              "file": "TWOEP.202608060501.txt",
+              "lat": null,
+              "lon": null,
+              "chance48": {
+                "cat": "low",
+                "pct": 0
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 20
+              },
+              "tagged": false,
+              "link": null
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202608060501-3",
+          "tag": null,
+          "sightings": [
+            {
+              "stamp": "202608060501",
+              "file": "TWOEP.202608060501.txt",
+              "lat": null,
+              "lon": null,
+              "chance48": {
+                "cat": "low",
+                "pct": 0
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 30
               },
               "tagged": false,
               "link": null

@@ -1,0 +1,37 @@
+
+000
+ABPZ20 KNHC 060501
+TWOEP 
+
+Tropical Weather Outlook
+NWS National Hurricane Center Miami FL
+1100 PM PDT Wed Aug 5 2026
+
+For the eastern and central North Pacific east of 180 longitude:
+
+Central Pacific:
+A tropical wave located over the western portion of the east Pacific 
+is producing limited showers and thunderstorms. This system is 
+moving into a large area of dry air over the central Pacific, and 
+development is no longer expected.
+* Formation chance through 48 hours...low...near 0 percent.
+* Formation chance through 7 days...low...near 0 percent.
+
+Western East Pacific and Central Pacific:
+A broad area of low pressure could form by early next week over the 
+western portion of the east Pacific. Environmental conditions could 
+support subsequent gradual development of this system as it moves 
+generally westward at 10 to 15 mph.
+* Formation chance through 48 hours...low...near 0 percent.
+* Formation chance through 7 days...low...20 percent.
+
+Central East Pacific:
+An area of low pressure is forecast to form well offshore of the 
+southwestern coast of Mexico late this weekend or early next week. 
+Some gradual development of this system is possible thereafter while 
+it moves generally west-northwestward.
+* Formation chance through 48 hours...low...near 0 percent.
+* Formation chance through 7 days...low...30 percent.
+
+$$
+Forecaster Hagen
