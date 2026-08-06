@@ -1,0 +1,103 @@
+
+000
+AXNT20 KNHC 052158
+TWDAT
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+0015 UTC Thu Aug 6 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 1800 UTC surface analysis and satellite imagery through 
+2100 UTC.
+
+...TROPICAL WAVES...
+
+A tropical wave is along 29W from 06N to 17N, moving west at 
+around 5 to 10 kt. Scattered moderate convection is depicted from
+08N to 13N between 25W and 32W. 
+
+A tropical wave is along 44W from 08N to 18N, moving west at 5 to
+10 kt. No significant convection is associated with this wave at 
+this time. 
+
+A tropical wave is in the W Caribbean with axis near 84W, and 
+moving west at 5 to 10 kt. Scattered moderate convection is noted
+from eastern Panama to northeast Costa Rica. 
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough enters the Atlantic near 23N16W and continues 
+southwestward to 09N30W to 06N45W. The ITCZ extends from 06N45W 
+to 08N57W. Scattered moderate convection is from 05N to 10N 
+between 35W and 45W. 
+
+...GULF OF AMERICA...
+
+A 1019 mb high pressure is centered near 27N89W. A trough is
+parallel to the coast of Veracruz in the southwest Gulf. This
+pattern is supporting moderate SE winds and 2-4 ft seas over the
+western Gulf, and light to gentle breezes with 1-3 ft seas
+elsewhere. A mid- and upper- level trough is supporting scattered
+showers and thunderstorms active over the southeast Gulf and the 
+west- central Gulf.
+ 
+For the forecast, high pressure will generally dominate, promoting
+gentle to occasionally moderate winds, and slight seas through
+the upcoming weekend and into early next week. Pulses of fresh 
+winds will occur west of the Yucatan Peninsula each night, locally
+strong tonight, along with moderate seas.
+
+...CARIBBEAN SEA...
+
+See Tropical Waves section above for information on convection in
+the basin. 
+
+Fresh to strong E trade winds and 8 to 10 ft seas persist across 
+the south-central and portions of the SW Caribbean, between high 
+pressure north of area and lower pressure over northern South 
+America. Moderate E winds and 3-6 ft seas are noted elsewhere. 
+
+For the forecast, the pressure gradient between Atlantic high pressure
+and relatively lower pressure in northern South America will
+continue to support strong trades in the south-central basin,
+and as the gradient tightenings into the weekend and into early
+next week, winds will increase to near gale. Rough seas will 
+prevail there, building to very rough at times this weekend. 
+Fresh winds will also pulse in the Gulf of Honduras and Windward 
+Passage. Otherwise, mainly moderate or weaker winds and seas will 
+prevail. 
+
+...ATLANTIC OCEAN...
+
+A mid- and upper-level trough between Bermuda and eastern Cuba is
+supporting scattered showers and thunderstorms offshore Florida 
+and in the vicinity of the Bahamas. A few showers and
+thunderstorms are also active along a surface trough extending 
+from 26N66W to 20N68W. Fresh E winds and rough seas are ongoing on
+the northern end of this trough, specifically from 24N to 26N
+between 62W and 67W. In the far NE Atlantic, strong to near- gale
+N-NE winds and moderate to rough seas are evident off Morocco and
+in the passages of the Canary Islands. Elsewhere, surface ridging
+prevails, with gentle to moderate winds and moderate seas.
+
+For the forecast west of 55W, the aforementioned mid- and upper-
+level trough along the SE U.S. coast will keep scattered 
+thunderstorms ongoing offshore Florida and in the vicinity of the 
+Bahamas through at least tonight. A westward moving surface trough
+will pass north of Puerto Rico and Hispaniola into tonight, then 
+approach the Bahamas Thu before shifting west of the area by late 
+Fri, bringing fresh to locally strong winds and locally rough 
+seas. Winds may pulse to fresh to strong at times from north of 
+Hispaniola to the Windward Passage. Otherwise, weak ridging 
+settles across the northern and central waters during the upcoming
+weekend and into early next week, bringing tranquil marine 
+conditions. 
+
+$$
+Christensen

@@ -1,0 +1,88 @@
+
+000
+AXPZ20 KNHC 060137
+TWDEP 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+0405 UTC Thu Aug 6 2026
+
+Tropical Weather Discussion for the eastern Pacific Ocean from
+03.4S to 30N, east of 120W including the Gulf of California, and
+from the Equator to 30N, between 120W and 140W. The following
+information is based on satellite imagery, weather observations,
+radar, and meteorological analysis.
+
+Based on 0000 UTC surface analysis and satellite imagery through
+0130 UTC.
+
+...TROPICAL WAVES...
+
+The axis of a tropical wave is near 85/86W, north of 03N, moving
+westward at 10 to 15 kt. Nearby convection is discussed in the 
+ITCZ/Monsoon Trough section below.
+
+The axis of a tropical wave is near 101/102W, north of 02N, 
+moving westward at 10 to 15 kt. Nearby convection is discussed in
+the ITCZ/Monsoon Trough section below.
+
+The axis of a tropical wave is near 121W, north of 02N, moving 
+westward at around 5 kt. Nearby convection is discussed in the 
+ITCZ/Monsoon Trough section below.
+
+The axis of a tropical wave is near 137/138W, from 02N to 19N, 
+moving westward at 10 kt. Nearby convection is discussed in the 
+ITCZ/Monsoon Trough section below.
+
+...INTERTROPICAL CONVERGENCE ZONE/MONSOON TROUGH...
+
+The monsoon trough extends from 10N85W to 07N109W to 07N120W. 
+Scattered moderate to isolated strong convection is noted from 
+02N to 12N east of 108W, and from 10N to 16N between 110W and 
+135W.
+
+...OFFSHORE WATERS WITHIN 250 NM OF MEXICO...
+
+Moderate or weaker winds, and moderate seas, prevail over the 
+open waters off Mexico. Gentle to moderate winds, and slight to
+moderate seas, are over the Gulf of California.
+
+For the forecast, fresh to strong gap winds and building seas 
+are expected across the Gulf of Tehuantepec into the weekend. 
+Elsewhere, a moderate pressure gradient will support mostly 
+gentle to moderate winds across the offshore waters of Mexico. 
+The pressure gradient between high pressure NW of the area and 
+lower pressure over the Colorado River Valley will support fresh 
+southerly winds across the northern Gulf of California late this 
+weekend into early next week.
+
+...OFFSHORE WATERS WITHIN 250 NM OF CENTRAL AMERICA, COLOMBIA, 
+AND WITHIN 750 NM OF ECUADOR...
+
+Fresh to strong winds, and moderate seas, prevail over and 
+downstream the Gulf of Papagayo. Gentle to moderate winds are 
+found between the Galapagos Islands and Ecuador. Light to gentle 
+winds and moderate seas are noted elsewhere. 
+
+For the forecast, fresh to strong gap winds and occasional rough
+seas will pulse across the Gulf of Papagayo into early next 
+week. Moderate or weaker winds and moderate seas in SW swell are 
+expected across the remainder of the waters through the period. 
+
+...REMAINDER OF THE AREA...
+
+High pressure prevails over the waters N of 20N. The pressure
+gradient between this area of high pressure and a tropical wave
+near 137/138W is supporting moderate to fresh winds from 15N to
+20N and W of 130W. Seas over these waters are estimated to be 
+approaching 8 ft in the area of fresh winds. Elsewhere, gentle to
+moderate winds and moderate seas prevail across the discussion 
+waters.
+
+For the forecast, seas to 8 ft will accompany the tropical wave 
+as it moves westward through Thu night. Farther south, southerly
+swell to 8 ft will move into the waters south of 05N and west of
+100W through the latter part of the week.
+
+$$
+AL
