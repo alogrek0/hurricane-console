@@ -1,0 +1,143 @@
+
+000
+AXNT20 KNHC 071624
+TWDAT 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+1815 UTC Fri Aug 7 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 1200 UTC surface analysis and satellite imagery through 
+1600 UTC.
+
+...SPECIAL FEATURES...
+
+Caribbean Gale Warning: The pressure gradient between the Bermuda 
+High and the Colombian low will continue to support fresh to 
+strong trades in the south-central and portions of the SW basin 
+through next week. Over the weekend, the ridge N of the region 
+will shift southward, acting to increase the pressure gradient and
+accelerating the winds offshore Colombia and in the Gulf of 
+Venezuela to near gale-force speed and to gale-force speeds 
+tonight and Saturday night. Rough seas will prevail there, 
+building to very rough at times coinciding with the periods of 
+gale-force winds.
+
+Please read the latest HIGH SEAS FORECAST issued by the National 
+Hurricane Center at website
+- https://www.nhc.noaa.gov/text/MIAHSFAT2.shtml for more details.
+
+...TROPICAL WAVES...
+
+A tropical wave is moving across the Cape Verde Islands. Its axis
+is along 24W, extending from 06N to 19N, and moving west at 5 to 10
+kt. Numerous moderate to isolated strong convection is noted from
+08N to 12N e of 18W to the coast of W Africa. Similar convective 
+activity is from 09N to 14N between 24W and 30W. Scattered moderate
+convection is along the wave axis.
+
+A tropical wave is near 41W, and extends from 05N to 19N, moving
+west at 15 to 20 kt. No significant convection is associated with
+this wave at this time.
+
+A tropical wave is E of the Lesser Antilles with axis near 56W, 
+extending from 05N to 20N, and moving west at 15 to 20 kt. Scattered
+moderate convection is ahead of the wave axis from 08N to 10N 
+between 56W and 60W.
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough enters the Atlantic near 13N17W and continues
+westward to near 11N40W. The ITCZ extends continues from 10N43W 
+to NE Venezuela near 09N61W. Aside from the convection associated
+with the tropical waves, limited convective activity is noted 
+elsewhere. 
+
+...GULF OF AMERICA...
+
+High pressure of 1026 mb located NW of Bermuda near 33N68W extends
+a ridge westward across Florida into the Gulf region. Under this 
+weather pattern, a gentle to locally moderate wind flow prevail. 
+Slight to moderate seas are noted, with the highest seas in the 
+central Bay of Campeche. Showers and thunderstorms continue to 
+flare-up over parts of Florida, the Straits of Florida and the E 
+Gulf, mainly E of 87W. Similar convective activity is noted in the
+Veracruz area. Scattered showers, with embedded thunderstorms, 
+are observed elsewhere. An upper-level low, currently located over
+the western Gulf, is helping to induce convection over most of the
+basin.
+ 
+For the forecast, surface ridging from the Bermuda High will dominate
+across most of the Gulf through late Tue, supporting gentle to moderate
+E to SE winds north of 24N along with slight seas. Pulses of fresh
+winds will occur north and west of the Yucatan Peninsula and into
+the Bay of Campeche each night as a surface trough migrates from 
+the Yucatan Peninsula to the SW Gulf.
+
+...CARIBBEAN SEA...
+
+The pressure gradient between a 1026 mb high pressure located NW 
+of Bermuda near 33N68W and the Colombian low continues to support 
+fresh to strong trades over the south-central Caribbean, including
+the Gulf of Venezuela, along with moderate to rough seas. Moderate
+to locally fresh trades are over the E Caribbean while gentle to
+locally moderate E winds are observed elsewhere. Seas are generally
+moderate with these latter winds. An upper-level low spinning just
+south of Haiti and Jamaica is supporting scattered showers and 
+tstms between Cuba and Jamaica as well as over the Cayman Islands 
+and surrounding waters. Showers and thunderstorms are also noted 
+in the SW Caribbean offshore western Panama and Costa Rica. Trade 
+wind showers dominate the remainder of the basin. 
+
+For the forecast, the pressure gradient between the Bermuda High 
+and relatively lower pressure in northern South America will 
+continue to support fresh to strong trades in the south-central 
+and portions of the SW basin through next week. Over the weekend, 
+the ridge N of the region will shift southward, acting to increase
+the pressure gradient and accelerating the winds offshore Colombia
+and in the Gulf of Venezuela to near gale-force speed and to 
+gale-force speeds tonight and Saturday night. Rough seas will 
+prevail there, building to very rough at times coinciding with the
+periods of gale-force winds. Fresh winds will pulse in the Gulf 
+of Honduras and Windward Passage through the forecast period, 
+except over the weekend when winds may pulse to strong speed. 
+Otherwise, mainly moderate to fresh easterlies will prevail 
+elsewhere. 
+
+...ATLANTIC OCEAN...
+
+A surface trough is analyzed over the western Atlantic, and runs 
+from 29N78W to the coast of central Cuba near 23N80W. Numerous 
+showers and thunderstorms are associated with this trough covering
+the waters N of 23N and W of 70W. Moderate to fresh winds and 
+moderate to rough seas are on either side of the trough axis. This
+feature will shift westward across Florida today, ushering in 
+deep tropical moisture. The remainder of the Atlantic forecast 
+waters is under the influence of high pressure, with the main 
+center of 1026 mb situated NW of Bermuda. The pressure gradient 
+between the Atlantic high pressure and lower pressures over NW 
+Africa supports moderate to fresh winds N of 27N E of 20W, 
+including the Canary Islands, with seas in the 6 to 8 ft range. 
+Elsewhere, gentle to moderate winds and moderate seas prevail, 
+with locally fresh trades E of the Lesser Antilles.
+
+For the forecast west of 55W, a westward moving surface trough 
+over the northern Bahamas offshores will support showers and 
+thunderstorm activity across the Florida seaboard and offshores 
+through this morning before shifting west of the area tonight into
+early Sat. Aside from the shower activity, the surface trough will
+bring fresh winds and moderate seas across the Bahamas offshores 
+through this afternoon. Seas may be locally rough in areas of 
+stronger convection. Fresh E winds will prevail N of Hispaniola 
+and in the approaches of the Windward Passage through the period, 
+pulsing to strong speeds each evening as the Bermuda High shifts 
+southward.
+
+$$
+GR
