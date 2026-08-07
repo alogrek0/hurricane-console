@@ -3,12 +3,12 @@
   "season": 2026,
   "btkNow": "202608021800",
   "summary": {
-    "invests": 229,
+    "invests": 231,
     "confirms": 1,
     "resolves": 5,
     "refutes": 0,
     "open": 0,
-    "noData": 223,
+    "noData": 225,
     "flags": 16
   },
   "flags": [
@@ -10648,6 +10648,68 @@
           "statements": [
             {
               "stamp": "202608062316",
+              "chance48": {
+                "cat": "low",
+                "pct": 0
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 30
+              },
+              "verdict48": "pending",
+              "verdict7": "pending",
+              "truth48": null,
+              "truth7": null
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202608070511-1",
+          "tag": null,
+          "ledger": {
+            "kind": "open",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null
+          },
+          "truth": null,
+          "agreement": "no-data",
+          "genesisDeltaH": null,
+          "posStats": null,
+          "statements": [
+            {
+              "stamp": "202608070511",
+              "chance48": {
+                "cat": "low",
+                "pct": 0
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 30
+              },
+              "verdict48": "pending",
+              "verdict7": "pending",
+              "truth48": null,
+              "truth7": null
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202608070511-2",
+          "tag": null,
+          "ledger": {
+            "kind": "open",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null
+          },
+          "truth": null,
+          "agreement": "no-data",
+          "genesisDeltaH": null,
+          "posStats": null,
+          "statements": [
+            {
+              "stamp": "202608070511",
               "chance48": {
                 "cat": "low",
                 "pct": 0
