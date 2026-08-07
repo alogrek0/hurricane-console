@@ -26343,6 +26343,23 @@
               ],
               "inferred": false,
               "link": "axis"
+            },
+            {
+              "stamp": "202608070131",
+              "file": "TWDEP.202608070131.txt",
+              "meanLon": -125,
+              "axis": [
+                {
+                  "lat": 14,
+                  "lon": -125
+                },
+                {
+                  "lat": 2,
+                  "lon": -125
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
             }
           ]
         },
@@ -26395,6 +26412,23 @@
                 {
                   "lat": 2,
                   "lon": -139
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
+            },
+            {
+              "stamp": "202608070131",
+              "file": "TWDEP.202608070131.txt",
+              "meanLon": -140,
+              "axis": [
+                {
+                  "lat": 19,
+                  "lon": -140
+                },
+                {
+                  "lat": 2,
+                  "lon": -140
                 }
               ],
               "inferred": false,
@@ -26455,6 +26489,23 @@
               ],
               "inferred": false,
               "link": "axis"
+            },
+            {
+              "stamp": "202608070131",
+              "file": "TWDEP.202608070131.txt",
+              "meanLon": -90,
+              "axis": [
+                {
+                  "lat": 15,
+                  "lon": -90
+                },
+                {
+                  "lat": 3,
+                  "lon": -90
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
             }
           ]
         },
@@ -26490,6 +26541,23 @@
                 {
                   "lat": 2,
                   "lon": -105
+                }
+              ],
+              "inferred": false,
+              "link": "axis"
+            },
+            {
+              "stamp": "202608070131",
+              "file": "TWDEP.202608070131.txt",
+              "meanLon": -106,
+              "axis": [
+                {
+                  "lat": 14,
+                  "lon": -106
+                },
+                {
+                  "lat": 2,
+                  "lon": -106
                 }
               ],
               "inferred": false,
