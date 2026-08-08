@@ -1,0 +1,133 @@
+
+000
+AXNT20 KNHC 081006
+TWDAT 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+1215 UTC Sat Aug 8 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 0600 UTC surface analysis and satellite imagery through 
+0930 UTC.
+
+...SPECIAL FEATURES...
+
+Caribbean Gale Warning: The pressure gradient between a 1025 mb  
+Bermuda High and the Colombian low will continue to support fresh 
+to strong trades in the south-central and portions of the SW basin
+through next week. Winds tonight have pulsed to minimal gale-force
+offshore of Colombia and inside the Gulf of Venezuela. The
+associated ridge N of the region will gradually shift southward 
+to along 28N through Tue to maintain strong to near gale-force
+winds across the south central Caribbean. Winds will diminish to
+below gale-force around sunrise this morning and then increase
+again to gale-force tonight. Seas will build into the 12-13 ft
+range during the time of the gale-force winds. Please read the 
+latest HIGH SEAS FORECAST issued by the National Hurricane Center 
+at website
+- https://www.nhc.noaa.gov/text/MIAHSFAT2.shtml for more details.
+
+...TROPICAL WAVES...
+
+An Atlantic tropical wave is moving away from the Cabo Verde 
+Islands, with axis along 28W from 06N to 19N, moving west at 10 
+to 15 kt. Scattered showers and isolated thunderstorms are noted 
+from 08.5N TO 12.5N between 27W and 31W.
+
+An Atlantic tropical wave is analyzed near 47W, and extends from 
+05N to 19N, moving west at 10 to 15 kt. Scattered moderate 
+convection is noted from 06N to 10N between 41W and 47W.
+
+A tropical wave is analyzed along 59W-60W, approaching the Lesser
+Antilles, extending from 05N to 20N, and moving west at 10 to 15 
+kt. Scattered moderate convection is noted from 08N to 11.5N 
+between 54W and 60W.
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough enters the Atlantic near 12N16.5W and 
+continues westward to near 10N44.5W. The ITCZ extends from 10N48W
+to 09.5N58W. Aside from the convection associated with the 
+tropical waves, scattered moderate isolated strong convection 
+is noted from 06.5N to 12N E of 24W.
+
+...GULF OF AMERICA...
+
+A 1024 mb high is located just NW of Bermuda and extends a western 
+Atlantic ridge westward along 33N and across the Carolinas. A 
+surface trough has moved westward across Florida, and extends from
+the extreme SW Gulf to near Jacksonville, with the ridge drapped
+across it over the northeast Gulf. This pattern is supporting 
+gentle to moderate E to SE winds and 1-3 ft seas across the basin,
+except for moderate NE winds across the eastern Bay of Campeche. 
+Widely scattered showers are across the coastal waters of SW
+Florida, and dot the waters elsewhere W of 88W.
+ 
+For the forecast, the surface ridge will dominate most of the
+Gulf basin through late Tue. This will support gentle to
+moderate E to SE winds north of 24N with slight seas. Pulses of
+fresh winds will occur north and west of the Yucatan Peninsula
+and into the Bay of Campeche each evening and night as a surface
+trough migrates from the Yucatan Peninsula westward across the
+SW Gulf. 
+
+...CARIBBEAN SEA...
+
+Refer to the section above for details on the Gale Warning in
+effect for the waters N of Colombia and the Gulf of Venezuela.
+
+The pressure gradient between a 1024 mb high pressure located NW 
+of Bermuda near 33N67W and the Colombian low continues to support
+fresh to strong trades over the south-central Caribbean S of 16N
+and between 68W and 80W. Seas are 6 to 9 ft across much of this
+area except 10 to 13 ft in the gale winds offshore of Colombia. 
+Moderate to fresh trades are over the E Caribbean while gentle to 
+moderate E winds are observed elsewhere. Seas are moderate with 
+these winds. Scattered moderate convection extends from Haiti
+northwestward to 80W and offshore of central Cuba.
+
+For the forecast, the pressure gradient between the Atlantic ridge
+and the Colombian low will continue to support fresh to strong 
+trades in the south-central and portions of the SW basin through 
+next week, with gale- force winds occurring early this morning and
+again Saturday night offshore of Colombia. The ridge N of the 
+region will gradually shift southward to along 28N through Tue and
+maintain near gale- force winds offshore Colombia and in the Gulf
+of Venezuela each night. Winds will pulse fresh to locally strong
+during the evenings and night in the Gulf of Honduras and 
+Windward Passage through the forecast period. Otherwise, mainly 
+moderate to fresh trades will prevail elsewhere.
+
+...ATLANTIC OCEAN...
+
+Scattered showers and thunderstorms are active over the Atlantic
+waters north of the Bahamas and W of 76W, following a low level 
+trough currently moving across the Florida peninsula and into the
+eastern Gulf of America. Broad ridging centered on a 1024 mb high
+just NW of Bemuda dominates the Atlantic north of 24N and west of
+50W, supporting gentle to moderate E to SE winds and 4-6 ft 
+W of 50W. A central Atlantic cold front extends southwestward to
+near 33N50W and weakens the ridge across the central basin. An
+Azores High dominates the basin est of 40W, producing fresh to 
+strong NE winds near the Canary Islands, where seas are 6 to 8 ft.
+Saharan air and dust covers much of the Atlantic north of 12N and
+east of 55W.
+
+For the forecast west of 55W, the surface trough moving across
+Florida will shift NW and further inland today. Scattered showers
+and thunderstorms occurring E of the trough to 77W will shift 
+northwestward behind the trough today, then persist N of 30N 
+through Sun. Otherwise, a 1024 mb Bermuda High will shift 
+slightly southward to along 28N through Tue. Fresh E winds will 
+prevail N of Hispaniola and in the approach to the Windward 
+Passage through the period, pulsing to strong speeds each evening 
+and night. 
+
+$$
+Stripling

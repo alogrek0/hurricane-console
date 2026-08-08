@@ -1,0 +1,40 @@
+
+000
+ABPZ20 KNHC 081146
+TWOEP 
+
+Tropical Weather Outlook
+NWS National Hurricane Center Miami FL
+500 AM PDT Sat Aug 8 2026
+
+For the eastern and central North Pacific east of 180 longitude:
+
+Central Pacific:
+A tropical wave located well east-southeast of the Hawaiian Islands 
+is producing disorganized showers and thunderstorms.  Environmental 
+conditions appear conducive for gradual development of this system, 
+and a tropical depression could form early next week while the wave
+moves westward or west-northwestward across the central Pacific. 
+* Formation chance through 48 hours...low...near 0 percent.
+* Formation chance through 7 days...medium...60 percent.
+
+Western East Pacific:
+A tropical wave located several hundred miles south-southwest of 
+the southern tip of the Baja California Peninsula is producing 
+disorganized showers and thunderstorms. A low pressure area is 
+expected to form from this system by early next week, and 
+additional development is possible after that time as the system 
+moves west-northwestward.
+* Formation chance through 48 hours...low...near 0 percent.
+* Formation chance through 7 days...low...30 percent.
+
+Southwest of Mexico:
+An area of low pressure could form well offshore of the southwestern 
+coast of Mexico by the middle of next week. Some gradual 
+development of this system is possible thereafter as it moves 
+generally west-northwestward.
+* Formation chance through 48 hours...low...near 0 percent.
+* Formation chance through 7 days...low...20 percent.
+
+$$
+Forecaster Blake
