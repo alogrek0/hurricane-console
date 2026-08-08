@@ -3,12 +3,12 @@
   "season": 2026,
   "btkNow": "202608021800",
   "summary": {
-    "invests": 237,
+    "invests": 240,
     "confirms": 1,
     "resolves": 5,
     "refutes": 0,
     "open": 0,
-    "noData": 231,
+    "noData": 234,
     "flags": 16
   },
   "flags": [
@@ -10408,7 +10408,7 @@
                 "cat": "low",
                 "pct": 0
               },
-              "verdict48": "pending",
+              "verdict48": "not-formed",
               "verdict7": "pending",
               "truth48": null,
               "truth7": null
@@ -10439,7 +10439,7 @@
                 "cat": "low",
                 "pct": 20
               },
-              "verdict48": "pending",
+              "verdict48": "not-formed",
               "verdict7": "pending",
               "truth48": null,
               "truth7": null
@@ -10470,7 +10470,7 @@
                 "cat": "low",
                 "pct": 30
               },
-              "verdict48": "pending",
+              "verdict48": "not-formed",
               "verdict7": "pending",
               "truth48": null,
               "truth7": null
@@ -10896,6 +10896,99 @@
           "statements": [
             {
               "stamp": "202608072313",
+              "chance48": {
+                "cat": "low",
+                "pct": 0
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 20
+              },
+              "verdict48": "pending",
+              "verdict7": "pending",
+              "truth48": null,
+              "truth7": null
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202608080504-1",
+          "tag": null,
+          "ledger": {
+            "kind": "open",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null
+          },
+          "truth": null,
+          "agreement": "no-data",
+          "genesisDeltaH": null,
+          "posStats": null,
+          "statements": [
+            {
+              "stamp": "202608080504",
+              "chance48": {
+                "cat": "low",
+                "pct": 0
+              },
+              "chance7": {
+                "cat": "low",
+                "pct": 20
+              },
+              "verdict48": "pending",
+              "verdict7": "pending",
+              "truth48": null,
+              "truth7": null
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202608080504-2",
+          "tag": null,
+          "ledger": {
+            "kind": "open",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null
+          },
+          "truth": null,
+          "agreement": "no-data",
+          "genesisDeltaH": null,
+          "posStats": null,
+          "statements": [
+            {
+              "stamp": "202608080504",
+              "chance48": {
+                "cat": "low",
+                "pct": 0
+              },
+              "chance7": {
+                "cat": "medium",
+                "pct": 50
+              },
+              "verdict48": "pending",
+              "verdict7": "pending",
+              "truth48": null,
+              "truth7": null
+            }
+          ]
+        },
+        {
+          "id": "EP-I-202608080504-3",
+          "tag": null,
+          "ledger": {
+            "kind": "open",
+            "cycloneId": null,
+            "cycloneName": null,
+            "genesisStamp": null
+          },
+          "truth": null,
+          "agreement": "no-data",
+          "genesisDeltaH": null,
+          "posStats": null,
+          "statements": [
+            {
+              "stamp": "202608080504",
               "chance48": {
                 "cat": "low",
                 "pct": 0
