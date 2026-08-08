@@ -23691,6 +23691,111 @@
           }
         }
       ]
+    },
+    {
+      "file": "TWDEP.202608072110.txt",
+      "kind": "TWD",
+      "stamp": "202608072110",
+      "issuedISO": "2026-08-07T22:05:00.000Z",
+      "cyclones": [],
+      "waves": [
+        {
+          "id": "W1",
+          "axis": [
+            {
+              "lat": 15,
+              "lon": -93
+            },
+            {
+              "lat": 3,
+              "lon": -93
+            }
+          ],
+          "inferred": false,
+          "motion": {
+            "bearing": 270,
+            "slowKt": 10,
+            "fastKt": 10
+          }
+        },
+        {
+          "id": "W2",
+          "axis": [
+            {
+              "lat": 14,
+              "lon": -110
+            },
+            {
+              "lat": 2,
+              "lon": -110
+            }
+          ],
+          "inferred": false,
+          "motion": {
+            "bearing": 270,
+            "slowKt": 10,
+            "fastKt": 10
+          }
+        },
+        {
+          "id": "W3",
+          "axis": [
+            {
+              "lat": 14,
+              "lon": -130
+            },
+            {
+              "lat": 2,
+              "lon": -130
+            }
+          ],
+          "inferred": false,
+          "motion": {
+            "bearing": 270,
+            "slowKt": 5,
+            "fastKt": 5
+          }
+        }
+      ],
+      "convection": 2,
+      "troughs": 4,
+      "fixes": 0,
+      "inferred": 0,
+      "projections": 3
+    },
+    {
+      "file": "TWOEP.202608072313.txt",
+      "kind": "TWO",
+      "stamp": "202608072313",
+      "issuedISO": "2026-08-08T00:00:00.000Z",
+      "disturbances": [
+        {
+          "invest": null,
+          "lat": null,
+          "lon": null,
+          "chance48": {
+            "cat": "low",
+            "pct": 0
+          },
+          "chance7": {
+            "cat": "medium",
+            "pct": 40
+          }
+        },
+        {
+          "invest": null,
+          "lat": null,
+          "lon": null,
+          "chance48": {
+            "cat": "low",
+            "pct": 0
+          },
+          "chance7": {
+            "cat": "low",
+            "pct": 20
+          }
+        }
+      ]
     }
   ]
 }

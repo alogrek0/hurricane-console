@@ -1,0 +1,30 @@
+
+000
+ABPZ20 KNHC 072313
+TWOEP 
+
+Tropical Weather Outlook
+NWS National Hurricane Center Miami FL
+500 PM PDT Fri Aug 7 2026
+
+For the eastern and central North Pacific east of 180 longitude:
+
+Western East Pacific and Central Pacific:
+Showers and thunderstorms associated with a series of tropical waves 
+were located over the western portion of the east Pacific. 
+Environmental conditions appear conducive for gradual development of 
+these showers and storms, and a tropical depression could form early 
+next week as this system moves westward toward the central Pacific. 
+* Formation chance through 48 hours...low...near 0 percent.
+* Formation chance through 7 days...medium...40 percent.
+
+Southwest of Mexico:
+An area of low pressure could form well offshore of the southwestern 
+coast of Mexico early or into the middle of next week. Some gradual 
+development of this system is possible thereafter as it moves 
+generally west-northwestward.
+* Formation chance through 48 hours...low...near 0 percent.
+* Formation chance through 7 days...low...20 percent.
+
+$$
+Forecaster Evans/Beven

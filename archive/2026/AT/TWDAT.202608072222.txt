@@ -1,0 +1,125 @@
+
+969 
+AXNT20 KNHC 072222
+TWDAT 
+
+Tropical Weather Discussion
+NWS National Hurricane Center Miami FL
+0015 UTC Sat Aug 8 2026
+
+Tropical Weather Discussion for North America, Central America
+Gulf of America, Caribbean Sea, northern sections of South
+America, and Atlantic Ocean to the African coast from the
+Equator to 31N. The following information is based on satellite
+imagery, weather observations, radar and meteorological analysis.
+
+Based on 1800 UTC surface analysis and satellite imagery through 
+2200 UTC.
+
+...SPECIAL FEATURES...
+
+Caribbean Gale Warning: The pressure gradient between the Bermuda 
+High and the Colombian low will continue to support fresh to 
+strong trades in the south-central and portions of the SW basin 
+through next week. Over the weekend, the ridge N of the region 
+will shift southward, acting to increase the pressure gradient and
+accelerating the winds offshore Colombia and in the Gulf of 
+Venezuela to near gale-force speed and to gale-force speeds 
+tonight and Saturday night. Rough seas will prevail there, 
+building to very rough at times coinciding with the periods of 
+gale-force winds.
+
+Please read the latest HIGH SEAS FORECAST issued by the National 
+Hurricane Center at website
+- https://www.nhc.noaa.gov/text/MIAHSFAT2.shtml for more details.
+
+...TROPICAL WAVES...
+
+A tropical wave is moving across the Cape Verde Islands. Its axis
+is along 25W, extending from 06N to 19N, and moving west at 5 to 
+10 kt. Scattered moderate convection is noted from 10N to 13N
+between 20W and 25W.
+
+A tropical wave is near 44W, and extends from 05N to 19N, moving
+west at 15 to 20 kt. No significant convection is associated with
+this wave at this time.
+
+A tropical wave is E of the Lesser Antilles with axis near 57W, 
+extending from 05N to 20N, and moving west at 15 to 20 kt. No 
+significant convection is associated with this wave at this time.
+
+...MONSOON TROUGH/ITCZ...
+
+The monsoon trough enters the Atlantic near 13N17W and continues
+westward to near 11N40W. The ITCZ extends continues from 10N43W 
+to NE Venezuela near 09N61W. Aside from the convection associated
+with the tropical waves, limited convective activity is noted 
+elsewhere. 
+
+...GULF OF AMERICA...
+
+The Atlantic ridge extends across the Carolinas and into the
+north-central Gulf. A trough is moving westward through Florida.
+This pattern is supporting gentle to moderate NE to E winds and
+1-3 ft seas. Scattered showers and thunderstorms are active across
+the central Gulf.
+ 
+For the forecast, the ridge will dominate across most of the Gulf
+through late Tue, supporting gentle to moderate E to SE winds 
+north of 24N along with slight seas. Pulses of fresh winds will 
+occur north and west of the Yucatan Peninsula and into the Bay of 
+Campeche each night as a surface trough migrates from the Yucatan 
+Peninsula to the SW Gulf. 
+
+...CARIBBEAN SEA...
+
+The pressure gradient between a 1025 mb high pressure located NW 
+of Bermuda near 33N69W and the Colombian low continues to support
+fresh to strong trades over the south-central Caribbean, 
+including the Gulf of Venezuela, along with moderate to rough 
+seas. Moderate to locally fresh trades are over the E Caribbean 
+while gentle to locally moderate E winds are observed elsewhere. 
+Seas are generally moderate with these latter winds. An upper-
+level low spinning just south of Haiti and Jamaica is supporting 
+scattered showers and thunderstorms between Cuba and Jamaica as 
+well as over the Cayman Islands and surrounding waters. Showers 
+and thunderstorms are also noted in the SW Caribbean offshore 
+western Panama and Costa Rica. Trade wind showers dominate the 
+remainder of the basin. 
+
+For the forecast, the pressure gradient between the Bermuda High 
+and relatively lower pressure in northern South America will 
+continue to support fresh to strong trades in the south-central 
+and portions of the SW basin through next week. Over the weekend, 
+the ridge N of the region will shift southward, strengthening the 
+pressure gradient and accelerating the winds offshore Colombia and
+in the Gulf of Venezuela to near gale-force speeds during the 
+daytime and to gale-force speeds tonight and Saturday night. Rough
+seas will prevail there, building to very rough at times 
+coinciding with the periods of gale-force winds. Fresh winds will 
+pulse in the Gulf of Honduras and Windward Passage through the 
+forecast period, except over the weekend when winds may pulse to 
+strong speeds mainly near the Windward Passage. Otherwise, mainly 
+moderate to fresh trades will prevail elsewhere.
+
+...ATLANTIC OCEAN...
+
+Scattered showers and thunderstorms are active over the northern
+Bahamas and off the northeast coast of Florida, following a trough
+currently moving into the Florida peninsula. Broad ridging
+dominates the Atlantic north of 25N, supporting E to SE winds and
+4-6 ft across the basin, except for fresh to strong NE winds near
+the Canary Islands. Saharan dust covers the Atlantic north of 15N
+and east of 50W.
+
+For the forecast west of 55W, the surface trough over Florida 
+will bring fresh winds and moderate seas across the Bahamas 
+offshores through this afternoon. Seas may be locally rough in 
+areas of stronger convection. Fresh E winds will prevail N of 
+Hispaniola and in the approaches of the Windward Passage through 
+the period, pulsing to strong speeds each evening as the Bermuda 
+High shifts southward. 
+
+$$
+Christensen
+
